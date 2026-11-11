@@ -23,5 +23,5 @@
         `validate.ts`. _Req 9.2–9.5, 10.1_
   - [x] 10.2 `build.ts`: staging, swap, run `npm run packs`, commit the
         packs. _Req 1.1, 1.4, 1.5, 10.2_
-- [ ] 11. Pack validation test over committed output; lint, typecheck,
+- [x] 11. Pack validation test over committed output; lint, typecheck,
       credits and a clean-cache rebuild. _Req 10.1, 10.2, 1.2_
