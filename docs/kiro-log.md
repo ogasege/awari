@@ -30,3 +30,4 @@ A dated record of which spec, hook or steering file drove each piece of work.
 | 2026-11-11 21:19 | spec | 02-content-packs 9 | Atlas: Natural Earth 110m trimmed to iso3/name/id, 2-decimal coordinates, closed rings; Property 8 |
 | 2026-11-11 21:19 | spec | 02-content-packs 10.1 | Credits region rewrite (Property 10), manifest, validatePacks shared by build and test |
 | 2026-11-11 21:52 | spec | 02-content-packs 10.2 | npm run packs: staged build, validation, swap into public/packs, CREDITS region; 197 countries (54 African), 12 physics, 66 photos, 8998 lemmas, 7.06 MB; tighter place-photo rules |
+| 2026-11-11 22:29 | steering/design.md | 01-app-shell 1.1-1.2 | Lagoon tokens, self-hosted fonts, contrast helper; Property 6 proves every text pair meets WCAG AA |

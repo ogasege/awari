@@ -1,0 +1,37 @@
+/* Lagoon palette and type, from .kiro/steering/design.md.
+   Keep in sync with src/design/contrast.ts (contrast is tested there). */
+:root {
+  --teal: #00606e;
+  --coral: #ff8662;
+  --yellow: #ffd23f;
+  --navy: #0b1b4d;
+  --teal-ink: #007a8c;
+  --tomato: #e8452c;
+  --paper: #ffffff;
+  --ink: #101828;
+
+  --ink-soft: #475467;
+  --mist: #d5f0f3;
+  --coral-ink: #2e0d00;
+  --yellow-ink: #1f1400;
+  --offline: #6fe3b4;
+  --footer-ink: #c9d2e6;
+  --cream: #fffdf5;
+  --pin: #d92d20;
+  --focus: #ffb703;
+
+  --font-head: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-body: 'Figtree', system-ui, sans-serif;
+  --font-hand: 'Covered By Your Grace', 'Segoe Print', 'Bradley Hand', cursive;
+
+  --gutter: 48px;
+  --radius-pill: 999px;
+  --shadow-print: 0 12px 26px rgb(60 30 0 / 0.3), 0 1px 2px rgb(60 30 0 / 0.35);
+  --shadow-hard: 4px 5px 0 rgb(0 0 0 / 0.32);
+}
+
+@media (max-width: 899px) {
+  :root {
+    --gutter: 20px;
+  }
+}
