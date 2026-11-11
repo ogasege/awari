@@ -103,10 +103,14 @@ it was not built for, so that it cannot be abused or run up costs.
    questions it already has, and SHALL make no further calls.
 4. THE Service SHALL respond 200 with `{ "questions": Question[],
    "rejected": number }`, with at most five questions, no two with the
-   same folded prompt, and `rejected` counting every dropped candidate.
-5. IF the model call fails or times out, THEN THE Service SHALL respond
-   502 with a short JSON error and SHALL NOT include model output or
-   stack traces.
+   same folded prompt, and `rejected` counting every candidate that
+   failed the Validator or repeated an accepted prompt (valid surplus
+   beyond five is dropped without counting).
+5. IF the first model call fails or times out, THEN THE Service SHALL
+   respond 502 with a short JSON error and SHALL NOT include model
+   output or stack traces; IF only the retry call fails, THEN THE
+   Service SHALL return the questions it already has, or 502 if it has
+   none.
 6. THE Bedrock client SHALL be injected so tests run without AWS.
 
 ### Requirement 5: Cost and abuse limits
@@ -132,7 +136,7 @@ app to keep working, so that a missing extra never breaks a quiz.
 1. THE Client SHALL POST the title and text to the configured endpoint
    and SHALL resolve to `null`, never throw, on a network error, a
    non-200 status, invalid JSON, a malformed body, or a timeout
-   (default 30 seconds).
+   (default 50 seconds).
 2. THE Client SHALL rebuild the article locally and re-run the Validator
    on every returned question, keeping only those that pass.
 3. IF no returned question passes, THEN THE Client SHALL resolve to

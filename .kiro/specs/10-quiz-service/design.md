@@ -64,7 +64,7 @@ client re-validates against exactly what the Lambda validated.
   with thinking on, which rejects forced tool use.
 - No `temperature` (newer models reject sampling parameters).
 - `inferenceConfig.maxTokens = 4096`.
-- The tool schema asks for 7 candidates of `{prompt, options[4],
+- The tool schema asks for 6 candidates of `{prompt, options[4],
   answer, nudge, whereToLook, removed[2], proof}`. The service fills
   `id`, `articleId`, `pack` and computes `proofSection` itself with
   `sectionOfSentence` (the model only quotes the sentence), which
@@ -98,7 +98,7 @@ the SPA's `index.html`.
 
 `fetchRemoteQuiz(endpoint, title, text, fetchImpl = fetch, options)`:
 serialises the body, hashes it with `crypto.subtle` into
-`x-amz-content-sha256`, aborts after `timeoutMs` (default 30 s), checks
+`x-amz-content-sha256`, aborts after `timeoutMs` (default 50 s, above the 45 s Lambda timeout), checks
 the response shape with `isQuestionShape`, rebuilds the article with
 `articleFromText` and keeps only questions that pass the Validator.
 Every failure path returns `null`.
@@ -129,8 +129,9 @@ Every failure path returns `null`.
    with `articleFromText` gives the same sections. (Req 2.2, 2.3)
 10. *Service output*: for any model output, every question the service
     returns passes the Validator, there are at most five, prompts are
-    unique, and `returned + rejected` equals the candidates received.
-    (Req 4.2–4.4)
+    unique, the count returned is the smaller of five and the number of
+    distinct-prompt valid candidates received, and `returned + rejected`
+    never exceeds the candidates received. (Req 4.2–4.4)
 11. *Bounded calls*: the service makes one model call when the first
     yields five valid questions and exactly two otherwise. (Req 4.3,
     5.1)

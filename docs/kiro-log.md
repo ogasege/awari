@@ -11,3 +11,4 @@ A dated record of which spec, hook or steering file drove each piece of work.
 | 2026-11-11 20:52 | spec | 10-quiz-service 1.1 | Shared question validator (validateQuestion, articleText, sectionOfSentence, articleFromText, isQuestionShape) with 20 example tests |
 | 2026-11-11 20:53 | spec | 10-quiz-service 1.2 | fast-check Properties 1-9 for the validator and articleFromText (shuffle invariance, foreign proof, missing answer, leaky hints, re-spacing, text round trip) |
 | 2026-11-11 20:56 | spec | 02-content-packs 1 | Content packs spec: EARS requirements (10), design with 11 correctness properties, tasks |
+| 2026-11-11 20:57 | spec | 10-quiz-service 2.1 | Quiz Lambda package (Node 22, TS, esbuild bundle to dist/index.mjs, vitest) with request limits (64 KiB body, 200-40000 char text, no URL fetching) and origin allow-list CORS |
