@@ -2,10 +2,10 @@
 
 - [x] 1. Spec: requirements, design with correctness properties, tasks.
       _Req 1–10_
-- [ ] 2. Pure text transforms
-  - [ ] 2.1 `slug.ts` and `text.ts` (sections, sentences, summary) with
+- [x] 2. Pure text transforms
+  - [x] 2.1 `slug.ts` and `text.ts` (sections, sentences, summary) with
         Properties 1 and 2. _Req 2.3–2.7_
-  - [ ] 2.2 `licence.ts` (normalisation, image filter) and `sources.ts`
+  - [x] 2.2 `licence.ts` (normalisation, image filter) and `sources.ts`
         with Properties 3 and 11. _Req 5.2, 9.1_
 - [ ] 3. Cached, polite HTTP client `http.ts`. _Req 1.2, 1.3_
 - [ ] 4. Countries

@@ -13,3 +13,4 @@ A dated record of which spec, hook or steering file drove each piece of work.
 | 2026-11-11 20:56 | spec | 02-content-packs 1 | Content packs spec: EARS requirements (10), design with 11 correctness properties, tasks |
 | 2026-11-11 20:57 | spec | 10-quiz-service 2.1 | Quiz Lambda package (Node 22, TS, esbuild bundle to dist/index.mjs, vitest) with request limits (64 KiB body, 200-40000 char text, no URL fetching) and origin allow-list CORS |
 | 2026-11-11 20:58 | spec | 10-quiz-service 2.2 | Bedrock Converse call with submit_questions tool (auto choice, 4096 max tokens), validate/dedupe/retry-once loop, function URL handler (204/400/405/413/502/200, never 403/404); Properties 10-11; 37 Lambda tests |
+| 2026-11-11 20:58 | spec | 02-content-packs 2 | Pure transforms: slugify, section/sentence splitting, summary, licence normalisation, image filter, Source builders; Properties 1, 2, 3, 11 |
