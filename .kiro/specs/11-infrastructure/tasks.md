@@ -6,8 +6,8 @@
   - [x] 1.2 OACs, cache policies and distribution (`cdn.tf`);
         Properties 1–5 in `tests/site.tftest.hcl`. _Req 2.1–2.6,
         3.1–3.5, 7.4_
-- [ ] 2. Quiz service
-  - [ ] 2.1 Lambda, log group, least-privilege role, function URL,
+- [x] 2. Quiz service
+  - [x] 2.1 Lambda, log group, least-privilege role, function URL,
         CloudFront API origin and permissions (`quiz.tf`); Properties
         6–10 in `tests/quiz.tftest.hcl`. _Req 4.1–4.4, 5.1–5.3,
         6.1–6.4, 7.1, 7.4_
