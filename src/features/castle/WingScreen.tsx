@@ -77,14 +77,22 @@ function Play({ wing, pool, titles, savedLit }: { wing: Wing; pool: Question[]; 
   }
 
   const other = WINGS.find((w) => w.id !== wing.id);
-  const done = state.lit >= ROOMS;
+  // The last answer lights the last room, but its Right! and proof stay on
+  // screen until the student walks through, then the finish panel appears.
+  const [closed, setClosed] = useState(savedLit >= ROOMS);
+  const done = state.lit >= ROOMS && closed;
+  const send = (a: Action) => {
+    if (state.lit >= ROOMS && a.type === 'next') setClosed(true);
+    else dispatch(a);
+  };
+  const roomNumber = Math.min(ROOMS, state.lit + 1);
 
   return (
     <>
       <div className="wing__wall">
         <Doors lit={state.lit} names={names} />
         <p className="wing__count" aria-live="polite">
-          {done ? 'Every room is lit!' : `${state.lit} of ${ROOMS} rooms lit`}
+          {state.lit >= ROOMS ? 'Every room is lit!' : `${state.lit} of ${ROOMS} rooms lit`}
         </p>
       </div>
       {done ? (
@@ -97,17 +105,17 @@ function Play({ wing, pool, titles, savedLit }: { wing: Wing; pool: Question[]; 
         </section>
       ) : q ? (
         <div className="wing__question">
-          <p className="wing__room">Room {state.lit + 1} of {ROOMS}</p>
+          <p className="wing__room">Room {roomNumber} of {ROOMS}</p>
           <QuestionCard
             key={`${q.id}-${state.quiz.index}`}
             question={q}
             state={state.quiz}
-            dispatch={dispatch}
-            number={state.lit + 1}
+            dispatch={send}
+            number={roomNumber}
             total={ROOMS}
             articleTitle={titles.get(q.articleId) ?? q.articleId}
             articleLink={`/article/${q.pack}/${q.articleId}`}
-            nextLabel={state.quiz.status === 'right' ? 'Walk through the door' : 'Try another question'}
+            nextLabel={state.lit >= ROOMS ? 'Open the last door' : state.quiz.status === 'right' ? 'Walk through the door' : 'Try another question'}
           />
         </div>
       ) : null}

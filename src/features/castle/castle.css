@@ -1,0 +1,220 @@
+/* The Castle (06-castle): navy night board, hand-drawn door wall. */
+.castle-board {
+  position: relative;
+  padding: 36px var(--gutter) 64px;
+  background: var(--navy);
+  color: var(--paper);
+  min-height: 70vh;
+}
+
+.castle-board a {
+  color: var(--yellow);
+}
+
+.castle__intro {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  margin-bottom: 36px;
+}
+
+.castle__photo {
+  flex: none;
+  width: 260px;
+  height: auto;
+  padding: 10px 10px 34px;
+  background: var(--paper);
+  box-shadow: var(--shadow-print);
+  rotate: -3deg;
+  transition: rotate 0.15s ease, translate 0.15s ease;
+}
+
+.castle__photo:hover {
+  rotate: 0deg;
+  translate: 0 -4px;
+}
+
+.castle__lead {
+  max-width: 34em;
+  margin: 18px 0 0;
+  font-size: 19px;
+  line-height: 1.5;
+}
+
+.castle__wings {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+}
+
+.castle__wing {
+  padding: 24px 26px 28px;
+  background: var(--teal);
+  color: var(--paper);
+  box-shadow: var(--shadow-hard);
+  transition: rotate 0.15s ease, translate 0.15s ease;
+}
+
+.castle__wing:hover,
+.castle__wing:focus-within {
+  rotate: 0deg !important;
+  translate: 0 -4px;
+}
+
+.castle__wing h2 {
+  margin: 0 0 6px;
+  font-family: var(--font-head);
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.castle__wing p {
+  margin: 0 0 14px;
+}
+
+.castle__wing-count {
+  font-weight: 700;
+  margin: 10px 0 16px !important;
+}
+
+.castle__note {
+  position: absolute;
+  right: 6%;
+  top: 22px;
+  max-width: 220px;
+}
+
+/* The door wall. */
+.doors {
+  max-width: 560px;
+}
+
+.doors--compact {
+  max-width: 300px;
+}
+
+.doors__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.doors__course {
+  fill: none;
+  stroke: rgb(255 255 255 / 0.28);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.doors__door {
+  fill: #1a2c66;
+  stroke: var(--paper);
+  stroke-width: 1;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.doors__door.is-lit {
+  fill: var(--yellow);
+  stroke: var(--yellow-ink);
+}
+
+.doors__knob {
+  fill: var(--yellow);
+}
+
+.doors__name {
+  font-family: var(--font-hand);
+  font-size: 20px;
+  fill: var(--yellow);
+}
+
+.doors__next path {
+  fill: none;
+  stroke: var(--yellow);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.doors__next text {
+  font-family: var(--font-hand);
+  font-size: 26px;
+  fill: var(--yellow);
+}
+
+/* A wing being played. */
+.wing__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.wing__back {
+  font-weight: 700;
+}
+
+.wing__wall {
+  margin-bottom: 32px;
+}
+
+.wing__count {
+  margin: 10px 0 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.wing__room {
+  margin: 0 0 12px;
+  font-weight: 700;
+  color: var(--yellow);
+}
+
+.wing__question {
+  color: var(--ink);
+}
+
+.wing__question .wing__room {
+  color: var(--yellow);
+}
+
+.wing__done {
+  max-width: 34em;
+  padding: 24px 28px;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--shadow-print);
+}
+
+.wing__done a {
+  color: var(--teal-ink);
+}
+
+.wing__done h2 {
+  margin: 0 0 8px;
+  font-family: var(--font-head);
+  font-weight: 800;
+}
+
+@media (max-width: 899px) {
+  .castle__intro {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .castle__photo {
+    width: 200px;
+  }
+
+  .castle__wings {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .castle__photo,
+  .castle__wing {
+    transition: none;
+  }
+}
