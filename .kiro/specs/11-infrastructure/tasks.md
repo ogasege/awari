@@ -11,7 +11,7 @@
         CloudFront API origin and permissions (`quiz.tf`); Properties
         6–10 in `tests/quiz.tftest.hcl`. _Req 4.1–4.4, 5.1–5.3,
         6.1–6.4, 7.1, 7.4_
-- [ ] 3. Outputs and docs
-  - [ ] 3.1 `outputs.tf`, `example.tfvars`, README with deploy steps
+- [x] 3. Outputs and docs
+  - [x] 3.1 `outputs.tf`, `example.tfvars`, README with deploy steps
         and abuse/cost controls; fmt, validate and test pass.
         _Req 7.2–7.4_
