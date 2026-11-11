@@ -59,8 +59,8 @@ given, and stores `{ url, fetched, status, body }` as JSON (text) or the
 raw bytes plus a `.meta.json` (binary) in `data/raw/<kind>/`. Cache hits
 return immediately with the original fetch date, so a rebuild from cache
 is byte-for-byte stable apart from the manifest build date. Network
-requests are serialised through one promise chain with a 150 ms gap;
-HTTP 429/5xx are retried up to four times with exponential back-off,
+requests are serialised through one promise chain with a 150 ms gap
+that doubles (up to 3 s) after every HTTP 429; HTTP 429/5xx are retried up to four times with exponential back-off,
 honouring `Retry-After`. Every request sends
 `AwariBuild/0.1 (educational open-source project)`. POST form bodies are
 part of the cache key.
