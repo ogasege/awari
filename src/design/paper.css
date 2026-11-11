@@ -1,0 +1,199 @@
+/* Styles for the hand-made components in paper.tsx. */
+.print {
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: var(--print-pad, calc(14 * var(--u, 1px))) var(--print-pad, calc(14 * var(--u, 1px))) 0;
+  background: var(--paper);
+  color: var(--ink);
+  text-decoration: none;
+  box-shadow:
+    0 calc(12 * var(--u, 1px)) calc(26 * var(--u, 1px)) rgb(60 30 0 / 0.3),
+    0 1px 2px rgb(60 30 0 / 0.35);
+}
+
+.print.abs {
+  position: absolute;
+}
+
+.print img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  background: #e6eaf2;
+}
+
+.print__caption {
+  display: block;
+  padding: calc(14 * var(--u, 1px)) 0 calc(18 * var(--u, 1px));
+  line-height: 1;
+  text-align: center;
+}
+
+.tape {
+  position: absolute;
+  z-index: 2;
+  height: calc(34 * var(--u, 1px));
+  background: rgb(255 255 255 / 0.62);
+}
+
+.tape--yellow {
+  background: rgb(255 210 63 / 0.82);
+}
+
+.tape--teal {
+  background: repeating-linear-gradient(
+    90deg,
+    rgb(0 122 140 / 0.94) 0 8px,
+    rgb(0 122 140 / 0.72) 8px 16px
+  );
+}
+
+.pin {
+  position: absolute;
+  z-index: 2;
+  overflow: visible;
+}
+
+.strip-heading {
+  font-size: clamp(44px, 5.9vw, 86px);
+  line-height: 1;
+  letter-spacing: -0.035em;
+  filter: drop-shadow(0.07em 0.08em 0 rgb(0 0 0 / 0.3));
+}
+
+.strip {
+  display: block;
+  width: fit-content;
+  padding: 0.07em 0.22em 0.15em;
+  background: var(--paper);
+  color: #000;
+}
+
+.strip--yellow {
+  background: var(--yellow);
+  color: var(--yellow-ink);
+}
+
+.strip--navy {
+  background: var(--navy);
+  color: var(--paper);
+}
+
+.strip--teal {
+  background: var(--teal-ink);
+  color: var(--paper);
+}
+
+.margin-note {
+  margin: 0;
+  line-height: 1.02;
+  width: fit-content;
+}
+
+.doodle {
+  overflow: visible;
+  filter: url(#aw-chalk);
+}
+
+.torn-edge {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  display: block;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 52px;
+  padding: 0 28px;
+  border: 2px solid transparent;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-hard);
+  transition:
+    rotate 0.15s ease,
+    translate 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.btn:hover:not(:disabled) {
+  rotate: -2deg;
+  translate: -1px -2px;
+  box-shadow: 6px 8px 0 rgb(0 0 0 / 0.32);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  box-shadow: none;
+}
+
+.btn--yellow {
+  background: var(--yellow);
+  color: var(--yellow-ink);
+}
+
+.btn--outline {
+  background: transparent;
+  border-color: currentColor;
+  color: inherit;
+}
+
+.btn--ink {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.stamp {
+  display: block;
+  text-decoration: none;
+  color: var(--ink);
+  filter: drop-shadow(0 calc(5 * var(--u, 1px)) calc(9 * var(--u, 1px)) rgb(16 24 40 / 0.3));
+}
+
+.stamp__paper {
+  display: block;
+  padding: calc(13 * var(--u, 1px)) calc(13 * var(--u, 1px)) calc(11 * var(--u, 1px));
+  background: var(--cream);
+}
+
+.stamp__paper img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 20 / 19;
+  object-fit: cover;
+}
+
+.stamp__name {
+  display: block;
+  margin-top: calc(9 * var(--u, 1px));
+  font-family: var(--font-head);
+  font-size: calc(23 * var(--u, 1px));
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.stamp__caption {
+  display: block;
+  margin-top: calc(3 * var(--u, 1px));
+  font-size: calc(23 * var(--u, 1px));
+  line-height: 1;
+  color: var(--teal-ink);
+}
+
+.hand-underline {
+  text-decoration: underline wavy var(--yellow);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}

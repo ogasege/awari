@@ -32,3 +32,4 @@ A dated record of which spec, hook or steering file drove each piece of work.
 | 2026-11-11 21:52 | spec | 02-content-packs 10.2 | npm run packs: staged build, validation, swap into public/packs, CREDITS region; 197 countries (54 African), 12 physics, 66 photos, 8998 lemmas, 7.06 MB; tighter place-photo rules |
 | 2026-11-11 22:29 | steering/design.md | 01-app-shell 1.1-1.2 | Lagoon tokens, self-hosted fonts, contrast helper; Property 6 proves every text pair meets WCAG AA |
 | 2026-11-11 22:29 | spec | 01-app-shell 2.1-2.2 | Pure router with round-trip and not-found properties; History API links, focus and title on navigation; credits screen renders CREDITS.md |
+| 2026-11-11 22:29 | steering/design.md | 01-app-shell 3.1-3.2 | Seeded wobble generator (Properties 3-5) and hand-made Print, Strip, Tape, Pin, MarginNote, Doodle, TornEdge, Button, Stamp components |
