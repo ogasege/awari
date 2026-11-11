@@ -36,3 +36,4 @@ A dated record of which spec, hook or steering file drove each piece of work.
 | 2026-11-11 22:29 | spec | 01-app-shell 4.1 | Shared header with kit logo, nav with aria-current, search, offline badge; skip link; lazy routes |
 | 2026-11-11 22:29 | design/home.png | 01-app-shell 5.1-5.2 | Home composed from design/home.html: kit doodle layers extracted, live stamps and doors from IndexedDB progress; 1440px matches reference (3951 vs 3953 px tall), 390px single column, no overflow |
 | 2026-11-11 22:30 | security review hook | 01-app-shell review | demo=reset now asks before clearing progress and the demo parameter is stripped from the address; progress store property tests; five screen designs written before building (design/screens) |
+| 2026-11-11 22:32 | spec | 03-articles-dictionary 1.1 | Spec written; splitWords, lookupWord, credits and fact rows with 6 properties (token round trip, lookup soundness and completeness, case, credit completeness, no NaN) |
