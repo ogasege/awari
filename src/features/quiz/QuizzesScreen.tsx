@@ -6,6 +6,7 @@ import { StripHeading } from '../../design/paper.tsx';
 import { usePack } from '../../lib/packs/load.ts';
 import type { PackId } from '../../lib/packs/types.ts';
 import { useProgress } from '../../lib/store/useProgress.ts';
+import { MakeQuiz } from './MakeQuiz.tsx';
 import './quiz.css';
 
 interface QuizIndex {
@@ -35,6 +36,7 @@ export default function QuizzesScreen() {
         Every quiz has five questions and three hints for each one. Read the article first, or dive
         straight in.
       </p>
+      <MakeQuiz />
       <label className="quizzes__filter">
         <span>Find a quiz</span>
         <input type="search" value={filter} onChange={(e) => setFilter(e.target.value)} placeholder="Try “Ghana” or “current”" />

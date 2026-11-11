@@ -3,7 +3,7 @@
  * screen and the Castle. Right and wrong are always said in words with a
  * drawn tick or cross, never colour alone (05 Req 3.1).
  */
-import { useId, type Dispatch } from 'react';
+import { useId, type Dispatch, type ReactNode } from 'react';
 import { Link } from '../../app/navigation.tsx';
 import { sectionId } from '../article/ArticleBody.tsx';
 import type { Question } from '../../lib/packs/types.ts';
@@ -52,6 +52,7 @@ export function QuestionCard({
   total,
   articleTitle,
   articleLink,
+  externalUrl,
   nextLabel = 'Next question',
 }: {
   question: Question;
@@ -61,8 +62,18 @@ export function QuestionCard({
   total: number;
   articleTitle: string;
   articleLink: string;
+  /** For quizzes outside the packs: the page to link to instead. */
+  externalUrl?: string;
   nextLabel?: string;
 }) {
+  const ref = (children: ReactNode) =>
+    externalUrl ? (
+      <a href={externalUrl} rel="noreferrer">
+        {children}
+      </a>
+    ) : (
+      <Link to={`${articleLink}#${sectionId(q.proofSection)}`}>{children}</Link>
+    );
   const groupId = useId();
   const visible = visibleOptions(q, s.hintsUsed);
   const answering = s.status === 'asking' || s.status === 'wrong';
@@ -127,10 +138,12 @@ export function QuestionCard({
               <blockquote>{q.proof}</blockquote>
               <figcaption>
                 The proof, from{' '}
-                <Link to={`${articleLink}#${sectionId(q.proofSection)}`}>
-                  {articleTitle}
-                  {q.proofSection ? `: ${q.proofSection}` : ''}
-                </Link>
+                {ref(
+                  <>
+                    {articleTitle}
+                    {q.proofSection ? `: ${q.proofSection}` : ''}
+                  </>,
+                )}
               </figcaption>
             </figure>
             <button type="button" className="btn btn--yellow" onClick={() => dispatch({ type: 'next' })}>
@@ -158,7 +171,7 @@ export function QuestionCard({
           {s.hintsUsed >= 1 ? <li className="hand">{q.hints.nudge}</li> : null}
           {s.hintsUsed >= 2 ? (
             <li className="hand">
-              <Link to={`${articleLink}#${sectionId(q.proofSection)}`}>{q.hints.whereToLook}</Link>
+              {ref(q.hints.whereToLook)}
             </li>
           ) : null}
           {s.hintsUsed >= 3 ? <li className="hand">Two wrong answers are crossed out.</li> : null}

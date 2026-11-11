@@ -33,9 +33,10 @@ function Dots({ total, index }: { total: number; index: number }) {
   );
 }
 
-function Finished({ quiz, state }: { quiz: QuizSet; state: QuizState }) {
+function Finished({ quiz, state, externalUrl }: { quiz: QuizSet; state: QuizState; externalUrl?: string }) {
   const total = quiz.questions.length;
   useEffect(() => {
+    if (externalUrl) return; // quizzes made on the fly are not saved
     void update((p) =>
       withQuizResult(p, {
         key: `${quiz.pack}/${quiz.articleId}`,
@@ -45,7 +46,7 @@ function Finished({ quiz, state }: { quiz: QuizSet; state: QuizState }) {
         at: new Date().toISOString(),
       }),
     );
-  }, [quiz, state.score, state.totalHints, total]);
+  }, [quiz, state.score, state.totalHints, total, externalUrl]);
   const words =
     state.score === total
       ? 'Every one right. Brilliant reading!'
@@ -62,7 +63,13 @@ function Finished({ quiz, state }: { quiz: QuizSet; state: QuizState }) {
         You used {state.totalHints === 1 ? '1 hint' : `${state.totalHints} hints`}.
       </p>
       <div className="quiz-done__actions">
-        <Button to={`/article/${quiz.pack}/${quiz.articleId}`}>Read the article again</Button>
+        {externalUrl ? (
+          <a className="btn btn--yellow" href={externalUrl} rel="noreferrer">
+            Read the article again
+          </a>
+        ) : (
+          <Button to={`/article/${quiz.pack}/${quiz.articleId}`}>Read the article again</Button>
+        )}
         <Button to="/castle" tone="outline">
           Try the castle
         </Button>
@@ -75,7 +82,7 @@ function Finished({ quiz, state }: { quiz: QuizSet; state: QuizState }) {
   );
 }
 
-function Quiz({ quiz }: { quiz: QuizSet }) {
+export function Quiz({ quiz, externalUrl }: { quiz: QuizSet; externalUrl?: string }) {
   useTitle(`${quiz.title} quiz`);
   const [state, dispatch] = useReducer(
     (s: QuizState, a: Parameters<typeof reduce>[2]) => reduce(quiz.questions, s, a),
@@ -103,7 +110,7 @@ function Quiz({ quiz }: { quiz: QuizSet }) {
         </div>
       </div>
       {state.status === 'done' || !q ? (
-        <Finished quiz={quiz} state={state} />
+        <Finished quiz={quiz} state={state} externalUrl={externalUrl} />
       ) : (
         <QuestionCard
           key={q.id}
@@ -114,6 +121,7 @@ function Quiz({ quiz }: { quiz: QuizSet }) {
           total={total}
           articleTitle={quiz.title}
           articleLink={articleLink}
+          externalUrl={externalUrl}
           nextLabel={state.index + 1 === total ? 'See my score' : 'Next question'}
         />
       )}
@@ -122,7 +130,14 @@ function Quiz({ quiz }: { quiz: QuizSet }) {
         <a href={quiz.source.url} rel="noreferrer">
           {quiz.source.name}
         </a>{' '}
-        ({quiz.source.licence}). <Link to={articleLink}>Read the article</Link>
+        ({quiz.source.licence}).{' '}
+        {externalUrl ? (
+          <a href={externalUrl} rel="noreferrer">
+            Read the article
+          </a>
+        ) : (
+          <Link to={articleLink}>Read the article</Link>
+        )}
       </p>
     </section>
   );
