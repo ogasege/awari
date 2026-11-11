@@ -4,6 +4,34 @@ Awari is built from openly licensed material. Every bundled photo and data
 file under `public/` is listed here with its source and licence; the
 `npm run credits` check (and a Kiro hook) fails if one is missing.
 
+## Design kit photos
+
+Resized copies of photos from Wikimedia Commons, used on Home and as
+stamps. Authors and licences come from the design kit's
+`design/CREDITS.md`; each is to be confirmed against its Commons file
+page before submission (tracked in `.kiro/specs/12-submission-pack`).
+
+| File | Subject | Author | Licence |
+| --- | --- | --- | --- |
+| photos/earth.jpg | The Earth seen from Apollo 17 | NASA | Public domain |
+| photos/milkyway.jpg | Centre of the Milky Way | NASA/JPL-Caltech/ESA/CXC/STScI | Public domain |
+| photos/falls.jpg | Victoria Falls | Diego Delso | CC BY-SA 4.0 |
+| photos/kili.jpg | Kilimanjaro | Diego Delso | CC BY-SA 4.0 |
+| photos/elephant.jpg | Elephant and calf | Charles J. Sharp | CC BY-SA 4.0 |
+| photos/pyramids.jpg | All Gizah Pyramids | Ricardo Liberato | CC BY-SA 2.0 |
+| photos/lightning.jpg | Lightning at night | Mathias Krumbholz | CC BY-SA 3.0 |
+| photos/castle.jpg | Fasilides Palace, Gondar | Bernard Gagnon | CC BY-SA 3.0 |
+| photos/zuma.jpg | Zuma Rock in the dry season | Hui Linbo | CC BY-SA 4.0 |
+| photos/lokoja.jpg | The Niger from Mount Patti, Lokoja | Samlokoja | CC BY-SA 4.0 |
+
+## Logo
+
+| File | Description | Licence |
+| --- | --- | --- |
+| logo/awari-logo.svg | Awari logo from the design kit, used unchanged | MIT (this project) |
+| logo/awari-icon.svg | Awari app icon and favicon from the design kit | MIT (this project) |
+| logo/awari-icon.png | PNG of the app icon, used for the web app manifest | MIT (this project) |
+
 ## Fonts
 
 All fonts are self-hosted from the `@fontsource` npm packages and are

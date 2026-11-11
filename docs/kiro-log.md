@@ -34,3 +34,4 @@ A dated record of which spec, hook or steering file drove each piece of work.
 | 2026-11-11 22:29 | spec | 01-app-shell 2.1-2.2 | Pure router with round-trip and not-found properties; History API links, focus and title on navigation; credits screen renders CREDITS.md |
 | 2026-11-11 22:29 | steering/design.md | 01-app-shell 3.1-3.2 | Seeded wobble generator (Properties 3-5) and hand-made Print, Strip, Tape, Pin, MarginNote, Doodle, TornEdge, Button, Stamp components |
 | 2026-11-11 22:29 | spec | 01-app-shell 4.1 | Shared header with kit logo, nav with aria-current, search, offline badge; skip link; lazy routes |
+| 2026-11-11 22:29 | design/home.png | 01-app-shell 5.1-5.2 | Home composed from design/home.html: kit doodle layers extracted, live stamps and doors from IndexedDB progress; 1440px matches reference (3951 vs 3953 px tall), 390px single column, no overflow |
