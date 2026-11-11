@@ -1,0 +1,244 @@
+# Design: Content packs
+
+## Overview
+
+`npm run packs` runs `scripts/packs/build.ts`, which fetches open data
+through a caching HTTP client, turns it into the shapes in
+`src/lib/packs/types.ts` with small pure functions, writes everything to
+a staging folder, validates it, and only then swaps it into
+`public/packs/` and rewrites the credits region of `CREDITS.md`.
+
+Pure transforms (no network, no file system) are kept apart from the
+steps that fetch and write, so each transform has example tests and a
+fast-check property.
+
+## Architecture
+
+```
+scripts/packs/
+  build.ts        entry point: runs the steps in order, stages, swaps
+  http.ts         cached, polite fetch (data/raw/, User-Agent, retries)
+  sources.ts      Source builders and licence URLs per data set
+  slug.ts         slugify(), stripParenthetical()             (pure)
+  text.ts         splitSections(), splitSentences(), summarise() (pure)
+  licence.ts      normaliseLicence(), isUnwantedImage()        (pure)
+  wikidata.ts     SPARQL queries + parse*/pick* helpers        (pure parts)
+  wikipedia.ts    extracts, page images, Commons imageinfo
+  countries.ts    country selection, articles, facts, African list
+  physics.ts      physics article list and builder
+  photos.ts       candidate search, acceptance, sharp resize
+  notes.ts        deriveNotes()                                (pure)
+  wordnet.ts      parseWordNet(), selectEntries(), shard()     (pure)
+  atlas.ts        trimAtlas(), roundCoords()                   (pure)
+  credits.ts      renderCredits(), replaceRegion()             (pure)
+  manifest.ts     buildManifest()
+  validate.ts     validatePacks(): the checks shared by build and test
+  *.test.ts       examples + "Property N" tests
+  validate.test.ts  loads committed public/packs and runs validatePacks
+```
+
+## Data flow
+
+```
+Natural Earth 50m ──┐ (QIDs present on the map)
+Wikidata SPARQL ────┼─> country list (QID, title, NE iso3/continent)
+                    │        │
+Simple Wikipedia ───┼────────┴─> extracts ─> sections, summary, notes
+                    │                             │
+Wikidata SPARQL ────┴─> facts rows ─> CountryFacts (neighbours→slugs)
+Commons API ──> candidates ─> accept ─> sharp ─> img/<slug>.jpg + Photo
+all article text ─> tokens ─> lemmaCandidates ∩ OEWN ─> dictionary/*.json
+Natural Earth 110m ─> trimAtlas(slug by QID) ─> atlas/countries.json
+staging folder ─> validatePacks ─> manifest.json ─> swap ─> CREDITS.md
+```
+
+### HTTP cache (`http.ts`)
+
+`fetchCached(url, { key, kind })` hashes the URL (SHA-1) unless a key is
+given, and stores `{ url, fetched, status, body }` as JSON (text) or the
+raw bytes plus a `.meta.json` (binary) in `data/raw/<kind>/`. Cache hits
+return immediately with the original fetch date, so a rebuild from cache
+is byte-for-byte stable apart from the manifest build date. Network
+requests are serialised through one promise chain with a 150 ms gap;
+HTTP 429/5xx are retried up to four times with exponential back-off,
+honouring `Retry-After`. Every request sends
+`AwariBuild/0.1 (educational open-source project)`. SPARQL queries are
+sent as POST form bodies and cached by a hash of the query text.
+
+### Country selection (`countries.ts`)
+
+1. SPARQL: every sovereign state (P31 Q3624078, no P576) with its
+   English label and Simple English sitelink.
+2. Natural Earth 1:50m: the set of `WIKIDATAID`s. Three aliases map a
+   sovereign state to the item Natural Earth uses: Kingdom of the
+   Netherlands Q29999 → Netherlands Q55, Kingdom of Denmark Q756617 →
+   Denmark Q35 (both for the European country, which is what students
+   look for), and Natural Earth's Palestinian territories Q23792 → State
+   of Palestine Q219060. For the first two the facts and article come
+   from the alias item.
+3. Keep states present on the map with a Simple English article; slug
+   and title come from that article's title (Requirement 2.3/2.4).
+4. Check the 54 African UN members (hard-coded ISO3 list) are present.
+
+### Text (`text.ts`)
+
+`splitSections(extract)` walks the extract line by line. A line
+matching `^(={2,})\s*(.+?)\s*\1$` opens a section at that level; a
+dropped heading (case-insensitive list) suppresses everything until a
+heading of the same or higher level. Other lines are trimmed, inner
+whitespace collapsed, and kept as paragraphs unless they look like a
+broken formula (contains `=` or `{\displaystyle` and has fewer than
+three spaces). Empty sections are removed.
+
+`splitSentences(paragraph)` splits after `.`, `!` or `?` followed by
+whitespace and an upper-case letter, digit or opening quote, except
+after common abbreviations (Mr, Dr, St, U.S, e.g, i.e, etc, c, No).
+Every sentence is a substring of the paragraph.
+
+### Facts (`wikidata.ts`)
+
+One SPARQL query per property, each using `VALUES ?c { … }` with the
+selected QIDs, so no query multiplies rows. Pure helpers:
+
+- `pickPopulation(rows)`: rank order preferred > normal > deprecated
+  (deprecated ignored); among the best rank, the latest `P585`.
+- `formatWikidataTime(value, precision)`: `YYYY-MM-DD` (11), `YYYY-MM`
+  (10) or `YYYY` (9 or coarser); negative years keep their sign.
+- Area uses the normalised value (`psn:P2046`, m²) / 10⁶, rounded.
+- `mapNeighbours(qids, slugByQid, self)`: maps to slugs, drops unknown
+  and self, sorts, de-duplicates.
+- `chooseContinent(labels, neContinent, iso3)`: "Africa" for African UN
+  members; else Natural Earth's continent when Wikidata lists it; else
+  the first Wikidata label in alphabetical order.
+
+### Photos (`photos.ts`)
+
+Candidates, in order: files used on the Simple English article (in the
+order the parse API returns them), then a Commons search
+(`filetype:bitmap` plus a query such as "Nigeria landscape" or a
+curated phrase for physics). Candidates go to Commons `imageinfo` in
+batches of up to 50 with `extmetadata` and a 1200 px thumbnail URL.
+`acceptImage(meta)` applies Requirement 5.2; the first accepted file is
+downloaded (thumbnail), resized with `sharp` (`fit: inside`, 800×800,
+`withoutEnlargement`, mozjpeg), and re-encoded at quality 72, 64, 57, 50
+until under 90 KB. Alt text: the first sentence of the Commons
+description (HTML stripped, ≤ 160 chars), else the object name. Caption:
+the object name when it has two to five words, else "<title> in
+pictures" style fallbacks of at most five words.
+
+### Margin notes (`notes.ts`)
+
+`deriveNotes(sections)` scans sentences in reading order and keeps those
+that contain a digit, end with a full stop, are at most 69 characters
+once the full stop becomes "!", do not start with a pronoun (It, They,
+This, These, He, She, Its, Their, There) and contain no brackets or
+quotes. The first two (preferring the lead) become notes. Because the
+text is the proof sentence itself, a note can only be as true as the
+article sentence it sits beside, which is the guarantee Requirement 8
+asks for.
+
+### Dictionary (`wordnet.ts`)
+
+The OEWN `english-wordnet-<year>.xml.gz` release asset is gunzipped in
+memory (~110 MB string) and scanned with two regular expressions: one
+for `<LexicalEntry>` blocks (lemma `writtenForm` + ordered `Sense`
+synset ids) and one for `<Synset>` blocks (part of speech, first
+`Definition`, first `Example`). XML entities are decoded. Lemmas are
+keyed in lower case; entries for the same key are merged. Senses are
+taken round-robin across that key's entries (so "charge" gets a noun
+and a verb sense) up to three.
+
+`selectEntries(tokens, lexicon)` collects `lemmaCandidates` for every
+token and keeps those in the lexicon; `shardEntries` groups them by
+`shardFor`.
+
+### Atlas (`atlas.ts`)
+
+`trimAtlas(fc, lookup)` keeps geometry type, rounds coordinates to two
+decimals, removes consecutive duplicate positions, re-closes rings,
+drops rings with fewer than four positions (and polygons whose outer
+ring was dropped), and sets `{ iso3, name, id }`. `id` comes from the
+country matched by `WIKIDATAID` (with the alias table) and `iso3` is
+then taken from that country's facts, which the build asserts equals
+the Natural Earth code; unmatched features keep the Natural Earth code
+and `id: null`.
+
+### Credits and manifest
+
+`replaceRegion(text, region)` returns `text` with the bytes between the
+markers replaced, or with the markers and region appended (after one
+blank line) when absent. `renderCredits(photos)` produces the data-set
+list with backticked globs (`packs/countries/*.json`,
+`packs/physics/*.json`, `packs/dictionary/*.json`,
+`packs/atlas/*.json`, `packs/manifest.json`) and one table row per
+photo. Table cells escape `|`.
+
+`manifest.json` (not part of `types.ts`, so its shape is fixed here):
+
+```ts
+interface PacksManifest {
+  built: string;            // ISO date of the build
+  totalBytes: number;
+  files: { path: string; bytes: number }[]; // path like "/packs/img/nigeria.jpg"
+}
+```
+
+The manifest does not list itself.
+
+### Staging and swap
+
+Everything is written to `data/build/packs/` first. `validatePacks`
+runs on the staging folder; on success `public/packs/` is replaced by
+it with a rename and the credits region is rewritten. On failure the
+old `public/packs/` stays untouched.
+
+## Correctness properties
+
+1. *Sections*: for any extract, no output section has a dropped
+   heading, every section has at least one paragraph, and every
+   paragraph is non-empty, trimmed and (after whitespace collapsing)
+   appears in the input in order. (Req 2.5, 2.6)
+2. *Slugs*: for any string, `slugify` returns only `[a-z0-9]` runs
+   joined by single hyphens (or the empty string) and is idempotent.
+   (Req 2.3)
+3. *Licences*: for any string, `normaliseLicence` returns either null
+   or an Accepted licence; strings mentioning NC, ND or GFDL-only are
+   never accepted; every Accepted licence normalises to itself. (Req
+   5.2, 9.1)
+4. *Population*: for any set of statements, `pickPopulation` returns a
+   statement of the best non-deprecated rank present with the latest
+   date among that rank, independent of input order. (Req 3.3)
+5. *Neighbours*: for any neighbour lists, `mapNeighbours` returns
+   sorted, unique, known slugs that never include the country itself.
+   (Req 3.5)
+6. *WordNet parsing*: for any generated lexicon serialised as LMF XML,
+   `parseWordNet` returns exactly its lemmas (lower-cased) with their
+   senses' parts of speech, glosses and first examples, entities
+   decoded. (Req 6.1, 6.3)
+7. *Dictionary selection*: for any texts and lexicon, every selected
+   lemma is a candidate of some token and in the lexicon, every such
+   candidate is selected, no lemma has more than three senses, and every
+   lemma sits in shard `shardFor(lemma)`. (Req 6.2–6.4)
+8. *Atlas trimming*: for any polygon features, output properties are
+   exactly `{iso3, name, id}`, every coordinate has at most two
+   decimals, every ring is closed with at least four positions, and
+   `iso3` follows the ISO_A3 / ADM0_A3 fallback. (Req 7.2, 7.3)
+9. *Margin notes*: for any sections, `deriveNotes` returns at most two
+   notes, each shorter than 70 characters, whose proof is an exact
+   substring of the article text and whose text is the proof with its
+   final full stop replaced by "!". (Req 8.1–8.4)
+10. *Credits region*: for any file text and region, `replaceRegion`
+    leaves everything outside the markers unchanged, is idempotent, and
+    appends the markers when they are absent. (Req 9.2)
+11. *Image filter*: for any file title containing an unwanted word
+    (flag, map, coat of arms, …) or a non-JPEG extension,
+    `isUnwantedImage` is true. (Req 5.2)
+
+## Testing
+
+- Example tests and Properties 1–11 sit beside the modules
+  (`scripts/packs/*.test.ts`), named `Property N: …` with the
+  requirement numbers.
+- `scripts/packs/validate.test.ts` runs `validatePacks` on the committed
+  `public/packs/` (Requirement 10) plus Nigeria/delta spot checks.
+- Pack test files use the `node` Vitest environment.

@@ -10,3 +10,4 @@ A dated record of which spec, hook or steering file drove each piece of work.
 | 2026-11-11 20:50 | steering | 10-quiz-service spec | Wrote requirements (EARS, 7 requirements), design with 12 correctness properties, and tasks for the quiz service |
 | 2026-11-11 20:52 | spec | 10-quiz-service 1.1 | Shared question validator (validateQuestion, articleText, sectionOfSentence, articleFromText, isQuestionShape) with 20 example tests |
 | 2026-11-11 20:53 | spec | 10-quiz-service 1.2 | fast-check Properties 1-9 for the validator and articleFromText (shuffle invariance, foreign proof, missing answer, leaky hints, re-spacing, text round trip) |
+| 2026-11-11 20:56 | spec | 02-content-packs 1 | Content packs spec: EARS requirements (10), design with 11 correctness properties, tasks |
