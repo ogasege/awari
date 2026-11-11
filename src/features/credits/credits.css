@@ -1,0 +1,35 @@
+.credits {
+  max-width: 1000px;
+}
+
+.credits__lead {
+  max-width: 640px;
+  font-size: 20px;
+}
+
+.credits h2 {
+  margin: 40px 0 12px;
+  font-size: 30px;
+}
+
+.credits__table {
+  overflow-x: auto;
+}
+
+.credits table {
+  border-collapse: collapse;
+  font-size: 15px;
+  min-width: 600px;
+}
+
+.credits th,
+.credits td {
+  padding: 6px 10px;
+  border-bottom: 1px solid #d0d5dd;
+  text-align: left;
+  vertical-align: top;
+}
+
+.credits a {
+  color: var(--teal-ink);
+}
