@@ -1,7 +1,7 @@
 # Tasks: Infrastructure
 
 - [ ] 1. Static site
-  - [ ] 1.1 `versions.tf`, `variables.tf`, private bucket and policy
+  - [x] 1.1 `versions.tf`, `variables.tf`, private bucket and policy
         (`site.tf`). _Req 1.1–1.3, 7.1_
   - [ ] 1.2 OACs, cache policies and distribution (`cdn.tf`);
         Properties 1–5 in `tests/site.tftest.hcl`. _Req 2.1–2.6,
