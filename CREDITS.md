@@ -32,6 +32,17 @@ page before submission (tracked in `.kiro/specs/12-submission-pack`).
 | logo/awari-icon.svg | Awari app icon and favicon from the design kit | MIT (this project) |
 | logo/awari-icon.png | PNG of the app icon, used for the web app manifest | MIT (this project) |
 
+## Quizzes
+
+Built by `scripts/quizzes/build.ts` from the article text (Simple English
+Wikipedia, CC BY-SA 4.0) and Wikidata facts (CC0). Each question quotes
+its proof sentence from the article, so the quiz files are adaptations
+of the articles and share their licence, CC BY-SA 4.0.
+
+- `packs/quizzes/countries/*.json`
+- `packs/quizzes/physics/*.json`
+- `packs/quizzes/*.json` (the quiz index)
+
 ## Fonts
 
 All fonts are self-hosted from the `@fontsource` npm packages and are

@@ -16,7 +16,7 @@
     "typecheck": "tsc -b --noEmit",
     "test": "vitest run",
     "test:props": "vitest run property",
-    "packs": "tsx scripts/packs/build.ts",
+    "packs": "tsx scripts/packs/build.ts && tsx scripts/quizzes/build.ts",
     "credits": "tsx scripts/check-credits.ts",
     "rules": "tsx scripts/check-rules.ts",
     "bundle": "tsx scripts/check-bundle.ts",
