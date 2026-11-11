@@ -7,7 +7,7 @@
         Properties 1 and 2. _Req 2.3–2.7_
   - [x] 2.2 `licence.ts` (normalisation, image filter) and `sources.ts`
         with Properties 3 and 11. _Req 5.2, 9.1_
-- [ ] 3. Cached, polite HTTP client `http.ts`. _Req 1.2, 1.3_
+- [x] 3. Cached, polite HTTP client `http.ts`. _Req 1.2, 1.3_
 - [ ] 4. Countries
   - [ ] 4.1 `wikidata.ts` parsers with Properties 4 and 5. _Req 3.2–3.5_
   - [ ] 4.2 `countries.ts`: selection, articles, facts, African check.

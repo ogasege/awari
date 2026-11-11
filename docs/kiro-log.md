@@ -15,3 +15,4 @@ A dated record of which spec, hook or steering file drove each piece of work.
 | 2026-11-11 20:58 | spec | 10-quiz-service 2.2 | Bedrock Converse call with submit_questions tool (auto choice, 4096 max tokens), validate/dedupe/retry-once loop, function URL handler (204/400/405/413/502/200, never 403/404); Properties 10-11; 37 Lambda tests |
 | 2026-11-11 20:58 | spec | 02-content-packs 2 | Pure transforms: slugify, section/sentence splitting, summary, licence normalisation, image filter, Source builders; Properties 1, 2, 3, 11 |
 | 2026-11-11 20:58 | spec | 10-quiz-service 3.1 | App client fetchRemoteQuiz: payload-hash header for CloudFront OAC, 50 s timeout, local re-validation, null on any failure; Property 12 |
+| 2026-11-11 20:58 | spec | 02-content-packs 3 | Cached polite HTTP client (data/raw cache, AwariBuild User-Agent, serial queue with 150 ms gap, retries on 429/5xx) |
