@@ -64,9 +64,13 @@ function cachePath(opts: FetchOptions, url: string, ext: string): string {
   return join(dir, `${stem.replace(/[^A-Za-z0-9._-]/g, '_')}${ext}`);
 }
 
-/** Runs one network request in the shared queue with retries. */
-function queued(url: string, opts: FetchOptions): Promise<Response> {
-  const run = async (): Promise<Response> => {
+/**
+ * Runs one network request in the shared queue and reads its body, with
+ * retries for network errors (including a connection dropped while the
+ * body is read), HTTP 429 and 5xx.
+ */
+function queued(url: string, opts: FetchOptions): Promise<Buffer> {
+  const run = async (): Promise<Buffer> => {
     for (let attempt = 0; ; attempt++) {
       const wait = lastRequest + gapMs - Date.now();
       if (wait > 0) {
@@ -82,9 +86,14 @@ function queued(url: string, opts: FetchOptions): Promise<Response> {
         init.body = new URLSearchParams(opts.form);
       }
       let res: Response | undefined;
+      let body: Buffer | undefined;
       try {
         res = await fetch(url, init);
+        if (res.ok) {
+          body = Buffer.from(await res.arrayBuffer());
+        }
       } catch (error) {
+        res = undefined;
         if (attempt >= MAX_RETRIES) {
           throw new Error(`Network error for ${url}: ${String(error)}`, {
             cause: error,
@@ -92,10 +101,10 @@ function queued(url: string, opts: FetchOptions): Promise<Response> {
         }
       }
       if (res && res.status !== 429 && res.status < 500) {
-        if (!res.ok) {
+        if (!res.ok || !body) {
           throw new Error(`HTTP ${res.status} for ${url}`);
         }
-        return res;
+        return body;
       }
       if (res?.status === 429) {
         gapMs = Math.min(gapMs * 2, MAX_GAP_MS);
@@ -132,7 +141,7 @@ export async function fetchJson<T>(
   const cached: Cached<T> = {
     url,
     fetched: new Date().toISOString(),
-    body: (await res.json()) as T,
+    body: JSON.parse(res.toString('utf8')) as T,
   };
   writeFileSync(path, JSON.stringify(cached));
   return cached;
@@ -152,8 +161,7 @@ export async function fetchBytes(
     };
     return { ...meta, body: readFileSync(path) };
   }
-  const res = await queued(url, opts);
-  const body = Buffer.from(await res.arrayBuffer());
+  const body = await queued(url, opts);
   const fetched = new Date().toISOString();
   writeFileSync(path, body);
   writeFileSync(metaPath, JSON.stringify({ url, fetched }));

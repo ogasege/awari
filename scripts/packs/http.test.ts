@@ -38,6 +38,23 @@ describe('fetchJson', () => {
     expect(calls).toHaveLength(2);
   });
 
+  it('retries when the connection drops while the body is read', async () => {
+    const broken = new ReadableStream({
+      start(controller) {
+        controller.error(new TypeError('terminated'));
+      },
+    });
+    const responses = [
+      new Response(broken, { status: 200 }),
+      new Response(JSON.stringify({ ok: 2 }), { status: 200 }),
+    ];
+    const fetchMock = vi.fn(() => Promise.resolve(responses.shift()));
+    vi.stubGlobal('fetch', fetchMock);
+    const res = await fetchJson<{ ok: number }>('https://example.org/drop', { kind });
+    expect(res.body).toEqual({ ok: 2 });
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+  });
+
   it('fails clearly on a 404', async () => {
     vi.stubGlobal(
       'fetch',
