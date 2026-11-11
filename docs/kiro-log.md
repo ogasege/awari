@@ -46,3 +46,4 @@ A dated record of which spec, hook or steering file drove each piece of work.
 | 2026-11-11 22:41 | spec | 04-atlas 1.1 | Spec written; globe rotation maths with 5 properties (range, wrap, reversible drag, centring checked against d3 projection, key steps) |
 | 2026-11-11 22:43 | design/screens (Atlas) | 04-atlas 2.1 | SVG orthographic globe from Natural Earth: drag to spin, tap to select, arrow keys, no self-animation; discovered countries yellow, selected outlined |
 | 2026-11-11 22:43 | spec | 04-atlas 3.1-3.2 | Atlas screen: accessible country picker, pinned facts card with article and quiz links, ?c= preselect, discovery, 54 drawn Africa stamps; test selects Nigeria and marks it discovered |
+| 2026-11-11 22:44 | spec | 06-castle 1.1 | Spec written; round-robin question pool from the quiz bank and lit-room rules reusing the quiz reducer; 4 properties (neighbours differ, pool complete, lit never drops or passes 12, wing completable) |
