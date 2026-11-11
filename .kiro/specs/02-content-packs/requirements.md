@@ -19,10 +19,10 @@ emits are the contract in `src/lib/packs/types.ts`.
   downloaded response, so a rerun does not hit the network again.
 - **Extract**: the plain text of a Simple English Wikipedia article as
   returned by the TextExtracts API with `explaintext`.
-- **Sovereign country**: a Wikidata item that is an instance of
-  sovereign state (Q3624078) and has not been dissolved (no P576). This
-  is the 193 UN member states plus Vatican City, Palestine, Taiwan and
-  Kosovo.
+- **Sovereign country**: a Wikidata item with a non-deprecated
+  "instance of sovereign state" (P31 Q3624078) statement and no
+  dissolution date (P576). On the Natural Earth map this is the 193 UN
+  member states plus Vatican City, Palestine, Taiwan and Kosovo.
 - **African UN member**: one of the 54 UN member states in Africa,
   listed by ISO 3166-1 alpha-3 code in `scripts/packs/countries.ts`.
 - **Slug**: the URL id of an article (see Requirement 2.3).
@@ -99,15 +99,18 @@ country, so that I can compare places at a glance.
 
 1. THE Pipeline SHALL write `countries/facts.json` (a `FactsPack`) with
    one `CountryFacts` per country article, using the article slug as id.
-2. THE facts SHALL come from Wikidata (CC0): ISO alpha-3 code (P298,
-   falling back to the Natural Earth code), continent (P30 label),
+2. THE facts SHALL come from Wikidata (CC0), read through the Wikidata
+   API: ISO alpha-3 code (as Natural Earth gives it, ISO_A3 or else
+   ADM0_A3, so it joins the atlas; P298 when the country is not on the
+   map), continent (P30 label),
    capital (P36), population (P1082) with the year it refers to, area
    in km² (P2046, normalised units), currency (P38), official languages
-   (P37), inception (P571, as an ISO date at the stated precision) and
-   neighbours (P47, mapped to slugs of bundled countries).
-3. WHEN several population statements exist, THE Pipeline SHALL use the
-   statement with the best rank and, among those, the latest point in
-   time.
+   (P37), inception (P571, as an ISO date at the stated precision,
+   stored in the `independence` field) and neighbours (P47, mapped to slugs of bundled countries).
+3. THE Pipeline SHALL ignore deprecated statements and statements with
+   an end time (P582), and WHEN several population statements remain,
+   SHALL use one with the best rank and, among those, the latest point
+   in time.
 4. WHEN a country has several continents, THE Pipeline SHALL use the
    one Natural Earth gives, and every African UN member SHALL have the
    continent "Africa".

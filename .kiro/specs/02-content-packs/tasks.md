@@ -9,7 +9,7 @@
         with Properties 3 and 11. _Req 5.2, 9.1_
 - [x] 3. Cached, polite HTTP client `http.ts`. _Req 1.2, 1.3_
 - [ ] 4. Countries
-  - [ ] 4.1 `wikidata.ts` parsers with Properties 4 and 5. _Req 3.2–3.5_
+  - [x] 4.1 `wikidata.ts` parsers with Properties 4 and 5. _Req 3.2–3.5_
   - [ ] 4.2 `countries.ts`: selection, articles, facts, African check.
         _Req 2.1–2.8, 3.1–3.5_
 - [ ] 5. Physics pack `physics.ts`. _Req 4.1, 4.2_

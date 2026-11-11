@@ -22,7 +22,7 @@ scripts/packs/
   slug.ts         slugify(), stripParenthetical()             (pure)
   text.ts         splitSections(), splitSentences(), summarise() (pure)
   licence.ts      normaliseLicence(), isUnwantedImage()        (pure)
-  wikidata.ts     SPARQL queries + parse*/pick* helpers        (pure parts)
+  wikidata.ts     wbgetentities client + claim/pick helpers   (pure parts)
   wikipedia.ts    extracts, page images, Commons imageinfo
   countries.ts    country selection, articles, facts, African list
   physics.ts      physics article list and builder
@@ -41,11 +41,11 @@ scripts/packs/
 
 ```
 Natural Earth 50m ──┐ (QIDs present on the map)
-Wikidata SPARQL ────┼─> country list (QID, title, NE iso3/continent)
+Wikidata API ───────┼─> country list (QID, title, NE iso3/continent)
                     │        │
 Simple Wikipedia ───┼────────┴─> extracts ─> sections, summary, notes
                     │                             │
-Wikidata SPARQL ────┴─> facts rows ─> CountryFacts (neighbours→slugs)
+Wikidata API ───────┴─> claims ─> CountryFacts (labels, neighbours→slugs)
 Commons API ──> candidates ─> accept ─> sharp ─> img/<slug>.jpg + Photo
 all article text ─> tokens ─> lemmaCandidates ∩ OEWN ─> dictionary/*.json
 Natural Earth 110m ─> trimAtlas(slug by QID) ─> atlas/countries.json
@@ -62,14 +62,18 @@ is byte-for-byte stable apart from the manifest build date. Network
 requests are serialised through one promise chain with a 150 ms gap;
 HTTP 429/5xx are retried up to four times with exponential back-off,
 honouring `Retry-After`. Every request sends
-`AwariBuild/0.1 (educational open-source project)`. SPARQL queries are
-sent as POST form bodies and cached by a hash of the query text.
+`AwariBuild/0.1 (educational open-source project)`. POST form bodies are
+part of the cache key.
 
 ### Country selection (`countries.ts`)
 
-1. SPARQL: every sovereign state (P31 Q3624078, no P576) with its
-   English label and Simple English sitelink.
-2. Natural Earth 1:50m: the set of `WIKIDATAID`s. Three aliases map a
+1. Natural Earth 1:50m: the set of `WIKIDATAID`s (242 features).
+2. Wikidata API (`wbgetentities`, 50 ids per request, labels, claims
+   and the Simple English sitelink): keep items with a non-deprecated
+   P31 Q3624078 and no P576. The Query Service (SPARQL) was not used: at
+   build time it was rate-limiting every client to one request a minute
+   during an outage, and `wbgetentities` needs no query at all. Three
+   aliases map a
    sovereign state to the item Natural Earth uses: Kingdom of the
    Netherlands Q29999 → Netherlands Q55, Kingdom of Denmark Q756617 →
    Denmark Q35 (both for the European country, which is what students
@@ -97,14 +101,22 @@ Every sentence is a substring of the paragraph.
 
 ### Facts (`wikidata.ts`)
 
-One SPARQL query per property, each using `VALUES ?c { … }` with the
-selected QIDs, so no query multiplies rows. Pure helpers:
+Claims come from the same `wbgetentities` responses; labels of the
+items they point at (capitals, currencies, languages, continents) are
+fetched in further batches of 50. Pure helpers:
 
-- `pickPopulation(rows)`: rank order preferred > normal > deprecated
-  (deprecated ignored); among the best rank, the latest `P585`.
+- `currentStatements(claims, pid)`: drops deprecated statements and
+  those with an end time (P582), keeps the best remaining rank.
+- `pickPopulation(statements)`: rank order preferred > normal
+  (deprecated ignored); among the best rank, the latest `P585`; ties go
+  to the larger figure so the choice does not depend on order.
+- `iso3`: Natural Earth's code (ISO_A3, else ADM0_A3) for countries on
+  the map, so facts always join the atlas (Wikidata's P298 is deprecated
+  for the Netherlands and is "XKS" for Kosovo where Natural Earth uses
+  "KOS"); P298 otherwise.
 - `formatWikidataTime(value, precision)`: `YYYY-MM-DD` (11), `YYYY-MM`
   (10) or `YYYY` (9 or coarser); negative years keep their sign.
-- Area uses the normalised value (`psn:P2046`, m²) / 10⁶, rounded.
+- Area converts km², square miles, hectares and m² to km², rounded.
 - `mapNeighbours(qids, slugByQid, self)`: maps to slugs, drops unknown
   and self, sorts, de-duplicates.
 - `chooseContinent(labels, neContinent, iso3)`: "Africa" for African UN
