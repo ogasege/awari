@@ -91,6 +91,12 @@ function ArticleView({ article }: { article: Article }) {
     if (isCountry) void update((p) => withDiscovered(p, article.id));
   }, [article.id, isCountry]);
 
+  // "Where to look" hints and proof links point at a section anchor.
+  useEffect(() => {
+    const id = decodeURIComponent(window.location.hash.slice(1));
+    if (id) document.getElementById(id)?.scrollIntoView({ block: 'start' });
+  }, [article.id]);
+
   return (
     <article className="article">
       <header className="article__board grain">
