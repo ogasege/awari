@@ -126,17 +126,24 @@ fetched in further batches of 50. Pure helpers:
 ### Photos (`photos.ts`)
 
 Candidates, in order: files used on the Simple English article (in the
-order the parse API returns them), then a Commons search
-(`filetype:bitmap` plus a query such as "Nigeria landscape" or a
-curated phrase for physics). Candidates go to Commons `imageinfo` in
-batches of up to 50 with `extmetadata` and a 1200 px thumbnail URL.
-`acceptImage(meta)` applies Requirement 5.2; the first accepted file is
-downloaded (thumbnail), resized with `sharp` (`fit: inside`, 800×800,
-`withoutEnlargement`, mozjpeg), and re-encoded at quality 72, 64, 57, 50
-until under 90 KB. Alt text: the first sentence of the Commons
-description (HTML stripped, ≤ 160 chars), else the object name. Caption:
-the object name when it has two to five words, else "<title> in
-pictures" style fallbacks of at most five words.
+order the parse API returns them), then Commons searches
+(`filetype:bitmap` with "<country> landscape", "<country>" and each
+capital for countries, or a curated phrase for physics). Candidates go
+to Commons `imageinfo` in batches of up to 50 with `extmetadata` and a
+1200 px thumbnail URL. `acceptImage(meta)` applies Requirement 5.2;
+for places it also rejects official portraits, events, embassies and
+satellite imagery. `placeMentions` keeps a country's photos about that
+country: a file used on the article is rejected when its name or
+description names another country but not this one (Benin's article
+used a photo of Koutammakou, Togo), and a search result must name this
+country (or its capital) and no other. Landscape-format files are
+preferred. The chosen file is downloaded (thumbnail), resized with
+`sharp` (`fit: inside`, 800×800, `withoutEnlargement`, mozjpeg), and
+re-encoded at quality 72, 64, 57, 50 until under 90 KB. Alt text: the
+first sentence of the Commons description when it reads as a complete
+English sentence (≤ 160 chars), else "Photo: <object name>". Caption:
+the object name when it is two to five plain words naming the subject,
+else "A view of <country>" or "<topic> up close" (at most five words).
 
 ### Margin notes (`notes.ts`)
 

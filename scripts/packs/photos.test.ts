@@ -1,7 +1,7 @@
 // @vitest-environment node
 /** Tests for Commons photo acceptance, captions and alt text. */
 import { describe, expect, it } from 'vitest';
-import { acceptImage, altFor, captionFor, stripHtml } from './photos.ts';
+import { acceptImage, altFor, captionFor, placeMentions, stripHtml } from './photos.ts';
 
 const base = {
   title: 'File:Lagos Island skyline.jpg',
@@ -32,9 +32,29 @@ describe('acceptImage (Req 5.2, 5.3)', () => {
   });
 });
 
+describe('place checks (Req 5.1, 5.2)', () => {
+  const others = ['Cameroon', 'Togo', 'Niger', 'Democratic Republic of the Congo', 'Republic of the Congo'];
+
+  it('rejects satellite images of places', () => {
+    expect(
+      acceptImage({ ...base, meta: { ...base.meta, ImageDescription: 'MODIS image of floods' } }, true),
+    ).toBeNull();
+  });
+
+  it('tells which places a text names', () => {
+    expect(placeMentions('Flooding in Cameroon', ['Equatorial Guinea'], others)).toEqual({ self: false, other: true });
+    expect(placeMentions('Rocks in Benin and Togo', ['Benin'], others)).toEqual({ self: true, other: true });
+    expect(placeMentions('Bumba, Democratic Republic of the Congo', ['Republic of the Congo'], others)).toEqual({ self: false, other: true });
+    expect(placeMentions('The Niger Delta, Nigeria', ['Nigeria'], others)).toEqual({ self: true, other: false });
+  });
+});
+
 describe('captions and alt text (Req 5.5)', () => {
   it('uses short object names and falls back to the title', () => {
-    expect(captionFor('Lagos Island skyline', 'Nigeria', 'countries')).toBe('Lagos Island skyline');
+    expect(captionFor('Lagos Island skyline', 'Nigeria', 'countries')).toBe('A view of Nigeria');
+    expect(captionFor('Beach with palms Ghana', 'Ghana', 'countries')).toBe('Beach with palms Ghana');
+    expect(captionFor('Lautsprecherkabel Makro', 'Electrical conductor', 'physics')).toBe('Electrical conductor up close');
+    expect(altFor({ title: 'File:Afang Soup.jpg', meta: { ImageDescription: 'This is an image of food from', ObjectName: 'Afang Soup' } }, 'Nigeria')).toBe('Photo: Afang Soup');
     expect(captionFor('DSC 0042', 'Nigeria', 'countries')).toBe('A view of Nigeria');
     expect(captionFor('Lightning', 'Lightning', 'physics')).toBe('Lightning up close');
     expect(

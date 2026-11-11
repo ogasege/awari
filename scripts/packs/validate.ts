@@ -85,8 +85,11 @@ function sourcesIn(value: unknown, out: Record<string, unknown>[] = []): Record<
     if ('licence' in obj) {
       out.push(obj);
     }
-    for (const v of Object.values(obj)) {
-      sourcesIn(v, out);
+    // Dictionary `entries` are keyed by words, and "licence" is a word.
+    for (const [k, v] of Object.entries(obj)) {
+      if (k !== 'entries') {
+        sourcesIn(v, out);
+      }
     }
   }
   return out;

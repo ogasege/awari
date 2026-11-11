@@ -18,10 +18,10 @@
       _Req 5.1–5.6_
 - [x] 8. Dictionary `wordnet.ts` with Properties 6 and 7. _Req 6.1–6.5_
 - [x] 9. Atlas `atlas.ts` with Property 8. _Req 7.1–7.4_
-- [ ] 10. Credits, manifest, validation and the build
+- [x] 10. Credits, manifest, validation and the build
   - [x] 10.1 `credits.ts` with Property 10, `manifest.ts`,
         `validate.ts`. _Req 9.2–9.5, 10.1_
-  - [ ] 10.2 `build.ts`: staging, swap, run `npm run packs`, commit the
+  - [x] 10.2 `build.ts`: staging, swap, run `npm run packs`, commit the
         packs. _Req 1.1, 1.4, 1.5, 10.2_
 - [ ] 11. Pack validation test over committed output; lint, typecheck,
       credits and a clean-cache rebuild. _Req 10.1, 10.2, 1.2_
