@@ -1,0 +1,19 @@
+{
+  "enabled": true,
+  "name": "Lint and unit tests on save",
+  "description": "When a source file is saved, run ESLint and the Vitest unit and property tests so a broken change is caught before the task is marked done.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/**/*.ts",
+      "src/**/*.tsx",
+      "scripts/**/*.ts",
+      "services/quiz-lambda/src/**/*.ts"
+    ]
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "npm run lint && npm test"
+  }
+}

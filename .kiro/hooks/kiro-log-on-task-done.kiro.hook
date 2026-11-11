@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Record completed spec tasks in the Kiro log",
+  "description": "When a spec's tasks.md is saved with a task newly ticked, append a dated entry to docs/kiro-log.md naming the spec, the task and the steering or hook that drove it. This log is the evidence for the judges.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      ".kiro/specs/*/tasks.md"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A spec tasks.md file was just saved. Compare it with the last commit (git diff) and find every task whose checkbox changed from [ ] to [x]. For each one, run: npm run log -- --spec <spec folder name> --task <task number> --by <spec, or the steering file or hook that drove the work> --note \"<one-line summary of the work>\". Do not edit docs/kiro-log.md by hand. Then remind me to commit with the message '<spec> <task>: <summary>'."
+  }
+}

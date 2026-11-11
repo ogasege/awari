@@ -1,0 +1,27 @@
+# Tasks: App shell and design system
+
+- [ ] 1. Tokens, fonts and global styles
+  - [ ] 1.1 `tokens.css` with the Lagoon palette and font stacks;
+        self-hosted fonts. _Req 3.1, 3.2, 3.4_
+  - [ ] 1.2 Contrast helper and Property 6 test over every token pair.
+        _Req 3.3_
+- [ ] 2. Router
+  - [ ] 2.1 Pure `matchRoute`/`buildPath` with Properties 1 and 2.
+        _Req 2.1, 2.4_
+  - [ ] 2.2 `useRoute`, `Link`, focus and title handling, not-found
+        screen. _Req 2.2, 2.3, 2.5_
+- [ ] 3. Hand-made components
+  - [ ] 3.1 Seeded wobble generator with Properties 3 and 4. _Req 4.3_
+  - [ ] 3.2 Print, Strip, Tape, Pin, MarginNote, Doodle, TornEdge, Button,
+        Stamp, HandUnderline; Property 5; hover/focus straighten and lift;
+        reduced motion. _Req 4.1, 4.2, 4.4–4.7_
+- [ ] 4. Header and app frame
+  - [ ] 4.1 Header with logo, nav, search, offline badge; skip link.
+        _Req 1.1–1.4_
+- [ ] 5. Home screen
+  - [ ] 5.1 Hero, subjects, on this day, stamp book, learn by playing,
+        footer, composed from the reference. _Req 5.1, 5.2, 5.4, 5.5_
+  - [ ] 5.2 Phone reflow and screenshot comparison at 1440 and 390 px.
+        _Req 5.2, 5.3_
+- [ ] 6. Budget
+  - [ ] 6.1 Lazy routes and `check-bundle.ts` under 300 KB. _Req 6.1, 6.2_

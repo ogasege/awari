@@ -1,0 +1,21 @@
+{
+  "enabled": true,
+  "name": "Credits stay complete when files change",
+  "description": "Re-run the CREDITS.md coverage check when a bundled photo or data file, or CREDITS.md itself, is edited.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "public/**/*.json",
+      "public/**/*.webp",
+      "public/**/*.jpg",
+      "public/**/*.png",
+      "public/**/*.svg",
+      "CREDITS.md"
+    ]
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "npm run credits"
+  }
+}

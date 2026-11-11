@@ -1,0 +1,21 @@
+{
+  "enabled": true,
+  "name": "Every bundled photo and data file is credited",
+  "description": "When a photo or data file is added or changed under public/, or CREDITS.md changes, check that every bundled file has a licence entry in CREDITS.md (hard rule 3).",
+  "version": "1",
+  "when": {
+    "type": "fileCreated",
+    "patterns": [
+      "public/**/*.json",
+      "public/**/*.webp",
+      "public/**/*.jpg",
+      "public/**/*.png",
+      "public/**/*.svg",
+      "CREDITS.md"
+    ]
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "npm run credits"
+  }
+}
