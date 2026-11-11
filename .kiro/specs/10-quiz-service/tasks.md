@@ -12,6 +12,6 @@
   - [x] 2.2 Bedrock Converse call, generate/validate/retry loop,
         handler status codes, Properties 10–11.
         _Req 3.1, 3.2, 4.1–4.6, 5.1, 5.2_
-- [ ] 3. App client
-  - [ ] 3.1 `remote.ts` with timeout, payload hash, re-validation and
+- [x] 3. App client
+  - [x] 3.1 `remote.ts` with timeout, payload hash, re-validation and
         Property 12. _Req 7.1–7.5_
