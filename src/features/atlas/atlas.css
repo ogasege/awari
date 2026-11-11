@@ -1,0 +1,257 @@
+.atlas-board {
+  background: var(--teal);
+  color: var(--paper);
+  padding: 24px var(--gutter) 48px;
+  min-height: calc(100vh - 94px);
+}
+
+.atlas {
+  display: grid;
+  grid-template-columns: minmax(240px, 320px) minmax(0, 1fr) minmax(260px, 340px);
+  grid-template-areas:
+    'side globe card'
+    'credit credit credit';
+  gap: 24px 32px;
+  align-items: start;
+}
+
+.atlas__side {
+  grid-area: side;
+}
+
+.atlas__title {
+  font-size: clamp(40px, 4.4vw, 64px);
+}
+
+.atlas__lead {
+  margin: 24px 0;
+  color: var(--mist);
+  font-size: 18px;
+}
+
+.atlas__picker {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 700;
+}
+
+.atlas__picker select {
+  height: 48px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 10px;
+  font: inherit;
+  font-weight: 400;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.atlas-stamps {
+  margin-top: 28px;
+}
+
+.atlas-stamps__count {
+  margin: 0 0 10px;
+}
+
+.atlas-stamps__count strong {
+  font-family: var(--font-head);
+  font-size: 34px;
+  color: var(--yellow);
+}
+
+.atlas-stamps__grid {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 5px;
+  max-width: 260px;
+}
+
+.atlas-stamps__grid span {
+  aspect-ratio: 5 / 6;
+  background: rgb(255 255 255 / 0.18);
+}
+
+.atlas-stamps__grid span.is-found {
+  background: var(--yellow);
+}
+
+.atlas__globe {
+  grid-area: globe;
+  position: relative;
+}
+
+.globe {
+  display: block;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  touch-action: none;
+  cursor: grab;
+  user-select: none;
+}
+
+.globe.is-dragging {
+  cursor: grabbing;
+}
+
+.globe:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 6px;
+  border-radius: 50%;
+}
+
+.globe__ring {
+  fill: none;
+  stroke: var(--paper);
+  stroke-width: 3;
+  stroke-linecap: round;
+  filter: url(#aw-chalk);
+}
+
+.globe__ocean {
+  fill: #0a4a55;
+}
+
+.globe__graticule {
+  fill: none;
+  stroke: rgb(213 240 243 / 0.18);
+  stroke-width: 1;
+}
+
+.globe__land {
+  fill: #7cc6cf;
+  stroke: var(--teal);
+  stroke-width: 0.8;
+  cursor: pointer;
+}
+
+.globe__land:hover {
+  fill: #b9e6ea;
+}
+
+.globe__land.is-discovered {
+  fill: var(--yellow);
+}
+
+.globe__selected {
+  fill: none;
+  stroke: var(--navy);
+  stroke-width: 3.5;
+  pointer-events: none;
+}
+
+.atlas__drag {
+  position: absolute;
+  left: 4%;
+  bottom: 10%;
+}
+
+.atlas__card-slot {
+  grid-area: card;
+}
+
+.atlas-card {
+  position: relative;
+  padding: 30px 24px 22px;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 12px 30px rgb(0 0 0 / 0.4);
+  rotate: 1.5deg;
+}
+
+.atlas-card__pin {
+  position: absolute;
+  left: 50%;
+  top: -10px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--pin);
+  box-shadow: 2px 4px 0 rgb(0 0 0 / 0.25);
+}
+
+.atlas-card h2 {
+  font-size: 32px;
+  margin-bottom: 14px;
+}
+
+.atlas-card dl {
+  margin: 0 0 16px;
+}
+
+.atlas-card dl div {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 8px;
+  padding: 3px 0;
+  border-bottom: 1px solid #e4e7ec;
+}
+
+.atlas-card dt {
+  font-weight: 700;
+}
+
+.atlas-card dd {
+  margin: 0;
+}
+
+.atlas-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.atlas-card__actions .btn--outline {
+  color: var(--ink);
+}
+
+.atlas-card__found {
+  margin: 14px 0 0;
+  font-size: 26px;
+  color: var(--teal-ink);
+}
+
+.atlas-card__credit {
+  margin: 10px 0 0;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.atlas-card a {
+  color: var(--teal-ink);
+}
+
+.atlas-card--empty {
+  font-size: 28px;
+  color: var(--teal-ink);
+}
+
+.atlas__credit {
+  grid-area: credit;
+  margin: 0;
+  font-size: 14px;
+  color: var(--mist);
+}
+
+.atlas__credit a {
+  color: var(--paper);
+}
+
+@media (max-width: 1100px) {
+  .atlas {
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+    grid-template-areas:
+      'side side'
+      'globe card'
+      'credit credit';
+  }
+}
+
+@media (max-width: 899px) {
+  .atlas {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'side' 'globe' 'card' 'credit';
+  }
+}
