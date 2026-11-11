@@ -14,7 +14,8 @@ export const USER_AGENT = 'AwariBuild/0.1 (educational open-source project)';
 /** Root of the raw download cache (git-ignored). */
 export const RAW_DIR = join('data', 'raw');
 
-const GAP_MS = 150;
+const MIN_GAP_MS = 150;
+const MAX_GAP_MS = 3000;
 const MAX_RETRIES = 4;
 
 /** A cached response body with the time it was first fetched. */
@@ -40,6 +41,8 @@ export interface FetchOptions {
 let chain: Promise<unknown> = Promise.resolve();
 let lastRequest = 0;
 let networkCount = 0;
+/** Pause between requests; doubles after every 429 (up to 3 s). */
+let gapMs = MIN_GAP_MS;
 
 /** Number of real network requests made in this process. */
 export function networkRequests(): number {
@@ -65,7 +68,7 @@ function cachePath(opts: FetchOptions, url: string, ext: string): string {
 function queued(url: string, opts: FetchOptions): Promise<Response> {
   const run = async (): Promise<Response> => {
     for (let attempt = 0; ; attempt++) {
-      const wait = lastRequest + GAP_MS - Date.now();
+      const wait = lastRequest + gapMs - Date.now();
       if (wait > 0) {
         await sleep(wait);
       }
@@ -93,6 +96,9 @@ function queued(url: string, opts: FetchOptions): Promise<Response> {
           throw new Error(`HTTP ${res.status} for ${url}`);
         }
         return res;
+      }
+      if (res?.status === 429) {
+        gapMs = Math.min(gapMs * 2, MAX_GAP_MS);
       }
       if (attempt >= MAX_RETRIES) {
         throw new Error(`HTTP ${res?.status ?? 'error'} for ${url}`);

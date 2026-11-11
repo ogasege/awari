@@ -14,12 +14,12 @@
         _Req 2.1–2.8, 3.1–3.5_
 - [x] 5. Physics pack `physics.ts`. _Req 4.1, 4.2_
 - [x] 6. Margin notes `notes.ts` with Property 9. _Req 8.1–8.4_
-- [ ] 7. Photos `photos.ts` (Commons candidates, acceptance, sharp).
+- [x] 7. Photos `photos.ts` (Commons candidates, acceptance, sharp).
       _Req 5.1–5.6_
-- [ ] 8. Dictionary `wordnet.ts` with Properties 6 and 7. _Req 6.1–6.5_
-- [ ] 9. Atlas `atlas.ts` with Property 8. _Req 7.1–7.4_
+- [x] 8. Dictionary `wordnet.ts` with Properties 6 and 7. _Req 6.1–6.5_
+- [x] 9. Atlas `atlas.ts` with Property 8. _Req 7.1–7.4_
 - [ ] 10. Credits, manifest, validation and the build
-  - [ ] 10.1 `credits.ts` with Property 10, `manifest.ts`,
+  - [x] 10.1 `credits.ts` with Property 10, `manifest.ts`,
         `validate.ts`. _Req 9.2–9.5, 10.1_
   - [ ] 10.2 `build.ts`: staging, swap, run `npm run packs`, commit the
         packs. _Req 1.1, 1.4, 1.5, 10.2_

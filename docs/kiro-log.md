@@ -25,3 +25,7 @@ A dated record of which spec, hook or steering file drove each piece of work.
 | 2026-11-11 21:06 | spec | 11-infrastructure 3.1 | Outputs (site URL, bucket, distribution id, quiz endpoint, function URL), example.tfvars, README with build/deploy/upload/invalidate/verify commands and abuse/cost controls; fmt, validate and 13 terraform tests pass offline |
 | 2026-11-11 21:19 | spec | 02-content-packs 4.2 | Countries: sovereign states on the Natural Earth 50m map with Simple English articles (alias table for NL, DK, Palestine), article builder, Wikidata facts, 54 African UN members check |
 | 2026-11-11 21:19 | spec | 02-content-packs 5 | Physics pack: 12 electricity articles from Simple English Wikipedia with Commons photo search phrases |
+| 2026-11-11 21:19 | spec | 02-content-packs 7 | Photos: Commons-only candidates, licence/author/restriction/flag-map filters, sharp resize to 800px under 90 KB |
+| 2026-11-11 21:19 | spec | 02-content-packs 8 | Dictionary: OEWN 2025 LMF regex parser, lemma selection via lemmaCandidates, shards; Properties 6, 7 |
+| 2026-11-11 21:19 | spec | 02-content-packs 9 | Atlas: Natural Earth 110m trimmed to iso3/name/id, 2-decimal coordinates, closed rings; Property 8 |
+| 2026-11-11 21:19 | spec | 02-content-packs 10.1 | Credits region rewrite (Property 10), manifest, validatePacks shared by build and test |
