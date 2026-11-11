@@ -16,3 +16,4 @@ A dated record of which spec, hook or steering file drove each piece of work.
 | 2026-11-11 20:58 | spec | 02-content-packs 2 | Pure transforms: slugify, section/sentence splitting, summary, licence normalisation, image filter, Source builders; Properties 1, 2, 3, 11 |
 | 2026-11-11 20:58 | spec | 10-quiz-service 3.1 | App client fetchRemoteQuiz: payload-hash header for CloudFront OAC, 50 s timeout, local re-validation, null on any failure; Property 12 |
 | 2026-11-11 20:58 | spec | 02-content-packs 3 | Cached polite HTTP client (data/raw cache, AwariBuild User-Agent, serial queue with 150 ms gap, retries on 429/5xx) |
+| 2026-11-11 21:00 | steering | 11-infrastructure spec | Wrote requirements (EARS, 7 requirements), design with 10 correctness properties checked by terraform test with mock providers, and tasks |
