@@ -1,10 +1,10 @@
 # Tasks: Quiz service
 
-- [ ] 1. Shared validator
-  - [ ] 1.1 `validate.ts` with `validateQuestion`, `articleText`,
+- [x] 1. Shared validator
+  - [x] 1.1 `validate.ts` with `validateQuestion`, `articleText`,
         `sectionOfSentence`, `articleFromText`, `isQuestionShape`;
         example tests. _Req 1.1–1.12, 2.1–2.3_
-  - [ ] 1.2 Properties 1–9 in `validate.property.test.ts`.
+  - [x] 1.2 Properties 1–9 in `validate.property.test.ts`.
         _Req 1.1–1.11, 2.2, 2.3_
 - [ ] 2. Lambda package
   - [ ] 2.1 Package, tsconfig, esbuild bundle, request parsing, CORS,
