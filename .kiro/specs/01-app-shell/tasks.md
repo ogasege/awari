@@ -23,7 +23,7 @@
         footer, composed from the reference. _Req 5.1, 5.2, 5.4, 5.5_
   - [x] 5.2 Phone reflow and screenshot comparison at 1440 and 390 px.
         _Req 5.2, 5.3_
-  - [ ] 5.3 Check every Home margin-note fact against its pack article
+  - [x] 5.3 Check every Home margin-note fact against its pack article
         (test fails if the proof sentence is missing). _Req 5.4_
-- [ ] 6. Budget
-  - [ ] 6.1 Lazy routes and `check-bundle.ts` under 300 KB. _Req 6.1, 6.2_
+- [x] 6. Budget
+  - [x] 6.1 Lazy routes and `check-bundle.ts` under 300 KB. _Req 6.1, 6.2_

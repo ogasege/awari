@@ -19,10 +19,10 @@ export const HERO_NOTES: Record<'dry' | 'lemurs' | 'ice', HomeNote> = {
   dry: { kind: 'question', text: 'Why is it so dry up here?', to: '/search?q=desert' },
   lemurs: {
     kind: 'fact',
-    text: 'Lemurs live here and nowhere else',
+    text: "Most of Madagascar's mammals live nowhere else!",
     to: '/article/countries/madagascar',
     article: 'countries/madagascar',
-    proof: '',
+    proof: 'most of the mammals living in Madagascar do not live anywhere else in the world',
   },
   ice: { kind: 'question', text: 'What is hiding under all that ice?', to: '/search?q=ice' },
 };
@@ -30,23 +30,21 @@ export const HERO_NOTES: Record<'dry' | 'lemurs' | 'ice', HomeNote> = {
 export const SUBJECT_NOTES: Record<'falls' | 'pyramids' | 'kili', HomeNote> = {
   falls: {
     kind: 'fact',
-    text: 'People who live near these falls call them the smoke that thunders.',
+    text: 'Victoria Falls is one of the seven natural wonders of the world.',
     to: '/article/countries/zambia',
     article: 'countries/zambia',
-    proof: '',
+    proof: 'Zambia is home to one of the seven natural wonders of the world, Victoria falls',
   },
   pyramids: {
     kind: 'fact',
-    text: 'about 4,500 years old!',
+    text: 'The Pyramids and the Sphinx!',
     to: '/article/countries/egypt',
     article: 'countries/egypt',
-    proof: '',
+    proof: 'Egypt is famous for its ancient monuments, such as the Pyramids and the Sphinx',
   },
   kili: {
-    kind: 'fact',
-    text: 'Kilimanjaro. 5,895 m, the top of Africa.',
-    to: '/article/countries/tanzania',
-    article: 'countries/tanzania',
-    proof: '',
+    kind: 'question',
+    text: 'Can you find Kilimanjaro on the globe?',
+    to: '/atlas?c=tanzania',
   },
 };
