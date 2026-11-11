@@ -20,3 +20,4 @@ A dated record of which spec, hook or steering file drove each piece of work.
 | 2026-11-11 21:01 | spec | 02-content-packs 4.1 | Wikidata API client (wbgetentities; SPARQL endpoint was rate-limited to 1 req/min) and claim helpers; Properties 4, 5; spec updated for iso3 from Natural Earth |
 | 2026-11-11 21:02 | spec | 02-content-packs 6 | Margin notes: verbatim numeric article sentences under 70 chars, proof = exact sentence; Property 9 |
 | 2026-11-11 21:03 | spec | 11-infrastructure 1.1 | Terraform providers (aws ~> 6.0, archive), validated variables, private site bucket (public access blocked, owner-enforced, SSE, versioning with 30-day expiry, CloudFront-only + TLS-only policy) |
+| 2026-11-11 21:03 | spec | 11-infrastructure 1.2 | CloudFront with S3 OAC, SPA fallback (403/404 -> /index.html 200), HTTPS only, HTTP/2+3, security headers, cache tiers (assets 1y, packs 7d, html 60s, sw.js uncached); Properties 1-5 as terraform test with mock providers |
