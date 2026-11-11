@@ -7,17 +7,37 @@ import { EMPTY_PROGRESS, update, withDiscovered, withRoomsLit } from './progress
 
 export const REFERENCE_STAMPS = ['nigeria', 'egypt', 'tanzania', 'ethiopia', 'zambia'];
 
-export async function applyDemoFromUrl(search: string): Promise<boolean> {
-  const mode = new URLSearchParams(search).get('demo');
+/**
+ * Applies a demo mode named in the query string, then removes the
+ * parameter from the address so a reload does not repeat it. Resetting
+ * is destructive, so it only happens after the person confirms.
+ */
+export async function applyDemoFromUrl(
+  search: string,
+  confirmReset: (message: string) => boolean = (m) => window.confirm(m),
+): Promise<boolean> {
+  const params = new URLSearchParams(search);
+  const mode = params.get('demo');
+  if (mode !== 'reference' && mode !== 'reset') {
+    return false;
+  }
+  params.delete('demo');
+  const rest = params.toString();
+  window.history.replaceState(
+    null,
+    '',
+    `${window.location.pathname}${rest ? `?${rest}` : ''}${window.location.hash}`,
+  );
   if (mode === 'reference') {
+    // Additive only: it never removes anything the student collected.
     await update((p) =>
       withRoomsLit(REFERENCE_STAMPS.reduce(withDiscovered, p), 'africa', 5),
     );
     return true;
   }
-  if (mode === 'reset') {
-    await update(() => EMPTY_PROGRESS);
-    return true;
+  if (!confirmReset('Clear every stamp, quiz score and castle room on this device?')) {
+    return false;
   }
-  return false;
+  await update(() => EMPTY_PROGRESS);
+  return true;
 }
