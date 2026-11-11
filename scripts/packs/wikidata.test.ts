@@ -7,7 +7,9 @@ import {
   chooseContinent,
   currentStatements,
   formatWikidataTime,
+  INDEPENDENCE,
   inception,
+  independenceDate,
   isSovereignState,
   itemIds,
   mapNeighbours,
@@ -77,6 +79,26 @@ describe('claim helpers', () => {
     expect(pickPopulation(populationFigures(NIGERIA))?.value).toBe(2000);
     expect(areaKm2(NIGERIA)).toBe(259);
     expect(inception(NIGERIA)).toBe('1963-10-01');
+  });
+
+  it('reads independence only from P793 = independence, never from P571 (Req 3.6)', () => {
+    expect(independenceDate(NIGERIA)).toBeUndefined();
+    const independent: Entity = {
+      ...NIGERIA,
+      claims: {
+        ...NIGERIA.claims,
+        P793: [
+          {
+            ...item(INDEPENDENCE),
+            qualifiers: {
+              P585: [{ datavalue: { type: 'time', value: { time: '+1960-10-01T00:00:00Z', precision: 11 } } }],
+            },
+          },
+          item('Q12345'),
+        ],
+      },
+    };
+    expect(independenceDate(independent)).toBe('1960-10-01');
   });
 
   it('formats times at their precision', () => {

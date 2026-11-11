@@ -275,6 +275,39 @@ export function inception(entity: Entity): string | undefined {
   return best ? formatWikidataTime(best.time, best.precision) : undefined;
 }
 
+/** Wikidata item for the event "independence". */
+export const INDEPENDENCE = 'Q1464916';
+
+/**
+ * ISO date of independence: the point in time (P585) of a "significant
+ * event" (P793) statement whose value is independence (Q1464916); the
+ * latest when there are several. Undefined when Wikidata records none:
+ * inception (P571) is not used, because it often marks a later change
+ * of government (Nigeria's is 1963, the year it became a republic).
+ */
+export function independenceDate(entity: Entity): string | undefined {
+  let best: { time: string; precision: number } | undefined;
+  for (const s of entity.claims?.P793 ?? []) {
+    const dv = s.mainsnak.datavalue;
+    if (
+      s.rank === 'deprecated' ||
+      dv?.type !== 'wikibase-entityid' ||
+      (dv.value as { id: string }).id !== INDEPENDENCE
+    ) {
+      continue;
+    }
+    const when = s.qualifiers?.P585?.[0]?.datavalue;
+    if (when?.type !== 'time') {
+      continue;
+    }
+    const v = when.value as { time: string; precision: number };
+    if (!best || timeKey(v.time) > timeKey(best.time)) {
+      best = v;
+    }
+  }
+  return best ? formatWikidataTime(best.time, best.precision) : undefined;
+}
+
 /**
  * Maps neighbour item ids to bundled slugs: unknown items and the
  * country itself are dropped; the result is sorted and unique.

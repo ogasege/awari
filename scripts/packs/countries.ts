@@ -16,7 +16,7 @@ import {
   chooseContinent,
   currentStatements,
   getEntities,
-  inception,
+  independenceDate,
   isSovereignState,
   itemIds,
   labelOf,
@@ -224,7 +224,7 @@ export async function buildFacts(
     const capital = itemIds(currentStatements(e, 'P36')).map(label);
     const currency = itemIds(currentStatements(e, 'P38')).map(label);
     const area = areaKm2(e);
-    const independence = inception(e);
+    const independence = independenceDate(e);
     const record: CountryFacts = {
       id: article.id,
       qid: c.qid,

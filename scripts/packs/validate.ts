@@ -17,7 +17,7 @@ import { listFiles } from '../lib/files.ts';
 import type { AtlasCollection } from './atlas.ts';
 import { AFRICAN_UN_MEMBERS } from './countries.ts';
 import { ACCEPTED_LICENCES } from './licence.ts';
-import { MANIFEST_FILE, type PacksManifest } from './manifest.ts';
+import { MANIFEST_FILE, isOwned, type PacksManifest } from './manifest.ts';
 import { MAX_NOTES, NOTE_LIMIT } from './notes.ts';
 import { articleText } from './text.ts';
 import { MAX_SENSES } from './wordnet.ts';
@@ -149,7 +149,7 @@ export function validatePacks(dir: string): string[] {
   for (const s of p.shards) {
     errors.push(...sourceProblems(`dictionary/${s.shard}`, s.source));
   }
-  for (const f of p.files.filter((x) => x.endsWith('.json'))) {
+  for (const f of p.files.filter((x) => x.endsWith('.json') && isOwned(x))) {
     for (const s of sourcesIn(readJson<unknown>(dir, f))) {
       errors.push(...sourceProblems(f, s));
     }
@@ -287,7 +287,7 @@ export function validatePacks(dir: string): string[] {
     fail('manifest.json missing');
   } else {
     const listed = new Map(p.manifest.files.map((f) => [f.path, f.bytes]));
-    for (const f of p.files.filter((x) => x !== MANIFEST_FILE)) {
+    for (const f of p.files.filter((x) => x !== MANIFEST_FILE && isOwned(x))) {
       const bytes = listed.get(`/packs/${f}`);
       if (bytes === undefined) {
         fail(`manifest does not list ${f}`);

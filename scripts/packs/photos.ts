@@ -1,6 +1,7 @@
 /**
- * Lead photos from Wikimedia Commons: candidate search, licence and
- * content checks, author/licence credit, and resizing with sharp.
+ * Lead photos from Wikimedia Commons: candidate search, licence,
+ * suitability and content checks, author/licence credit, curated
+ * overrides, and resizing with sharp.
  */
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -57,9 +58,44 @@ const PEOPLE_EVENTS =
 const SATELLITE =
   /MODIS|satellite|sat[ée]lite|landsat|sentinel-?\d|observa[çc][ãa]o da terra|earth observatory|astronaut photo/i;
 
+/** Subjects unsuitable for a children's lead photo. */
+export const UNSUITABLE =
+  /child[ _-]?labou?r|\bwars?\b|warfare|conflict|refugee|poverty|corpse|\bdead\b|death|killed|protest|\briots?\b|caricature|cartoon|damaged|destroyed|rebel|militia|soldier|\barmy\b|military|weapon|\bguns?\b|slum|famine|starv|execution|genocide|massacre|prison|slave|funeral|wounded|injur|\bbomb|attack|terror|violence|disaster|flood/i;
+
+/** Old artworks: paintings, prints and drawings. */
+const ARTWORK =
+  /painting|engraving|lithograph|etching|woodcut|drawing|illustration|sketch|watercolou?r|aquatint|\bprint by\b/i;
+
+/** A year before 1900 written in the text. */
+const OLD_YEAR = /\b1[0-8]\d\d\b/;
+
+/** Subjects a lead photo should preferably show. */
+const PREFERRED =
+  /landscape|view|panorama|mountain|\bmount\b|\bpeak\b|hill|valley|lake|river|falls|waterfall|beach|coast|bay|island|desert|dune|savann?ah?|forest|park|reserve|wildlife|elephant|lion|giraffe|zebra|antelope|gorilla|bird|city|skyline|street|market|harbou?r|\bport\b|mosque|church|cathedral|temple|palace|fort|castle|tower|bridge|monument|pyramid|ruins|old town|village|sunset|sunrise/gi;
+
+/** File title without "File:" and extension, underscores as spaces. */
+function plainName(title: string): string {
+  return title
+    .replace(/^File:/, '')
+    .replace(/\.[a-z0-9]+$/i, '')
+    .replace(/_/g, ' ')
+    .trim();
+}
+
+/** What a Commons file says about itself, for the checks below. */
+export function fileText(file: Pick<CommonsFile, 'title' | 'meta'>): string {
+  return [
+    plainName(file.title),
+    stripHtml(file.meta.ObjectName ?? ''),
+    stripHtml(file.meta.ImageDescription ?? ''),
+    stripHtml(file.meta.Categories ?? '').replace(/\|/g, ' '),
+  ].join(' ');
+}
+
 /**
  * Decides whether a Commons file can be a lead photo (Requirement 5.2):
  * a JPEG at least 480 px wide, not a flag/map/emblem/logo and similar,
+ * nothing unsuitable for children, no artwork or work dated before 1900,
  * with an accepted licence, a named author and no usage restriction.
  * For places, official portraits, events and satellite images are
  * rejected too.
@@ -69,16 +105,15 @@ export function acceptImage(
   place = false,
 ): Acceptance | null {
   const categories = (file.meta.Categories ?? '').split('|');
-  const about = [
-    file.title,
-    stripHtml(file.meta.ImageDescription ?? ''),
-    stripHtml(file.meta.Artist ?? ''),
-  ].join(' ');
+  const text = `${fileText(file)} ${stripHtml(file.meta.Artist ?? '')}`;
   if (
     file.mime !== 'image/jpeg' ||
     file.width < 480 ||
     isUnwantedImage(file.title, categories) ||
-    (place && (PEOPLE_EVENTS.test(file.title) || SATELLITE.test(about)))
+    UNSUITABLE.test(text) ||
+    ARTWORK.test(text) ||
+    OLD_YEAR.test(text) ||
+    (place && (PEOPLE_EVENTS.test(text) || SATELLITE.test(text)))
   ) {
     return null;
   }
@@ -93,6 +128,15 @@ export function acceptImage(
     return null;
   }
   return { licence, author };
+}
+
+/** How strongly a file shows a preferred subject (0 = not at all). */
+export function preferenceScore(
+  file: Pick<CommonsFile, 'title' | 'meta' | 'width' | 'height'>,
+): number {
+  const hits = fileText(file).match(PREFERRED) ?? [];
+  const landscape = file.width >= file.height * 1.2 ? 1 : 0;
+  return new Set(hits.map((h) => h.toLowerCase())).size * 2 + landscape;
 }
 
 function escapeRegExp(text: string): string {
@@ -132,92 +176,72 @@ export function placeMentions(
   return { self, other };
 }
 
-/** What a file says about itself: name, object name and description. */
-function fileText(file: Pick<CommonsFile, 'title' | 'meta'>): string {
-  return [
-    plainName(file.title),
-    stripHtml(file.meta.ObjectName ?? ''),
-    stripHtml(file.meta.ImageDescription ?? ''),
-  ].join(' ');
-}
-
-/** File title without "File:" and extension, underscores as spaces. */
-function plainName(title: string): string {
-  return title
-    .replace(/^File:/, '')
-    .replace(/\.[a-z0-9]+$/i, '')
-    .replace(/_/g, ' ')
-    .trim();
-}
-
 /**
- * A caption of two to five words: the file's object name when it is
- * plain words that name the subject (the place, or a word of four or
- * more letters from a physics title), else a phrase from the title.
+ * A caption of two to five words naming what the photo shows, taken
+ * from the Commons object name (or file name) with bracketed parts and
+ * trailing numbers removed; null when it does not read as plain words.
  */
-export function captionFor(
-  objectName: string,
-  title: string,
-  pack: 'countries' | 'physics',
-): string {
-  const words = stripHtml(objectName).split(/\s+/).filter(Boolean);
-  const plain = words.every((w) => /^[A-Za-zÀ-ÿ'’-]+$/.test(w));
-  const lower = words.join(' ').toLowerCase();
-  const namesSubject =
-    pack === 'countries'
-      ? lower.includes(title.toLowerCase())
-      : title
-          .toLowerCase()
-          .split(/[^a-z]+/)
-          .some((w) => w.length >= 4 && lower.includes(w));
-  if (plain && words.length >= 2 && words.length <= 5 && namesSubject) {
-    return words.join(' ');
-  }
-  const phrase = pack === 'countries' ? `A view of ${title}` : `${title} up close`;
-  return phrase.split(' ').length <= 5
-    ? phrase
-    : title.split(' ').slice(0, 5).join(' ');
+export function captionFrom(name: string): string | null {
+  const clean = stripHtml(name)
+    .replace(/\s*\btitle QS:.*$/, '')
+    .replace(/\([^)]*\)/g, ' ')
+    .replace(/[\s_-]+\d[\d\s_-]*$/, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  const words = clean.split(' ').filter(Boolean);
+  const plain = words.every((w) => /^[A-Za-zÀ-ÿ'’-]+,?$/.test(w));
+  return plain && words.length >= 2 && words.length <= 5 ? clean : null;
 }
+
+/** Longest alt text, in characters. */
+export const ALT_LIMIT = 140;
 
 const WEAK_DESCRIPTION =
-  /^(this (is an |is a |)(image|photo)|per filename|it |uploaded|own work)/i;
+  /^(this (is an |is a |)(image|photo)|per filename|it |uploaded|own work|photographed)/i;
 
 /**
- * Plain alt text: the description's first sentence when it reads as a
- * complete English description, else the file's name.
+ * Plain alt text from the Commons description: its first sentence when
+ * it reads as a complete English description, shortened at a word
+ * boundary to at most 140 characters; null when there is none.
  */
-export function altFor(file: Pick<CommonsFile, 'title' | 'meta'>, title: string): string {
-  const description = stripHtml(file.meta.ImageDescription ?? '');
-  const first = (description.split(/(?<=[.!?])\s/)[0] ?? '').trim();
+export function altFrom(description: string): string | null {
+  const text = stripHtml(description).replace(/^English:\s*/i, '');
+  const first = (text.split(/(?<=[.!?])\s/)[0] ?? '').trim();
   const letters = first.replace(/[^\p{L}]/gu, '');
   const latin = letters !== '' && /^[A-Za-zÀ-ÿ]+$/.test(letters);
   // "in" and "a" are left out: Dutch, German and French share them.
   const english =
     /^[A-Z]/.test(first) &&
-    /\b(the|of|and|at|on|with|near|from|an|is|to|for|by|over|into|are|was)\b/i.test(first);
-  const unfinished = /(\bfrom|\bof|\bthe|\bwith|:)$/i.test(first.replace(/[.!?]$/, ''));
+    /\b(the|of|and|at|on|with|near|from|an|is|to|for|by|over|into|are|was)\b/i.test(
+      first,
+    );
+  const unfinished = /(\bfrom|\bof|\bthe|\bwith|:)$/i.test(
+    first.replace(/[.!?]$/, ''),
+  );
   if (
-    first.split(/\s+/).length >= 3 &&
-    first.length <= 160 &&
-    latin &&
-    english &&
-    !/\b[a-z]{2}:|500px|QS:/.test(first) &&
-    !WEAK_DESCRIPTION.test(first) &&
-    !unfinished
+    first.split(/\s+/).length < 3 ||
+    !latin ||
+    !english ||
+    /\b[a-z]{2}:|500px|QS:/.test(first) ||
+    WEAK_DESCRIPTION.test(first) ||
+    unfinished
   ) {
+    return null;
+  }
+  if (first.length <= ALT_LIMIT) {
     return first;
   }
-  const name = cleanName(stripHtml(file.meta.ObjectName ?? '') || plainName(file.title));
-  return name.length >= 4 ? `Photo: ${name}` : `Photo for the article about ${title}`;
+  return `${first.slice(0, ALT_LIMIT - 1).replace(/[\s,;:]+\S*$/, '')}…`;
 }
 
-/** Drops Commons structured-data residue, dates and numbers from a name. */
-export function cleanName(name: string): string {
-  return name
-    .replace(/\s*\btitle QS:.*$/, '')
-    .replace(/\b\d[\d-]*\b/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
+/** A hand-picked Commons file for one article, checked like any other. */
+export interface PhotoOverride {
+  /** File name on Commons, without "File:". */
+  file: string;
+  /** Two to five words naming what the photo shows. */
+  caption: string;
+  /** Plain description; defaults to the Commons description. */
+  alt?: string;
 }
 
 /** What a photo is wanted for. */
@@ -231,6 +255,7 @@ export interface PhotoSubject {
   /** For places: names of this place, and of every other place. */
   names?: string[];
   otherNames?: string[];
+  override?: PhotoOverride;
 }
 
 /** A chosen photo with its credit. */
@@ -239,54 +264,104 @@ export interface ChosenPhoto {
   subject: string;
 }
 
+interface Candidate {
+  file: CommonsFile;
+  ok: Acceptance;
+  alt: string;
+  caption: string;
+  score: number;
+}
+
 /**
  * Finds, checks, downloads and resizes a lead photo, writing it to
- * `<outDir>/img/<slug>.jpg`. Returns null when no candidate qualifies.
- * For places, a file used on the article must not name another place
- * without naming this one, and a Commons search result must name this
- * place and no other.
+ * `<outDir>/img/<slug>.jpg`. An override is used when given (and must
+ * pass the same checks). Otherwise candidates come from the files used
+ * on the article, then Commons searches; each must pass `acceptImage`
+ * and have an alt text and a caption. For places, a file used on the
+ * article must not name another country without naming this one, and
+ * a search result must name this place and no other. The best-scoring
+ * candidate (preferred subjects, landscape format) wins; the search
+ * stops at the first source that offers a preferred subject.
  */
 export async function choosePhoto(
   subject: PhotoSubject,
   outDir: string,
 ): Promise<ChosenPhoto | null> {
+  if (subject.override) {
+    const photo = await applyOverride(subject, subject.override, outDir);
+    return { photo, subject: subject.title };
+  }
   const place = subject.pack === 'countries';
   const names = subject.names ?? [subject.title];
   const others = subject.otherNames ?? [];
-  const lists: string[][] = [await getArticleFiles(subject.wikiTitle)];
-  for (const q of subject.queries) {
-    lists.push(await searchCommons(q));
-  }
-  for (const [i, list] of lists.entries()) {
-    const quick = list.filter((n) => !isUnwantedImage(`File:${n}`));
+  const sources: (() => Promise<string[]>)[] = [
+    () => getArticleFiles(subject.wikiTitle),
+    ...subject.queries.map((q) => () => searchCommons(q)),
+  ];
+  const pool: Candidate[] = [];
+  for (const [i, source] of sources.entries()) {
+    const quick = (await source()).filter((n) => !isUnwantedImage(`File:${n}`));
     if (quick.length === 0) {
       continue;
     }
     const files = await getCommonsFiles(quick);
-    const accepted = quick
-      .map((n) => files.get(`File:${n.replace(/_/g, ' ')}`) ?? files.get(`File:${n}`))
-      .filter((f): f is CommonsFile => f !== undefined)
-      .filter((f) => {
-        if (!place) {
-          return true;
+    for (const n of quick) {
+      const file =
+        files.get(`File:${n.replace(/_/g, ' ')}`) ?? files.get(`File:${n}`);
+      if (!file || pool.some((c) => c.file.title === file.title)) {
+        continue;
+      }
+      if (place) {
+        const m = placeMentions(fileText(file), names, others);
+        if (i === 0 ? !m.self && m.other : !m.self || m.other) {
+          continue;
         }
-        const m = placeMentions(fileText(f), names, others);
-        return i === 0 ? m.self || !m.other : m.self && !m.other;
-      })
-      .map((f) => ({ f, ok: acceptImage(f, place) }))
-      .filter((x): x is { f: CommonsFile; ok: Acceptance } => x.ok !== null);
-    // Prefer landscape photos; keep source order otherwise.
-    accepted.sort(
-      (a, b) =>
-        Number(b.f.width >= b.f.height * 1.2) -
-        Number(a.f.width >= a.f.height * 1.2),
-    );
-    const best = accepted[0];
-    if (best) {
-      return { photo: await savePhoto(best.f, best.ok, subject, outDir), subject: subject.title };
+      }
+      const ok = acceptImage(file, place);
+      const alt = altFrom(file.meta.ImageDescription ?? '');
+      const caption =
+        captionFrom(file.meta.ObjectName ?? '') ??
+        captionFrom(plainName(file.title));
+      if (ok && alt && caption) {
+        pool.push({ file, ok, alt, caption, score: preferenceScore(file) });
+      }
+    }
+    if (pool.some((c) => c.score >= 2)) {
+      break;
     }
   }
-  return null;
+  const best = [...pool].sort((a, b) => b.score - a.score)[0];
+  if (!best) {
+    return null;
+  }
+  return {
+    photo: await savePhoto(best.file, best.ok, subject, outDir, best.alt, best.caption),
+    subject: subject.title,
+  };
+}
+
+/** Uses a hand-picked file, failing loudly when it does not qualify. */
+async function applyOverride(
+  subject: PhotoSubject,
+  override: PhotoOverride,
+  outDir: string,
+): Promise<Photo> {
+  const files = await getCommonsFiles([override.file]);
+  const file = files.get(`File:${override.file.replace(/_/g, ' ')}`);
+  if (!file) {
+    throw new Error(`Override ${override.file} for ${subject.slug} is not on Commons`);
+  }
+  const ok = acceptImage(file, false);
+  if (!ok) {
+    throw new Error(
+      `Override ${override.file} for ${subject.slug} fails the licence or suitability checks`,
+    );
+  }
+  const alt = override.alt ?? altFrom(file.meta.ImageDescription ?? '');
+  if (!alt) {
+    throw new Error(`Override ${override.file} for ${subject.slug} needs an alt text`);
+  }
+  return savePhoto(file, ok, subject, outDir, alt, override.caption);
 }
 
 /** Downloads, resizes and writes one photo and returns its record. */
@@ -295,13 +370,20 @@ async function savePhoto(
   ok: Acceptance,
   subject: PhotoSubject,
   outDir: string,
+  alt: string,
+  caption: string,
 ): Promise<Photo> {
   const raw = await fetchBytes(file.thumbUrl, { kind: 'commons-img', ext: '.jpg' });
   let out: { data: Buffer; info: OutputInfo } | undefined;
   for (const quality of QUALITIES) {
     out = await sharp(raw.body)
       .rotate()
-      .resize({ width: MAX_SIDE, height: MAX_SIDE, fit: 'inside', withoutEnlargement: true })
+      .resize({
+        width: MAX_SIDE,
+        height: MAX_SIDE,
+        fit: 'inside',
+        withoutEnlargement: true,
+      })
       .jpeg({ quality, mozjpeg: true })
       .toBuffer({ resolveWithObject: true });
     if (out.data.length <= TARGET_BYTES) {
@@ -319,13 +401,15 @@ async function savePhoto(
     file: rel,
     width: out.info.width,
     height: out.info.height,
-    alt: altFor(file, subject.title),
-    caption: captionFor(file.meta.ObjectName ?? plainName(file.title), subject.title, subject.pack),
+    alt,
+    caption,
     credit: {
       name: `Wikimedia Commons: ${file.title.replace(/^File:/, '')}`,
       url: file.pageUrl,
       licence: ok.licence,
-      licenceUrl: /^https?:\/\//.test(licenceLink) ? licenceLink : licenceUrl(ok.licence),
+      licenceUrl: /^https?:\/\//.test(licenceLink)
+        ? licenceLink
+        : licenceUrl(ok.licence),
       author: ok.author,
       retrieved: isoDate(file.fetched),
     },

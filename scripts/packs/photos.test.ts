@@ -1,12 +1,21 @@
 // @vitest-environment node
-/** Tests for Commons photo acceptance, captions and alt text. */
+/** Tests for Commons photo acceptance, suitability, captions and alt text. */
 import { describe, expect, it } from 'vitest';
-import { acceptImage, altFor, captionFor, placeMentions, stripHtml } from './photos.ts';
+import {
+  ALT_LIMIT,
+  acceptImage,
+  altFrom,
+  captionFrom,
+  placeMentions,
+  preferenceScore,
+  stripHtml,
+} from './photos.ts';
 
 const base = {
   title: 'File:Lagos Island skyline.jpg',
   mime: 'image/jpeg',
   width: 3000,
+  height: 2000,
   meta: {
     Artist: '<a href="//commons.wikimedia.org/wiki/User:Ada">Ada &amp; Co</a>',
     LicenseShortName: 'CC BY-SA 4.0',
@@ -16,30 +25,44 @@ const base = {
   },
 };
 
+const withMeta = (meta: Record<string, string>) => ({
+  ...base,
+  meta: { ...base.meta, ...meta },
+});
+
 describe('acceptImage (Req 5.2, 5.3)', () => {
   it('accepts a freely licensed photo and strips the author HTML', () => {
     expect(acceptImage(base)).toEqual({ licence: 'CC BY-SA 4.0', author: 'Ada & Co' });
   });
 
   it('rejects non-free, restricted, unattributed, non-JPEG and map files', () => {
-    expect(acceptImage({ ...base, meta: { ...base.meta, LicenseShortName: 'CC BY-NC 2.0' } })).toBeNull();
-    expect(acceptImage({ ...base, meta: { ...base.meta, Restrictions: 'trademarked' } })).toBeNull();
-    expect(acceptImage({ ...base, meta: { ...base.meta, Artist: '' } })).toBeNull();
+    expect(acceptImage(withMeta({ LicenseShortName: 'CC BY-NC 2.0' }))).toBeNull();
+    expect(acceptImage(withMeta({ Restrictions: 'trademarked' }))).toBeNull();
+    expect(acceptImage(withMeta({ Artist: '' }))).toBeNull();
     expect(acceptImage({ ...base, mime: 'image/png' })).toBeNull();
     expect(acceptImage({ ...base, title: 'File:Lagos locator map.jpg' })).toBeNull();
-    expect(acceptImage({ ...base, meta: { ...base.meta, Categories: 'Flags of Nigeria' } })).toBeNull();
+    expect(acceptImage(withMeta({ Categories: 'Flags of Nigeria' }))).toBeNull();
     expect(acceptImage({ ...base, title: 'File:President visit Lagos.jpg' }, true)).toBeNull();
+  });
+
+  it('rejects subjects unsuitable for children, artworks and pre-1900 works', () => {
+    expect(acceptImage({ ...base, title: 'File:Child labor in Ethiopia 2.jpg' })).toBeNull();
+    expect(acceptImage(withMeta({ ImageDescription: 'Refugee camp near the border.' }))).toBeNull();
+    expect(acceptImage(withMeta({ ImageDescription: 'A school damaged during the civil war.' }))).toBeNull();
+    expect(acceptImage(withMeta({ ObjectName: 'Caricature by Thomas Rowlandson' }))).toBeNull();
+    expect(acceptImage(withMeta({ ImageDescription: 'Engraving of the harbour, 1820.' }))).toBeNull();
+    expect(acceptImage(withMeta({ ImageDescription: 'MODIS image of the coast.' }), true)).toBeNull();
+  });
+
+  it('prefers landscapes, landmarks, wildlife and cities', () => {
+    expect(preferenceScore(base)).toBeGreaterThan(
+      preferenceScore({ ...base, title: 'File:Afang soup.jpg', width: 600, height: 800, meta: { ObjectName: 'Afang soup', ImageDescription: 'A bowl of soup.' } }),
+    );
   });
 });
 
 describe('place checks (Req 5.1, 5.2)', () => {
   const others = ['Cameroon', 'Togo', 'Niger', 'Democratic Republic of the Congo', 'Republic of the Congo'];
-
-  it('rejects satellite images of places', () => {
-    expect(
-      acceptImage({ ...base, meta: { ...base.meta, ImageDescription: 'MODIS image of floods' } }, true),
-    ).toBeNull();
-  });
 
   it('tells which places a text names', () => {
     expect(placeMentions('Flooding in Cameroon', ['Equatorial Guinea'], others)).toEqual({ self: false, other: true });
@@ -50,20 +73,24 @@ describe('place checks (Req 5.1, 5.2)', () => {
 });
 
 describe('captions and alt text (Req 5.5)', () => {
-  it('uses short object names and falls back to the title', () => {
-    expect(captionFor('Lagos Island skyline', 'Nigeria', 'countries')).toBe('A view of Nigeria');
-    expect(captionFor('Beach with palms Ghana', 'Ghana', 'countries')).toBe('Beach with palms Ghana');
-    expect(captionFor('Lautsprecherkabel Makro', 'Electrical conductor', 'physics')).toBe('Electrical conductor up close');
-    expect(altFor({ title: 'File:Afang Soup.jpg', meta: { ImageDescription: 'This is an image of food from', ObjectName: 'Afang Soup' } }, 'Nigeria')).toBe('Photo: Afang Soup');
-    expect(captionFor('DSC 0042', 'Nigeria', 'countries')).toBe('A view of Nigeria');
-    expect(captionFor('Lightning', 'Lightning', 'physics')).toBe('Lightning up close');
-    expect(
-      captionFor('x', 'Democratic Republic of the Congo', 'countries').split(' ').length,
-    ).toBeLessThanOrEqual(5);
+  it('captions with two to five plain words, never a generic phrase', () => {
+    expect(captionFrom('Lagos Island skyline')).toBe('Lagos Island skyline');
+    expect(captionFrom('Le Morne Peninsula in Mauritius (53697779236)')).toBe('Le Morne Peninsula in Mauritius');
+    expect(captionFrom('Tanzania landscape 01')).toBe('Tanzania landscape');
+    expect(captionFrom('DSC 0042')).toBeNull();
+    expect(captionFrom('Lightning')).toBeNull();
+    expect(captionFrom('A very long object name with many words')).toBeNull();
   });
 
-  it('takes the first sentence of the description as alt', () => {
-    expect(altFor(base, 'Nigeria')).toBe('The skyline of Lagos Island at dusk.');
+  it('takes alt text only from a complete English description', () => {
+    expect(altFrom(base.meta.ImageDescription)).toBe('The skyline of Lagos Island at dusk.');
+    expect(altFrom('English: View of the falls from the bridge.')).toBe('View of the falls from the bridge.');
+    expect(altFrom('This is an image of food from')).toBeNull();
+    expect(altFrom('Eigen foto, gemaakt op 15-10-2006 in Kampala.')).toBeNull();
+    expect(altFrom('Per filename')).toBeNull();
+    const long = altFrom(`The view ${'over the wide green hills '.repeat(10)}at dawn.`);
+    expect(long?.length).toBeLessThanOrEqual(ALT_LIMIT);
+    expect(long?.endsWith('…')).toBe(true);
     expect(stripHtml('<b>a</b>&nbsp;b')).toBe('a b');
   });
 });

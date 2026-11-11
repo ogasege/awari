@@ -117,6 +117,11 @@ fetched in further batches of 50. Pure helpers:
 - `formatWikidataTime(value, precision)`: `YYYY-MM-DD` (11), `YYYY-MM`
   (10) or `YYYY` (9 or coarser); negative years keep their sign.
 - Area converts km², square miles, hectares and m² to km², rounded.
+- `independenceDate(entity)`: the P585 date of a P793 = Q1464916
+  ("significant event: independence") statement, else nothing. P571
+  (inception) is deliberately not used (Nigeria's is its 1963 republic,
+  not its 1960 independence). At build time Wikidata had no such
+  statement for any bundled country, so `independence` is omitted.
 - `mapNeighbours(qids, slugByQid, self)`: maps to slugs, drops unknown
   and self, sorts, de-duplicates.
 - `chooseContinent(labels, neContinent, iso3)`: "Africa" for African UN
@@ -130,20 +135,33 @@ order the parse API returns them), then Commons searches
 (`filetype:bitmap` with "<country> landscape", "<country>" and each
 capital for countries, or a curated phrase for physics). Candidates go
 to Commons `imageinfo` in batches of up to 50 with `extmetadata` and a
-1200 px thumbnail URL. `acceptImage(meta)` applies Requirement 5.2;
-for places it also rejects official portraits, events, embassies and
-satellite imagery. `placeMentions` keeps a country's photos about that
-country: a file used on the article is rejected when its name or
-description names another country but not this one (Benin's article
-used a photo of Koutammakou, Togo), and a search result must name this
-country (or its capital) and no other. Landscape-format files are
-preferred. The chosen file is downloaded (thumbnail), resized with
-`sharp` (`fit: inside`, 800×800, `withoutEnlargement`, mozjpeg), and
-re-encoded at quality 72, 64, 57, 50 until under 90 KB. Alt text: the
-first sentence of the Commons description when it reads as a complete
-English sentence (≤ 160 chars), else "Photo: <object name>". Caption:
-the object name when it is two to five plain words naming the subject,
-else "A view of <country>" or "<topic> up close" (at most five words).
+1200 px thumbnail URL. `acceptImage(meta)` applies Requirements 5.2
+and 5.7 to the file name, object name, description, categories and
+author together: the `UNSUITABLE` list (child labour, war, refugees,
+poverty, protests, caricatures…), artworks (painting, engraving,
+drawing…) and any year before 1900; for places also official
+portraits, events, embassies and satellite imagery. `placeMentions`
+keeps a country's photos about that country: a file used on the
+article is rejected when its name or description names another country
+but not this one (Benin's article used a photo of Koutammakou, Togo),
+and a search result must name this country (or its capital) and no
+other. A candidate is only usable with an alt text (`altFrom`: the
+first sentence of the Commons description when it reads as complete
+English, cut at a word boundary to 140 characters) and a caption
+(`captionFrom`: the object name or file name, bracketed parts and
+trailing numbers removed, when it is two to five plain words). Among
+usable candidates `preferenceScore` ranks landscapes, landmarks,
+wildlife and cities (keyword hits) and landscape format; sources are
+read until one offers a preferred subject.
+
+`photo-overrides.ts` maps "<pack>/<slug>" to a hand-picked Commons file
+with its caption (and optional alt). Overrides were chosen by reviewing
+every automatic pick's file name and description and replacing any that
+was doubtful; they pass through `acceptImage` like any other file, so a
+licence change on Commons fails the build. The chosen file is
+downloaded (thumbnail), resized with `sharp` (`fit: inside`, 800×800,
+`withoutEnlargement`, mozjpeg), and re-encoded at quality 72, 64, 57, 50
+until under 90 KB.
 
 ### Margin notes (`notes.ts`)
 
@@ -202,14 +220,20 @@ interface PacksManifest {
 }
 ```
 
-The manifest does not list itself.
+The manifest does not list itself, and lists only this pipeline's
+entries (`OWNED_ENTRIES`: `countries/`, `physics/`, `dictionary/`,
+`atlas/`, `img/`). `quizzes/` is written afterwards by
+`scripts/quizzes/build.ts` (`npm run packs` runs both), so the service
+worker must precache quiz files from their own listing.
 
 ### Staging and swap
 
 Everything is written to `data/build/packs/` first. `validatePacks`
-runs on the staging folder; on success `public/packs/` is replaced by
-it with a rename and the credits region is rewritten. On failure the
-old `public/packs/` stays untouched.
+runs on the staging folder; on success each owned entry of
+`public/packs/` is replaced by its staged copy with a rename, and the
+credits region is rewritten. Entries the pipeline does not own (such
+as `quizzes/`) are never touched. On failure `public/packs/` stays
+untouched.
 
 ## Correctness properties
 

@@ -58,6 +58,10 @@ time.
 5. THE Pipeline SHALL delete generated files from a previous run that
    the current run did not produce, so the output always matches the
    manifest.
+6. THE Pipeline SHALL replace only the entries of `public/packs/` it
+   generates (`countries/`, `physics/`, `dictionary/`, `atlas/`, `img/`
+   and `manifest.json`) and SHALL leave every other entry (such as
+   `quizzes/`, built by `scripts/quizzes`) untouched.
 
 ### Requirement 2: Countries pack
 
@@ -105,8 +109,15 @@ country, so that I can compare places at a glance.
    map), continent (P30 label),
    capital (P36), population (P1082) with the year it refers to, area
    in km² (P2046, normalised units), currency (P38), official languages
-   (P37), inception (P571, as an ISO date at the stated precision,
-   stored in the `independence` field) and neighbours (P47, mapped to slugs of bundled countries).
+   (P37), independence and neighbours (P47, mapped to slugs of bundled
+   countries).
+6. THE `independence` field SHALL be filled only from a "significant
+   event: independence" statement (P793 = Q1464916) with its point in
+   time (P585), as an ISO date at the stated precision, and SHALL be
+   omitted otherwise. Inception (P571) SHALL NOT be used, because it
+   often marks a later change of government (Nigeria's is 1963, the
+   year it became a republic, not its 1960 independence), and a wrong
+   fact would become a wrong quiz answer.
 3. THE Pipeline SHALL ignore deprecated statements and statements with
    an end time (P582), and WHEN several population statements remain,
    SHALL use one with the best rank and, among those, the latest point
@@ -142,14 +153,29 @@ article, so that I can see the place or thing I am reading about.
    carries no usage restriction, and neither its name nor its categories
    mark it as a flag, map, coat of arms, emblem, seal, logo, locator,
    icon or symbol.
+7. THE Pipeline SHALL reject any file whose name, description or
+   categories mention a subject unsuitable for children (child labour,
+   war, conflict, refugees, poverty, corpses, protests, rebels, weapons,
+   disasters and similar), a caricature or cartoon, a painting,
+   engraving, drawing or other artwork, or a year before 1900; and, for
+   places, official portraits, events, embassies and satellite images.
+8. THE Pipeline SHALL prefer landscapes, landmarks, wildlife and cities,
+   and SHALL use a hand-picked file from `photo-overrides.ts` when one
+   is listed for the article; an override SHALL pass the same licence,
+   author and suitability checks or the build fails.
 3. THE Pipeline SHALL read the author (Artist, stripped of HTML) and
    licence (LicenseShortName) from the Commons `extmetadata`.
 4. THE Pipeline SHALL resize each photo to at most 800 px wide and
    800 px high, encode it as JPEG at quality about 72, and lower the
    quality until it is under 90 KB or quality 50 is reached.
 5. THE Pipeline SHALL save the photo as `img/<slug>.jpg` and record a
-   `Photo` with its pixel size, a plain alt text, a caption of two to
-   five words, and a credit `Source` whose url is the Commons file page.
+   `Photo` with its pixel size, an alt text, a caption, and a credit
+   `Source` whose url is the Commons file page. The alt text SHALL be a
+   plain English description from the Commons ImageDescription (HTML
+   stripped, at most 140 characters) or the override's; a file without
+   one is not used. The caption SHALL be two to five words naming what
+   the photo shows, from the Commons object name or the override, and
+   never a generic phrase such as "A view of <country>".
 6. IF no acceptable photo is found for an article, THEN THE Pipeline
    SHALL fail for African countries and physics articles.
 
@@ -218,9 +244,10 @@ it came from, so that Awari honours every licence.
    WordNet (CC BY 4.0) with backticked glob lines covering every
    generated JSON file, and SHALL list every photo in a table row with
    its exact path, subject, author, licence and Commons url.
-4. THE Pipeline SHALL write `manifest.json` listing every generated
-   file under `public/packs/` with its URL path and byte size, the total
-   size and the build date.
+4. THE Pipeline SHALL write `manifest.json` listing every file it
+   generates under `public/packs/` with its URL path and byte size, the
+   total size and the build date. Files other builders write there (such
+   as `quizzes/`) are not listed.
 5. `npm run credits` SHALL pass after a build.
 
 ### Requirement 10: Validation and budget

@@ -29,8 +29,9 @@ import {
 } from './countries.ts';
 import { renderCredits, replaceRegion, type PhotoCredit } from './credits.ts';
 import { networkRequests } from './http.ts';
-import { MANIFEST_FILE, buildManifest } from './manifest.ts';
+import { MANIFEST_FILE, OWNED_ENTRIES, buildManifest } from './manifest.ts';
 import { PHYSICS_TOPICS, buildPhysicsArticles } from './physics.ts';
+import { PHOTO_OVERRIDES } from './photo-overrides.ts';
 import { choosePhoto, type PhotoSubject } from './photos.ts';
 import {
   isoDate,
@@ -73,6 +74,7 @@ async function addPhoto(
     wikiTitle,
     pack: article.pack,
     queries,
+    override: PHOTO_OVERRIDES.get(`${article.pack}/${article.id}`),
     ...places,
   };
   const chosen = await choosePhoto(subject, STAGING);
@@ -230,12 +232,22 @@ async function main(): Promise<void> {
   }
 
   log('Swapping into public/packs and updating CREDITS.md…');
+  // Only the entries this pipeline generates are replaced; anything else
+  // in public/packs (such as quizzes/, built by scripts/quizzes) stays.
   rmSync(PREVIOUS, { recursive: true, force: true });
-  if (existsSync(PUBLIC_PACKS)) {
-    renameSync(PUBLIC_PACKS, PREVIOUS);
+  mkdirSync(PREVIOUS, { recursive: true });
+  mkdirSync(PUBLIC_PACKS, { recursive: true });
+  for (const entry of OWNED_ENTRIES) {
+    const live = join(PUBLIC_PACKS, entry);
+    if (existsSync(live)) {
+      renameSync(live, join(PREVIOUS, entry));
+    }
+    if (existsSync(join(STAGING, entry))) {
+      renameSync(join(STAGING, entry), live);
+    }
   }
-  renameSync(STAGING, PUBLIC_PACKS);
   rmSync(PREVIOUS, { recursive: true, force: true });
+  rmSync(STAGING, { recursive: true, force: true });
   const creditsPath = 'CREDITS.md';
   const before = existsSync(creditsPath) ? readFileSync(creditsPath, 'utf8') : '';
   writeFileSync(
