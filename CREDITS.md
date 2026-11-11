@@ -97,70 +97,70 @@ Resized to at most 800 px. Each links to its Commons file page.
 
 | File | Subject | Author | Licence | Source |
 | --- | --- | --- | --- | --- |
-| packs/img/algeria.jpg | Algeria | Momotlemcen13 | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Algeria_coastal_landscape_view.jpg |
-| packs/img/angola.jpg | Angola | jlrsousa | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Angola_landscape.jpg |
-| packs/img/battery.jpg | Battery | Lead holder | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Batteries_comparison_4,5_D_C_AA_AAA_AAAA_A23_9V_CR2032_LR44_matchstick-1.jpeg |
-| packs/img/benin.jpg | Benin | GBETONGNINOUGBO JOSEPH HERVE AHISSOU | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Mosquee_Centrale_Natitingou-Benin_Joseph_Herve_Ahissou.jpg |
-| packs/img/botswana.jpg | Botswana | Malcolm Macgregor | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Okavango_sunset_(6158363864).jpg |
+| packs/img/algeria.jpg | Algeria | Bernard Gagnon | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Landscape_of_Baniane.jpg |
+| packs/img/angola.jpg | Angola | Erik Cleves Kristensen | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Namib_desert_Angola.jpg |
+| packs/img/battery.jpg | Battery | RAIL P ( RAIL.PHOTOGRAPHY ) | CC0 | https://commons.wikimedia.org/wiki/File:IKEA_LADDA_rechargeable_AA-batteries.jpg |
+| packs/img/benin.jpg | Benin | Dr. Ondřej Havelka (cestovatel) | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Benin_village_on_water_Ganvi%C3%A9.jpg |
+| packs/img/botswana.jpg | Botswana | FaysaL Bin DaruL | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Botswana_National_Stadium_20150928_115938.jpg |
 | packs/img/burkina-faso.jpg | Burkina Faso | c.hug | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Waterfalls_at_Karfiguela,_Burkina_Faso.jpg |
 | packs/img/burundi.jpg | Burundi | d_proffer | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Burundi_landscape.jpg |
-| packs/img/cameroon.jpg | Cameroon | Amcaja | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Rhumsiki_Peak.jpg |
-| packs/img/cape-verde.jpg | Cape Verde | Ingo Wölbern | Public domain | https://commons.wikimedia.org/wiki/File:Igreja_Nossa_Senhora_do_Ros%C3%A1rio.jpg |
-| packs/img/central-african-republic.jpg | Central African Republic | Afrika Force from South Africa | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Bangui_Shopping_District.jpg |
-| packs/img/chad.jpg | Chad | The original uploader was Beck musarra at English Wikipedia . | CC BY-SA 2.5 | https://commons.wikimedia.org/wiki/File:Chari_River.jpg |
-| packs/img/comoros.jpg | Comoros | Woodlouse | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Moroni-Harbour.jpg |
-| packs/img/democratic-republic-of-the-congo.jpg | Democratic Republic of the Congo | EdwinAlden.1995 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:A_view_of_Congo_River_from_Kinshasa,_Democratic_Republic_of_the_Congo_(DRC).jpg |
-| packs/img/djibouti.jpg | Djibouti | Tyke | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Djib_003.JPG |
-| packs/img/egypt.jpg | Egypt | Daniel Mayer | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Giza_Plateau_-_Pyramid_of_Menkaure.JPG |
-| packs/img/electric-charge.jpg | Electric charge | Christiankral | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Fluke_175_measuring_AC_voltage.jpg |
-| packs/img/electric-current.jpg | Electric current | Осадчая Екатерина | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:An_indispensable_source_of_light_your_time.jpg |
-| packs/img/electrical-circuit.jpg | Electrical circuit | Tlapicka | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Nonsolder-field.jpg |
-| packs/img/electrical-conductor.jpg | Electrical conductor | RobertKuhlmann | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Lautsprecherkabel_Makro_nah.jpg |
-| packs/img/electrical-resistance.jpg | Electrical resistance | Afrank99 | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:6_different_resistors.jpg |
-| packs/img/electricity.jpg | Electricity | Akshaya govindasamy | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Switch_box.jpg |
-| packs/img/equatorial-guinea.jpg | Equatorial Guinea | eigenes Bild,-- Mehlauge ( talk ) 09:36, 13 December 2010 (UTC) | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Autobahnbau_in_Oyala.JPG |
+| packs/img/cameroon.jpg | Cameroon | Buma Peter | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Landscape_of_Mount_Cameroon.jpg |
+| packs/img/cape-verde.jpg | Cape Verde | David Trainer | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Mount_fogo.jpg |
+| packs/img/central-african-republic.jpg | Central African Republic | Patrickroque01 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Bangui_overlooking,_National_Road_(Bangui,_Ilocos_Norte;_11-17-2022).jpg |
+| packs/img/chad.jpg | Chad | Ken Doerr from Chester, UK | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Storm_clouds_over_N%27Djamena_(15386229016).jpg |
+| packs/img/comoros.jpg | Comoros | Frédéric Ducarme | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Sakouli_baobabs.jpg |
+| packs/img/democratic-republic-of-the-congo.jpg | Democratic Republic of the Congo | Garcia-Pavilion | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Vue_Kinshasa.jpg |
+| packs/img/djibouti.jpg | Djibouti | Clovis conchou | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:%C3%8Ele_maskali,_Djibouti.jpg |
+| packs/img/egypt.jpg | Egypt | Vyacheslav Argenberg | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Egypt,_Alexandria.jpg |
+| packs/img/electric-charge.jpg | Electric charge | doe-oakridge . 82-25 DOE photo by Frank Hoffman | Public domain | https://commons.wikimedia.org/wiki/File:Van_de_Graaff_at_American_Museum_of_Science_and_Energy_Oak_Ridge.jpg |
+| packs/img/electric-current.jpg | Electric current | wdwd | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Multimeter_Strommessung.JPG |
+| packs/img/electrical-circuit.jpg | Electrical circuit | Mitch Barrie from Reno, NV, USA | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:First_LED_circuit_(48433844026).jpg |
+| packs/img/electrical-conductor.jpg | Electrical conductor | Dmitry G | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Copper_cable_resistance.jpg |
+| packs/img/electrical-resistance.jpg | Electrical resistance | Evan-Amos | Public domain | https://commons.wikimedia.org/wiki/File:Electronic-Axial-Lead-Resistors-Array.jpg |
+| packs/img/electricity.jpg | Electricity | Aatu Liimatta | CC BY-SA 2.5 | https://commons.wikimedia.org/wiki/File:Electric_wiring_near_Helsinki.JPG |
+| packs/img/equatorial-guinea.jpg | Equatorial Guinea | Francesca Calisti | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Atardecer_en_la_playa_de_Ureca_(Ureka)_Guinea_Ecuatorial.jpg |
 | packs/img/eritrea.jpg | Eritrea | Temesgen | CC BY-SA 2.5 | https://commons.wikimedia.org/wiki/File:Eritrean_Highlands.jpg |
-| packs/img/eswatini.jpg | Eswatini | Christoph Riedl | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Swazis_dancing_in_a_cultural_village_show_in_Eswatini,_2006.jpg |
-| packs/img/ethiopia.jpg | Ethiopia | Damien Halleux Radermecker | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Child_labor_in_Ethiopia_2.jpg |
+| packs/img/eswatini.jpg | Eswatini | Umkhaya | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Mbabane_Landscape.jpg |
+| packs/img/ethiopia.jpg | Ethiopia | Radosław Botev | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Lalibela_Ethiopia_landscape_(6).jpg |
 | packs/img/gabon.jpg | Gabon | Lengai101 | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:DIGITAL_CROSSING_-_KONGOU_03.jpg |
 | packs/img/ghana.jpg | Ghana | Erik Kristensen | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Beach_with_palms_Ghana.jpg |
-| packs/img/guinea-bissau.jpg | Guinea-Bissau | Mooonswimmer | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Rubane.jpg |
-| packs/img/guinea.jpg | Guinea | Aboubacarkhoraa | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Chute_de_Tabouna_%C3%A0_Kindia_01.jpg |
+| packs/img/guinea-bissau.jpg | Guinea-Bissau | Joehawkins | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Lagoa_com_hipop%C3%B3tamos_03_(cropped).jpg |
+| packs/img/guinea.jpg | Guinea | Flucco | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Plage_de_Roume.jpg |
 | packs/img/insulator.jpg | Insulator | Thermos | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Insulator_railways.jpg |
-| packs/img/ivory-coast.jpg | Ivory Coast | Thomas Rowlandson | Public domain | https://commons.wikimedia.org/wiki/File:Thomas_Rowlandson_-_The_Ivory_Coast,_West_Africa_-_Google_Art_Project.jpg |
-| packs/img/kenya.jpg | Kenya | Daniel Case | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Landscape_of_Masai_Mara,_Kenya,_at_sunset.jpg |
-| packs/img/lesotho.jpg | Lesotho | Woodyshonet | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Lesotho_Landscape.jpg |
-| packs/img/liberia.jpg | Liberia | Fred van der Kraaij | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:ASC_Leiden_-_F._van_der_Kraaij_Collection_-_13_-_001_-_LAMCO_J.V._A_landscape_with_open_pit_mining_for_iron_ore._Excavators_and_lorries_-_Yekepa,_Nimba_county,_Liberia_-_1976.jpg |
-| packs/img/libya.jpg | Libya | Abdul-Jawad Elhusuni | Public domain | https://commons.wikimedia.org/wiki/File:Emhemmed_Elmgharief_Street_Tripoli.jpg |
+| packs/img/ivory-coast.jpg | Ivory Coast | Mickaël T. | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Yamoussoukro_panorama.jpg |
+| packs/img/kenya.jpg | Kenya | Tanishakagiri | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:LANDSCAPES_OF_KENYA.jpg |
+| packs/img/lesotho.jpg | Lesotho | Sheane Moji | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Landscape_View,.jpg |
+| packs/img/liberia.jpg | Liberia | David Stanley | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Liberian_Capitol_Building.jpg |
+| packs/img/libya.jpg | Libya | David Holt | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Temple_of_Zeus_Cyrene.jpg |
 | packs/img/lightning.jpg | Lightning | Postdlf | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Lightning_in_Arlington.jpg |
 | packs/img/madagascar.jpg | Madagascar | Bernard Gagnon | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Landscape_Madagascar_05.jpg |
-| packs/img/malawi.jpg | Malawi | Hansueli Krapf | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:2005-07-10_Malawi_01.jpg |
-| packs/img/mali.jpg | Mali | No machine-readable author provided. Guaka assumed (based on copyright claims). | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Kati_market_street_(and_Amadu).jpg |
-| packs/img/mauritania.jpg | Mauritania | Sidi mohamed21 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Here_is_North_African_Mauritania_and_Autumn_Time_08.jpg |
-| packs/img/mauritius.jpg | Mauritius | "dronepicr" | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Le_Morne_Peninsula_in_Mauritius_(53697779236).jpg |
-| packs/img/morocco.jpg | Morocco | Thomas Fuhrmann | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Erg_Chebbi_sunset.jpg |
+| packs/img/malawi.jpg | Malawi | Dr. Ondřej Havelka (cestovatel) | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Malawi_Village.jpg |
+| packs/img/mali.jpg | Mali | Dr. Ondřej Havelka (cestovatel) | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Koro,_Mali.jpg |
+| packs/img/mauritania.jpg | Mauritania | LBM1948 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Mauritania,_desierto_1997_02.jpg |
+| packs/img/mauritius.jpg | Mauritius | Hansueli Krapf | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Landscape_near_Les_Mariannes,_Mauritius,_2007-09-09.jpg |
+| packs/img/morocco.jpg | Morocco | Rosino | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Erg_Chebbi_Maroc.jpg |
 | packs/img/mozambique.jpg | Mozambique | Paulo Oliveira at English Wikipedia | Public domain | https://commons.wikimedia.org/wiki/File:Gurue_Mount_Murresse.jpg |
-| packs/img/namibia.jpg | Namibia | Brian McMorrow | CC BY-SA 2.5 | https://commons.wikimedia.org/wiki/File:Walvis_Bay_aerial.jpg |
-| packs/img/niger.jpg | Niger | Roland Hunziker https://www.flickr.com/photos/rolandh/ | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Gazelle_big_road_park_w_niger_2006148670716_94d943892c_b.jpg |
-| packs/img/nigeria.jpg | Nigeria | Yemisi Ogbe | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Afang_Soup.jpg |
-| packs/img/ohms-law.jpg | Ohm's law | 16chseld 604 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Circuit_1.jpg |
-| packs/img/republic-of-the-congo.jpg | Republic of the Congo | Bsm15 | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Welsh_Onion_fields_(Loukol%C3%A9la,_Republic_of_the_Congo)_001.JPG |
-| packs/img/rwanda.jpg | Rwanda | SteveRwanda aka Amakuru | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:KageraRuvubu.jpg |
-| packs/img/sao-tome-and-principe.jpg | São Tomé and Príncipe | Ji-Elle | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Tchiloli_%C3%A0_S%C3%A3o_Tom%C3%A9_(49).jpg |
-| packs/img/senegal.jpg | Senegal | Catjacket | CC0 | https://commons.wikimedia.org/wiki/File:Dembancane_landscape_with_lake.jpg |
-| packs/img/seychelles.jpg | Seychelles | Esskay at German Wikipedia | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Victoria_(Seychelles).jpg |
-| packs/img/sierra-leone.jpg | Sierra Leone | Laura Lartigue | Public domain | https://commons.wikimedia.org/wiki/File:School_destroyed_by_Sierra_Leone_Civil_War.jpg |
+| packs/img/namibia.jpg | Namibia | Hans Hillewaert | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Equus_burchelli_4.jpg |
+| packs/img/niger.jpg | Niger | Roland Hunziker https://www.flickr.com/photos/rolandh/ | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Elephants_bath_park_w_Niger_2006.jpg |
+| packs/img/nigeria.jpg | Nigeria | MediaMOF | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Nigeria_Landscape_69.jpg |
+| packs/img/ohms-law.jpg | Ohm's law | Daniel Villafruela . | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Saint_%C3%89tienne-Georg_Ohm-20140328.jpg |
+| packs/img/republic-of-the-congo.jpg | Republic of the Congo | Bsm15 | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Sunrise_on_the_Congo_River_-_2.JPG |
+| packs/img/rwanda.jpg | Rwanda | Carine06 from UK | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Rwandan_landscape_(8219706414).jpg |
+| packs/img/sao-tome-and-principe.jpg | São Tomé and Príncipe | David Stanley from Nanaimo, Canada | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Sao_Tome_Street_(20101565569)_(2).jpg |
+| packs/img/senegal.jpg | Senegal | Dorothy Voorhees | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:On_the_road_to_Dimboli-Senegal(2).jpg |
+| packs/img/seychelles.jpg | Seychelles | Hajira Amla, Seychelles News Agency | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:North_Island_Seychelles_landscape.jpg |
+| packs/img/sierra-leone.jpg | Sierra Leone | LindsayStark | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Sierra_Leone_Road.jpg |
 | packs/img/somalia.jpg | Somalia | Rahim Alpa | Public domain | https://commons.wikimedia.org/wiki/File:Somalia,_Puntland,_Bari,_Bargal_(01).jpg |
-| packs/img/south-africa.jpg | South Africa | PZFUN | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Fynbos.jpg |
-| packs/img/south-sudan.jpg | South Sudan | Gije Cho | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:South_Sudan_(173227397).jpeg |
-| packs/img/static-electricity.jpg | Static electricity | MikeRun | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Attractive-electric-force-between-hair-and-balloon.jpg |
-| packs/img/sudan.jpg | Sudan | MobarkAn | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Simple_house_of_sudanese_nomad_family.jpg |
-| packs/img/tanzania.jpg | Tanzania | Mussi Katz from Israel | Public domain | https://commons.wikimedia.org/wiki/File:Tanzania_landscape_(22210288394).jpg |
-| packs/img/the-gambia.jpg | The Gambia | Jurgen from Netherlands | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:The_Gambia_(3517742885).jpg |
-| packs/img/togo.jpg | Togo | PhReym | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Sokod%C3%A9-centre-ville.jpg |
-| packs/img/tunisia.jpg | Tunisia | Tijani A | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Panoramique_Avenue_Mohamed_V,_centre_de_Tunis.jpg |
-| packs/img/uganda.jpg | Uganda | Nielsr at Dutch Wikipedia | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Centrum_kampala.jpg |
-| packs/img/voltage.jpg | Voltage | Dennis G German, aka DGerman at English Wikipedia | CC0 | https://commons.wikimedia.org/wiki/File:9VBatteryWithMeter.jpg |
-| packs/img/zambia.jpg | Zambia | User:Vberger | Public domain | https://commons.wikimedia.org/wiki/File:Ndola01.jpg |
+| packs/img/south-africa.jpg | South Africa | Gossipguy | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Upland_South_Africa_Savanna.jpg |
+| packs/img/south-sudan.jpg | South Sudan | Lomondi | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Landscape_of_my_house.jpg |
+| packs/img/static-electricity.jpg | Static electricity | Sagadattolembay | CC0 | https://commons.wikimedia.org/wiki/File:Electric_spark.jpg |
+| packs/img/sudan.jpg | Sudan | walter callens | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Western_Deffufa_-_Kerma.jpg |
+| packs/img/tanzania.jpg | Tanzania | Mchiriku | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Nyerere_Square_in_Dodoma.jpg |
+| packs/img/the-gambia.jpg | The Gambia | Mark Hodson Photos | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Makasutu_Forest,_The_Gambia_(16223036065).jpg |
+| packs/img/togo.jpg | Togo | Erik Kristensen | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Togo_Taberma_house_02.jpg |
+| packs/img/tunisia.jpg | Tunisia | Amanimersni | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Natur_tunisia(1).jpg |
+| packs/img/uganda.jpg | Uganda | not not phil from SF, CA, US | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Uganda_-_growing_millet.jpg |
+| packs/img/voltage.jpg | Voltage | Contraix | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:CH_Capdella,_3_volt%C3%ADmetres.jpg |
+| packs/img/zambia.jpg | Zambia | DBrianWilson | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Big_Tree_Natl_Mont_Kabwe.JPG |
 | packs/img/zimbabwe.jpg | Zimbabwe | JackyR | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Curled_trunk.jpg |
 <!-- packs:end -->

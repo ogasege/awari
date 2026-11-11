@@ -60,7 +60,10 @@ function latest(dates: readonly string[]): string {
   return [...dates].sort().at(-1) ?? isoDate(new Date());
 }
 
-/** Adds a lead photo to an article, failing when none qualifies. */
+/** Articles with no acceptable photo; the build fails at the end. */
+const missingPhotos: string[] = [];
+
+/** Adds a lead photo to an article; records it when none qualifies. */
 async function addPhoto(
   article: Article,
   wikiTitle: string,
@@ -79,7 +82,9 @@ async function addPhoto(
   };
   const chosen = await choosePhoto(subject, STAGING);
   if (!chosen) {
-    throw new Error(`No acceptable Commons photo for ${article.pack}/${article.id}`);
+    // Keep going so one run reports every article that needs an override.
+    missingPhotos.push(`${article.pack}/${article.id}`);
+    return article;
   }
   credits.push({ path: `packs/${chosen.photo.file}`, subject: article.title, photo: chosen.photo });
   return { ...article, photos: [chosen.photo] };
@@ -224,6 +229,11 @@ async function main(): Promise<void> {
   writeJson(MANIFEST_FILE, manifest);
 
   log('Validating…');
+  if (missingPhotos.length > 0) {
+    throw new Error(
+      `No acceptable Commons photo for: ${missingPhotos.join(', ')}. Add a hand-picked file to photo-overrides.ts.`,
+    );
+  }
   const problems = validatePacks(STAGING);
   if (problems.length > 0) {
     throw new Error(
