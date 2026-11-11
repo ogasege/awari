@@ -41,3 +41,4 @@ A dated record of which spec, hook or steering file drove each piece of work.
 | 2026-11-11 22:34 | spec | 03-articles-dictionary 3.1-3.2 | Tap-a-word side card with keyboard lookup field and live region; test renders Nigeria from the committed pack and resolves 'delta' (and 'deltas') with no network |
 | 2026-11-11 22:37 | spec | 05-quizzes 1.1 | Spec written; buildQuiz makes fact and gap-fill questions, seeded and validator-checked. Property 6 caught a real leak: year nudges like 'the 1960s' contained the answer, now written in words |
 | 2026-11-11 22:37 | hook: credits check | 05-quizzes 1.2 | 205 quizzes built into public/packs/quizzes as part of npm run packs; every bundled question passes the shared validator (Property 1); quiz files credited CC BY-SA 4.0 |
+| 2026-11-11 22:40 | spec | 05-quizzes 2.1 | Pure quiz reducer: hints strictly in order (Property 4), remove-two keeps the answer (Property 5), score counts only real right answers (Property 7) |
