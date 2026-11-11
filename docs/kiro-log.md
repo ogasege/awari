@@ -33,3 +33,4 @@ A dated record of which spec, hook or steering file drove each piece of work.
 | 2026-11-11 22:29 | steering/design.md | 01-app-shell 1.1-1.2 | Lagoon tokens, self-hosted fonts, contrast helper; Property 6 proves every text pair meets WCAG AA |
 | 2026-11-11 22:29 | spec | 01-app-shell 2.1-2.2 | Pure router with round-trip and not-found properties; History API links, focus and title on navigation; credits screen renders CREDITS.md |
 | 2026-11-11 22:29 | steering/design.md | 01-app-shell 3.1-3.2 | Seeded wobble generator (Properties 3-5) and hand-made Print, Strip, Tape, Pin, MarginNote, Doodle, TornEdge, Button, Stamp components |
+| 2026-11-11 22:29 | spec | 01-app-shell 4.1 | Shared header with kit logo, nav with aria-current, search, offline badge; skip link; lazy routes |

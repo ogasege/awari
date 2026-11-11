@@ -1,0 +1,119 @@
+.site-header {
+  position: relative;
+  z-index: 40;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 40px;
+  padding: 22px var(--gutter);
+  color: var(--paper);
+}
+
+.site-header__logo {
+  display: flex;
+  align-items: center;
+  margin: -8px 0 -8px -14px;
+}
+
+.site-header__logo img {
+  display: block;
+  height: 62px;
+  width: auto;
+}
+
+.site-header__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 32px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.site-header__nav a {
+  padding: 12px 0;
+  color: var(--paper);
+  text-decoration: none;
+}
+
+.site-header__nav a:hover,
+.site-header__nav a[aria-current='page'] {
+  color: var(--yellow);
+}
+
+.site-header__nav a[aria-current='page'] {
+  text-decoration: underline wavy;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 8px;
+}
+
+.site-header__search {
+  margin-left: auto;
+  flex: 0 1 320px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 46px;
+  padding: 0 16px;
+  border-radius: 23px;
+  background: rgb(255 255 255 / 0.12);
+  border: 1px solid rgb(255 255 255 / 0.35);
+}
+
+.site-header__search:focus-within {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.site-header__search input {
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: var(--paper);
+  font-family: inherit;
+  font-size: 16px;
+}
+
+.site-header__search input::placeholder {
+  color: var(--mist);
+  opacity: 1;
+}
+
+.site-header__badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 46px;
+  padding: 0 16px;
+  border-radius: 23px;
+  background: rgb(0 0 0 / 0.35);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--offline);
+}
+
+@media (max-width: 899px) {
+  .site-header {
+    gap: 8px 20px;
+  }
+
+  .site-header__nav {
+    order: 3;
+    width: 100%;
+    gap: 4px 20px;
+  }
+
+  .site-header__search {
+    order: 4;
+    flex: 1 1 100%;
+    margin-left: 0;
+  }
+
+  .site-header__badge {
+    margin-left: auto;
+    height: 36px;
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,32 @@
+.app__board {
+  background: var(--teal);
+  color: var(--paper);
+}
+
+.app__loading {
+  padding: 64px var(--gutter);
+  font-size: 20px;
+}
+
+/* Shared frame for inner screens: a board band, then the page. */
+.page {
+  position: relative;
+  padding: 40px var(--gutter) 80px;
+}
+
+.page-footer {
+  padding: 32px var(--gutter) 40px;
+  background: var(--ink);
+  color: var(--footer-ink);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.page-footer a {
+  color: var(--paper);
+}
+
+.page-footer p {
+  margin: 0;
+  max-width: 980px;
+}
