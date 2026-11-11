@@ -13,7 +13,7 @@
   - [ ] 4.2 `countries.ts`: selection, articles, facts, African check.
         _Req 2.1–2.8, 3.1–3.5_
 - [ ] 5. Physics pack `physics.ts`. _Req 4.1, 4.2_
-- [ ] 6. Margin notes `notes.ts` with Property 9. _Req 8.1–8.4_
+- [x] 6. Margin notes `notes.ts` with Property 9. _Req 8.1–8.4_
 - [ ] 7. Photos `photos.ts` (Commons candidates, acceptance, sharp).
       _Req 5.1–5.6_
 - [ ] 8. Dictionary `wordnet.ts` with Properties 6 and 7. _Req 6.1–6.5_
