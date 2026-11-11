@@ -51,3 +51,4 @@ A dated record of which spec, hook or steering file drove each piece of work.
 | 2026-11-11 23:49 | spec | 02-content-packs 11 | validate.test.ts checks committed packs; rebuilt packs with six hand-picked photos |
 | 2026-11-11 23:50 | spec | 06-castle 2.1-2.2 | Castle gate, hand-drawn door wall with chalked topic names, wing play reusing QuestionCard; test found the final answer hid its Right!/proof, fixed by showing the finish panel only after the last door |
 | 2026-11-11 23:51 | spec | 01-app-shell 5.3-6.1 | Home notes rewritten: the old lemur, smoke-that-thunders, 4,500-year and Kilimanjaro claims were not in the articles; each fact now has an exact proof sentence tested; check-bundle.ts measures first-load JS from index.html (266.9 KB of 300) |
+| 2026-11-11 23:53 | spec | 05-quizzes 3.1 | Optional quiz maker panel (VITE_QUIZ_ENDPOINT): fetches article text, calls fetchRemoteQuiz, replays with the same hint ladder; falls back to bundled quizzes in words |
