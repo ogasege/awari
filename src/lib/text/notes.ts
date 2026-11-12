@@ -14,6 +14,15 @@ export const NOTE_LIMIT = 70;
 
 const PRONOUN_START =
   /^(it|its|it's|they|their|them|this|these|that|those|he|she|his|her|there|we|our|you|your|one)\b/i;
+/**
+ * Topics a handwritten note must not lead with for readers aged 9 to 14
+ * (found by awari-design-reviewer on /subject/wildlife: "The largest
+ * elephant ever recorded was shot in Angola in 1974!"). The article
+ * itself may say it; a cheerful margin note should not.
+ */
+export const UNSUITABLE_NOTE =
+  /\b(shot|shoot|killed|kill(s|ing)?|murder\w*|died|dies|death|dead|war|wars|battle|bomb\w*|attack\w*|massacre\w*|genocide|slave\w*|executed|execution|suicide|terror\w*|disaster\w*|earthquake|famine|weapon\w*|guns?|army|invad\w*|invasion|poison\w*|hunted|extinct|injur\w*|wounded|disease|epidemic|pandemic|cancer)\b/i;
+
 const BRACKETS_OR_QUOTES = /[()[\]{}"“”‘’«»]/;
 
 /** The note text for a proof sentence, or null when it does not qualify. */
@@ -23,6 +32,7 @@ export function noteFor(sentence: string): string | null {
     !/\d/.test(sentence) ||
     PRONOUN_START.test(sentence) ||
     BRACKETS_OR_QUOTES.test(sentence) ||
+    UNSUITABLE_NOTE.test(sentence) ||
     sentence.split(' ').length < 4 ||
     !/^[A-Z]/.test(sentence)
   ) {
