@@ -28,22 +28,35 @@ export default function CastleScreen() {
           </p>
         </div>
       </div>
-      <div className="castle__wings">
-        {WINGS.map((w, i) => {
-          const lit = progress.castle[w.id] ?? 0;
-          return (
-            <section key={w.id} className="castle__wing" aria-labelledby={`wing-${w.id}`} style={{ rotate: i % 2 ? '1deg' : '-1deg' }}>
-              <h2 id={`wing-${w.id}`}>{w.name}</h2>
-              <p>{w.blurb}</p>
-              <Doors lit={lit} compact />
-              <p className="castle__wing-count">
-                {lit === ROOMS ? 'All 12 rooms lit' : `${lit} of ${ROOMS} rooms lit`}
-              </p>
-              <Button to={`/castle/${w.id}`}>{lit === 0 ? 'Open the first door' : lit === ROOMS ? 'Visit again' : 'Keep going'}</Button>
-            </section>
-          );
-        })}
-      </div>
+      {(
+        [
+          ['world', 'Around the world', 'One wing for each continent.'],
+          ['subject', 'Subjects', 'One wing for each subject in Awari.'],
+        ] as const
+      ).map(([group, title, blurb]) => (
+        <section key={group} className="castle__group" aria-labelledby={`group-${group}`}>
+          <h2 id={`group-${group}`} className="castle__group-title">
+            {title}
+          </h2>
+          <p className="castle__group-blurb">{blurb}</p>
+          <div className="castle__wings">
+            {WINGS.filter((w) => w.group === group).map((w, i) => {
+              const lit = progress.castle[w.id] ?? 0;
+              return (
+                <section key={w.id} className="castle__wing" aria-labelledby={`wing-${w.id}`} style={{ rotate: i % 2 ? '1deg' : '-1deg' }}>
+                  <h3 id={`wing-${w.id}`}>{w.name}</h3>
+                  <p>{w.blurb}</p>
+                  <Doors lit={lit} compact />
+                  <p className="castle__wing-count">
+                    {lit === ROOMS ? 'All 12 rooms lit' : `${lit} of ${ROOMS} rooms lit`}
+                  </p>
+                  <Button to={`/castle/${w.id}`}>{lit === 0 ? 'Open the first door' : lit === ROOMS ? 'Visit again' : 'Keep going'}</Button>
+                </section>
+              );
+            })}
+          </div>
+        </section>
+      ))}
       <MarginNote className="castle__note crowding" decorative color="var(--yellow)" tilt={-4} size={30}>
         who do you think lived in a castle like this?
       </MarginNote>

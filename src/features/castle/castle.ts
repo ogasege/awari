@@ -1,4 +1,5 @@
 /** Pure rules for the Castle (06-castle). */
+import { CONTINENTS, SUBJECTS, continentSlug, type Continent } from '../../lib/packs/subjects.ts';
 import type { PackId, Question, QuizSet } from '../../lib/packs/types.ts';
 import { reduce, type Action, type QuizState } from '../quiz/quizMachine.ts';
 
@@ -8,15 +9,48 @@ export interface Wing {
   id: string;
   name: string;
   pack: PackId;
-  /** Which pack articles feed the wing. */
-  continent?: string;
+  /** For a continent wing: which countries feed it. */
+  continent?: Continent;
+  /** Where the gate page lists it. */
+  group: 'world' | 'subject';
   blurb: string;
 }
 
-export const WINGS: readonly Wing[] = [
-  { id: 'africa', name: 'The Africa wing', pack: 'countries', continent: 'Africa', blurb: 'Twelve doors, one for each journey across Africa.' },
-  { id: 'electricity', name: 'The Electricity wing', pack: 'physics', blurb: 'Twelve doors that hum with sparks, circuits and lightning.' },
-];
+/** Wing id for a subject: the pack id, except Electricity (kept as 'electricity'). */
+const subjectWingId = (pack: string): string => (pack === 'physics' ? 'electricity' : pack);
+
+const WORLD_WINGS: readonly Wing[] = CONTINENTS.map((continent) => ({
+  id: continentSlug(continent),
+  name: `The ${continent} wing`,
+  pack: 'countries',
+  continent,
+  group: 'world',
+  blurb: `Twelve doors, one for each journey across ${continent}.`,
+}));
+
+const SUBJECT_BLURBS: Record<string, string> = {
+  physics: 'Twelve doors that hum with sparks, circuits and lightning.',
+  wildlife: 'Twelve doors that growl, flap and rustle with wild animals.',
+  space: 'Twelve doors that open onto planets, stars and rockets.',
+  ancient: 'Twelve doors into pyramids, empires and the long story of people.',
+  earth: 'Twelve doors that rumble with mountains, volcanoes, rivers and seas.',
+  body: 'Twelve doors inside you: hearts, brains, bones and senses.',
+  science: 'Twelve doors of atoms, forces, light and sound.',
+  inventions: 'Twelve doors of wheels, engines and bright ideas.',
+  people: 'Twelve doors, each with someone who changed the world.',
+  arts: 'Twelve doors of music, art, games and great athletes.',
+};
+
+const SUBJECT_WINGS: readonly Wing[] = SUBJECTS.filter((s) => s.id !== 'countries').map((s) => ({
+  id: subjectWingId(s.id),
+  name: `The ${s.name} wing`,
+  pack: s.id,
+  group: 'subject',
+  blurb: SUBJECT_BLURBS[s.id] ?? 'Twelve doors, twelve questions.',
+}));
+
+/** Sixteen wings: six continents and ten subjects, twelve rooms each (17-castle-wings). */
+export const WINGS: readonly Wing[] = [...WORLD_WINGS, ...SUBJECT_WINGS];
 
 /**
  * Interleaves questions round-robin across quiz sets: every set's first

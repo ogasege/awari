@@ -61,7 +61,7 @@
   translate: 0 -4px;
 }
 
-.castle__wing h2 {
+.castle__wing h3 {
   margin: 0 0 6px;
   font-family: var(--font-head);
   font-size: 28px;
@@ -217,4 +217,19 @@
   .castle__wing {
     transition: none;
   }
+}
+
+.castle__group {
+  margin-top: 32px;
+}
+
+.castle__group-title {
+  margin: 0 0 4px;
+  font-size: 34px;
+  color: var(--yellow);
+}
+
+.castle__group-blurb {
+  margin: 0 0 16px;
+  max-width: 560px;
 }

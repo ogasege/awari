@@ -7,6 +7,7 @@ import { Link } from '../../app/navigation.tsx';
 import { useTitle } from '../../app/useTitle.ts';
 import { Button, StripHeading } from '../../design/paper.tsx';
 import { loadPack, usePack } from '../../lib/packs/load.ts';
+import { normaliseContinent } from '../../lib/packs/subjects.ts';
 import type { PackIndex, Question, QuizSet } from '../../lib/packs/types.ts';
 import { loadProgress, update, withRoomsLit } from '../../lib/store/progress.ts';
 import { QuestionCard } from '../quiz/QuestionCard.tsx';
@@ -31,7 +32,7 @@ function useWingPool(wing: Wing): PoolState {
     if (quizIndex.status !== 'ready' || (wing.continent && countries.status !== 'ready')) return;
     const allowed =
       wing.continent && countries.status === 'ready'
-        ? new Set(countries.data.items.filter((i) => i.continent === wing.continent).map((i) => i.id))
+        ? new Set(countries.data.items.filter((i) => normaliseContinent(i.continent) === wing.continent).map((i) => i.id))
         : null;
     const entries = quizIndex.data.quizzes.filter((q) => q.pack === wing.pack && (!allowed || allowed.has(q.id)));
     let live = true;
@@ -76,7 +77,8 @@ function Play({ wing, pool, titles, savedLit }: { wing: Wing; pool: Question[]; 
     });
   }
 
-  const other = WINGS.find((w) => w.id !== wing.id);
+  // Suggest the next wing along the gate, wrapping round after the last.
+  const other = WINGS[(WINGS.findIndex((w) => w.id === wing.id) + 1) % WINGS.length];
   // The last answer lights the last room, but its Right! and proof stay on
   // screen until the student walks through, then the finish panel appears.
   const [closed, setClosed] = useState(savedLit >= ROOMS);

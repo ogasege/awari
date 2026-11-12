@@ -27,7 +27,7 @@ describe('The Castle from the committed packs (06-castle)', () => {
     resetForTests();
   });
 
-  it('lets a student light all twelve rooms of the Africa wing, saves progress and offers the other wing', async () => {
+  it('lets a student light all twelve rooms of the Africa wing, saves progress and offers the next wing', async () => {
     const user = userEvent.setup();
     const answers = answersByPrompt();
     render(<WingScreen params={{ wing: 'africa' }} />);
@@ -47,7 +47,7 @@ describe('The Castle from the committed packs (06-castle)', () => {
 
     expect(await screen.findByRole('heading', { name: 'You lit the whole wing!' })).toBeInTheDocument();
     expect(screen.getByText('Every room is lit!')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /Try the electricity wing/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Try the Asia wing/i })).toBeInTheDocument();
     await waitFor(() => expect(getProgress().castle['africa']).toBe(12));
   });
 
