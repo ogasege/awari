@@ -31,6 +31,9 @@ import { renderCredits, replaceRegion, type PhotoCredit } from './credits.ts';
 import { networkRequests } from './http.ts';
 import { MANIFEST_FILE, OWNED_ENTRIES, buildManifest } from './manifest.ts';
 import { PHYSICS_TOPICS, buildPhysicsArticles } from './physics.ts';
+import { buildEvents } from './timeline.ts';
+import { TIMELINE_ITEMS } from './timeline-items.ts';
+import { getEntities } from './wikidata.ts';
 import { PHOTO_OVERRIDES } from './photo-overrides.ts';
 import { choosePhoto, type PhotoSubject } from './photos.ts';
 import {
@@ -225,6 +228,34 @@ async function main(): Promise<void> {
     source: naturalEarthSource(isoDate(neFetched)),
   });
 
+  log('Building the timeline (Wikidata)…');
+  const { entities: timelineEntities, fetched: timelineFetched } =
+    await getEntities(
+      TIMELINE_ITEMS.map((i) => i.qid),
+      'labels|claims',
+      true,
+    );
+  const countrySlugByQid = new Map(
+    countryArticles.map((a) => [a.qid ?? '', a.id]),
+  );
+  const { events, dropped } = buildEvents(
+    TIMELINE_ITEMS,
+    timelineEntities,
+    isoDate(timelineFetched),
+    (i) => {
+      const slug = i.subject === 'countries' ? countrySlugByQid.get(i.qid) : undefined;
+      return i.link ?? (slug ? `countries/${slug}` : undefined);
+    },
+  );
+  for (const d of dropped) {
+    log(`  timeline: dropped ${d.qid} (${d.reason})`);
+  }
+  writeJson('timeline.json', {
+    events,
+    source: wikidataSource(isoDate(timelineFetched)),
+  });
+  log(`  ${events.length} events`);
+
   const manifest = buildManifest(STAGING, isoDate(new Date()));
   writeJson(MANIFEST_FILE, manifest);
 
@@ -273,6 +304,7 @@ async function main(): Promise<void> {
       `${countryArticles.length} countries (${african} African), ` +
       `${physicsArticles.length} physics articles, ${credits.length} photos, ` +
       `${entries.size} dictionary lemmas, ${atlas.features.length} atlas shapes, ` +
+      `${events.length} timeline events, ` +
       `${(manifest.totalBytes / 1024 / 1024).toFixed(2)} MB, ` +
       `${networkRequests()} network requests.`,
   );

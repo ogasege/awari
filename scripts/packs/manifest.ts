@@ -20,6 +20,7 @@ export const OWNED_ENTRIES: readonly string[] = [
   'dictionary',
   'atlas',
   'img',
+  'timeline.json',
   MANIFEST_FILE,
 ];
 

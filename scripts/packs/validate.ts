@@ -11,6 +11,7 @@ import type {
   FactsPack,
   PackId,
   PackIndex,
+  TimelinePack,
 } from '../../src/lib/packs/types.ts';
 import { lemmaCandidates, shardFor } from '../../src/lib/dictionary/lemmatize.ts';
 import { listFiles } from '../lib/files.ts';
@@ -20,6 +21,7 @@ import { ACCEPTED_LICENCES } from './licence.ts';
 import { MANIFEST_FILE, isOwned, type PacksManifest } from './manifest.ts';
 import { MAX_NOTES, NOTE_LIMIT } from './notes.ts';
 import { articleText } from './text.ts';
+import { validateTimeline } from './timeline.ts';
 import { MAX_SENSES } from './wordnet.ts';
 
 /** Largest allowed total size of the packs folder. */
@@ -32,6 +34,7 @@ export interface LoadedPacks {
   facts: FactsPack;
   shards: DictionaryShard[];
   atlas: AtlasCollection;
+  timeline: TimelinePack;
   manifest?: PacksManifest;
   files: string[];
 }
@@ -65,6 +68,7 @@ export function loadPacks(dir: string): LoadedPacks {
       .filter((f) => f.startsWith('dictionary/'))
       .map((f) => readJson<DictionaryShard>(dir, f)),
     atlas: readJson<AtlasCollection>(dir, 'atlas/countries.json'),
+    timeline: readJson<TimelinePack>(dir, 'timeline.json'),
     manifest: files.includes(MANIFEST_FILE)
       ? readJson<PacksManifest>(dir, MANIFEST_FILE)
       : undefined,
@@ -274,6 +278,14 @@ export function validatePacks(dir: string): string[] {
       }
     }
   }
+
+  // Timeline (07-timeline Req 1): every link points at a bundled article.
+  errors.push(
+    ...validateTimeline(p.timeline, (link) => {
+      const [pack, id] = link.split('/');
+      return byPack.get(pack ?? '')?.has(id ?? '') ?? false;
+    }),
+  );
 
   // Manifest matches the files and the size budget holds (Req 9.4, 10.2).
   let total = 0;

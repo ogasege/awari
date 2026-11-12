@@ -74,6 +74,12 @@ Country facts in `packs/countries/facts.json` come from Wikidata,
 dedicated to the public domain under
 [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
 
+### Timeline: Wikidata
+
+- `packs/timeline.json`: dates and labels read from Wikidata (CC0) for a
+  hand-picked list of items; each sentence is a fixed template filled
+  with those fields, and each event names its Wikidata page.
+
 ### Atlas: Natural Earth
 
 - `packs/atlas/*.json`: country shapes from Natural Earth 1:110m
