@@ -258,7 +258,7 @@ Resized to at most 800 px. Each links to its Commons file page.
 | packs/img/cameroon.jpg | Cameroon | Buma Peter | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Landscape_of_Mount_Cameroon.jpg |
 | packs/img/canada.jpg | Canada | Tobias Alt, Tobi 87 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Peyto_Lake-Banff_NP-Canada.jpg |
 | packs/img/cape-verde.jpg | Cape Verde | David Trainer | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Mount_fogo.jpg |
-| packs/img/central-african-republic.jpg | Central African Republic | Patrickroque01 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Bangui_overlooking,_National_Road_(Bangui,_Ilocos_Norte;_11-17-2022).jpg |
+| packs/img/central-african-republic.jpg | Central African Republic | Alllexxxis | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Bangui_City_Centre.jpg |
 | packs/img/chad.jpg | Chad | Ken Doerr from Chester, UK | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Storm_clouds_over_N%27Djamena_(15386229016).jpg |
 | packs/img/chile.jpg | Chile | mtchm from - | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Parinacota_volcano.jpg |
 | packs/img/colombia.jpg | Colombia | Bernard Gagnon | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Landscape_near_Gigante,_Colombia_01.jpg |
