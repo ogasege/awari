@@ -53,6 +53,14 @@ describe('tours (20-tours)', () => {
     }
   });
 
+  it('every stop of the volcanoes tour lies around the Pacific (east of 95 or west of -60)', () => {
+    const volcanoes = tourById('volcanoes');
+    expect(volcanoes).toBeDefined();
+    for (const s of volcanoes?.stops ?? []) {
+      expect(s.lon > 95 || s.lon < -60, `${s.title} at ${s.lon}`).toBe(true);
+    }
+  });
+
   it('opens a stop as its article with the tour and stop number in the address', () => {
     const rivers = tourById('rivers');
     expect(rivers && stopHref(rivers, 0)).toBe('/article/earth/nile?tour=rivers&stop=1');
