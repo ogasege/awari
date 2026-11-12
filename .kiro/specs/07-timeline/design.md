@@ -4,15 +4,33 @@
 
 SPARQL over all of Wikidata timed out (HTTP 504) and returned unreviewed
 items, so the pipeline uses a curated list instead. `timeline-items.ts`
-holds `{ qid, subject, kind, link? }` where `kind` is `born`, `died`,
-`founded`, `event` (P585) or `launched` (P619), which picks the property
-and the sentence template. The list is fetched with `getEntities`
-(cached under `data/raw/wikidata`), so rebuilds are offline.
+holds `{ qid, subject, kind, link?, label? }` where `kind` picks the
+Wikidata property and the sentence template:
+
+| kind | property | sentence |
+| --- | --- | --- |
+| `born` | P569 | "X was born on D." |
+| `founded` / `established` | P571 | "X was founded / established on D." |
+| `independence` | P571 | "X became an independent country on D." |
+| `launched` | P619 | "X was launched on D." |
+| `opened` | P1619 | "X was officially opened on D." |
+
+Deaths are left out on purpose (ages 9 to 14). `independence` reads P571
+(inception) only for countries whose inception is a day-precision date
+that is also their independence day; every such item was checked by hand
+before listing, and countries whose P571 means something else (Nigeria's
+is 1963, the year it became a republic) are simply not listed.
+`label` replaces a long or unclear Wikidata label (for example "NASA").
+The list is fetched with `getEntities(..., languageFallback)` because
+Wikidata now returns some English labels only through the shared `mul`
+label (Marie Curie, Carl Linnaeus); responses are cached under
+`data/raw/wikidata`, so rebuilds are offline.
 
 ## Pure helpers (`scripts/packs/timeline.ts`)
 
-- `dayDate(entity, pid)`: the single distinct day-precision date for a
-  property, else `undefined`.
+- `dayDate(entity, pid)`: the single distinct day-precision CE date for a
+  property, else `undefined` (deprecated statements ignored, a
+  preferred statement outranks normal ones).
 - `sentence(kind, label, date)`: the template text, e.g. "Marie Curie was
   born on 7 November 1867."
 - `buildEvents(items, entities, retrieved)`: events sorted by date then

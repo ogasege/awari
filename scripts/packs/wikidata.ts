@@ -2,6 +2,7 @@
  * Wikidata access through the Action API (`wbgetentities`) and the pure
  * helpers that turn raw claims into country facts. Wikidata is CC0.
  */
+import { createHash } from 'node:crypto';
 import { fetchJson } from './http.ts';
 
 /** Statement rank as Wikidata reports it. */
@@ -47,6 +48,7 @@ const API = 'https://www.wikidata.org/w/api.php';
 export async function getEntities(
   ids: readonly string[],
   props = 'labels|claims|sitelinks',
+  languageFallback = false,
 ): Promise<{ entities: Map<string, Entity>; fetched: string }> {
   const unique = [...new Set(ids)].sort();
   const entities = new Map<string, Entity>();
@@ -55,14 +57,20 @@ export async function getEntities(
     const batch = unique.slice(i, i + 50);
     const res = await fetchJson<{ entities: Record<string, Entity> }>(API, {
       kind: 'wikidata',
-      key: `${props.replace(/\|/g, '-')}-${batch.join('-')}`.slice(0, 180) +
-        `-${batch.length}-${i}`,
+      key: languageFallback
+        ? // A hash of the whole batch: long id lists must not collide.
+          `fb-${createHash('sha1').update(`${props}|${batch.join('|')}`).digest('hex')}-${i}`
+        : `${props.replace(/\|/g, '-')}-${batch.join('-')}`.slice(0, 180) +
+          `-${batch.length}-${i}`,
       form: {
         action: 'wbgetentities',
         ids: batch.join('|'),
         props,
         languages: 'en',
         sitefilter: 'simplewiki',
+        // Labels that equal the shared "mul" label are only returned
+        // with fallback on (Marie Curie, Carl Linnaeus).
+        ...(languageFallback ? { languagefallback: '1' } : {}),
         format: 'json',
         formatversion: '2',
       },

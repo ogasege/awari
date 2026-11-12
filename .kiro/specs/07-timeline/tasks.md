@@ -2,7 +2,7 @@
 
 - [x] 1. Spec: requirements, design with properties, tasks.
 - [ ] 2. Pack pipeline
-  - [ ] 2.1 `timeline.ts` helpers with Properties 3–5. _Req 1.2, 1.3_
+  - [x] 2.1 `timeline.ts` helpers with Properties 3–5. _Req 1.2, 1.3_
   - [ ] 2.2 Curated `timeline-items.ts`, wired into `npm run packs`,
         validation, credits entry. _Req 1.1, 1.4–1.6_
 - [ ] 3. Screen
