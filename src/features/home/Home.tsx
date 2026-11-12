@@ -47,20 +47,22 @@ interface ShownNote {
   to: string;
 }
 
-/** Six notes for today: three for the hero, three for the subjects (19-home-world Req 3). */
+/**
+ * Notes for today (19-home-world Req 3). The three hero notes stay put:
+ * their drawn arrows point at real places on the Earth photograph
+ * (Madagascar, the Sahara, Antarctica), so a rotating note would point at
+ * the wrong place. The three subject notes rotate daily and come from the
+ * subjects shown in today's prints, so each note sits by its own subject.
+ */
 function useNotes(day: number): ShownNote[] {
   const data = useHomeData();
-  const defaults: ShownNote[] = [
-    HERO_NOTES.dry,
-    HERO_NOTES.lemurs,
-    HERO_NOTES.ice,
-    SUBJECT_NOTES.falls,
-    SUBJECT_NOTES.pyramids,
-    SUBJECT_NOTES.kili,
-  ];
-  if (!data) return defaults;
-  const picked = pickNotes(day, data.notes, 6);
-  return defaults.map((d, i) => picked[i] ?? d);
+  const hero: ShownNote[] = [HERO_NOTES.dry, HERO_NOTES.lemurs, HERO_NOTES.ice];
+  const fallback: ShownNote[] = [SUBJECT_NOTES.falls, SUBJECT_NOTES.pyramids, SUBJECT_NOTES.kili];
+  if (!data) return [...hero, ...fallback];
+  const today = new Set(pickSubjects(day, subjectsWithPrints(data), 5));
+  const pool = data.notes.filter((n) => today.has(n.subject));
+  const picked = pickNotes(day, pool, 3);
+  return [...hero, ...fallback.map((d, i) => picked[i] ?? d)];
 }
 
 const pos = (left: string, top: string, extra: CSSProperties = {}): CSSProperties => ({

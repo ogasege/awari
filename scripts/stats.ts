@@ -107,6 +107,11 @@ export function computeStats(runTests: boolean): Stats {
       : 0,
     commits: Number(spawnSync('git', ['rev-list', '--count', 'HEAD'], { encoding: 'utf8' }).stdout.trim() || 0),
     logEntries: count('docs/kiro-log.md', /^\| 20\d\d-/gm),
+    hookFirings: existsSync('docs/kiro-evidence/hook-firings.jsonl')
+      ? read('docs/kiro-evidence/hook-firings.jsonl')
+          .split('\n')
+          .filter((l) => l.includes('"source":"kiro-session"')).length
+      : 0,
     subjects: SUBJECTS.length,
     countries: idx('countries'),
     electricityArticles: idx('physics'),

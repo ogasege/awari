@@ -8,6 +8,7 @@ import type { Feature, FeatureCollection, Geometry } from 'geojson';
 import { useMemo, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react';
 import { wobblyCircle } from '../../design/wobble.ts';
 import { centreOn, drag, keyStep, normalise, type Rotation } from './globeMath.ts';
+import './atlas.css';
 
 export interface ShapeProps {
   iso3: string;

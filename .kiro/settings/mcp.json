@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "aws-documentation": {
+      "command": "uvx",
+      "args": ["awslabs.aws-documentation-mcp-server@1.2.5"],
+      "env": { "FASTMCP_LOG_LEVEL": "ERROR" },
+      "timeout": 60000
+    },
+    "terraform": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "hashicorp/terraform-mcp-server:1.4.1"],
+      "timeout": 90000
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@0.0.85", "--headless", "--no-sandbox", "--isolated"],
+      "timeout": 90000
+    }
+  }
+}

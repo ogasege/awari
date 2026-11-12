@@ -25,6 +25,8 @@ describe('photo overrides', () => {
 
   it('alt texts are at most 140 characters', () => {
     for (const [key, override] of PHOTO_OVERRIDES) {
+      // An override without its own alt uses the Commons description, checked at build time.
+      if (override.alt === undefined) continue;
       expect(override.alt.length, key).toBeGreaterThan(0);
       expect(override.alt.length, key).toBeLessThanOrEqual(140);
     }

@@ -1,7 +1,43 @@
 /* Guided tours (20-tours). */
-.tour {
-  min-height: 70vh;
-  padding: 24px var(--gutter) 56px;
+.tour__board {
+  position: relative;
+  padding: 24px var(--gutter) 64px;
+}
+
+.tour__globe {
+  position: relative;
+}
+
+.tour__note {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  max-width: 260px;
+  pointer-events: none;
+}
+
+.tour__paper {
+  padding: 28px var(--gutter) 56px;
+  color: var(--ink);
+}
+
+.tour__route {
+  display: block;
+  max-width: 100%;
+  overflow: visible;
+  fill: var(--paper);
+  stroke: var(--teal-ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.tour__route circle.is-done {
+  fill: var(--yellow);
+  stroke: var(--ink);
 }
 
 .tour__head {
@@ -38,6 +74,10 @@
 }
 
 .tour__card {
+  position: relative;
+  z-index: 2;
+  /* The card crosses the torn edge into the paper (design rule 5). */
+  margin-bottom: -90px;
   padding: 22px 26px 24px;
   background: var(--paper);
   color: var(--ink);
@@ -81,7 +121,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px 14px;
-  margin: 28px 0 0;
+  margin: 12px 0 0;
   padding: 0;
   list-style: none;
 }
@@ -91,9 +131,9 @@
   align-items: center;
   gap: 8px;
   padding: 6px 14px;
-  border: 2px solid var(--mist);
+  border: 2px solid var(--ink);
   border-radius: var(--radius-pill);
-  color: var(--paper);
+  color: var(--ink);
   font-weight: 600;
   text-decoration: none;
 }
@@ -169,8 +209,20 @@
   text-decoration: underline;
 }
 
+.tour__paper .tour__route {
+  margin-top: 70px;
+}
+
 @media (max-width: 899px) {
   .tour__body {
     grid-template-columns: 1fr;
+  }
+
+  .tour__card {
+    margin-bottom: -40px;
+  }
+
+  .tour__paper .tour__route {
+    margin-top: 40px;
   }
 }

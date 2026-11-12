@@ -188,3 +188,35 @@ export async function getCommonsFiles(
   }
   return out;
 }
+
+const EN_API = 'https://en.wikipedia.org/w/api.php';
+
+/**
+ * The lead image the wiki itself shows for an article (PageImages): first
+ * Simple English Wikipedia, then English Wikipedia. Only files on Commons
+ * are returned, as names without "File:".
+ */
+export async function getLeadImages(title: string): Promise<string[]> {
+  const out: string[] = [];
+  for (const [api, kind] of [[SIMPLE_API, 'simplewiki'], [EN_API, 'enwiki']] as const) {
+    const url = withQuery(api, {
+      action: 'query',
+      prop: 'pageimages',
+      piprop: 'name',
+      pilicense: 'free',
+      redirects: 1,
+      titles: title,
+      format: 'json',
+      formatversion: 2,
+    });
+    const res = await fetchJson<{ query?: { pages?: { pageimage?: string }[] } }>(url, {
+      kind,
+      key: `pageimage-${slugify(title)}`,
+    });
+    const name = res.body.query?.pages?.[0]?.pageimage;
+    if (name && !out.includes(name)) {
+      out.push(name);
+    }
+  }
+  return out;
+}

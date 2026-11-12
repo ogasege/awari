@@ -1,0 +1,5 @@
+{
+  "note": "Which of the eight Kiro write-up prompts in the Kiroween rules were really used. npm run submission-check requires a heading for each one listed here, and fails on headings for anything else being claimed without evidence. Kiro powers were not used and the Kiro IDE and Kiro Web were not used for the build; see docs/kiro-evidence/README.md.",
+  "used": ["surfaces", "agents", "hooks", "specs", "steering", "mcp", "pbt"],
+  "notUsed": ["powers"]
+}

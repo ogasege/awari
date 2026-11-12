@@ -14,6 +14,7 @@ import { isoDate } from './sources.ts';
 import {
   getArticleFiles,
   getCommonsFiles,
+  getLeadImages,
   searchCommons,
   type CommonsFile,
 } from './wikipedia.ts';
@@ -40,7 +41,7 @@ const SATELLITE =
 
 /** Subjects unsuitable for a children's lead photo. */
 export const UNSUITABLE =
-  /child[ _-]?labou?r|\bwars?\b|warfare|conflict|refugee|poverty|corpse|\bdead\b|death|killed|protest|\briots?\b|caricature|cartoon|damaged|destroyed|rebel|militia|soldier|\barmy\b|military|weapon|\bguns?\b|slum|famine|starv|execution|genocide|massacre|prison|slave|funeral|wounded|injur|\bbomb|attack|terror|violence|disaster|flood/i;
+  /human remains|skeletal remains|\bremains\b|burial|\bgraves?\b|tomb of|cadaver|dissect|autopsy|necropsy|carcass|slaughter|butcher|\bmeat\b|cooked|specimen jar|child[ _-]?labou?r|\bwars?\b|warfare|conflict|refugee|poverty|corpse|\bdead\b|death|killed|protest|\briots?\b|caricature|cartoon|damaged|destroyed|rebel|militia|soldier|\barmy\b|military|weapon|\bguns?\b|slum|famine|starv|execution|genocide|massacre|prison|slave|funeral|wounded|injur|\bbomb|attack|terror|violence|disaster|flood/i;
 
 /** Old artworks: paintings, prints and drawings. */
 const ARTWORK =
@@ -83,16 +84,16 @@ export function fileText(file: Pick<CommonsFile, 'title' | 'meta'>): string {
 export function acceptImage(
   file: Pick<CommonsFile, 'title' | 'mime' | 'width' | 'meta'>,
   place = false,
+  allowArtwork = false,
 ): Acceptance | null {
   const categories = (file.meta.Categories ?? '').split('|');
   const text = `${fileText(file)} ${stripHtml(file.meta.Artist ?? '')}`;
   if (
-    file.mime !== 'image/jpeg' ||
+    !(file.mime === 'image/jpeg' || (allowArtwork && file.mime === 'image/png')) ||
     file.width < 480 ||
     isUnwantedImage(file.title, categories) ||
     UNSUITABLE.test(text) ||
-    ARTWORK.test(text) ||
-    OLD_YEAR.test(text) ||
+    (!allowArtwork && (ARTWORK.test(text) || OLD_YEAR.test(text))) ||
     (place && (PEOPLE_EVENTS.test(text) || SATELLITE.test(text)))
   ) {
     return null;
@@ -272,9 +273,16 @@ export async function choosePhoto(
     return { photo, subject: subject.title };
   }
   const place = subject.pack === 'countries';
+  // Subject packs (not countries or Electricity) take the wiki's own lead
+  // image first: it shows the topic itself, where a scenic Commons search
+  // drifts (a bridge for "light bulb", a cruise ship for "Vikings").
+  const lead = !place && subject.pack !== 'physics';
+  // Portraits, statues and old paintings belong in these packs.
+  const allowArtwork = lead && ['people', 'arts', 'ancient', 'space', 'inventions', 'science', 'body'].includes(subject.pack);
   const names = subject.names ?? [subject.title];
   const others = subject.otherNames ?? [];
   const sources: (() => Promise<string[]>)[] = [
+    ...(lead ? [() => getLeadImages(subject.wikiTitle)] : []),
     () => getArticleFiles(subject.wikiTitle),
     ...subject.queries.map((q) => () => searchCommons(q)),
   ];
@@ -297,16 +305,20 @@ export async function choosePhoto(
           continue;
         }
       }
-      const ok = acceptImage(file, place);
-      const alt = altFrom(file.meta.ImageDescription ?? '');
+      const ok = acceptImage(file, place, allowArtwork);
+      const alt = altFrom(file.meta.ImageDescription ?? '') ?? (lead && i === 0 ? `A picture of ${subject.title}` : null);
       const caption =
         captionFrom(file.meta.ObjectName ?? '') ??
         captionFrom(plainName(file.title));
-      if (ok && alt && caption) {
-        pool.push({ file, ok, alt, caption, score: preferenceScore(file) });
+      if (ok && alt && (caption || (lead && i === 0))) {
+        // The wiki's own lead image wins outright when it qualifies.
+        pool.push({ file, ok, alt, caption: lead && i === 0 ? subject.title : (caption as string), score: lead && i === 0 ? 100 : preferenceScore(file) });
       }
     }
-    if (pool.some((c) => c.score >= 2)) {
+    if (pool.some((c) => c.score >= (lead ? 100 : 2))) {
+      break;
+    }
+    if (lead && i >= 1 && pool.length > 0) {
       break;
     }
   }

@@ -7,7 +7,8 @@
 import { useState } from 'react';
 import { Link, usePath } from '../../app/navigation.tsx';
 import { useTitle } from '../../app/useTitle.ts';
-import { Button, Doodle, Print, StripHeading } from '../../design/paper.tsx';
+import { Button, Doodle, MarginNote, Print, StripHeading, TornEdge } from '../../design/paper.tsx';
+import { seedFrom, wobblyLine } from '../../design/wobble.ts';
 import { packUrl, usePack } from '../../lib/packs/load.ts';
 import type { Article } from '../../lib/packs/types.ts';
 import { Globe, type Shapes } from '../atlas/Globe.tsx';
@@ -16,6 +17,20 @@ import { TOURS, stopFromPath, stopHref, stopRotation, tourById, type Tour } from
 import './tours.css';
 
 const NO_DISCOVERED: ReadonlySet<string> = new Set();
+
+/** The journey drawn as a hand-inked line with a dot per stop, filled up to here (design rule 6). */
+function Route({ count, index, seed }: { count: number; index: number; seed: string }) {
+  const W = 40 + (count - 1) * 64;
+  const x = (i: number): number => 20 + i * 64;
+  return (
+    <svg aria-hidden="true" className="tour__route" viewBox={`0 0 ${W} 40`} width={W} height={40}>
+      <path d={wobblyLine({ x: 12, y: 20 }, { x: W - 12, y: 20 }, seedFrom(seed), 2)} />
+      {Array.from({ length: count }, (_, i) => (
+        <circle key={i} cx={x(i)} cy={20} r={i === index ? 11 : 8} className={i <= index ? 'is-done' : ''} />
+      ))}
+    </svg>
+  );
+}
 
 function TourPlay({ tour }: { tour: Tour }) {
   const path = usePath();
@@ -31,7 +46,8 @@ function TourPlay({ tour }: { tour: Tour }) {
   const lead = article.status === 'ready' ? article.data.photos[0] : undefined;
 
   return (
-    <section className="tour atlas-board grain" aria-labelledby="tour-title">
+    <section className="tour" aria-labelledby="tour-title">
+      <div className="tour__board atlas-board grain">
       <div className="tour__head">
         <StripHeading id="tour-title" lines={[{ text: tour.title, tone: 'paper', tilt: -2 }]} className="tour__title" />
         <Link to="/tours" className="tour__back">
@@ -44,6 +60,12 @@ function TourPlay({ tour }: { tour: Tour }) {
 
       <div className="tour__body">
         <div className="tour__globe">
+          <div className="tour__note crowding">
+            <MarginNote decorative tilt={-4} size={30} color="var(--yellow)">
+              {last ? 'last stop! where would you go next?' : 'the red ring marks this stop'}
+            </MarginNote>
+            <Doodle kind="arrow" seed={`tour-${tour.id}`} size={70} color="var(--yellow)" from={{ x: 6, y: 6 }} to={{ x: 62, y: 60 }} className="crowding" />
+          </div>
           {shapes.status === 'ready' ? (
             <Globe
               shapes={shapes.data}
@@ -97,6 +119,10 @@ function TourPlay({ tour }: { tour: Tour }) {
         </article>
       </div>
 
+      <TornEdge color="var(--paper)" seed={`tour-edge-${tour.id}`} height={30} />
+      </div>
+      <div className="tour__paper squared">
+      <Route count={tour.stops.length} index={index} seed={tour.id} />
       <ol className="tour__stops" aria-label="Stops on this tour">
         {tour.stops.map((s, i) => (
           <li key={s.article}>
@@ -109,6 +135,7 @@ function TourPlay({ tour }: { tour: Tour }) {
           </li>
         ))}
       </ol>
+      </div>
     </section>
   );
 }

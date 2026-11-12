@@ -49,10 +49,11 @@ if (mode === 'after-write') {
   const sources = touched.map(rel).filter((p) => /^(src|scripts|services\/quiz-lambda\/src)\/.*\.(ts|tsx)$/.test(p));
   const bundled = touched.map(rel).filter((p) => /^(public\/|CREDITS\.md$)/.test(p));
   if (sources.length > 0) {
-    check = `eslint + related tests on ${sources.join(', ')}`;
+    check = `eslint + typecheck + related tests on ${sources.join(', ')}`;
     const lint = run('npx', ['eslint', '--max-warnings', '0', ...sources]);
-    const tests = lint.ok ? run('npx', ['vitest', 'run', '--related', ...sources]) : { ok: true, output: '' };
-    result = { ok: lint.ok && tests.ok, output: `${lint.output}\n${tests.output}`.trim() };
+    const types = lint.ok ? run('npx', ['tsc', '-b', '--noEmit']) : { ok: true, output: '' };
+    const tests = lint.ok && types.ok ? run('npx', ['vitest', 'related', '--run', '--passWithNoTests', ...sources]) : { ok: true, output: '' };
+    result = { ok: lint.ok && types.ok && tests.ok, output: `${lint.output}\n${types.output}\n${tests.output}`.trim() };
   } else if (bundled.length > 0) {
     check = 'npm run credits';
     result = run('npm', ['run', '--silent', 'credits']);

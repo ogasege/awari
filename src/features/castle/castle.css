@@ -7,7 +7,7 @@
   min-height: 70vh;
 }
 
-.castle-board a {
+.castle-board a:not(.btn) {
   color: var(--yellow);
 }
 

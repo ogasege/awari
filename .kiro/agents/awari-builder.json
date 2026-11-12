@@ -1,0 +1,61 @@
+{
+  "name": "awari-builder",
+  "description": "Builds Awari spec by spec: reads the steering files, works from the spec's tasks, runs lint and tests after each source write, checks credits when bundled files change, and checks the hackathon hard rules when it stops.",
+  "prompt": "You are the builder for Awari, a free offline-first encyclopedia for students aged 9 to 14 (Kiroween 2026, Resurrection). The steering files in .kiro/steering are your standing rules: product, tech, structure, design and hackathon-rules. Work spec-first: read .kiro/specs/<spec>/requirements.md, design.md and tasks.md before changing code; tick tasks only when their tests pass. Every correctness property in a design.md needs a test named 'Property N:'. After each completed task run `npm run log -- --spec <spec> --task <n> --by <what really drove it> --note \"...\"` and commit with the message '<spec> <task>: <summary>'. Never write 'hook' in the log's Driven-by column unless a Kiro hook really fired. Hard limits: do not git push, do not run terraform apply or destroy, do not run AWS commands that create, change or delete anything, never print or commit secrets, never use the banned product name, keep content openly licensed and credited in CREDITS.md. Put scratch files under data/build, which is git-ignored.",
+  "tools": ["read", "write", "shell", "grep", "glob", "code", "web_fetch", "web_search", "@aws-documentation", "@terraform"],
+  "allowedTools": ["read", "grep", "glob", "code", "write", "web_fetch", "@aws-documentation", "@terraform"],
+  "mcpServers": {
+    "aws-documentation": {
+      "command": "uvx",
+      "args": ["awslabs.aws-documentation-mcp-server@1.2.5"],
+      "env": { "FASTMCP_LOG_LEVEL": "ERROR" },
+      "timeout": 60000
+    },
+    "terraform": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "hashicorp/terraform-mcp-server:1.4.1"],
+      "timeout": 90000
+    }
+  },
+  "toolsSettings": {
+    "write": {
+      "allowedPaths": ["src/**", "scripts/**", "docs/**", "public/**", "services/**", "infra/**", ".kiro/**", "*.md", "*.json", "*.ts", "*.html"],
+      "deniedPaths": ["**/.env", "**/.env.*", "node_modules/**", ".git/**"]
+    },
+    "shell": {
+      "autoAllowReadonly": true,
+      "allowedCommands": [
+        "npm run .*",
+        "npm test.*",
+        "npx (vitest|eslint|tsc|tsx|vite|playwright) .*",
+        "node .*",
+        "git (status|diff|log|show|add|commit|check-ignore|ls-files).*",
+        "python3 .*",
+        "terraform (fmt|init|validate|test|plan).*"
+      ],
+      "deniedCommands": [
+        "git push.*",
+        "terraform apply.*",
+        "terraform destroy.*",
+        "rm -rf.*",
+        "aws .*(create|delete|update|put|terminate|run|invoke|attach|detach).*"
+      ]
+    }
+  },
+  "resources": [
+    "file://.kiro/steering/product.md",
+    "file://.kiro/steering/tech.md",
+    "file://.kiro/steering/structure.md",
+    "file://.kiro/steering/design.md",
+    "file://.kiro/steering/hackathon-rules.md"
+  ],
+  "hooks": {
+    "agentSpawn": [{ "command": "node scripts/hooks/kiro-hook.mjs spawn", "timeout_ms": 20000 }],
+    "postToolUse": [
+      { "matcher": "write", "command": "node scripts/hooks/kiro-hook.mjs after-write", "timeout_ms": 170000 },
+      { "matcher": "shell", "command": "node scripts/hooks/kiro-hook.mjs after-shell", "timeout_ms": 60000 }
+    ],
+    "stop": [{ "command": "node scripts/hooks/kiro-hook.mjs stop", "timeout_ms": 60000 }]
+  },
+  "welcomeMessage": "Awari builder ready. Which spec and task?"
+}

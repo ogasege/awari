@@ -83,3 +83,84 @@
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
 }
+
+.subject__board {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+  gap: 24px 48px;
+  align-items: center;
+  padding: 28px var(--gutter) 70px;
+  background: var(--teal);
+  color: var(--paper);
+}
+
+.subject__board .subject__lead {
+  color: var(--mist);
+}
+
+.subject__board .btn--outline {
+  color: var(--paper);
+}
+
+.subject__lead-print {
+  position: relative;
+  z-index: 2;
+  /* The print crosses the torn edge into the paper below (design rule 5). */
+  margin-bottom: -110px;
+}
+
+.subject__note {
+  position: absolute;
+  top: -10px;
+  left: -230px;
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  width: 260px;
+}
+
+.subject__note a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.subject__paper {
+  padding-top: 56px;
+}
+
+.subject__progress {
+  max-width: 640px;
+}
+
+.subject__progress p {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.subject__stamps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.subject__stamps span {
+  width: 18px;
+  height: 22px;
+  background: rgb(0 122 140 / 0.18);
+}
+
+.subject__stamps span.is-done {
+  background: var(--yellow);
+}
+
+@media (max-width: 899px) {
+  .subject__board {
+    grid-template-columns: 1fr;
+  }
+
+  .subject__lead-print {
+    margin-bottom: -60px;
+    max-width: 320px;
+  }
+}
