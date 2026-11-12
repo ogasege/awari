@@ -9,7 +9,7 @@ own, logged in `docs/kiro-log.md`, and opened in a real browser at 1440 and
       tour and every stop opened. _Req 1_
 - [x] 3. Finish 14-any-article task 5 (offline proof for a read Wikipedia
       article) and 19-home-world task 4. _Review item 2_
-- [ ] 4. Hero notes are Earth facts with proofs; circle only for a visible
+- [x] 4. Hero notes are Earth facts with proofs; circle only for a visible
       place; "ever wondered" moved out of the photograph; Property 2.
       _Req 2-4_
 - [ ] 5. Reviewed subject cover list + licence audit; Home uses it;

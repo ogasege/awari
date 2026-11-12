@@ -16,7 +16,13 @@ export interface HomeNote {
 }
 
 export const HERO_NOTES: Record<'dry' | 'lemurs' | 'ice', HomeNote> = {
-  dry: { kind: 'question', text: 'Why is it so dry up here?', to: '/search?q=desert' },
+  dry: {
+    kind: 'fact',
+    text: 'The Sahara is the largest hot desert!',
+    to: '/article/earth/sahara',
+    article: 'earth/sahara',
+    proof: 'The Sahara is the largest hot desert',
+  },
   lemurs: {
     kind: 'fact',
     text: "Most of Madagascar's mammals live nowhere else!",
@@ -24,7 +30,13 @@ export const HERO_NOTES: Record<'dry' | 'lemurs' | 'ice', HomeNote> = {
     article: 'countries/madagascar',
     proof: 'most of the mammals living in Madagascar do not live anywhere else in the world',
   },
-  ice: { kind: 'question', text: 'What is hiding under all that ice?', to: '/search?q=ice' },
+  ice: {
+    kind: 'fact',
+    text: 'Wild penguins live in Antarctica!',
+    to: '/article/wildlife/penguin',
+    article: 'wildlife/penguin',
+    proof: 'Penguins in the wild only live in the Southern Hemisphere: Antarctica',
+  },
 };
 
 export const SUBJECT_NOTES: Record<'falls' | 'pyramids' | 'kili', HomeNote> = {

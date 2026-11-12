@@ -6,6 +6,16 @@ import { HERO_NOTES, SUBJECT_NOTES, type HomeNote } from './notes.ts';
 
 const notes: HomeNote[] = [...Object.values(HERO_NOTES), ...Object.values(SUBJECT_NOTES)];
 
+describe('Home hero notes (21-review-2 Property 2)', () => {
+  it('Property 2: every note whose arrow touches the Earth photograph is a proved fact. _Req 2_', () => {
+    for (const note of Object.values(HERO_NOTES)) {
+      expect(note.kind).toBe('fact');
+      expect(note.article).toBeTruthy();
+      expect(note.proof).toBeTruthy();
+    }
+  });
+});
+
 describe('Home margin notes', () => {
   it('has at least one fact and one question', () => {
     expect(notes.some((n) => n.kind === 'fact')).toBe(true);
