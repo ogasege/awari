@@ -57,3 +57,25 @@ export function stampsFor(
   const africaCount = Math.min(AFRICA_TOTAL, stamps.filter((s) => s.africa).length);
   return { stamps, africaCount, africaTotal: AFRICA_TOTAL };
 }
+
+export interface AfricaSlot {
+  id: string;
+  name: string;
+  /** The stamp when the student has found this country. */
+  stamp?: StampView;
+}
+
+/**
+ * One slot for each African country in the index, sorted by name, filled
+ * with its stamp when found (08-stamp-book Req 3.1).
+ */
+export function africaSlots(
+  stamps: readonly StampView[],
+  items: readonly PackIndexItem[],
+): AfricaSlot[] {
+  const found = new Map(stamps.map((s) => [s.id, s]));
+  return items
+    .filter((i) => i.continent === 'Africa')
+    .sort((a, b) => a.title.localeCompare(b.title))
+    .map((i) => ({ id: i.id, name: i.title, stamp: found.get(i.id) }));
+}

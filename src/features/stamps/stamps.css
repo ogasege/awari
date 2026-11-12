@@ -1,0 +1,71 @@
+/* The stamp book screen (08-stamp-book). */
+.stamp-book__count {
+  max-width: 620px;
+  font-size: 22px;
+}
+
+.stamp-book__note {
+  position: absolute;
+  top: 70px;
+  right: var(--gutter);
+  max-width: 280px;
+}
+
+.stamp-book h2 {
+  margin: 36px 0 16px;
+  font-size: 34px;
+}
+
+.stamp-book__empty {
+  font-size: 20px;
+}
+
+.stamp-book__empty a {
+  color: var(--teal);
+  font-weight: 700;
+}
+
+.stamp-book__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+  gap: 26px 22px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stamp-book__grid .stamp {
+  width: 100%;
+  max-width: 190px;
+}
+
+.stamp-book__empty-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  max-width: 190px;
+  aspect-ratio: 186 / 226;
+  background: rgb(255 255 255 / 0.7);
+  border: 2px dashed var(--ink-soft);
+  color: var(--ink-soft);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.stamp-book__q {
+  font-size: 64px;
+  line-height: 0.8;
+}
+
+@media (max-width: 899px) {
+  .stamp-book__note {
+    display: none;
+  }
+
+  .stamp-book__grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+}

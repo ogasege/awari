@@ -1,7 +1,7 @@
 import fc from 'fast-check';
 import { describe, expect, it } from 'vitest';
 import type { PackIndexItem } from '../../lib/packs/types.ts';
-import { AFRICA_TOTAL, stampsFor } from './stamps.ts';
+import { AFRICA_TOTAL, africaSlots, stampsFor } from './stamps.ts';
 
 const slug = fc.stringMatching(/^[a-z]{1,10}$/);
 const items = fc.uniqueArray(
@@ -42,6 +42,20 @@ describe('stamp book (08-stamp-book)', () => {
         expect(stampsFor([...a, ...b], idx).africaCount).toBeGreaterThanOrEqual(
           stampsFor(a, idx).africaCount,
         );
+      }),
+    );
+  });
+
+  it('Property 4: one slot per African country, and the filled slots are exactly the African stamps', () => {
+    fc.assert(
+      fc.property(items, fc.array(slug, { maxLength: 100 }), (idx, discovered) => {
+        const book = stampsFor(discovered, idx);
+        const slots = africaSlots(book.stamps, idx);
+        const african = idx.filter((i) => i.continent === 'Africa').map((i) => i.id);
+        expect(slots.map((s) => s.id).sort()).toEqual([...african].sort());
+        expect(
+          slots.filter((s) => s.stamp).map((s) => s.id).sort(),
+        ).toEqual(book.stamps.filter((s) => s.africa).map((s) => s.id).sort());
       }),
     );
   });
