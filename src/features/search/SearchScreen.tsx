@@ -1,6 +1,174 @@
-/** Placeholder until its spec is implemented. */
-import { Placeholder } from '../../app/Placeholder.tsx';
+/**
+ * Search (13-search): articles, quizzes, timeline events and a dictionary
+ * meaning, all found on the device so it works offline.
+ */
+import { useEffect, useMemo, useState, type FormEvent } from 'react';
+import { Link, navigate, usePath } from '../../app/navigation.tsx';
+import { useTitle } from '../../app/useTitle.ts';
+import { StripHeading } from '../../design/paper.tsx';
+import { lookupWord, partOfSpeech, type Definition } from '../../lib/dictionary/lookup.ts';
+import { usePack } from '../../lib/packs/load.ts';
+import type { PackIndex, PackId, TimelinePack } from '../../lib/packs/types.ts';
+import { searchDocs, tokens, type SearchDoc } from './search.ts';
+import './search.css';
 
-export default function Screen() {
-  return <Placeholder title="Search" />;
+interface QuizIndex {
+  quizzes: Array<{ pack: PackId; id: string }>;
+}
+
+const MAX_SHOWN = 40;
+
+export default function SearchScreen() {
+  // The header's search box navigates to /search?q=…; follow the address.
+  const path = usePath();
+  const urlQuery = new URLSearchParams(path.split('?')[1] ?? '').get('q') ?? '';
+  const [seen, setSeen] = useState(urlQuery);
+  const [field, setField] = useState(urlQuery);
+  const [query, setQuery] = useState(urlQuery);
+  if (seen !== urlQuery) {
+    setSeen(urlQuery);
+    setField(urlQuery);
+    setQuery(urlQuery);
+  }
+  useTitle(query.trim() ? `Search: ${query.trim()}` : 'Search');
+
+  const countries = usePack<PackIndex>('countries/index.json');
+  const physics = usePack<PackIndex>('physics/index.json');
+  const quizzes = usePack<QuizIndex>('quizzes/index.json');
+  const timeline = usePack<TimelinePack>('timeline.json');
+
+  const docs = useMemo<SearchDoc[]>(() => {
+    const out: SearchDoc[] = [];
+    for (const [pack, state] of [['countries', countries], ['physics', physics]] as const) {
+      if (state.status === 'ready') {
+        for (const i of state.data.items) {
+          out.push({ kind: 'article', id: `${pack}/${i.id}`, title: i.title, text: i.summary, to: `/article/${pack}/${i.id}` });
+        }
+      }
+    }
+    if (timeline.status === 'ready') {
+      for (const e of timeline.data.events) {
+        out.push({ kind: 'event', id: e.id, title: e.label, text: e.text, to: `/timeline?year=${Number(e.date.slice(0, 4))}` });
+      }
+    }
+    return out;
+  }, [countries, physics, timeline]);
+
+  const quizSet = useMemo(
+    () => new Set(quizzes.status === 'ready' ? quizzes.data.quizzes.map((q) => `${q.pack}/${q.id}`) : []),
+    [quizzes],
+  );
+  const hits = useMemo(() => searchDocs(docs, query), [docs, query]);
+  const articles = hits.filter((h) => h.kind === 'article').slice(0, MAX_SHOWN);
+  const events = hits.filter((h) => h.kind === 'event').slice(0, MAX_SHOWN);
+
+  const words = tokens(query);
+  const single = words.length === 1 ? (words[0] ?? null) : null;
+  const [meaning, setMeaning] = useState<{ word: string; def: Definition | null } | null>(null);
+  useEffect(() => {
+    if (!single) return;
+    let live = true;
+    lookupWord(single).then(
+      (def) => live && setMeaning({ word: single, def }),
+      () => live && setMeaning({ word: single, def: null }),
+    );
+    return () => {
+      live = false;
+    };
+  }, [single]);
+  const def = single && meaning?.word === single ? meaning.def : null;
+
+  const loading = [countries, physics, timeline].some((s) => s.status === 'loading');
+  const submit = (e: FormEvent): void => {
+    e.preventDefault();
+    const q = field.trim();
+    setQuery(q);
+    navigate(q ? `/search?q=${encodeURIComponent(q)}` : '/search', true);
+  };
+
+  return (
+    <section className="page squared search" aria-labelledby="search-title">
+      <StripHeading
+        id="search-title"
+        lines={[
+          { text: 'Search', tone: 'paper', tilt: -2 },
+          { text: 'find anything', tone: 'yellow', tilt: 1.5, style: { marginLeft: '0.8em' } },
+        ]}
+      />
+      <form role="search" className="search__form" onSubmit={submit}>
+        <label htmlFor="search-field">Search articles, events and words</label>
+        <div>
+          <input id="search-field" type="search" value={field} onChange={(e) => setField(e.target.value)} />
+          <button type="submit" className="btn btn--yellow">
+            Search
+          </button>
+        </div>
+      </form>
+
+      <div role="status" aria-live="polite" className="search__status">
+        {words.length === 0
+          ? 'Type a word or a name to start.'
+          : loading
+            ? 'Looking through the packs…'
+            : `${articles.length + events.length} ${articles.length + events.length === 1 ? 'result' : 'results'} for “${query.trim()}”.`}
+      </div>
+
+      {def ? (
+        <aside className="search__meaning" aria-labelledby="search-meaning">
+          <h2 id="search-meaning">The word “{def.lemma}”</h2>
+          <ol>
+            {def.senses.map((s, i) => (
+              <li key={i}>
+                <span className="search__pos">{partOfSpeech(s.pos)}</span> {s.gloss}
+              </li>
+            ))}
+          </ol>
+        </aside>
+      ) : null}
+
+      {articles.length > 0 ? (
+        <section aria-labelledby="search-articles">
+          <h2 id="search-articles">Articles</h2>
+          <ul className="search__list">
+            {articles.map((h) => (
+              <li key={h.id}>
+                <Link to={h.to} className="search__title">
+                  {h.title}
+                </Link>
+                <p>{h.text}</p>
+                {quizSet.has(h.id) ? (
+                  <Link to={`/quiz/${h.id}`} className="search__quiz">
+                    Take the {h.title} quiz
+                  </Link>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      {events.length > 0 ? (
+        <section aria-labelledby="search-events">
+          <h2 id="search-events">On the timeline</h2>
+          <ul className="search__list">
+            {events.map((h) => (
+              <li key={h.id}>
+                <Link to={h.to} className="search__title">
+                  {h.title}
+                </Link>
+                <p>{h.text}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      {words.length > 0 && !loading && hits.length === 0 && !def ? (
+        <p className="search__none">
+          Nothing matched. Try a shorter word, or wander instead: <Link to="/atlas">spin the globe</Link> or{' '}
+          <Link to="/quizzes">pick a quiz</Link>.
+        </p>
+      ) : null}
+    </section>
+  );
 }

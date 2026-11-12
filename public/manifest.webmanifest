@@ -1,0 +1,14 @@
+{
+  "name": "Awari",
+  "short_name": "Awari",
+  "description": "A free encyclopedia you explore by place, by date, or by playing. It keeps working when the internet does not.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#00606E",
+  "theme_color": "#00606E",
+  "icons": [
+    { "src": "/logo/awari-icon.png", "sizes": "any", "type": "image/png", "purpose": "any" },
+    { "src": "/logo/awari-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

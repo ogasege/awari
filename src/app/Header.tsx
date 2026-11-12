@@ -3,6 +3,7 @@
  * Everything here is straight and calm (design rule 7).
  */
 import { useEffect, useState, type FormEvent } from 'react';
+import { useOfflineStatus, type OfflineStatus } from '../lib/offline/register.ts';
 import { Link, navigate, usePath } from './navigation.tsx';
 import { matchRoute, type RouteName } from './router.ts';
 import './header.css';
@@ -31,10 +32,22 @@ function useOnline(): boolean {
   return online;
 }
 
+/** Says in words whether the site is saved for offline use (09-offline Req 3.1). */
+export function badgeText(saved: OfflineStatus, online: boolean): string {
+  if (saved === 'ready') {
+    return online ? 'Works offline' : 'Offline, still working';
+  }
+  if (saved === 'preparing') {
+    return online ? 'Saving for offline…' : 'Offline, still saving';
+  }
+  return online ? 'Not saved for offline yet' : 'Offline';
+}
+
 export function Header() {
   const path = usePath();
   const route = matchRoute(path).name;
   const online = useOnline();
+  const offline = useOfflineStatus();
   const [query, setQuery] = useState('');
 
   const submit = (event: FormEvent): void => {
@@ -81,10 +94,12 @@ export function Header() {
         />
       </form>
       <span className="site-header__badge" role="status">
-        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M5 12.5l4.5 4.5L19 7.5" />
-        </svg>
-        {online ? 'Works offline' : 'Offline, still working'}
+        {offline === 'ready' ? (
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5 12.5l4.5 4.5L19 7.5" />
+          </svg>
+        ) : null}
+        {badgeText(offline, online)}
       </span>
     </header>
   );
