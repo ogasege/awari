@@ -41,12 +41,12 @@ export const TOURS: readonly Tour[] = [
   {
     id: 'wonders',
     title: 'Wonders of the ancient world',
-    blurb: 'Visit the wonders the ancient Greeks wrote about, from Egypt to Babylon, and Olympia where the Statue of Zeus stood.',
+    blurb: 'Visit the wonders the ancient Greeks wrote about, from Egypt to Babylon, and the story of the list itself.',
     stops: [
       { article: 'ancient/great-pyramid-of-giza', title: 'The Great Pyramid of Giza', place: 'Giza, Egypt', lat: 29.98, lon: 31.13 },
       { article: 'ancient/hanging-gardens-of-babylon', title: 'The Hanging Gardens of Babylon', place: 'Babylon, Iraq', lat: 32.54, lon: 44.42 },
       { article: 'ancient/temple-of-artemis', title: 'The Temple of Artemis', place: 'Ephesus, Türkiye', lat: 37.95, lon: 27.36 },
-      { article: 'ancient/ancient-olympic-games', title: 'The Ancient Olympic Games', place: 'Olympia, Greece, where the Statue of Zeus stood', lat: 37.64, lon: 21.63 },
+      { article: 'ancient/wonders-of-the-world', title: 'The Seven Wonders of the Ancient World', place: 'Greece, home of the writers who made the list', lat: 37.98, lon: 23.73 },
       { article: 'ancient/colossus-of-rhodes', title: 'The Colossus of Rhodes', place: 'Rhodes, Greece', lat: 36.45, lon: 28.23 },
       { article: 'ancient/lighthouse-of-alexandria', title: 'The Lighthouse of Alexandria', place: 'Alexandria, Egypt', lat: 31.21, lon: 29.89 },
     ],

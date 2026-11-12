@@ -1,5 +1,10 @@
 # Requirements: App shell and design system
 
+
+> Updated in the 01-13 review pass (2026-11-12): Home now rotates its subject prints, subject notes and
+> suggestions daily (`19-home-world`); the header gained Subjects and Tours. The credits screen overflowed by 9 px at
+> 390 px; long names now wrap.
+
 ## Introduction
 
 The shell gives every Awari screen the same header, routes, design tokens

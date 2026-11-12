@@ -1,5 +1,9 @@
 # Requirements: Timeline and On this day
 
+
+> Updated in the 01-13 review pass (2026-11-12): subjects are now the eleven Awari subjects and events carry a
+> continent (`18-world-timeline`); the four subjects below (Countries, Science, People, History) are history.
+
 ## Introduction
 
 Dated events from Wikidata, filterable by subject, shown on a drawn

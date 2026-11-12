@@ -1,5 +1,9 @@
 # Requirements: Search
 
+
+> Updated in the 01-13 review pass (2026-11-12): search now also covers every subject pack, articles read on this
+> device, and Simple or English Wikipedia online (`14-any-article` Req 4, `15-subject-packs` Req 3.1).
+
 ## Introduction
 
 The header has a search field on every screen. It searches the bundled

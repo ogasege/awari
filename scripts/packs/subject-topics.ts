@@ -25,7 +25,7 @@ const t = (title: string, photoQuery?: string, event?: EventKind): SubjectTopic 
 /** Articles per pack the build keeps (the first ones that pass). */
 export const TARGET = 30;
 /** Packs that keep more, so every tour stop has a page (20-tours). */
-export const TARGETS: Readonly<Record<string, number>> = { earth: 34 };
+export const TARGETS: Readonly<Record<string, number>> = { earth: 34, ancient: 32 };
 
 export const SUBJECT_TOPICS: Readonly<Record<SubjectPackId, readonly SubjectTopic[]>> = {
   wildlife: [
@@ -112,8 +112,8 @@ export const SUBJECT_TOPICS: Readonly<Record<SubjectPackId, readonly SubjectTopi
     t('Spinal cord', 'spinal cord anatomy'), t('Hand', 'human hand'), t('Skull', 'human skull'),
     t('Pancreas', 'pancreas anatomy'), t('Intestine', 'intestine anatomy'), t('Blood vessel', 'blood vessels'),
     t('Hormone', 'hormone'), t('Breathing', 'breathing lungs'), t('Taste', 'taste buds'),
-    t('Foot', 'human foot'), t('Joint', 'knee joint'), t('Pulse', 'pulse measuring'), t('Fingerprint', 'fingerprint'),
-    t('Human body', 'human body'), t('Tissue', 'tissue'), t('Artery', 'artery'), t('Vein', 'vein'), t('Esophagus', 'esophagus'), t('Throat', 'throat'), t('Bladder', 'bladder'), t('Diaphragm (anatomy)', 'diaphragm (anatomy)'), t('Rib', 'rib'), t('Vertebral column', 'vertebral column'), t('Thumb', 'thumb'), t('Finger', 'finger'), t('Arm', 'arm'), t('Leg', 'leg'), t('Knee', 'knee'), t('Elbow', 'elbow'), t('Neck', 'neck'), t('Face', 'face'), t('Mouth', 'mouth'), t('Cerebellum', 'cerebellum'), t('Blood pressure', 'blood pressure'), t('Protein', 'protein'), t('Vitamin', 'vitamin'), t('Calorie', 'calorie'), t('Exercise', 'exercise'), t('Hygiene', 'hygiene'), t('Allergy', 'allergy'), t('Fever', 'fever'), t('Tonsil', 'tonsil'), t('Appendix', 'appendix'), t('Gland', 'gland'), t('Saliva', 'saliva'), t('Sweat', 'sweat'), t('Reflex', 'reflex'),
+    t('Joint', 'knee joint'), t('Pulse', 'pulse measuring'), t('Fingerprint', 'fingerprint'),
+    t('Human body', 'human body'), t('Tissue', 'tissue'), t('Artery', 'artery'), t('Vein', 'vein'), t('Esophagus', 'esophagus'), t('Throat', 'throat'), t('Bladder', 'bladder'), t('Diaphragm (anatomy)', 'diaphragm (anatomy)'), t('Rib', 'rib'), t('Vertebral column', 'vertebral column'), t('Thumb', 'thumb'), t('Finger', 'finger'), t('Arm', 'arm'), t('Knee', 'knee'), t('Elbow', 'elbow'), t('Neck', 'neck'), t('Face', 'face'), t('Mouth', 'mouth'), t('Cerebellum', 'cerebellum'), t('Blood pressure', 'blood pressure'), t('Protein', 'protein'), t('Vitamin', 'vitamin'), t('Calorie', 'calorie'), t('Exercise', 'exercise'), t('Hygiene', 'hygiene'), t('Allergy', 'allergy'), t('Fever', 'fever'), t('Tonsil', 'tonsil'), t('Appendix', 'appendix'), t('Gland', 'gland'), t('Saliva', 'saliva'), t('Sweat', 'sweat'), t('Reflex', 'reflex'),
   ],
   science: [
     t('Atom', 'atom model'), t('Molecule', 'molecule model'), t('Chemical element', 'periodic table'),

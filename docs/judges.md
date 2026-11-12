@@ -1,44 +1,36 @@
 # Judge guide: test Awari in under two minutes
 
-Awari is a free encyclopedia for curious students. It works offline after
-one visit. Live app: **[LIVE URL]**. Code: **[GITHUB URL]**. No account or
-sign-in is needed.
+Awari is a free encyclopedia for curious students that works offline after one visit. Live app:
+**[LIVE URL]**. Code: **[GITHUB URL]**. No account or sign-in.
 
 ## The main journey (about 90 seconds)
 
-1. **Open the live app** and wait a few seconds. The badge at the top right
-   changes from "Saving for offline…" to **"Works offline"**. That means the
-   whole site has been saved on your device.
-2. **Read and tap a word.** Choose *Explore*, open **Nigeria**, and tap the
-   word **delta** in the text. A side card shows its meaning. (Every word
-   works; the dictionary is saved too.)
-3. **Spin the globe.** Choose *Atlas*, drag the globe, pick a country (or use
-   the list below it). The facts card links to the article and the quiz.
-   Open two or three countries, then go to *Explore*: they are now **stamps**,
-   counted "out of Africa's 54".
-4. **Take a quiz with hints.** Open the **Nigeria quiz**. Press *Give me a
-   nudge*, *Where should I look?* and *Take away two answers*. Answer, then
-   check: the result is said in words ("Right!" or "Not quite."), and a right
-   answer shows the **sentence from the article that proves it**.
-5. **Try the Castle.** *Castle → The Africa wing*: each right answer lights the
-   next of twelve rooms.
-6. **Timeline.** *Timeline → Science*. The drawn ruler has a "you are here"
-   arrow. Home shows up to three events for today's date.
+1. **Open the live app** and wait a few seconds. The badge at the top right changes from "Saving
+   for offline…" to **"Works offline"**: the bundled library is saved on your device.
+2. **Search any topic.** Type something in the header search, for example *okapi*, and choose
+   **Open**. The article opens from Wikipedia with its photo, credits and a quiz. Tap any word
+   for its meaning.
+3. **Spin the globe.** *Atlas*: drag the globe, pick a country. It becomes a **stamp**; *Explore →
+   stamp book* shows a page for each continent and the count out of
+   <!--n:countries-->197<!--/n-->.
+4. **Take a guided tour.** *Tours → Great rivers of the world*, then *Next stop*: the globe turns
+   to each river, and *Open the article* opens it.
+5. **Quiz with hints.** Open any quiz (for example from *Subjects → Wildlife → Lion → Take the
+   quiz*). Use the three hints; a right answer shows the sentence that proves it.
+6. **Castle and timeline.** *Castle*: pick a wing, answer, watch a room light. *Timeline*: filter
+   by a subject and a continent.
 
 ## Offline (30 seconds)
 
-After step 1, turn the network off, then reload and repeat any step above.
+After step 2, turn the network off and reload:
 
-- **Airplane mode:** switch on your device's airplane mode, **or**
-- **In a desktop browser:** open DevTools → Network → set throttling to
-  **Offline** (Chrome or Edge), then reload the page.
+- **Airplane mode** on your device, **or**
+- **DevTools → Network → Offline** in Chrome or Edge, then reload.
 
-The badge now reads **"Offline, still working"**, and articles, the
-dictionary, the globe, quizzes, the Castle, the timeline and your stamps all
-still work. A page you never visited also opens. The only feature that needs
-the network is the optional quiz maker for articles outside the packs; it
-appears only when a quiz service is configured, and if the service is
-unreachable the app says so in words and carries on with the bundled quizzes.
+The badge reads **"Offline, still working"**. The bundled articles, dictionary, globe, tours,
+quizzes, castle, timeline and stamps all still work, and so does the article you opened from
+search in step 2. A topic never opened before says, in words, that it needs a connection. The
+optional quiz maker for articles outside the packs appears only when a quiz service is configured.
 
 ## Check it from the code
 
@@ -47,28 +39,23 @@ git clone [GITHUB URL] awari && cd awari
 npm ci
 npm run build
 npm run offline-check     # visits once, goes offline, opens every feature
-npm run submission-check  # hard rules, credits, secret scan, tests, build
+npm run submission-check  # .kiro, licence, write-up claims, numbers, secrets, tests, build
 ```
-
-`npm run offline-check` serves the build, lets the service worker save the
-site, switches a real Chromium offline and opens Home, the Nigeria article
-and the word "delta", the Nigeria quiz with a hint, the quizzes list, the
-atlas, a Castle wing, the timeline, the stamp book, search and a page never
-visited.
 
 ## Where to look for the Kiro evidence
 
 | What | Where |
 | --- | --- |
-| Specs (requirements in EARS, design with correctness properties, tasks) | `.kiro/specs/` |
-| Steering (product, tech, structure, design, hackathon rules) | `.kiro/steering/` |
-| Hooks | `.kiro/hooks/` |
-| Dated record of what drove each piece of work | `docs/kiro-log.md` |
-| Property tests (87 named `Property N:`) | `src/**/*.property.test.ts`, `scripts/**` |
+| Specs (EARS requirements, design with correctness properties, tasks) | `.kiro/specs/` (<!--n:specs-->20<!--/n-->) |
+| Steering | `.kiro/steering/` |
+| Custom agents (builder with hooks and MCP, licence auditor, design reviewer) | `.kiro/agents/`, `docs/kiro-evidence/agents.md` |
+| Hooks and their recorded firings | `.kiro/hooks/README.md`, `docs/kiro-evidence/hooks.md`, `docs/kiro-evidence/hook-firings.jsonl` |
+| MCP configuration and the Terraform and AWS documentation review | `.kiro/settings/mcp.json`, `docs/kiro-evidence/terraform-mcp-review.md` |
+| Property tests and the defects they caught | `src/**/*.property.test.ts`, `docs/kiro-evidence/properties.md` |
+| Dated record of what drove each piece of work, and the Kiro surfaces used | `docs/kiro-log.md` |
 
 ## Rules, at a glance
 
-`.kiro/` is committed and not ignored; `LICENSE` is MIT; every bundled photo
-and data file is listed in `CREDITS.md` with author and licence; all content
-is openly licensed; no secrets are in the repository. `npm run rules`,
-`npm run credits` and `npm run submission-check` check these.
+`.kiro/` is committed and not ignored; `LICENSE` is the standard MIT text; every bundled photo
+and data file is in `CREDITS.md` with author and licence; all content is openly licensed; no
+secrets are in the repository. `npm run submission-check` checks all of these.

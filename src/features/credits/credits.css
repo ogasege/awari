@@ -33,3 +33,10 @@
 .credits a {
   color: var(--teal-ink);
 }
+
+/* Long file names and URLs in list items wrap instead of widening the page
+   on a phone (found in the 01-13 review pass: 9 px overflow at 390 px). */
+.credits p,
+.credits li {
+  overflow-wrap: anywhere;
+}

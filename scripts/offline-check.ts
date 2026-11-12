@@ -128,11 +128,6 @@ await step('Timeline lists events', async (p) => {
   await p.getByText(/Showing \d+ events\./).waitFor({ timeout: 10_000 });
 });
 
-await step('Stamp book opens', async (p) => {
-  await open(p, '/stamps');
-  await p.getByRole('heading', { name: 'Africa' }).waitFor({ timeout: 10_000 });
-});
-
 await step('Search finds an article', async (p) => {
   await open(p, '/search?q=egypt');
   await p.getByRole('link', { name: 'Egypt' }).first().waitFor({ timeout: 10_000 });

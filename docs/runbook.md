@@ -20,7 +20,8 @@ aws sts get-caller-identity          # confirms the profile works; shows an acco
 ```sh
 cd ~/workplace/awari
 npm ci
-npm run submission-check             # hard rules, credits, documents, secret scan, tests, build
+npm run stats                        # refreshes every number the write-up quotes
+npm run submission-check             # .kiro, licence, write-up claims and numbers, secrets, tests, build
 npm run offline-check                # airplane-mode proof
 ```
 
@@ -44,6 +45,13 @@ gh repo create awari --public --source=. --remote=origin \
   --push
 gh repo view --web                   # check .kiro/, LICENSE and README render
 ```
+
+Then confirm, on the repository page:
+
+- the repository is **public**;
+- the **About** section on the right shows **MIT License** (GitHub detects it from `LICENSE`;
+  if it does not, open `LICENSE` and use "Choose a license template" to re-save MIT);
+- the `.kiro` folder is listed at the root.
 
 Put the repo URL in `docs/devpost.md`, `docs/judges.md` and
 `docs/social-post.md` (replace `[GITHUB URL]`), commit and push:
@@ -131,13 +139,23 @@ Upload to YouTube or Vimeo as public or unlisted, put the link in
 
 ## 7. Submit on Devpost — **PUBLISHES**
 
-1. Category: **Resurrection**.
+1. Category: **Resurrection**. Name each bonus category you enter (for example the blog post
+   and social post bonuses) in the form, exactly as Devpost lists them.
 2. Paste the sections of `docs/devpost.md` into the form fields.
 3. Add the repo, live app and video links; add `README.md`'s screenshot and
    two from `docs/screenshots/`.
 4. Bonus prizes: post `docs/blog-post.md` (your blog or dev.to) and
    `docs/social-post.md`, then add the links to the submission.
 5. Submit by **Wed 2 December** to leave two days of margin.
+
+## 7b. One Kiro IDE task (optional, for the write-up's IDE line)
+
+The build ran in Kiro Crew and the Kiro CLI; the `.kiro/hooks/*.kiro.hook` files are in the Kiro
+IDE format and have never fired. If you want the IDE in the write-up: open the project in the
+Kiro IDE, pick one small task (for example tick a spec task after its tests pass), save a source
+file and watch the "Lint and unit tests on save" hook run. Then add one line to the Sessions
+table in `docs/kiro-log.md` and to "Kiro surfaces" in `README.md` and `docs/devpost.md`. Until
+then the write-up says the IDE was not used.
 
 ## 8. Keep it online until 29 January 2027
 

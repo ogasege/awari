@@ -10,6 +10,16 @@ import type { PhotoOverride } from './photos.ts';
 /** Curated Commons files, checked by `npm run packs`. */
 export const PHOTO_OVERRIDES: ReadonlyMap<string, PhotoOverride> = new Map([
   [
+    // Contact-sheet review (2026-11-12): the lead image was a dissected stomach.
+    'body/stomach',
+    { file: 'Human Stomach schematic external anatomy.jpg', caption: 'Parts of the stomach', alt: 'A labelled outline drawing of the human stomach' },
+  ],
+  [
+    // Contact-sheet review: the automatic pick was a patterned carpet.
+    'body/blood-vessel',
+    { file: 'Diagram of the circulatory system Wellcome L0050337.jpg', caption: 'Blood vessels', alt: 'An old engraving of the arteries and veins of the human body' },
+  ],
+  [
     // Found by awari-licence-auditor (2026-11-12): the automatic pick was
     // of Bangui in Ilocos Norte, the Philippines, not the country's capital.
     'countries/central-african-republic',

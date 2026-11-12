@@ -1,5 +1,10 @@
 # Requirements: Atlas
 
+
+> Updated in the 01-13 review pass (2026-11-12): the Africa stamp count beside the globe is now the world count
+> (`16-world-stamp-book`), and the globe can draw a marked place for tours (`20-tours`). Requirements about the
+> 54 African stamps are kept as history.
+
 ## Introduction
 
 A globe the student can spin, drawn from Natural Earth country shapes.

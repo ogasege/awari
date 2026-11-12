@@ -1,5 +1,10 @@
 # Requirements: The Castle
 
+
+> Updated in the 01-13 review pass (2026-11-12): the Castle now has sixteen wings (`17-castle-wings`). The review
+> found the wing buttons were yellow text on yellow (`.castle-board a` outranked `.btn--yellow`), fixed in
+> `castle.css`.
+
 ## Introduction
 
 A room-by-room trivia game that uses the same question bank as the
