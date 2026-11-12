@@ -1,32 +1,61 @@
 import { render, screen, within } from '@testing-library/react';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { resetForTests, update, withDiscovered } from '../../lib/store/progress.ts';
+import { EMPTY_PROGRESS, resetForTests, update, withDiscovered } from '../../lib/store/progress.ts';
 import { servePacksFromDisk } from '../../test/packFetch.ts';
+import ContinentStamps from './ContinentStamps.tsx';
 import StampsScreen from './StampsScreen.tsx';
 
-describe('Stamp book screen (08-stamp-book 3.2)', () => {
-  beforeEach(() => {
+describe('World stamp book screens (16-world-stamp-book 3)', () => {
+  beforeEach(async () => {
     servePacksFromDisk();
     resetForTests();
+    await update(() => EMPTY_PROGRESS); // IndexedDB keeps progress between tests
   });
 
-  it('says the book is empty in words and shows 54 empty African slots. _Req 3.1, 3.4_', async () => {
+  it('says the book is empty in words, with the world count and a card per continent. _Req 2_', async () => {
     render(<StampsScreen />);
     expect(await screen.findByText(/Your book is empty so far/)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Spin the globe' })).toHaveAttribute('href', '/atlas');
-    expect(screen.getAllByText('Not found yet')).toHaveLength(54);
-    expect(screen.getByRole('status')).toHaveTextContent('0 of 54 African countries');
+    expect(screen.getByRole('status')).toHaveTextContent('0 of 197 countries');
+    const cards = screen.getAllByRole('link', { name: /countries$/ });
+    expect(cards.map((c) => c.textContent)).toEqual([
+      'Africa0 of 54 countries',
+      'Asia0 of 49 countries',
+      'Europe0 of 45 countries',
+      'North America0 of 23 countries',
+      'South America0 of 12 countries',
+      'Oceania0 of 14 countries',
+    ]);
+    expect(cards[3]).toHaveAttribute('href', '/stamps/north-america');
   });
 
-  it('turns discovered countries into linked stamps and counts them. _Req 3.1-3.3_', async () => {
-    await update((p) => withDiscovered(withDiscovered(withDiscovered(p, 'nigeria'), 'ghana'), 'france'));
+  it('counts discovered countries in the world and on their continents. _Req 2, 5_', async () => {
+    await update((p) => ['nigeria', 'ghana', 'france', 'japan', 'brazil', 'fiji'].reduce(withDiscovered, p));
     render(<StampsScreen />);
+    expect(await screen.findByText(/6 of 197/)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /^Africa2 of 54/ })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /^Oceania1 of 14/ })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /^South America1 of 12/ })).toBeInTheDocument();
+  });
+
+  it('shows a continent page with a slot per country, found ones linked, the rest in words. _Req 3_', async () => {
+    await update((p) => ['nigeria', 'ghana', 'france'].reduce(withDiscovered, p));
+    render(<ContinentStamps params={{ continent: 'africa' }} />);
     expect(await screen.findByText(/2 of 54/)).toBeInTheDocument();
     expect(screen.getAllByText('Not found yet')).toHaveLength(52);
-    const nigeria = screen.getByRole('link', { name: /Nigeria/ });
-    expect(nigeria).toHaveAttribute('href', '/article/countries/nigeria');
-    const world = screen.getByRole('heading', { name: 'Around the world' }).nextElementSibling as HTMLElement;
-    expect(within(world).getByRole('link', { name: /France/ })).toHaveAttribute('href', '/article/countries/france');
-    expect(screen.getByRole('status')).toHaveTextContent('3 stamps in all');
+    expect(screen.getByRole('link', { name: /Nigeria/ })).toHaveAttribute('href', '/article/countries/nigeria');
+    expect(screen.queryByRole('link', { name: /France/ })).not.toBeInTheDocument();
+    expect(screen.getByRole('status')).toHaveTextContent('3 of 197 in the world');
+  });
+
+  it('has a page for a small continent too, and says so for a place that has none', async () => {
+    const { unmount } = render(<ContinentStamps params={{ continent: 'oceania' }} />);
+    expect(await screen.findByText(/0 of 14/)).toBeInTheDocument();
+    expect(screen.getAllByText('Not found yet')).toHaveLength(14);
+    unmount();
+    render(<ContinentStamps params={{ continent: 'atlantis' }} />);
+    expect(screen.getByRole('alert')).toHaveTextContent('There is no stamp page for that place');
+    const world = within(document.body).getByRole('link', { name: 'Oceania' });
+    expect(world).toHaveAttribute('href', '/stamps/oceania');
   });
 });

@@ -1,7 +1,7 @@
 /**
  * The Atlas (04-atlas): a globe to spin, a picker that does the same job
  * from the keyboard, a pinned facts card for the selected country, and
- * the Africa stamp count drawn as stamps.
+ * the world stamp count drawn as stamps.
  */
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from '../../app/navigation.tsx';
@@ -13,7 +13,7 @@ import type { FactsPack, PackIndex } from '../../lib/packs/types.ts';
 import { update, withDiscovered } from '../../lib/store/progress.ts';
 import { useProgress } from '../../lib/store/useProgress.ts';
 import { factRows } from '../article/credit.ts';
-import { stampsFor } from '../stamps/stamps.ts';
+import { worldBook } from '../stamps/stamps.ts';
 import { Globe, centreOf, type Shapes } from './Globe.tsx';
 import { centreOn, type Rotation } from './globeMath.ts';
 import './atlas.css';
@@ -24,12 +24,12 @@ interface QuizIndex {
 
 const STAMP = perforation(6, 6);
 
-/** 54 little stamp outlines, filled for each African country found. */
-function AfricaStamps({ count, total }: { count: number; total: number }) {
+/** One little stamp outline for every country, filled for each one found. */
+function WorldStamps({ count, total }: { count: number; total: number }) {
   return (
     <div className="atlas-stamps">
       <p className="atlas-stamps__count">
-        <strong>{count}</strong> of Africa&rsquo;s {total} countries discovered
+        <strong>{count}</strong> of {total} countries discovered
       </p>
       <div className="atlas-stamps__grid" aria-hidden="true">
         {Array.from({ length: total }, (_, i) => (
@@ -56,7 +56,7 @@ function Loaded({ shapes, facts, index, quizzes }: { shapes: Shapes; facts: Fact
   const hasArticle = slug ? index.items.some((i) => i.id === slug) : false;
   const hasQuiz = slug ? quizzes.quizzes.some((q) => q.pack === 'countries' && q.id === slug) : false;
   const discovered = useMemo(() => new Set(progress.discovered), [progress.discovered]);
-  const book = stampsFor(progress.discovered, index.items);
+  const book = worldBook(progress.discovered, index.items);
 
   useEffect(() => {
     if (slug && hasArticle) void update((p) => withDiscovered(p, slug));
@@ -104,7 +104,7 @@ function Loaded({ shapes, facts, index, quizzes }: { shapes: Shapes; facts: Fact
             ))}
           </select>
         </label>
-        <AfricaStamps count={book.africaCount} total={book.africaTotal} />
+        <WorldStamps count={book.count} total={book.total || 197} />
       </div>
 
       <div className="atlas__globe">

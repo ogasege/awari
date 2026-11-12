@@ -9,7 +9,7 @@ import { matchRoute, type RouteName } from './router.ts';
 import './header.css';
 
 const NAV: ReadonlyArray<{ to: string; label: string; routes: RouteName[] }> = [
-  { to: '/', label: 'Explore', routes: ['home', 'article', 'search', 'stamps'] },
+  { to: '/', label: 'Explore', routes: ['home', 'article', 'search', 'stamps', 'continentStamps'] },
   { to: '/atlas', label: 'Atlas', routes: ['atlas'] },
   { to: '/timeline', label: 'Timeline', routes: ['timeline'] },
   { to: '/castle', label: 'Castle', routes: ['castle', 'wing'] },

@@ -1,6 +1,6 @@
 /**
  * "Your stamp book" on Home: the most recent stamps the student has
- * collected, a count out of Africa's 54 countries, and a dashed slot
+ * collected, a count out of every country in the world, and a dashed slot
  * inviting the next one.
  */
 import { Link } from '../../app/navigation.tsx';
@@ -8,7 +8,7 @@ import { Stamp, u } from '../../design/paper.tsx';
 import { usePack } from '../../lib/packs/load.ts';
 import type { PackIndex } from '../../lib/packs/types.ts';
 import { useProgress } from '../../lib/store/useProgress.ts';
-import { stampsFor } from '../stamps/stamps.ts';
+import { worldBook } from '../stamps/stamps.ts';
 
 const PLACES: ReadonlyArray<{ left: string; top: string; tilt: number }> = [
   { left: '0%', top: '72%', tilt: -3 },
@@ -22,7 +22,7 @@ export function StampBook({ today = new Date() }: { today?: Date }) {
   const progress = useProgress();
   const index = usePack<PackIndex>('countries/index.json');
   const items = index.status === 'ready' ? index.data.items : [];
-  const book = stampsFor(progress.discovered, items);
+  const book = worldBook(progress.discovered, items);
   const recent = book.stamps.slice(-PLACES.length);
   const next = PLACES[recent.length] ?? { left: '79.32%', top: '71.78%', tilt: 2 };
   const nextLeft = recent.length < PLACES.length ? next.left : '79.32%';
@@ -34,8 +34,8 @@ export function StampBook({ today = new Date() }: { today?: Date }) {
       </h2>
       <p className="abs home-stamps__count" style={{ left: 0, top: '63.56%', width: u(700), fontSize: u(20) }}>
         <span>
-          You have {book.africaCount} of Africa&rsquo;s {book.africaTotal} countries. Find a country
-          on the globe to collect its stamp.
+          You have {book.count} of {book.total || 197} countries. Find a country on the globe to
+          collect its stamp.
         </span>
       </p>
       {recent.map((s, i) => {

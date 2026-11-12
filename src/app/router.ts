@@ -13,6 +13,7 @@ export const ROUTES = {
   wing: '/castle/:wing',
   timeline: '/timeline',
   stamps: '/stamps',
+  continentStamps: '/stamps/:continent',
   search: '/search',
   credits: '/credits',
 } as const;

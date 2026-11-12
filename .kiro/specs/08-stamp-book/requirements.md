@@ -2,6 +2,9 @@
 
 ## Introduction
 
+> Superseded by `16-world-stamp-book`: the book now covers all 197 countries on six
+> continents. The Africa-only requirements below are kept as history.
+
 Each country a student opens becomes a postage stamp. Home shows the
 latest stamps and a count out of Africa's 54 countries; the stamp book
 screen shows the whole collection. Progress lives on the device

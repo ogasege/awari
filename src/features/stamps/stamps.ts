@@ -1,12 +1,11 @@
 /**
- * Turns the list of discovered countries into postage stamps, and counts
- * how many of Africa's 54 countries the student has collected.
+ * Turns the list of discovered countries into postage stamps, grouped by
+ * continent, and counts how many of the world's countries the student
+ * has collected (16-world-stamp-book).
  */
 import { packUrl } from '../../lib/packs/load.ts';
+import { CONTINENTS, normaliseContinent, type Continent } from '../../lib/packs/subjects.ts';
 import type { PackIndexItem } from '../../lib/packs/types.ts';
-
-/** Africa has 54 countries recognised by the United Nations. */
-export const AFRICA_TOTAL = 54;
 
 export interface StampView {
   id: string;
@@ -14,7 +13,8 @@ export interface StampView {
   caption: string;
   src: string;
   alt: string;
-  africa: boolean;
+  /** The continent page this stamp belongs on. */
+  continent: Continent | undefined;
 }
 
 /** Design-kit photos used for a few stamps, matching the Home reference. */
@@ -28,13 +28,9 @@ const KIT_STAMPS: Record<string, { src: string; caption: string; alt: string }> 
 
 /**
  * Builds stamps in discovery order. Unknown slugs (not in the index) are
- * skipped, duplicates count once, and only African countries count
- * towards the 54.
+ * skipped and duplicates count once.
  */
-export function stampsFor(
-  discovered: readonly string[],
-  items: readonly PackIndexItem[],
-): { stamps: StampView[]; africaCount: number; africaTotal: number } {
+export function stampsFor(discovered: readonly string[], items: readonly PackIndexItem[]): StampView[] {
   const byId = new Map(items.map((i) => [i.id, i]));
   const seen = new Set<string>();
   const stamps: StampView[] = [];
@@ -45,37 +41,67 @@ export function stampsFor(
     }
     seen.add(id);
     const kit = KIT_STAMPS[id];
+    const continent = normaliseContinent(item.continent);
     stamps.push({
       id,
       name: item.title,
-      caption: kit?.caption ?? item.continent ?? '',
+      caption: kit?.caption ?? continent ?? '',
       src: kit?.src ?? (item.thumb ? packUrl(item.thumb) : '/logo/awari-icon.svg'),
       alt: kit?.alt ?? `A picture from ${item.title}`,
-      africa: item.continent === 'Africa',
+      continent,
     });
   }
-  const africaCount = Math.min(AFRICA_TOTAL, stamps.filter((s) => s.africa).length);
-  return { stamps, africaCount, africaTotal: AFRICA_TOTAL };
+  return stamps;
 }
 
-export interface AfricaSlot {
+export interface ContinentCount {
+  continent: Continent;
+  count: number;
+  total: number;
+}
+
+export interface WorldBook {
+  stamps: StampView[];
+  /** Countries collected, out of `total`. */
+  count: number;
+  /** Every country in the index that sits on a continent. */
+  total: number;
+  perContinent: ContinentCount[];
+}
+
+/** The whole collection: stamps, the world count and each continent's count. */
+export function worldBook(discovered: readonly string[], items: readonly PackIndexItem[]): WorldBook {
+  const stamps = stampsFor(discovered, items);
+  const totals = new Map<Continent, number>();
+  for (const i of items) {
+    const c = normaliseContinent(i.continent);
+    if (c) totals.set(c, (totals.get(c) ?? 0) + 1);
+  }
+  const perContinent = CONTINENTS.map((continent) => ({
+    continent,
+    count: stamps.filter((s) => s.continent === continent).length,
+    total: totals.get(continent) ?? 0,
+  }));
+  return {
+    stamps,
+    count: perContinent.reduce((n, c) => n + c.count, 0),
+    total: perContinent.reduce((n, c) => n + c.total, 0),
+    perContinent,
+  };
+}
+
+export interface Slot {
   id: string;
   name: string;
   /** The stamp when the student has found this country. */
   stamp?: StampView;
 }
 
-/**
- * One slot for each African country in the index, sorted by name, filled
- * with its stamp when found (08-stamp-book Req 3.1).
- */
-export function africaSlots(
-  stamps: readonly StampView[],
-  items: readonly PackIndexItem[],
-): AfricaSlot[] {
+/** One slot for each country of a continent, sorted by name. */
+export function slotsFor(continent: Continent, stamps: readonly StampView[], items: readonly PackIndexItem[]): Slot[] {
   const found = new Map(stamps.map((s) => [s.id, s]));
   return items
-    .filter((i) => i.continent === 'Africa')
+    .filter((i) => normaliseContinent(i.continent) === continent)
     .sort((a, b) => a.title.localeCompare(b.title))
     .map((i) => ({ id: i.id, name: i.title, stamp: found.get(i.id) }));
 }

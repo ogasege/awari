@@ -25,7 +25,7 @@ describe('Atlas (04-atlas)', () => {
     expect(within(card).getByRole('link', { name: 'Take the quiz' })).toHaveAttribute('href', '/quiz/countries/nigeria');
     await waitFor(() => expect(getProgress().discovered).toContain('nigeria'));
     expect(globe.querySelector('path.is-selected')?.getAttribute('data-iso')).toBe('NGA');
-    expect(screen.getByText(/of Africa’s 54 countries discovered/)).toBeInTheDocument();
+    expect(screen.getByText(/of 197 countries discovered/)).toBeInTheDocument();
   });
 
   it('opens with ?c= preselected and turns with the arrow keys', async () => {

@@ -25,6 +25,7 @@ const SCREENS: Record<RouteName, Screen> = {
   wing: lazyScreen(() => import('../features/castle/WingScreen.tsx')),
   timeline: lazyScreen(() => import('../features/timeline/TimelineScreen.tsx')),
   stamps: lazyScreen(() => import('../features/stamps/StampsScreen.tsx')),
+  continentStamps: lazyScreen(() => import('../features/stamps/ContinentStamps.tsx')),
   search: lazyScreen(() => import('../features/search/SearchScreen.tsx')),
   credits: lazyScreen(() => import('../features/credits/CreditsScreen.tsx')),
   'not-found': lazyScreen(() => import('./NotFound.tsx')),
