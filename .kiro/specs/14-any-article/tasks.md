@@ -13,4 +13,4 @@
   - [x] 4.3 Word card fallback to saved lookups and Wiktionary. _Req 5.1_
   - [x] 4.4 Search: online results, cached articles, "Open best match",
         Property 7. _Req 3.3, 4.1-4.3_
-- [ ] 5. Proof: offline-check opens a read wiki article offline.
+- [x] 5. Proof: offline-check opens a read wiki article offline.
