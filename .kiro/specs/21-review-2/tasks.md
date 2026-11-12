@@ -5,7 +5,7 @@ own, logged in `docs/kiro-log.md`, and opened in a real browser at 1440 and
 390 px before it is ticked.
 
 - [ ] 1. Spec: requirements, design with properties, tasks.
-- [ ] 2. Tour globe takes its fills from design tokens; Property 1; every
+- [x] 2. Tour globe takes its fills from design tokens; Property 1; every
       tour and every stop opened. _Req 1_
 - [ ] 3. Finish 14-any-article task 5 (offline proof for a read Wikipedia
       article) and 19-home-world task 4. _Review item 2_

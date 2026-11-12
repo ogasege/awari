@@ -111,24 +111,24 @@
 }
 
 .globe__ocean {
-  fill: #0a4a55;
+  fill: var(--globe-sea);
 }
 
 .globe__graticule {
   fill: none;
-  stroke: rgb(213 240 243 / 0.18);
+  stroke: var(--globe-grid);
   stroke-width: 1;
 }
 
 .globe__land {
-  fill: #7cc6cf;
+  fill: var(--globe-land);
   stroke: var(--teal);
   stroke-width: 0.8;
   cursor: pointer;
 }
 
 .globe__land:hover {
-  fill: #b9e6ea;
+  fill: var(--globe-land-lit);
 }
 
 .globe__land.is-discovered {

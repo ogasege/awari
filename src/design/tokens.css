@@ -20,6 +20,13 @@
   --pin: #d92d20;
   --focus: #ffb703;
 
+  /* The globe's sea and land (04-atlas, 20-tours). Named so no screen can
+     fall back to an unstyled black shape (21-review-2 Req 1). */
+  --globe-sea: #0a4a55;
+  --globe-land: #7cc6cf;
+  --globe-land-lit: #b9e6ea;
+  --globe-grid: rgb(213 240 243 / 0.18);
+
   --font-head: 'Bricolage Grotesque', system-ui, sans-serif;
   --font-body: 'Figtree', system-ui, sans-serif;
   --font-hand: 'Covered By Your Grace', 'Segoe Print', 'Bradley Hand', cursive;
