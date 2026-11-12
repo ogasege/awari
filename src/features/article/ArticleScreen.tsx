@@ -8,14 +8,16 @@ import { Link, navigate } from '../../app/navigation.tsx';
 import { useTitle } from '../../app/useTitle.ts';
 import { Button, MarginNote, Print, StripHeading, TornEdge } from '../../design/paper.tsx';
 import { packUrl, usePack } from '../../lib/packs/load.ts';
+import { isBundledPack, subjectById } from '../../lib/packs/subjects.ts';
+import { urlTitle } from '../../lib/wiki/convert.ts';
 import type { Article, FactsPack, PackIndex } from '../../lib/packs/types.ts';
 import { update, withDiscovered } from '../../lib/store/progress.ts';
 import { ArticleBody } from './ArticleBody.tsx';
 import { articleCredits, factRows } from './credit.ts';
 import { WordCard } from './WordCard.tsx';
+import { errorWords, useWikiArticle } from './useWikiArticle.ts';
 import './article.css';
 
-const PACKS = new Set(['countries', 'physics']);
 
 /** `/article/:pack/random` picks any article in the pack. */
 function RandomArticle({ pack }: { pack: string }) {
@@ -75,7 +77,21 @@ function FactsCard({ id }: { id: string }) {
   );
 }
 
-function ArticleView({ article }: { article: Article }) {
+/** The name shown on the article's yellow label. */
+/** The address form of a wiki article's title. */
+function wikiSlug(article: Article): string {
+  return urlTitle(article.source.name.replace(/^[^:]*:\s*/, ''));
+}
+
+function kicker(article: Article): string {
+  if (article.pack === 'countries') return 'A country';
+  if (article.pack === 'wiki') {
+    return article.source.url.includes('simple.') ? 'From Simple English Wikipedia' : 'From English Wikipedia';
+  }
+  return subjectById(article.pack)?.name ?? 'Awari';
+}
+
+function ArticleView({ article, photoSrc }: { article: Article; photoSrc?: string }) {
   useTitle(article.title);
   const [tap, setTap] = useState<{ word: string; n: number } | null>(null);
   const onWord = useCallback(
@@ -106,11 +122,11 @@ function ArticleView({ article }: { article: Article }) {
             className="article__h1"
           />
           <p className="article__kicker">
-            <span className="strip strip--yellow">{isCountry ? 'A country' : 'Electricity'}</span>
+            <span className="strip strip--yellow">{kicker(article)}</span>
           </p>
           <p className="article__summary">{article.summary}</p>
           <div className="article__actions">
-            <Button to={`/quiz/${article.pack}/${article.id}`}>Take the quiz</Button>
+            <Button to={`/quiz/${article.pack}/${article.pack === 'wiki' ? wikiSlug(article) : article.id}`}>Take the quiz</Button>
             {isCountry ? (
               <Button to={`/atlas?c=${article.id}`} tone="outline">
                 Find it on the globe
@@ -121,7 +137,7 @@ function ArticleView({ article }: { article: Article }) {
         {lead ? (
           <Print
             className="article__lead"
-            src={packUrl(lead.file)}
+            src={article.pack === 'wiki' ? (photoSrc ?? lead.file) : packUrl(lead.file)}
             alt={lead.alt}
             caption={lead.caption}
             tilt={3}
@@ -167,12 +183,33 @@ function ArticleView({ article }: { article: Article }) {
   );
 }
 
+/** An article loaded on demand from Wikipedia (14-any-article). */
+function WikiArticle({ title }: { title: string }) {
+  const state = useWikiArticle(title);
+  if (state.status === 'loading') return <p className="page">Opening the page…</p>;
+  if (state.status === 'error') {
+    return (
+      <section className="page squared" aria-labelledby="wiki-missing">
+        <StripHeading id="wiki-missing" lines={[{ text: 'Not here yet', tone: 'yellow', tilt: -2 }]} />
+        <p role="alert">{errorWords(state.reason, title)}</p>
+        <p>
+          <Link to={`/search?q=${encodeURIComponent(title.replace(/_/g, ' '))}`}>Search for it</Link> or{' '}
+          <Link to="/atlas">spin the globe</Link>.
+        </p>
+      </section>
+    );
+  }
+  return <ArticleView key={state.article.id} article={state.article} photoSrc={state.photoSrc} />;
+}
+
 export default function ArticleScreen({ params }: { params: Record<string, string> }) {
   const pack = params['pack'] ?? '';
   const id = params['id'] ?? '';
-  const valid = PACKS.has(pack) && id !== 'random';
+  const bundled = isBundledPack(pack);
+  const valid = bundled && id !== 'random';
   const article = usePack<Article>(valid ? `${pack}/${id}.json` : null);
-  if (PACKS.has(pack) && id === 'random') return <RandomArticle pack={pack} />;
+  if (pack === 'wiki') return <WikiArticle title={id} />;
+  if (bundled && id === 'random') return <RandomArticle pack={pack} />;
   if (!valid || article.status === 'error') return <Missing id={id} />;
   if (article.status === 'loading') return <p className="page">Opening the page…</p>;
   return <ArticleView key={article.data.id} article={article.data} />;

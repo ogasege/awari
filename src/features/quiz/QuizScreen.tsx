@@ -3,13 +3,16 @@
  * hint ladder, a proof slip after each answer, drawn progress dots and the
  * best score saved on the device.
  */
-import { useEffect, useReducer } from 'react';
+import { useEffect, useMemo, useReducer } from 'react';
 import { Link } from '../../app/navigation.tsx';
 import { useTitle } from '../../app/useTitle.ts';
 import { Button, Doodle, StripHeading } from '../../design/paper.tsx';
 import { usePack } from '../../lib/packs/load.ts';
+import { isBundledPack } from '../../lib/packs/subjects.ts';
 import type { QuizSet } from '../../lib/packs/types.ts';
+import { autoTerms, buildQuiz } from '../../lib/quiz/generate.ts';
 import { update, withQuizResult } from '../../lib/store/progress.ts';
+import { errorWords, useWikiArticle } from '../article/useWikiArticle.ts';
 import { QuestionCard } from './QuestionCard.tsx';
 import { initialState, reduce, type QuizState } from './quizMachine.ts';
 import './quiz.css';
@@ -143,20 +146,45 @@ export function Quiz({ quiz, externalUrl }: { quiz: QuizSet; externalUrl?: strin
   );
 }
 
+export function NoQuiz({ words }: { words: string }) {
+  return (
+    <section className="page squared">
+      <StripHeading lines={[{ text: 'No quiz here yet', tone: 'yellow', tilt: -2 }]} />
+      <p role="alert">{words}</p>
+      <p>
+        <Link to="/quizzes">See every quiz</Link>.
+      </p>
+    </section>
+  );
+}
+
+/** A quiz made on the device from an article read on demand (14-any-article Req 5.2). */
+function WikiQuiz({ title }: { title: string }) {
+  const state = useWikiArticle(title);
+  const quiz = useMemo<QuizSet | null>(() => {
+    if (state.status !== 'ready') return null;
+    const a = { ...state.article, id: title };
+    const questions = buildQuiz(a, undefined, [], autoTerms(a));
+    return questions.length >= 3
+      ? { articleId: title, pack: 'wiki', title: a.title, questions, source: a.source }
+      : null;
+  }, [state, title]);
+  if (state.status === 'loading') return <p className="page">Shuffling the questions…</p>;
+  if (state.status === 'error') return <NoQuiz words={errorWords(state.reason, title)} />;
+  if (!quiz) {
+    return <NoQuiz words="This article is too short to make a fair quiz from. Try reading it, or pick another article." />;
+  }
+  return <Quiz key={`wiki/${title}`} quiz={quiz} />;
+}
+
 export default function QuizScreen({ params }: { params: Record<string, string> }) {
   const pack = params['pack'] ?? '';
   const id = params['id'] ?? '';
-  const ok = pack === 'countries' || pack === 'physics';
+  const ok = isBundledPack(pack);
   const quiz = usePack<QuizSet>(ok ? `quizzes/${pack}/${id}.json` : null);
+  if (pack === 'wiki') return <WikiQuiz title={id} />;
   if (!ok || quiz.status === 'error') {
-    return (
-      <section className="page squared">
-        <StripHeading lines={[{ text: 'No quiz here yet', tone: 'yellow', tilt: -2 }]} />
-        <p>
-          There is no quiz for that page. <Link to="/quizzes">See every quiz</Link>.
-        </p>
-      </section>
-    );
+    return <NoQuiz words="There is no quiz for that page." />;
   }
   if (quiz.status === 'loading') return <p className="page">Shuffling the questions…</p>;
   return <Quiz key={`${pack}/${id}`} quiz={quiz.data} />;

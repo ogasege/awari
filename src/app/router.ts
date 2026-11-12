@@ -24,7 +24,19 @@ export interface Match {
   params: Record<string, string>;
 }
 
-const SEGMENT = /^[A-Za-z0-9._~-]+$/;
+/**
+ * A route parameter: any readable text without slashes or control
+ * characters, so wiki titles such as “Mount_Everest” or “Côte_d'Ivoire” fit.
+ */
+const SEGMENT = {
+  test(value: string): boolean {
+    return (
+      value.length >= 1 &&
+      value.length <= 200 &&
+      ![...value].some((c) => '/\\?#'.includes(c) || c.charCodeAt(0) < 32)
+    );
+  },
+};
 
 /** Splits a path into non-empty segments, ignoring query and hash. */
 function segments(path: string): string[] {

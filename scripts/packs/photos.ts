@@ -6,7 +6,8 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import sharp, { type OutputInfo } from 'sharp';
-import type { Licence, Photo } from '../../src/lib/packs/types.ts';
+import type { Licence, PackId, Photo } from '../../src/lib/packs/types.ts';
+import { stripHtml } from '../../src/lib/text/html.ts';
 import { fetchBytes } from './http.ts';
 import { isUnwantedImage, licenceUrl, normaliseLicence } from './licence.ts';
 import { isoDate } from './sources.ts';
@@ -22,29 +23,8 @@ export const MAX_SIDE = 800;
 export const TARGET_BYTES = 90 * 1024;
 const QUALITIES = [72, 64, 57, 50];
 
-/** Decodes the HTML entities Commons metadata uses. */
-export function decodeEntities(text: string): string {
-  return text
-    .replace(/&#(\d+);/g, (_, n: string) => String.fromCodePoint(Number(n)))
-    .replace(/&#x([0-9a-f]+);/gi, (_, n: string) =>
-      String.fromCodePoint(parseInt(n, 16)),
-    )
-    .replace(/&nbsp;/g, ' ')
-    .replace(/&quot;/g, '"')
-    .replace(/&apos;/g, "'")
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&amp;/g, '&');
-}
+export { decodeEntities, stripHtml } from '../../src/lib/text/html.ts';
 
-/** Strips HTML tags and entities and collapses whitespace. */
-export function stripHtml(html: string): string {
-  return decodeEntities(html.replace(/<[^>]*>/g, ' '))
-    .replace(/\s+/g, ' ')
-    .trim();
-}
-
-/** Licence and author of a file Awari may use. */
 export interface Acceptance {
   licence: Licence;
   author: string;
@@ -249,7 +229,7 @@ export interface PhotoSubject {
   slug: string;
   title: string;
   wikiTitle: string;
-  pack: 'countries' | 'physics';
+  pack: PackId;
   /** Commons search phrases tried after the article's own files. */
   queries: string[];
   /** For places: names of this place, and of every other place. */

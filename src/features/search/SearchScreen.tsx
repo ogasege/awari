@@ -9,6 +9,8 @@ import { StripHeading } from '../../design/paper.tsx';
 import { lookupWord, partOfSpeech, type Definition } from '../../lib/dictionary/lookup.ts';
 import { usePack } from '../../lib/packs/load.ts';
 import type { PackIndex, PackId, TimelinePack } from '../../lib/packs/types.ts';
+import { listArticles, type ReadArticle } from '../../lib/wiki/cache.ts';
+import { mergeResults, wikiSearch, type WikiHit } from '../../lib/wiki/search.ts';
 import { searchDocs, tokens, type SearchDoc } from './search.ts';
 import './search.css';
 
@@ -59,8 +61,44 @@ export default function SearchScreen() {
     [quizzes],
   );
   const hits = useMemo(() => searchDocs(docs, query), [docs, query]);
-  const articles = hits.filter((h) => h.kind === 'article').slice(0, MAX_SHOWN);
   const events = hits.filter((h) => h.kind === 'event').slice(0, MAX_SHOWN);
+
+  // Articles already read on this device, searchable offline (14-any-article Req 3.3).
+  const [read, setRead] = useState<ReadArticle[]>([]);
+  useEffect(() => {
+    let live = true;
+    void listArticles().then((list) => live && setRead(list));
+    return () => {
+      live = false;
+    };
+  }, []);
+  const readHits = useMemo(
+    () =>
+      searchDocs(
+        read.map((r) => ({ kind: 'article' as const, id: r.slug, title: r.title, text: r.summary, to: `/article/wiki/${encodeURIComponent(r.slug)}` })),
+        query,
+      ),
+    [read, query],
+  );
+
+  // Any topic, online (14-any-article Req 4.1).
+  const [online, setOnline] = useState<{ query: string; hits: WikiHit[] } | null>(null);
+  useEffect(() => {
+    const q = query.trim();
+    if (!q) return;
+    let live = true;
+    void wikiSearch(q).then((found) => live && setOnline({ query: q, hits: found }));
+    return () => {
+      live = false;
+    };
+  }, [query]);
+  const onlineHits = useMemo(() => (online && online.query === query.trim() ? online.hits : []), [online, query]);
+  const searching = query.trim() !== '' && online?.query !== query.trim();
+  const articles = useMemo(
+    () => mergeResults(hits.filter((h) => h.kind === 'article'), readHits, onlineHits).slice(0, MAX_SHOWN),
+    [hits, readHits, onlineHits],
+  );
+  const best = articles[0];
 
   const words = tokens(query);
   const single = words.length === 1 ? (words[0] ?? null) : null;
@@ -78,7 +116,7 @@ export default function SearchScreen() {
   }, [single]);
   const def = single && meaning?.word === single ? meaning.def : null;
 
-  const loading = [countries, physics, timeline].some((s) => s.status === 'loading');
+  const loading = [countries, physics, timeline].some((s) => s.status === 'loading') || searching;
   const submit = (e: FormEvent): void => {
     e.preventDefault();
     const q = field.trim();
@@ -110,8 +148,16 @@ export default function SearchScreen() {
           ? 'Type a word or a name to start.'
           : loading
             ? 'Looking through the packs…'
-            : `${articles.length + events.length} ${articles.length + events.length === 1 ? 'result' : 'results'} for “${query.trim()}”.`}
+            : `${articles.length + events.length} ${articles.length + events.length === 1 ? 'result' : 'results'} for “${query.trim()}”.${typeof navigator !== 'undefined' && navigator.onLine === false ? ' You are offline, so only saved articles are searched.' : ''}`}
       </div>
+
+      {best && !loading ? (
+        <p className="search__best">
+          <Link to={best.to} className="btn btn--yellow">
+            Open {best.title}
+          </Link>
+        </p>
+      ) : null}
 
       {def ? (
         <aside className="search__meaning" aria-labelledby="search-meaning">
@@ -130,19 +176,24 @@ export default function SearchScreen() {
         <section aria-labelledby="search-articles">
           <h2 id="search-articles">Articles</h2>
           <ul className="search__list">
-            {articles.map((h) => (
-              <li key={h.id}>
-                <Link to={h.to} className="search__title">
-                  {h.title}
-                </Link>
-                <p>{h.text}</p>
-                {quizSet.has(h.id) ? (
-                  <Link to={`/quiz/${h.id}`} className="search__quiz">
-                    Take the {h.title} quiz
+            {articles.map((h) => {
+              const id = h.to.replace('/article/', '');
+              return (
+                <li key={h.to}>
+                  <Link to={h.to} className="search__title">
+                    {h.title}
                   </Link>
-                ) : null}
-              </li>
-            ))}
+                  {h.origin === 'wikipedia' ? <span className="search__origin"> From Wikipedia</span> : null}
+                  {h.origin === 'read' ? <span className="search__origin"> You read this</span> : null}
+                  <p>{h.text}</p>
+                  {quizSet.has(id) ? (
+                    <Link to={`/quiz/${id}`} className="search__quiz">
+                      Take the {h.title} quiz
+                    </Link>
+                  ) : null}
+                </li>
+              );
+            })}
           </ul>
         </section>
       ) : null}
@@ -163,7 +214,7 @@ export default function SearchScreen() {
         </section>
       ) : null}
 
-      {words.length > 0 && !loading && hits.length === 0 && !def ? (
+      {words.length > 0 && !loading && articles.length === 0 && events.length === 0 && !def ? (
         <p className="search__none">
           Nothing matched. Try a shorter word, or wander instead: <Link to="/atlas">spin the globe</Link> or{' '}
           <Link to="/quizzes">pick a quiz</Link>.

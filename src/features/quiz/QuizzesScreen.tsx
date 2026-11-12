@@ -4,6 +4,7 @@ import { Link } from '../../app/navigation.tsx';
 import { useTitle } from '../../app/useTitle.ts';
 import { StripHeading } from '../../design/paper.tsx';
 import { usePack } from '../../lib/packs/load.ts';
+import { SUBJECTS } from '../../lib/packs/subjects.ts';
 import type { PackId } from '../../lib/packs/types.ts';
 import { useProgress } from '../../lib/store/useProgress.ts';
 import { MakeQuiz } from './MakeQuiz.tsx';
@@ -13,7 +14,7 @@ interface QuizIndex {
   quizzes: Array<{ pack: PackId; id: string; title: string; questions: number }>;
 }
 
-const PACK_NAMES: Record<PackId, string> = { physics: 'Electricity', countries: 'Countries' };
+const PACK_NAMES: Record<string, string> = Object.fromEntries(SUBJECTS.map((s) => [s.id, s.name]));
 
 export default function QuizzesScreen() {
   useTitle('Quizzes');
@@ -41,7 +42,7 @@ export default function QuizzesScreen() {
         <span>Find a quiz</span>
         <input type="search" value={filter} onChange={(e) => setFilter(e.target.value)} placeholder="Try “Ghana” or “current”" />
       </label>
-      {(['physics', 'countries'] as const).map((pack) => {
+      {SUBJECTS.map((s) => s.id).map((pack) => {
         const list = shown.filter((q) => q.pack === pack);
         if (list.length === 0) return null;
         return (

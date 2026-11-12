@@ -3,7 +3,10 @@
  * anyone can look up a word from the keyboard (03 Req 3).
  */
 import { useEffect, useState, type FormEvent } from 'react';
-import { lookupWord, partOfSpeech, type Definition } from '../../lib/dictionary/lookup.ts';
+import { partOfSpeech } from '../../lib/dictionary/lookup.ts';
+import { lookupAnyWord, type AnyDefinition } from '../../lib/dictionary/online.ts';
+
+type Answer = { definition: AnyDefinition | null; offline: boolean };
 
 export interface Tap {
   word: string;
@@ -13,7 +16,7 @@ export interface Tap {
 export function WordCard({ tap }: { tap: Tap | null }) {
   const [field, setField] = useState('');
   const [asked, setAsked] = useState<string | null>(null);
-  const [results, setResults] = useState<Record<string, Definition | null>>({});
+  const [results, setResults] = useState<Record<string, Answer>>({});
   const [seenTap, setSeenTap] = useState<Tap | null>(null);
 
   // A new tap from the article becomes the current question
@@ -27,9 +30,9 @@ export function WordCard({ tap }: { tap: Tap | null }) {
   useEffect(() => {
     if (asked === null || asked in results) return;
     let live = true;
-    lookupWord(asked).then(
-      (def) => live && setResults((r) => ({ ...r, [asked]: def })),
-      () => live && setResults((r) => ({ ...r, [asked]: null })),
+    lookupAnyWord(asked).then(
+      (answer) => live && setResults((r) => ({ ...r, [asked]: answer })),
+      () => live && setResults((r) => ({ ...r, [asked]: { definition: null, offline: false } })),
     );
     return () => {
       live = false;
@@ -42,7 +45,8 @@ export function WordCard({ tap }: { tap: Tap | null }) {
     if (w) setAsked(w);
   };
 
-  const def = asked === null ? undefined : results[asked];
+  const answer = asked === null ? undefined : results[asked];
+  const def = answer === undefined ? undefined : answer.definition;
 
   return (
     <aside className="word-card" aria-labelledby="word-card-title">
@@ -57,8 +61,9 @@ export function WordCard({ tap }: { tap: Tap | null }) {
           <p>Looking up “{asked}”…</p>
         ) : def === null ? (
           <p>
-            No meaning found for “{asked}”. Try another form of the word, like “river” instead of
-            “rivers”.
+            {answer?.offline
+              ? `You are offline, and “${asked}” is not in the saved dictionary. Words you look up while online are saved for next time.`
+              : `No meaning found for “${asked}”. Try another form of the word, like “river” instead of “rivers”.`}
           </p>
         ) : (
           <>
@@ -94,7 +99,20 @@ export function WordCard({ tap }: { tap: Tap | null }) {
         </div>
       </form>
       <p className="word-card__credit">
-        Meanings from{' '}
+        {def?.from === 'wiktionary' ? (
+          <>
+            This meaning is from{' '}
+            <a href="https://en.wiktionary.org/" rel="noreferrer">
+              Wiktionary
+            </a>
+            ,{' '}
+            <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noreferrer">
+              CC BY-SA 4.0
+            </a>
+            .{' '}
+          </>
+        ) : null}
+        Other meanings from{' '}
         <a href="https://github.com/globalwordnet/english-wordnet" rel="noreferrer">
           Open English WordNet
         </a>

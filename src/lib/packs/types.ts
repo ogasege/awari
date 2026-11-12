@@ -5,6 +5,8 @@
  * under which licence.
  */
 
+import type { BundledPackId } from './subjects.ts';
+
 /** Licences Awari accepts for bundled content. */
 export type Licence =
   | 'CC BY-SA 4.0'
@@ -32,8 +34,8 @@ export interface Source {
   retrieved: string;
 }
 
-/** The packs Awari ships. */
-export type PackId = 'countries' | 'physics';
+/** The packs Awari ships, plus `wiki` for articles loaded on demand. */
+export type PackId = BundledPackId | 'wiki';
 
 /** A photo shown as a physical print. Paths are relative to `/packs/`. */
 export interface Photo {
@@ -181,12 +183,8 @@ export interface QuizSet {
   source: Source;
 }
 
-/** Subjects a timeline event can be filtered by. */
-export type TimelineSubject =
-  | 'countries'
-  | 'science'
-  | 'people'
-  | 'history';
+/** Subjects a timeline event can be filtered by (18-world-timeline will drop `history`). */
+export type TimelineSubject = BundledPackId | 'history';
 
 export interface TimelineEvent {
   /** Wikidata QID of the event or subject. */
@@ -197,6 +195,8 @@ export interface TimelineEvent {
   /** One short sentence saying what happened. */
   text: string;
   subject: TimelineSubject;
+  /** Continent of the event or person, when Wikidata or a curator names one. */
+  continent?: string;
   /** Optional link into a pack article, e.g. "countries/angola". */
   link?: string;
   source: Source;

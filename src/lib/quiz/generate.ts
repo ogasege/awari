@@ -262,3 +262,37 @@ export function buildQuiz(
   }
   return questions;
 }
+
+/** Common words that make poor answers or distractors. */
+const STOPWORDS = new Set(
+  (
+    'about above after again against almost along already also although always among another because become becomes ' +
+    'became before being below between both called cannot could country different during each either enough even ever ' +
+    'every first following found from further great have having here however include includes included including into ' +
+    'itself known large later least less like likely made make makes many might more most much must near never next ' +
+    'often only other others over part parts people place places quite rather really same second several should since ' +
+    'small some something still such than that their them then there these they thing things this those though three ' +
+    'through together took under until upon used uses using usually very want well went were what when where whether ' +
+    'which while whole will with within without would years young'
+  ).split(' '),
+);
+
+/**
+ * Key words for gap-fill questions about any article: the longest, most
+ * repeated plain words in its own text, without common words or the
+ * title. Wrong choices come from the same article, so they are at least
+ * plausible (05-quizzes; used for subject packs and on-demand articles).
+ */
+export function autoTerms(article: Pick<Article, 'title' | 'sections'>, max = 60): string[] {
+  const text = article.sections.flatMap((s) => s.paragraphs).join(' ');
+  const counts = new Map<string, number>();
+  for (const w of text.match(/[A-Za-z][a-z]{4,}/g) ?? []) {
+    const f = fold(w);
+    if (STOPWORDS.has(f) || mentions(article.title, f) || f.endsWith('ing') || f.endsWith('ed')) continue;
+    counts.set(f, (counts.get(f) ?? 0) + 1);
+  }
+  return [...counts.entries()]
+    .sort((a, b) => b[1] - a[1] || b[0].length - a[0].length || a[0].localeCompare(b[0]))
+    .slice(0, max)
+    .map(([w]) => w);
+}

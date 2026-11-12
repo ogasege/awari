@@ -91,3 +91,13 @@
 .search__quiz {
   font-size: 16px;
 }
+
+.search__best {
+  margin: 4px 0 16px;
+}
+
+.search__origin {
+  color: var(--ink-soft);
+  font-size: 14px;
+  font-weight: 600;
+}
