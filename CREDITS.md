@@ -7,22 +7,24 @@ file under `public/` is listed here with its source and licence; the
 ## Design kit photos
 
 Resized copies of photos from Wikimedia Commons, used on Home and as
-stamps. Authors and licences come from the design kit's
-`design/CREDITS.md`; each is to be confirmed against its Commons file
-page before submission (tracked in `.kiro/specs/12-submission-pack`).
+stamps. On 2026-11-12 each author and licence below was checked against
+the Commons file page of the matching file (same subject, same author),
+linked in the last column. The kit does not record which exact file of
+a series was used, so the owner should confirm the page matches the
+picture before submitting (step in `docs/runbook.md`).
 
-| File | Subject | Author | Licence |
-| --- | --- | --- | --- |
-| photos/earth.jpg | The Earth seen from Apollo 17 | NASA | Public domain |
-| photos/milkyway.jpg | Centre of the Milky Way | NASA/JPL-Caltech/ESA/CXC/STScI | Public domain |
-| photos/falls.jpg | Victoria Falls | Diego Delso | CC BY-SA 4.0 |
-| photos/kili.jpg | Kilimanjaro | Diego Delso | CC BY-SA 4.0 |
-| photos/elephant.jpg | Elephant and calf | Charles J. Sharp | CC BY-SA 4.0 |
-| photos/pyramids.jpg | All Gizah Pyramids | Ricardo Liberato | CC BY-SA 2.0 |
-| photos/lightning.jpg | Lightning at night | Mathias Krumbholz | CC BY-SA 3.0 |
-| photos/castle.jpg | Fasilides Palace, Gondar | Bernard Gagnon | CC BY-SA 3.0 |
-| photos/zuma.jpg | Zuma Rock in the dry season | Hui Linbo | CC BY-SA 4.0 |
-| photos/lokoja.jpg | The Niger from Mount Patti, Lokoja | Samlokoja | CC BY-SA 4.0 |
+| File | Subject | Author | Licence | Commons page |
+| --- | --- | --- | --- | --- |
+| photos/earth.jpg | The Earth seen from Apollo 17 | NASA (Apollo 17 crew) | Public domain | https://commons.wikimedia.org/wiki/File:The_Earth_seen_from_Apollo_17.jpg |
+| photos/milkyway.jpg | Centre of the Milky Way | NASA/JPL-Caltech/ESA/CXC/STScI | Public domain | https://commons.wikimedia.org/wiki/File:Center_of_the_Milky_Way_Galaxy_IV_%E2%80%93_Composite.jpg |
+| photos/falls.jpg | Victoria Falls | Diego Delso | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Cataratas_Victoria,_Zambia-Zimbabue,_2018-07-27,_DD_30-34_PAN.jpg |
+| photos/kili.jpg | Kilimanjaro | Diego Delso | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Kilimanjaro,_Tanzania,_2024-05-22,_DD_15.jpg |
+| photos/elephant.jpg | Elephant and calf | Charles J. Sharp | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:African_bush_elephant_(Loxodonta_africana)_with_calf_Serengeti.jpg |
+| photos/pyramids.jpg | All Gizah Pyramids | Ricardo Liberato | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:All_Gizah_Pyramids.jpg |
+| photos/lightning.jpg | Lightning at night | Mathias Krumbholz | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Lightning_Pritzerbe_01_(MK).jpg |
+| photos/castle.jpg | Fasilides Palace, Gondar | Bernard Gagnon | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Fasilides_Palace_02.jpg |
+| photos/zuma.jpg | Zuma Rock in the dry season | Hui Linbo | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Zuma_Rock_in_the_dry_season.jpg |
+| photos/lokoja.jpg | The Niger from Mount Patti, Lokoja | Samlokoja | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:View_of_River_Niger_and_River_Venue_from_the_top_of_Mount_Patti_in_Lokoja_(Confluence_city).jpg |
 
 ## Logo
 
