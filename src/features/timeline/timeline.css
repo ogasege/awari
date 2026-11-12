@@ -1,0 +1,229 @@
+/* Timeline and On this day (07-timeline). Text stays straight and dark on
+   white; only the year numbers, tape and tiny card tilts are playful. */
+.timeline {
+  position: relative;
+}
+
+.timeline__lead {
+  max-width: 620px;
+  font-size: 20px;
+}
+
+.deco-note {
+  position: absolute;
+  top: 64px;
+  right: var(--gutter);
+  max-width: 280px;
+}
+
+.timeline__today {
+  position: relative;
+  max-width: 760px;
+  margin: 24px 0 28px;
+  padding: 22px 28px 18px;
+  background: var(--cream);
+  box-shadow: var(--shadow-print);
+  rotate: -0.6deg;
+}
+
+.timeline__today h2 {
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+
+.timeline__today p,
+.timeline__today-list {
+  margin: 0;
+  font-size: 19px;
+}
+
+.timeline__today-list {
+  padding-left: 22px;
+}
+
+.timeline__today-list li {
+  margin: 6px 0;
+}
+
+.timeline__filters {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 8px 0 4px;
+}
+
+.timeline__chip {
+  min-height: 48px;
+  padding: 0 22px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.timeline__chip[aria-pressed='true'] {
+  background: var(--yellow);
+  color: var(--yellow-ink);
+  box-shadow: var(--shadow-hard);
+}
+
+/* Pressed is also said in words for screen readers by aria-pressed, and
+   shown by the heavier outline below, not colour alone. */
+.timeline__chip[aria-pressed='true']::before {
+  content: '✓ ';
+}
+
+.timeline__chip:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.timeline__chip-arrow {
+  position: static;
+  align-self: center;
+  rotate: 200deg;
+}
+
+.timeline__count {
+  margin: 12px 0 0;
+  min-height: 1.5em;
+  color: var(--ink-soft);
+  font-size: 16px;
+}
+
+.tl-ruler {
+  display: block;
+  width: 100%;
+  max-width: 1000px;
+  margin: 8px 0 12px;
+  fill: none;
+  stroke: var(--teal-ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+  overflow: visible;
+}
+
+.tl-ruler__tick {
+  fill: var(--teal-ink);
+  stroke: none;
+}
+
+.tl-ruler__year,
+.tl-ruler__here-text {
+  fill: var(--ink);
+  stroke: none;
+  font-family: var(--font-hand);
+  font-size: 30px;
+}
+
+.tl-ruler__here {
+  stroke: var(--tomato);
+}
+
+.tl-ruler__here-text {
+  fill: var(--tomato);
+  font-size: 34px;
+}
+
+.timeline__century-title {
+  display: inline-block;
+  margin: 36px 0 14px;
+  padding: 0.05em 0.35em 0.12em;
+  background: var(--navy);
+  color: var(--paper);
+  font-size: 34px;
+  rotate: -1.2deg;
+  box-shadow: var(--shadow-hard);
+}
+
+.timeline__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 20px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tl-note {
+  position: relative;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 16px 18px 16px 16px;
+  background: var(--paper);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  box-shadow: var(--shadow-hard);
+}
+
+.tl-note--lined {
+  background-image: repeating-linear-gradient(transparent 0 27px, rgb(0 122 140 / 0.18) 27px 28px);
+}
+
+.tl-note--teal {
+  background: var(--mist);
+}
+
+.tl-note--sticky {
+  background: #fff2b8;
+}
+
+.tl-note.is-picked {
+  outline: 4px solid var(--focus);
+  outline-offset: 4px;
+}
+
+.tl-note__year {
+  flex: none;
+  min-width: 3.1em;
+  color: var(--teal-ink);
+  font-size: 40px;
+  line-height: 1;
+  rotate: -4deg;
+}
+
+.tl-note__body {
+  min-width: 0;
+}
+
+.tl-note__label {
+  margin: 0 0 4px;
+  font-size: 21px;
+  line-height: 1.15;
+}
+
+.tl-note__body p {
+  margin: 0 0 6px;
+  font-size: 17px;
+}
+
+.tl-note__link {
+  color: var(--teal);
+  font-weight: 700;
+}
+
+.timeline__credit {
+  margin-top: 48px;
+  color: var(--ink-soft);
+  font-size: 15px;
+}
+
+@media (max-width: 899px) {
+  .deco-note {
+    display: none;
+  }
+
+  .timeline__list {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline__today {
+    rotate: 0deg;
+  }
+}
