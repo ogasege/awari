@@ -227,3 +227,19 @@
     rotate: 0deg;
   }
 }
+
+.timeline__filters--continents {
+  margin-top: 10px;
+}
+
+.timeline__filters--continents .timeline__chip {
+  min-height: 40px;
+  font-size: 16px;
+  border-style: dashed;
+}
+
+.tl-note__where {
+  color: var(--ink-soft);
+  font-size: 14px !important;
+  font-weight: 600;
+}

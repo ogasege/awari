@@ -12,13 +12,15 @@ import { usePack } from '../../lib/packs/load.ts';
 import type { TimelineEvent, TimelinePack } from '../../lib/packs/types.ts';
 import { onThisDay } from '../home/today.ts';
 import {
+  CONTINENT_FILTERS,
   FILTERS,
-  filterBySubject,
+  filterEvents,
   groupByCentury,
   positionOf,
   rulerMarks,
   yearOf,
   yearRange,
+  type ContinentFilter,
   type SubjectFilter,
 } from './filter.ts';
 import './timeline.css';
@@ -46,6 +48,7 @@ function EventNote({ event, index, picked }: { event: TimelineEvent; index: numb
           {event.label}
         </h3>
         <p>{event.text}</p>
+        {event.continent ? <p className="tl-note__where">{event.continent}</p> : null}
         {event.link ? (
           <Link to={articlePath(event.link)} className="tl-note__link">
             Read about {event.label}
@@ -99,7 +102,11 @@ function Ruler({ events, todayYear }: { events: readonly TimelineEvent[]; todayY
 export default function TimelineScreen() {
   useTitle('Timeline');
   const pack = usePack<TimelinePack>('timeline.json');
-  const [filter, setFilter] = useState<SubjectFilter>('all');
+  const [filter, setFilter] = useState<SubjectFilter>(() => {
+    const wanted = new URLSearchParams(window.location.search).get('subject');
+    return FILTERS.some((f) => f.id === wanted) ? (wanted as SubjectFilter) : 'all';
+  });
+  const [continent, setContinent] = useState<ContinentFilter>('all');
   const today = useMemo(() => new Date(), []);
   const wantedYear = useMemo(() => {
     const y = new URLSearchParams(window.location.search).get('year');
@@ -107,7 +114,7 @@ export default function TimelineScreen() {
   }, []);
 
   const all = useMemo(() => (pack.status === 'ready' ? pack.data.events : []), [pack]);
-  const shown = useMemo(() => filterBySubject(all, filter), [all, filter]);
+  const shown = useMemo(() => filterEvents(all, filter, continent), [all, filter, continent]);
   const groups = useMemo(() => groupByCentury(shown), [shown]);
   const todays = useMemo(() => onThisDay(all, today, 6), [all, today]);
   const picked = useMemo(
@@ -123,6 +130,7 @@ export default function TimelineScreen() {
   }, [picked]);
 
   const filterName = FILTERS.find((f) => f.id === filter)?.label ?? 'All';
+  const continentName = CONTINENT_FILTERS.find((f) => f.id === continent)?.label ?? 'Everywhere';
   const dayText = today.toLocaleDateString('en-GB', { day: 'numeric', month: 'long' });
 
   return (
@@ -175,9 +183,22 @@ export default function TimelineScreen() {
         ))}
         <Doodle kind="arrow" seed="chips" size={56} color="var(--teal-ink)" className="crowding timeline__chip-arrow" />
       </div>
+      <div className="timeline__filters timeline__filters--continents" role="group" aria-label="Show events from">
+        {CONTINENT_FILTERS.map((f) => (
+          <button
+            key={f.id}
+            type="button"
+            className="timeline__chip"
+            aria-pressed={continent === f.id}
+            onClick={() => setContinent(f.id)}
+          >
+            {f.label}
+          </button>
+        ))}
+      </div>
       <p className="timeline__count" role="status" aria-live="polite">
         {pack.status === 'ready'
-          ? `Showing ${shown.length} ${shown.length === 1 ? 'event' : 'events'}${filter === 'all' ? '' : ` about ${filterName}`}.`
+          ? `Showing ${shown.length} ${shown.length === 1 ? 'event' : 'events'}${filter === 'all' ? '' : ` about ${filterName}`}${continent === 'all' ? '' : ` in ${continentName}`}.`
           : ''}
       </p>
 
@@ -195,7 +216,7 @@ export default function TimelineScreen() {
           </ol>
         </section>
       ))}
-      {pack.status === 'ready' && shown.length === 0 ? <p>Nothing filed under {filterName} yet.</p> : null}
+      {pack.status === 'ready' && shown.length === 0 ? <p>Nothing filed under {filterName}{continent === 'all' ? '' : ` in ${continentName}`} yet.</p> : null}
 
       <p className="timeline__credit">
         Dates and names: <a href="https://www.wikidata.org/">Wikidata</a> (CC0). Each sentence is a fixed template

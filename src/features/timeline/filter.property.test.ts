@@ -4,11 +4,13 @@
  */
 import fc from 'fast-check';
 import { describe, expect, it } from 'vitest';
+import { EVENT_CONTINENTS, SUBJECTS } from '../../lib/packs/subjects.ts';
 import type { TimelineEvent, TimelineSubject } from '../../lib/packs/types.ts';
 import {
   FILTERS,
   centuryLabel,
   filterBySubject,
+  filterEvents,
   groupByCentury,
   positionOf,
   rulerMarks,
@@ -17,7 +19,7 @@ import {
   type SubjectFilter,
 } from './filter.ts';
 
-const subjects: TimelineSubject[] = ['countries', 'science', 'people', 'history'];
+const subjects: TimelineSubject[] = SUBJECTS.map((x) => x.id);
 
 const event = fc
   .record({
@@ -25,6 +27,7 @@ const event = fc
     month: fc.integer({ min: 1, max: 12 }),
     day: fc.integer({ min: 1, max: 28 }),
     subject: fc.constantFrom(...subjects),
+    continent: fc.option(fc.constantFrom(...EVENT_CONTINENTS), { nil: undefined }),
     id: fc.stringMatching(/^Q[0-9]{1,6}$/),
   })
   .map(
@@ -34,6 +37,7 @@ const event = fc
       label: r.id,
       text: r.id,
       subject: r.subject,
+      ...(r.continent ? { continent: r.continent } : {}),
       source: {
         name: 'Wikidata',
         url: 'https://www.wikidata.org',
@@ -71,6 +75,20 @@ describe('Timeline filter (07-timeline 3.1)', () => {
       fc.property(events, (list) => {
         const parts = subjects.flatMap((s) => filterBySubject(list, s));
         expect(parts).toHaveLength(list.length);
+      }),
+    );
+  });
+
+  it('Property 1 (world): subject and continent together return exactly the events with both; All and Everywhere return everything. _Req 6_', () => {
+    fc.assert(
+      fc.property(events, fc.constantFrom('all' as const, ...subjects), fc.constantFrom('all' as const, ...EVENT_CONTINENTS), (list, subject, continent) => {
+        const out = filterEvents(list, subject, continent);
+        expect(out).toEqual(
+          list.filter((e) => (subject === 'all' || e.subject === subject) && (continent === 'all' || e.continent === continent)),
+        );
+        expect(filterEvents(out, subject, continent)).toEqual(out);
+        expect(filterEvents(list, 'all', 'all')).toEqual(list);
+        expect(filterEvents(list, subject, 'all')).toEqual(filterBySubject(list, subject));
       }),
     );
   });

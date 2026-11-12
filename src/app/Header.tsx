@@ -10,7 +10,9 @@ import './header.css';
 
 const NAV: ReadonlyArray<{ to: string; label: string; routes: RouteName[] }> = [
   { to: '/', label: 'Explore', routes: ['home', 'article', 'search', 'stamps', 'continentStamps'] },
+  { to: '/subjects', label: 'Subjects', routes: ['subjects', 'subject'] },
   { to: '/atlas', label: 'Atlas', routes: ['atlas'] },
+  { to: '/tours', label: 'Tours', routes: ['tours', 'tour'] },
   { to: '/timeline', label: 'Timeline', routes: ['timeline'] },
   { to: '/castle', label: 'Castle', routes: ['castle', 'wing'] },
   { to: '/quizzes', label: 'Quizzes', routes: ['quizzes', 'quiz'] },

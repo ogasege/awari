@@ -69,6 +69,16 @@ const open = async (p: Page, path: string): Promise<void> => {
 console.log(`Visiting ${base} once, online…`);
 await page.goto(base, { waitUntil: 'load' });
 await page.getByRole('status').filter({ hasText: 'Works offline' }).waitFor({ timeout: 90_000 });
+// Any article, on demand (14-any-article): read one from Wikipedia while online.
+let wikiRead = false;
+try {
+  await page.goto(`${base}/article/wiki/Okapi`, { waitUntil: 'load' });
+  await page.getByRole('heading', { name: 'Okapi' }).first().waitFor({ timeout: 20_000 });
+  wikiRead = true;
+  console.log('Read the Okapi article from Wikipedia while online.');
+} catch {
+  console.log('Wikipedia was not reachable: skipping the on-demand article check.');
+}
 console.log('Saved. Going offline (airplane mode).');
 await context.setOffline(true);
 
@@ -115,7 +125,7 @@ await step('Castle wing opens', async (p) => {
 
 await step('Timeline lists events', async (p) => {
   await open(p, '/timeline');
-  await p.getByText(/Showing 123 events\./).waitFor({ timeout: 10_000 });
+  await p.getByText(/Showing \d+ events\./).waitFor({ timeout: 10_000 });
 });
 
 await step('Stamp book opens', async (p) => {
@@ -132,6 +142,51 @@ await step('A route never visited opens (navigation fallback)', async (p) => {
   await open(p, '/credits');
   await p.getByRole('heading', { name: /open knowledge/i }).first().waitFor({ timeout: 10_000 });
 });
+
+await step('Subjects list and a subject wall open', async (p) => {
+  await open(p, '/subjects');
+  await p.getByRole('link', { name: /Wildlife/ }).first().waitFor({ timeout: 10_000 });
+  await open(p, '/subject/wildlife');
+  await p.getByText(/\d+ articles in this subject\./).waitFor({ timeout: 10_000 });
+  await p.locator('.subject__print').first().waitFor({ timeout: 10_000 });
+});
+
+await step('A subject pack article, its quiz and its castle wing work', async (p) => {
+  await open(p, '/article/space/mars');
+  await p.getByRole('heading', { name: 'Mars' }).first().waitFor({ timeout: 10_000 });
+  await open(p, '/quiz/space/mars');
+  await p.getByText('Question 1 of 5').first().waitFor({ timeout: 10_000 });
+  await open(p, '/castle/wildlife');
+  await p.getByText(/Room 1 of 12/).first().waitFor({ timeout: 10_000 });
+});
+
+await step('The stamp book has a page for each continent', async (p) => {
+  await open(p, '/stamps');
+  await p.getByRole('status').filter({ hasText: 'of 197 countries' }).waitFor({ timeout: 10_000 });
+  await open(p, '/stamps/asia');
+  await p.getByRole('status').filter({ hasText: 'in the world' }).waitFor({ timeout: 10_000 });
+});
+
+await step('A guided tour turns the globe and opens the stop article', async (p) => {
+  await open(p, '/tours/rivers?stop=2');
+  await p.getByRole('status').filter({ hasText: 'Stop 2 of 8' }).waitFor({ timeout: 15_000 });
+  await p.locator('svg.globe').waitFor({ timeout: 10_000 });
+  await p.getByRole('link', { name: 'Open the article' }).click();
+  await p.getByRole('navigation', { name: 'Tour' }).waitFor({ timeout: 10_000 });
+});
+
+await step('The timeline filters by continent', async (p) => {
+  await open(p, '/timeline');
+  await p.getByRole('button', { name: 'Oceania' }).click();
+  await p.getByText(/in Oceania\./).waitFor({ timeout: 10_000 });
+});
+
+if (wikiRead) {
+  await step('The Wikipedia article read online opens offline', async (p) => {
+    await open(p, '/article/wiki/Okapi');
+    await p.getByRole('heading', { name: 'Okapi' }).first().waitFor({ timeout: 10_000 });
+  });
+}
 
 await browser.close();
 server.close();

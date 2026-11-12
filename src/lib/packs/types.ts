@@ -183,8 +183,8 @@ export interface QuizSet {
   source: Source;
 }
 
-/** Subjects a timeline event can be filtered by (18-world-timeline will drop `history`). */
-export type TimelineSubject = BundledPackId | 'history';
+/** Subjects a timeline event can be filtered by: the bundled pack ids. */
+export type TimelineSubject = BundledPackId;
 
 export interface TimelineEvent {
   /** Wikidata QID of the event or subject. */

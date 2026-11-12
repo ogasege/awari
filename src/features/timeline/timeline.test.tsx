@@ -1,11 +1,19 @@
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { readFileSync } from 'node:fs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import type { TimelinePack } from '../../lib/packs/types.ts';
 import { OnThisDay } from '../home/OnThisDay.tsx';
 import { servePacksFromDisk } from '../../test/packFetch.ts';
 import TimelineScreen from './TimelineScreen.tsx';
 
-describe('Timeline screen from the committed pack (07-timeline 3.2)', () => {
+const pack = JSON.parse(readFileSync('public/packs/timeline.json', 'utf8')) as TimelinePack;
+const TOTAL = pack.events.length;
+const COUNTRIES = pack.events.filter((e) => e.subject === 'countries').length;
+const OCEANIA = pack.events.filter((e) => e.continent === 'Oceania').length;
+const showing = (n: number, tail = ''): RegExp => new RegExp(`Showing ${n} events${tail}\\.`);
+
+describe('Timeline screen from the committed pack (07-timeline 3.2, 18-world-timeline 4)', () => {
   beforeEach(() => {
     servePacksFromDisk();
     vi.useRealTimers();
@@ -15,7 +23,7 @@ describe('Timeline screen from the committed pack (07-timeline 3.2)', () => {
   it('lists events oldest first, filters by subject and says what is shown. _Req 2.1, 2.2_', async () => {
     const user = userEvent.setup();
     render(<TimelineScreen />);
-    expect(await screen.findByText(/Showing 123 events\./)).toBeInTheDocument();
+    expect(await screen.findByText(showing(TOTAL))).toBeInTheDocument();
 
     const lists = screen.getAllByRole('list').filter((l) => l.tagName === 'OL');
     const years = lists.flatMap((l) =>
@@ -23,7 +31,7 @@ describe('Timeline screen from the committed pack (07-timeline 3.2)', () => {
         .getAllByRole('listitem')
         .map((li) => Number(/^(\d+):/.exec(li.querySelector('h3')?.textContent ?? '')?.[1])),
     );
-    expect(years).toHaveLength(123);
+    expect(years).toHaveLength(TOTAL);
     expect(years).toEqual([...years].sort((a, b) => a - b));
 
     const countries = screen.getByRole('button', { name: 'Countries' });
@@ -31,14 +39,21 @@ describe('Timeline screen from the committed pack (07-timeline 3.2)', () => {
     await user.click(countries);
     expect(countries).toHaveAttribute('aria-pressed', 'true');
     expect(screen.getByRole('button', { name: 'All' })).toHaveAttribute('aria-pressed', 'false');
-    expect(screen.getByText(/Showing 23 events about Countries\./)).toBeInTheDocument();
+    expect(screen.getByText(showing(COUNTRIES, ' about Countries'))).toBeInTheDocument();
     expect(screen.getByText('Mali became an independent country on 22 September 1960.')).toBeInTheDocument();
+    // Subject and continent together (18-world-timeline Req 6).
+    await user.click(screen.getByRole('button', { name: 'All' }));
+    await user.click(screen.getByRole('button', { name: 'Oceania' }));
+    expect(screen.getByRole('button', { name: 'Oceania' })).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByText(showing(OCEANIA, ' in Oceania'))).toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: 'Everywhere' }));
+    await user.click(countries);
     expect(screen.queryByText(/Marie Curie was born/)).not.toBeInTheDocument();
     // A country event links to its article.
     expect(screen.getByRole('link', { name: 'Read about Mali' })).toHaveAttribute('href', '/article/countries/mali');
 
     await user.click(screen.getByRole('button', { name: 'All' }));
-    expect(screen.getByText(/Showing 123 events\./)).toBeInTheDocument();
+    expect(screen.getByText(showing(TOTAL))).toBeInTheDocument();
     expect(screen.getByText('Marie Curie was born on 7 November 1867.')).toBeInTheDocument();
   });
 
@@ -53,7 +68,7 @@ describe('Timeline screen from the committed pack (07-timeline 3.2)', () => {
 
   it('draws the ruler hidden from screen readers with a you-are-here arrow. _Req 2.4_', async () => {
     const { container } = render(<TimelineScreen />);
-    await screen.findByText(/Showing 123 events\./);
+    await screen.findByText(showing(TOTAL));
     const ruler = container.querySelector('svg.tl-ruler');
     expect(ruler).toHaveAttribute('aria-hidden', 'true');
     expect(ruler?.textContent).toContain('you are here');
@@ -87,8 +102,8 @@ describe('Home: On this day (07-timeline 3.2, Req 3)', () => {
     expect(years.length).toBeGreaterThan(0);
   });
 
-  it('says so in words when nothing is filed. _Req 3.2_', async () => {
+  it('fills a day with nothing filed with the next events, and says so in words. _Req 3.2; 19-home-world Req 5_', async () => {
     render(<OnThisDay today={new Date(2026, 0, 2, 12)} />);
-    expect(await screen.findByText(/No events filed for today yet/)).toBeInTheDocument();
+    expect(await screen.findByText('Coming up on the calendar:')).toBeInTheDocument();
   });
 });

@@ -3,7 +3,7 @@
  * orthographic projection, drawn as SVG. It moves only when the student
  * drags it or presses an arrow key; it never animates on its own.
  */
-import { geoCentroid, geoGraticule10, geoOrthographic, geoPath } from 'd3-geo';
+import { geoCentroid, geoGraticule10, geoOrthographic, geoPath, type GeoProjection } from 'd3-geo';
 import type { Feature, FeatureCollection, Geometry } from 'geojson';
 import { useMemo, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react';
 import { wobblyCircle } from '../../design/wobble.ts';
@@ -34,6 +34,8 @@ export function Globe({
   discovered,
   selected,
   onSelect,
+  marker,
+  label = 'Globe. Drag it or use the arrow keys to spin it. Choose a country from the list to visit it.',
 }: {
   shapes: Shapes;
   rotation: Rotation;
@@ -41,6 +43,10 @@ export function Globe({
   discovered: ReadonlySet<string>;
   selected: string | null;
   onSelect: (iso3: string) => void;
+  /** A place to mark with a drawn pin, such as a tour stop. */
+  marker?: { lon: number; lat: number };
+  /** The accessible name of the globe. */
+  label?: string;
 }) {
   const press = useRef<{ x: number; y: number; start: Rotation; moved: boolean } | null>(null);
   const [dragging, setDragging] = useState(false);
@@ -99,7 +105,7 @@ export function Globe({
       viewBox={`0 0 ${SIZE} ${SIZE}`}
       role="application"
       aria-roledescription="globe"
-      aria-label="Globe. Drag it or use the arrow keys to spin it. Choose a country from the list to visit it."
+      aria-label={label}
       tabIndex={0}
       onPointerDown={down}
       onPointerMove={move}
@@ -130,6 +136,19 @@ export function Globe({
         .map((f) => (
           <path key="sel" d={path(f) ?? ''} className="globe__selected" aria-hidden="true" />
         ))}
+      {marker ? <Pin point={(path.projection() as GeoProjection | null)?.([marker.lon, marker.lat])} /> : null}
     </svg>
+  );
+}
+
+/** A hand-drawn red ring with a dot, marking a place on the globe. */
+function Pin({ point }: { point: [number, number] | null | undefined }) {
+  if (!point) return null;
+  const [x, y] = point;
+  return (
+    <g aria-hidden="true" className="globe__pin" transform={`translate(${x} ${y})`}>
+      <circle r="16" className="globe__pin-ring" />
+      <circle r="6" className="globe__pin-dot" />
+    </g>
   );
 }

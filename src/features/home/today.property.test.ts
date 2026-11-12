@@ -1,9 +1,9 @@
 import fc from 'fast-check';
 import { describe, expect, it } from 'vitest';
 import type { TimelineEvent, TimelineSubject } from '../../lib/packs/types.ts';
-import { DAILY_QUIZZES, monthDay, onThisDay, todaysQuiz } from './today.ts';
+import { DAILY_QUIZZES, daysAhead, monthDay, onThisDay, onThisDayOrNext, todaysQuiz } from './today.ts';
 
-const subject = fc.constantFrom<TimelineSubject>('countries', 'science', 'people', 'history');
+const subject = fc.constantFrom<TimelineSubject>('countries', 'science', 'people', 'ancient');
 const date = fc.date({ min: new Date(1900, 0, 1), max: new Date(2100, 0, 1), noInvalidDate: true });
 const event = fc
   .record({
@@ -82,5 +82,35 @@ describe('Home: on this day and today’s quiz (07-timeline / 01-app-shell)', ()
       ),
     );
     expect(seen.size).toBe(DAILY_QUIZZES.length);
+  });
+
+  it('Property 6: the calendar shows at most three, today first, and fills with the next days. _Req 5_', () => {
+    fc.assert(
+      fc.property(fc.array(event, { maxLength: 60 }), date, (events, d) => {
+        const { events: shown, comingUp } = onThisDayOrNext(events, d);
+        expect(shown.length).toBeLessThanOrEqual(3);
+        expect(shown.length).toBe(Math.min(3, events.length));
+        const md = monthDay(d);
+        const today = shown.filter((e) => e.date.slice(5, 10) === md);
+        const rest = shown.filter((e) => e.date.slice(5, 10) !== md);
+        expect(shown.slice(0, today.length)).toEqual(today);
+        expect(comingUp).toBe(rest.length > 0);
+        const ahead = rest.map((e) => daysAhead(md, e.date.slice(5, 10)));
+        expect(ahead).toEqual([...ahead].sort((a, b) => a - b));
+        // Nothing nearer was passed over.
+        const lastAhead = ahead.at(-1);
+        if (lastAhead !== undefined) {
+          const skipped = events.filter((e) => e.date.slice(5, 10) !== md && !shown.includes(e) && daysAhead(md, e.date.slice(5, 10)) < lastAhead);
+          expect(skipped).toEqual([]);
+        }
+      }),
+    );
+  });
+
+  it('counts days ahead round the year, with 29 February in place', () => {
+    expect(daysAhead('11-12', '11-12')).toBe(0);
+    expect(daysAhead('11-12', '11-16')).toBe(4);
+    expect(daysAhead('12-31', '01-01')).toBe(1);
+    expect(daysAhead('02-28', '03-01')).toBe(2);
   });
 });

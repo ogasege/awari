@@ -255,3 +255,15 @@
     grid-template-areas: 'side' 'globe' 'card' 'credit';
   }
 }
+
+.globe__pin-ring {
+  fill: none;
+  stroke: var(--tomato);
+  stroke-width: 4;
+}
+
+.globe__pin-dot {
+  fill: var(--tomato);
+  stroke: var(--paper);
+  stroke-width: 2;
+}

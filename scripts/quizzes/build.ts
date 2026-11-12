@@ -4,7 +4,8 @@
  * `npm run packs`, and reports any article it could not fill.
  */
 import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
-import { buildQuiz, PHYSICS_TERMS, QUIZ_LENGTH } from '../../src/lib/quiz/generate.ts';
+import { SUBJECTS } from '../../src/lib/packs/subjects.ts';
+import { autoTerms, buildQuiz, PHYSICS_TERMS, QUIZ_LENGTH } from '../../src/lib/quiz/generate.ts';
 import type {
   Article,
   FactsPack,
@@ -31,7 +32,7 @@ rmSync(`${ROOT}/quizzes`, { recursive: true, force: true });
 const index: QuizIndex = { quizzes: [] };
 const short: string[] = [];
 
-for (const pack of ['countries', 'physics'] as const) {
+for (const pack of SUBJECTS.map((x) => x.id)) {
   mkdirSync(`${ROOT}/quizzes/${pack}`, { recursive: true });
   const items = readJson<PackIndex>(`${pack}/index.json`).items;
   for (const item of items) {
@@ -40,7 +41,7 @@ for (const pack of ['countries', 'physics'] as const) {
       article,
       pack === 'countries' ? factsById.get(article.id) : undefined,
       facts,
-      pack === 'countries' ? countryTerms : PHYSICS_TERMS,
+      pack === 'countries' ? countryTerms : pack === 'physics' ? PHYSICS_TERMS : autoTerms(article),
     );
     if (questions.length < QUIZ_LENGTH) {
       short.push(`${pack}/${item.id} (${questions.length})`);

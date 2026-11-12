@@ -20,12 +20,14 @@ import { AFRICAN_UN_MEMBERS } from './countries.ts';
 import { ACCEPTED_LICENCES } from './licence.ts';
 import { MANIFEST_FILE, isOwned, type PacksManifest } from './manifest.ts';
 import { MAX_NOTES, NOTE_LIMIT } from './notes.ts';
+import { BUNDLED_PACKS, SUBJECT_PACKS } from '../../src/lib/packs/subjects.ts';
+import { MAX_ARTICLES, MIN_ARTICLES } from './subject-packs.ts';
 import { articleText } from './text.ts';
 import { validateTimeline } from './timeline.ts';
 import { MAX_SENSES } from './wordnet.ts';
 
 /** Largest allowed total size of the packs folder. */
-export const SIZE_BUDGET = 25 * 1024 * 1024;
+export const SIZE_BUDGET = 70 * 1024 * 1024;
 
 /** Everything loaded from a packs folder. */
 export interface LoadedPacks {
@@ -48,7 +50,7 @@ export function loadPacks(dir: string): LoadedPacks {
   const files = listFiles(dir).sort();
   const indexes = new Map<PackId, PackIndex>();
   const articles: Article[] = [];
-  for (const pack of ['countries', 'physics'] as const) {
+  for (const pack of BUNDLED_PACKS) {
     indexes.set(pack, readJson<PackIndex>(dir, `${pack}/index.json`));
     for (const f of files) {
       if (
@@ -229,9 +231,18 @@ export function validatePacks(dir: string): string[] {
   if (indexAfrica !== AFRICAN_UN_MEMBERS.size) {
     fail(`countries index has ${indexAfrica ?? 0} African items, expected 54`);
   }
-  for (const a of byPack.get('physics')?.values() ?? []) {
-    if (a.photos.length === 0) {
-      fail(`physics/${a.id}: no lead photo`);
+  for (const pack of ['physics', ...SUBJECT_PACKS]) {
+    for (const a of byPack.get(pack)?.values() ?? []) {
+      if (a.photos.length === 0) {
+        fail(`${pack}/${a.id}: no lead photo`);
+      }
+    }
+  }
+  // Subject packs hold 25-35 articles each (15-subject-packs Req 1.1).
+  for (const pack of SUBJECT_PACKS) {
+    const n = byPack.get(pack)?.size ?? 0;
+    if (n < MIN_ARTICLES || n > MAX_ARTICLES) {
+      fail(`${pack}: ${n} articles, expected ${MIN_ARTICLES}-${MAX_ARTICLES}`);
     }
   }
   for (const c of p.facts.countries) {

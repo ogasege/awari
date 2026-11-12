@@ -16,6 +16,7 @@ import { ArticleBody } from './ArticleBody.tsx';
 import { articleCredits, factRows } from './credit.ts';
 import { WordCard } from './WordCard.tsx';
 import { errorWords, useWikiArticle } from './useWikiArticle.ts';
+import { TourBar } from '../tours/TourBar.tsx';
 import './article.css';
 
 
@@ -115,6 +116,7 @@ function ArticleView({ article, photoSrc }: { article: Article; photoSrc?: strin
 
   return (
     <article className="article">
+      <TourBar article={`${article.pack}/${article.id}`} />
       <header className="article__board grain">
         <div className="article__titles">
           <StripHeading

@@ -1,0 +1,176 @@
+/* Guided tours (20-tours). */
+.tour {
+  min-height: 70vh;
+  padding: 24px var(--gutter) 56px;
+}
+
+.tour__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.tour__title {
+  font-size: clamp(34px, 4.6vw, 64px);
+}
+
+.tour__back {
+  color: var(--yellow);
+  font-weight: 700;
+}
+
+.tour__count {
+  margin: 12px 0 18px;
+  font-size: 19px;
+}
+
+.tour__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+  gap: 28px 40px;
+  align-items: start;
+}
+
+.tour__globe {
+  max-width: 600px;
+}
+
+.tour__card {
+  padding: 22px 26px 24px;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--shadow-print);
+}
+
+.tour__card h2 {
+  margin: 0 0 6px;
+  font-size: 30px;
+}
+
+.tour__place {
+  margin: 0 0 14px;
+  color: var(--teal);
+  font-weight: 700;
+}
+
+.tour__print {
+  --print-pad: 10px;
+  max-width: 320px;
+  margin: 4px auto 18px;
+}
+
+.tour__summary {
+  margin: 0 0 18px;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.tour__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.tour__buttons .btn--outline {
+  color: var(--ink);
+}
+
+.tour__stops {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tour__stops a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border: 2px solid var(--mist);
+  border-radius: var(--radius-pill);
+  color: var(--paper);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.tour__stops a[aria-current='step'] {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--yellow-ink);
+}
+
+.tour__stops-num {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.tours__lead {
+  max-width: 600px;
+  font-size: 20px;
+}
+
+.tours__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 22px 26px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tours__card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px 22px;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  box-shadow: var(--shadow-hard);
+}
+
+.tours__card h2 {
+  margin: 0;
+  font-size: 28px;
+  color: var(--teal);
+}
+
+.tours__card p {
+  margin: 0;
+}
+
+.tours__stops {
+  color: var(--ink-soft);
+  font-size: 15px;
+}
+
+.tours__card .btn {
+  align-self: flex-start;
+  margin-top: 6px;
+}
+
+.tourbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+  padding: 10px var(--gutter);
+  background: var(--yellow);
+  color: var(--yellow-ink);
+  font-weight: 700;
+}
+
+.tourbar a {
+  color: var(--yellow-ink);
+  text-decoration: underline;
+}
+
+@media (max-width: 899px) {
+  .tour__body {
+    grid-template-columns: 1fr;
+  }
+}

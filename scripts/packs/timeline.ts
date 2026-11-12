@@ -9,10 +9,12 @@ import type {
   TimelinePack,
   TimelineSubject,
 } from '../../src/lib/packs/types.ts';
+import { EVENT_CONTINENTS, SUBJECTS } from '../../src/lib/packs/subjects.ts';
 import { wikidataSource } from './sources.ts';
 import {
   currentStatements,
   formatWikidataTime,
+  itemIds,
   type Entity,
 } from './wikidata.ts';
 
@@ -23,7 +25,9 @@ export type EventKind =
   | 'established'
   | 'independence'
   | 'launched'
-  | 'opened';
+  | 'opened'
+  | 'published'
+  | 'discovered';
 
 /** The Wikidata property and sentence template for each kind. */
 export const KINDS: Readonly<
@@ -38,6 +42,8 @@ export const KINDS: Readonly<
   },
   launched: { pid: 'P619', text: (l, d) => `${l} was launched on ${d}.` },
   opened: { pid: 'P1619', text: (l, d) => `${l} was officially opened on ${d}.` },
+  published: { pid: 'P577', text: (l, d) => `${l} was first published on ${d}.` },
+  discovered: { pid: 'P575', text: (l, d) => `${l} was discovered on ${d}.` },
 };
 
 /** One reviewed Wikidata item the pipeline turns into an event. */
@@ -49,6 +55,14 @@ export interface TimelineItem {
   link?: string;
   /** Short name to use when the Wikidata label is long or unclear. */
   label?: string;
+  /**
+   * The day the curator expects Wikidata to give (YYYY-MM-DD). When
+   * Wikidata says another day the event is dropped and reported, so a
+   * wrong date can only enter when two sources agree on it.
+   */
+  expect?: string;
+  /** A continent to use when Wikidata names none (for example Antarctica). */
+  continent?: string;
 }
 
 const MONTHS = [
@@ -139,6 +153,7 @@ export function buildEvents(
   entities: ReadonlyMap<string, Entity>,
   retrieved: string,
   linkFor: (item: TimelineItem) => string | undefined = (i) => i.link,
+  continentFor: (item: TimelineItem, entity: Entity) => string | undefined = (i) => i.continent,
 ): { events: TimelineEvent[]; dropped: Dropped[] } {
   const events: TimelineEvent[] = [];
   const dropped: Dropped[] = [];
@@ -167,13 +182,22 @@ export function buildEvents(
       });
       continue;
     }
+    if (item.expect !== undefined && item.expect !== date) {
+      dropped.push({
+        qid: item.qid,
+        reason: `Wikidata says ${date}, expected ${item.expect}`,
+      });
+      continue;
+    }
     const link = linkFor(item);
+    const continent = item.continent ?? continentFor(item, entity);
     events.push({
       id: item.qid,
       date,
       label,
       text: sentence(item.kind, label, date),
       subject: item.subject,
+      ...(continent ? { continent } : {}),
       ...(link ? { link } : {}),
       source: wikidataSource(retrieved, item.qid, label),
     });
@@ -183,17 +207,17 @@ export function buildEvents(
 }
 
 /** The subjects the screen filters by, in display order. */
-export const SUBJECTS: readonly TimelineSubject[] = [
-  'countries',
-  'science',
-  'people',
-  'history',
-];
+export const SUBJECT_IDS: readonly TimelineSubject[] = SUBJECTS.map((x) => x.id);
 
-/** Fewest events each subject must have (Req 1.5). */
+/** Fewest events the whole pack must hold (18-world-timeline Req 1). */
+export const MIN_EVENTS = 400;
+/** Fewest events each subject must have (Req 2). */
 export const MIN_PER_SUBJECT = 15;
-/** Fewest distinct month-and-day pairs the pack must cover (Req 1.6). */
-export const MIN_MONTH_DAYS = 40;
+/** Fewest events each inhabited continent, and Antarctica, must have (Req 3). */
+export const MIN_PER_CONTINENT = 20;
+export const MIN_ANTARCTICA = 3;
+/** Fewest distinct month-and-day pairs the pack must cover (Req 7). */
+export const MIN_MONTH_DAYS = 200;
 
 /**
  * Checks a timeline pack against the spec and returns the problems.
@@ -221,7 +245,10 @@ export function validateTimeline(
       errors.push(`${where}: not sorted by date`);
     }
     previous = e.date;
-    if (!SUBJECTS.includes(e.subject)) {
+    if (e.continent && !(EVENT_CONTINENTS as readonly string[]).includes(e.continent)) {
+      errors.push(`${where}: unknown continent "${e.continent}"`);
+    }
+    if (!SUBJECT_IDS.includes(e.subject)) {
       errors.push(`${where}: unknown subject "${e.subject}"`);
     }
     if (!e.label || !e.text.includes(e.label) || !e.text.includes(formatDate(e.date))) {
@@ -234,10 +261,20 @@ export function validateTimeline(
       errors.push(`${where}: link ${e.link} has no bundled article`);
     }
   }
-  for (const subject of SUBJECTS) {
+  if (pack.events.length < MIN_EVENTS) {
+    errors.push(`timeline: ${pack.events.length} events, needs ${MIN_EVENTS}`);
+  }
+  for (const subject of SUBJECT_IDS) {
     const n = pack.events.filter((e) => e.subject === subject).length;
     if (n < MIN_PER_SUBJECT) {
       errors.push(`timeline: ${subject} has ${n} events, needs ${MIN_PER_SUBJECT}`);
+    }
+  }
+  for (const continent of EVENT_CONTINENTS) {
+    const n = pack.events.filter((e) => e.continent === continent).length;
+    const need = continent === 'Antarctica' ? MIN_ANTARCTICA : MIN_PER_CONTINENT;
+    if (n < need) {
+      errors.push(`timeline: ${continent} has ${n} events, needs ${need}`);
     }
   }
   const monthDays = new Set(pack.events.map((e) => e.date.slice(5)));
@@ -247,4 +284,50 @@ export function validateTimeline(
     );
   }
   return errors;
+}
+
+/** Properties whose value is a country. */
+const COUNTRY_PIDS = ['P17', 'P27', 'P495', 'P1532'] as const;
+/** Properties whose value is a place that has a country (P17) of its own. */
+const PLACE_PIDS = ['P19', 'P159', 'P131', 'P276'] as const;
+
+/** The country and place items an entity points at (to fetch before `continentFrom`). */
+export function referencedPlaces(entity: Entity): string[] {
+  return [...COUNTRY_PIDS, ...PLACE_PIDS].flatMap((pid) => itemIds(currentStatements(entity, pid)));
+}
+
+/**
+ * The continent of an entity, only when Wikidata names a country (or a
+ * place in a country) that sits on one: it never guesses. The item itself
+ * counts when it is a country.
+ */
+export function continentFrom(
+  entity: Entity,
+  byCountry: ReadonlyMap<string, string>,
+  places: ReadonlyMap<string, Entity>,
+): string | undefined {
+  const own = byCountry.get(entity.id);
+  if (own) {
+    return own;
+  }
+  for (const pid of COUNTRY_PIDS) {
+    for (const id of itemIds(currentStatements(entity, pid))) {
+      const found = byCountry.get(id);
+      if (found) {
+        return found;
+      }
+    }
+  }
+  for (const pid of PLACE_PIDS) {
+    for (const id of itemIds(currentStatements(entity, pid))) {
+      const place = places.get(id);
+      for (const countryId of place ? itemIds(currentStatements(place, 'P17')) : []) {
+        const found = byCountry.get(countryId);
+        if (found) {
+          return found;
+        }
+      }
+    }
+  }
+  return undefined;
 }

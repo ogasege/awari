@@ -16,13 +16,18 @@ import {
   u,
 } from '../../design/paper.tsx';
 import { rng, seedFrom, wobblyCirclePoints } from '../../design/wobble.ts';
+import type { HomeData } from '../../lib/packs/home.ts';
+import { packUrl, usePack } from '../../lib/packs/load.ts';
+import { subjectById } from '../../lib/packs/subjects.ts';
 import { useProgress } from '../../lib/store/useProgress.ts';
+import { WINGS } from '../castle/castle.ts';
 import { DoorRow } from './DoorRow.tsx';
 import { KitLayer } from './KitLayer.tsx';
 import { HERO_NOTES, SUBJECT_NOTES } from './notes.ts';
 import { OnThisDay } from './OnThisDay.tsx';
 import { StampBook } from './StampBook.tsx';
-import { todaysQuiz } from './today.ts';
+import { dayNumber, todaysQuiz } from './today.ts';
+import { pickFeatured, pickNotes, pickSubjects, subjectsWithPrints } from './rotation.ts';
 import './home.css';
 
 /** An irregular, hand-cut circle as a CSS polygon (white print border). */
@@ -31,14 +36,42 @@ function cutCircle(seed: string): string {
   return `polygon(${pts.map((p) => `${p.x.toFixed(1)}% ${p.y.toFixed(1)}%`).join(',')})`;
 }
 
+/** Home's daily picks come from `packs/home.json`; until it loads the kit photos and notes stand in. */
+function useHomeData(): HomeData | null {
+  const data = usePack<HomeData>('home.json');
+  return data.status === 'ready' ? data.data : null;
+}
+
+interface ShownNote {
+  text: string;
+  to: string;
+}
+
+/** Six notes for today: three for the hero, three for the subjects (19-home-world Req 3). */
+function useNotes(day: number): ShownNote[] {
+  const data = useHomeData();
+  const defaults: ShownNote[] = [
+    HERO_NOTES.dry,
+    HERO_NOTES.lemurs,
+    HERO_NOTES.ice,
+    SUBJECT_NOTES.falls,
+    SUBJECT_NOTES.pyramids,
+    SUBJECT_NOTES.kili,
+  ];
+  if (!data) return defaults;
+  const picked = pickNotes(day, data.notes, 6);
+  return defaults.map((d, i) => picked[i] ?? d);
+}
+
 const pos = (left: string, top: string, extra: CSSProperties = {}): CSSProperties => ({
   left,
   top,
   ...extra,
 });
 
-function Hero() {
+function Hero({ day }: { day: number }) {
   const ring = useMemo(() => cutCircle('earth'), []);
+  const notes = useNotes(day);
   return (
     <div className="home-hero grain">
       <Header />
@@ -89,14 +122,14 @@ function Hero() {
               />
             </Link>
             <KitLayer layer="hero" />
-            <Link to={HERO_NOTES.dry.to} className="abs home-q hand crowding" style={pos('0', '4.4%', { width: u(230), fontSize: u(38), rotate: '-6deg' })}>
-              {HERO_NOTES.dry.text}
+            <Link to={notes[0]?.to ?? '/'} className="abs home-q hand crowding" style={pos('0', '4.4%', { width: u(230), fontSize: u(38), rotate: '-6deg' })}>
+              {notes[0]?.text}
             </Link>
-            <Link to={HERO_NOTES.lemurs.to} className="abs home-q hand crowding" style={{ right: '4.5%', top: 0, width: u(215), textAlign: 'right', fontSize: u(36), rotate: '4deg', color: 'var(--yellow)' }}>
-              {HERO_NOTES.lemurs.text}
+            <Link to={notes[1]?.to ?? '/'} className="abs home-q hand crowding" style={{ right: '4.5%', top: 0, width: u(215), textAlign: 'right', fontSize: u(36), rotate: '4deg', color: 'var(--yellow)' }}>
+              {notes[1]?.text}
             </Link>
-            <Link to={HERO_NOTES.ice.to} className="abs home-q hand crowding" style={pos('0', '77%', { width: u(195), fontSize: u(36), rotate: '-4deg' })}>
-              {HERO_NOTES.ice.text}
+            <Link to={notes[2]?.to ?? '/'} className="abs home-q hand crowding" style={pos('0', '77%', { width: u(195), fontSize: u(36), rotate: '-4deg' })}>
+              {notes[2]?.text}
             </Link>
           </div>
         </div>
@@ -106,7 +139,36 @@ function Hero() {
   );
 }
 
-function Subjects() {
+/** The five print slots of the subjects collage, from the Home reference. */
+const PRINT_SLOTS = [
+  { width: 344, tilt: -4, aspect: '3 / 4', left: '1.19%', top: '3.95%', z: 2, captionSize: 34, tape: [{ left: '34%', width: 124, tilt: -6 }] },
+  { width: 478, tilt: 2.5, aspect: '3 / 2', left: '25.15%', top: '0.47%', z: 3, captionSize: 38, pin: '47%' },
+  { width: 404, tilt: -3, aspect: '3 / 2', left: '59.23%', top: '6.51%', z: 4, captionSize: 38, tape: [{ left: '-7%', top: u(4), width: 110, tilt: -38 }, { left: '80%', top: u(2), width: 110, tilt: 36 }] },
+  { width: 548, tilt: -2, aspect: '2 / 1', left: '26.93%', top: '51.16%', z: 5, captionSize: 38, tape: [{ left: '40%', top: u(-15), width: 130, tilt: 3, tone: 'teal' as const }] },
+  { width: 420, tilt: 4, aspect: '3 / 2', left: '67.11%', top: '50.23%', z: 6, captionSize: 38, tape: [{ left: '30%', top: u(-17), width: 120, tilt: -4 }] },
+] as const;
+
+/** The kit photos shown until the day's picks arrive (and with no network). */
+const DEFAULT_PRINTS = [
+  { to: '/subject/earth', src: '/photos/falls.jpg', alt: 'Victoria Falls seen from the air', caption: 'Mountains and rivers' },
+  { to: '/subject/wildlife', src: '/photos/elephant.jpg', alt: 'An elephant walking with her calf', caption: 'Wildlife' },
+  { to: '/subject/ancient', src: '/photos/pyramids.jpg', alt: 'The pyramids of Giza', caption: 'Ancient worlds' },
+  { to: '/subject/space', src: '/photos/milkyway.jpg', alt: 'The centre of the Milky Way in many colours', caption: 'Space' },
+  { to: '/subject/countries', src: '/photos/kili.jpg', alt: 'Kilimanjaro rising above the clouds', caption: 'Countries' },
+] as const;
+
+function Subjects({ day }: { day: number }) {
+  const data = useHomeData();
+  const notes = useNotes(day);
+  const subjects = data ? pickSubjects(day, subjectsWithPrints(data), 5) : [];
+  const prints = PRINT_SLOTS.map((slot, i) => {
+    const id = subjects[i];
+    const featured = data && id ? pickFeatured(day, i, data.subjects.find((x) => x.id === id)?.featured ?? []) : undefined;
+    const subject = id ? subjectById(id) : undefined;
+    const fallback = DEFAULT_PRINTS[i] as (typeof DEFAULT_PRINTS)[number];
+    if (!featured || !subject) return { slot, to: fallback.to, src: fallback.src, alt: fallback.alt, caption: fallback.caption };
+    return { slot, to: `/subject/${subject.id}`, src: packUrl(featured.photo.file), alt: featured.photo.alt, caption: subject.label };
+  });
   return (
     <section className="home-subjects grain" aria-labelledby="subjects-title">
       <div className="home-subjects__head">
@@ -119,26 +181,38 @@ function Subjects() {
             <path d="M58 62Q58.6 55.9 56.7 50" />
           </svg>
         </p>
-        <Link to="/quizzes" className="home-link">
+        <Link to="/subjects" className="home-link">
           See every subject
         </Link>
       </div>
       <div className="collage" data-w="1344">
         <div className="collage__inner" style={{ aspectRatio: '1344 / 860' }}>
           <KitLayer layer="subjects" />
-          <Print className="abs" to="/search?q=river" src="/photos/falls.jpg" alt="Victoria Falls seen from the air" caption="Rivers and waterfalls" captionSize={34} aspect="3 / 4" width={344} tilt={-4} tape={[{ left: '34%', width: 124, tilt: -6 }]} style={pos('1.19%', '3.95%', { zIndex: 2 })} />
-          <Print className="abs" to="/search?q=animals" src="/photos/elephant.jpg" alt="An elephant walking with her calf" caption="Wildlife" width={478} tilt={2.5} pin="47%" style={pos('25.15%', '0.47%', { zIndex: 3 })} />
-          <Print className="abs" to="/article/countries/egypt" src="/photos/pyramids.jpg" alt="The pyramids of Giza" caption="Ancient worlds" width={404} tilt={-3} tape={[{ left: '-7%', top: u(4), width: 110, tilt: -38 }, { left: '80%', top: u(2), width: 110, tilt: 36 }]} style={pos('59.23%', '6.51%', { zIndex: 4 })} />
-          <Print className="abs" to="/search?q=planet" src="/photos/milkyway.jpg" alt="The centre of the Milky Way in many colours" caption="Space" width={548} tilt={-2} aspect="2 / 1" tape={[{ left: '40%', top: u(-15), width: 130, tilt: 3, tone: 'teal' }]} style={pos('26.93%', '51.16%', { zIndex: 5 })} />
-          <Print className="abs" to="/article/countries/tanzania" src="/photos/kili.jpg" alt="Kilimanjaro rising above the clouds" caption="Mountains and volcanoes" width={420} tilt={4} tape={[{ left: '30%', top: u(-17), width: 120, tilt: -4 }]} style={pos('67.11%', '50.23%', { zIndex: 6 })} />
+          {prints.map(({ slot, to, src, alt, caption }) => (
+            <Print
+              key={slot.left}
+              className="abs"
+              to={to}
+              src={src}
+              alt={alt}
+              caption={caption}
+              captionSize={slot.captionSize}
+              aspect={slot.aspect}
+              width={slot.width}
+              tilt={slot.tilt}
+              tape={'tape' in slot ? [...slot.tape] : undefined}
+              pin={'pin' in slot ? slot.pin : undefined}
+              style={pos(slot.left, slot.top, { zIndex: slot.z })}
+            />
+          ))}
           <MarginNote className="abs crowding" tilt={-2} size={31} style={pos('2.23%', '72.33%', { width: u(270) })}>
-            {SUBJECT_NOTES.falls.text}
+            {notes[3]?.text}
           </MarginNote>
           <MarginNote className="abs crowding" tilt={5} size={31} style={pos('90.92%', '7.21%', { width: u(116) })}>
-            {SUBJECT_NOTES.pyramids.text}
+            {notes[4]?.text}
           </MarginNote>
           <MarginNote className="abs crowding" tilt={2} size={31} style={pos('76.04%', '93.02%', { width: u(300) })}>
-            {SUBJECT_NOTES.kili.text}
+            {notes[5]?.text}
           </MarginNote>
         </div>
       </div>
@@ -147,10 +221,30 @@ function Subjects() {
   );
 }
 
-function LearnByPlaying() {
+/** Today's quiz: a featured article from today's first subject, or the kit's daily quiz until the data arrives. */
+function useTodaysQuiz(day: number) {
+  const data = useHomeData();
+  const fallback = todaysQuiz(new Date());
+  if (!data) return fallback;
+  const id = pickSubjects(day + 2, subjectsWithPrints(data), 1)[0];
+  const featured = id ? pickFeatured(day, 5, data.subjects.find((x) => x.id === id)?.featured ?? []) : undefined;
+  if (!featured) return fallback;
+  return {
+    pack: featured.pack,
+    id: featured.id,
+    topic: featured.title,
+    blurb: 'Five questions, three hints each, and a proof from the article.',
+    photo: packUrl(featured.photo.file),
+    alt: featured.photo.alt,
+  };
+}
+
+function LearnByPlaying({ day }: { day: number }) {
   const progress = useProgress();
-  const lit = progress.castle['africa'] ?? 0;
-  const quiz = todaysQuiz(new Date());
+  // A different wing of the castle each day, from the whole world and every subject.
+  const wing = pickSubjects(day, WINGS, 1)[0] ?? WINGS[0];
+  const lit = wing ? (progress.castle[wing.id] ?? 0) : 0;
+  const quiz = useTodaysQuiz(day);
   return (
     <section className="home-play grain" aria-labelledby="play-title">
       <h2 id="play-title">Learn by playing</h2>
@@ -166,7 +260,7 @@ function LearnByPlaying() {
           </div>
           <div className="abs home-castle__copy" style={pos('2.4%', '76.5%', { width: u(470) })}>
             <p style={{ fontSize: u(21) }}>Every door asks a question. Answer it and the next room lights up.</p>
-            <Button to="/castle">Enter the castle</Button>
+            <Button to={wing ? `/castle/${wing.id}` : '/castle'}>{wing ? `Enter ${wing.name}` : 'Enter the castle'}</Button>
           </div>
           <MarginNote className="abs crowding" color="var(--paper)" tilt={-4} size={33} style={pos('47.6%', '31%', { width: u(150) })}>
             {lit} rooms lit, {12 - lit} still dark
@@ -203,10 +297,11 @@ const CASTLE_CUT = (() => {
 
 export default function Home() {
   useTitle(undefined);
+  const day = useMemo(() => dayNumber(new Date()), []);
   return (
     <div className="home">
-      <Hero />
-      <Subjects />
+      <Hero day={day} />
+      <Subjects day={day} />
       <section className="home-paper squared" aria-label="On this day and your stamp book">
         <div className="collage" data-w="1344">
           <div className="collage__inner" style={{ aspectRatio: '1344 / 900' }}>
@@ -218,7 +313,7 @@ export default function Home() {
         </div>
         <TornEdge color="var(--teal)" seed="paper-edge" height={34} />
       </section>
-      <LearnByPlaying />
+      <LearnByPlaying day={day} />
       <footer className="page-footer">
         <p>
           Photos from Wikimedia Commons: Earth and the Milky Way by NASA (public domain); Victoria

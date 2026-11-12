@@ -43,14 +43,36 @@ of the articles and share their licence, CC BY-SA 4.0.
 
 - `packs/quizzes/countries/*.json`
 - `packs/quizzes/physics/*.json`
+- `packs/quizzes/wildlife/*.json`, `packs/quizzes/space/*.json`, `packs/quizzes/ancient/*.json`
+- `packs/quizzes/earth/*.json`, `packs/quizzes/body/*.json`, `packs/quizzes/science/*.json`
+- `packs/quizzes/inventions/*.json`, `packs/quizzes/people/*.json`, `packs/quizzes/arts/*.json`
 - `packs/quizzes/*.json` (the quiz index)
+
+## Home rotation
+
+- `packs/home.json`: featured articles and margin notes for Home, built by
+  `scripts/packs/home.ts` from the packs above. Each fact note is an article sentence
+  word for word (Simple English Wikipedia, CC BY-SA 4.0); each photo reference points at
+  a pack photo credited below.
+
+## Any article on demand
+
+Articles opened with "search any topic" are fetched by the student's own browser from
+Simple English Wikipedia (or English Wikipedia when Simple has none), CC BY-SA 4.0, with
+their lead photo from Wikimedia Commons when its licence is accepted and its author is
+named; word meanings outside the bundled dictionary come from Wiktionary (CC BY-SA 4.0).
+They are kept only on the student's device and credited on the page. None is bundled.
+
+## App icon manifest
+
+- `manifest.webmanifest`: the web app manifest, written for this project (MIT).
 
 ## Fonts
 
 All fonts are self-hosted from the `@fontsource` npm packages and are
 licensed under the SIL Open Font License 1.1.
 
-- Bricolage Grotesque, by Mathieu Triay
+- Bricolage Grotesque, by The Bricolage Grotesque Project Authors (Mathieu Triay, Atelier Triay)
 - Figtree, by Erik Kennedy
 - Covered By Your Grace, by Kimberly Geswein
 
@@ -69,6 +91,15 @@ some back-matter sections were removed.
 
 - `packs/countries/*.json` (country articles and the pack index)
 - `packs/physics/*.json` (electricity articles and the pack index)
+- `packs/wildlife/*.json` (wildlife subject pack articles and index)
+- `packs/space/*.json` (space subject pack articles and index)
+- `packs/ancient/*.json` (ancient subject pack articles and index)
+- `packs/earth/*.json` (earth subject pack articles and index)
+- `packs/body/*.json` (body subject pack articles and index)
+- `packs/science/*.json` (science subject pack articles and index)
+- `packs/inventions/*.json` (inventions subject pack articles and index)
+- `packs/people/*.json` (people subject pack articles and index)
+- `packs/arts/*.json` (arts subject pack articles and index)
 
 ### Facts: Wikidata
 
@@ -105,21 +136,181 @@ Resized to at most 800 px. Each links to its Commons file page.
 
 | File | Subject | Author | Licence | Source |
 | --- | --- | --- | --- | --- |
+| packs/img/afghanistan.jpg | Afghanistan | Sven Dirks, Wien | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Kabul_TV_Hill_view.jpg |
+| packs/img/albania.jpg | Albania | Pasztilla aka Attila Terbócs | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Byty%C3%A7,_Albania_landscape_2018-05_01.jpg |
 | packs/img/algeria.jpg | Algeria | Bernard Gagnon | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Landscape_of_Baniane.jpg |
+| packs/img/ancient-alexander-the-great.jpg | Alexander the Great | Berthold Werner | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Tessaloniki_BW_2017-10-05_18-37-34.jpg |
+| packs/img/ancient-ancient-egypt.jpg | Ancient Egypt | Unknown author Unknown author | Public domain | https://commons.wikimedia.org/wiki/File:Rosetta_Stone_BW.jpeg |
+| packs/img/ancient-ancient-greece.jpg | Ancient Greece | Jebulon | CC0 | https://commons.wikimedia.org/wiki/File:Erechtheum_Acropolis_Athens_evening_moon.jpg |
+| packs/img/ancient-ancient-olympic-games.jpg | Ancient Olympic Games | Institute for the Study of the Ancient World from New York, United States of America | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Stadium_at_Olympia_(II)_(4910582279).jpg |
+| packs/img/ancient-aztecs.jpg | Aztecs | Rosemania | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Sun_stone_detail.JPG |
+| packs/img/ancient-colosseum.jpg | Colosseum | Wilfredor | CC0 | https://commons.wikimedia.org/wiki/File:Colosseum_of_Rome,_Italy.jpg |
+| packs/img/ancient-colossus-of-rhodes.jpg | Colossus of Rhodes | Pelalion | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Colossus_of_Rhodes_summer_2017.jpg |
+| packs/img/ancient-great-pyramid-of-giza.jpg | Great Pyramid of Giza | Berthold Werner | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Gizeh_Cheops_BW_1.jpg |
+| packs/img/ancient-great-wall-of-china.jpg | Great Wall of China | Land Rover MENA | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:The_Journey_of_Discovery_Beijing_(6962643268).jpg |
+| packs/img/ancient-hanging-gardens-of-babylon.jpg | Hanging Gardens of Babylon | Osama Sarm | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Street_in_Babylon.jpg |
+| packs/img/ancient-inca-empire.jpg | Inca Empire | icelight from Boston, MA, US | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Before_Machu_Picchu.jpg |
+| packs/img/ancient-julius-caesar.jpg | Julius Caesar | Ángel M. Felicísimo from Mérida, España | Public domain | https://commons.wikimedia.org/wiki/File:Retrato_de_Julio_C%C3%A9sar_(26724093101).jpg |
+| packs/img/ancient-kingdom-of-aksum.jpg | Kingdom of Aksum | Tesfawel | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Aksum_obelisk.jpg |
+| packs/img/ancient-lighthouse-of-alexandria.jpg | Lighthouse of Alexandria | Gene Poole | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Pharos_at_Abuqir.jpg |
+| packs/img/ancient-machu-picchu.jpg | Machu Picchu | Allard Schmidt (The Netherlands) | Public domain | https://commons.wikimedia.org/wiki/File:Peru_Machu_Picchu_Sunrise.jpg |
+| packs/img/ancient-mali-empire.jpg | Mali Empire | Albert Backer | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Djenn%C3%A9_Moschee(Dach)1990.jpg |
+| packs/img/ancient-mayan-civilization.jpg | Mayan civilization | Daniel Schwen | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Chichen_Itza_3.jpg |
+| packs/img/ancient-middle-ages.jpg | Middle Ages | Thomas Wolf , www.foto-tw.de | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Schloss_Neuschwanstein_2013.jpg |
+| packs/img/ancient-pompeii.jpg | Pompeii | Gary Todd from Xinzheng, China | Public domain | https://commons.wikimedia.org/wiki/File:Pompeii_Ruins_(48440776966).jpg |
+| packs/img/ancient-renaissance.jpg | Renaissance | Domenico di Michelino / After Alesso Baldovinetti | Public domain | https://commons.wikimedia.org/wiki/File:Michelino_DanteAndHisPoem.jpg |
+| packs/img/ancient-roman-empire.jpg | Roman Empire | Nhartmannphotos | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Roman_Forum_east_end.jpg |
+| packs/img/ancient-rosetta-stone.jpg | Rosetta Stone | Hans Hillewaert | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Rosetta_Stone.JPG |
+| packs/img/ancient-samurai.jpg | Samurai | Unknown author Unknown author | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Armour,_samurai_(AM_1935.119-2).jpg |
+| packs/img/ancient-silk-road.jpg | Silk Road | Party Fabrics | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:China_silk-crystalblue.jpg |
+| packs/img/ancient-sphinx.jpg | Sphinx | Hamerani | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Great_Sphinx_of_Giza_(2).jpg |
+| packs/img/ancient-stonehenge.jpg | Stonehenge | Drawn by Adamsan | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Stonehenge_plan.jpg |
+| packs/img/ancient-temple-of-artemis.jpg | Temple of Artemis | Adam Carr | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Ac_artemisephesus.jpg |
+| packs/img/ancient-tutankhamun.jpg | Tutankhamun | Sergiy Galyonkin of Raleigh, USA | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Tutankhamun_Ankh_shaped_mirror_2018.jpg |
+| packs/img/ancient-vikings.jpg | Vikings | Christian Ferrer | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Viking_Sky_(ship,_2017)_and_GNV_Cristal_(ship,_1989).jpg |
+| packs/img/ancient-wonders-of-the-world.jpg | Wonders of the World | Maerten van Heemskrerck | Public domain | https://commons.wikimedia.org/wiki/File:Maerten_van_Heemskrerck.jpg |
+| packs/img/andorra.jpg | Andorra | Krzysztof Golik | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Pyrenees_in_Andorra_(10).jpg |
 | packs/img/angola.jpg | Angola | Erik Cleves Kristensen | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Namib_desert_Angola.jpg |
+| packs/img/antigua-and-barbuda.jpg | Antigua and Barbuda | Vincent van Zeijst | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Antigua_and_Barbuda,_English_Harbour_(24).jpg |
+| packs/img/argentina.jpg | Argentina | Fernando | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Llao_Llao_Peninsula.jpg |
+| packs/img/armenia.jpg | Armenia | Vyacheslav Argenberg | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Geghard_Monastery,_Armenia.jpg |
+| packs/img/arts-ballet.jpg | Ballet | AlfrescoBallet | CC0 | https://commons.wikimedia.org/wiki/File:Alfresco_Ballet_9.jpg |
+| packs/img/arts-basketball.jpg | Basketball | owamux | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:McMurdo_Basketball_Gym.jpg |
+| packs/img/arts-chess.jpg | Chess | Dietmar Rabich | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Schachfiguren,_Bauern_--_2022_--_0022_(bw).jpg |
+| packs/img/arts-cricket.jpg | Cricket | Rae Allen from Brisbane, Australia | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Muttiah_Muralitharan.jpg |
+| packs/img/arts-dance.jpg | Dance | Barry Goyette from San Luis Obispo, USA | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Two_dancers.jpg |
+| packs/img/arts-fifa-world-cup.jpg | FIFA World Cup | Haena96 | CC0 | https://commons.wikimedia.org/wiki/File:Jeonju_World_Cup_stadium_interior.jpg |
+| packs/img/arts-flute.jpg | Flute | Lukasz Kobus, European Commission | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:A_musician_playing_transverse_flute_2.jpg |
+| packs/img/arts-guitar.jpg | Guitar | Melissa Ursula Dawn Goldsmith | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Acoustic_Guitar_with_Seashell_Inlay.jpg |
+| packs/img/arts-hip-hop.jpg | Hip hop | Muhammed amine benloulou | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Hip_hop_dance.jpg |
+| packs/img/arts-jesse-owens.jpg | Jesse Owens | Unknown author Unknown author | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_183-G00630,_Sommerolympiade,_Siegerehrung_Weitsprung.jpg |
+| packs/img/arts-lionel-messi.jpg | Lionel Messi | Кирилл Венедиктов | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Lionel_Messi_20180626.jpg |
+| packs/img/arts-literature.jpg | Literature | Roc0ast3r | CC0 | https://commons.wikimedia.org/wiki/File:International_books_at_Kent_Library.jpg |
+| packs/img/arts-ludwig-van-beethoven.jpg | Ludwig van Beethoven | Dietmar Rabich | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Bonn,_Beethoven-Denkmal_--_2020_--_6513.jpg |
+| packs/img/arts-mask.jpg | Mask | Thomas Quine | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:African_mask_with_straw_hair_(31800149417).jpg |
+| packs/img/arts-movie-theatre.jpg | Movie theatre | Anthony22 ( talk ) | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Regal_Cinemas_Imax_Theatre.jpg |
+| packs/img/arts-muhammad-ali.jpg | Muhammad Ali | Hans Krebs | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Muhammad_Ali,_Z%C3%BCrich_Airport_-_1.jpg |
+| packs/img/arts-museum.jpg | Museum | mrpbps | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:New_Lanark_buildings_2009.jpg |
+| packs/img/arts-olympic-games.jpg | Olympic Games | Unknown author Unknown author | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_183-G00630,_Sommerolympiade,_Siegerehrung_Weitsprung.jpg |
+| packs/img/arts-opera.jpg | Opera | Unknown | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Greymouth_Opera_House_Fire_02.jpg |
+| packs/img/arts-orchestra.jpg | Orchestra | Gerda Arendt | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Kyiv_Symphony_Orchestra,_Kurhaus_Wiesbaden.jpg |
+| packs/img/arts-photography.jpg | Photography | Diliff | CC BY 2.5 | https://commons.wikimedia.org/wiki/File:Radcliffe_Camera,_Oxford_-_Oct_2006.jpg |
+| packs/img/arts-piano.jpg | Piano | User:Gryffindor and User:Megodenas | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Grand_piano_and_upright_piano.jpg |
+| packs/img/arts-saxophone.jpg | Saxophone | William P. Gottlieb | Public domain | https://commons.wikimedia.org/wiki/File:Portrait_of_Charlie_Parker_in_1947.jpg |
+| packs/img/arts-swimming.jpg | Swimming | Matti Blume | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Swimming_pool,_Maikammer_(P1180480).jpg |
+| packs/img/arts-tennis.jpg | Tennis | Boss Tweed, Flickr.com | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Andy_Roddick.jpg |
+| packs/img/arts-theatre.jpg | Theatre | Malene Thyssen | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Harlekin_Columbine_Tivoli_Denmark.jpg |
+| packs/img/arts-trumpet.jpg | Trumpet | Eusebius | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Trompette_-_corps.JPG |
+| packs/img/arts-usain-bolt.jpg | Usain Bolt | Doha Stadium Plus Qatar from Doha, Qatar | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Usain_Bolt_2011.jpg |
+| packs/img/arts-violin.jpg | Violin | Daniel Jason Karjadi ; cropped by Eugenio Hansen, OFS | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Violin_by_Daniel_Jason_Karjadi.jpg |
+| packs/img/arts-wolfgang-amadeus-mozart.jpg | Wolfgang Amadeus Mozart | Japleenpasricha | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Statue_of_Mozart_in_Vienna.jpg |
+| packs/img/australia.jpg | Australia | Diliff | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Sydney_Opera_House_-_Dec_2008.jpg |
+| packs/img/austria.jpg | Austria | Diliff | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Graz,_Austria_skyline_-_July_2004.jpg |
+| packs/img/azerbaijan.jpg | Azerbaijan | Radosław Botev | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Landscape_in_Lahic_Azerbaijan_(1).jpg |
+| packs/img/bahrain.jpg | Bahrain | Jayson De Leon | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Road_and_towers_in_Manama.jpg |
+| packs/img/bangladesh.jpg | Bangladesh | Kritzolina | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Tamak_and_Tumdak_01.jpg |
+| packs/img/barbados.jpg | Barbados | Postdlf | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Saint_Andrew,_Barbados_038.jpg |
 | packs/img/battery.jpg | Battery | RAIL P ( RAIL.PHOTOGRAPHY ) | CC0 | https://commons.wikimedia.org/wiki/File:IKEA_LADDA_rechargeable_AA-batteries.jpg |
+| packs/img/belarus.jpg | Belarus | zedlik | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Strusta_Lake_-_Panorama.jpg |
+| packs/img/belgium.jpg | Belgium | [cipher ] | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Brussels_waffle.jpg |
+| packs/img/belize.jpg | Belize | epiphyllumlover | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:The_Belize_River_-_panoramio.jpg |
 | packs/img/benin.jpg | Benin | Dr. Ondřej Havelka (cestovatel) | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Benin_village_on_water_Ganvi%C3%A9.jpg |
+| packs/img/bhutan.jpg | Bhutan | Christopher J. Fynn | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Himalayan_peak_from_Bumthang.jpg |
+| packs/img/body-blood-pressure.jpg | Blood pressure | ProfBondi | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Blood_Pressure_Information.jpg |
+| packs/img/body-blood-vessel.jpg | Blood vessel | Ryan Somma | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Blood_Vessels_in_the_Penis.jpg |
+| packs/img/body-blood.jpg | Blood | El*Falaf | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Howell-Jolly_bodies_(Overview_of_peripheral_blood_stain,_May-Gr%C3%BCnwald_Giemsa).jpg |
+| packs/img/body-bone.jpg | Bone | Mr Khubaib Sani | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Human_Skeleton_2.jpg |
+| packs/img/body-brain.jpg | Brain | JonRichfield | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Optic_processing_human_brain.jpg |
+| packs/img/body-breathing.jpg | Breathing | Yale Rosen from USA | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Normal_lung_(3661529848).jpg |
+| packs/img/body-cell.jpg | Cell | SaraKasa | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Animal_cell_optical_microscope_view.jpg |
+| packs/img/body-digestion.jpg | Digestion | Tekks ( talk ) | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Digestive_hormones.jpg |
+| packs/img/body-dna.jpg | DNA | NIH Image Gallery from Bethesda, Maryland, USA | Public domain | https://commons.wikimedia.org/wiki/File:DNA_Double_Helix_(20468181866).jpg |
+| packs/img/body-ear.jpg | Ear | RWhitwam | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Model_of_human_ear.jpg |
+| packs/img/body-eye.jpg | Eye | Steve Jurvetson | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Hawk_eye.jpg |
+| packs/img/body-hair.jpg | Hair | Daisuke Tashiro | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Macaca_fuscata_juvenile_yawning.jpg |
+| packs/img/body-heart.jpg | Heart | No machine-readable author provided. Ekko assumed (based on copyright claims). | Public domain | https://commons.wikimedia.org/wiki/File:Heart_frontally_PDA.jpg |
+| packs/img/body-hormone.jpg | Hormone | Mcfall2016 | Public domain | https://commons.wikimedia.org/wiki/File:Free_Hormone_Hypothesis_2.jpg |
+| packs/img/body-human-body.jpg | Human body | Makyou | CC0 | https://commons.wikimedia.org/wiki/File:Human_body_in_Creole.jpg |
+| packs/img/body-human-skeleton.jpg | Human skeleton | Davidbena | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Human_skeleton_(Rockefeller_Museum).jpg |
+| packs/img/body-immune-system.jpg | Immune system | Electron Microscopy Facility at The National Cancer Institute at Frederick (NCI-Frederick) | Public domain | https://commons.wikimedia.org/wiki/File:Red_White_Blood_cells.jpg |
+| packs/img/body-leg.jpg | Leg | Basile Morin | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Hypomeces_squamosus.jpg |
+| packs/img/body-liver.jpg | Liver | Poupou l'quourouce | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Preparing_Chicken_Liver_05.JPG |
+| packs/img/body-lung.jpg | Lung | Mokele ( talk ) | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Lungs_of_Protopterus_dolloi.JPG |
+| packs/img/body-muscle.jpg | Muscle | OpenStax College | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Biceps_Muscle_CNX.jpg |
+| packs/img/body-nose.jpg | Nose | Faceofwiki | Public domain | https://commons.wikimedia.org/wiki/File:Human_Nose.JPG |
+| packs/img/body-protein.jpg | Protein | User:Astrojan | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Protein_mosaic.jpg |
+| packs/img/body-skin.jpg | Skin | Clump | CC0 | https://commons.wikimedia.org/wiki/File:Hand_skin_closeup.jpg |
+| packs/img/body-stomach.jpg | Stomach | Photographer: Scott Hansen, U.S. Geological Survey | Public domain | https://commons.wikimedia.org/wiki/File:Brown_pelican_stomach_ingested_objects.jpg |
+| packs/img/body-taste.jpg | Taste | Saurabh R. Patil | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Tongue_and_taste_buds.jpg |
+| packs/img/body-thumb.jpg | Thumb | Tony Alter | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Virginia_opossum_opposable_thumb.jpg |
+| packs/img/body-tooth.jpg | Tooth | Grey Geezer | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Alveolar_processes_cutaway_color.jpg |
+| packs/img/body-vaccine.jpg | Vaccine | Nacaru | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Covid_vaccination_booths_in_Poitiers_(France).jpg |
+| packs/img/body-vitamin.jpg | Vitamin | Dungodung | Public domain | https://commons.wikimedia.org/wiki/File:La_Boqueria.JPG |
+| packs/img/bolivia.jpg | Bolivia | Christopher Crouzet | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Copacabana,_Bolivia.jpg |
+| packs/img/bosnia-and-herzegovina.jpg | Bosnia and Herzegovina | Boabo | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Tuzla_View_of_Tuzla.jpg |
 | packs/img/botswana.jpg | Botswana | FaysaL Bin DaruL | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Botswana_National_Stadium_20150928_115938.jpg |
+| packs/img/brazil.jpg | Brazil | Eurico Zimbres | CC BY-SA 2.5 | https://commons.wikimedia.org/wiki/File:Brazilian_National_Congress.jpg |
+| packs/img/brunei.jpg | Brunei | DeltaSquad833 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Brunei_Pumpjack-1.jpg |
+| packs/img/bulgaria.jpg | Bulgaria | Boby Dimitrov from Sofia, Bulgaria | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Downtown_Sofia_Boby_Dimitrov_1.jpg |
 | packs/img/burkina-faso.jpg | Burkina Faso | c.hug | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Waterfalls_at_Karfiguela,_Burkina_Faso.jpg |
 | packs/img/burundi.jpg | Burundi | d_proffer | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Burundi_landscape.jpg |
+| packs/img/cambodia.jpg | Cambodia | Juan Antonio Segal from Madrid, Spain | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:People_and_landscapes_of_Cambodia_(16288249485).jpg |
 | packs/img/cameroon.jpg | Cameroon | Buma Peter | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Landscape_of_Mount_Cameroon.jpg |
+| packs/img/canada.jpg | Canada | Tobias Alt, Tobi 87 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Peyto_Lake-Banff_NP-Canada.jpg |
 | packs/img/cape-verde.jpg | Cape Verde | David Trainer | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Mount_fogo.jpg |
 | packs/img/central-african-republic.jpg | Central African Republic | Patrickroque01 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Bangui_overlooking,_National_Road_(Bangui,_Ilocos_Norte;_11-17-2022).jpg |
 | packs/img/chad.jpg | Chad | Ken Doerr from Chester, UK | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Storm_clouds_over_N%27Djamena_(15386229016).jpg |
+| packs/img/chile.jpg | Chile | mtchm from - | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Parinacota_volcano.jpg |
+| packs/img/colombia.jpg | Colombia | Bernard Gagnon | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Landscape_near_Gigante,_Colombia_01.jpg |
 | packs/img/comoros.jpg | Comoros | Frédéric Ducarme | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Sakouli_baobabs.jpg |
+| packs/img/costa-rica.jpg | Costa Rica | Creator:Edwin Dalorzo | Public domain | https://commons.wikimedia.org/wiki/File:Iglesia_Inmaculada_Concepcion_Ujarras.jpg |
+| packs/img/croatia.jpg | Croatia | Quahadi Añtó 10:33, 1 October 2014 (UTC) | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Ston_i_solana_sa_zidina_9280657.JPG |
+| packs/img/cuba.jpg | Cuba | Didier Baertschiger | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Cuba_-_Cayo_Coco.jpg |
+| packs/img/cyprus.jpg | Cyprus | Michal Osmenda from Brussels, Belgium | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Near_Trodos,_Cyprus_(8132780501).jpg |
+| packs/img/czech-republic.jpg | Czech Republic | Petar Milošević | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Prague_skyline_at_dawn.jpg |
 | packs/img/democratic-republic-of-the-congo.jpg | Democratic Republic of the Congo | Garcia-Pavilion | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Vue_Kinshasa.jpg |
+| packs/img/denmark.jpg | Denmark | Jebulon | CC0 | https://commons.wikimedia.org/wiki/File:Window_Roskilde_Denmark.jpg |
 | packs/img/djibouti.jpg | Djibouti | Clovis conchou | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:%C3%8Ele_maskali,_Djibouti.jpg |
+| packs/img/dominica.jpg | Dominica | Aneil Lutchman | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Dominica_Hiking_Path.JPG |
+| packs/img/dominican-republic.jpg | Dominican Republic | Bogdan from Timisoara, Romania | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Dominican_landscape_(3965528732).jpg |
+| packs/img/earth-alps.jpg | Alps | böhringer friedrich | CC BY-SA 2.5 | https://commons.wikimedia.org/wiki/File:L%C3%BCnersee_vom_Saulakopf_1.JPG |
+| packs/img/earth-amazon-rainforest.jpg | Amazon rainforest | flowcomm | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Sunset_at_Amazon_rainforest,_Brazil_-_2026-5.jpg |
+| packs/img/earth-amazon-river.jpg | Amazon River | Neil Palmer/CIAT | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Amazon_CIAT_(2).jpg |
+| packs/img/earth-andes.jpg | Andes | Jorge Morales Piderit | Public domain | https://commons.wikimedia.org/wiki/File:Cordillera_de_los_Andes.jpg |
+| packs/img/earth-arctic-ocean.jpg | Arctic Ocean | Patrick Kelley | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Arctic_ice.jpg |
+| packs/img/earth-atlantic-ocean.jpg | Atlantic Ocean | Tiago Fioreze | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Clouds_over_the_Atlantic_Ocean.jpg |
+| packs/img/earth-congo-river.jpg | Congo River | Kimmyfari | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Congo_River_views.jpg |
+| packs/img/earth-danube.jpg | Danube | User:Drombalan | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Donaueschingen_Donauzusammenfluss_20080714.jpg |
+| packs/img/earth-ganges.jpg | Ganges | Atarax42 | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Gaumukh_Gangotri_glacier.jpg |
+| packs/img/earth-grand-canyon.jpg | Grand Canyon | Tomas Castelazo | CC BY-SA 2.5 | https://commons.wikimedia.org/wiki/File:Gran_ca%C3%B1on_del_colorado.jpg |
+| packs/img/earth-great-barrier-reef.jpg | Great Barrier Reef | Dmitry Brant | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Great_Barrier_Reef_snorkeling_18.jpg |
+| packs/img/earth-himalayas.jpg | Himalayas | Vyacheslav Argenberg | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Himalayas,_Cholatse,_Nepal.jpg |
+| packs/img/earth-krakatoa.jpg | Krakatoa | SentinelHub | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Anak_Krakatau,_Indonesia_2.jpg |
+| packs/img/earth-mississippi-river.jpg | Mississippi River | NPS photo | Public domain | https://commons.wikimedia.org/wiki/File:Efmo_View_from_Fire_Point.jpg |
+| packs/img/earth-mount-aso.jpg | Mount Aso | Johannes Wilhelm | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:MtAso_from_Takamori.jpg |
+| packs/img/earth-mount-etna.jpg | Mount Etna | NASA Earth Observatory images by Joshua Stevens, using Landsat data from the U.S. Geological Survey. Text by Kasha Patel. | Public domain | https://commons.wikimedia.org/wiki/File:Etna_Awakens_on_its_Side.jpg |
+| packs/img/earth-mount-everest.jpg | Mount Everest | Nir B. Gurung | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Sunset_view_of_Everest.jpg |
+| packs/img/earth-mount-fuji.jpg | Mount Fuji | Katsushika Hokusai | Public domain | https://commons.wikimedia.org/wiki/File:Hodogaya_on_the_Tokaido.jpg |
+| packs/img/earth-mount-kilimanjaro.jpg | Mount Kilimanjaro | Altezzatravel | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Trekking_Barranco_Valley_Kilimanjaro_Tanzania.jpg |
+| packs/img/earth-mount-merapi.jpg | Mount Merapi | Hildaniar Novitasari | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:The_Top_of_Merapi_Mount.jpg |
+| packs/img/earth-mount-rainier.jpg | Mount Rainier | Lyn Topinka (USGS) | Public domain | https://commons.wikimedia.org/wiki/File:Mount_Rainier_over_Tacoma.jpg |
+| packs/img/earth-mount-tambora.jpg | Mount Tambora | Jialiang Gao (peace-on-earth.org) | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Caldera_Mt_Tambora_Sumbawa_Indonesia.jpg |
+| packs/img/earth-mount-vesuvius.jpg | Mount Vesuvius | A Outra Voz (The original uploader was ChrisO at English Wikipedia .) | Public domain | https://commons.wikimedia.org/wiki/File:Vesuvius_crater_wall.jpg |
+| packs/img/earth-murray-river.jpg | Murray River | Grahamec | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Murray_at_Tom_Groggin_2.jpg |
+| packs/img/earth-niger-river.jpg | Niger River | Jialiang Gao www.peace-on-earth.org | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Niger_River_Center_Island.jpg |
+| packs/img/earth-nile.jpg | Nile | Vyacheslav Argenberg | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Nile_River,_Aswan,_Egypt.jpg |
+| packs/img/earth-pacific-ring-of-fire.jpg | Pacific Ring of Fire | Alexander Gerst | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Ring_of_Fire_-_Feuerring.jpg |
+| packs/img/earth-plate-tectonics.jpg | Plate tectonics | NOAA Photo Library | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Rifted_lava_flow_(Expl6466_9784118753).jpg |
+| packs/img/earth-popocatepetl.jpg | Popocatépetl | Carlos Valenzuela | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Popocatepetl_pasodecortez_cut.JPG |
+| packs/img/earth-rhine-river.jpg | Rhine River | Dietmar Rabich | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:D%C3%BCsseldorf,_Rheinturm_--_2015_--_8172.jpg |
+| packs/img/earth-rocky-mountains.jpg | Rocky Mountains | Gorgo | Public domain | https://commons.wikimedia.org/wiki/File:Moraine_Lake_17092005.jpg |
+| packs/img/earth-sahara.jpg | Sahara | fr:Utilisateur:Jgremillot | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Sahara_desert.jpg |
+| packs/img/earth-volcano.jpg | Volcano | Taro Taylor edit by Richard Bartz | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Tavurvur_volcano_edit.jpg |
+| packs/img/earth-yangtze-river.jpg | Yangtze River | Tan Wei Liang Byorn | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Qutang_Gorge_on_Changjiang.jpg |
+| packs/img/east-timor.jpg | East Timor | Nick Hobgood | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Dili_and_Atauro_Island.jpg |
+| packs/img/ecuador.jpg | Ecuador | Stephen Montgomery from Kallangur, Australia | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Rabida_Island_-_panorama.jpg |
 | packs/img/egypt.jpg | Egypt | Vyacheslav Argenberg | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Egypt,_Alexandria.jpg |
+| packs/img/el-salvador.jpg | El Salvador | Wanmei Liang | Public domain | https://commons.wikimedia.org/wiki/File:San_Salvador_metropolitan_area.jpg |
 | packs/img/electric-charge.jpg | Electric charge | doe-oakridge . 82-25 DOE photo by Frank Hoffman | Public domain | https://commons.wikimedia.org/wiki/File:Van_de_Graaff_at_American_Museum_of_Science_and_Energy_Oak_Ridge.jpg |
 | packs/img/electric-current.jpg | Electric current | wdwd | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Multimeter_Strommessung.JPG |
 | packs/img/electrical-circuit.jpg | Electrical circuit | Mitch Barrie from Reno, NV, USA | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:First_LED_circuit_(48433844026).jpg |
@@ -128,47 +319,296 @@ Resized to at most 800 px. Each links to its Commons file page.
 | packs/img/electricity.jpg | Electricity | Aatu Liimatta | CC BY-SA 2.5 | https://commons.wikimedia.org/wiki/File:Electric_wiring_near_Helsinki.JPG |
 | packs/img/equatorial-guinea.jpg | Equatorial Guinea | Francesca Calisti | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Atardecer_en_la_playa_de_Ureca_(Ureka)_Guinea_Ecuatorial.jpg |
 | packs/img/eritrea.jpg | Eritrea | Temesgen | CC BY-SA 2.5 | https://commons.wikimedia.org/wiki/File:Eritrean_Highlands.jpg |
+| packs/img/estonia.jpg | Estonia | Abrget47j | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:M%C3%A4nnikj%C3%A4rve_raba_tornist.jpg |
 | packs/img/eswatini.jpg | Eswatini | Umkhaya | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Mbabane_Landscape.jpg |
 | packs/img/ethiopia.jpg | Ethiopia | Radosław Botev | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Lalibela_Ethiopia_landscape_(6).jpg |
+| packs/img/federated-states-of-micronesia.jpg | Federated States of Micronesia | Erin Magee/AusAID | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Federated_States_of_Micronesia_landscape_(10694963426).jpg |
+| packs/img/fiji.jpg | Fiji | JaredWiltshire | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Bounty_Island_beach_Fiji.jpg |
+| packs/img/finland.jpg | Finland | Lobke Thijssen | CC BY-SA 2.5 | https://commons.wikimedia.org/wiki/File:Koli_hill_view.jpg |
+| packs/img/france.jpg | France | Christian Ferrer | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Landscape_in_Peyriac-de-Mer,_february_2018_(05).jpg |
 | packs/img/gabon.jpg | Gabon | Lengai101 | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:DIGITAL_CROSSING_-_KONGOU_03.jpg |
+| packs/img/georgia.jpg | Georgia | Radosław Botev | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Landscape_near_Vardzia_-_Georgia_(3).jpg |
+| packs/img/germany.jpg | Germany | Softeis | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Castle_Neuschwanstein.jpg |
 | packs/img/ghana.jpg | Ghana | Erik Kristensen | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Beach_with_palms_Ghana.jpg |
+| packs/img/greece.jpg | Greece | Jebulon | CC0 | https://commons.wikimedia.org/wiki/File:Landscape_at_Cape_Sounion,_Greece.jpg |
+| packs/img/grenada.jpg | Grenada | ImagePerson | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Bougainvillia_flowers_Grenada_7749.jpg |
+| packs/img/guatemala.jpg | Guatemala | Christopher Crouzet | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:View_from_Volcano_Pacaya,_Guatemala.jpg |
 | packs/img/guinea-bissau.jpg | Guinea-Bissau | Joehawkins | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Lagoa_com_hipop%C3%B3tamos_03_(cropped).jpg |
 | packs/img/guinea.jpg | Guinea | Flucco | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Plage_de_Roume.jpg |
+| packs/img/guyana.jpg | Guyana | Stephane Lesbats (IFREMER, Pôle Images, Centre Bretagne - ZI de la Pointe du Diable - CS 10070 - 29280 Plouzané, France) | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Ilet_Cupidon_(Guyane)_(Ifremer_00807-91876_-_52994).jpg |
+| packs/img/haiti.jpg | Haiti | Bdx | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Landscape_in_Palmes,_Petit-Go%C3%A2ve,_Haiti,_2017.jpg |
+| packs/img/honduras.jpg | Honduras | LeRoc | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Pedernales_La_Paz_Honduras.jpg |
+| packs/img/hungary.jpg | Hungary | Cserlajos | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Hungarian_landscape,_near_obanya.jpg |
+| packs/img/iceland.jpg | Iceland | Fran Cano Cabal | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Icelandic_landscapes.jpg |
+| packs/img/india.jpg | India | Indrajit Das | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Sunset_on_river_Ganges_02.jpg |
+| packs/img/indonesia.jpg | Indonesia | yohanes budiyanto | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Jakarta_Skyline_Part_2.jpg |
 | packs/img/insulator.jpg | Insulator | Thermos | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Insulator_railways.jpg |
+| packs/img/inventions-airplane.jpg | Airplane | Slyronit | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:An_airplane_above_Sao_Paulo.jpg |
+| packs/img/inventions-automobile.jpg | Automobile | Rhododendrites | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Abandoned_car_in_Marine_Park_(10852p).jpg |
+| packs/img/inventions-bicycle.jpg | Bicycle | Tomascastelazo | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Bicycle_reflections.jpg |
+| packs/img/inventions-calculator.jpg | Calculator | Matti Blume | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Sharp_Scientific_Calculator.jpg |
+| packs/img/inventions-camera.jpg | Camera | Cody Logan | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Security_camera,_September_2018.jpg |
+| packs/img/inventions-clock.jpg | Clock | Cayambe | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Geneva_flower_clock_2012.jpg |
+| packs/img/inventions-computer.jpg | Computer | Newfoundlandguy | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Computer_learning.jpg |
+| packs/img/inventions-elevator.jpg | Elevator | Chris McKenna ( Thryduulf ) | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Borough_tube_station_lifts_01.jpg |
+| packs/img/inventions-helicopter.jpg | Helicopter | Fabien1309 | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Helicopter_rescue_sancy_takeoff.jpg |
+| packs/img/inventions-light-bulb.jpg | Light bulb | Arcalino | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Mainz_Theodor-Heuss-Bruecke_blaue_Stunde_Panorama.jpg |
+| packs/img/inventions-microscope.jpg | Microscope | Les Chatfield from Brighton, England | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Fine_rotative_table_Microscope_5_(12996283235).jpg |
+| packs/img/inventions-mobile-phone.jpg | Mobile phone | Canadian Light Source Inc. | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Cellphone_X-ray.jpg |
+| packs/img/inventions-paper.jpg | Paper | Saad Akhtar from New Delhi, India | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Ruins_of_the_guard_tower.jpg |
+| packs/img/inventions-plastic.jpg | Plastic | Daniel Capilla | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:This_Fish_Eats_Plastic.jpg |
+| packs/img/inventions-printing-press.jpg | Printing press | Vis M | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Printing_press_05.jpg |
+| packs/img/inventions-radio.jpg | Radio | Noodle snacks | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Mount_Pleasant_Radio_Telescope.jpg |
+| packs/img/inventions-refrigerator.jpg | Refrigerator | National Institute of Standards and Technology | Public domain | https://commons.wikimedia.org/wiki/File:Ice_Maker_(5881247006).jpg |
+| packs/img/inventions-robot.jpg | Robot | NASA | Public domain | https://commons.wikimedia.org/wiki/File:Robot_Bug.jpg |
+| packs/img/inventions-solar-energy.jpg | Solar energy | DiverDave | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Ivanpah_SEGS_(2).JPG |
+| packs/img/inventions-steam-engine.jpg | Steam engine | Oosoom at English Wikipedia | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Blue_plaque_Smethwick_Engine.jpg |
+| packs/img/inventions-steamboat.jpg | Steamboat | Bo | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Belle_of_Louisville_2.jpg |
+| packs/img/inventions-submarine.jpg | Submarine | John Webber CET | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:VICTORIA_CLASS_SUBMARINE_2021.jpg |
+| packs/img/inventions-telephone.jpg | Telephone | Berthold Werner | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Telefon_Nizza_BW_2025-03-16_18-09-02.jpg |
+| packs/img/inventions-television.jpg | Television | LG전자 | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:LG_smart_TV.jpg |
+| packs/img/inventions-train.jpg | Train | Maria Feofilova | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Pilatus_railway_train.jpg |
+| packs/img/inventions-typewriter.jpg | Typewriter | MatejK42 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Chinese_typewriter_03.jpg |
+| packs/img/inventions-washing-machine.jpg | Washing machine | W.carter | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Open_top-loading_washing_machine.jpg |
+| packs/img/inventions-wheel.jpg | Wheel | Petar Milošević | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Ljubljana_Marshes_Wheel_with_axle_(oldest_wooden_wheel_yet_discovered).jpg |
+| packs/img/inventions-wind-turbine.jpg | Wind turbine | Lauri Veerde | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Wind_turbine_in_full_01.jpg |
+| packs/img/inventions-zipper.jpg | Zipper | kelly | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Blue_Bubble_Back.jpg |
+| packs/img/iran.jpg | Iran | Radosław Botev | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Abyaneh_village_Iran_-_landscape_(2).jpg |
+| packs/img/iraq.jpg | Iraq | Hasan a. almoosawi | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Farm_land_in_albasrah_iraq_01.jpg |
+| packs/img/israel.jpg | Israel | AbuAssab | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Haifa_Bay_Panorama.jpg |
+| packs/img/italy.jpg | Italy | Quintin Soloviev | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Portofino_harbor.jpg |
 | packs/img/ivory-coast.jpg | Ivory Coast | Mickaël T. | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Yamoussoukro_panorama.jpg |
+| packs/img/jamaica.jpg | Jamaica | This picture has been taken by Oleg Yunakov . Contact e-mail: yunakov gmail.com . Image can be used in accordance with the terms of the СС-BY-SA license. Other photos can be seen here . | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Jamaica_-_Negril_-_047.jpg |
+| packs/img/japan.jpg | Japan | David Kernan | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Minato_City,_Tokyo,_Japan.jpg |
+| packs/img/jordan.jpg | Jordan | Vyacheslav Argenberg | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Wadi_Musa,_Jordan,_Mountains.jpg |
+| packs/img/kazakhstan.jpg | Kazakhstan | Казбеков Нуржан Есенгельдиевич | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Burabay_winter.jpg |
 | packs/img/kenya.jpg | Kenya | Tanishakagiri | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:LANDSCAPES_OF_KENYA.jpg |
+| packs/img/kiribati.jpg | Kiribati | User Mark Tranchant on en.wikipedia | Public domain | https://commons.wikimedia.org/wiki/File:Bikeman_island_1975.jpg |
+| packs/img/kosovo.jpg | Kosovo | KastriotThaqi | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Kosovo_B_Power_Station.jpg |
+| packs/img/kuwait.jpg | Kuwait | Zainqasem | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Kuwait_beach_with_sunrise.jpg |
+| packs/img/kyrgyzstan.jpg | Kyrgyzstan | Bgag | CC0 | https://commons.wikimedia.org/wiki/File:Tian_Shan_in_Kyrgyzstan_02.jpg |
+| packs/img/latvia.jpg | Latvia | simka | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Winter_landscape_in_Latvia,_2012.jpg |
+| packs/img/lebanon.jpg | Lebanon | Eusebius | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Pano_Baalbek_1.jpg |
 | packs/img/lesotho.jpg | Lesotho | Sheane Moji | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Landscape_View,.jpg |
 | packs/img/liberia.jpg | Liberia | David Stanley | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Liberian_Capitol_Building.jpg |
 | packs/img/libya.jpg | Libya | David Holt | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Temple_of_Zeus_Cyrene.jpg |
 | packs/img/lightning.jpg | Lightning | Postdlf | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Lightning_in_Arlington.jpg |
+| packs/img/lithuania.jpg | Lithuania | Wojsyl | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Lithuania_Centre_of_Europe.jpg |
+| packs/img/luxembourg.jpg | Luxembourg | Ipigott | CC0 | https://commons.wikimedia.org/wiki/File:Luxembourg_Moselle_Vinyards_Machtum.JPG |
 | packs/img/madagascar.jpg | Madagascar | Bernard Gagnon | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Landscape_Madagascar_05.jpg |
 | packs/img/malawi.jpg | Malawi | Dr. Ondřej Havelka (cestovatel) | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Malawi_Village.jpg |
+| packs/img/malaysia.jpg | Malaysia | Pangalau | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Parliament_House_of_Malaysia_(cropped_4to3_landscape).jpg |
+| packs/img/maldives.jpg | Maldives | O'Dea | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Aquanaut_Explorer,_1987.jpg |
 | packs/img/mali.jpg | Mali | Dr. Ondřej Havelka (cestovatel) | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Koro,_Mali.jpg |
+| packs/img/malta.jpg | Malta | Peter Flass | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Malta_Corners,_Malta_NY.jpg |
 | packs/img/mauritania.jpg | Mauritania | LBM1948 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Mauritania,_desierto_1997_02.jpg |
 | packs/img/mauritius.jpg | Mauritius | Hansueli Krapf | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Landscape_near_Les_Mariannes,_Mauritius,_2007-09-09.jpg |
+| packs/img/mexico.jpg | Mexico | No machine-readable author provided. JensUhlenbrock~commonswiki assumed (based on copyright claims). | Public domain | https://commons.wikimedia.org/wiki/File:Barranca_del_cobre_2.jpg |
+| packs/img/moldova.jpg | Moldova | Duesseljan | CC0 | https://commons.wikimedia.org/wiki/File:Jewish_Cultural_Centre_Chisinau_1.jpg |
+| packs/img/monaco.jpg | Monaco | VictiniFan360 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Monaco_Souvenir_Passport-Notes_page.jpg |
+| packs/img/mongolia.jpg | Mongolia | Bernard Gagnon | CC0 | https://commons.wikimedia.org/wiki/File:Landscape_of_Kh%C3%B6vsg%C3%B6l_Province.jpg |
+| packs/img/montenegro.jpg | Montenegro | Daniya.Mostovaya | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Wind_Park_Mozura_Montenegro_(1).jpg |
 | packs/img/morocco.jpg | Morocco | Rosino | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Erg_Chebbi_Maroc.jpg |
 | packs/img/mozambique.jpg | Mozambique | Paulo Oliveira at English Wikipedia | Public domain | https://commons.wikimedia.org/wiki/File:Gurue_Mount_Murresse.jpg |
+| packs/img/myanmar.jpg | Myanmar | Sky89 at English Wikipedia | Public domain | https://commons.wikimedia.org/wiki/File:Downtown_Yangon_(2006).jpg |
 | packs/img/namibia.jpg | Namibia | Hans Hillewaert | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Equus_burchelli_4.jpg |
+| packs/img/nauru.jpg | Nauru | U.S. Department of Energy's Atmospheric Radiation Measurement Program | Public domain | https://commons.wikimedia.org/wiki/File:Aerial_view_of_Nauru.jpg |
+| packs/img/nepal.jpg | Nepal | Vyacheslav Argenberg | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Himalayas,_Cholatse,_Nepal.jpg |
+| packs/img/netherlands.jpg | Netherlands | Fractal Caleidoscope | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Winter_landscape_in_the_Netherlands.jpg |
+| packs/img/nicaragua.jpg | Nicaragua | Adrian Sampson from Bainbridge Island, WA, USA | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Down_to_laguna_(landscape).jpg |
 | packs/img/niger.jpg | Niger | Roland Hunziker https://www.flickr.com/photos/rolandh/ | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Elephants_bath_park_w_Niger_2006.jpg |
 | packs/img/nigeria.jpg | Nigeria | MediaMOF | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Nigeria_Landscape_69.jpg |
+| packs/img/north-korea.jpg | North Korea | Kok Leng Yeo from Singapore, Singapore | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:North_Korea-Pyongyang-Arirang_Mass_Games-01_(1).jpg |
+| packs/img/north-macedonia.jpg | North Macedonia | Alekishere at English Wikipedia | Public domain | https://commons.wikimedia.org/wiki/File:Macedonian_parliament_interior.jpg |
+| packs/img/norway.jpg | Norway | Johannes Groll followhansi | CC0 | https://commons.wikimedia.org/wiki/File:Lofoten,_Norway_(Unsplash).jpg |
 | packs/img/ohms-law.jpg | Ohm's law | Daniel Villafruela . | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Saint_%C3%89tienne-Georg_Ohm-20140328.jpg |
+| packs/img/oman.jpg | Oman | Sakralamn | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Nakhal_Fort_Sultanate_of_Oman_001.jpg |
+| packs/img/pakistan.jpg | Pakistan | Joham javed | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Pakistan_landscape.jpg |
+| packs/img/palestine.jpg | Palestine | Addshore | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Palestine_with_sheep_panorama.jpg |
+| packs/img/panama.jpg | Panama | Dozenist | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Panama_City_from_Administration_Buildling_01.jpg |
+| packs/img/papua-new-guinea.jpg | Papua New Guinea | Mschlauch | Public domain | https://commons.wikimedia.org/wiki/File:Port_Moresby_Town_Mschlauch.JPG |
+| packs/img/paraguay.jpg | Paraguay | Cmasi | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Tebicuary_landscape_IMG_8300.JPG |
+| packs/img/people-alan-turing.jpg | Alan Turing | Mike McBey | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Alan_Turing_(48428940902).jpg |
+| packs/img/people-albert-einstein.jpg | Albert Einstein | International News Service | Public domain | https://commons.wikimedia.org/wiki/File:Albert_Einstein_sticks_his_tongue.jpg |
+| packs/img/people-amelia-earhart.jpg | Amelia Earhart | Copyright by Underwood and Underwood (not renewed) | Public domain | https://commons.wikimedia.org/wiki/File:Face_detail,_Earhart_(cropped).jpg |
+| packs/img/people-barack-obama.jpg | Barack Obama | Pete Souza | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Barack_Obama_and_Bill_Clinton.jpg |
+| packs/img/people-charles-darwin.jpg | Charles Darwin | Peter_Glyn | CC0 | https://commons.wikimedia.org/wiki/File:Statue_of_Charles_Darwin_Shrewsbury.jpg |
+| packs/img/people-chinua-achebe.jpg | Chinua Achebe | Scartol | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Things_Fall_Apart_books_02.jpg |
+| packs/img/people-christopher-columbus.jpg | Christopher Columbus | AgnosticPreachersKid | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Christopher_Columbus_Monument_4.JPG |
+| packs/img/people-florence-nightingale.jpg | Florence Nightingale | Hugh M Smith | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Florence_Nightingale_Statue,_Derby.jpg |
+| packs/img/people-haile-selassie-i.jpg | Haile Selassie I | Unknown author Unknown author | Public domain | https://commons.wikimedia.org/wiki/File:Haile_Selassie_and_group.jpg |
+| packs/img/people-helen-keller.jpg | Helen Keller | Whitman | Public domain | https://commons.wikimedia.org/wiki/File:Helen_Keller_apple_tree_1909.jpg |
+| packs/img/people-ibn-battuta.jpg | Ibn Battuta | Challiyil Eswaramangalath Pavithran Vipin | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Ibn_Bathutha_Mall_of_Dubai.jpg |
+| packs/img/people-isaac-newton.jpg | Isaac Newton | Andrew Gray | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Isaac_Newton_statue.jpg |
+| packs/img/people-jane-goodall.jpg | Jane Goodall | Jeekc | CC BY 2.5 | https://commons.wikimedia.org/wiki/File:Jane_Goodall_HK.jpg |
+| packs/img/people-kofi-annan.jpg | Kofi Annan | US Mission in Geneva | Public domain | https://commons.wikimedia.org/wiki/File:Kofi_Annan_2012.jpg |
+| packs/img/people-kwame-nkrumah.jpg | Kwame Nkrumah | Edward Kamau | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Kwame_nkrumah_grave_accra_ghana.jpg |
+| packs/img/people-mahatma-gandhi.jpg | Mahatma Gandhi | Dietmar Rabich | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Hamburg,_HafenCity,_Elbphilharmonie_(und_Mahatma-Gandhi-Br%C3%BCcke)_--_2016_--_3054.jpg |
+| packs/img/people-malala-yousafzai.jpg | Malala Yousafzai | DFID - UK Department for International Development | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Malala_Yousafzai_2015.jpg |
+| packs/img/people-marco-polo.jpg | Marco Polo | xiquinhosilva | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Statue_of_Marco_Polo_(Ulaanbaatar_-_54510007902).jpg |
+| packs/img/people-marie-curie.jpg | Marie Curie | Fotograv. - Generalstabens Litografiska Anstalt Stockholm | Public domain | https://commons.wikimedia.org/wiki/File:Marie_Curie_(Nobel-Chem).jpg |
+| packs/img/people-martin-luther-king-jr.jpg | Martin Luther King Jr. | U.S. Department of Justice | Public domain | https://commons.wikimedia.org/wiki/File:Bloody_Sunday-officers_await_demonstrators.jpeg |
+| packs/img/people-mother-teresa.jpg | Mother Teresa | Kingkongphoto & www.celebrity-photos.com from Laurel Maryland, USA | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Mother_Teresa_1.jpg |
+| packs/img/people-nelson-mandela.jpg | Nelson Mandela | South Africa The Good News | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Nelson_Mandela_(3199011844).jpg |
+| packs/img/people-nikola-tesla.jpg | Nikola Tesla | Barraud | Public domain | https://commons.wikimedia.org/wiki/File:Nikola_Tesla,_Barraud.jpg |
+| packs/img/people-rosa-parks.jpg | Rosa Parks | Associated Press | Public domain | https://commons.wikimedia.org/wiki/File:Rosa_Parks_1955.jpg |
+| packs/img/people-stephen-hawking.jpg | Stephen Hawking | Tanya Hart | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Relative_time_(2886233692)_(Stephen_Hawking_cropped).jpg |
+| packs/img/people-steve-jobs.jpg | Steve Jobs | Joi Ito from Inbamura, Japan | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Steve_Jobs_and_Bill_Gates_(522695099).jpg |
+| packs/img/people-thomas-edison.jpg | Thomas Edison | Unknown author Unknown author | Public domain | https://commons.wikimedia.org/wiki/File:Thomas_Edison_and_Charles_Edison_(a4a8af4f7a2c4ecd96d2a4e0696d2d70).jpg |
+| packs/img/people-tim-berners-lee.jpg | Tim Berners-Lee | Paul Clarke | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Sir_Tim_Berners-Lee.jpg |
+| packs/img/people-winston-churchill.jpg | Winston Churchill | Original: Greg78uk Derivative work: Off2riorob ( talk ) | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Winston_Spencer-Churchill_(1997).jpg |
+| packs/img/people-wright-brothers.jpg | Wright brothers | Aviation poseidon | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Wright_Flyer_1903.jpg |
+| packs/img/peoples-republic-of-china.jpg | People's Republic of China | CEphoto, Uwe Aranas | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Beijing_China_Woman-cleaning-West-Lake-01.jpg |
+| packs/img/peru.jpg | Peru | Allard Schmidt (The Netherlands) | Public domain | https://commons.wikimedia.org/wiki/File:Peru_Machu_Picchu_Sunrise.jpg |
+| packs/img/philippines.jpg | Philippines | Edpan newyork | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Baguio_City,_Philippines(landscape_view).jpg |
+| packs/img/poland.jpg | Poland | This photo was taken by Przemysław Jahr Autorem zdjęcia jest Przemysław Jahr Wykorzystując zdjęcie proszę podać jako autora: Przemysław Jahr / Wikimedia Commons | Public domain | https://commons.wikimedia.org/wiki/File:Wilan%C3%B3w_Palace.jpg |
+| packs/img/portugal.jpg | Portugal | Berit Watkin from London/ UK, UK | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Landscape_in_Portugal_(17021425272).jpg |
+| packs/img/qatar.jpg | Qatar | Lilac landscape | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Lilac_landscape_qatar_(cropped).JPG |
+| packs/img/republic-of-ireland.jpg | Republic of Ireland | Sixflashphoto | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Dublin_City_Hall_1.jpg |
 | packs/img/republic-of-the-congo.jpg | Republic of the Congo | Bsm15 | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Sunrise_on_the_Congo_River_-_2.JPG |
+| packs/img/romania.jpg | Romania | Thalpha | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Retezat_Mountain_-_Spring_Waterfall_02.JPG |
+| packs/img/russia.jpg | Russia | Александр Байдуков | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Swamp_landscape_of_Chuvnoy-Suo.jpg |
 | packs/img/rwanda.jpg | Rwanda | Carine06 from UK | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Rwandan_landscape_(8219706414).jpg |
+| packs/img/saint-kitts-and-nevis.jpg | Saint Kitts and Nevis | Gertjan R. | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Basseterre_from_sea_2.JPG |
+| packs/img/saint-lucia.jpg | Saint Lucia | P. Hughes | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Saint_Lucia_-_Castries_Harbor.jpg |
+| packs/img/samoa.jpg | Samoa | Stephen Glauser | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Beach_on_Upolu_Island,_Samoa,_2009.jpg |
 | packs/img/sao-tome-and-principe.jpg | São Tomé and Príncipe | David Stanley from Nanaimo, Canada | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Sao_Tome_Street_(20101565569)_(2).jpg |
+| packs/img/saudi-arabia.jpg | Saudi Arabia | BroadArrow at English Wikipedia | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Abha_from_Abha_Palace_Hotel.JPG |
+| packs/img/science-acid.jpg | Acid | Rifleman 82 | Public domain | https://commons.wikimedia.org/wiki/File:Sulfuric_acid_burning_tissue_paper.jpg |
+| packs/img/science-atom.jpg | Atom | Ernest Rutherford | Public domain | https://commons.wikimedia.org/wiki/File:Rutherford-atom-for-carbon_lg.jpg |
+| packs/img/science-carbon.jpg | Carbon | Robert M. Lavinsky / Robert M. Lavinsky | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Diamond_and_graphite_without_structures.jpg |
+| packs/img/science-chemical-element.jpg | Chemical element | José A. Flores-Livas, Lilia Boeri, Antonio Sanna, Gianni Profeta, Ryotaro Arita, Mikhail Eremets | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Periodic_table_with_superconducting_temperatures.jpg |
+| packs/img/science-combustion.jpg | Combustion | Femma Official | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Late_Night_Burning_Fire.jpg |
+| packs/img/science-energy.jpg | Energy | Lauri Veerde | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Wind_turbine_in_full_01.jpg |
+| packs/img/science-force.jpg | Force | US Air Force from USA | Public domain | https://commons.wikimedia.org/wiki/File:Pushing_to_the_finish_line_(14887290649).jpg |
+| packs/img/science-gas.jpg | Gas | Ram samudrala | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Eternal_flame_falls_2.jpg |
+| packs/img/science-gold.jpg | Gold | James St. John | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Gold_nugget_(Australia)_4_(16848647509).jpg |
+| packs/img/science-gravity.jpg | Gravity | NASA | Public domain | https://commons.wikimedia.org/wiki/File:GPB_circling_earth.jpg |
+| packs/img/science-heat.jpg | Heat | Jan.Nijkamp | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Flame_detection_radiation_of_heat.JPG |
+| packs/img/science-iron.jpg | Iron | Photographic Collection from Australia | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Iron_ore,_Newcastle_(3057429699).jpg |
+| packs/img/science-laser.jpg | Laser | ESO/ Yuri Beletsky ( ybialets at eso.org ) | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Laser_Towards_Milky_Ways_Centre.jpg |
+| packs/img/science-light.jpg | Light | Sindugab | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Rainbow_colors_splashing_of_powder.jpg |
+| packs/img/science-liquid.jpg | Liquid | Dan Brown from London, UK | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Pouring_Liquid_Gold.jpg |
+| packs/img/science-magnet.jpg | Magnet | Maciej J. Mrowinski | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Horseshoe_magnet_metal_shavings_(top).jpg |
+| packs/img/science-mass.jpg | Mass | Tomás Castelazo | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Chickens_in_market.jpg |
+| packs/img/science-matter.jpg | Matter | Henryk Niestrój | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:L%C3%B3d_na_jeziorze.jpg |
+| packs/img/science-metal.jpg | Metal | James St. John | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Gold_nugget_(Australia)_4_(16848647509).jpg |
+| packs/img/science-molecule.jpg | Molecule | Ljeto | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Molecule_of_water.jpg |
+| packs/img/science-nuclear-power.jpg | Nuclear power | NRC | Public domain | https://commons.wikimedia.org/wiki/File:Reactor_Vessel_head.jpg |
+| packs/img/science-oxygen.jpg | Oxygen | Alchemist-hp | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Oxygen_discharge_tube_resized.jpg |
+| packs/img/science-periodic-table.jpg | Periodic table | José A. Flores-Livas, Lilia Boeri, Antonio Sanna, Gianni Profeta, Ryotaro Arita, Mikhail Eremets | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Periodic_table_with_superconducting_temperatures.jpg |
+| packs/img/science-pressure.jpg | Pressure | Fumikas Sagisavas | CC0 | https://commons.wikimedia.org/wiki/File:Pressure_gauge_of_brake_pipe.jpg |
+| packs/img/science-rainbow.jpg | Rainbow | Rhododendrites | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Ring-billed_gull_and_a_rainbow_(52910).jpg |
+| packs/img/science-salt.jpg | Salt | Dey.sandip | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Marakkanam_Salt_Pans.JPG |
+| packs/img/science-solid.jpg | Solid | User Postdlf on en.wikipedia | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Chrysler_Building_detail.jpg |
+| packs/img/science-speed-of-light.jpg | Speed of light | InSapphoWeTrust | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Luxor_Light_Beam_by_inSapphoWeTrust.jpeg |
+| packs/img/science-temperature.jpg | Temperature | No machine-readable author provided. CambridgeBayWeather assumed (based on copyright claims). | Public domain | https://commons.wikimedia.org/wiki/File:Maximum_thermometer_close_up_2.JPG |
+| packs/img/science-water.jpg | Water | Jason Auch | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Iceberg_from_overhead_IMG_0320.jpg |
 | packs/img/senegal.jpg | Senegal | Dorothy Voorhees | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:On_the_road_to_Dimboli-Senegal(2).jpg |
+| packs/img/serbia.jpg | Serbia | Elemirus | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Elemir_landscape_001.jpeg |
 | packs/img/seychelles.jpg | Seychelles | Hajira Amla, Seychelles News Agency | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:North_Island_Seychelles_landscape.jpg |
 | packs/img/sierra-leone.jpg | Sierra Leone | LindsayStark | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Sierra_Leone_Road.jpg |
+| packs/img/singapore.jpg | Singapore | Kroisenbrunner . | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Singapore_port_panorama.jpg |
+| packs/img/slovakia.jpg | Slovakia | Michalsmr | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Sitno_nov_2023.jpg |
+| packs/img/slovenia.jpg | Slovenia | Doremo | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Zakal_Slovenia_-_landscape.jpg |
+| packs/img/solomon-islands.jpg | Solomon Islands | U.S. Central Intelligence Agency | Public domain | https://commons.wikimedia.org/wiki/File:Solomon_Islands_1989.jpg |
 | packs/img/somalia.jpg | Somalia | Rahim Alpa | Public domain | https://commons.wikimedia.org/wiki/File:Somalia,_Puntland,_Bari,_Bargal_(01).jpg |
 | packs/img/south-africa.jpg | South Africa | Gossipguy | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Upland_South_Africa_Savanna.jpg |
 | packs/img/south-sudan.jpg | South Sudan | Lomondi | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Landscape_of_my_house.jpg |
+| packs/img/space-apollo-11.jpg | Apollo 11 | Neil A. Armstrong | Public domain | https://commons.wikimedia.org/wiki/File:Aldrin_Apollo_11.jpg |
+| packs/img/space-astronaut.jpg | Astronaut | Bill Ingalls | Public domain | https://commons.wikimedia.org/wiki/File:First_all-female_spacewalk_-_2.jpg |
+| packs/img/space-aurora.jpg | Aurora | AstroAnthony | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Church_of_light.jpg |
+| packs/img/space-big-bang.jpg | Big Bang | Uros Seljak | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:B_mode_in_microwave_sky.jpg |
+| packs/img/space-black-hole.jpg | Black hole | Event Horizon Telescope | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Black_hole_-_Messier_87.jpg |
+| packs/img/space-constellation.jpg | Constellation | Rogelio Bernal Andreo | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Orion_Head_to_Toe.jpg |
+| packs/img/space-galaxy.jpg | Galaxy | European Space Agency | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Birds_of_a_feather_(50071190086).jpg |
+| packs/img/space-hubble-space-telescope.jpg | Hubble Space Telescope | NASA/JPL-Caltech and The Hubble Heritage Team (STScI/AURA) | Public domain | https://commons.wikimedia.org/wiki/File:Sombrero_Galaxy_in_infrared_light_(Hubble_Space_Telescope_and_Spitzer_Space_Telescope).jpg |
+| packs/img/space-international-space-station.jpg | International Space Station | NASA | Public domain | https://commons.wikimedia.org/wiki/File:International_Space_Station.jpg |
+| packs/img/space-jupiter.jpg | Jupiter | Taavi Niittee | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Jupiter_t%C3%B5rva.jpg |
+| packs/img/space-mars.jpg | Mars | NASA and The Hubble Heritage Team (STScI/AURA) | Public domain | https://commons.wikimedia.org/wiki/File:Mars_Hubble.jpg |
+| packs/img/space-mercury.jpg | Mercury | NASA/Johns Hopkins University Applied Physics Laboratory/Arizona State University/Carnegie Institution of Washington | Public domain | https://commons.wikimedia.org/wiki/File:Mercury_in_true_color.jpg |
+| packs/img/space-meteor.jpg | Meteor | James St. John | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Murnpeowie_meteorite.jpg |
+| packs/img/space-milky-way.jpg | Milky Way | ESO/ Yuri Beletsky ( ybialets at eso.org ) | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Laser_Towards_Milky_Ways_Centre.jpg |
+| packs/img/space-moon.jpg | Moon | Neil A. Armstrong | Public domain | https://commons.wikimedia.org/wiki/File:Aldrin_Apollo_11.jpg |
+| packs/img/space-nebula.jpg | Nebula | NASA/JPL-Caltech/WISE Team | Public domain | https://commons.wikimedia.org/wiki/File:Rho_Ophiuchi.jpg |
+| packs/img/space-neil-armstrong.jpg | Neil Armstrong | Unknown author Unknown author | Public domain | https://commons.wikimedia.org/wiki/File:Neil_Armstrong_pose.jpg |
+| packs/img/space-neptune.jpg | Neptune | NASA | Public domain | https://commons.wikimedia.org/wiki/File:Neptune_Full.jpg |
+| packs/img/space-pluto.jpg | Pluto | NASA | Public domain | https://commons.wikimedia.org/wiki/File:New_Horizons_Trajectory_to_Pluto.jpg |
+| packs/img/space-rocket.jpg | Rocket | Gocsmán Benedek | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Rocket_launch_remains.jpg |
+| packs/img/space-saturn.jpg | Saturn | NASA/JPL/Space Science Institute | Public domain | https://commons.wikimedia.org/wiki/File:Saturn_from_Cassini_Orbiter_(2004-10-06).jpg |
+| packs/img/space-solar-eclipse.jpg | Solar eclipse | Luc Viatour | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Solar_eclips_1999_1.jpg |
+| packs/img/space-solar-system.jpg | Solar System | wikipedia user Brian0918 | Public domain | https://commons.wikimedia.org/wiki/File:Terrestrial_planet_size_comparisons.jpg |
+| packs/img/space-space-shuttle.jpg | Space Shuttle | NASA | Public domain | https://commons.wikimedia.org/wiki/File:Shuttle_profiles.jpg |
+| packs/img/space-sun.jpg | Sun | NSO/AURA/ NSF | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Solar_flare_(noao-02245).jpg |
+| packs/img/space-telescope.jpg | Telescope | NASA (Transfered by Quantanew /Original uploaded by Mohamed Osama AlNagdy ) | Public domain | https://commons.wikimedia.org/wiki/File:LargeBinoTelescope_NASA.jpg |
+| packs/img/space-uranus.jpg | Uranus | NASA | Public domain | https://commons.wikimedia.org/wiki/File:Uranus_Final_Image.jpg |
+| packs/img/space-venus.jpg | Venus | NASA/JPL | Public domain | https://commons.wikimedia.org/wiki/File:Venus_globe.jpg |
+| packs/img/space-voyager-1.jpg | Voyager 1 | NASA | Public domain | https://commons.wikimedia.org/wiki/File:Great_Red_Spot_From_Voyager_1.jpg |
+| packs/img/space-yuri-gagarin.jpg | Yuri Gagarin | Jorit | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Yuri_Gagarin_by_Jorit.jpg |
+| packs/img/spain.jpg | Spain | Phillip Capper | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Landscape_near_%C3%89cija,_Spain.jpg |
+| packs/img/sri-lanka.jpg | Sri Lanka | Christophe Meneboeuf | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:SriLanka_Elephants_(pixinn.net).jpg |
 | packs/img/static-electricity.jpg | Static electricity | Sagadattolembay | CC0 | https://commons.wikimedia.org/wiki/File:Electric_spark.jpg |
 | packs/img/sudan.jpg | Sudan | walter callens | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Western_Deffufa_-_Kerma.jpg |
+| packs/img/suriname.jpg | Suriname | Forrestjunky | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Suriname_rainforest_villages.jpg |
+| packs/img/sweden.jpg | Sweden | Pudelek | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Swedish_landscape_near_Bj%C3%B6rnlunda_(by_Pudelek)_01.jpg |
+| packs/img/switzerland.jpg | Switzerland | Benjamin Gimmel BenHur | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Schweiz_Schloss_Chillon_Gesamtansicht.jpg |
+| packs/img/syria.jpg | Syria | Somar Samrah | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:The_Umayyad_square.jpg |
+| packs/img/taiwan.jpg | Taiwan | TaiwanBro | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Taichung_Metropolitan_Park_Lake.jpg |
+| packs/img/tajikistan.jpg | Tajikistan | Шухрат Саъдиев | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Tajikistan_Fan-Mountains_-_landscape_03.JPG |
 | packs/img/tanzania.jpg | Tanzania | Mchiriku | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Nyerere_Square_in_Dodoma.jpg |
+| packs/img/thailand.jpg | Thailand | Vyacheslav Argenberg | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Krabi,_Limestone_karst_landscape,_Thailand.jpg |
+| packs/img/the-bahamas.jpg | The Bahamas | Gervacio Rosales | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Nassau,_The_Bahamas_-_panoramio_(3).jpg |
 | packs/img/the-gambia.jpg | The Gambia | Mark Hodson Photos | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Makasutu_Forest,_The_Gambia_(16223036065).jpg |
 | packs/img/togo.jpg | Togo | Erik Kristensen | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Togo_Taberma_house_02.jpg |
+| packs/img/tonga.jpg | Tonga | Duncan from Wellington, NZ | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Eua_National_Park,_Tonga.jpg |
+| packs/img/trinidad-and-tobago.jpg | Trinidad and Tobago | cheesy 42 | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Castara_Bay_(Tobago_2009).jpg |
 | packs/img/tunisia.jpg | Tunisia | Amanimersni | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Natur_tunisia(1).jpg |
+| packs/img/turkey.jpg | Turkey | Benh LIEU SONG ( Flickr ) | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Cappadocia_Aerial_View_Landscape.jpg |
+| packs/img/turkmenistan.jpg | Turkmenistan | ILMur | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Panorama_From_Ashgabat_TV_Tower.JPG |
+| packs/img/tuvalu.jpg | Tuvalu | Stefan Lins | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Tuvalu_Funafuti_atoll_beach.jpg |
 | packs/img/uganda.jpg | Uganda | not not phil from SF, CA, US | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Uganda_-_growing_millet.jpg |
+| packs/img/ukraine.jpg | Ukraine | Zyoru | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Oblasts_of_Ukraine_(in_Kashmiri).jpg |
+| packs/img/united-arab-emirates.jpg | United Arab Emirates | Like My Travel from Peru | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Dubai_downtown,_United_Arab_Emirates_(49786413631).jpg |
+| packs/img/united-kingdom.jpg | United Kingdom | Diliff | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Glenridding,_Cumbria,_England_-_June_2009.jpg |
+| packs/img/united-states.jpg | United States | Patrick Nouhailler | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Aerial_view_of_Silicon_Valley.jpg |
+| packs/img/uruguay.jpg | Uruguay | Libertinus | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:R%C3%ADo_Uruguay_en_Bella_Uni%C3%B3n.jpg |
+| packs/img/uzbekistan.jpg | Uzbekistan | Bgag | CC0 | https://commons.wikimedia.org/wiki/File:Kyzylkum_Desert_in_Uzbekistan.jpg |
+| packs/img/vanuatu.jpg | Vanuatu | Phillip Capper from Wellington, New Zealand | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Port_Vila_aerial.jpg |
+| packs/img/vatican-city.jpg | Vatican City | Krzysztof Golik | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Gardens_in_the_Vatican_City_(3).jpg |
+| packs/img/venezuela.jpg | Venezuela | Wilfredor | CC0 | https://commons.wikimedia.org/wiki/File:Panoramic_of_Juan_Griego_45.jpg |
+| packs/img/vietnam.jpg | Vietnam | Trantuanviet | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Incense_in_Vietnam.jpg |
 | packs/img/voltage.jpg | Voltage | Contraix | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:CH_Capdella,_3_volt%C3%ADmetres.jpg |
+| packs/img/wildlife-bat.jpg | Bat | Ranieljosecastaneda | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Fruit_Bat_in_the_Philippines.jpg |
+| packs/img/wildlife-blue-whale.jpg | Blue whale | Gregory "Slobirdr" Smith | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Blue_Whale_(Balaenoptera_musculus)_(16108163937).jpg |
+| packs/img/wildlife-butterfly.jpg | Butterfly | Thomas Bresson | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Gonepteryx_rhamni_-_Citron-1.jpg |
+| packs/img/wildlife-camel.jpg | Camel | Manojkiri photography | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Arabian_Camel_in_Kuwait.jpg |
+| packs/img/wildlife-cheetah.jpg | Cheetah | James Temple | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Acinonyx_jubatus_Sabi_Sand.jpg |
+| packs/img/wildlife-chimpanzee.jpg | Chimpanzee | Charles J. Sharp | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Common_chimpanzee_(Pan_troglodytes_schweinfurthii)_feeding.jpg |
+| packs/img/wildlife-crocodile.jpg | Crocodile | Bernard Gagnon | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Nile_crocodile_in_the_Zambezi.jpg |
+| packs/img/wildlife-dolphin.jpg | Dolphin | NASA | Public domain | https://commons.wikimedia.org/wiki/File:Tursiops_truncatus_01.jpg |
+| packs/img/wildlife-elephant.jpg | Elephant | Charles J. Sharp | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Desert_elephant_(Loxodonta_africana)_spraying_sand.jpg |
+| packs/img/wildlife-frog.jpg | Frog | Charles J. Sharp | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Oceanic_tree_frog_(Hyperolius_drewesi).jpg |
+| packs/img/wildlife-giant-panda.jpg | Giant panda | Jeff Kubina | Public domain | https://commons.wikimedia.org/wiki/File:Giant_Panda_2004-03-2.jpg |
+| packs/img/wildlife-giraffe.jpg | Giraffe | Ssemmanda will | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Graceful_Giant_of_the_Savanna_(Giraffe)_02.jpg |
+| packs/img/wildlife-gorilla.jpg | Gorilla | Joe McKenna from San Diego, California | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Eastern_lowland_gorilla.jpg |
+| packs/img/wildlife-hippopotamus.jpg | Hippopotamus | Bernard Gagnon | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Hippopotamus_in_the_Zambezi.jpg |
+| packs/img/wildlife-honey-bee.jpg | Honey bee | John Severns ( Severnjc ) | Public domain | https://commons.wikimedia.org/wiki/File:European_honey_bee_extracts_nectar.jpg |
+| packs/img/wildlife-hummingbird.jpg | Hummingbird | Charles J. Sharp | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Purple-throated_carib_hummingbird_feeding.jpg |
+| packs/img/wildlife-kangaroo.jpg | Kangaroo | JJ Harrison ( https://www.jjharrison.com.au/ ) | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Macropus_giganteus_-_Brunkerville.jpg |
+| packs/img/wildlife-koala.jpg | Koala | KobiWiki | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Koala_in_eucalyptus.jpg |
+| packs/img/wildlife-komodo-dragon.jpg | Komodo dragon | Charles J. Sharp | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Komodo_dragons_(Varanus_komodoensis)_fighting.jpg |
+| packs/img/wildlife-lion.jpg | Lion | Falense | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Okonjima_Lioness.jpg |
+| packs/img/wildlife-octopus.jpg | Octopus | Stan Shebs | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Galaxea_fascicularis_1.jpg |
+| packs/img/wildlife-owl.jpg | Owl | P. Hughes | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Barn_Owl,_Arizona.jpg |
+| packs/img/wildlife-penguin.jpg | Penguin | User:Pismire | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Colony_of_aptenodytes_patagonicus.jpg |
+| packs/img/wildlife-platypus.jpg | Platypus | Igor Zagrebin | CC0 | https://commons.wikimedia.org/wiki/File:Paralithodes_platypus_on_rocks.jpg |
+| packs/img/wildlife-polar-bear.jpg | Polar bear | Alan Wilson | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Polar_Bear_-_Alaska_(cropped).jpg |
+| packs/img/wildlife-rhinoceros.jpg | Rhinoceros | Flickr user James Temple | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Ceratotherium_simum_pair_Sabi_Sand.jpg |
+| packs/img/wildlife-shark.jpg | Shark | Mfield , Matthew Field, www.photography.mattfield.com | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Leopard_shark_in_kelp.jpg |
+| packs/img/wildlife-tiger.jpg | Tiger | Stephenekka | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Panthera_tigris_tigris_Tidoba_20150306.jpg |
+| packs/img/wildlife-wolf.jpg | Wolf | Malene Thyssen | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Scandinavian_grey_wolf_Canis_lupus.jpg |
+| packs/img/wildlife-zebra.jpg | Zebra | Yathin S Krishnappa | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Equus_quagga_(Namutoni,_2012).jpg |
+| packs/img/yemen.jpg | Yemen | Bernard Gagnon | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Yemen_landscape_05.jpg |
 | packs/img/zambia.jpg | Zambia | DBrianWilson | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Big_Tree_Natl_Mont_Kabwe.JPG |
 | packs/img/zimbabwe.jpg | Zimbabwe | JackyR | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Curled_trunk.jpg |
 <!-- packs:end -->

@@ -135,8 +135,8 @@ describe('buildEvents', () => {
   const items: TimelineItem[] = [
     { qid: 'Q1', subject: 'people', kind: 'born' },
     { qid: 'Q2', subject: 'science', kind: 'launched', label: 'Spirit rover' },
-    { qid: 'Q3', subject: 'history', kind: 'founded' },
-    { qid: 'Q4', subject: 'history', kind: 'founded' },
+    { qid: 'Q3', subject: 'ancient', kind: 'founded' },
+    { qid: 'Q4', subject: 'ancient', kind: 'founded' },
     { qid: 'Q5', subject: 'people', kind: 'born' },
     { qid: 'Q1', subject: 'people', kind: 'born' },
     { qid: 'Q6', subject: 'people', kind: 'born' },
@@ -186,7 +186,7 @@ describe('buildEvents', () => {
           const map = new Map<string, Entity>();
           rows.forEach(([iso, kind], i) => {
             const qid = `Q${i + 1}`;
-            list.push({ qid, subject: 'history', kind });
+            list.push({ qid, subject: 'ancient', kind });
             map.set(qid, entity(qid, { [KINDS[kind].pid]: [time(iso)] }));
           });
           const { events, dropped } = buildEvents(list, map, '2026-11-12');

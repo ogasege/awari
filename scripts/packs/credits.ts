@@ -3,6 +3,7 @@
  * covering every pack file and one table row per bundled photo. Only
  * the text between the pack markers is ever rewritten.
  */
+import { SUBJECT_PACKS } from '../../src/lib/packs/subjects.ts';
 import type { Photo } from '../../src/lib/packs/types.ts';
 
 /** Marker opening the generated region. */
@@ -69,6 +70,7 @@ export function renderCredits(
     '',
     '- `packs/countries/*.json` (country articles and the pack index)',
     '- `packs/physics/*.json` (electricity articles and the pack index)',
+    ...SUBJECT_PACKS.map((p) => `- \`packs/${p}/*.json\` (${p} subject pack articles and index)`),
     '',
     '### Facts: Wikidata',
     '',

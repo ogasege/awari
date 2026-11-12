@@ -2,17 +2,22 @@
  * Pure helpers for the Timeline screen: subject filtering, grouping by
  * century and the century ruler (07-timeline Req 2.2, 2.4).
  */
+import { EVENT_CONTINENTS, SUBJECTS, type EventContinent } from '../../lib/packs/subjects.ts';
 import type { TimelineEvent, TimelineSubject } from '../../lib/packs/types.ts';
 
 export type SubjectFilter = 'all' | TimelineSubject;
+export type ContinentFilter = 'all' | EventContinent;
 
-/** The filter buttons, in display order. */
+/** The subject buttons, in display order: every subject in Awari. */
 export const FILTERS: ReadonlyArray<{ id: SubjectFilter; label: string }> = [
   { id: 'all', label: 'All' },
-  { id: 'countries', label: 'Countries' },
-  { id: 'science', label: 'Science' },
-  { id: 'people', label: 'People' },
-  { id: 'history', label: 'History' },
+  ...SUBJECTS.map((s) => ({ id: s.id as SubjectFilter, label: s.label })),
+];
+
+/** The continent buttons, in display order. */
+export const CONTINENT_FILTERS: ReadonlyArray<{ id: ContinentFilter; label: string }> = [
+  { id: 'all', label: 'Everywhere' },
+  ...EVENT_CONTINENTS.map((c) => ({ id: c as ContinentFilter, label: c })),
 ];
 
 /** Events of one subject, or every event for `all`; order is kept. */
@@ -21,6 +26,17 @@ export function filterBySubject(
   filter: SubjectFilter,
 ): TimelineEvent[] {
   return filter === 'all' ? [...events] : events.filter((e) => e.subject === filter);
+}
+
+/** Events that match both a subject and a continent (either may be `all`). */
+export function filterEvents(
+  events: readonly TimelineEvent[],
+  subject: SubjectFilter,
+  continent: ContinentFilter,
+): TimelineEvent[] {
+  return events.filter(
+    (e) => (subject === 'all' || e.subject === subject) && (continent === 'all' || e.continent === continent),
+  );
 }
 
 /** The year of an event; all dates are CE (Req 2.5). */

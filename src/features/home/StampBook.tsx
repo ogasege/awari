@@ -9,6 +9,8 @@ import { usePack } from '../../lib/packs/load.ts';
 import type { PackIndex } from '../../lib/packs/types.ts';
 import { useProgress } from '../../lib/store/useProgress.ts';
 import { worldBook } from '../stamps/stamps.ts';
+import { nextCountry } from './rotation.ts';
+import { dayNumber } from './today.ts';
 
 const PLACES: ReadonlyArray<{ left: string; top: string; tilt: number }> = [
   { left: '0%', top: '72%', tilt: -3 },
@@ -23,6 +25,8 @@ export function StampBook({ today = new Date() }: { today?: Date }) {
   const index = usePack<PackIndex>('countries/index.json');
   const items = index.status === 'ready' ? index.data.items : [];
   const book = worldBook(progress.discovered, items);
+  // A different country each day, from the continent with the fewest stamps (19-home-world Req 4).
+  const suggestion = nextCountry(dayNumber(today), progress.discovered, items);
   const recent = book.stamps.slice(-PLACES.length);
   const next = PLACES[recent.length] ?? { left: '79.32%', top: '71.78%', tilt: 2 };
   const nextLeft = recent.length < PLACES.length ? next.left : '79.32%';
@@ -61,12 +65,12 @@ export function StampBook({ today = new Date() }: { today?: Date }) {
           {today.toLocaleDateString('en-GB', { month: 'short' })}
         </span>
       ) : null}
-      <Link to="/atlas" className="abs lift home-stamps__next" style={{ left: nextLeft, top: '71.78%', width: u(186), height: u(226), rotate: `${next.tilt}deg` }}>
+      <Link to={suggestion ? `/atlas?c=${suggestion.id}` : '/stamps'} className="abs lift home-stamps__next" style={{ left: nextLeft, top: '71.78%', width: u(186), height: u(226), rotate: `${next.tilt}deg` }}>
         <span aria-hidden="true" className="hand" style={{ fontSize: u(110), lineHeight: 0.8 }}>
           ?
         </span>
         <span className="hand" style={{ fontSize: u(26), lineHeight: 1 }}>
-          which one next?
+          {suggestion ? `how about ${suggestion.title}?` : 'every stamp found!'}
         </span>
       </Link>
     </>

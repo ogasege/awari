@@ -31,8 +31,11 @@ import { renderCredits, replaceRegion, type PhotoCredit } from './credits.ts';
 import { networkRequests } from './http.ts';
 import { MANIFEST_FILE, OWNED_ENTRIES, buildManifest } from './manifest.ts';
 import { PHYSICS_TOPICS, buildPhysicsArticles } from './physics.ts';
-import { buildEvents } from './timeline.ts';
-import { TIMELINE_ITEMS } from './timeline-items.ts';
+import { SUBJECT_PACKS, normaliseContinent } from '../../src/lib/packs/subjects.ts';
+import { buildHome } from './home.ts';
+import { buildSubjectPack, subjectIndex } from './subject-packs.ts';
+import { buildEvents, continentFrom, referencedPlaces, type TimelineItem } from './timeline.ts';
+import { COUNTRY_DAYS, TIMELINE_ITEMS } from './timeline-items.ts';
 import { getEntities } from './wikidata.ts';
 import { PHOTO_OVERRIDES } from './photo-overrides.ts';
 import { choosePhoto, type PhotoSubject } from './photos.ts';
@@ -65,6 +68,8 @@ function latest(dates: readonly string[]): string {
 
 /** Articles with no acceptable photo; the build fails at the end. */
 const missingPhotos: string[] = [];
+/** Countries outside Africa with no acceptable photo: allowed, and listed in the log. */
+const optionalWithoutPhoto: string[] = [];
 
 /** Adds a lead photo to an article; records it when none qualifies. */
 async function addPhoto(
@@ -73,6 +78,7 @@ async function addPhoto(
   queries: string[],
   credits: PhotoCredit[],
   places?: { names: string[]; otherNames: string[] },
+  required = true,
 ): Promise<Article> {
   const subject: PhotoSubject = {
     slug: article.id,
@@ -86,7 +92,11 @@ async function addPhoto(
   const chosen = await choosePhoto(subject, STAGING);
   if (!chosen) {
     // Keep going so one run reports every article that needs an override.
-    missingPhotos.push(`${article.pack}/${article.id}`);
+    if (required) {
+      missingPhotos.push(`${article.pack}/${article.id}`);
+    } else {
+      optionalWithoutPhoto.push(`${article.pack}/${article.id}`);
+    }
     return article;
   }
   credits.push({ path: `packs/${chosen.photo.file}`, subject: article.title, photo: chosen.photo });
@@ -118,7 +128,7 @@ async function main(): Promise<void> {
   const facts = await buildFacts(countries, byQid, wdFetched);
   const factsById = new Map(facts.countries.map((c) => [c.id, c]));
 
-  log('Choosing lead photos for African countries…');
+  log('Choosing lead photos for every country…');
   const countryArticles: Article[] = [];
   const namesOf = (qid: string): string[] => {
     const c = countries.find((x) => x.qid === qid);
@@ -133,7 +143,7 @@ async function main(): Promise<void> {
     if (!article) {
       throw new Error(`No article for ${c.qid}`);
     }
-    if (AFRICAN_UN_MEMBERS.has(c.iso3)) {
+    {
       const names = namesOf(c.qid);
       const capitals = (factsById.get(article.id)?.capital ?? '')
         .split(', ')
@@ -147,10 +157,14 @@ async function main(): Promise<void> {
           names: [...names, ...capitals],
           otherNames: allNames.filter((n) => !names.includes(n)),
         },
+        // Africa's 54 must have a photo (02-content-packs Req 5.1); the rest may go without.
+        AFRICAN_UN_MEMBERS.has(c.iso3),
       );
     }
     countryArticles.push(article);
   }
+
+  log(`  ${optionalWithoutPhoto.length} countries outside Africa have no photo: ${optionalWithoutPhoto.join(', ')}`);
 
   log('Fetching physics articles…');
   const physicsArticles: Article[] = [];
@@ -203,10 +217,29 @@ async function main(): Promise<void> {
   };
   writeJson('physics/index.json', physicsIndex);
 
+  log('Building the subject packs…');
+  const subjectArticles: Article[] = [];
+  const subjectEvents: TimelineItem[] = [];
+  for (const pack of SUBJECT_PACKS) {
+    const built = await buildSubjectPack(pack, STAGING, credits, log);
+    for (const a of built.articles) {
+      const kind = built.events.get(a.id);
+      if (kind && a.qid) {
+        subjectEvents.push({ qid: a.qid, subject: pack, kind, link: `${pack}/${a.id}` });
+      }
+    }
+    log(`  ${pack}: ${built.articles.length} articles, ${built.skipped.length} candidates skipped`);
+    for (const a of built.articles) {
+      writeJson(`${pack}/${a.id}.json`, a);
+    }
+    writeJson(`${pack}/index.json`, subjectIndex(pack, built.articles, wikiRetrieved));
+    subjectArticles.push(...built.articles);
+  }
+
   log('Building the dictionary (Open English WordNet)…');
   const { lexicon, source: wnSource } = await loadWordNet();
   const entries = selectEntries(
-    [...countryArticles, ...physicsArticles].flatMap(articleTokens),
+    [...countryArticles, ...physicsArticles, ...subjectArticles].flatMap(articleTokens),
     lexicon,
   );
   const shards = shardEntries(entries, wnSource);
@@ -229,23 +262,43 @@ async function main(): Promise<void> {
   });
 
   log('Building the timeline (Wikidata)…');
-  const { entities: timelineEntities, fetched: timelineFetched } =
-    await getEntities(
-      TIMELINE_ITEMS.map((i) => i.qid),
-      'labels|claims',
-      true,
-    );
-  const countrySlugByQid = new Map(
-    countryArticles.map((a) => [a.qid ?? '', a.id]),
+  const countrySlugByQid = new Map(countryArticles.map((x) => [x.qid ?? '', x.id]));
+  const countryQidBySlug = new Map(countryArticles.map((x) => [x.id, x.qid ?? '']));
+  const continentByQid = new Map<string, string>();
+  for (const f of facts.countries) {
+    const c = normaliseContinent(f.continent);
+    if (c) continentByQid.set(f.qid, c);
+  }
+  const countryItems: TimelineItem[] = [];
+  for (const [slug, expect] of Object.entries(COUNTRY_DAYS)) {
+    const qid = countryQidBySlug.get(slug);
+    if (!qid) {
+      log(`  timeline: no country article "${slug}" for COUNTRY_DAYS`);
+      continue;
+    }
+    countryItems.push({ qid, subject: 'countries', kind: 'independence', expect, link: `countries/${slug}` });
+  }
+  const seenQids = new Set<string>();
+  const timelineItems = [...TIMELINE_ITEMS, ...countryItems, ...subjectEvents].filter((i) => {
+    if (seenQids.has(i.qid)) return false;
+    seenQids.add(i.qid);
+    return true;
+  });
+  const { entities: timelineEntities, fetched: timelineFetched } = await getEntities(
+    timelineItems.map((i) => i.qid),
+    'labels|claims',
+    true,
   );
+  const placeIds = [
+    ...new Set([...timelineEntities.values()].flatMap(referencedPlaces).filter((id) => !timelineEntities.has(id))),
+  ];
+  const { entities: placeEntities } = await getEntities(placeIds, 'claims', true);
   const { events, dropped } = buildEvents(
-    TIMELINE_ITEMS,
+    timelineItems,
     timelineEntities,
     isoDate(timelineFetched),
-    (i) => {
-      const slug = i.subject === 'countries' ? countrySlugByQid.get(i.qid) : undefined;
-      return i.link ?? (slug ? `countries/${slug}` : undefined);
-    },
+    (i) => i.link ?? (i.subject === 'countries' && countrySlugByQid.has(i.qid) ? `countries/${countrySlugByQid.get(i.qid)}` : undefined),
+    (i, entity) => i.continent ?? continentFrom(entity, continentByQid, new Map([...placeEntities, ...timelineEntities])),
   );
   for (const d of dropped) {
     log(`  timeline: dropped ${d.qid} (${d.reason})`);
@@ -255,6 +308,11 @@ async function main(): Promise<void> {
     source: wikidataSource(isoDate(timelineFetched)),
   });
   log(`  ${events.length} events`);
+
+  log('Building the Home rotation data…');
+  const home = buildHome([...countryArticles, ...physicsArticles, ...subjectArticles]);
+  writeJson('home.json', home);
+  log(`  ${home.notes.length} notes, ${home.subjects.reduce((n, x) => n + x.featured.length, 0)} featured articles`);
 
   const manifest = buildManifest(STAGING, isoDate(new Date()));
   writeJson(MANIFEST_FILE, manifest);
@@ -302,7 +360,7 @@ async function main(): Promise<void> {
   log(
     `Done in ${Math.round((Date.now() - started) / 1000)} s: ` +
       `${countryArticles.length} countries (${african} African), ` +
-      `${physicsArticles.length} physics articles, ${credits.length} photos, ` +
+      `${physicsArticles.length} physics articles, ${subjectArticles.length} subject articles, ${credits.length} photos, ` +
       `${entries.size} dictionary lemmas, ${atlas.features.length} atlas shapes, ` +
       `${events.length} timeline events, ` +
       `${(manifest.totalBytes / 1024 / 1024).toFixed(2)} MB, ` +

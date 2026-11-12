@@ -7,7 +7,8 @@ import { Link, navigate, usePath } from '../../app/navigation.tsx';
 import { useTitle } from '../../app/useTitle.ts';
 import { StripHeading } from '../../design/paper.tsx';
 import { lookupWord, partOfSpeech, type Definition } from '../../lib/dictionary/lookup.ts';
-import { usePack } from '../../lib/packs/load.ts';
+import { loadPack, usePack } from '../../lib/packs/load.ts';
+import { BUNDLED_PACKS } from '../../lib/packs/subjects.ts';
 import type { PackIndex, PackId, TimelinePack } from '../../lib/packs/types.ts';
 import { listArticles, type ReadArticle } from '../../lib/wiki/cache.ts';
 import { mergeResults, wikiSearch, type WikiHit } from '../../lib/wiki/search.ts';
@@ -19,6 +20,25 @@ interface QuizIndex {
 }
 
 const MAX_SHOWN = 40;
+
+/** Every bundled pack index, loaded on demand when search opens (15-subject-packs Req 3.1). */
+function usePackIndexes(): { ready: PackIndex[]; loading: boolean } {
+  const [state, setState] = useState<{ ready: PackIndex[]; loading: boolean }>({ ready: [], loading: true });
+  useEffect(() => {
+    let live = true;
+    void Promise.allSettled(BUNDLED_PACKS.map((p) => loadPack<PackIndex>(`${p}/index.json`))).then((results) => {
+      if (!live) return;
+      setState({
+        ready: results.flatMap((r) => (r.status === 'fulfilled' ? [r.value] : [])),
+        loading: false,
+      });
+    });
+    return () => {
+      live = false;
+    };
+  }, []);
+  return state;
+}
 
 export default function SearchScreen() {
   // The header's search box navigates to /search?q=…; follow the address.
@@ -34,18 +54,15 @@ export default function SearchScreen() {
   }
   useTitle(query.trim() ? `Search: ${query.trim()}` : 'Search');
 
-  const countries = usePack<PackIndex>('countries/index.json');
-  const physics = usePack<PackIndex>('physics/index.json');
+  const indexes = usePackIndexes();
   const quizzes = usePack<QuizIndex>('quizzes/index.json');
   const timeline = usePack<TimelinePack>('timeline.json');
 
   const docs = useMemo<SearchDoc[]>(() => {
     const out: SearchDoc[] = [];
-    for (const [pack, state] of [['countries', countries], ['physics', physics]] as const) {
-      if (state.status === 'ready') {
-        for (const i of state.data.items) {
-          out.push({ kind: 'article', id: `${pack}/${i.id}`, title: i.title, text: i.summary, to: `/article/${pack}/${i.id}` });
-        }
+    for (const index of indexes.ready) {
+      for (const i of index.items) {
+        out.push({ kind: 'article', id: `${index.pack}/${i.id}`, title: i.title, text: i.summary, to: `/article/${index.pack}/${i.id}` });
       }
     }
     if (timeline.status === 'ready') {
@@ -54,7 +71,7 @@ export default function SearchScreen() {
       }
     }
     return out;
-  }, [countries, physics, timeline]);
+  }, [indexes, timeline]);
 
   const quizSet = useMemo(
     () => new Set(quizzes.status === 'ready' ? quizzes.data.quizzes.map((q) => `${q.pack}/${q.id}`) : []),
@@ -116,7 +133,7 @@ export default function SearchScreen() {
   }, [single]);
   const def = single && meaning?.word === single ? meaning.def : null;
 
-  const loading = [countries, physics, timeline].some((s) => s.status === 'loading') || searching;
+  const loading = indexes.loading || timeline.status === 'loading' || searching;
   const submit = (e: FormEvent): void => {
     e.preventDefault();
     const q = field.trim();

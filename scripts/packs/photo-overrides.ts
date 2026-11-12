@@ -10,6 +10,12 @@ import type { PhotoOverride } from './photos.ts';
 /** Curated Commons files, checked by `npm run packs`. */
 export const PHOTO_OVERRIDES: ReadonlyMap<string, PhotoOverride> = new Map([
   [
+    // Found by awari-licence-auditor (2026-11-12): the automatic pick was
+    // of Bangui in Ilocos Norte, the Philippines, not the country's capital.
+    'countries/central-african-republic',
+    { file: 'Bangui City Centre.jpg', caption: 'Bangui city centre', alt: 'The centre of Bangui, the capital of the Central African Republic' },
+  ],
+  [
     'countries/equatorial-guinea',
     { file: 'Atardecer en la playa de Ureca (Ureka) Guinea Ecuatorial.jpg', caption: 'Sunset at Ureca', alt: 'Sunset on the beach at Ureca on Bioko island, Equatorial Guinea' },
   ],

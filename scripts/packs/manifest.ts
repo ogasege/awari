@@ -4,6 +4,7 @@
  */
 import { statSync } from 'node:fs';
 import { join } from 'node:path';
+import { SUBJECT_PACKS } from '../../src/lib/packs/subjects.ts';
 import { listFiles } from '../lib/files.ts';
 
 /** Name of the manifest file inside the packs folder. */
@@ -17,6 +18,8 @@ export const MANIFEST_FILE = 'manifest.json';
 export const OWNED_ENTRIES: readonly string[] = [
   'countries',
   'physics',
+  ...SUBJECT_PACKS,
+  'home.json',
   'dictionary',
   'atlas',
   'img',

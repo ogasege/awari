@@ -42,6 +42,42 @@ export function onThisDay(
   return picked.sort((a, b) => a.date.localeCompare(b.date));
 }
 
+/** Days from `from` ("MM-DD") to `to` ("MM-DD") going forward, wrapping at the year's end (0 = same day). */
+export function daysAhead(from: string, to: string): number {
+  const day = (md: string): number => {
+    const m = Number(md.slice(0, 2));
+    const d = Number(md.slice(3, 5));
+    // A leap year, so 02-29 has a place; every year is 366 long here.
+    return Math.floor(Date.UTC(2024, m - 1, d) / 86_400_000);
+  };
+  const delta = day(to) - day(from);
+  return delta >= 0 ? delta : delta + 366;
+}
+
+/**
+ * Up to `count` events for Home's calendar: today's first, spread across
+ * subjects; when fewer than `count` are filed for today, the next events
+ * on the calendar fill the rest ("Coming up"). Today's events come first,
+ * then the others in calendar order.
+ */
+export function onThisDayOrNext(
+  events: readonly TimelineEvent[],
+  date: Date,
+  count = 3,
+): { events: TimelineEvent[]; comingUp: boolean } {
+  const today = onThisDay(events, date, count);
+  if (today.length >= count) {
+    return { events: today, comingUp: false };
+  }
+  const md = monthDay(date);
+  const later = events
+    .filter((e) => e.date.slice(5, 10) !== md)
+    .map((e) => ({ e, ahead: daysAhead(md, e.date.slice(5, 10)) }))
+    .sort((a, b) => a.ahead - b.ahead || a.e.date.localeCompare(b.e.date) || a.e.id.localeCompare(b.e.id));
+  const fill = later.slice(0, count - today.length).map((x) => x.e);
+  return { events: [...today, ...fill], comingUp: fill.length > 0 };
+}
+
 export interface DailyQuiz {
   pack: 'countries' | 'physics';
   id: string;

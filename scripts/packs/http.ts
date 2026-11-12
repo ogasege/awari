@@ -41,7 +41,7 @@ export interface FetchOptions {
 let chain: Promise<unknown> = Promise.resolve();
 let lastRequest = 0;
 let networkCount = 0;
-/** Pause between requests; doubles after every 429 (up to 3 s). */
+/** Pause between requests; doubles after every 429 (up to 3 s), shrinks on success. */
 let gapMs = MIN_GAP_MS;
 
 /** Number of real network requests made in this process. */
@@ -104,6 +104,8 @@ function queued(url: string, opts: FetchOptions): Promise<Buffer> {
         if (!res.ok || !body) {
           throw new Error(`HTTP ${res.status} for ${url}`);
         }
+        // Recover from a slow patch: shrink the pause after every success.
+        gapMs = Math.max(MIN_GAP_MS, Math.floor(gapMs * 0.7));
         return body;
       }
       if (res?.status === 429) {

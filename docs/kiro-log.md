@@ -1,6 +1,30 @@
 # Kiro log
 
-A dated record of which spec, hook or steering file drove each piece of work.
+A dated record of which spec, steering file, command or Kiro hook drove each piece of work.
+
+> Corrected on 2026-11-12: the "Driven by" column said `hook: …` in rows where the agent ran
+> the command itself, and one row named a "security review hook" that does not exist in
+> `.kiro/hooks/`. Those rows now name what really drove the work. Nothing else was rewritten.
+
+## Sessions
+
+Every build session ran in Kiro Crew, driven by chat (the owner's brief, then "continue the
+build" messages). The agent backend Crew used changed once:
+
+| From | To | Kiro surface | Agent backend | Commits |
+| --- | --- | --- | --- | --- |
+| 2026-11-11 20:41 UTC | 2026-11-11 22:44 UTC | Kiro Crew | Claude Code | `0691f11` to `fd8c464` |
+| 2026-11-11 23:47 UTC | (current) | Kiro Crew | Kiro CLI | `9f3cc2c` onward |
+| 2026-11-12 (world scope) | (current) | Kiro Crew, Kiro CLI backend, custom agents in `.kiro/agents/` | Kiro CLI | from the rules-alignment commit |
+
+Inputs prepared outside Kiro before the first session: the Home design reference in `design/`
+(`home.html`, `home.png`, `logo/`, photos) and the brief `KICKOFF.md` (saved again as
+`docs/brief.md`).
+
+Hook firings captured from Kiro sessions are in `docs/kiro-evidence/hook-firings.jsonl`
+(`source: "kiro-session"`). The IDE-format files in `.kiro/hooks/*.kiro.hook` only fire in the
+Kiro IDE; before the custom agent existed, rows below that ran the same checks were the agent
+running the command itself.
 
 | Date (UTC) | Driven by | Spec / task | Work |
 | --- | --- | --- | --- |
@@ -35,12 +59,12 @@ A dated record of which spec, hook or steering file drove each piece of work.
 | 2026-11-11 22:29 | steering/design.md | 01-app-shell 3.1-3.2 | Seeded wobble generator (Properties 3-5) and hand-made Print, Strip, Tape, Pin, MarginNote, Doodle, TornEdge, Button, Stamp components |
 | 2026-11-11 22:29 | spec | 01-app-shell 4.1 | Shared header with kit logo, nav with aria-current, search, offline badge; skip link; lazy routes |
 | 2026-11-11 22:29 | design/home.png | 01-app-shell 5.1-5.2 | Home composed from design/home.html: kit doodle layers extracted, live stamps and doors from IndexedDB progress; 1440px matches reference (3951 vs 3953 px tall), 390px single column, no overflow |
-| 2026-11-11 22:30 | security review hook | 01-app-shell review | demo=reset now asks before clearing progress and the demo parameter is stripped from the address; progress store property tests; five screen designs written before building (design/screens) |
+| 2026-11-11 22:30 | agent self-review (chat), no hook | 01-app-shell review | demo=reset now asks before clearing progress and the demo parameter is stripped from the address; progress store property tests; five screen designs written before building (design/screens) |
 | 2026-11-11 22:32 | spec | 03-articles-dictionary 1.1 | Spec written; splitWords, lookupWord, credits and fact rows with 6 properties (token round trip, lookup soundness and completeness, case, credit completeness, no NaN) |
 | 2026-11-11 22:34 | design/screens (Article) | 03-articles-dictionary 2.1-2.2 | Photo-led article page: strip title, lead print crossing the torn edge, proof sentences underlined and linked from margin notes, Wikidata facts card, discovery on open, random and not-found; text and photo credits on every article |
 | 2026-11-11 22:34 | spec | 03-articles-dictionary 3.1-3.2 | Tap-a-word side card with keyboard lookup field and live region; test renders Nigeria from the committed pack and resolves 'delta' (and 'deltas') with no network |
 | 2026-11-11 22:37 | spec | 05-quizzes 1.1 | Spec written; buildQuiz makes fact and gap-fill questions, seeded and validator-checked. Property 6 caught a real leak: year nudges like 'the 1960s' contained the answer, now written in words |
-| 2026-11-11 22:37 | hook: credits check | 05-quizzes 1.2 | 205 quizzes built into public/packs/quizzes as part of npm run packs; every bundled question passes the shared validator (Property 1); quiz files credited CC BY-SA 4.0 |
+| 2026-11-11 22:37 | spec; `npm run credits` run by the agent | 05-quizzes 1.2 | 205 quizzes built into public/packs/quizzes as part of npm run packs; every bundled question passes the shared validator (Property 1); quiz files credited CC BY-SA 4.0 |
 | 2026-11-11 22:40 | spec | 05-quizzes 2.1 | Pure quiz reducer: hints strictly in order (Property 4), remove-two keeps the answer (Property 5), score counts only real right answers (Property 7) |
 | 2026-11-11 22:40 | design/screens (Quiz) | 05-quizzes 2.2-2.3 | Quiz screen and quiz list: radio group, three drawn hint bulbs, Right!/Not quite in words with drawn tick or cross, proof slip linked to the article section, drawn progress dots, best score saved; Nigeria quiz plays end to end from the committed pack with no network |
 | 2026-11-11 22:41 | spec | 04-atlas 1.1 | Spec written; globe rotation maths with 5 properties (range, wrap, reversible drag, centring checked against d3 projection, key steps) |
@@ -62,11 +86,11 @@ A dated record of which spec, hook or steering file drove each piece of work.
 | 2026-11-12 01:00 | spec | 09-offline 1-2.1 | Spec written; strategy.ts decisions (plan per request, stale caches, precache list, order-free version) with Properties 1-6 |
 | 2026-11-12 01:00 | spec | 09-offline 3.1 | Hand-written sw.ts (install saves all 569 files or fails whole, cache-first, navigation fallback to index.html, /api never cached) built by scripts/build-sw.ts as the last step of npm run build; web manifest added |
 | 2026-11-12 01:00 | spec | 09-offline 4.1 | Header badge tells the truth: Saving for offline / Works offline / Not saved yet, fed by the worker's ready message |
-| 2026-11-12 01:00 | hook: lint+test, npm run offline-check | 09-offline 5.1 | npm run offline-check: Playwright visits once, goes offline, and opens Home, Nigeria article + delta, Nigeria quiz with hint, quizzes, atlas, castle wing, timeline, stamp book, search and an unvisited route; all pass |
+| 2026-11-12 01:00 | spec; `npm run lint && npm test` and `npm run offline-check` run by the agent | 09-offline 5.1 | npm run offline-check: Playwright visits once, goes offline, and opens Home, Nigeria article + delta, Nigeria quiz with hint, quizzes, atlas, castle wing, timeline, stamp book, search and an unvisited route; all pass |
 | 2026-11-12 01:00 | header search field | 13-search 1-3.1 | The header search box led to a placeholder; added a 13-search spec, pure search with Properties 1-4 and a screen over packs, quizzes, timeline and dictionary that works offline |
 | 2026-11-12 01:08 | spec | 12-submission-pack 1-2.2 | Spec written; scripts/lib/submission.ts (secret scan that never prints values; shot-list parser that checks 2:55 and 40 s of Kiro) with tests; npm run submission-check runs documents, secrets, rules, credits and the full check |
 | 2026-11-12 01:08 | spec | 12-submission-pack 3.1-3.3 | README, Devpost write-up, judge guide, 2:55 video script, blog and social drafts and the owner runbook written from the repo's real numbers; design-kit photo authors and licences checked against Commons on 2026-11-12 and linked in CREDITS.md; terraform plan (20 to add) run with the personal profile, nothing applied |
-| 2026-11-12 01:08 | hook: hard-rule guard | 12-submission-pack 4 | npm run submission-check passes: hard rules, credits, documents, shot list, secret scan, lint, typecheck, 217 app tests, build, 268 KB first load |
+| 2026-11-12 01:08 | spec; `npm run submission-check` (which runs `npm run rules`) run by the agent | 12-submission-pack 4 | npm run submission-check passes: hard rules, credits, documents, shot list, secret scan, lint, typecheck, 217 app tests, build, 268 KB first load |
 | 2026-11-12 01:29 | owner's world-scope brief 2026-11-12 | 14-20 (world scope) 1 | Wrote requirements (EARS), designs with correctness properties and tasks for any article, subject packs, world stamp book, castle wings, world timeline, home world and tours before building |
 | 2026-11-12 01:45 | spec | 14-any-article 2.1-2.2 | convert.ts (sections without back matter, source, photo only with accepted licence and named author) and autoTerms so any article gets a validated on-device quiz; text/slug/notes/licence/html moved to src/lib/text so the app and pipeline share them; Properties 1, 2, 3, 6 |
 | 2026-11-12 01:45 | spec | 14-any-article 3.1-3.2 | api.ts (Simple English first, English Wikipedia only when Simple has no page, Commons credit lookup, injected fetch) and the IndexedDB reading cache that keeps each article with its photo bytes; Properties 4, 5 |
@@ -74,3 +98,8 @@ A dated record of which spec, hook or steering file drove each piece of work.
 | 2026-11-12 01:48 | spec | 16-world-stamp-book 2 | worldBook / slotsFor / continents (Insular Oceania counted with Oceania): 197 countries on six continents, Africa 54, Asia 49, Europe 45, North America 23, South America 12, Oceania 14; Properties 1-5 including the real index |
 | 2026-11-12 01:48 | spec | 16-world-stamp-book 3-4 | Stamp book overview with the world count and a card per continent, one page per continent at /stamps/:continent, Home and Atlas now use the world count; a wording test fails on any Africa-only count in the app text |
 | 2026-11-12 01:49 | spec | 17-castle-wings 2-3 | Sixteen wings generated from the continents and subjects (Africa and Electricity keep their saved ids); gate page groups Around the world and Subjects; finishing a wing suggests the next one; pool-size test follows with the subject quizzes |
+| 2026-11-12 03:57 | spec; npm run packs and npm run lint && npm test run by the agent | 15-subject-packs 2-5 | Nine subject packs of 30 articles (Earth 34, so every tour stop has a page), first candidates that pass text, photo and quiz checks; 274 subject articles, 475 photos in all, 479 quizzes; subject pages /subject/:id and /subjects; search covers every pack; Properties 1-4; pack budget raised to 70 MB (31.4 MB used) |
+| 2026-11-12 03:57 | spec | 17-castle-wings 2-3 | Pool test: all 16 wings draw at least 12 questions from the committed packs; Oceania, South America, Space and Famous people wings played to all twelve rooms in component tests |
+| 2026-11-12 03:57 | spec | 18-world-timeline 2-4 | 511 events, every subject at least 19, every continent at least 29 (Antarctica 4), 272 month-days; curator expected days cross-checked against Wikidata, 21 country dates dropped where the two disagreed (Nigeria 1963 vs 1960, United States 1784 vs 1776); continent filter on the screen; Properties 1-4 |
+| 2026-11-12 03:57 | spec | 19-home-world 2-3 | home.json (273 notes, 88 featured articles) with every fact note's proof checked against its article; daily rotation of prints, notes, castle wing, quiz and the next stamp; coming-up fill for On this day; Properties 1-3, 5, 6 |
+| 2026-11-12 03:57 | spec | 20-tours 2-4 | Three tours (8 rivers, 6 wonders, 7 Ring of Fire volcanoes) turning the globe to each stop with a drawn pin, tour bar on stop articles; volcano stops rebuilt from articles that passed the pack checks (Mayon, Pinatubo, St. Helens and Cotopaxi were too short or had no photo) and the wonders tour points at Olympia through the Ancient Olympic Games article; Properties 1-3 |

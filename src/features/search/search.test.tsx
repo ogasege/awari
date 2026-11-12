@@ -37,6 +37,12 @@ describe('Search screen from the committed packs (13-search 3.1)', () => {
     expect(await screen.findByText('Marie Curie was born on 7 November 1867.')).toBeInTheDocument();
   });
 
+  it('finds subject pack articles too. _15-subject-packs Req 3.1_', async () => {
+    window.history.replaceState(null, '', '/search?q=giraffe');
+    render(<SearchScreen />);
+    expect(await screen.findByRole('link', { name: 'Giraffe' })).toHaveAttribute('href', '/article/wildlife/giraffe');
+  });
+
   it('says so in words when nothing matches. _Req 2.3_', async () => {
     window.history.replaceState(null, '', '/search?q=zzzxqj');
     render(<SearchScreen />);
