@@ -226,3 +226,13 @@
     margin-top: 40px;
   }
 }
+
+/* The arrow runs from the note to the red ring, which is always at the
+   centre of the globe because the globe turns to each stop. */
+.tour__pointer {
+  position: absolute;
+  top: 70px;
+  left: 40px;
+  z-index: 3;
+  pointer-events: none;
+}

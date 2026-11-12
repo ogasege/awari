@@ -64,8 +64,12 @@ function TourPlay({ tour }: { tour: Tour }) {
             <MarginNote decorative tilt={-4} size={30} color="var(--yellow)">
               {last ? 'last stop! where would you go next?' : 'the red ring marks this stop'}
             </MarginNote>
-            <Doodle kind="arrow" seed={`tour-${tour.id}`} size={70} color="var(--yellow)" from={{ x: 6, y: 6 }} to={{ x: 62, y: 60 }} className="crowding" />
           </div>
+          {!last && (
+            <div className="tour__pointer crowding">
+              <Doodle kind="arrow" seed={`tour-${tour.id}`} size={260} color="var(--yellow)" from={{ x: 8, y: 8 }} to={{ x: 215, y: 225 }} />
+            </div>
+          )}
           {shapes.status === 'ready' ? (
             <Globe
               shapes={shapes.data}
