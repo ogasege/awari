@@ -14,10 +14,14 @@ import { onThisDay } from '../home/today.ts';
 import {
   CONTINENT_FILTERS,
   FILTERS,
+  balancedCentury,
+  centuriesWith,
   filterEvents,
-  groupByCentury,
+  inCentury,
+  nearestCentury,
   positionOf,
   rulerMarks,
+  startCentury,
   yearOf,
   yearRange,
   type ContinentFilter,
@@ -115,7 +119,27 @@ export default function TimelineScreen() {
 
   const all = useMemo(() => (pack.status === 'ready' ? pack.data.events : []), [pack]);
   const shown = useMemo(() => filterEvents(all, filter, continent), [all, filter, continent]);
-  const groups = useMemo(() => groupByCentury(shown), [shown]);
+  const [century, setCentury] = useState<number | null>(null);
+  const [showAll, setShowAll] = useState(false);
+  const centuries = useMemo(() => centuriesWith(shown), [shown]);
+  // One century at a time: the one the student chose, else the one the link asked for, else the 1900s.
+  const current =
+    century === null ? startCentury(centuries, wantedYear) : nearestCentury(centuries, century);
+  const index = current === undefined ? -1 : centuries.indexOf(current);
+  const previous = index > 0 ? centuries[index - 1] : undefined;
+  const next = index >= 0 ? centuries[index + 1] : undefined;
+  const inThis = useMemo(() => (current === undefined ? [] : inCentury(shown, current)), [shown, current]);
+  const visible = useMemo(() => {
+    if (showAll) return inThis;
+    const mix = balancedCentury(inThis);
+    // A link to a particular year must show that year's event even if the mix left it out.
+    const target = wantedYear === null ? undefined : inThis.find((e) => yearOf(e) === wantedYear);
+    return target && !mix.includes(target) ? inThis.filter((e) => e === target || mix.includes(e)) : mix;
+  }, [showAll, inThis, wantedYear]);
+  const goTo = (c: number): void => {
+    setCentury(c);
+    setShowAll(false);
+  };
   const todays = useMemo(() => onThisDay(all, today, 6), [all, today]);
   const picked = useMemo(
     () => (wantedYear === null ? undefined : all.find((e) => yearOf(e) === wantedYear)),
@@ -204,18 +228,58 @@ export default function TimelineScreen() {
 
       <Ruler events={shown} todayYear={today.getFullYear()} />
 
-      {groups.map((g) => (
-        <section key={g.label} className="timeline__century" aria-labelledby={`century-${g.label}`}>
-          <h2 id={`century-${g.label}`} className="timeline__century-title">
-            {g.label}
+      {current !== undefined ? (
+        <nav className="timeline__centuries" aria-label="Centuries">
+          <button
+            type="button"
+            className="timeline__chip timeline__step"
+            disabled={previous === undefined}
+            onClick={() => previous !== undefined && goTo(previous)}
+          >
+            {previous === undefined ? 'Earlier' : `← ${previous}s`}
+          </button>
+          <ul className="timeline__century-list">
+            {centuries.map((c) => (
+              <li key={c}>
+                <button type="button" className="timeline__chip" aria-pressed={c === current} onClick={() => goTo(c)}>
+                  {c}s
+                </button>
+              </li>
+            ))}
+          </ul>
+          <button
+            type="button"
+            className="timeline__chip timeline__step"
+            disabled={next === undefined}
+            onClick={() => next !== undefined && goTo(next)}
+          >
+            {next === undefined ? 'Later' : `${next}s →`}
+          </button>
+        </nav>
+      ) : null}
+
+      {current !== undefined ? (
+        <section className="timeline__century" aria-labelledby={`century-${current}`}>
+          <h2 id={`century-${current}`} className="timeline__century-title">
+            The {current}s
           </h2>
+          <p className="timeline__century-count" role="status">
+            {visible.length === inThis.length
+              ? `All ${inThis.length} ${inThis.length === 1 ? 'event' : 'events'} of the ${current}s.`
+              : `A mix of ${visible.length} of the ${inThis.length} events of the ${current}s.`}
+          </p>
           <ol className="timeline__list">
-            {g.events.map((e, i) => (
+            {visible.map((e, i) => (
               <EventNote key={e.id} event={e} index={i} picked={picked?.id === e.id} />
             ))}
           </ol>
+          {visible.length < inThis.length ? (
+            <button type="button" className="timeline__chip timeline__more" onClick={() => setShowAll(true)}>
+              Show all {inThis.length} events of the {current}s
+            </button>
+          ) : null}
         </section>
-      ))}
+      ) : null}
       {pack.status === 'ready' && shown.length === 0 ? <p>Nothing filed under {filterName}{continent === 'all' ? '' : ` in ${continentName}`} yet.</p> : null}
 
       <p className="timeline__credit">

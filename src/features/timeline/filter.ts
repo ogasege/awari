@@ -100,3 +100,65 @@ export function yearRange(
   const years = events.map(yearOf);
   return { min: Math.min(...years), max: Math.max(...years) };
 }
+
+/** First year of the century an event falls in (1865 -> 1800). */
+export function centuryStart(year: number): number {
+  return Math.floor(year / 100) * 100;
+}
+
+/**
+ * Each century that holds at least one event, once, oldest first
+ * (21-review-2 Req 17): the stops of the previous/next century controls.
+ */
+export function centuriesWith(events: readonly Pick<TimelineEvent, 'date'>[]): number[] {
+  return [...new Set(events.map((e) => centuryStart(yearOf(e))))].sort((a, b) => a - b);
+}
+
+/** The events of one century, in the order given. */
+export function inCentury(events: readonly TimelineEvent[], start: number): TimelineEvent[] {
+  return events.filter((e) => centuryStart(yearOf(e)) === start);
+}
+
+/** The century to open on: the wanted year's, else 1900s if it has events, else the newest. */
+export function startCentury(centuries: readonly number[], wantedYear: number | null): number | undefined {
+  if (wantedYear !== null && centuries.includes(centuryStart(wantedYear))) {
+    return centuryStart(wantedYear);
+  }
+  return centuries.includes(1900) ? 1900 : centuries.at(-1);
+}
+
+/** `wanted` if it holds events, else the nearest century that does (undefined when none do). */
+export function nearestCentury(centuries: readonly number[], wanted: number): number | undefined {
+  return [...centuries].sort((a, b) => Math.abs(a - wanted) - Math.abs(b - wanted) || a - b)[0];
+}
+
+/** A birth ("X was born on ...") or anything else. */
+export function isBirth(event: Pick<TimelineEvent, 'text'>): boolean {
+  return /\bwas born\b/.test(event.text);
+}
+
+/** Events shown at once for a century unless the student asks for all of them. */
+export const CENTURY_LIMIT = 60;
+
+/** `count` items spread evenly across a list, order kept. */
+function spread<T>(list: readonly T[], count: number): T[] {
+  if (count >= list.length) return [...list];
+  return Array.from({ length: count }, (_, i) => list[Math.floor((i * list.length) / count)] as T);
+}
+
+/**
+ * The default view of one century (21-review-2 Req 18): at most `limit`
+ * events, oldest first, with fewer births than other events whenever the
+ * century holds any other event, so a page is not a wall of "was born".
+ */
+export function balancedCentury(events: readonly TimelineEvent[], limit = CENTURY_LIMIT): TimelineEvent[] {
+  const others = events.filter((e) => !isBirth(e));
+  const births = events.filter(isBirth);
+  const takeOthers = Math.min(others.length, births.length === 0 ? limit : Math.ceil(limit * 0.6));
+  const takeBirths =
+    others.length === 0
+      ? Math.min(births.length, limit)
+      : Math.max(0, Math.min(births.length, takeOthers - 1, limit - takeOthers));
+  const chosen = new Set([...spread(others, takeOthers), ...spread(births, takeBirths)]);
+  return events.filter((e) => chosen.has(e));
+}

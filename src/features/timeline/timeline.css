@@ -243,3 +243,34 @@
   font-size: 14px !important;
   font-weight: 600;
 }
+
+/* One century at a time (21-review-2 Req 17). */
+.timeline__centuries {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  margin: 20px 0 8px;
+}
+
+.timeline__century-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.timeline__step:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.timeline__century-count {
+  margin: 0 0 16px;
+}
+
+.timeline__more {
+  margin-top: 24px;
+}
