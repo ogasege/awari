@@ -25,6 +25,16 @@ picture before submitting (step in `docs/runbook.md`).
 | photos/castle.jpg | Fasilides Palace, Gondar | Bernard Gagnon | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Fasilides_Palace_02.jpg |
 | photos/zuma.jpg | Zuma Rock in the dry season | Hui Linbo | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Zuma_Rock_in_the_dry_season.jpg |
 | photos/lokoja.jpg | The Niger from Mount Patti, Lokoja | Samlokoja | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:View_of_River_Niger_and_River_Venue_from_the_top_of_Mount_Patti_in_Lokoja_(Confluence_city).jpg |
+| photos/covers/countries.jpg | Countries | Annatsach | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Flags_of_the_world.jpg |
+| photos/covers/wildlife.jpg | Wildlife | Kevin Pluck | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Lion_waiting_in_Namibia.jpg |
+| photos/covers/space.jpg | Space | NASA / JPL / Space Science Institute | Public domain | https://commons.wikimedia.org/wiki/File:Saturn_during_Equinox.jpg |
+| photos/covers/earth.jpg | Mountains and rivers | Luca Galuzzi (Lucag) | CC BY-SA 2.5 | https://commons.wikimedia.org/wiki/File:Everest_North_Face_toward_Base_Camp_Tibet_Luca_Galuzzi_2006.jpg |
+| photos/covers/body.jpg | The human body | Mr Khubaib Sani | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Human_Skeleton_2.jpg |
+| photos/covers/science.jpg | Science | Stanislav.nevyhosteny | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Erlenmeyer_flasks.jpg |
+| photos/covers/physics.jpg | Physics and chemistry | Luc Viatour | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Plasma-lamp_2.jpg |
+| photos/covers/inventions.jpg | Inventions | John T. Daniels | Public domain | https://commons.wikimedia.org/wiki/File:First_flight2.jpg |
+| photos/covers/people.jpg | Famous people | Ferdinand Schmutzer / Adam Cuerden | Public domain | https://commons.wikimedia.org/wiki/File:Einstein_1921_by_F_Schmutzer_-_restoration.jpg |
+| photos/covers/arts.jpg | Arts, music and sport | Leonardo da Vinci | Public domain | https://commons.wikimedia.org/wiki/File:Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg |
 
 ## Logo
 

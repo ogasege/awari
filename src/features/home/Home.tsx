@@ -26,6 +26,7 @@ import { KitLayer } from './KitLayer.tsx';
 import { HERO_NOTES, SUBJECT_NOTES } from './notes.ts';
 import { OnThisDay } from './OnThisDay.tsx';
 import { StampBook } from './StampBook.tsx';
+import { coverFor } from '../../lib/packs/covers.ts';
 import { dayNumber, todaysQuiz } from './today.ts';
 import { pickFeatured, pickNotes, pickSubjects, subjectsWithPrints } from './rotation.ts';
 import './home.css';
@@ -165,11 +166,11 @@ function Subjects({ day }: { day: number }) {
   const subjects = data ? pickSubjects(day, subjectsWithPrints(data), 5) : [];
   const prints = PRINT_SLOTS.map((slot, i) => {
     const id = subjects[i];
-    const featured = data && id ? pickFeatured(day, i, data.subjects.find((x) => x.id === id)?.featured ?? []) : undefined;
     const subject = id ? subjectById(id) : undefined;
     const fallback = DEFAULT_PRINTS[i] as (typeof DEFAULT_PRINTS)[number];
-    if (!featured || !subject) return { slot, to: fallback.to, src: fallback.src, alt: fallback.alt, caption: fallback.caption };
-    return { slot, to: `/subject/${subject.id}`, src: packUrl(featured.photo.file), alt: featured.photo.alt, caption: subject.label };
+    const cover = id ? coverFor(id) : undefined;
+    if (!cover || !subject) return { slot, to: fallback.to, src: fallback.src, alt: fallback.alt, caption: fallback.caption };
+    return { slot, to: `/subject/${subject.id}`, src: cover.file, alt: cover.alt, caption: subject.label };
   });
   return (
     <section className="home-subjects grain" aria-labelledby="subjects-title">

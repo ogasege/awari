@@ -12,7 +12,7 @@ own, logged in `docs/kiro-log.md`, and opened in a real browser at 1440 and
 - [x] 4. Hero notes are Earth facts with proofs; circle only for a visible
       place; "ever wondered" moved out of the photograph; Property 2.
       _Req 2-4_
-- [ ] 5. Reviewed subject cover list + licence audit; Home uses it;
+- [x] 5. Reviewed subject cover list + licence audit; Home uses it;
       Property 3. _Req 5, 6_
 - [ ] 6. Notes sit beside their own subject (Property 4) and read as
       English (Property 5). _Req 7, 8_
