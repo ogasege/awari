@@ -67,3 +67,38 @@ export function api<T>(endpoint: string, params: Record<string, string>, opts: {
   chain = next.catch(() => undefined);
   return next;
 }
+
+const IMG = join('data', 'raw', 'media-img');
+
+/** Downloads one file through the same queue (at least 1.1 s apart), cached by URL under `data/raw/media-img/`. */
+export function fetchBinary(url: string): Promise<Buffer> {
+  mkdirSync(IMG, { recursive: true });
+  const file = join(IMG, `${createHash('sha1').update(url).digest('hex')}.bin`);
+  if (existsSync(file)) return Promise.resolve(readFileSync(file));
+  const run = async (): Promise<Buffer> => {
+    for (let attempt = 1; ; attempt++) {
+      const wait = last + GAP_MS - Date.now();
+      if (wait > 0) await sleep(wait);
+      last = Date.now();
+      requests++;
+      try {
+        const res = await fetch(url, { headers: { 'User-Agent': userAgent() }, signal: AbortSignal.timeout(TIMEOUT_MS) });
+        if (res.status === 429 || res.status >= 500) {
+          const retry = Number(res.headers.get('retry-after') ?? '');
+          if (Number.isFinite(retry) && retry > 0) await sleep(Math.min(retry, 120) * 1000);
+          throw new Error(`HTTP ${res.status}`);
+        }
+        if (!res.ok) throw new Error(`HTTP ${res.status} (not retried)`);
+        const body = Buffer.from(await res.arrayBuffer());
+        writeFileSync(file, body);
+        return body;
+      } catch (error) {
+        if (attempt >= MAX_ATTEMPTS || String(error).includes('not retried')) throw error;
+        await sleep(2000 * 2 ** (attempt - 1));
+      }
+    }
+  };
+  const next = chain.then(run, run);
+  chain = next.catch(() => undefined);
+  return next;
+}
