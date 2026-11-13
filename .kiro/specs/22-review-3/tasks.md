@@ -16,7 +16,7 @@ One task per item. Each is built by `awari-builder`, checked by `awari-design-re
       hero note arrows clear of their text. _Req 8-10_
 - [x] 8. Population: one figure with year and source in every country article; drop empty
       sections in the build (Property 6). _Req 11, 12_
-- [ ] 9. Search snippets (Property 4). _Req 13_
+- [x] 9. Search snippets (Property 4). _Req 13_
 - [ ] 10. Tours: equal cards, a print each, globe outline centred, no blank gap. _Req 17, 18_
 - [ ] 11. Castle wings: a print per wing, doors fill the card, the Asia page. _Req 19_
 - [ ] 12. Quiz card detail and disabled-button contrast; wildlife single-subject prints;

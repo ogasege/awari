@@ -12,7 +12,7 @@ import { BUNDLED_PACKS } from '../../lib/packs/subjects.ts';
 import type { PackIndex, PackId, TimelinePack } from '../../lib/packs/types.ts';
 import { listArticles, type ReadArticle } from '../../lib/wiki/cache.ts';
 import { mergeResults, wikiSearch, type WikiHit } from '../../lib/wiki/search.ts';
-import { searchDocs, tokens, type SearchDoc } from './search.ts';
+import { searchDocs, snippetOf, tokens, type SearchDoc } from './search.ts';
 import './search.css';
 
 interface QuizIndex {
@@ -202,7 +202,7 @@ export default function SearchScreen() {
                   </Link>
                   {h.origin === 'wikipedia' ? <span className="search__origin"> From Wikipedia</span> : null}
                   {h.origin === 'read' ? <span className="search__origin"> You read this</span> : null}
-                  <p>{h.text}</p>
+                  <p>{snippetOf(h.text, query)}</p>
                   {quizSet.has(id) ? (
                     <Link to={`/quiz/${id}`} className="search__quiz">
                       Take the {h.title} quiz
@@ -224,7 +224,7 @@ export default function SearchScreen() {
                 <Link to={h.to} className="search__title">
                   {h.title}
                 </Link>
-                <p>{h.text}</p>
+                <p>{snippetOf(h.text, query)}</p>
               </li>
             ))}
           </ul>

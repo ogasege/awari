@@ -69,3 +69,58 @@ export function searchDocs(docs: readonly SearchDoc[], query: string): SearchHit
     (a, b) => b.score - a.score || a.title.localeCompare(b.title) || a.id.localeCompare(b.id),
   );
 }
+
+/** Degrees-minutes-seconds and decimal coordinate strings, with the brackets or "approximate coordinates" around them. */
+const COORDINATES = new RegExp(
+  [
+    String.raw`\s*\((?:[^()]*?coordinates?\s*)?[-+]?\d{1,3}(?:[°º]\s*\d{0,2}['’′]?\s*\d{0,2}(?:\.\d+)?["”″]?\s*|\.\d+\s*)[NSEW]?[,;]?\s*[-+]?\d{1,3}(?:[°º][^()]*|\.\d+\s*)[NSEW]?\)`,
+    String.raw`\s*[-+]?\d{1,3}[°º]\s*\d{0,2}['’′]?\s*\d{0,2}(?:\.\d+)?["”″]?\s*[NS],?\s*[-+]?\d{1,3}[°º]\s*\d{0,2}['’′]?\s*\d{0,2}(?:\.\d+)?["”″]?\s*[EW]`,
+  ].join('|'),
+  'g',
+);
+
+/** Text without coordinate strings, whitespace tidied. */
+export function withoutCoordinates(text: string): string {
+  return text.replace(COORDINATES, '').replace(/\s{2,}/g, ' ').replace(/\s+([,.;:])/g, '$1').trim();
+}
+
+/**
+ * A short piece of `text` for a search result (22-review-3 Req 13): around
+ * the first query word, starting at a word boundary, ending at the end of a
+ * sentence when one fits and otherwise at a word with an ellipsis, and with
+ * no coordinate strings.
+ */
+export function snippetOf(text: string, query: string, max = 160): string {
+  const clean = withoutCoordinates(text);
+  if (clean.length <= max) {
+    // A summary that stops without a full stop is marked as cut.
+    return /[.!?:)"”’']$/.test(clean) || clean === '' ? clean : `${clean}…`;
+  }
+  const lower = clean.toLowerCase();
+  const at = tokens(query)
+    .map((w) => lower.indexOf(w))
+    .filter((i) => i >= 0)
+    .sort((a, b) => a - b)[0];
+  let start = 0;
+  if (at !== undefined && at > max / 3) {
+    // Begin at the start of the sentence holding the match, else at a word.
+    const sentence = Math.max(clean.lastIndexOf('. ', at), clean.lastIndexOf('! ', at), clean.lastIndexOf('? ', at));
+    start = sentence >= 0 && at - sentence < max ? sentence + 2 : at;
+    if (start === at && start > 0) {
+      const space = clean.lastIndexOf(' ', at);
+      start = space >= 0 && at - space < 40 ? space + 1 : at;
+    }
+  }
+  let body = clean.slice(start);
+  if (body.length > max) {
+    const window = body.slice(0, max);
+    const stop = Math.max(window.lastIndexOf('. '), window.lastIndexOf('! '), window.lastIndexOf('? '));
+    if (stop >= max * 0.5) {
+      body = window.slice(0, stop + 1);
+      return `${start > 0 ? '… ' : ''}${body}`;
+    }
+    const space = window.lastIndexOf(' ');
+    body = `${window.slice(0, space > 0 ? space : max).replace(/[\s,;:(–-]+$/, '')}…`;
+  }
+  return `${start > 0 ? '… ' : ''}${body}`;
+}
