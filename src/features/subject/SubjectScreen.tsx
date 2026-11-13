@@ -9,8 +9,7 @@ import { Link } from '../../app/navigation.tsx';
 import { useTitle } from '../../app/useTitle.ts';
 import { Button, Doodle, MarginNote, Print, StripHeading, TornEdge } from '../../design/paper.tsx';
 import { perforation } from '../../design/wobble.ts';
-import { SUBJECT_COVERS, type SubjectCover } from '../../lib/packs/covers.ts';
-import { dayNumber } from '../home/today.ts';
+import { coverFor } from '../../lib/packs/covers.ts';
 import type { HomeData } from '../../lib/packs/home.ts';
 import { useProgress } from '../../lib/store/useProgress.ts';
 import { packUrl, usePack } from '../../lib/packs/load.ts';
@@ -184,10 +183,33 @@ export default function SubjectScreen({ params }: { params: Record<string, strin
 }
 
 /** `/subjects`: every subject as a card. */
+const CARD_TILTS = [-2.5, 1.8, -1.2, 2.6, -2, 1.4, -2.8, 2.2] as const;
+
+/** One subject as its cover print with a handwritten label and the number of articles in its pack. */
+function SubjectPrint({ subject, index }: { subject: (typeof SUBJECTS)[number]; index: number }) {
+  const cover = coverFor(subject.id);
+  const pack = usePack<PackIndex>(`${subject.id}/index.json`);
+  const count = pack.status === 'ready' ? pack.data.items.length : undefined;
+  return (
+    <li className="subject-print">
+      <Print
+        to={`/subject/${subject.id}`}
+        src={cover?.file ?? '/photos/earth.jpg'}
+        alt={cover?.alt ?? subject.name}
+        caption={subject.name}
+        captionSize={26}
+        width={230}
+        tilt={CARD_TILTS[index % CARD_TILTS.length]}
+        tape={[{ left: `${28 + ((index * 17) % 30)}%`, width: 96, tilt: index % 2 === 0 ? -5 : 6, tone: index % 3 === 0 ? 'teal' : 'yellow' }]}
+      />
+      <p className="subject-print__count hand">{count === undefined ? '…' : `${count} ${count === 1 ? 'article' : 'articles'}`}</p>
+      <p className="subject-print__blurb">{subject.blurb}</p>
+    </li>
+  );
+}
+
 export function SubjectList() {
   useTitle('Subjects');
-  // A different subject's cover each day, so the print is never the same one twice running.
-  const todaysCover = SUBJECT_COVERS[dayNumber(new Date()) % SUBJECT_COVERS.length] as SubjectCover;
   return (
     <section className="page squared subject" aria-labelledby="subjects-title">
       <StripHeading
@@ -197,27 +219,12 @@ export function SubjectList() {
           { text: 'pick one', tone: 'yellow', tilt: 1.5, style: { marginLeft: '0.8em' } },
         ]}
       />
-      <Print
-        className="page-print"
-        src={todaysCover.file}
-        alt={todaysCover.alt}
-        caption={todaysCover.caption}
-        captionSize={26}
-        width={240}
-        tilt={3}
-        tape={[{ left: '34%', width: 100, tilt: -5, tone: 'yellow' }]}
-      />
       <MarginNote tilt={-2} size={30} className="subjects-intro crowding" style={{ color: 'var(--teal-ink)' }}>
-        {SUBJECTS.length - 1} subjects of about 30 articles each, plus all 197 countries.
+        {SUBJECTS.length} subjects. Tap a picture to open its pages.
       </MarginNote>
-      <ul className="subject__cards">
-        {SUBJECTS.map((s) => (
-          <li key={s.id}>
-            <Link to={`/subject/${s.id}`} className="subject__card lift">
-              <span className="subject__card-name">{s.name}</span>
-              <span>{s.blurb}</span>
-            </Link>
-          </li>
+      <ul className="subject-prints">
+        {SUBJECTS.map((s, i) => (
+          <SubjectPrint key={s.id} subject={s} index={i} />
         ))}
       </ul>
     </section>
