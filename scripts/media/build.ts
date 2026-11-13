@@ -12,6 +12,7 @@ import { join } from 'node:path';
 import { captionFor } from './caption.ts';
 import type { Collected } from './collect.ts';
 import { requestCount } from './http.ts';
+import { readRecords } from './licences.ts';
 import { MIN_PER_ARTICLE, keepFor, kindOf, selectForArticle, type Kind } from './select.ts';
 import { IMG_DIR, ensureThumb, folderBytes, thumbName } from './thumbs.ts';
 
@@ -88,6 +89,37 @@ async function thumbs(limit: number): Promise<void> {
   report(failed);
 }
 
+/** The Commons titles already used by bundled photographs (leads, covers, kit), which the picture of the day avoids. */
+function bundledTitles(): Set<string> {
+  return new Set(readRecords(readFileSync('CREDITS.md', 'utf8')).map((r) => r.title.toLowerCase()));
+}
+
+/** A small stable hash, to order pictures the same way every build. */
+function hashOf(text: string): number {
+  let h = 2166136261;
+  for (const ch of text) h = Math.imul(h ^ ch.charCodeAt(0), 16777619);
+  return h >>> 0;
+}
+
+/**
+ * The picture of each day of the year (366): large photographs with a real caption, taken round the subjects in
+ * turn so no subject runs for days, and never one that a bundled photograph already shows (Req 19, Property 3).
+ */
+export function dailyPictures(items: readonly MediaItem[]): Array<Pick<MediaItem, 'id' | 'article' | 'articleTitle' | 'caption' | 'tw' | 'th' | 'author' | 'licence' | 'licenceUrl' | 'page'>> {
+  const used = bundledTitles();
+  const good = items
+    .filter((m) => m.kind === 'photo' && m.width >= 1600 && m.captionFrom !== 'article' && m.caption.length >= 12 && !used.has(m.title.toLowerCase()))
+    .sort((a, b) => hashOf(a.id) - hashOf(b.id));
+  const groups = new Map<string, MediaItem[]>();
+  for (const m of good) groups.set(m.article.split('/')[0] ?? '', [...(groups.get(m.article.split('/')[0] ?? '') ?? []), m]);
+  const order: MediaItem[] = [];
+  for (let round = 0; order.length < 366 && [...groups.values()].some((g) => g[round]); round++) {
+    for (const g of groups.values()) if (g[round] && order.length < 366) order.push(g[round] as MediaItem);
+  }
+  const pick = (m: MediaItem) => ({ id: m.id, article: m.article, articleTitle: m.articleTitle, caption: m.caption, tw: m.tw, th: m.th, author: m.author, licence: m.licence, licenceUrl: m.licenceUrl, page: m.page });
+  return Array.from({ length: 366 }, (_, i) => pick(order[i % Math.max(1, order.length)] as MediaItem)).filter(Boolean);
+}
+
 function records(): void {
   const today = new Date().toISOString().slice(0, 10);
   const bySubject = new Map<string, MediaItem[]>();
@@ -139,6 +171,7 @@ function records(): void {
     for (const m of items) index.push([m.id, m.article, m.kind, m.tw, m.th, m.caption]);
   }
   writeFileSync(join(OUT, 'index.json'), `${JSON.stringify({ built: today, count: index.length, subjects: [...bySubject.keys()].sort(), items: index })}\n`);
+  writeFileSync(join(OUT, 'daily.json'), `${JSON.stringify({ built: today, days: dailyPictures([...bySubject.values()].flat()) })}\n`);
   console.log(`${index.length} pictures in ${bySubject.size} subject files.`);
   if (missing.length > 0) console.log(`No thumbnail yet for ${missing.length} chosen pictures.`);
   if (short.length > 0) console.log(`Articles under ${MIN_PER_ARTICLE} pictures: ${short.length} (first: ${short.slice(0, 6).join(', ')})`);

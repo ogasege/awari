@@ -12,7 +12,17 @@ export interface Caption {
 }
 
 const MAX = 90;
-const JUNK = /https?:|\{\{|\}\}|wikidata|category:|\bq\d{3,}\b|\.jpe?g|\.png|\bimg[_ ]?\d|\bdsc[_n ]?\d|\bcopyright\b|\bphoto by\b|\buploaded\b|\bsource:|\bown work\b/i;
+const JUNK = /https?:|\{\{|\}\}|wikidata|category:|\bq\d{3,}\b|\.jpe?g|\.png|\bimg[_ ]?\d|\bdsc[_n ]?\d|\bcopyright\b|\bphoto by\b|\buploaded\b|\bsource:|\bown work\b|\bversion \d|textbook|\bpublished\b|\bfig(?:ure)?\.? ?\d|\d{4}-\d{2}-\d{2}|\bretrieved\b|\bvia\b|\bscan(?:ned)?\b|\bcrop(?:ped)?\b|\bdetail of\b|\bfile:/i;
+
+const ENGLISH = /\b(?:the|of|in|a|an|and|from|with|at|on|is|are|was|by|to|near|view)\b/gi;
+const FOREIGN = /\b(?:der|die|das|und|von|mit|f[üu]r|anl[äa]sslich|im|zum|le|la|les|des|du|une|et|dans|sur|el|los|las|del|una|con|por|il|lo|gli|di|che|het|een|voor)\b/gi;
+
+/** True when a text reads as English: more English small words than German, French, Spanish or Italian ones. */
+export function looksEnglish(text: string): boolean {
+  const en = (text.match(ENGLISH) ?? []).length;
+  const other = (text.match(FOREIGN) ?? []).length;
+  return other === 0 || en > other;
+}
 
 const collapse = (s: string): string => s.replace(/\s+/g, ' ').trim();
 
@@ -60,7 +70,7 @@ export function tidy(description: string): string {
 /** The caption for one picture. */
 export function captionFor(description: string, title: string, articleTitle: string): Caption {
   const d = tidy(description);
-  if (d.length >= 12 && d.split(' ').length >= 3 && !JUNK.test(d)) {
+  if (d.length >= 12 && d.split(' ').length >= 3 && !JUNK.test(d) && looksEnglish(d)) {
     return { text: shorten(d), source: 'description' };
   }
   const n = nameFromTitle(title);

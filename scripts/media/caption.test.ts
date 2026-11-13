@@ -55,4 +55,10 @@ describe('captions', () => {
     expect(captionFor('object type: portrait statue - description: Head of Hatshepsut', 'File:X.jpg', 'Egypt').text).toBe('Head of Hatshepsut');
     expect(captionFor('object type: portrait statue', 'File:Bust of Hatshepsut.jpg', 'Egypt')).toEqual({ text: 'Bust of Hatshepsut', source: 'title' });
   });
+
+  it('does not use metadata or non-English descriptions as captions', () => {
+    expect(captionFor('Version 8.25 from the Textbook OpenStax Anatomy and Physiology Published May 18, 2016', 'File:Heart diagram.jpg', 'Heart').source).toBe('title');
+    expect(captionFor('Royal Regalie, Museum der Präsente anlässlich der Inthronisierung des Sultans', 'File:Sultan regalia.jpg', 'Oman').source).toBe('title');
+    expect(captionFor('A lion resting in the shade of a tree', 'File:Lion.jpg', 'Lion').source).toBe('description');
+  });
 });

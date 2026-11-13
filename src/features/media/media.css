@@ -238,3 +238,44 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+/* Picture of the day on Home. */
+.potd {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 40px;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px var(--gutter) 40px;
+  color: var(--ink);
+}
+
+.potd__print {
+  flex: none;
+}
+
+.potd__text {
+  flex: 1 1 280px;
+}
+
+.potd__text h2 {
+  margin: 0 0 6px;
+  font-size: 34px;
+}
+
+.potd__caption {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+
+.potd__credit {
+  margin: 0 0 8px;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.potd a {
+  color: var(--teal-ink);
+  font-weight: 700;
+}

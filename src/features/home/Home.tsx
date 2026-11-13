@@ -23,6 +23,7 @@ import { useProgress } from '../../lib/store/useProgress.ts';
 import { WINGS } from '../castle/castle.ts';
 import { creditLine } from './bundledCredits.ts';
 import { CastleDoor } from './CastleDoor.tsx';
+import { PictureOfTheDay } from '../media/PictureOfTheDay.tsx';
 import { castlePanel, enterLabel } from './castlePanel.ts';
 import { DoorRow } from './DoorRow.tsx';
 import { KitLayer } from './KitLayer.tsx';
@@ -346,6 +347,7 @@ export default function Home() {
             <KitLayer layer="stampBook" style={{ zIndex: 21 }} />
           </div>
         </div>
+        <PictureOfTheDay />
         <TornEdge color="var(--teal)" seed="paper-edge" height={34} />
       </section>
       <LearnByPlaying day={day} />
