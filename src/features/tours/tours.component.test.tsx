@@ -17,6 +17,20 @@ describe('guided tours on the committed packs (20-tours)', () => {
     }
   });
 
+  it('gives every tour card its own print, from a picture that exists (22-review-3 Req 17)', () => {
+    for (const t of TOURS) {
+      expect(existsSync(`public/packs/${t.cover.file}`), t.cover.file).toBe(true);
+      expect(t.cover.alt.length).toBeGreaterThan(5);
+    }
+    const { container } = render(<ToursList />);
+    const cards = container.querySelectorAll('.tours__card');
+    expect(cards).toHaveLength(TOURS.length);
+    for (const c of cards) {
+      expect(c.querySelectorAll('img')).toHaveLength(1);
+    }
+    expect(container.querySelector('.tours__arrow')).toBeNull();
+  });
+
   it('lists the three tours with their stop counts. _Req 1_', () => {
     render(<ToursList />);
     expect(screen.getAllByRole('heading', { level: 2 }).map((h) => h.textContent)).toEqual([

@@ -174,8 +174,16 @@ export function ToursList() {
       />
       <p className="tours__lead">Hop from stop to stop. The globe turns to each place and opens its article.</p>
       <ul className="tours__list">
-        {TOURS.map((t) => (
+        {TOURS.map((t, i) => (
           <li key={t.id} className="tours__card">
+            <Print
+              className="tours__print"
+              src={packUrl(t.cover.file)}
+              alt={t.cover.alt}
+              width={220}
+              tilt={i % 2 === 0 ? -2.5 : 2}
+              tape={[{ left: '34%', width: 90, tilt: i % 2 === 0 ? -5 : 5, tone: 'yellow' }]}
+            />
             <h2>{t.title}</h2>
             <p>{t.blurb}</p>
             <p className="tours__stops">{t.stops.map((s) => s.title).join(' · ')}</p>
@@ -183,7 +191,6 @@ export function ToursList() {
           </li>
         ))}
       </ul>
-      <Doodle kind="arrow" seed="tours" size={60} color="var(--teal-ink)" className="crowding tours__arrow" />
     </section>
   );
 }
