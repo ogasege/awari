@@ -1,6 +1,6 @@
 {
   "specs": 23,
-  "specTasksDone": 183,
+  "specTasksDone": 184,
   "specTasks": 198,
   "properties": 114,
   "testFiles": 60,
@@ -12,8 +12,8 @@
   "ideHooks": 5,
   "agents": 3,
   "mcpServers": 3,
-  "commits": 102,
-  "logEntries": 128,
+  "commits": 103,
+  "logEntries": 129,
   "hookFirings": 27,
   "subjects": 11,
   "countries": 197,
@@ -44,5 +44,5 @@
   "articles_inventions": 30,
   "articles_people": 30,
   "articles_arts": 30,
-  "mainScriptKB": "265"
+  "mainScriptKB": "267"
 }

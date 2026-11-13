@@ -126,5 +126,5 @@ const CONTINENT_PRINTS: Readonly<Record<string, { file: string; alt: string }>> 
   Europe: { file: 'img/france.jpg', alt: 'The Eiffel Tower in Paris' },
   'North America': { file: 'img/united-states.jpg', alt: 'The Statue of Liberty holding up her torch, seen from the front' },
   'South America': { file: 'img/brazil.jpg', alt: 'The statue of Christ the Redeemer above the clouds in Rio de Janeiro' },
-  Oceania: { file: 'img/australia.jpg', alt: 'The Sydney Opera House seen across the harbour' },
+  Oceania: { file: 'img/australia.jpg', alt: 'The Sydney Opera House lit up at night, its white shells beside the harbour with the city skyline behind' },
 };

@@ -28,7 +28,7 @@ export const TOURS: readonly Tour[] = [
   {
     id: 'rivers',
     title: 'Great rivers of the world',
-    cover: { file: 'img/earth-nile.jpg', alt: 'Dhows traversing the Nile near Aswan' },
+    cover: { file: 'img/earth-nile.jpg', alt: 'A felucca with a tall white sail on the Nile, with palm trees and a rocky desert hill behind' },
     blurb: 'Follow eight rivers from Egypt to Australia, and see where millions of people live beside them.',
     stops: [
       { article: 'earth/nile', title: 'The Nile', place: 'near Luxor, Egypt', lat: 25.7, lon: 32.64 },
@@ -44,7 +44,7 @@ export const TOURS: readonly Tour[] = [
   {
     id: 'wonders',
     title: 'Wonders of the ancient world',
-    cover: { file: 'img/ancient-great-pyramid-of-giza.jpg', alt: 'The Great Pyramid of Giza' },
+    cover: { file: 'img/ancient-great-pyramid-of-giza.jpg', alt: 'The Great Pyramid of Giza rising above the sand, with tourists and a saddled camel in front' },
     blurb: 'Visit the wonders the ancient Greeks wrote about, from Egypt to Babylon, and the story of the list itself.',
     stops: [
       { article: 'ancient/great-pyramid-of-giza', title: 'The Great Pyramid of Giza', place: 'Giza, Egypt', lat: 29.98, lon: 31.13 },
@@ -58,7 +58,7 @@ export const TOURS: readonly Tour[] = [
   {
     id: 'volcanoes',
     title: 'Volcanoes of the Ring of Fire',
-    cover: { file: 'img/earth-mount-fuji.jpg', alt: 'Mount Fuji, a volcano in Japan' },
+    cover: { file: 'img/earth-mount-fuji.jpg', alt: 'Snow-capped Mount Fuji above a village of thatched roofs and bare winter trees' },
     blurb: 'Follow the Ring of Fire round the Pacific Ocean, from Indonesia to Japan and on to the Americas.',
     stops: [
       { article: 'earth/krakatoa', title: 'Krakatoa', place: 'Sunda Strait, Indonesia', lat: -6.1, lon: 105.42 },

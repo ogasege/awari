@@ -80,19 +80,30 @@ const statsPath = 'docs/generated/stats.json';
 // (22-review-3 Req 23). A write-up or stats file that was out of date is rewritten AND reported, so a
 // stale README or write-up cannot pass quietly: commit the refreshed files and run the gate again.
 {
-  const fresh = `${JSON.stringify(computeStats(false), null, 2)}\n`;
-  if (read(statsPath) !== fresh) {
+  // Counts that change with every commit or build (commits, log rows, ticked tasks, built script size)
+  // are refreshed silently; committing them would change them again.
+  const MOVING = new Set(['commits', 'logEntries', 'specTasksDone', 'mainScriptKB']);
+  const withoutMoving = (o: Record<string, number | string>): string =>
+    JSON.stringify(Object.fromEntries(Object.entries(o).filter(([k]) => !MOVING.has(k))));
+  const freshStats = computeStats(false) as Record<string, number | string>;
+  const fresh = `${JSON.stringify(freshStats, null, 2)}\n`;
+  const storedText = read(statsPath);
+  if (storedText !== fresh) {
+    const stored = storedText === '' ? {} : (JSON.parse(storedText) as Record<string, number | string>);
     mkdirSync('docs/generated', { recursive: true });
     writeFileSync(statsPath, fresh);
-    note(`${statsPath} was stale and has been regenerated`);
+    if (withoutMoving(stored) !== withoutMoving(freshStats)) {
+      note(`${statsPath} was stale and has been regenerated`);
+    }
   }
-  const freshStats = JSON.parse(fresh) as Record<string, number | string>;
   for (const doc of [...writeups, 'docs/blog-post.md', 'docs/social-post.md', 'docs/judges.md', 'docs/video-script.md']) {
     const before = read(doc);
     const after = before === '' ? before : fillNumbers(before, freshStats);
     if (after !== before) {
       writeFileSync(doc, after);
-      note(`${doc} had stale generated numbers and has been refilled`);
+      // Only a content number being out of date is a failure.
+      const stale = fillNumbers(before, Object.fromEntries(Object.entries(freshStats).filter(([k]) => !MOVING.has(k))));
+      if (stale !== before) note(`${doc} had stale generated numbers and has been refilled`);
     }
   }
 }

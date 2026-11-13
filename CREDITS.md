@@ -350,7 +350,7 @@ Resized to at most 800 px. Each links to its Commons file page.
 | packs/img/honduras.jpg | Honduras | LeRoc | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Pedernales_La_Paz_Honduras.jpg |
 | packs/img/hungary.jpg | Hungary | Cserlajos | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Hungarian_landscape,_near_obanya.jpg |
 | packs/img/iceland.jpg | Iceland | Fran Cano Cabal | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Icelandic_landscapes.jpg |
-| packs/img/india.jpg | India | Dhirad , picture edited by J. A. Knudsen | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Taj_Mahal_in_March_2004.jpg |
+| packs/img/india.jpg | India | Dhirad, picture edited by J. A. Knudsen | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Taj_Mahal_in_March_2004.jpg |
 | packs/img/indonesia.jpg | Indonesia | Gunawan Kartapranata | Public domain | https://commons.wikimedia.org/wiki/File:Borobudur-Nothwest-view.jpg |
 | packs/img/insulator.jpg | Insulator | Thermos | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Insulator_railways.jpg |
 | packs/img/inventions-airplane.jpg | Airplane | Quintin Soloviev | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:ANA_777-300_Taking_off_from_JFK.jpg |
