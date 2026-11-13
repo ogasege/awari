@@ -29,6 +29,6 @@ own, logged in `docs/kiro-log.md`, and opened in a real browser at 1440 and
       _Req 17-19_
 - [x] 13. Article lead photos on the judges' path and the thirty most
       populous countries; Property 10. _Req 20_
-- [ ] 14. Confirm the wildlife note fix in the pack. _Review item 13_
+- [x] 14. Confirm the wildlife note fix in the pack. _Review item 13_
 - [ ] 15. Retake every screenshot at 1440 and 390; `npm run
       submission-check` and `npm run offline-check` pass. _Req 21_
