@@ -9,7 +9,7 @@ Starts after spec 22 is committed. Run through the conductor with `awari-builder
       photos and the 36 changed photos first; add it to `submission-check`; drop the "owner confirms
       photo pages" step from runbook, CREDITS and every owner list (Property 1, 7). _Req 1-5_
 - [x] 3. `select.ts` filters and scoring with property tests (Property 5). _Req 6-8_
-- [ ] 4. Collector: queue, cache under `data/raw`, resumable progress; dry run on five articles. _Req 9, 10_
+- [x] 4. Collector: queue, cache under `data/raw`, resumable progress; dry run on five articles. _Req 9, 10_
 - [ ] 5. Thumbnails: WebP 480 px, size budget check (under 150 MB total). _Req 11_
 - [ ] 6. Run the collector over all articles in batches until each has at least four (or the gap is
       listed); countries per kind. _Req 15, 16_

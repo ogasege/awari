@@ -21,6 +21,8 @@ export interface Candidate {
   description: string;
   /** Commons categories of the file, plain text. */
   categories: readonly string[];
+  /** Where the collector found it: used in the Wikipedia article itself, or only in its Commons category. */
+  from?: 'article' | 'category';
 }
 
 /** The smallest long side we keep (Req 8). */
@@ -32,7 +34,8 @@ const MIMES = new Set(['image/jpeg', 'image/png', 'image/webp']);
 /** Logos, signatures, icons and collages are never shown (Req 8). */
 const NEVER = /\blogos?\b|wordmark|signature|autograph|\bicons?\b|\bcollage\b|montage|composite|sprite|screenshot|\bscan of\b|\bsvg\b/i;
 /** Frightening, graphic or sexual material, by title, description or category (Req 8); adds to the lead-photo list. */
-const GRAPHIC = /nude|naked|nudity|sexual|erotic|porn|gore|graphic|bloody|blood\b|mutilat|torture|lynching|hanging body|swastika|nazi/i;
+const GRAPHIC =
+  /nude|naked|nudity|sexual|erotic|porn|gore|graphic|bloody|blood\b|mutilat|torture|lynching|hanging body|swastika|nazi|penis|vagina|genital|testic|scrotum|vulva|\banus\b|breast|nipple|sperm|menstru|copulat|mating|field dressing|dressing a deer|gutting|gutted|skinning|\bhunt(?:ing|ed|er|ers)\b|trophy|entrails|viscera|intestin|surgery|surgical|operation|open[- ]heart|wound|injur|\bscar\b|amputat|tumou?r|cancer|disease|infect|\bpus\b|rotting|decompos|roadkill|stuffed|taxiderm/i;
 
 export type Kind = 'photo' | 'portrait' | 'map' | 'flag' | 'emblem' | 'art' | 'diagram';
 
@@ -71,13 +74,35 @@ function recognition(c: Candidate): number {
   return n;
 }
 
-/** A score for an allowed candidate: recognition, then a landscape frame, then size. */
+/** A score for an allowed candidate: recognition, then use in the article itself, a landscape frame and size. */
 export function score(c: Candidate): number {
   const ratio = c.width / Math.max(1, c.height);
   const frame = ratio >= 1.2 && ratio <= 2 ? 6 : ratio >= 0.7 && ratio < 1.2 ? 3 : 0;
   const size = Math.min(4, Math.floor(Math.max(c.width, c.height) / 1500));
-  return recognition(c) + frame + size;
+  return recognition(c) + (c.from === 'article' ? 8 : 0) + frame + size;
 }
+
+/**
+ * The series a file belongs to: its name without numbers, dates, camera counters and brackets, so
+ * "A horse rider at the A.B.U carnival 02.jpg" and "... 03.jpg" share one stem.
+ */
+export function stemOf(title: string): string {
+  return title
+    .replace(/^File:/i, '')
+    .replace(/\.[A-Za-z0-9]+$/, '')
+    .replace(/\([^)]*\)/g, ' ')
+    .replace(/\b(?:img|dsc|dscn|p|dsf|_mg)[ _-]?\d+\b/gi, ' ')
+    .replace(/[0-9]+/g, ' ')
+    .replace(/[^\p{L}]+/gu, ' ')
+    .trim()
+    .toLowerCase()
+    .split(' ')
+    .slice(0, 4)
+    .join(' ');
+}
+
+/** At most this many pictures of one series in one article's set. */
+export const SERIES_CAP = 2;
 
 /**
  * The pictures chosen for one article: allowed candidates only, best first, at most `max`, spread over kinds so a
@@ -90,8 +115,16 @@ export function selectForArticle(candidates: readonly Candidate[], max = MAX_PER
     .filter((c) => rejectReason(c) === undefined)
     .filter((c) => (seen.has(c.title) ? false : (seen.add(c.title), true)))
     .sort((a, b) => score(b) - score(a) || a.title.localeCompare(b.title));
+  // A series of near-identical shots (same stem) adds one or two pictures, not twelve.
+  const perStem = new Map<string, number>();
+  const varied = allowed.filter((c) => {
+    const stem = stemOf(c.title);
+    const n = perStem.get(stem) ?? 0;
+    perStem.set(stem, n + 1);
+    return n < SERIES_CAP;
+  });
   const byKind = new Map<Kind, Candidate[]>();
-  for (const c of allowed) {
+  for (const c of varied) {
     const k = kindOf(c);
     byKind.set(k, [...(byKind.get(k) ?? []), c]);
   }

@@ -2,7 +2,7 @@
 import fc from 'fast-check';
 import { describe, expect, it } from 'vitest';
 import { parseLicence } from './allow.ts';
-import { MAX_PER_ARTICLE, MIN_SIDE, kindOf, rejectReason, score, selectForArticle, type Candidate } from './select.ts';
+import { MAX_PER_ARTICLE, MIN_SIDE, kindOf, rejectReason, score, selectForArticle, stemOf, type Candidate } from './select.ts';
 
 const good: Candidate = {
   title: 'File:Mount Kenya at dawn.jpg',
@@ -97,5 +97,20 @@ describe('selectForArticle (Property 5)', () => {
   it('returns fewer than four when the article has fewer allowed pictures, never padding with rejected ones', () => {
     const chosen = selectForArticle([good, { ...good, title: 'File:Small.jpg', width: 400, height: 300 }]);
     expect(chosen).toHaveLength(1);
+  });
+
+  it('keeps at most two pictures of one series and prefers pictures used in the article', () => {
+    const series = Array.from({ length: 6 }, (_, i): Candidate => ({ ...good, title: `File:A horse rider at the carnival 0${i}.jpg`, from: 'category' }));
+    const other: Candidate = { ...good, title: 'File:Lake at dawn.jpg', from: 'article' };
+    const chosen = selectForArticle([...series, other]);
+    expect(chosen.filter((c) => stemOf(c.title) === stemOf(series[0]?.title ?? '')).length).toBeLessThanOrEqual(2);
+    expect(chosen[0]?.title).toBe('File:Lake at dawn.jpg');
+    expect(stemOf('File:Fuji, assorted - FujiAssorted6854.jpg')).toBe(stemOf('File:Fuji, assorted - FujiAssorted6859.jpg'));
+  });
+
+  it('rejects anatomical, hunting and surgical pictures', () => {
+    for (const t of ['File:Penis asiatischer Elefant.JPG', 'File:Field dressing a deer 2.jpg', 'File:Open heart surgery.jpg', 'File:Roadkill fox.jpg']) {
+      expect(rejectReason({ ...good, title: t }), t).toBeDefined();
+    }
   });
 });
