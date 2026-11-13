@@ -358,3 +358,17 @@
     margin: 0 0 8px;
   }
 }
+
+/* The question card is a taped sheet (22-review-3 Req 20). */
+.question__card {
+  position: relative;
+}
+
+.question__tape {
+  position: absolute;
+  top: -14px;
+  left: 9%;
+  width: 110px;
+  rotate: -4deg;
+  pointer-events: none;
+}

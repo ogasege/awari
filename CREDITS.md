@@ -427,7 +427,7 @@ Resized to at most 800 px. Each links to its Commons file page.
 | packs/img/netherlands.jpg | Netherlands | Fractal Caleidoscope | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Winter_landscape_in_the_Netherlands.jpg |
 | packs/img/nicaragua.jpg | Nicaragua | Adrian Sampson from Bainbridge Island, WA, USA | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Down_to_laguna_(landscape).jpg |
 | packs/img/niger.jpg | Niger | Roland Hunziker https://www.flickr.com/photos/rolandh/ | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Elephants_bath_park_w_Niger_2006.jpg |
-| packs/img/nigeria.jpg | Nigeria | Hui Linbo | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Zuma_Rock_in_the_dry_season.jpg |
+| packs/img/nigeria.jpg | Nigeria | kopee15 | Public domain | https://commons.wikimedia.org/wiki/File:Lagos_skyline_with_marina.jpg |
 | packs/img/north-korea.jpg | North Korea | Kok Leng Yeo from Singapore, Singapore | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:North_Korea-Pyongyang-Arirang_Mass_Games-01_(1).jpg |
 | packs/img/north-macedonia.jpg | North Macedonia | Alekishere at English Wikipedia | Public domain | https://commons.wikimedia.org/wiki/File:Macedonian_parliament_interior.jpg |
 | packs/img/norway.jpg | Norway | Johannes Groll followhansi | CC0 | https://commons.wikimedia.org/wiki/File:Lofoten,_Norway_(Unsplash).jpg |
@@ -589,7 +589,7 @@ Resized to at most 800 px. Each links to its Commons file page.
 | packs/img/venezuela.jpg | Venezuela | Wilfredor | CC0 | https://commons.wikimedia.org/wiki/File:Panoramic_of_Juan_Griego_45.jpg |
 | packs/img/vietnam.jpg | Vietnam | Thomas Hirsch / User:Ravn | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Halong_Bay_in_Vietnam.jpg |
 | packs/img/voltage.jpg | Voltage | Contraix | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:CH_Capdella,_3_volt%C3%ADmetres.jpg |
-| packs/img/wildlife-bat.jpg | Bat | MathKnight | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Wikipedia-Bats-001-v01.jpg |
+| packs/img/wildlife-bat.jpg | Bat | Andrew Mercer (www.baldwhiteguy.co.nz) | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Grey_headed_flying_fox_-_AndrewMercer_IMG41833.jpg |
 | packs/img/wildlife-blue-whale.jpg | Blue whale | NOAA Photo Library | Public domain | https://commons.wikimedia.org/wiki/File:Anim1754_-_Flickr_-_NOAA_Photo_Library.jpg |
 | packs/img/wildlife-butterfly.jpg | Butterfly | Thomas Bresson | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Gonepteryx_rhamni_-_Citron-1.jpg |
 | packs/img/wildlife-camel.jpg | Camel | No machine-readable author provided. EmmanuelFAIVRE assumed (based on copyright claims). | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Bactrian_Camel.jpg |
@@ -604,7 +604,7 @@ Resized to at most 800 px. Each links to its Commons file page.
 | packs/img/wildlife-gorilla.jpg | Gorilla | Thurundir | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Gorille_des_plaines_de_l%27ouest_%C3%A0_l%27Espace_Zoologique.jpg |
 | packs/img/wildlife-hippopotamus.jpg | Hippopotamus | Nevit Dilmen ( talk ) | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Hippopotamus_amphibius_in_Tanzania_4041_Nevit.jpg |
 | packs/img/wildlife-honey-bee.jpg | Honey bee | Tanner Smida | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:The_Lone_Pollinator.jpg |
-| packs/img/wildlife-hummingbird.jpg | Hummingbird | Charles J. Sharp | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Trinidad_and_Tobago_hummingbirds_composite.jpg |
+| packs/img/wildlife-hummingbird.jpg | Hummingbird | Charles J. Sharp | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Anna%27s_hummingbird_(Calypte_anna)_male_in_flight_Campbell_River.jpg |
 | packs/img/wildlife-kangaroo.jpg | Kangaroo | Charles J. Sharp | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Forester_kangaroo_(Macropus_giganteus_tasmaniensis)_juvenile_hopping_Esk_Valley.jpg |
 | packs/img/wildlife-koala.jpg | Koala | Diliff | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Koala_climbing_tree.jpg |
 | packs/img/wildlife-komodo-dragon.jpg | Komodo dragon | Charles J. Sharp | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Komodo_dragon_(Varanus_komodoensis).jpg |

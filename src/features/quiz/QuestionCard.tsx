@@ -82,6 +82,7 @@ export function QuestionCard({
   return (
     <div className="question">
       <fieldset className="question__card" disabled={!answering}>
+        <span aria-hidden="true" className="tape tape--yellow question__tape" />
         <legend id={`${groupId}-legend`} className="question__prompt">
           <span className="question__count">
             Question {number} of {total}

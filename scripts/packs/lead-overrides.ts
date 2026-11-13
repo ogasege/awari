@@ -10,7 +10,7 @@
 import type { PhotoOverride } from './photos.ts';
 
 export const LEAD_OVERRIDES: ReadonlyArray<readonly [string, PhotoOverride]> = [
-  ['countries/nigeria', { file: 'Zuma Rock in the dry season.jpg', caption: 'Zuma Rock', alt: 'Zuma Rock, a huge dome of rock, rising above the land near Abuja' }],
+  ['countries/nigeria', { file: 'Lagos skyline with marina.jpg', caption: 'The Lagos skyline', alt: 'The tall buildings of Lagos beside the water, with boats in the marina' }],
   ['countries/india', { file: 'Taj Mahal in March 2004.jpg', caption: 'The Taj Mahal', alt: 'The white marble Taj Mahal with its dome and four tall towers' }],
   ['countries/peoples-republic-of-china', { file: 'Great Wall of China July 2006.JPG', caption: 'The Great Wall', alt: 'The Great Wall of China winding along a hill ridge' }],
   ['countries/indonesia', { file: 'Borobudur-Nothwest-view.jpg', caption: 'Borobudur temple', alt: 'The stone temple of Borobudur on Java, with its stepped levels and stupas' }],
@@ -35,4 +35,7 @@ export const LEAD_OVERRIDES: ReadonlyArray<readonly [string, PhotoOverride]> = [
   ['countries/kenya', { file: 'Amboseli Park - Kilimanjaro elephant.jpg', caption: 'Elephant in Amboseli', alt: 'An elephant in Amboseli National Park in Kenya with Mount Kilimanjaro behind it' }],
   ['countries/myanmar', { file: '20160813 Shwedagon Pagoda 9949 DxO.jpg', caption: 'Shwedagon Pagoda', alt: 'The golden Shwedagon Pagoda in Yangon' }],
   ['countries/south-korea', { file: 'Gyeonghoeru (Royal Banquet Hall) at Gyeongbokgung Palace, Seoul.jpg', caption: 'Gyeongbokgung Palace', alt: 'The Gyeonghoeru banquet hall beside a pond at Gyeongbokgung Palace in Seoul' }],
+  // One animal per picture for the wildlife prints (22-review-3 Req 21): these two leads were four-photo collages.
+  ['wildlife/bat', { file: 'Grey headed flying fox - AndrewMercer IMG41833.jpg', caption: 'Grey-headed flying fox', alt: 'A grey-headed flying fox, a large bat' }],
+  ['wildlife/hummingbird', { file: "Anna's hummingbird (Calypte anna) male in flight Campbell River.jpg", caption: 'A hovering hummingbird', alt: 'A hummingbird hovering in the air' }],
 ];
