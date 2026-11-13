@@ -21,6 +21,7 @@ import { packUrl, usePack } from '../../lib/packs/load.ts';
 import { subjectById } from '../../lib/packs/subjects.ts';
 import { useProgress } from '../../lib/store/useProgress.ts';
 import { WINGS } from '../castle/castle.ts';
+import { castlePanel, enterLabel } from './castlePanel.ts';
 import { DoorRow } from './DoorRow.tsx';
 import { KitLayer } from './KitLayer.tsx';
 import { HERO_NOTES, SUBJECT_NOTES } from './notes.ts';
@@ -254,6 +255,7 @@ function LearnByPlaying({ day }: { day: number }) {
   const wing = pickSubjects(day, WINGS, 1)[0] ?? WINGS[0];
   const lit = wing ? (progress.castle[wing.id] ?? 0) : 0;
   const quiz = useTodaysQuiz(day);
+  const panel = castlePanel(wing);
   return (
     <section className="home-play grain" aria-labelledby="play-title">
       <h2 id="play-title">Learn by playing</h2>
@@ -262,14 +264,14 @@ function LearnByPlaying({ day }: { day: number }) {
           <KitLayer layer="playing" />
           <DoorRow lit={lit} />
           <div className="abs home-castle" style={pos('0.6%', '3%', { width: u(570), rotate: '-3deg' })}>
-            <img src="/photos/castle.jpg" alt="A stone castle tower in Gondar, Ethiopia" style={{ clipPath: CASTLE_CUT }} />
+            <img src={panel.photo} alt={panel.alt} style={{ clipPath: CASTLE_CUT }} />
             <h3 className="home-castle__title" style={{ fontSize: u(68), bottom: u(-30) }}>
               The Castle
             </h3>
           </div>
           <div className="abs home-castle__copy" style={pos('2.4%', '76.5%', { width: u(470) })}>
             <p style={{ fontSize: u(21) }}>Every door asks a question. Answer it and the next room lights up.</p>
-            <Button to={wing ? `/castle/${wing.id}` : '/castle'}>{wing ? `Enter ${wing.name}` : 'Enter the castle'}</Button>
+            <Button to={wing ? `/castle/${wing.id}` : '/castle'}>{enterLabel(wing)}</Button>
           </div>
           <MarginNote className="abs crowding" color="var(--paper)" tilt={-4} size={33} style={pos('47.6%', '31%', { width: u(150) })}>
             {lit} rooms lit, {12 - lit} still dark
