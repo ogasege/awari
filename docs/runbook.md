@@ -25,11 +25,9 @@ npm run submission-check             # .kiro, licence, write-up claims and numbe
 npm run offline-check                # airplane-mode proof
 ```
 
-Both must end with "passed". Then confirm the design-kit photo pages once:
-open each link in the last column of the "Design kit photos" table in
-`CREDITS.md` and check the picture on the page is the one in `public/photos/`
-(the kit did not record which file of a series it used). Fix the link or the
-author if one differs, then run `npm run credits`.
+Both must end with "passed". The photo licences need no hand check: `npm run licences` asks the Commons
+API for every credited image (author, licence, restrictions, existence) and `submission-check` fails on any
+mismatch, so there are no photo pages for you to open.
 
 ## 1. Create the public GitHub repo and push — **PUBLISHES**
 

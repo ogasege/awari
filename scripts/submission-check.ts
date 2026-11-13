@@ -120,6 +120,22 @@ for (const doc of [...writeups, 'docs/blog-post.md', 'docs/social-post.md', 'doc
   for (const p of untaggedCounts(doc, text)) note(p);
 }
 
+// 5b. Licences come from the Commons API (23-media-library Req 3): the saved answer must be recent, cover every
+//     credited image, and have no problem. Run `npm run licences` to refresh it.
+{
+  const path = 'public/media/licences.json';
+  if (!existsSync(path)) {
+    note(`${path} is missing: run npm run licences`);
+  } else {
+    const saved = JSON.parse(read(path)) as { checkedAt: string; problems: number; count: number };
+    const ageDays = (Date.now() - Date.parse(saved.checkedAt)) / 86_400_000;
+    if (!(ageDays <= 7)) note(`${path} is ${Math.floor(ageDays)} days old: run npm run licences`);
+    if (saved.problems > 0) note(`${path} lists ${saved.problems} image(s) with a licence problem`);
+    const credited = read('CREDITS.md').split('\n').filter((l) => l.startsWith('|') && l.includes('commons.wikimedia.org/wiki/File:')).length;
+    if (saved.count < credited) note(`${path} covers ${saved.count} of ${credited} credited images: run npm run licences`);
+  }
+}
+
 // 6. Every feature the README, write-up or video names has a route and a test.
 const routes = new Set(Object.keys(ROUTES));
 for (const doc of [...writeups, 'docs/video-script.md']) {

@@ -18,6 +18,7 @@
     "test:props": "vitest run property",
     "packs": "tsx scripts/packs/build.ts && tsx scripts/packs/drop-stale-population.ts && tsx scripts/quizzes/build.ts",
     "credits": "tsx scripts/check-credits.ts",
+    "licences": "tsx scripts/media/licences.ts",
     "rules": "tsx scripts/check-rules.ts",
     "bundle": "tsx scripts/check-bundle.ts",
     "log": "tsx scripts/kiro-log.ts",

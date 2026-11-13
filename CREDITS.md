@@ -7,11 +7,10 @@ file under `public/` is listed here with its source and licence; the
 ## Design kit photos
 
 Resized copies of photos from Wikimedia Commons, used on Home and as
-stamps. On 2026-11-12 each author and licence below was checked against
-the Commons file page of the matching file (same subject, same author),
-linked in the last column. The kit does not record which exact file of
-a series was used, so the owner should confirm the page matches the
-picture before submitting (step in `docs/runbook.md`).
+stamps. Each row names its Commons file, and `npm run licences` asks the
+Commons API for every one of them (existence, licence, author and listed
+restrictions); the result is saved in `public/media/licences.json` and the
+submission check fails on any mismatch.
 
 | File | Subject | Author | Licence | Commons page |
 | --- | --- | --- | --- | --- |

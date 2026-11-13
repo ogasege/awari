@@ -33,8 +33,8 @@ Findings, 2026-11-12 03:46 UTC, on the committed bundle:
    (`Bangui City Centre.jpg`, CC BY-SA 4.0) in commit `aaa2b79`.
 2. **Font credit.** `CREDITS.md` named Mathieu Triay as the author of Bricolage Grotesque;
    the font's own licence names "The Bricolage Grotesque Project Authors". Corrected.
-3. Design-kit photos: the exact Commons file is unconfirmed (already a step for the owner
-   in `docs/runbook.md`).
+3. Design-kit photos: the exact Commons file was unconfirmed at the time; the owner verified the ten
+   against the API on 13 Nov and `npm run licences` now checks every credited image (23-media-library).
 4. `public/manifest.webmanifest` had no credits entry. Added.
 
 ## `awari-design-reviewer` (read-only, Playwright MCP)

@@ -5,7 +5,7 @@ Starts after spec 22 is committed. Run through the conductor with `awari-builder
 `docs/kiro-log.md`, tests before ticking, browser check at 1440 and 390 px.
 
 - [x] 1. Spec: requirements, design with properties, tasks.
-- [ ] 2. `npm run licences` and the allow-list module; `public/media/licences.json` for the ten design
+- [x] 2. `npm run licences` and the allow-list module; `public/media/licences.json` for the ten design
       photos and the 36 changed photos first; add it to `submission-check`; drop the "owner confirms
       photo pages" step from runbook, CREDITS and every owner list (Property 1, 7). _Req 1-5_
 - [ ] 3. `select.ts` filters and scoring with property tests (Property 5). _Req 6-8_

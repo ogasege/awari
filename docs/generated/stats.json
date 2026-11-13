@@ -1,6 +1,6 @@
 {
   "specs": 23,
-  "specTasksDone": 184,
+  "specTasksDone": 185,
   "specTasks": 198,
   "properties": 114,
   "testFiles": 60,
@@ -12,8 +12,8 @@
   "ideHooks": 5,
   "agents": 3,
   "mcpServers": 3,
-  "commits": 103,
-  "logEntries": 129,
+  "commits": 105,
+  "logEntries": 131,
   "hookFirings": 27,
   "subjects": 11,
   "countries": 197,
