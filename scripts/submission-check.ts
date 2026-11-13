@@ -10,8 +10,10 @@
  * gates and the full `npm run check`.
  */
 import { execFileSync, spawnSync } from 'node:child_process';
-import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { ROUTES } from '../src/app/router.ts';
+import { computeStats } from './stats.ts';
+import { fillNumbers } from './lib/writeup.ts';
 import { REQUIRED_DOCS, findSecrets, parseShots, shotListProblems } from './lib/submission.ts';
 import {
   featureProblems,
@@ -74,6 +76,26 @@ for (const doc of ['docs/blog-post.md', 'docs/social-post.md']) {
 
 // 5. Numbers come from `npm run stats`, not from hands.
 const statsPath = 'docs/generated/stats.json';
+// The gate recomputes every generated number from the repository and refills the tagged numbers
+// (22-review-3 Req 23). A write-up or stats file that was out of date is rewritten AND reported, so a
+// stale README or write-up cannot pass quietly: commit the refreshed files and run the gate again.
+{
+  const fresh = `${JSON.stringify(computeStats(false), null, 2)}\n`;
+  if (read(statsPath) !== fresh) {
+    mkdirSync('docs/generated', { recursive: true });
+    writeFileSync(statsPath, fresh);
+    note(`${statsPath} was stale and has been regenerated`);
+  }
+  const freshStats = JSON.parse(fresh) as Record<string, number | string>;
+  for (const doc of [...writeups, 'docs/blog-post.md', 'docs/social-post.md', 'docs/judges.md', 'docs/video-script.md']) {
+    const before = read(doc);
+    const after = before === '' ? before : fillNumbers(before, freshStats);
+    if (after !== before) {
+      writeFileSync(doc, after);
+      note(`${doc} had stale generated numbers and has been refilled`);
+    }
+  }
+}
 const stats = existsSync(statsPath) ? (JSON.parse(read(statsPath)) as Record<string, number | string>) : {};
 if (Object.keys(stats).length === 0) {
   note(`${statsPath} is missing: run npm run stats`);

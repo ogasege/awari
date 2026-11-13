@@ -25,7 +25,7 @@ discovery.
   device and tap-a-word meanings. Every article read is saved, so it opens offline later.
 - **A library on the disc**: <!--n:countries-->197<!--/n--> countries and
   <!--n:subjectArticles-->274<!--/n--> articles in <!--n:subjects-->11<!--/n--> subjects, with
-  <!--n:photos-->475<!--/n--> licence-checked Commons photos, a page per subject, and a dictionary of
+  <!--n:photos-->476<!--/n--> licence-checked Commons photos, a page per subject, and a dictionary of
   <!--n:lemmas-->14,593<!--/n--> words.
 - **A globe** you can spin and **guided tours** that turn it from stop to stop: great rivers,
   wonders of the ancient world, volcanoes of the Ring of Fire.
@@ -37,7 +37,7 @@ discovery.
   words.
 - **The Castle**: <!--n:wings-->16<!--/n--> wings, one per continent and one per subject, twelve
   rooms each.
-- **A timeline** of <!--n:events-->511<!--/n--> dates across every subject and continent, and **On
+- **A timeline** of <!--n:events-->1530<!--/n--> dates across every subject and continent, and **On
   this day** on Home, which also rotates its prints, notes and suggestions daily.
 - **Offline**: a hand-written service worker saves the whole bundle. After one visit every bundled
   feature works in airplane mode, and the header says honestly whether the site has been saved.
@@ -47,7 +47,7 @@ discovery.
 ## How we built it
 
 React 19, TypeScript and Vite, with hand-made components for the scrapbook look and no UI
-framework. The main script is <!--n:mainScriptKB-->261<!--/n--> KB, under the 300 KB budget;
+framework. The main script is <!--n:mainScriptKB-->265<!--/n--> KB, under the 300 KB budget;
 packs load on demand. Content is built by one command, `npm run packs`, from Simple English
 Wikipedia, Wikidata, Natural Earth, Open English WordNet and Wikimedia Commons, and every record
 carries its source and licence. Infrastructure is Terraform (private S3 behind CloudFront, and
@@ -96,9 +96,9 @@ Kiro IDE; they have not fired, because the IDE was not used.
 
 ### Spec-driven development
 
-<!--n:specs-->20<!--/n--> specs, each with EARS requirements and numbered acceptance criteria, a
-design that derives correctness properties, and tasks; <!--n:specTasksDone-->153<!--/n--> of
-<!--n:specTasks-->155<!--/n--> tasks are done, each committed as `<spec> <task>: <summary>`. The
+<!--n:specs-->23<!--/n--> specs, each with EARS requirements and numbered acceptance criteria, a
+design that derives correctness properties, and tasks; <!--n:specTasksDone-->183<!--/n--> of
+<!--n:specTasks-->198<!--/n--> tasks are done, each committed as `<spec> <task>: <summary>`. The
 difference from vibe coding showed most when the scope grew to the whole world: specs 14 to 20
 were written before any code. The design for the timeline made us check what Wikidata's
 "inception" means, found that it is often not a country's independence day, and turned that
@@ -127,7 +127,7 @@ listed.
 
 ### Property-based testing
 
-<!--n:properties-->110<!--/n--> fast-check tests are named `Property N:` with the requirements they
+<!--n:properties-->114<!--/n--> fast-check tests are named `Property N:` with the requirements they
 cover. Defects they caught (`docs/kiro-evidence/properties.md`):
 - *05-quizzes, Property 6* ("a hint never gives the answer away") caught year nudges like "the
   1960s" for an answer of 1960 (`be247ac`).

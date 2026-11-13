@@ -30,7 +30,7 @@ paper strips, wobbly SVG doodles, torn edges.
   in words, never colour alone.
 - **Walk the Castle**: <!--n:wings-->16<!--/n--> wings, one per continent and one per subject,
   each with twelve rooms that light up one right answer at a time.
-- **Wander the timeline** of <!--n:events-->511<!--/n--> dates from Wikidata, by subject and by
+- **Wander the timeline** of <!--n:events-->1530<!--/n--> dates from Wikidata, by subject and by
   continent, and see what happened **on this day** on Home, where the prints, notes and
   suggestions change every day.
 - **Go offline.** After one visit every bundled feature works in airplane mode. Progress lives on
@@ -100,9 +100,9 @@ Kiro IDE format; they have not fired, because the IDE was not used.
 
 ### Spec-driven development
 
-<!--n:specs-->20<!--/n--> specs in `.kiro/specs/`, each with EARS requirements, numbered acceptance
+<!--n:specs-->23<!--/n--> specs in `.kiro/specs/`, each with EARS requirements, numbered acceptance
 criteria, a design that derives correctness properties, and tasks
-(<!--n:specTasksDone-->153<!--/n--> of <!--n:specTasks-->155<!--/n--> done). Every spec was written
+(<!--n:specTasksDone-->183<!--/n--> of <!--n:specTasks-->198<!--/n--> done). Every spec was written
 before its code, and each task became a commit named `<spec> <task>: <summary>`. Compared with
 vibe coding, the specs changed outcomes: when the owner widened the scope to the whole world,
 specs 14 to 20 were written first and caught that Wikidata's "inception" is not independence,
@@ -124,7 +124,7 @@ focus. Configuration: `.kiro/settings/mcp.json` and the agent files; no secrets.
 
 ### Property-based testing
 
-<!--n:properties-->110<!--/n--> fast-check tests are named for a spec property and the requirements
+<!--n:properties-->114<!--/n--> fast-check tests are named for a spec property and the requirements
 they cover. Defects they caught, with commits, are in `docs/kiro-evidence/properties.md`: a
 quiz hint that gave away its answer (`be247ac`), curated dates that disagreed with Wikidata
 (`6084f8d`), and unsuitable margin notes (`b1a5071`).
