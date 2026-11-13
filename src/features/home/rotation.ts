@@ -94,3 +94,28 @@ export function nextCountry(
   const here = left.filter((i) => normaliseContinent(i.continent) === continent).sort((a, b) => a.id.localeCompare(b.id));
   return here[(((day * 13) % here.length) + here.length) % here.length];
 }
+
+/**
+ * One note per print slot, each from the SAME subject as the print it
+ * sits beside (21-review-2 Req 7). `subjects[slot]` is the subject of
+ * that print; a slot whose subject has no note gets none, never a note
+ * from another subject. Facts and questions alternate by slot.
+ */
+export function notesBeside(
+  day: number,
+  pool: readonly HomeNoteData[],
+  subjects: readonly BundledPackId[],
+  slots: readonly number[],
+): Array<HomeNoteData | undefined> {
+  const used = new Set<HomeNoteData>();
+  return slots.map((slot, k) => {
+    const subject = subjects[slot];
+    const mine = pool.filter((n) => n.subject === subject && !used.has(n));
+    const wanted: HomeNoteData['kind'] = (day + k) % 2 === 0 ? 'fact' : 'question';
+    const options = mine.some((n) => n.kind === wanted) ? mine.filter((n) => n.kind === wanted) : mine;
+    if (options.length === 0) return undefined;
+    const note = options[(((day * 5 + k) % options.length) + options.length) % options.length] as HomeNoteData;
+    used.add(note);
+    return note;
+  });
+}

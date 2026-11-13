@@ -14,7 +14,7 @@ own, logged in `docs/kiro-log.md`, and opened in a real browser at 1440 and
       _Req 2-4_
 - [x] 5. Reviewed subject cover list + licence audit; Home uses it;
       Property 3. _Req 5, 6_
-- [ ] 6. Notes sit beside their own subject (Property 4) and read as
+- [x] 6. Notes sit beside their own subject (Property 4) and read as
       English (Property 5). _Req 7, 8_
 - [ ] 7. Coming-up cards labelled and clear of the years; doodle means
       something; Property 6. _Req 9-11_

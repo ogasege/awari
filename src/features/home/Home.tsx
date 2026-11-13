@@ -28,7 +28,7 @@ import { OnThisDay } from './OnThisDay.tsx';
 import { StampBook } from './StampBook.tsx';
 import { coverFor } from '../../lib/packs/covers.ts';
 import { dayNumber, todaysQuiz } from './today.ts';
-import { pickFeatured, pickNotes, pickSubjects, subjectsWithPrints } from './rotation.ts';
+import { notesBeside, pickFeatured, pickSubjects, subjectsWithPrints } from './rotation.ts';
 import './home.css';
 
 /** An irregular, hand-cut circle as a CSS polygon (white print border). */
@@ -55,15 +55,16 @@ interface ShownNote {
  * the wrong place. The three subject notes rotate daily and come from the
  * subjects shown in today's prints, so each note sits by its own subject.
  */
-function useNotes(day: number): ShownNote[] {
+/** The print slots the three subject notes sit beside (left, top-right, bottom-right). */
+const NOTE_SLOTS = [0, 2, 4] as const;
+
+function useNotes(day: number): Array<ShownNote | undefined> {
   const data = useHomeData();
   const hero: ShownNote[] = [HERO_NOTES.dry, HERO_NOTES.lemurs, HERO_NOTES.ice];
   const fallback: ShownNote[] = [SUBJECT_NOTES.falls, SUBJECT_NOTES.pyramids, SUBJECT_NOTES.kili];
   if (!data) return [...hero, ...fallback];
-  const today = new Set(pickSubjects(day, subjectsWithPrints(data), 5));
-  const pool = data.notes.filter((n) => today.has(n.subject));
-  const picked = pickNotes(day, pool, 3);
-  return [...hero, ...fallback.map((d, i) => picked[i] ?? d)];
+  const picked = notesBeside(day, data.notes, pickSubjects(day, subjectsWithPrints(data), 5), NOTE_SLOTS);
+  return [...hero, ...picked];
 }
 
 const pos = (left: string, top: string, extra: CSSProperties = {}): CSSProperties => ({
@@ -208,16 +209,21 @@ function Subjects({ day }: { day: number }) {
               style={pos(slot.left, slot.top, { zIndex: slot.z })}
             />
           ))}
-          <MarginNote className="abs crowding" tilt={-2} size={31} style={pos('2.23%', '72.33%', { width: u(270) })}>
-            {notes[3]?.text}
-          </MarginNote>
-          <MarginNote className="abs crowding" tilt={5} size={31} style={pos('90.92%', '7.21%', { width: u(116) })}>
-            {notes[4]?.text}
-          </MarginNote>
-          <MarginNote className="abs crowding" tilt={2} size={31} style={pos('76.04%', '93.02%', { width: u(300) })}>
-            {notes[5]?.text}
-          </MarginNote>
-        </div>
+          {notes[3] && (
+            <MarginNote className="abs crowding" tilt={-2} size={31} style={pos('2.23%', '72.33%', { width: u(270) })}>
+              {notes[3].text}
+            </MarginNote>
+          )}
+          {notes[4] && (
+            <MarginNote className="abs crowding" tilt={5} size={31} style={pos('90.92%', '7.21%', { width: u(116) })}>
+              {notes[4].text}
+            </MarginNote>
+          )}
+          {notes[5] && (
+            <MarginNote className="abs crowding" tilt={2} size={31} style={pos('76.04%', '93.02%', { width: u(300) })}>
+              {notes[5].text}
+            </MarginNote>
+          )}        </div>
       </div>
       <TornEdge color="var(--paper)" seed="subjects-edge" height={30} />
     </section>

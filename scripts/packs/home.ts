@@ -9,6 +9,7 @@ import { createHash } from 'node:crypto';
 import type { HomeData, HomeFeatured, HomeNoteData, HomeSubjectData } from '../../src/lib/packs/home.ts';
 import { SUBJECTS, type BundledPackId } from '../../src/lib/packs/subjects.ts';
 import type { Article } from '../../src/lib/packs/types.ts';
+import { questionFor, type QuestionKind } from '../../src/lib/text/questions.ts';
 import { articleText } from './text.ts';
 
 /** Featured articles kept per subject. */
@@ -19,11 +20,10 @@ export const QUESTIONS_PER_SUBJECT = 6;
 
 const hash = (text: string): string => createHash('sha1').update(text).digest('hex');
 
-const QUESTIONS = [
-  (t: string) => `Ever wondered about ${t}?`,
-  (t: string) => `What is ${t} really like?`,
-  (t: string) => `How much do you know about ${t}?`,
-];
+/** Subjects whose article titles name people or places (no article before them). */
+const NAME_SUBJECTS: ReadonlySet<string> = new Set(['countries', 'people', 'earth', 'ancient', 'space']);
+/** Subjects whose titles are countable things ("the violin"); the rest are materials and ideas. */
+const COMMON_SUBJECTS: ReadonlySet<string> = new Set(['wildlife', 'body', 'inventions', 'arts']);
 
 /** Builds the Home data from every bundled article. */
 export function buildHome(articles: readonly Article[]): HomeData {
@@ -67,10 +67,10 @@ export function buildHome(articles: readonly Article[]): HomeData {
       }
     }
     mine.slice(0, QUESTIONS_PER_SUBJECT).forEach((a, i) => {
-      const make = QUESTIONS[(hash(a.id).charCodeAt(0) + i) % QUESTIONS.length] as (t: string) => string;
+      const kind: QuestionKind = NAME_SUBJECTS.has(id) ? 'name' : COMMON_SUBJECTS.has(id) ? 'common' : 'mass';
       notes.push({
         kind: 'question',
-        text: id === 'countries' ? `Can you find ${a.title} on the globe?` : make(a.title),
+        text: id === 'countries' ? `Can you find ${a.title} on the globe?` : questionFor(a.title, kind, hash(a.id).charCodeAt(0) + i),
         to: id === 'countries' ? `/atlas?c=${a.id}` : `/article/${id}/${a.id}`,
         subject: id,
       });
