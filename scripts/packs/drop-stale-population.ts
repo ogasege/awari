@@ -32,7 +32,7 @@ for (const c of facts.countries) {
     console.log(`${c.id}: changed`);
     // A note or a quiz question whose proof sentence is gone goes with it.
     const text = sections.flatMap((s) => s.paragraphs).join(' ');
-    const notes = a.notes.filter((n) => text.includes(n.proof));
+    const notes = a.notes.filter((n) => n.proof === undefined || text.includes(n.proof));
     writeFileSync(path, `${JSON.stringify({ ...a, sections, notes })}\n`);
     const quizPath = join(DIR, 'quizzes', 'countries', `${c.id}.json`);
     try {
