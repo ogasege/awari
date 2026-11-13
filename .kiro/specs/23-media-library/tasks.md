@@ -11,7 +11,7 @@ Starts after spec 22 is committed. Run through the conductor with `awari-builder
 - [x] 3. `select.ts` filters and scoring with property tests (Property 5). _Req 6-8_
 - [x] 4. Collector: queue, cache under `data/raw`, resumable progress; dry run on five articles. _Req 9, 10_
 - [x] 5. Thumbnails: WebP 480 px, size budget check (under 150 MB total). _Req 11_
-- [ ] 6. Run the collector over all articles in batches until each has at least four (or the gap is
+- [x] 6. Run the collector over all articles in batches until each has at least four (or the gap is
       listed); countries per kind. _Req 15, 16_
 - [ ] 7. Media records and captions from Commons descriptions (Property 4). _Req 13, 14_
 - [ ] 8. Article gallery strip and the large viewer with credit; service-worker caching of the large

@@ -113,4 +113,10 @@ describe('selectForArticle (Property 5)', () => {
       expect(rejectReason({ ...good, title: t }), t).toBeDefined();
     }
   });
+
+  it('keeps blood vessels and blood cells for the body pack, and still rejects blood stains', () => {
+    expect(rejectReason({ ...good, title: 'File:Blood vessel diagram.jpg' })).toBeUndefined();
+    expect(rejectReason({ ...good, title: 'File:Red blood cells.jpg' })).toBeUndefined();
+    expect(rejectReason({ ...good, title: 'File:Blood stain on a floor.jpg' })).toBeDefined();
+  });
 });

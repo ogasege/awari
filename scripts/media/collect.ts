@@ -128,7 +128,7 @@ const IMAGE_PARAMS = {
 function toCollected(p: ImagePage, from: 'article' | 'category'): Collected | undefined {
   const i = p.imageinfo?.[0];
   // A Commons file seen through another wiki is flagged `missing` for that wiki; its imageinfo is what counts.
-  if (!i || !i.thumburl) return undefined;
+  if (!i || !(i.thumburl ?? i.url)) return undefined;
   const m = i.extmetadata ?? {};
   return {
     title: p.title,
@@ -141,7 +141,7 @@ function toCollected(p: ImagePage, from: 'article' | 'category'): Collected | un
     description: plainText(m['ImageDescription']?.value),
     categories: plainText((m['Categories']?.value ?? '').replace(/\|/g, ' | ')).split(' | ').filter((c) => c !== ''),
     page: i.descriptionurl ?? '',
-    thumbUrl: i.thumburl,
+    thumbUrl: i.thumburl ?? i.url ?? '',
     sha1: i.sha1 ?? '',
     author: plainText(m['Artist']?.value),
     licenceUrl: plainText(m['LicenseUrl']?.value),
@@ -154,7 +154,16 @@ async function listPages(endpoint: string, params: Record<string, string>, from:
   const out: Collected[] = [];
   let more: Record<string, string> = {};
   for (let n = 0; n < pages; n++) {
-    const reply = await api<Reply>(endpoint, { ...IMAGE_PARAMS, ...params, ...more });
+    let reply: Reply;
+    try {
+      reply = await api<Reply>(endpoint, { ...IMAGE_PARAMS, ...params, ...more });
+    } catch (error) {
+      // A page or document file (.djvu, .pdf) makes the API refuse the whole request when a thumbnail width is
+      // asked for. Ask again without it: those files are rejected by the mime filter anyway.
+      if (!String(error).includes('urlparamnormal')) throw error;
+      const { iiurlwidth: _width, ...without } = { ...IMAGE_PARAMS, ...params, ...more };
+      reply = await api<Reply>(endpoint, without);
+    }
     for (const p of reply.query?.pages ?? []) {
       const c = toCollected(p, from);
       if (c) out.push(c);
@@ -228,9 +237,17 @@ async function main(): Promise<void> {
   const links = await wikidataLinks([...new Set(todo.map((a) => a.qid).filter((q): q is string => !!q))]);
   let enough = 0;
   const short: string[] = [];
+  const failed: string[] = [];
   for (const a of todo) {
     const l: Links = a.qid ? (links.get(a.qid) ?? {}) : {};
-    const all = await collectWithFallback(l);
+    let all: Collected[];
+    try {
+      all = await collectWithFallback(l);
+    } catch (error) {
+      failed.push(`${a.key}: ${String(error).slice(0, 120)}`);
+      console.log(`${a.key.padEnd(38)} FAILED ${String(error).slice(0, 100)}`);
+      continue;
+    }
     const chosen = selectForArticle(all);
     const allowed = all.filter((c) => rejectReason(c) === undefined).length;
     if (chosen.length >= MIN_PER_ARTICLE) enough++;
@@ -243,6 +260,7 @@ async function main(): Promise<void> {
     }
   }
   console.log(`\n${todo.length} articles, ${enough} with at least ${MIN_PER_ARTICLE} pictures, ${requestCount()} network requests.`);
+  if (failed.length > 0) console.log(`Failed (will be retried on the next run): ${failed.join('; ')}`);
   if (short.length > 0) console.log(`Short: ${short.join(', ')}`);
 }
 

@@ -29,13 +29,20 @@ export interface Candidate {
 export const MIN_SIDE = 800;
 export const MIN_PER_ARTICLE = 4;
 export const MAX_PER_ARTICLE = 12;
+/** What the library actually keeps per article: eight, and ten for a country (more kinds to show). */
+export const KEEP_PER_ARTICLE = 8;
+export const KEEP_PER_COUNTRY = 10;
+
+export function keepFor(pack: string): number {
+  return pack === 'countries' ? KEEP_PER_COUNTRY : KEEP_PER_ARTICLE;
+}
 
 const MIMES = new Set(['image/jpeg', 'image/png', 'image/webp']);
 /** Logos, signatures, icons and collages are never shown (Req 8). */
 const NEVER = /\blogos?\b|wordmark|signature|autograph|\bicons?\b|\bcollage\b|montage|composite|sprite|screenshot|\bscan of\b|\bsvg\b/i;
 /** Frightening, graphic or sexual material, by title, description or category (Req 8); adds to the lead-photo list. */
 const GRAPHIC =
-  /nude|naked|nudity|sexual|erotic|porn|gore|graphic|bloody|blood\b|mutilat|torture|lynching|hanging body|swastika|nazi|penis|vagina|genital|testic|scrotum|vulva|\banus\b|breast|nipple|sperm|menstru|copulat|mating|field dressing|dressing a deer|gutting|gutted|skinning|\bhunt(?:ing|ed|er|ers)\b|trophy|entrails|viscera|intestin|surgery|surgical|operation|open[- ]heart|wound|injur|\bscar\b|amputat|tumou?r|cancer|disease|infect|\bpus\b|rotting|decompos|roadkill|stuffed|taxiderm/i;
+  /nude|naked|nudity|sexual|erotic|porn|gore|graphic|bloody|blood[ -](?:stain|spatter|splatter|pool)|bleeding|mutilat|torture|lynching|hanging body|swastika|nazi|penis|vagina|genital|testic|scrotum|vulva|\banus\b|breast|nipple|sperm|menstru|copulat|mating|field dressing|dressing a deer|gutting|gutted|skinning|\bhunt(?:ing|ed|er|ers)\b|trophy|entrails|viscera|intestin|surgery|surgical|operation|open[- ]heart|wound|injur|\bscar\b|amputat|tumou?r|cancer|disease|infect|\bpus\b|rotting|decompos|roadkill|stuffed|taxiderm/i;
 
 export type Kind = 'photo' | 'portrait' | 'map' | 'flag' | 'emblem' | 'art' | 'diagram';
 
