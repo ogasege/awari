@@ -1,0 +1,156 @@
+/**
+ * Builds the media library from the collected candidates (23-media-library Req 11-14).
+ *
+ *   npx tsx scripts/media/build.ts --thumbs [--limit N]   download and convert thumbnails (resumable)
+ *   npx tsx scripts/media/build.ts --records              write public/media/<subject>.json and index.json
+ *
+ * The thumbnail pass skips every file that already exists, so it can be stopped and started again. The records
+ * pass only lists pictures whose thumbnail exists, and reports the rest.
+ */
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { captionFor } from './caption.ts';
+import type { Collected } from './collect.ts';
+import { requestCount } from './http.ts';
+import { MIN_PER_ARTICLE, keepFor, kindOf, selectForArticle, type Kind } from './select.ts';
+import { IMG_DIR, ensureThumb, folderBytes, thumbName } from './thumbs.ts';
+
+const CANDIDATES = join('data', 'media', 'candidates');
+const OUT = join('public', 'media');
+
+interface Saved {
+  article: { key: string; pack: string; id: string; title: string };
+  candidates: Collected[];
+}
+
+/** What one picture is in the library. */
+export interface MediaItem {
+  id: string;
+  article: string;
+  articleTitle: string;
+  kind: Kind;
+  title: string;
+  page: string;
+  author: string;
+  licence: string;
+  licenceUrl: string;
+  caption: string;
+  captionFrom: string;
+  alt: string;
+  description: string;
+  width: number;
+  height: number;
+  thumb: string;
+  tw: number;
+  th: number;
+  verified: string;
+}
+
+function* articles(): Generator<{ saved: Saved; chosen: Collected[] }> {
+  for (const f of readdirSync(CANDIDATES).filter((x) => x.endsWith('.json')).sort()) {
+    const saved = JSON.parse(readFileSync(join(CANDIDATES, f), 'utf8')) as Saved;
+    yield { saved, chosen: selectForArticle(saved.candidates, keepFor(saved.article.pack)) };
+  }
+}
+
+function report(failed: string[]): void {
+  const f = folderBytes();
+  console.log(`${f.files} thumbnails, ${(f.bytes / 1048576).toFixed(1)} MB.`);
+  if (failed.length > 0) console.log(`Failed (retried on the next run): ${failed.length}\n  ${failed.slice(0, 8).join('\n  ')}`);
+}
+
+async function thumbs(limit: number): Promise<void> {
+  mkdirSync(IMG_DIR, { recursive: true });
+  let made = 0;
+  let kept = 0;
+  const failed: string[] = [];
+  for (const { saved, chosen } of articles()) {
+    for (const c of chosen) {
+      if (existsSync(join(IMG_DIR, thumbName(c.sha1)))) {
+        kept++;
+        continue;
+      }
+      if (made >= limit) {
+        console.log(`Stopped at the limit: ${made} made, ${kept} already there.`);
+        report(failed);
+        return;
+      }
+      try {
+        await ensureThumb(c.sha1, c.thumbUrl);
+        made++;
+        if (made % 25 === 0) console.log(`  ${made} made (${saved.article.key}), ${requestCount()} requests`);
+      } catch (error) {
+        failed.push(`${c.title}: ${String(error).slice(0, 80)}`);
+      }
+    }
+  }
+  console.log(`Done: ${made} made, ${kept} already there.`);
+  report(failed);
+}
+
+function records(): void {
+  const today = new Date().toISOString().slice(0, 10);
+  const bySubject = new Map<string, MediaItem[]>();
+  const missing: string[] = [];
+  const short: string[] = [];
+  const seen = new Set<string>();
+  for (const { saved, chosen } of articles()) {
+    const items: MediaItem[] = [];
+    for (const c of chosen) {
+      const file = thumbName(c.sha1);
+      if (!existsSync(join(IMG_DIR, file))) {
+        missing.push(c.title);
+        continue;
+      }
+      const id = file.replace('.webp', '');
+      // One picture is listed once, with the first article that chose it (the thumbnail file is shared).
+      if (seen.has(id)) continue;
+      seen.add(id);
+      const cap = captionFor(c.description, c.title, saved.article.title);
+      items.push({
+        id,
+        article: saved.article.key,
+        articleTitle: saved.article.title,
+        kind: kindOf(c),
+        title: c.title,
+        page: c.page,
+        author: c.author,
+        licence: c.licence,
+        licenceUrl: c.licenceUrl,
+        caption: cap.text,
+        captionFrom: cap.source,
+        alt: cap.text,
+        description: c.description.slice(0, 400),
+        width: c.width,
+        height: c.height,
+        thumb: `img/${file}`,
+        tw: 480,
+        th: Math.round((480 * c.height) / Math.max(1, c.width)),
+        verified: today,
+      });
+    }
+    if (items.length < MIN_PER_ARTICLE) short.push(`${saved.article.key} (${items.length})`);
+    bySubject.set(saved.article.pack, [...(bySubject.get(saved.article.pack) ?? []), ...items]);
+  }
+  mkdirSync(OUT, { recursive: true });
+  const index: Array<[string, string, string, number, number, string]> = [];
+  for (const [subject, items] of bySubject) {
+    writeFileSync(join(OUT, `${subject}.json`), `${JSON.stringify({ subject, built: today, count: items.length, items })}\n`);
+    for (const m of items) index.push([m.id, m.article, m.kind, m.tw, m.th, m.caption]);
+  }
+  writeFileSync(join(OUT, 'index.json'), `${JSON.stringify({ built: today, count: index.length, subjects: [...bySubject.keys()].sort(), items: index })}\n`);
+  console.log(`${index.length} pictures in ${bySubject.size} subject files.`);
+  if (missing.length > 0) console.log(`No thumbnail yet for ${missing.length} chosen pictures.`);
+  if (short.length > 0) console.log(`Articles under ${MIN_PER_ARTICLE} pictures: ${short.join(', ')}`);
+}
+
+const args = process.argv.slice(2);
+if (process.argv[1]?.endsWith('build.ts')) {
+  if (args.includes('--thumbs')) {
+    await thumbs(Number(args[args.indexOf('--limit') + 1] || Infinity));
+  } else if (args.includes('--records')) {
+    records();
+  } else {
+    console.log('Use --thumbs [--limit N] or --records.');
+  }
+}
