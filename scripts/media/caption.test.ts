@@ -48,4 +48,11 @@ describe('captions', () => {
     expect(nameFromTitle('File:20230101 123456.jpg')).toBe('');
     expect(nameFromTitle('File:Lake Victoria at dawn 2.jpg')).toBe('Lake Victoria at dawn');
   });
+
+  it('takes boilerplate off the front and refuses key-value metadata', () => {
+    expect(captionFor('This is a photo of a monument in Mexico City.', 'File:X.jpg', 'Mexico').text).toBe('A monument in Mexico City');
+    expect(captionFor('Photo of the place of the Persian Gate', 'File:X.jpg', 'Iran').text).toBe('The place of the Persian Gate');
+    expect(captionFor('object type: portrait statue - description: Head of Hatshepsut', 'File:X.jpg', 'Egypt').text).toBe('Head of Hatshepsut');
+    expect(captionFor('object type: portrait statue', 'File:Bust of Hatshepsut.jpg', 'Egypt')).toEqual({ text: 'Bust of Hatshepsut', source: 'title' });
+  });
 });

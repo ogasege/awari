@@ -4,7 +4,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 16px 40px;
+  gap: 16px 28px;
   padding: 22px var(--gutter);
   color: var(--paper);
 }
@@ -24,7 +24,7 @@
 .site-header__nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 32px;
+  gap: 8px 22px;
   font-size: 17px;
   font-weight: 600;
 }
@@ -48,7 +48,7 @@
 
 .site-header__search {
   margin-left: auto;
-  flex: 0 1 320px;
+  flex: 0 1 250px;
   display: flex;
   align-items: center;
   gap: 10px;

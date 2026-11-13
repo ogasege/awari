@@ -112,3 +112,22 @@ describe('caches and versions', () => {
     );
   });
 });
+
+describe('library thumbnails (23-media-library Req 21)', () => {
+  it('are answered by the media plan and left out of the install-time precache', () => {
+    expect(planFor({ method: 'GET', url: `${ORIGIN}/media/img/0123456789abcdef.webp`, mode: 'cors' }, ORIGIN, new Set())).toBe('media');
+    const list = precacheList(['index.html', 'media/index.json', 'media/img/a.webp', 'media/img/b.webp', 'assets/app.js']);
+    expect(list).toContain('/media/index.json');
+    expect(list.filter((u) => u.startsWith('/media/img/'))).toEqual([]);
+  });
+});
+
+describe('large view of a library picture (23-media-library Req 21)', () => {
+  it('is kept when it comes from the Commons FilePath address, and nothing else from another origin is', () => {
+    const big = 'https://commons.wikimedia.org/wiki/Special:FilePath/Lagos%20skyline.jpg?width=1024';
+    expect(planFor({ method: 'GET', url: big, mode: 'no-cors' }, ORIGIN, new Set())).toBe('media');
+    expect(planFor({ method: 'GET', url: 'https://commons.wikimedia.org/w/api.php', mode: 'cors' }, ORIGIN, new Set())).toBe('network-only');
+    expect(planFor({ method: 'GET', url: 'http://commons.wikimedia.org/wiki/Special:FilePath/x.jpg', mode: 'no-cors' }, ORIGIN, new Set())).toBe('network-only');
+    expect(planFor({ method: 'POST', url: big, mode: 'cors' }, ORIGIN, new Set())).toBe('network-only');
+  });
+});

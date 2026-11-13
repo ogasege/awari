@@ -141,7 +141,7 @@ function records(): void {
   writeFileSync(join(OUT, 'index.json'), `${JSON.stringify({ built: today, count: index.length, subjects: [...bySubject.keys()].sort(), items: index })}\n`);
   console.log(`${index.length} pictures in ${bySubject.size} subject files.`);
   if (missing.length > 0) console.log(`No thumbnail yet for ${missing.length} chosen pictures.`);
-  if (short.length > 0) console.log(`Articles under ${MIN_PER_ARTICLE} pictures: ${short.join(', ')}`);
+  if (short.length > 0) console.log(`Articles under ${MIN_PER_ARTICLE} pictures: ${short.length} (first: ${short.slice(0, 6).join(', ')})`);
 }
 
 const args = process.argv.slice(2);

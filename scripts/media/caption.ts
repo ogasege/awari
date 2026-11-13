@@ -48,9 +48,18 @@ export function nameFromTitle(title: string): string {
   return name.split(' ').length >= 2 && letters >= name.length * 0.6 ? name : '';
 }
 
+/** Takes the boilerplate off the front of a description ("This is a photo of ...", "object type: ... description: ..."). */
+export function tidy(description: string): string {
+  let d = englishPart(description);
+  const keyed = /^[a-z ]{3,24}:\s/i.test(d) ? /\bdescription\s*:\s*(.+)$/i.exec(d) : null;
+  if (/^(?:object type|title|name|object|inscription)\s*:/i.test(d)) d = keyed?.[1] ? collapse(keyed[1]) : '';
+  d = d.replace(/^(?:this is (?:an?|the) (?:photo|picture|image|photograph) (?:of|showing)\s+|(?:photo|picture|image|photograph) of\s+)/i, '');
+  return d.charAt(0).toUpperCase() + d.slice(1);
+}
+
 /** The caption for one picture. */
 export function captionFor(description: string, title: string, articleTitle: string): Caption {
-  const d = englishPart(description);
+  const d = tidy(description);
   if (d.length >= 12 && d.split(' ').length >= 3 && !JUNK.test(d)) {
     return { text: shorten(d), source: 'description' };
   }

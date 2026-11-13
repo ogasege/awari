@@ -10,7 +10,7 @@ export function servePacksFromDisk(overrides: Readonly<Record<string, unknown>> 
   vi.stubGlobal('fetch', async (input: RequestInfo | URL) => {
     const url = typeof input === 'string' ? input : input.toString();
     const path = new URL(url, 'http://localhost').pathname;
-    if (!path.startsWith('/packs/')) {
+    if (!path.startsWith('/packs/') && !path.startsWith('/media/')) {
       return new Response('not found', { status: 404 });
     }
     const override = overrides[path];

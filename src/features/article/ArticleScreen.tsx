@@ -12,6 +12,7 @@ import { isBundledPack, subjectById } from '../../lib/packs/subjects.ts';
 import { urlTitle } from '../../lib/wiki/convert.ts';
 import type { Article, FactsPack, PackIndex } from '../../lib/packs/types.ts';
 import { update, withDiscovered } from '../../lib/store/progress.ts';
+import { ArticleGallery } from '../media/ArticleGallery.tsx';
 import { ArticleBody } from './ArticleBody.tsx';
 import { articleCredits, factRows } from './credit.ts';
 import { WordCard } from './WordCard.tsx';
@@ -149,6 +150,8 @@ function ArticleView({ article, photoSrc }: { article: Article; photoSrc?: strin
         ) : null}
         <TornEdge color="var(--paper)" seed={`article-${article.id}`} height={30} />
       </header>
+
+      {article.pack !== 'wiki' ? <ArticleGallery articleKey={`${article.pack}/${article.id}`} leadCredit={lead?.credit.name} /> : null}
 
       <div className="article__paper">
         <ArticleBody sections={article.sections} proofs={proofs} onWord={onWord} />

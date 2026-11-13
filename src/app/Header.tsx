@@ -14,6 +14,7 @@ const NAV: ReadonlyArray<{ to: string; label: string; routes: RouteName[] }> = [
   { to: '/atlas', label: 'Atlas', routes: ['atlas'] },
   { to: '/tours', label: 'Tours', routes: ['tours', 'tour'] },
   { to: '/timeline', label: 'Timeline', routes: ['timeline'] },
+  { to: '/media', label: 'Pictures', routes: ['media'] },
   { to: '/castle', label: 'Castle', routes: ['castle', 'wing'] },
   { to: '/quizzes', label: 'Quizzes', routes: ['quizzes', 'quiz'] },
 ];

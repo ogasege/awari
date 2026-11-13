@@ -32,6 +32,7 @@ const SCREENS: Record<RouteName, Screen> = {
   continentStamps: lazyScreen(() => import('../features/stamps/ContinentStamps.tsx')),
   search: lazyScreen(() => import('../features/search/SearchScreen.tsx')),
   credits: lazyScreen(() => import('../features/credits/CreditsScreen.tsx')),
+  media: lazyScreen(() => import('../features/media/MediaScreen.tsx')),
   'not-found': lazyScreen(() => import('./NotFound.tsx')),
 };
 

@@ -6,6 +6,11 @@
  */
 import { cacheNameFor, planFor, staleCaches } from './strategy.ts';
 
+/** Pictures looked at, kept for offline. Its name does not start with the site prefix, so a new site version keeps it. */
+const MEDIA_CACHE = 'media-awari-v1';
+/** At most this many pictures are kept; the oldest go first. */
+const MEDIA_LIMIT = 800;
+
 declare const __PRECACHE__: string[];
 declare const __VERSION__: string;
 
@@ -94,6 +99,22 @@ async function fromCache(url: string): Promise<Response | undefined> {
   return cache.match(url, { ignoreSearch: true });
 }
 
+async function mediaAnswer(request: Request): Promise<Response> {
+  const cache = await caches.open(MEDIA_CACHE);
+  const hit = await cache.match(request);
+  if (hit) return hit;
+  const res = await fetch(request);
+  // A picture from Commons arrives as an opaque response in an <img>; it can be kept all the same.
+  if (res.ok || res.type === 'opaque') {
+    await cache.put(request, res.clone());
+    const keys = await cache.keys();
+    for (const old of keys.slice(0, Math.max(0, keys.length - MEDIA_LIMIT))) {
+      await cache.delete(old);
+    }
+  }
+  return res;
+}
+
 async function answer(request: Request): Promise<Response> {
   const plan = planFor(request, scope.location.origin, PRECACHE);
   if (plan === 'network-only') {
@@ -101,6 +122,9 @@ async function answer(request: Request): Promise<Response> {
   }
   if (plan === 'navigate') {
     return (await fromCache('/index.html')) ?? fetch(request);
+  }
+  if (plan === 'media') {
+    return mediaAnswer(request);
   }
   if (plan === 'precache') {
     return (await fromCache(new URL(request.url).pathname)) ?? fetch(request);

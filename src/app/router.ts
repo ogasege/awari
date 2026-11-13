@@ -20,6 +20,7 @@ export const ROUTES = {
   continentStamps: '/stamps/:continent',
   search: '/search',
   credits: '/credits',
+  media: '/media',
 } as const;
 
 export type RouteName = keyof typeof ROUTES | 'not-found';

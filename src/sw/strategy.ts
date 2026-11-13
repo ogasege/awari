@@ -8,7 +8,10 @@
 export const CACHE_PREFIX = 'awari-';
 
 /** What the worker does with one request. */
-export type Plan = 'network-only' | 'navigate' | 'precache' | 'network-first';
+export type Plan = 'network-only' | 'navigate' | 'precache' | 'network-first' | 'media';
+
+/** Library thumbnails: too many to save on the first visit, so they are kept as they are looked at (23-media-library Req 21). */
+export const MEDIA_PREFIX = '/media/img/';
 
 /** The parts of a request the decision needs. */
 export interface RequestInfo {
@@ -29,14 +32,21 @@ export function planFor(
   precache: ReadonlySet<string>,
 ): Plan {
   const url = new URL(request.url, origin);
-  if (request.method !== 'GET' || url.origin !== origin) {
+  if (request.method !== 'GET') {
     return 'network-only';
+  }
+  if (url.origin !== origin) {
+    // The larger view of a library picture, served by Commons, is kept once looked at (Req 21).
+    return url.protocol === 'https:' && url.hostname === 'commons.wikimedia.org' && url.pathname.startsWith('/wiki/Special:FilePath/') ? 'media' : 'network-only';
   }
   if (url.pathname === '/api' || url.pathname.startsWith('/api/')) {
     return 'network-only';
   }
   if (request.mode === 'navigate') {
     return 'navigate';
+  }
+  if (url.pathname.startsWith(MEDIA_PREFIX)) {
+    return 'media';
   }
   return precache.has(url.pathname) ? 'precache' : 'network-first';
 }
@@ -60,7 +70,7 @@ export function precacheList(files: readonly string[]): string[] {
   const urls = new Set<string>(['/', '/index.html']);
   for (const f of files) {
     const path = `/${f.replace(/^\/+/, '')}`;
-    if (path === '/sw.js' || path.endsWith('.map')) {
+    if (path === '/sw.js' || path.endsWith('.map') || path.startsWith(MEDIA_PREFIX)) {
       continue;
     }
     urls.add(path);
