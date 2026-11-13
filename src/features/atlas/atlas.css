@@ -68,58 +68,6 @@
   color: var(--yellow);
 }
 
-.atlas-sheets {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 22px;
-  margin: 14px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.atlas-sheet {
-  padding: 14px 16px 16px;
-  background: var(--paper);
-  color: var(--ink);
-  border-radius: 4px;
-  box-shadow: 0 6px 12px rgb(16 24 40 / 0.25);
-}
-
-.atlas-sheet__head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 8px;
-  margin: 0 0 10px;
-}
-
-.atlas-sheet__name {
-  font-family: var(--font-head);
-  font-size: 22px;
-}
-
-.atlas-sheet__count {
-  font-family: var(--font-hand);
-  font-size: 22px;
-  color: var(--teal-ink);
-}
-
-.atlas-sheet__stamps {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(18px, 1fr));
-  gap: 5px;
-}
-
-.atlas-sheet__stamps span {
-  aspect-ratio: 5 / 6;
-  background: rgb(11 27 77 / 0.12);
-}
-
-.atlas-sheet__stamps span.is-found {
-  background: var(--yellow);
-  outline: 1px solid rgb(11 27 77 / 0.35);
-}
-
 .atlas__globe {
   grid-area: globe;
   position: relative;
@@ -282,20 +230,10 @@
   color: var(--paper);
 }
 
-@media (max-width: 1100px) {
-  .atlas-sheets {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
 @media (max-width: 899px) {
   .atlas {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas: 'side' 'globe' 'card' 'sheets' 'credit';
-  }
-
-  .atlas-sheets {
-    grid-template-columns: 1fr;
   }
 }
 

@@ -7,9 +7,9 @@ import { Link } from '../../app/navigation.tsx';
 import { useTitle } from '../../app/useTitle.ts';
 import { MarginNote, Print, Stamp, StripHeading } from '../../design/paper.tsx';
 import { usePack } from '../../lib/packs/load.ts';
-import { continentSlug } from '../../lib/packs/subjects.ts';
 import type { PackIndex } from '../../lib/packs/types.ts';
 import { useProgress } from '../../lib/store/useProgress.ts';
+import { StampSheets } from './StampSheets.tsx';
 import { worldBook } from './stamps.ts';
 import './stamps.css';
 
@@ -61,18 +61,7 @@ export default function StampsScreen() {
       ) : null}
 
       <h2>One page for each continent</h2>
-      <ul className="stamp-book__continents">
-        {book.perContinent.map((c) => (
-          <li key={c.continent}>
-            <Link to={`/stamps/${continentSlug(c.continent)}`} className="stamp-book__continent lift">
-              <span className="stamp-book__continent-name">{c.continent}</span>
-              <span>
-                {c.count} of {c.total} countries
-              </span>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <StampSheets book={book} />
 
       {latest.length > 0 ? (
         <>

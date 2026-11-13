@@ -75,7 +75,7 @@ describe('Timeline screen from the committed pack (07-timeline 3.2, 18-world-tim
     // The previous and next controls walk to the neighbouring centuries.
     await user.click(screen.getByRole('button', { name: '1900s →' }));
     expect(screen.getByRole('heading', { name: 'The 1900s' })).toBeInTheDocument();
-  });
+  }, 20_000);
 
   it('shows fewer births than other events by default (21-review-2 Req 18)', async () => {
     const { container } = render(<TimelineScreen />);

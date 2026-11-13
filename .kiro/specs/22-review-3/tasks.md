@@ -9,7 +9,7 @@ One task per item. Each is built by `awari-builder`, checked by `awari-design-re
       "Coming up" only in the third slot (Property 2). _Req 1-3_
 - [x] 3. Timeline cards: colour by kind with a legend, year above the title, ruler spacing, births
       under 40% (Property 5). _Req 14-16_
-- [ ] 4. Stamp sheets component; stamp book continents as sheets in a 3x2 grid. _Req 5_
+- [x] 4. Stamp sheets component; stamp book continents as sheets in a 3x2 grid. _Req 5_
 - [ ] 5. Atlas uses the stamp sheets; closes the gap under the picker. _Req 6, 7_
 - [ ] 6. Subjects page as cover prints with hand labels; count from data. _Req 4_
 - [ ] 7. Home castle panel: a castle or a door; no duplicate photographs on Home (Property 3);

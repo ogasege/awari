@@ -43,13 +43,13 @@ describe('Atlas (04-atlas)', () => {
   it('draws progress as one stamp sheet per continent with its own count (21-review-2 Req 15)', async () => {
     render(<AtlasScreen />);
     await screen.findByRole('application', { name: /Globe/ });
-    const sheets = document.querySelectorAll('.atlas-sheet');
+    const sheets = document.querySelectorAll('.stamp-sheet');
     expect(sheets).toHaveLength(6);
     let stamps = 0;
     for (const sheet of sheets) {
-      expect(sheet.querySelector('.atlas-sheet__name')?.textContent).toBeTruthy();
-      expect(sheet.querySelector('.atlas-sheet__count')?.textContent).toMatch(/^\d+ of \d+$/);
-      stamps += sheet.querySelectorAll('.atlas-sheet__stamps span').length;
+      expect(sheet.querySelector('.stamp-sheet__name')?.textContent).toBeTruthy();
+      expect(sheet.querySelector('.stamp-sheet__count')?.textContent).toMatch(/^\d+ of \d+$/);
+      stamps += sheet.querySelectorAll('.stamp-sheet__stamps span').length;
     }
     expect(stamps).toBe(197);
   });

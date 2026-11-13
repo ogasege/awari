@@ -7,12 +7,12 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link } from '../../app/navigation.tsx';
 import { useTitle } from '../../app/useTitle.ts';
 import { Button, MarginNote, StripHeading } from '../../design/paper.tsx';
-import { perforation } from '../../design/wobble.ts';
 import { usePack } from '../../lib/packs/load.ts';
 import type { FactsPack, PackIndex } from '../../lib/packs/types.ts';
 import { update, withDiscovered } from '../../lib/store/progress.ts';
 import { useProgress } from '../../lib/store/useProgress.ts';
 import { factRows } from '../article/credit.ts';
+import { StampSheets } from '../stamps/StampSheets.tsx';
 import { worldBook, type WorldBook } from '../stamps/stamps.ts';
 import { Globe, centreOf, type Shapes } from './Globe.tsx';
 import { centreOn, type Rotation } from './globeMath.ts';
@@ -22,12 +22,8 @@ interface QuizIndex {
   quizzes: Array<{ pack: string; id: string }>;
 }
 
-const STAMP = perforation(6, 6);
-
 /**
- * The world stamp count as a stamp sheet: one perforated sheet per
- * continent with its own count, a stamp for every country, filled in as
- * the student finds them (21-review-2 Req 15).
+ * The world stamp count as the shared stamp sheets (22-review-3 Req 6).
  */
 function WorldStamps({ book }: { book: WorldBook }) {
   return (
@@ -35,23 +31,7 @@ function WorldStamps({ book }: { book: WorldBook }) {
       <p className="atlas-stamps__count">
         <strong>{book.count}</strong> of {book.total || 197} countries discovered
       </p>
-      <ul className="atlas-sheets">
-        {book.perContinent.map((c, i) => (
-          <li key={c.continent} className="atlas-sheet" style={{ rotate: `${[-1.2, 0.9, -0.6, 1.1, -0.9, 0.7][i % 6]}deg` }}>
-            <p className="atlas-sheet__head">
-              <span className="atlas-sheet__name">{c.continent}</span>
-              <span className="atlas-sheet__count">
-                {c.count} of {c.total}
-              </span>
-            </p>
-            <div className="atlas-sheet__stamps" aria-hidden="true">
-              {Array.from({ length: c.total }, (_, k) => (
-                <span key={k} className={k < c.count ? 'is-found' : ''} style={{ clipPath: STAMP }} />
-              ))}
-            </div>
-          </li>
-        ))}
-      </ul>
+      <StampSheets book={book} />
     </div>
   );
 }
