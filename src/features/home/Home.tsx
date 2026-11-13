@@ -22,6 +22,7 @@ import { subjectById } from '../../lib/packs/subjects.ts';
 import { useProgress } from '../../lib/store/useProgress.ts';
 import { WINGS } from '../castle/castle.ts';
 import { creditLine } from './bundledCredits.ts';
+import { CastleDoor } from './CastleDoor.tsx';
 import { castlePanel, enterLabel } from './castlePanel.ts';
 import { DoorRow } from './DoorRow.tsx';
 import { KitLayer } from './KitLayer.tsx';
@@ -183,7 +184,7 @@ const todaysWing = (day: number) => pickSubjects(day, WINGS, 1)[0] ?? WINGS[0];
 /** The credit line names exactly the bundled photographs on the page today (21-review-2 Req 13). */
 function HomeFooter({ day }: { day: number }) {
   const prints = usePrints(day);
-  const shown = ['/photos/earth.jpg', ...prints.map((p) => p.src), castlePanel(todaysWing(day)).photo];
+  const shown = ['/photos/earth.jpg', ...prints.map((p) => p.src)];
   return (
     <footer className="page-footer">
       <p>
@@ -287,7 +288,7 @@ function LearnByPlaying({ day }: { day: number }) {
           <KitLayer layer="playing" />
           <DoorRow lit={lit} />
           <div className="abs home-castle" style={pos('0.6%', '3%', { width: u(570), rotate: '-3deg' })}>
-            <img src={panel.photo} alt={panel.alt} style={{ clipPath: CASTLE_CUT }} />
+            <CastleDoor label={panel.label} alt={panel.alt} clip={CASTLE_CUT} />
             <h3 className="home-castle__title" style={{ fontSize: u(68), bottom: u(-30) }}>
               The Castle
             </h3>

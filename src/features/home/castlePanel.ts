@@ -1,32 +1,22 @@
 /**
- * What Home's castle panel shows for today's wing (21-review-2 Req 12):
- * a photograph that matches the wing, or one of no particular place, and
- * a button label in sentence case ("Enter the Asia wing").
+ * What Home's castle panel shows for today's wing (22-review-3 Req 8): a
+ * drawn castle door with the wing's name over it. It is never a photograph of
+ * somewhere else, never the flag poster and never the hero's Earth, so the
+ * panel cannot repeat a picture used elsewhere on the page (Req 9).
  */
-import { coverFor } from '../../lib/packs/covers.ts';
 import type { Wing } from '../castle/castle.ts';
 
 export interface CastlePanel {
-  photo: string;
+  /** Always a drawn door: the panel carries no photograph. */
+  kind: 'door';
+  /** The wing's name, shown over the door ("Asia", "Wildlife"). */
+  label: string;
   alt: string;
-  /** Kit photo files under /photos, for the footer credit line. */
-  credited: string;
 }
 
-const GONDAR = { photo: '/photos/castle.jpg', alt: 'A stone castle tower in Gondar, Ethiopia', credited: '/photos/castle.jpg' };
-const EARTH = { photo: '/photos/earth.jpg', alt: 'The Earth seen from space', credited: '/photos/earth.jpg' };
-
 export function castlePanel(wing: Wing | undefined): CastlePanel {
-  if (!wing) return EARTH;
-  if (wing.group === 'subject') {
-    const cover = coverFor(wing.pack);
-    return cover ? { photo: cover.file, alt: cover.alt, credited: cover.file } : EARTH;
-  }
-  // The only continent we hold a castle photograph for is Africa (Gondar). Any other continent gets a
-  // picture of no particular place that is not the hero's Earth: the poster of hand-drawn flags.
-  if (wing.continent === 'Africa') return GONDAR;
-  const flags = coverFor('countries');
-  return flags ? { photo: flags.file, alt: flags.alt, credited: flags.file } : EARTH;
+  const label = wing ? wing.name.replace(/^The /, '') : 'The castle';
+  return { kind: 'door', label, alt: wing ? `A castle door for the ${label} wing` : 'A castle door' };
 }
 
 /** "Enter the Asia wing": the wing's name with its leading "The" in lower case. */

@@ -330,7 +330,8 @@
   margin: 0 0 28px;
 }
 
-.home-castle img {
+.home-castle img,
+.home-castle__door {
   display: block;
   width: 100%;
   aspect-ratio: 57 / 40;

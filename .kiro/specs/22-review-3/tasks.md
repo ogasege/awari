@@ -12,7 +12,7 @@ One task per item. Each is built by `awari-builder`, checked by `awari-design-re
 - [x] 4. Stamp sheets component; stamp book continents as sheets in a 3x2 grid. _Req 5_
 - [x] 5. Atlas uses the stamp sheets; closes the gap under the picker. _Req 6, 7_
 - [x] 6. Subjects page as cover prints with hand labels; count from data. _Req 4_
-- [ ] 7. Home castle panel: a castle or a door; no duplicate photographs on Home (Property 3);
+- [x] 7. Home castle panel: a castle or a door; no duplicate photographs on Home (Property 3);
       hero note arrows clear of their text. _Req 8-10_
 - [ ] 8. Population: one figure with year and source in every country article; drop empty
       sections in the build (Property 6). _Req 11, 12_
