@@ -14,7 +14,7 @@ One task per item. Each is built by `awari-builder`, checked by `awari-design-re
 - [x] 6. Subjects page as cover prints with hand labels; count from data. _Req 4_
 - [x] 7. Home castle panel: a castle or a door; no duplicate photographs on Home (Property 3);
       hero note arrows clear of their text. _Req 8-10_
-- [ ] 8. Population: one figure with year and source in every country article; drop empty
+- [x] 8. Population: one figure with year and source in every country article; drop empty
       sections in the build (Property 6). _Req 11, 12_
 - [ ] 9. Search snippets (Property 4). _Req 13_
 - [ ] 10. Tours: equal cards, a print each, globe outline centred, no blank gap. _Req 17, 18_

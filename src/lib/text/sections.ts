@@ -69,7 +69,21 @@ export function splitSections(extract: string): ArticleSection[] {
     }
     sections.at(-1)?.paragraphs.push(collapseSpaces(line));
   }
-  return sections.filter((s) => s.paragraphs.length > 0);
+  return sections.filter((s) => s.paragraphs.length > 0 && !isEmptySection(s));
+}
+
+/**
+ * A heading whose only text introduces a table or list that the plain-text
+ * extract does not carry ("These are the cities in Nigeria with over 1 million
+ * people as of 2012."). Shown alone it is an empty section (22-review-3 Req 12).
+ */
+export function isEmptySection(section: ArticleSection): boolean {
+  if (section.heading === '') {
+    return false;
+  }
+  return section.paragraphs.every(
+    (p) => p.trim() === '' || /:$/.test(p.trim()) || /^(these|here|the following) (are|is)\b.*\b(below|as of \d{4}|following|listed)\b[^.]*\.?$/i.test(p.trim()),
+  );
 }
 
 /** Abbreviations after which a full stop does not end a sentence. */
