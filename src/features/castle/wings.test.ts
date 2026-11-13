@@ -32,3 +32,25 @@ describe('castle wings (17-castle-wings Property 1)', () => {
     expect(WINGS.find((w) => w.id === 'electricity')?.pack).toBe('physics');
   });
 });
+
+describe('wing names and prints (22-review-3 Req 19)', () => {
+  it('never doubles "The" in a wing name', async () => {
+    const { WINGS } = await import('./castle.ts');
+    for (const w of WINGS) {
+      expect(w.name, w.id).not.toMatch(/The The/i);
+      expect(w.name).toMatch(/^The .+ wing$/);
+    }
+  });
+
+  it('gives every wing a print whose picture exists', async () => {
+    const { WINGS, wingPrint } = await import('./castle.ts');
+    const { existsSync } = await import('node:fs');
+    for (const w of WINGS) {
+      const p = wingPrint(w);
+      expect(p, w.id).toBeDefined();
+      expect(p?.alt.length).toBeGreaterThan(5);
+      const file = (p?.src ?? '').replace(/^\/packs\//, 'packs/').replace(/^\//, '');
+      expect(existsSync(`public/${file.startsWith('packs/') ? file : file}`), p?.src).toBe(true);
+    }
+  });
+});

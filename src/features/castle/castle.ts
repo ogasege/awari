@@ -1,4 +1,6 @@
 /** Pure rules for the Castle (06-castle). */
+import { coverFor } from '../../lib/packs/covers.ts';
+import { packUrl } from '../../lib/packs/load.ts';
 import { CONTINENTS, SUBJECTS, continentSlug, type Continent } from '../../lib/packs/subjects.ts';
 import type { PackId, Question, QuizSet } from '../../lib/packs/types.ts';
 import { reduce, type Action, type QuizState } from '../quiz/quizMachine.ts';
@@ -43,7 +45,7 @@ const SUBJECT_BLURBS: Record<string, string> = {
 
 const SUBJECT_WINGS: readonly Wing[] = SUBJECTS.filter((s) => s.id !== 'countries').map((s) => ({
   id: subjectWingId(s.id),
-  name: `The ${s.name} wing`,
+  name: `The ${s.name.replace(/^The /, '')} wing`,
   pack: s.id,
   group: 'subject',
   blurb: SUBJECT_BLURBS[s.id] ?? 'Twelve doors, twelve questions.',
@@ -107,3 +109,22 @@ export function castleReduce(pool: readonly Question[], s: CastleState, a: Actio
   }
   return { quiz, lit };
 }
+
+/** A reviewed picture for a wing's card: the subject's cover, or a famous place on the continent (22-review-3 Req 19). */
+export function wingPrint(wing: Wing): { src: string; alt: string } | undefined {
+  if (wing.group === 'subject') {
+    const cover = coverFor(wing.pack === 'physics' ? 'physics' : wing.pack);
+    return cover ? { src: cover.file, alt: cover.alt } : undefined;
+  }
+  const place = CONTINENT_PRINTS[wing.continent ?? ''];
+  return place ? { src: packUrl(place.file), alt: place.alt } : undefined;
+}
+
+const CONTINENT_PRINTS: Readonly<Record<string, { file: string; alt: string }>> = {
+  Africa: { file: 'img/egypt.jpg', alt: 'The three great pyramids of Giza standing in the desert' },
+  Asia: { file: 'img/india.jpg', alt: 'The white marble Taj Mahal with its dome and four tall towers' },
+  Europe: { file: 'img/france.jpg', alt: 'The Eiffel Tower in Paris' },
+  'North America': { file: 'img/united-states.jpg', alt: 'The Statue of Liberty holding up her torch, seen from the front' },
+  'South America': { file: 'img/brazil.jpg', alt: 'The statue of Christ the Redeemer above the clouds in Rio de Janeiro' },
+  Oceania: { file: 'img/australia.jpg', alt: 'The Sydney Opera House seen across the harbour' },
+};

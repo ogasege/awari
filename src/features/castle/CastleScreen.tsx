@@ -1,10 +1,12 @@
 /** The castle gate: choose a wing, with each wing's doors drawn lit. */
 import { useTitle } from '../../app/useTitle.ts';
-import { Button, MarginNote, StripHeading } from '../../design/paper.tsx';
+import { Button, MarginNote, Print, StripHeading } from '../../design/paper.tsx';
 import { useProgress } from '../../lib/store/useProgress.ts';
-import { ROOMS, WINGS } from './castle.ts';
+import { ROOMS, WINGS, wingPrint } from './castle.ts';
 import { Doors } from './Doors.tsx';
 import './castle.css';
+
+const printOf = wingPrint;
 
 export default function CastleScreen() {
   useTitle('The Castle');
@@ -44,6 +46,16 @@ export default function CastleScreen() {
               const lit = progress.castle[w.id] ?? 0;
               return (
                 <section key={w.id} className="castle__wing" aria-labelledby={`wing-${w.id}`} style={{ rotate: i % 2 ? '1deg' : '-1deg' }}>
+                  {printOf(w) ? (
+                    <Print
+                      className="castle__wing-print"
+                      src={printOf(w)?.src ?? ''}
+                      alt={printOf(w)?.alt ?? ''}
+                      width={200}
+                      tilt={i % 2 ? 2 : -2}
+                      tape={[{ left: '36%', width: 80, tilt: i % 2 ? 5 : -5, tone: 'yellow' }]}
+                    />
+                  ) : null}
                   <h3 id={`wing-${w.id}`}>{w.name}</h3>
                   <p>{w.blurb}</p>
                   <Doors lit={lit} compact />

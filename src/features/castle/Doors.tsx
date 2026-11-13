@@ -47,10 +47,11 @@ export function Doors({ lit, names = [], compact = false }: { lit: number; names
         )}
         {next && !compact ? (
           <g className="doors__next">
-            {wobblyArrow({ x: next.x - 34, y: next.y - 26 }, { x: next.x + 4, y: next.y + 8 }, seedFrom('next')).map((p) => (
+            {wobblyArrow({ x: Math.max(8, next.x - 34), y: next.y - 26 }, { x: next.x + 4, y: next.y + 8 }, seedFrom('next')).map((p) => (
               <path key={p} d={p} />
             ))}
-            <text x={next.x - 70} y={next.y - 30}>next!</text>
+            {/* The label sits beside the arrow's tail and always inside the wall. */}
+            <text x={Math.max(8, next.x - 34) + 8} y={next.y - 30}>next!</text>
           </g>
         ) : null}
       </svg>
