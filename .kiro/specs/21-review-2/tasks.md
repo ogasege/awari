@@ -19,7 +19,7 @@ own, logged in `docs/kiro-log.md`, and opened in a real browser at 1440 and
 - [x] 7. Coming-up cards labelled and clear of the years; doodle means
       something; Property 6. _Req 9-11_
 - [x] 8. Castle panel photo matches its wing; button grammar. _Req 12_
-- [ ] 9. Home footer credits generated from the photos shown; Property 7.
+- [x] 9. Home footer credits generated from the photos shown; Property 7.
       _Req 13_
 - [ ] 10. Atlas: globe is the hero, progress is a continent stamp sheet.
       _Req 14, 15_

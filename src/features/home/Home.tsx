@@ -21,6 +21,7 @@ import { packUrl, usePack } from '../../lib/packs/load.ts';
 import { subjectById } from '../../lib/packs/subjects.ts';
 import { useProgress } from '../../lib/store/useProgress.ts';
 import { WINGS } from '../castle/castle.ts';
+import { creditLine } from './bundledCredits.ts';
 import { castlePanel, enterLabel } from './castlePanel.ts';
 import { DoorRow } from './DoorRow.tsx';
 import { KitLayer } from './KitLayer.tsx';
@@ -162,11 +163,11 @@ const DEFAULT_PRINTS = [
   { to: '/subject/countries', src: '/photos/kili.jpg', alt: 'Kilimanjaro rising above the clouds', caption: 'Countries' },
 ] as const;
 
-function Subjects({ day }: { day: number }) {
+/** The five prints of today's subjects collage: each subject's reviewed cover. */
+function usePrints(day: number) {
   const data = useHomeData();
-  const notes = useNotes(day);
   const subjects = data ? pickSubjects(day, subjectsWithPrints(data), 5) : [];
-  const prints = PRINT_SLOTS.map((slot, i) => {
+  return PRINT_SLOTS.map((slot, i) => {
     const id = subjects[i];
     const subject = id ? subjectById(id) : undefined;
     const fallback = DEFAULT_PRINTS[i] as (typeof DEFAULT_PRINTS)[number];
@@ -174,6 +175,28 @@ function Subjects({ day }: { day: number }) {
     if (!cover || !subject) return { slot, to: fallback.to, src: fallback.src, alt: fallback.alt, caption: fallback.caption };
     return { slot, to: `/subject/${subject.id}`, src: cover.file, alt: cover.alt, caption: subject.label };
   });
+}
+
+/** The wing the castle panel shows today. */
+const todaysWing = (day: number) => pickSubjects(day, WINGS, 1)[0] ?? WINGS[0];
+
+/** The credit line names exactly the bundled photographs on the page today (21-review-2 Req 13). */
+function HomeFooter({ day }: { day: number }) {
+  const prints = usePrints(day);
+  const shown = ['/photos/earth.jpg', ...prints.map((p) => p.src), castlePanel(todaysWing(day)).photo];
+  return (
+    <footer className="page-footer">
+      <p>
+        {creditLine(shown)} Photos on the stamps and in the quiz are credited on their article pages. Article text comes from
+        Wikipedia under CC BY-SA 4.0. Every licence is listed on the <Link to="/credits">credits page</Link>.
+      </p>
+    </footer>
+  );
+}
+
+function Subjects({ day }: { day: number }) {
+  const notes = useNotes(day);
+  const prints = usePrints(day);
   return (
     <section className="home-subjects grain" aria-labelledby="subjects-title">
       <div className="home-subjects__head">
@@ -252,7 +275,7 @@ function useTodaysQuiz(day: number) {
 function LearnByPlaying({ day }: { day: number }) {
   const progress = useProgress();
   // A different wing of the castle each day, from the whole world and every subject.
-  const wing = pickSubjects(day, WINGS, 1)[0] ?? WINGS[0];
+  const wing = todaysWing(day);
   const lit = wing ? (progress.castle[wing.id] ?? 0) : 0;
   const quiz = useTodaysQuiz(day);
   const panel = castlePanel(wing);
@@ -325,15 +348,7 @@ export default function Home() {
         <TornEdge color="var(--teal)" seed="paper-edge" height={34} />
       </section>
       <LearnByPlaying day={day} />
-      <footer className="page-footer">
-        <p>
-          Photos from Wikimedia Commons: Earth and the Milky Way by NASA (public domain); Victoria
-          Falls and Kilimanjaro by Diego Delso, elephants by Charles J. Sharp, pyramids by Ricardo
-          Liberato, lightning by Mathias Krumbholz, Zuma Rock by Hui Linbo and the Gondar castle by
-          Bernard Gagnon (CC BY-SA). Article text comes from Wikipedia under CC BY-SA 4.0. Every
-          licence is listed on the <Link to="/credits">credits page</Link>.
-        </p>
-      </footer>
+      <HomeFooter day={day} />
     </div>
   );
 }
