@@ -17,7 +17,9 @@ for (const width of [1440, 390]) {
   const m = await page.evaluate(() => {
     const globe = document.querySelector('svg.globe')?.getBoundingClientRect();
     const card = document.querySelector('.atlas__card-slot')?.getBoundingClientRect();
+    const picker = document.querySelector('.atlas__picker')?.getBoundingClientRect();
     return {
+      gap: card && picker ? card.top - picker.bottom : 0,
       globeW: globe?.width ?? 0,
       globeArea: (globe?.width ?? 0) * (globe?.height ?? 0),
       cardArea: (card?.width ?? 0) * (card?.height ?? 0),
@@ -25,7 +27,8 @@ for (const width of [1440, 390]) {
     };
   });
   const ratio = m.globeW / width;
-  console.log(`${width}px: globe ${Math.round(m.globeW)}px (${(ratio * 100).toFixed(0)}%), overflow ${m.overflow}px`);
+  console.log(`${width}px: globe ${Math.round(m.globeW)}px (${(ratio * 100).toFixed(0)}%), overflow ${m.overflow}px, ${Math.round(m.gap)}px between picker and facts note`);
+  if (width === 1440 && m.gap > 60) failed = true;
   if (m.overflow > 0) failed = true;
   if (width === 1440 && (ratio < 0.45 || m.globeArea <= m.cardArea)) failed = true;
   await page.close();

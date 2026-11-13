@@ -12,8 +12,12 @@
   grid-template-areas:
     'globe side'
     'globe card'
+    'globe .'
     'sheets sheets'
     'credit credit';
+  /* The spare height below the globe's neighbours goes to the empty row, so the
+     picker and the facts note stay together (22-review-3 Req 7). */
+  grid-template-rows: auto auto 1fr auto auto;
   gap: 24px 40px;
   align-items: start;
 }
@@ -234,6 +238,7 @@
   .atlas {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas: 'side' 'globe' 'card' 'sheets' 'credit';
+    grid-template-rows: none;
   }
 }
 
