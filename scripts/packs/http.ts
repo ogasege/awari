@@ -17,6 +17,8 @@ export const RAW_DIR = join('data', 'raw');
 const MIN_GAP_MS = 150;
 const MAX_GAP_MS = 3000;
 const MAX_RETRIES = 4;
+/** No single request may hang a build: it times out and is retried. */
+const REQUEST_TIMEOUT_MS = 30_000;
 
 /** A cached response body with the time it was first fetched. */
 export interface Cached<T> {
@@ -88,7 +90,7 @@ function queued(url: string, opts: FetchOptions): Promise<Buffer> {
       let res: Response | undefined;
       let body: Buffer | undefined;
       try {
-        res = await fetch(url, init);
+        res = await fetch(url, { ...init, signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS) });
         if (res.ok) {
           body = Buffer.from(await res.arrayBuffer());
         }

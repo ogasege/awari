@@ -27,7 +27,7 @@ own, logged in `docs/kiro-log.md`, and opened in a real browser at 1440 and
       meaningful note each. _Req 16_
 - [x] 12. Timeline: one century at a time, balanced kinds; Properties 8, 9.
       _Req 17-19_
-- [ ] 13. Article lead photos on the judges' path and the thirty most
+- [x] 13. Article lead photos on the judges' path and the thirty most
       populous countries; Property 10. _Req 20_
 - [ ] 14. Confirm the wildlife note fix in the pack. _Review item 13_
 - [ ] 15. Retake every screenshot at 1440 and 390; `npm run

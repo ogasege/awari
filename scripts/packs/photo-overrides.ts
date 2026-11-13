@@ -6,6 +6,7 @@
  * file whose licence changes fails the build instead of shipping.
  */
 import type { PhotoOverride } from './photos.ts';
+import { LEAD_OVERRIDES } from './lead-overrides.ts';
 
 /** Curated Commons files, checked by `npm run packs`. */
 export const PHOTO_OVERRIDES: ReadonlyMap<string, PhotoOverride> = new Map([
@@ -49,4 +50,5 @@ export const PHOTO_OVERRIDES: ReadonlyMap<string, PhotoOverride> = new Map([
     'physics/static-electricity',
     { file: 'Electric spark.jpg', caption: 'An electric spark', alt: 'A purple electric spark in a static electricity experiment' },
   ],
+  ...LEAD_OVERRIDES,
 ]);
