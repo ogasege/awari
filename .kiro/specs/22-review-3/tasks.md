@@ -5,7 +5,7 @@ One task per item. Each is built by `awari-builder`, checked by `awari-design-re
 `docs/kiro-log.md` before it is ticked. Tests before a task is done. Browser check at 1440 and 390.
 
 - [x] 1. Spec: requirements, design with properties, tasks.
-- [ ] 2. Timeline data: at least two events for each of the 366 days; coverage test (Property 1);
+- [x] 2. Timeline data: at least two events for each of the 366 days; coverage test (Property 1);
       "Coming up" only in the third slot (Property 2). _Req 1-3_
 - [ ] 3. Timeline cards: colour by kind with a legend, year above the title, ruler spacing, births
       under 40% (Property 5). _Req 14-16_

@@ -7,6 +7,11 @@ import { useEffect, useState } from 'react';
 const cache = new Map<string, Promise<unknown>>();
 
 /** Fetches and parses a pack file once per session. */
+/** Test support: forget every loaded pack, so a test can serve different data. */
+export function clearPackCache(): void {
+  cache.clear();
+}
+
 export function loadPack<T>(path: string, fetchImpl: typeof fetch = fetch): Promise<T> {
   const url = `/packs/${path.replace(/^\/+/, '')}`;
   let p = cache.get(url);

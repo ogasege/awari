@@ -3,6 +3,8 @@ import userEvent from '@testing-library/user-event';
 import { readFileSync } from 'node:fs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import type { TimelinePack } from '../../lib/packs/types.ts';
+import { clearPackCache } from '../../lib/packs/load.ts';
+import { onThisDay } from '../home/today.ts';
 import { OnThisDay } from '../home/OnThisDay.tsx';
 import { servePacksFromDisk } from '../../test/packFetch.ts';
 import TimelineScreen from './TimelineScreen.tsx';
@@ -15,6 +17,7 @@ const showing = (n: number, tail = ''): RegExp => new RegExp(`Showing ${n} event
 
 describe('Timeline screen from the committed pack (07-timeline 3.2, 18-world-timeline 4)', () => {
   beforeEach(() => {
+    clearPackCache();
     servePacksFromDisk();
     vi.useRealTimers();
     window.history.replaceState(null, '', '/timeline');
@@ -86,8 +89,10 @@ describe('Timeline screen from the committed pack (07-timeline 3.2, 18-world-tim
   it('opens at ?year= on the event of that year', async () => {
     window.history.replaceState(null, '', '/timeline?year=1867');
     render(<TimelineScreen />);
-    // Two events share 1867; the screen opens at the first of them.
-    const first = (await screen.findByText('Wilbur Wright was born on 16 April 1867.')).closest('li');
+    // Several events share 1867; the screen opens at the first of them.
+    const firstEvent = pack.events.find((e) => e.date.startsWith('1867'));
+    expect(firstEvent).toBeDefined();
+    const first = (await screen.findByText(firstEvent?.text ?? '')).closest('li');
     expect(first).toHaveClass('is-picked');
     expect(screen.getByRole('heading', { name: 'The 1800s' })).toBeInTheDocument();
   });
@@ -105,11 +110,21 @@ describe('Timeline screen from the committed pack (07-timeline 3.2, 18-world-tim
     vi.setSystemTime(new Date(2026, 10, 16, 12));
     const { unmount } = render(<TimelineScreen />);
     const band = (await screen.findByRole('heading', { name: 'On this day, 16 November' })).closest('section') as HTMLElement;
-    expect(within(band).getByText(/UNESCO was founded on 16 November 1945\./)).toBeInTheDocument();
-    expect(within(band).getByText(/Chinua Achebe was born on 16 November 1930\./)).toBeInTheDocument();
+    const items = await within(band).findAllByRole('listitem');
+    expect(items.length).toBeGreaterThanOrEqual(2);
+    for (const li of items) {
+      expect(li.textContent).toMatch(/16 November/);
+    }
     unmount();
 
+  });
+
+  it('says so in words when a day has nothing filed (pack with no 2 January events)', async () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
     vi.setSystemTime(new Date(2026, 0, 2, 12));
+    servePacksFromDisk({
+      '/packs/timeline.json': { ...pack, events: pack.events.filter((e) => e.date.slice(5, 10) !== '01-02') },
+    });
     render(<TimelineScreen />);
     expect(await screen.findByText(/No events are filed for 2 January yet\./)).toBeInTheDocument();
   });
@@ -117,18 +132,27 @@ describe('Timeline screen from the committed pack (07-timeline 3.2, 18-world-tim
 
 describe('Home: On this day (07-timeline 3.2, Req 3)', () => {
   beforeEach(() => {
+    clearPackCache();
     servePacksFromDisk();
   });
 
   it('shows up to three events for today, spread across subjects, oldest first. _Req 3.1_', async () => {
     render(<OnThisDay today={new Date(2026, 10, 16, 12)} />);
-    expect(await screen.findByText(/Chinua Achebe was born/)).toBeInTheDocument();
-    expect(screen.getByText(/UNESCO was founded/)).toBeInTheDocument();
-    const years = screen.getAllByText(/^(1930|1945)$/);
-    expect(years.length).toBeGreaterThan(0);
+    const todays = pack.events.filter((e) => e.date.slice(5, 10) === '11-16');
+    expect(todays.length).toBeGreaterThanOrEqual(2);
+    const shown = onThisDay(pack.events, new Date(2026, 10, 16, 12), 3);
+    expect(shown.length).toBe(3);
+    for (const e of shown) {
+      expect(await screen.findByText(e.text)).toBeInTheDocument();
+    }
+    // Every card is a real event of 16 November; none says "Coming up".
+    expect(screen.queryByText(/^Coming up/)).not.toBeInTheDocument();
+    expect(screen.getAllByText(/^\d{3,4}$/).length).toBeGreaterThanOrEqual(2);
   });
 
   it('fills a day with nothing filed with the next events, and says so in words. _Req 3.2; 19-home-world Req 5_', async () => {
+    const noJan2 = { ...pack, events: pack.events.filter((e) => e.date.slice(5, 10) !== '01-02') };
+    servePacksFromDisk({ '/packs/timeline.json': noJan2 });
     render(<OnThisDay today={new Date(2026, 0, 2, 12)} />);
     expect((await screen.findAllByText(/^Coming up: \d{1,2} [A-Z][a-z]+$/)).length).toBeGreaterThan(0);
   });

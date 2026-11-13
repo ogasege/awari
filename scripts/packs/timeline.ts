@@ -125,8 +125,17 @@ export function dayDate(entity: Entity, pid: string): string | undefined {
     if (dv?.type !== 'time') {
       continue;
     }
-    const { time, precision } = dv.value as { time: string; precision: number };
+    const { time, precision, calendarmodel } = dv.value as {
+      time: string;
+      precision: number;
+      calendarmodel?: string;
+    };
     if (precision < 11 || !time.startsWith('+')) {
+      continue;
+    }
+    // A Julian-calendar day after 1582 is not the day people celebrate today
+    // (Tchaikovsky: 25 April Julian, 7 May Gregorian), so it is not shown.
+    if (calendarmodel?.endsWith('/Q1985786') && Number(time.slice(1, 5)) > 1582) {
       continue;
     }
     const iso = formatWikidataTime(time, precision);
