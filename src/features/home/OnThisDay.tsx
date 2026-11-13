@@ -8,7 +8,7 @@ import { u } from '../../design/paper.tsx';
 import { cutPolygon, seedFrom } from '../../design/wobble.ts';
 import { usePack } from '../../lib/packs/load.ts';
 import type { TimelinePack } from '../../lib/packs/types.ts';
-import { onThisDayOrNext } from './today.ts';
+import { comingUpLabel, onThisDayOrNext } from './today.ts';
 
 const SLOTS: ReadonlyArray<{ left: string; top: string; width: number; tilt: number; year: string; yearTilt: number; style: 'lined' | 'teal' | 'sticky' }> = [
   { left: '25%', top: '24.89%', width: 292, tilt: -2.5, year: '34.97%', yearTilt: -4, style: 'lined' },
@@ -55,12 +55,6 @@ export function OnThisDay({ today = new Date() }: { today?: Date }) {
         </p>
       ) : null}
 
-      {picked.comingUp ? (
-        <p className="abs hand home-otd__empty" style={{ left: '24%', top: '12.4%', width: u(640), fontSize: u(26) }}>
-          {events.length === 0 ? '' : 'Coming up on the calendar:'}
-        </p>
-      ) : null}
-
       {events.map((e, i) => {
         const slot = SLOTS[i];
         if (!slot) {
@@ -78,6 +72,7 @@ export function OnThisDay({ today = new Date() }: { today?: Date }) {
                 <span aria-hidden="true" className="tape tape--yellow" style={{ left: '32%', top: u(-14), width: u(104), rotate: '-6deg' }} />
               ) : null}
               <span className="hand" style={{ clipPath: cutPolygon(seedFrom(e.id), 0.8) }}>
+                {comingUpLabel(e.date, today) ? <span className="home-otd__when">{comingUpLabel(e.date, today)}</span> : null}
                 <span className="home-otd__sr-year">{year}: </span>
                 {e.text}
               </span>

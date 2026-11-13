@@ -16,7 +16,7 @@ own, logged in `docs/kiro-log.md`, and opened in a real browser at 1440 and
       Property 3. _Req 5, 6_
 - [x] 6. Notes sit beside their own subject (Property 4) and read as
       English (Property 5). _Req 7, 8_
-- [ ] 7. Coming-up cards labelled and clear of the years; doodle means
+- [x] 7. Coming-up cards labelled and clear of the years; doodle means
       something; Property 6. _Req 9-11_
 - [ ] 8. Castle panel photo matches its wing; button grammar. _Req 12_
 - [ ] 9. Home footer credits generated from the photos shown; Property 7.

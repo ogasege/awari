@@ -11,6 +11,21 @@ export function monthDay(date: Date): string {
   return `${m}-${d}`;
 }
 
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+/**
+ * The label for an event that is not today's (21-review-2 Req 9): "Coming
+ * up: 14 November". Undefined for an event that falls on today's date.
+ */
+export function comingUpLabel(eventDate: string, today: Date): string | undefined {
+  const md = eventDate.slice(5, 10);
+  if (md === monthDay(today)) {
+    return undefined;
+  }
+  const month = MONTHS[Number(md.slice(0, 2)) - 1];
+  return `Coming up: ${Number(md.slice(3, 5))} ${month}`;
+}
+
 /**
  * Picks up to `count` events that happened on this month and day, spread
  * across subjects where possible, returned oldest first.
