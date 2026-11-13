@@ -17,6 +17,14 @@ Brief: `docs/crew-capabilities.md`. This file records what really ran in Kiro Cr
 - **Licence auditor**: all 36 photographs have usable licences, authors and Commons URLs. Four alt texts were wrong (Colombia lead, and the Countries, Science and Body covers); all four are fixed and a test now compares every lead photo's alt with its override. Two photos are accurate but weak (Zuma Rock is hazy with power lines, the Sagrada Família shows scaffolding).
 - **Design reviewer**: of the 14 review-2 items it marked 6 FIXED, 7 PARTLY and 1 NOT VERIFIABLE (the offline proof, which no screenshot can show). It also raised 18 new defects. Fixed in the same pass: N1 (Home On this day cards overlapped the stamp book at 390 px), N2 (castle panel repeated the hero Earth), N8 (blue link on the stamp pages), N10 (low-contrast disabled button), N15 (clipped credit URLs). The rest are listed under "What I need from you" in the reply with this file and were not fixed.
 
+## Review 3 (spec 22, 13 Nov): what really ran
+
+- **Conductor `bed8c321`: used for the start only.** It read the spec and handed task 2 to `awari-builder`, then ended its turn, as the conductor does after each delegation.
+- **`awari-builder` run `34363b32`: died** on a backend 5xx after its Wikidata fetch had finished and before it wired the rows in. Per the owner's instruction I took over in the main session: tasks 2 to 14 were built, tested and committed there, one commit each (`dc277b5` to `b479e05`), with a `docs/kiro-log.md` row each. The builder's leftover files (the candidate rows) were kept and used.
+- **`awari-licence-auditor` run `d89d3288`: used.** It audited 12 photos against the Commons API with throttling and a timeout: no licence or author defect, five alt-text or caption defects, all fixed. Report: `licence-audit-review-3.md`. Note: both reviewers were spawned in one call with `crew=awari-design-reviewer`, because `crew=` applies to the whole batch, so the auditor ran under the design-reviewer template.
+- **`awari-design-reviewer` run `8b50276e`: failed** with "Request exceeds the maximum allowed size": it was handed all 40 full-page screenshots. I did the design check myself on the retaken screens and recorded it in `design-review-review-3.md`. A retry with fewer, smaller images is left for the owner to decide.
+- **Workflow `awari-post-batch-verification`: still not run.** Its steps were run by hand in this session: screenshots, the auditor, `submission-check`, `offline-check`.
+
 ## What this does not show
 
 The write-up must not say a conductor, a workflow run or `awari-builder` crew run was used. Say that two Crew members (the licence auditor and the design reviewer) reviewed the final screenshots and photos, that three Crew hooks fired during the build, and that Knowledge holds the three documents.

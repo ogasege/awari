@@ -8,28 +8,35 @@
 /** Countries whose body text states the national headcount without naming the country in that sentence. */
 const ODD_PHRASING = new Set(['democratic-republic-of-the-congo', 'saudi-arabia', 'vietnam']);
 
-const CLAIM = /population (?:of|is|was)[^.]{0,40}?(\d[\d,]*(?:\.\d+)?)\s*(million|billion)?|(?:male|female) population is\s*(\d[\d,]*)|(\d[\d,]*(?:\.\d+)?)\s*(million)\s+people living in/gi;
+const CLAIM = /population (?:of|is|was)[^.]{0,40}?(\d[\d,]*(?:\.\d+)?)\s*(million|billion)?|(?:male|female) population is\s*(\d[\d,]*)|(\d[\d,]*(?:\.\d+)?)\s*(million)\s+people living in|(?:with|has|have)\s+(?:over|about|around|nearly|almost|more than|approximately)?\s*(\d[\d,]{6,})\s+people/gi;
 
 /** The headcounts a sentence gives (people, not percentages). */
 export function populationClaims(sentence: string): number[] {
-  const out: number[] = [];
+  return populationClaimsDetailed(sentence).map((c) => c.n);
+}
+
+/** The headcounts with whether each was written as an exact figure (with thousands separators). */
+export function populationClaimsDetailed(sentence: string): Array<{ n: number; exact: boolean }> {
+  const out: Array<{ n: number; exact: boolean }> = [];
   for (const m of sentence.matchAll(CLAIM)) {
-    const raw = (m[1] ?? m[3] ?? m[4] ?? '').replace(/,/g, '');
+    const raw = (m[1] ?? m[3] ?? m[4] ?? m[6] ?? '').replace(/,/g, '');
     const unit = (m[2] ?? m[5] ?? '').toLowerCase();
     const n = Number(raw) * (unit === 'million' ? 1e6 : unit === 'billion' ? 1e9 : 1);
-    if (Number.isFinite(n) && n > 100_000) out.push(n);
+    if (Number.isFinite(n) && n > 100_000) out.push({ n, exact: /\d,\d{3}/.test(m[1] ?? m[3] ?? m[4] ?? m[6] ?? '') && unit === '' });
   }
   return out;
 }
 
 /** True when the sentence is about the whole country and gives a count that is not the checked one. */
 export function conflictsWithFact(sentence: string, id: string, title: string, population: number): boolean {
-  const claims = populationClaims(sentence);
+  const claims = populationClaimsDetailed(sentence);
   if (claims.length === 0) return false;
   const named = title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const own = new RegExp(`population of (?:the )?${named}\\b|${named} (?:has|had|have) (?:an? )?(?:estimated |approximate )?population|${named}'s population`, 'i');
-  const countryLevel = own.test(sentence) || ODD_PHRASING.has(id);
-  return countryLevel && claims.some((n) => Math.abs(n - population) / population >= 0.15);
+  // "It is the most populous country ..., with over N people": the whole country, said without its name.
+  const populous = /\b(?:it|the country)\b[^.]*\bpopul(?:ous|ated)\b/i.test(sentence);
+  const countryLevel = own.test(sentence) || ODD_PHRASING.has(id) || populous;
+  return countryLevel && claims.some((c) => Math.abs(c.n - population) / population >= (c.exact ? 0.03 : 0.15));
 }
 
 /**

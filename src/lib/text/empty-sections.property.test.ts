@@ -65,4 +65,11 @@ describe('population figures (22-review-3 Req 11)', () => {
       }
     }
   });
+
+  it('Nigeria gives one figure: the 2021 Wikidata count on the facts card, not 232 million in the text', () => {
+    const nigeria = readFileSync(join(DIR, 'countries', 'nigeria.json'), 'utf8');
+    expect(nigeria).not.toMatch(/232,679,478/);
+    expect(conflictsWithFact('It is the most populated country in Africa, with over 232,679,478 people.', 'nigeria', 'Nigeria', 211_400_708)).toBe(true);
+    expect(conflictsWithFact('Lagos has over 15,000,000 people.', 'nigeria', 'Nigeria', 211_400_708)).toBe(false);
+  });
 });
