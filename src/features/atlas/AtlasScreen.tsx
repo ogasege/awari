@@ -13,7 +13,7 @@ import type { FactsPack, PackIndex } from '../../lib/packs/types.ts';
 import { update, withDiscovered } from '../../lib/store/progress.ts';
 import { useProgress } from '../../lib/store/useProgress.ts';
 import { factRows } from '../article/credit.ts';
-import { worldBook } from '../stamps/stamps.ts';
+import { worldBook, type WorldBook } from '../stamps/stamps.ts';
 import { Globe, centreOf, type Shapes } from './Globe.tsx';
 import { centreOn, type Rotation } from './globeMath.ts';
 import './atlas.css';
@@ -24,18 +24,34 @@ interface QuizIndex {
 
 const STAMP = perforation(6, 6);
 
-/** One little stamp outline for every country, filled for each one found. */
-function WorldStamps({ count, total }: { count: number; total: number }) {
+/**
+ * The world stamp count as a stamp sheet: one perforated sheet per
+ * continent with its own count, a stamp for every country, filled in as
+ * the student finds them (21-review-2 Req 15).
+ */
+function WorldStamps({ book }: { book: WorldBook }) {
   return (
     <div className="atlas-stamps">
       <p className="atlas-stamps__count">
-        <strong>{count}</strong> of {total} countries discovered
+        <strong>{book.count}</strong> of {book.total || 197} countries discovered
       </p>
-      <div className="atlas-stamps__grid" aria-hidden="true">
-        {Array.from({ length: total }, (_, i) => (
-          <span key={i} className={i < count ? 'is-found' : ''} style={{ clipPath: STAMP }} />
+      <ul className="atlas-sheets">
+        {book.perContinent.map((c, i) => (
+          <li key={c.continent} className="atlas-sheet" style={{ rotate: `${[-1.2, 0.9, -0.6, 1.1, -0.9, 0.7][i % 6]}deg` }}>
+            <p className="atlas-sheet__head">
+              <span className="atlas-sheet__name">{c.continent}</span>
+              <span className="atlas-sheet__count">
+                {c.count} of {c.total}
+              </span>
+            </p>
+            <div className="atlas-sheet__stamps" aria-hidden="true">
+              {Array.from({ length: c.total }, (_, k) => (
+                <span key={k} className={k < c.count ? 'is-found' : ''} style={{ clipPath: STAMP }} />
+              ))}
+            </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 }
@@ -104,7 +120,6 @@ function Loaded({ shapes, facts, index, quizzes }: { shapes: Shapes; facts: Fact
             ))}
           </select>
         </label>
-        <WorldStamps count={book.count} total={book.total || 197} />
       </div>
 
       <div className="atlas__globe">
@@ -162,6 +177,10 @@ function Loaded({ shapes, facts, index, quizzes }: { shapes: Shapes; facts: Fact
         ) : (
           <p className="atlas-card atlas-card--empty hand">Tap a country to see its facts here.</p>
         )}
+      </div>
+
+      <div className="atlas__sheets">
+        <WorldStamps book={book} />
       </div>
 
       <p className="atlas__credit">

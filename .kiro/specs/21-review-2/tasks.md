@@ -21,7 +21,7 @@ own, logged in `docs/kiro-log.md`, and opened in a real browser at 1440 and
 - [x] 8. Castle panel photo matches its wing; button grammar. _Req 12_
 - [x] 9. Home footer credits generated from the photos shown; Property 7.
       _Req 13_
-- [ ] 10. Atlas: globe is the hero, progress is a continent stamp sheet.
+- [x] 10. Atlas: globe is the hero, progress is a continent stamp sheet.
       _Req 14, 15_
 - [ ] 11. Subjects, stamp book and quiz get prints, strips, tape and one
       meaningful note each. _Req 16_
