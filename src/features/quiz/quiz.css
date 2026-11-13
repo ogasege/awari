@@ -347,3 +347,14 @@
   margin: 12px 0 0;
   font-weight: 700;
 }
+
+/* Keep the progress dots clear of the pinned print (21-review-2 Req 16). */
+@media (min-width: 900px) {
+  .quiz__head {
+    margin-right: 260px;
+  }
+
+  .quiz__note {
+    margin: 0 0 8px;
+  }
+}

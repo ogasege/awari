@@ -6,10 +6,11 @@
 import { useEffect, useMemo, useReducer } from 'react';
 import { Link } from '../../app/navigation.tsx';
 import { useTitle } from '../../app/useTitle.ts';
-import { Button, Doodle, StripHeading } from '../../design/paper.tsx';
-import { usePack } from '../../lib/packs/load.ts';
+import { Button, Doodle, MarginNote, Print, StripHeading } from '../../design/paper.tsx';
+import { coverFor } from '../../lib/packs/covers.ts';
+import { packUrl, usePack } from '../../lib/packs/load.ts';
 import { isBundledPack } from '../../lib/packs/subjects.ts';
-import type { QuizSet } from '../../lib/packs/types.ts';
+import type { Article, QuizSet } from '../../lib/packs/types.ts';
 import { autoTerms, buildQuiz } from '../../lib/quiz/generate.ts';
 import { update, withQuizResult } from '../../lib/store/progress.ts';
 import { errorWords, useWikiArticle } from '../article/useWikiArticle.ts';
@@ -95,9 +96,30 @@ export function Quiz({ quiz, externalUrl }: { quiz: QuizSet; externalUrl?: strin
   const q = quiz.questions[state.index];
   const total = quiz.questions.length;
   const articleLink = `/article/${quiz.pack}/${quiz.articleId}`;
+  // The quiz's own article photograph; the subject's cover when the article has none (or is not bundled).
+  const lead = usePack<Article>(isBundledPack(quiz.pack) ? `${quiz.pack}/${quiz.articleId}.json` : null);
+  const photo = lead.status === 'ready' ? lead.data.photos[0] : undefined;
+  const cover = coverFor(quiz.pack);
+  const print = photo
+    ? { src: packUrl(photo.file), alt: photo.alt }
+    : cover
+      ? { src: cover.file, alt: cover.alt }
+      : undefined;
 
   return (
     <section className="page squared quiz" aria-labelledby="quiz-title">
+      {print ? (
+        <Print
+          className="page-print quiz__print"
+          src={print.src}
+          alt={print.alt}
+          caption={quiz.title}
+          captionSize={24}
+          width={220}
+          tilt={3}
+          tape={[{ left: '36%', width: 96, tilt: -4, tone: 'yellow' }]}
+        />
+      ) : null}
       <div className="quiz__head">
         <StripHeading
           id="quiz-title"
@@ -112,6 +134,9 @@ export function Quiz({ quiz, externalUrl }: { quiz: QuizSet; externalUrl?: strin
           <span>{state.status === 'done' ? 'All done' : `Question ${state.index + 1} of ${total}`}</span>
         </div>
       </div>
+      <MarginNote tilt={-2} size={28} className="quiz__note crowding" style={{ color: 'var(--teal-ink)' }}>
+        Stuck? Every question has three hints.
+      </MarginNote>
       {state.status === 'done' || !q ? (
         <Finished quiz={quiz} state={state} externalUrl={externalUrl} />
       ) : (

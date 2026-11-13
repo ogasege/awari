@@ -164,3 +164,8 @@
     max-width: 320px;
   }
 }
+
+.subjects-intro {
+  max-width: 420px;
+  margin: 0 0 20px;
+}

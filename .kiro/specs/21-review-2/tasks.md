@@ -23,7 +23,7 @@ own, logged in `docs/kiro-log.md`, and opened in a real browser at 1440 and
       _Req 13_
 - [x] 10. Atlas: globe is the hero, progress is a continent stamp sheet.
       _Req 14, 15_
-- [ ] 11. Subjects, stamp book and quiz get prints, strips, tape and one
+- [x] 11. Subjects, stamp book and quiz get prints, strips, tape and one
       meaningful note each. _Req 16_
 - [ ] 12. Timeline: one century at a time, balanced kinds; Properties 8, 9.
       _Req 17-19_

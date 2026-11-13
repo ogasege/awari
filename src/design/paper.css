@@ -197,3 +197,21 @@
   text-decoration-thickness: 2px;
   text-underline-offset: 6px;
 }
+
+/* A photographic print pinned to the top right of a page (21-review-2 Req 16).
+   On a phone it sits under the heading instead. */
+.print.page-print {
+  position: absolute;
+  top: 28px;
+  right: var(--gutter);
+  z-index: 1;
+}
+
+@media (max-width: 899px) {
+  .print.page-print {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin: 12px 0 8px 8px;
+  }
+}

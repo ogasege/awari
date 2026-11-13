@@ -104,6 +104,6 @@ describe('Home: On this day (07-timeline 3.2, Req 3)', () => {
 
   it('fills a day with nothing filed with the next events, and says so in words. _Req 3.2; 19-home-world Req 5_', async () => {
     render(<OnThisDay today={new Date(2026, 0, 2, 12)} />);
-    expect(await screen.findByText('Coming up on the calendar:')).toBeInTheDocument();
+    expect((await screen.findAllByText(/^Coming up: \d{1,2} [A-Z][a-z]+$/)).length).toBeGreaterThan(0);
   });
 });

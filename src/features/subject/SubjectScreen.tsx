@@ -9,6 +9,8 @@ import { Link } from '../../app/navigation.tsx';
 import { useTitle } from '../../app/useTitle.ts';
 import { Button, Doodle, MarginNote, Print, StripHeading, TornEdge } from '../../design/paper.tsx';
 import { perforation } from '../../design/wobble.ts';
+import { SUBJECT_COVERS, type SubjectCover } from '../../lib/packs/covers.ts';
+import { dayNumber } from '../home/today.ts';
 import type { HomeData } from '../../lib/packs/home.ts';
 import { useProgress } from '../../lib/store/useProgress.ts';
 import { packUrl, usePack } from '../../lib/packs/load.ts';
@@ -184,6 +186,8 @@ export default function SubjectScreen({ params }: { params: Record<string, strin
 /** `/subjects`: every subject as a card. */
 export function SubjectList() {
   useTitle('Subjects');
+  // A different subject's cover each day, so the print is never the same one twice running.
+  const todaysCover = SUBJECT_COVERS[dayNumber(new Date()) % SUBJECT_COVERS.length] as SubjectCover;
   return (
     <section className="page squared subject" aria-labelledby="subjects-title">
       <StripHeading
@@ -193,6 +197,19 @@ export function SubjectList() {
           { text: 'pick one', tone: 'yellow', tilt: 1.5, style: { marginLeft: '0.8em' } },
         ]}
       />
+      <Print
+        className="page-print"
+        src={todaysCover.file}
+        alt={todaysCover.alt}
+        caption={todaysCover.caption}
+        captionSize={26}
+        width={240}
+        tilt={3}
+        tape={[{ left: '34%', width: 100, tilt: -5, tone: 'yellow' }]}
+      />
+      <MarginNote tilt={-2} size={30} className="subjects-intro crowding" style={{ color: 'var(--teal-ink)' }}>
+        {SUBJECTS.length - 1} subjects of about 30 articles each, plus all 197 countries.
+      </MarginNote>
       <ul className="subject__cards">
         {SUBJECTS.map((s) => (
           <li key={s.id}>

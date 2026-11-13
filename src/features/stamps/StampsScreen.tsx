@@ -5,7 +5,7 @@
  */
 import { Link } from '../../app/navigation.tsx';
 import { useTitle } from '../../app/useTitle.ts';
-import { MarginNote, Stamp, StripHeading } from '../../design/paper.tsx';
+import { MarginNote, Print, Stamp, StripHeading } from '../../design/paper.tsx';
 import { usePack } from '../../lib/packs/load.ts';
 import { continentSlug } from '../../lib/packs/subjects.ts';
 import type { PackIndex } from '../../lib/packs/types.ts';
@@ -22,6 +22,7 @@ export default function StampsScreen() {
   const items = index.status === 'ready' ? index.data.items : [];
   const book = worldBook(progress.discovered, items);
   const latest = book.stamps.slice(-6).reverse();
+  const newest = latest[0];
 
   return (
     <section className="page squared stamp-book" aria-labelledby="stamps-title">
@@ -35,6 +36,17 @@ export default function StampsScreen() {
       <p className="stamp-book__count" role="status">
         You have <strong>{book.count} of {book.total || 197}</strong> countries.
       </p>
+      <Print
+        className="page-print"
+        to={newest ? `/article/countries/${newest.id}` : '/atlas'}
+        src={newest ? newest.src : '/photos/earth.jpg'}
+        alt={newest ? newest.alt : 'The Earth seen from space'}
+        caption={newest ? `Newest: ${newest.name}` : 'Your whole world'}
+        captionSize={26}
+        width={240}
+        tilt={-3}
+        tape={[{ left: '34%', width: 100, tilt: 5, tone: 'yellow' }]}
+      />
       <MarginNote decorative tilt={-3} size={30} className="stamp-book__note crowding" style={{ color: 'var(--teal-ink)' }}>
         Open a country on the globe or read its article to get its stamp.
       </MarginNote>
