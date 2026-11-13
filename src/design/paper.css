@@ -215,3 +215,11 @@
     margin: 12px 0 8px 8px;
   }
 }
+
+/* A disabled button stays readable and says so with a dashed edge, not only with faintness. */
+.btn:disabled {
+  opacity: 0.8;
+  border-style: dashed;
+  border-color: currentColor;
+  filter: grayscale(0.4);
+}

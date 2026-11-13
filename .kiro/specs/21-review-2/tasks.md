@@ -4,7 +4,7 @@ One task per numbered item in `docs/review-2.md`. Each is committed on its
 own, logged in `docs/kiro-log.md`, and opened in a real browser at 1440 and
 390 px before it is ticked.
 
-- [ ] 1. Spec: requirements, design with properties, tasks.
+- [x] 1. Spec: requirements, design with properties, tasks.
 - [x] 2. Tour globe takes its fills from design tokens; Property 1; every
       tour and every stop opened. _Req 1_
 - [x] 3. Finish 14-any-article task 5 (offline proof for a read Wikipedia
@@ -30,5 +30,5 @@ own, logged in `docs/kiro-log.md`, and opened in a real browser at 1440 and
 - [x] 13. Article lead photos on the judges' path and the thirty most
       populous countries; Property 10. _Req 20_
 - [x] 14. Confirm the wildlife note fix in the pack. _Review item 13_
-- [ ] 15. Retake every screenshot at 1440 and 390; `npm run
+- [x] 15. Retake every screenshot at 1440 and 390; `npm run
       submission-check` and `npm run offline-check` pass. _Req 21_

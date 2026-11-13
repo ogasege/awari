@@ -448,6 +448,22 @@
     line-height: 1.2 !important;
   }
 
+  /* The cards sit inside a wrapper, so the collage's "stack on a phone"
+     rule does not reach them: stack them here, in normal flow, so they
+     can never sit on top of the stamp book (21-review-2 review N1). */
+  .home-otd__item {
+    display: contents;
+  }
+
+  .home-otd__item > .abs {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    max-width: 100%;
+    margin-left: 0 !important;
+  }
+
   .home-otd__sr-year {
     position: static;
     width: auto;

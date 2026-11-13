@@ -96,3 +96,8 @@
   font-weight: 800;
   color: var(--teal);
 }
+
+/* Plain links on the stamp pages use the teal ink, not the browser's blue (review N8). */
+.stamp-book a:not(.stamp):not(.stamp-book__continent) {
+  color: var(--teal-ink);
+}

@@ -5,6 +5,8 @@
  *
  *   npx tsx scripts/find-commons.ts "Taj Mahal" "Great Wall of China"
  */
+export {};
+
 const API = 'https://commons.wikimedia.org/w/api.php';
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 const strip = (s: string | undefined) => (s ?? '').replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();

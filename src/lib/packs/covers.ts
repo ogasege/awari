@@ -24,13 +24,13 @@ const c = (subject: BundledPackId, commons: string, alt: string, caption: string
 });
 
 export const SUBJECT_COVERS: readonly SubjectCover[] = [
-  c('countries', 'Flags of the world.jpg', 'Flags of many countries flying side by side', 'Countries'),
+  c('countries', 'Flags of the world.jpg', 'A poster of hand-drawn flags from many countries', 'Countries'),
   c('wildlife', 'Lion waiting in Namibia.jpg', 'A lion looking out across dry grass', 'Wildlife'),
   c('space', 'Saturn during Equinox.jpg', 'Saturn and its rings seen by a spacecraft', 'Space'),
   { subject: 'ancient', source: 'bundled', file: '/photos/pyramids.jpg', alt: 'The pyramids of Giza', caption: 'Ancient worlds' },
   c('earth', 'Everest North Face toward Base Camp Tibet Luca Galuzzi 2006.jpg', 'Mount Everest and its snow ridges', 'Mountains and rivers'),
-  c('body', 'Human Skeleton 2.jpg', 'A human skeleton standing', 'The human body'),
-  c('science', 'Erlenmeyer flasks.jpg', 'Glass laboratory flasks holding coloured liquids', 'Science'),
+  c('body', 'Human Skeleton 2.jpg', 'A model of a human skeleton, head and chest', 'The human body'),
+  c('science', 'Erlenmeyer flasks.jpg', 'Two glass laboratory flasks with stoppers', 'Science'),
   c('physics', 'Plasma-lamp 2.jpg', 'A plasma ball with purple lightning inside', 'Physics and chemistry'),
   c('inventions', 'First flight2.jpg', 'The Wright brothers’ first aeroplane flight in 1903', 'Inventions'),
   c('people', 'Einstein 1921 by F Schmutzer - restoration.jpg', 'Albert Einstein looking at the camera', 'Famous people'),

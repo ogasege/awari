@@ -26,7 +26,7 @@ let applied = 0;
 for (const [key, override] of LEAD_OVERRIDES) {
   const article = read(key);
   const current = article.photos[0];
-  if (current?.caption === override.caption && current.credit.name.endsWith(override.file)) {
+  if (current?.caption === override.caption && current.alt === (override.alt ?? current.alt) && current.credit.name.endsWith(override.file)) {
     continue; // already applied
   }
   try {

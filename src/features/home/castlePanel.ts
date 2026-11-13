@@ -22,8 +22,11 @@ export function castlePanel(wing: Wing | undefined): CastlePanel {
     const cover = coverFor(wing.pack);
     return cover ? { photo: cover.file, alt: cover.alt, credited: cover.file } : EARTH;
   }
-  // The only continent we hold a castle photograph for is Africa (Gondar).
-  return wing.continent === 'Africa' ? GONDAR : EARTH;
+  // The only continent we hold a castle photograph for is Africa (Gondar). Any other continent gets a
+  // picture of no particular place that is not the hero's Earth: the poster of hand-drawn flags.
+  if (wing.continent === 'Africa') return GONDAR;
+  const flags = coverFor('countries');
+  return flags ? { photo: flags.file, alt: flags.alt, credited: flags.file } : EARTH;
 }
 
 /** "Enter the Asia wing": the wing's name with its leading "The" in lower case. */

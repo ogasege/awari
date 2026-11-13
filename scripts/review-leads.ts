@@ -7,7 +7,7 @@
  *   npx tsx scripts/review-leads.ts <out.png>
  */
 import { readFileSync } from 'node:fs';
-import sharp from 'sharp';
+import sharp, { type OverlayOptions } from 'sharp';
 import { TOURS } from '../src/features/tours/tours.ts';
 import type { Article, FactsPack } from '../src/lib/packs/types.ts';
 
@@ -24,7 +24,7 @@ const keys = [...new Set([...judges, ...top30])];
 const CELL = 240;
 const COLS = 6;
 const rows = Math.ceil(keys.length / COLS);
-const tiles: sharp.OverlayOptions[] = [];
+const tiles: OverlayOptions[] = [];
 keys.forEach((key, i) => {
   const a = JSON.parse(readFileSync(`public/packs/${key}.json`, 'utf8')) as Article;
   const p = a.photos[0];
@@ -34,13 +34,13 @@ keys.forEach((key, i) => {
   const top = Math.floor(i / COLS) * (CELL + 20);
   tiles.push({ input: `public/packs/${p.file}`, left, top });
 });
-const resized: sharp.OverlayOptions[] = [];
+const resized: OverlayOptions[] = [];
 for (const [n, t] of tiles.entries()) {
   const buf = await sharp(t.input as string).resize(CELL - 6, CELL - 6, { fit: 'cover' }).toBuffer();
   resized.push({ input: buf, left: (t.left ?? 0) + 3, top: (t.top ?? 0) + 3 });
   void n;
 }
-const label = (i: number, key: string): sharp.OverlayOptions => ({
+const label = (i: number, key: string): OverlayOptions => ({
   input: Buffer.from(
     `<svg xmlns="http://www.w3.org/2000/svg" width="${CELL}" height="20"><text x="4" y="15" font-size="13" font-family="Arial" fill="#000">${i + 1} ${key.split('/')[1]?.slice(0, 26) ?? ''}</text></svg>`,
   ),
