@@ -17,7 +17,10 @@ import {
   balancedCentury,
   centuriesWith,
   filterEvents,
+  EVENT_KIND_GROUPS,
   inCentury,
+  kindOf,
+  rulerStep,
   nearestCentury,
   positionOf,
   rulerMarks,
@@ -29,20 +32,16 @@ import {
 } from './filter.ts';
 import './timeline.css';
 
-const NOTE_STYLES = ['lined', 'teal', 'sticky'] as const;
 
 /** Article link such as "countries/mali" as an in-app path. */
 function articlePath(link: string): string {
   return `/article/${link}`;
 }
 
-function EventNote({ event, index, picked }: { event: TimelineEvent; index: number; picked: boolean }) {
+function EventNote({ event, picked }: { event: TimelineEvent; picked: boolean }) {
   const year = yearOf(event);
   return (
-    <li
-      id={`event-${event.id}`}
-      className={`tl-note tl-note--${NOTE_STYLES[index % NOTE_STYLES.length]}${picked ? ' is-picked' : ''}`}
-    >
+    <li id={`event-${event.id}`} className={`tl-note tl-note--${kindOf(event)}${picked ? ' is-picked' : ''}`}>
       <span aria-hidden="true" className="tl-note__year hand">
         {year}
       </span>
@@ -83,7 +82,7 @@ function Ruler({ events, todayYear }: { events: readonly TimelineEvent[]; todayY
       {events.map((e) => (
         <circle key={e.id} cx={x(yearOf(e))} cy={90} r={3.5} className="tl-ruler__tick" />
       ))}
-      {rulerMarks(min, max).map((year) => (
+      {rulerMarks(min, max, rulerStep(min, max)).map((year) => (
         <g key={year}>
           <path d={wobblyLine({ x: x(year), y: 78 }, { x: x(year), y: 106 }, year, 1.5)} />
           <text x={x(year)} y={132} textAnchor="middle" className="tl-ruler__year">
@@ -268,9 +267,16 @@ export default function TimelineScreen() {
               ? `All ${inThis.length} ${inThis.length === 1 ? 'event' : 'events'} of the ${current}s.`
               : `A mix of ${visible.length} of the ${inThis.length} events of the ${current}s.`}
           </p>
+          <ul className="tl-legend" aria-label="What the colours mean">
+            {EVENT_KIND_GROUPS.map((k) => (
+              <li key={k.id} className={`tl-legend__item tl-note--${k.id}`}>
+                {k.label}
+              </li>
+            ))}
+          </ul>
           <ol className="timeline__list">
-            {visible.map((e, i) => (
-              <EventNote key={e.id} event={e} index={i} picked={picked?.id === e.id} />
+            {visible.map((e) => (
+              <EventNote key={e.id} event={e} picked={picked?.id === e.id} />
             ))}
           </ol>
           {visible.length < inThis.length ? (

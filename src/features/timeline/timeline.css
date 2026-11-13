@@ -153,25 +153,53 @@
 .tl-note {
   position: relative;
   display: flex;
-  gap: 16px;
+  flex-direction: column;
+  gap: 4px;
   align-items: flex-start;
-  padding: 16px 18px 16px 16px;
+  padding: 14px 18px 16px;
   background: var(--paper);
   color: var(--ink);
   border: 2px solid var(--ink);
   box-shadow: var(--shadow-hard);
 }
 
-.tl-note--lined {
+/* The colour says what kind of event it is; the legend names each one (22-review-3 Req 14). */
+.tl-note--birth {
+  background: var(--paper);
   background-image: repeating-linear-gradient(transparent 0 27px, rgb(0 122 140 / 0.18) 27px 28px);
 }
 
-.tl-note--teal {
+.tl-note--nation {
   background: var(--mist);
 }
 
-.tl-note--sticky {
+.tl-note--founded {
   background: #fff2b8;
+}
+
+.tl-note--discovery {
+  background: #ffe1d6;
+}
+
+.tl-note--book {
+  background: #e3f0d4;
+}
+
+.tl-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin: 0 0 18px;
+  padding: 0;
+  list-style: none;
+}
+
+.tl-legend__item {
+  padding: 4px 12px;
+  border: 2px solid var(--ink);
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 700;
 }
 
 .tl-note.is-picked {
@@ -181,7 +209,6 @@
 
 .tl-note__year {
   flex: none;
-  min-width: 3.1em;
   color: var(--teal-ink);
   font-size: 40px;
   line-height: 1;

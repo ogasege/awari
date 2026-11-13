@@ -7,7 +7,7 @@ One task per item. Each is built by `awari-builder`, checked by `awari-design-re
 - [x] 1. Spec: requirements, design with properties, tasks.
 - [x] 2. Timeline data: at least two events for each of the 366 days; coverage test (Property 1);
       "Coming up" only in the third slot (Property 2). _Req 1-3_
-- [ ] 3. Timeline cards: colour by kind with a legend, year above the title, ruler spacing, births
+- [x] 3. Timeline cards: colour by kind with a legend, year above the title, ruler spacing, births
       under 40% (Property 5). _Req 14-16_
 - [ ] 4. Stamp sheets component; stamp book continents as sheets in a 3x2 grid. _Req 5_
 - [ ] 5. Atlas uses the stamp sheets; closes the gap under the picker. _Req 6, 7_

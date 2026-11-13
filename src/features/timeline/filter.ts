@@ -137,6 +137,37 @@ export function isBirth(event: Pick<TimelineEvent, 'text'>): boolean {
   return /\bwas born\b/.test(event.text);
 }
 
+/** What an event is about, for its colour and the legend (22-review-3 Req 14). */
+export type EventKindGroup = 'birth' | 'nation' | 'founded' | 'discovery' | 'book';
+
+/** The legend, in display order. */
+export const EVENT_KIND_GROUPS: ReadonlyArray<{ id: EventKindGroup; label: string }> = [
+  { id: 'birth', label: 'Birthday' },
+  { id: 'nation', label: 'A country is born' },
+  { id: 'founded', label: 'Founded or opened' },
+  { id: 'discovery', label: 'Discovery or launch' },
+  { id: 'book', label: 'First published' },
+];
+
+/** The group of an event, read from its fixed sentence template. */
+export function kindOf(event: Pick<TimelineEvent, 'text'>): EventKindGroup {
+  const t = event.text;
+  if (/\bwas born\b/.test(t)) return 'birth';
+  if (/\bbecame an independent country\b/.test(t)) return 'nation';
+  if (/\bwas (launched|discovered)\b/.test(t)) return 'discovery';
+  if (/\bwas first published\b/.test(t)) return 'book';
+  return 'founded';
+}
+
+/** A ruler step that keeps the marks readable: about ten marks at most. */
+export function rulerStep(min: number, max: number): number {
+  const span = Math.max(1, max - min);
+  for (const step of [100, 200, 500, 1000, 2000]) {
+    if (span / step <= 10) return step;
+  }
+  return 5000;
+}
+
 /** Events shown at once for a century unless the student asks for all of them. */
 export const CENTURY_LIMIT = 60;
 
@@ -158,7 +189,8 @@ export function balancedCentury(events: readonly TimelineEvent[], limit = CENTUR
   const takeBirths =
     others.length === 0
       ? Math.min(births.length, limit)
-      : Math.max(0, Math.min(births.length, takeOthers - 1, limit - takeOthers));
+      : // Strictly under 40% of what is shown: births < 2/3 of the other events (22-review-3 Req 16).
+        Math.max(0, Math.min(births.length, Math.ceil((takeOthers * 2) / 3) - 1, limit - takeOthers));
   const chosen = new Set([...spread(others, takeOthers), ...spread(births, takeBirths)]);
   return events.filter((e) => chosen.has(e));
 }

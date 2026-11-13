@@ -26,7 +26,7 @@ for (const width of [1440, 390]) {
   });
   console.log(`${width}px: ${m.title}, ${m.cards} cards, ${m.births} births, ${m.height}px tall, overflow ${m.overflow}px`);
   if (m.overflow > 0) failed = true;
-  if (width === 1440 && (m.height >= 12_000 || m.births * 2 >= m.cards)) failed = true;
+  if (width === 1440 && (m.height >= 12_000 || m.births * 5 >= m.cards * 2)) failed = true;
   await page.close();
 }
 await browser.close();
