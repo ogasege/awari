@@ -161,7 +161,8 @@ async function listPages(endpoint: string, params: Record<string, string>, from:
       // A page or document file (.djvu, .pdf) makes the API refuse the whole request when a thumbnail width is
       // asked for. Ask again without it: those files are rejected by the mime filter anyway.
       if (!String(error).includes('urlparamnormal')) throw error;
-      const { iiurlwidth: _width, ...without } = { ...IMAGE_PARAMS, ...params, ...more };
+      const without: Record<string, string> = { ...IMAGE_PARAMS, ...params, ...more };
+      delete without['iiurlwidth'];
       reply = await api<Reply>(endpoint, without);
     }
     for (const p of reply.query?.pages ?? []) {

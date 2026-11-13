@@ -116,7 +116,7 @@ export const SERIES_CAP = 2;
  * country gets a landscape, a map, a flag and so on rather than twelve of one kind (Req 15). Emblems never lead.
  * Returns fewer than `min` when the article simply has fewer allowed pictures; the caller lists the gap.
  */
-export function selectForArticle(candidates: readonly Candidate[], max = MAX_PER_ARTICLE): Candidate[] {
+export function selectForArticle<T extends Candidate>(candidates: readonly T[], max = MAX_PER_ARTICLE): T[] {
   const seen = new Set<string>();
   const allowed = candidates
     .filter((c) => rejectReason(c) === undefined)
@@ -130,14 +130,14 @@ export function selectForArticle(candidates: readonly Candidate[], max = MAX_PER
     perStem.set(stem, n + 1);
     return n < SERIES_CAP;
   });
-  const byKind = new Map<Kind, Candidate[]>();
+  const byKind = new Map<Kind, T[]>();
   for (const c of varied) {
     const k = kindOf(c);
     byKind.set(k, [...(byKind.get(k) ?? []), c]);
   }
   // Round-robin over kinds in the order of each kind's best score; photos take the extra places.
-  const order = [...byKind.entries()].sort((a, b) => score(b[1][0] as Candidate) - score(a[1][0] as Candidate));
-  const chosen: Candidate[] = [];
+  const order = [...byKind.entries()].sort((a, b) => score(b[1][0] as T) - score(a[1][0] as T));
+  const chosen: T[] = [];
   const perKindCap: Record<Kind, number> = { photo: max, portrait: 3, map: 2, flag: 2, emblem: 1, art: 3, diagram: 2 };
   for (let round = 0; chosen.length < max && round < max; round++) {
     let added = false;
