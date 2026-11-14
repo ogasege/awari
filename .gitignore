@@ -15,3 +15,12 @@ infra/terraform/*.tfvars
 test-results/
 .vega/
 infra/terraform/tfplan
+
+# Desktop (25-desktop): bundled site copy and built installers are never committed.
+desktop/node_modules/
+desktop/site/
+desktop/release/
+*.exe
+*.dmg
+*.AppImage
+*.blockmap

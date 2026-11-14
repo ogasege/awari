@@ -14,6 +14,9 @@ export default tseslint.config(
       'infra',
       'design',
       'data',
+      'desktop/site',
+      'desktop/release',
+      'desktop/node_modules',
     ],
   },
   {
