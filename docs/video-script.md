@@ -27,6 +27,10 @@ Crew session and the files named, do not stage anything that did not happen.
 | 2:40 – 2:50 | **[KIRO]** `docs/kiro-evidence/hook-firings.jsonl` and `docs/kiro-log.md`. | "Every hook firing and every task is on the record." | Stop on two readable rows. |
 | 2:50 – 2:55 | Back to Home. Logo. Text: "Awari. Free. Open. Works offline." | "Awari: discovery, for everyone." | End card. |
 
+**Desktop download (optional cutaway, no extra time):** if a few seconds are spare in the offline
+segment, show the macOS app opening with Wi-Fi off and say "or download it, and it works from the first
+launch". Do not call the installers signed.
+
 ## Timing check
 
 Rows run 0:00 to 2:55 with no gaps: 10 + 15 + 30 + 20 + 15 + 15 + 15 + 50 + 5 = 175 seconds.

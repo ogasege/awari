@@ -42,6 +42,16 @@ paper strips, wobbly SVG doodles, torn edges.
 - **Go offline.** After one visit every bundled feature works in airplane mode. Progress lives on
   your device; there are no accounts and no tracking.
 
+## Download
+
+Awari is also a download for Windows (`.exe`), macOS (`.dmg`, Apple silicon and Intel) and
+Linux (`.AppImage`) from the [Releases page](https://github.com/ogasege/awari/releases). It is the same build as the website with every
+pack and small picture inside, so it works with no internet from the first launch; bigger pictures
+still come from Wikimedia Commons when online. The installers are **not code-signed**: on macOS,
+right-click the app and choose Open; on Windows, choose More info, then Run anyway. Only the macOS
+build was opened and tested by hand; the Windows and Linux builds come from the
+`Desktop installers` workflow (`.github/workflows/desktop.yml`) and were not run by hand.
+
 ## Run it
 
 Needs Node.js 20 or later (22 recommended). No network is needed to build: the content packs are

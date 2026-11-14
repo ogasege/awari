@@ -33,6 +33,19 @@ quizzes, castle, timeline and stamps all still work, and so does the article you
 search in step 2. A topic never opened before says, in words, that it needs a connection. The
 optional quiz maker for articles outside the packs appears only when a quiz service is configured.
 
+## Download (optional)
+
+Awari is also a download for Windows (`.exe`), macOS (`.dmg`, Apple silicon and Intel) and
+Linux (`.AppImage`) from the [Releases page](https://github.com/ogasege/awari/releases). It is the same build as the website with every
+pack and small picture inside, so it works with no internet from the first launch; bigger pictures
+still come from Wikimedia Commons when online. The installers are **not code-signed**: on macOS,
+right-click the app and choose Open; on Windows, choose More info, then Run anyway. Only the macOS
+build was opened and tested by hand; the Windows and Linux builds come from the
+`Desktop installers` workflow (`.github/workflows/desktop.yml`) and were not run by hand.
+
+To try it: download the installer for your system, open it with the network off, and open Home,
+an article, a quiz and the Pictures screen.
+
 ## Check it from the code
 
 ```sh

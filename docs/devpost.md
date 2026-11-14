@@ -45,6 +45,16 @@ discovery.
 - **An optional quiz service** (AWS Lambda calling Amazon Bedrock) that checks every generated
   question against the article before a student sees it. The app never depends on it.
 
+## Download
+
+Awari is also a download for Windows (`.exe`), macOS (`.dmg`, Apple silicon and Intel) and
+Linux (`.AppImage`) from the [Releases page](https://github.com/ogasege/awari/releases). It is the same build as the website with every
+pack and small picture inside, so it works with no internet from the first launch; bigger pictures
+still come from Wikimedia Commons when online. The installers are **not code-signed**: on macOS,
+right-click the app and choose Open; on Windows, choose More info, then Run anyway. Only the macOS
+build was opened and tested by hand; the Windows and Linux builds come from the
+`Desktop installers` workflow (`.github/workflows/desktop.yml`) and were not run by hand.
+
 ## How we built it
 
 React 19, TypeScript and Vite, with hand-made components for the scrapbook look and no UI
