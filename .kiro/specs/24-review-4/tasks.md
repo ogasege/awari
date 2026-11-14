@@ -12,5 +12,5 @@ One commit per task, log row in `docs/kiro-log.md`, tests before ticking.
 - [x] 8. Fill-the-gap distractors by part of speech, property test.
 - [x] 9. Credits page paged with search.
 - [x] 10. Perforated stamp slots on the Atlas and stamp book.
-- [ ] 11. Coordinate strings out of snippets and leads.
+- [x] 11. Coordinate strings out of snippets and leads.
 - [ ] 12. Screenshots, licences, submission-check, offline-check, numbers, report.

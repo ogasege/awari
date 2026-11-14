@@ -4,6 +4,7 @@
  * and a lead photo only when its licence and author qualify.
  */
 import type { Article, Licence, Photo, Source } from '../packs/types.ts';
+import { stripCoordinates } from '../text/coordinates.ts';
 import { stripHtml } from '../text/html.ts';
 import { licenceUrl, normaliseLicence } from '../text/licence.ts';
 import { deriveNotes } from '../text/notes.ts';
@@ -150,7 +151,9 @@ export class WikiError extends Error {
 
 /** Converts a page (and optional photo metadata) into an `Article`. */
 export function toArticle(page: WikiPage, meta?: PhotoMeta): Article {
-  const sections = capText(splitSections(page.extract), MAX_TEXT);
+  // Position strings ("30°54′N 31°07′E / 30.900; 31.117") are not text a child reads: cut them from every line, keeping the line breaks.
+  const extract = stripCoordinates(page.extract);
+  const sections = capText(splitSections(extract), MAX_TEXT);
   const length = sections.reduce((n, s) => n + s.paragraphs.join(' ').length, 0);
   if (length < MIN_TEXT) {
     throw new WikiError('empty', `"${page.title}" has no text to show`);

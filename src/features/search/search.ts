@@ -2,6 +2,9 @@
  * Pure search over the bundled packs (13-search). Runs on the device, so
  * it works offline.
  */
+import { withoutCoordinates } from '../../lib/text/coordinates.ts';
+
+export { withoutCoordinates };
 
 export type DocKind = 'article' | 'event';
 
@@ -68,20 +71,6 @@ export function searchDocs(docs: readonly SearchDoc[], query: string): SearchHit
   return hits.sort(
     (a, b) => b.score - a.score || a.title.localeCompare(b.title) || a.id.localeCompare(b.id),
   );
-}
-
-/** Degrees-minutes-seconds and decimal coordinate strings, with the brackets or "approximate coordinates" around them. */
-const COORDINATES = new RegExp(
-  [
-    String.raw`\s*\((?:[^()]*?coordinates?\s*)?[-+]?\d{1,3}(?:[°º]\s*\d{0,2}['’′]?\s*\d{0,2}(?:\.\d+)?["”″]?\s*|\.\d+\s*)[NSEW]?[,;]?\s*[-+]?\d{1,3}(?:[°º][^()]*|\.\d+\s*)[NSEW]?\)`,
-    String.raw`\s*[-+]?\d{1,3}[°º]\s*\d{0,2}['’′]?\s*\d{0,2}(?:\.\d+)?["”″]?\s*[NS],?\s*[-+]?\d{1,3}[°º]\s*\d{0,2}['’′]?\s*\d{0,2}(?:\.\d+)?["”″]?\s*[EW]`,
-  ].join('|'),
-  'g',
-);
-
-/** Text without coordinate strings, whitespace tidied. */
-export function withoutCoordinates(text: string): string {
-  return text.replace(COORDINATES, '').replace(/\s{2,}/g, ' ').replace(/\s+([,.;:])/g, '$1').trim();
 }
 
 /**
