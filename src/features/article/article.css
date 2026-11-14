@@ -269,3 +269,8 @@
     position: static;
   }
 }
+
+/* A very long unbroken number (40 digits) must wrap, not widen the page (26-final-review F-005). */
+.article__body {
+  overflow-wrap: anywhere;
+}

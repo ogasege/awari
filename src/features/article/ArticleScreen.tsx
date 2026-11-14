@@ -211,7 +211,8 @@ export default function ArticleScreen({ params }: { params: Record<string, strin
   const pack = params['pack'] ?? '';
   const id = params['id'] ?? '';
   const bundled = isBundledPack(pack);
-  const valid = bundled && id !== 'random';
+  // `index` and `facts` are data files inside the pack folders, not articles: they get the not-found screen (26-final-review F-004).
+  const valid = bundled && id !== 'random' && id !== 'index' && id !== 'facts';
   const article = usePack<Article>(valid ? `${pack}/${id}.json` : null);
   if (pack === 'wiki') return <WikiArticle title={id} />;
   if (bundled && id === 'random') return <RandomArticle pack={pack} />;

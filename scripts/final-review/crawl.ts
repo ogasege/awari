@@ -38,11 +38,12 @@ interface Activation {
 
 const packs = readdirSync('public/packs').filter((d) => !d.includes('.') && !['img', 'quizzes', 'atlas', 'dictionary'].includes(d));
 const articles: string[] = [];
-for (const p of packs) for (const f of readdirSync(`public/packs/${p}`)) if (f.endsWith('.json')) articles.push(`/article/${p}/${f.replace(/\.json$/, '')}`);
+for (const p of packs) for (const f of readdirSync(`public/packs/${p}`)) if (f.endsWith('.json') && f !== 'index.json' && f !== 'facts.json') articles.push(`/article/${p}/${f.replace(/\.json$/, '')}`);
 const quizzes = articles.filter((_, i) => i % 4 === 0).map((a) => a.replace('/article/', '/quiz/'));
 const subjects = ['ancient', 'arts', 'body', 'countries', 'earth', 'inventions', 'people', 'physics', 'science', 'space', 'wildlife'].map((s) => `/subject/${s}`);
 const fixed = ['/', '/atlas', '/quizzes', '/castle', '/subjects', '/tours', '/timeline', '/stamps', '/search', '/search?q=nile', '/search?q=zzqxj', '/search?q=a', '/credits', '/media', '/no-such-page', '/article/wiki/Okapi'];
 const seeds = [...new Set([...fixed, ...subjects, ...articles, ...quizzes])];
+// `index.json` and `facts.json` are data files, not articles; their routes are checked once as not-found.
 
 const visits: Visit[] = [];
 const activations: Activation[] = [];
@@ -64,6 +65,7 @@ function attach(page: Page, problems: string[]): void {
 
 async function inspect(page: Page, vp: string): Promise<{ problems: string[]; small: number; links: string[] }> {
   await page.evaluate(() => document.querySelectorAll('img').forEach((i) => (i.loading = 'eager'))).catch(() => undefined);
+  await page.waitForFunction(() => ((document.querySelector('main') ?? document.body).textContent ?? '').trim().length >= 40, undefined, { timeout: 8000 }).catch(() => undefined);
   await page.waitForTimeout(500);
   return page.evaluate((isPhone) => {
     const problems: string[] = [];
