@@ -19,6 +19,7 @@
  */
 import { spawnSync } from 'node:child_process';
 import { appendFileSync, mkdirSync, readFileSync } from 'node:fs';
+import { redactLine } from './redact.mjs';
 
 const mode = process.argv[2] ?? '';
 let event = {};
@@ -83,7 +84,7 @@ const line = {
   output: result.output.slice(-600),
 };
 mkdirSync('docs/kiro-evidence', { recursive: true });
-appendFileSync('docs/kiro-evidence/hook-firings.jsonl', `${JSON.stringify(line)}\n`);
+appendFileSync('docs/kiro-evidence/hook-firings.jsonl', `${JSON.stringify(redactLine(line))}\n`);
 
 if (!result.ok) {
   process.stderr.write(`${check} failed:\n${result.output}\n`);
