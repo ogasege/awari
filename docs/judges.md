@@ -67,6 +67,9 @@ npm run submission-check  # .kiro, licence, write-up claims, numbers, secrets, t
 | MCP configuration and the Terraform and AWS documentation review | `.kiro/settings/mcp.json`, `docs/kiro-evidence/terraform-mcp-review.md` |
 | Property tests and the defects they caught | `src/**/*.property.test.ts`, `docs/kiro-evidence/properties.md` |
 | Dated record of what drove each piece of work, and the Kiro surfaces used | `docs/kiro-log.md` |
+| Screenshots of Kiro in use (23, with captions that match the crew record): Subagents panel, a reviewer run and its transcript, steering loaded, the hooks panel, the specs folder | `docs/kiro-evidence/screenshots/` (start with 13 to 20, then 07 and 10) |
+| What really ran in Crew, with run ids, including what died or did not run | `docs/kiro-evidence/crew/README.md` |
+| The independent final review: crawl, accessibility, Lighthouse, design review, findings and the verdict | `docs/final-review/report.md` |
 
 ## Rules, at a glance
 

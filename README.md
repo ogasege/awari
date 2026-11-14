@@ -135,6 +135,35 @@ narrow jobs with their own tools and hooks. The Kiro IDE and Kiro Web were not u
 were prepared outside Kiro before the first session: the Home design reference in `design/`
 and the brief `KICKOFF.md`.
 
+### Kiro in use (screenshots)
+
+These are real captures of the Kiro Crew desktop app and the public repository, taken on 14 November 2026 (the full set
+of 23 is in [`docs/kiro-evidence/screenshots/`](docs/kiro-evidence/screenshots/README.md)).
+
+![Crew's Subagents panel for the build session: twelve sub-agent runs with their models and durations, and the input of the awari-design-reviewer run](docs/kiro-evidence/screenshots/13-subagents-panel-crew-member-runs.jpg)
+
+*The Subagents panel: twelve sub-agent runs (eleven complete, one error), and the brief given to one `awari-design-reviewer` run.*
+
+![The awari-design-reviewer run opened: its transcript path and the report it wrote](docs/kiro-evidence/screenshots/15-design-reviewer-run-transcript.jpg)
+
+*That run opened: the transcript path and the report file it wrote (`docs/kiro-evidence/crew/media-design-review-2.md`).*
+
+![Kiro's first tool calls read the design steering file, which has inclusion: always](docs/kiro-evidence/screenshots/20-kiro-loads-steering-file.jpg)
+
+*Steering in use: at the start of the session Kiro reads `.kiro/steering` and loads the design file.*
+
+![Crew's Hooks panel: three hooks, 223 runs, 0 errors](docs/kiro-evidence/screenshots/07-hooks-223-runs.jpg)
+
+*Crew's Hooks panel on 14 November: three hooks, 223 runs, 0 errors.*
+
+![The /.kiro/specs folder in the public repository, one folder per spec](docs/kiro-evidence/screenshots/10-repo-specs.png)
+
+*`/.kiro/specs` in the public repository: one folder per spec.*
+
+![Crew's Agent Capabilities, Agents: the three crew members created for this project](docs/kiro-evidence/screenshots/06-crew-members.jpg)
+
+*The three crew members. This picture shows they exist; which of them actually ran is in `docs/kiro-evidence/crew/README.md`.*
+
 ### Custom agents
 
 Three workspace agents in `.kiro/agents/`, each used for real work (`docs/kiro-evidence/agents.md`):
@@ -154,10 +183,41 @@ Three workspace agents in `.kiro/agents/`, each used for real work (`docs/kiro-e
 related tests after a source file is written; `npm run credits` after a pack build or a change
 under `public/`) and on `stop` (`npm run rules`, the hackathon hard rules). Kiro fired these
 <!--n:hookFirings-->27<!--/n--> times in real sessions, each recorded with its session id in
-`docs/kiro-evidence/hook-firings.jsonl`. A firing caught a defect in the hook itself (an option
+`docs/kiro-evidence/hook-firings.jsonl`. Crew's own Hooks panel, with three Crew hooks, counted 223 runs and 0 errors on
+14 November (picture above); those runs are the panel's count, not lines in that file. A firing caught a defect in the hook itself (an option
 Vitest 4 removed) and showed it missed type errors, so it now runs the type checker
 (`docs/kiro-evidence/hooks.md`). The `.kiro/hooks/*.kiro.hook` files hold the same checks in the
 Kiro IDE format; they have not fired, because the IDE was not used.
+
+### Kiro powers
+
+The catalogue on this machine lists 26 Kiro powers. I installed HashiCorp's **Terraform** power, because the AWS stack
+(`infra/terraform`) is real work in this repository. Installing it by catalogue name timed out (it clones over SSH), so it
+went in from a clone of the public powers repository by local path (`kiro-cli powers install <path>`), and
+`~/.kiro/powers/installed.json` records it. I used the power's `terraform-best-practices` steering as a checklist against
+the live stack: provider pins, validated inputs, default tags, no IAM wildcards (the only `*` is the explicit Deny of
+insecure transport) and git-ignored state and variables all meet it; remote state does not (local state, one owner). Its
+MCP server was not started, so only the power's steering text was used (`docs/final-review/kiro-power.md`).
+
+### What I tried that did not work
+
+- **A crew member died.** The `awari-builder` run `34363b32` ended on a backend 5xx after fetching its data and before wiring
+  it in; I finished spec 22 by hand.
+- **A review was too big.** The design reviewer run `8b50276e` failed with "Request exceeds the maximum allowed size" when I
+  handed it 40 full-page screenshots. Later runs got contact sheets of about 1.6 MB.
+- **A hook missed things.** It called a Vitest option that no longer exists, and it ran lint and tests but not the type
+  checker, so a type error got through; both are fixed (`docs/kiro-evidence/hooks.md`).
+- **Filtering was not enough for pictures.** Three review rounds measured 62%, 80% and 82% of sampled pictures with a problem.
+  Spec 24 added 214 hand decisions, and the independent review in spec 26 found more (captions cut off, wrong lead pictures).
+- **Safety rules blocked good commands.** Crew refused long shell heredocs as an "ssh to localhost", `curl | shasum` as
+  `curl | sh`, an S3 upload and any push to `main`. I redid each edit with the file tool and short commands, and the owner
+  pushed and deployed by hand.
+- **A model was not available.** Claude Haiku 5.5 was refused for this AWS account, so the quiz service uses Haiku 4.5
+  through an inference profile.
+- **"Works offline" was too broad.** The owner found ten of twelve pictures broken offline on the first article; the notice,
+  the strip and every document were reshaped (`docs/final-review/findings.md`, F-001).
+- **A hint gave away the answer.** The independent reviewer found that the first hint named the answer in 96% of quiz
+  questions; it was rebuilt (D-1).
 
 ### Spec-driven development
 

@@ -1,7 +1,6 @@
 # I rebuilt the 1990s CD-ROM encyclopedia as a web app that works in airplane mode
 
-*Draft for the Kiroween 2026 blog-post bonus. Replace `https://d3txwsv4mn6ye9.cloudfront.net` and `https://github.com/ogasege/awari` before
-publishing. Suggested tags: `kiro`, `kiroween`, `offline-first`, `react`, `aws`.*
+*This post was written as part of the Kiroween 2026 hackathon (blog-post bonus). Live app: https://d3txwsv4mn6ye9.cloudfront.net. Code (MIT): https://github.com/ogasege/awari. Suggested tags: `kiro`, `kiroween`, `offline-first`, `react`, `aws`.*
 
 When I was young, an entire encyclopedia came on one shiny disc. You put it in the computer and
 everything was just there: no loading, no connection, no account. You could start at a photo of a
@@ -50,6 +49,24 @@ being shot. Kids' reference needs that kind of second reader.
 
 <!--n:properties-->118<!--/n--> property-based tests guard the rules that matter, such as "a hint
 never contains the answer", which caught a hint that said "the 1960s" for an answer of 1960.
+
+### Kiro in use
+
+![Crew's Subagents panel: twelve sub-agent runs, and the brief given to the design reviewer](kiro-evidence/screenshots/13-subagents-panel-crew-member-runs.jpg)
+
+*Crew's Subagents panel: twelve sub-agent runs for the build session (eleven complete, one error).*
+
+![Kiro reading the design steering file at the start of a session](kiro-evidence/screenshots/20-kiro-loads-steering-file.jpg)
+
+*Steering in use: Kiro reads the design file first.*
+
+![Crew's Hooks panel: three hooks, 223 runs, 0 errors](kiro-evidence/screenshots/07-hooks-223-runs.jpg)
+
+*Crew's Hooks panel on 14 November: three hooks, 223 runs, 0 errors.*
+
+Not everything worked, and the write-up says so: a crew member died on a backend error, a review was too big to send, the
+offline claim was too broad until the owner caught it on the live site, and the first quiz hint gave the answer away in most
+questions until an independent reviewer found it. All four were fixed and are listed in the repository.
 
 ## What's next
 

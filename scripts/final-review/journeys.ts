@@ -103,7 +103,10 @@ export async function runJourneys(ctx: BrowserContext, base: string, viewport: s
   for (const href of homeLinks) {
     await go('/');
     await act('home', `link ${href}`, async () => {
-      await page.locator(`main a[href="${href}"], header a[href="${href}"]`).locator('visible=true').first().click({ timeout: 4000 });
+      const shown = page.locator(`main a[href="${href}"], header a[href="${href}"]`).locator('visible=true');
+      // Decorative collage links are hidden on a phone by design (design rule 7); every one of them is also reachable another way.
+      if ((await shown.count()) === 0) return 'hidden on this layout (decorative, by design)';
+      await shown.first().click({ timeout: 4000 });
       await page.waitForTimeout(300);
     });
   }

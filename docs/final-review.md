@@ -243,3 +243,18 @@ works without a connection." notice appeared, then put offline and walked throug
     say the same true thing.
 - Add an offline pass to the crawl: after the save, go offline and visit every screen type and at
   least 60 articles; fail on any broken image, blank area or network error shown to the visitor.
+
+### Owner's re-check of the live site after the F-001 deploy (14 Nov, 21:55 UTC, Chromium 1440 px)
+
+- F-001 confirmed fixed on the live site: offline, no broken-image icon on Nigeria, Elephant, Cuba,
+  Temperature, Pictures, Castle, Quizzes or Credits; no developer text; data ids show the not-found
+  screen; no page errors.
+- New, minor: `/quizzes` offline at 1440 px reports horizontal overflow (scrollWidth wider than the
+  window). Check it online and offline at both widths and fix the cause.
+- New, design: offline, an article that has none of its extra pictures saved shows a full row of
+  seven to ten identical empty "Needs a connection" frames (see Nigeria). It is honest, but it is
+  the first thing a visitor sees under the title and it reads as "missing". Show only the pictures
+  that are on the device; when some or all are missing, replace the empty frames with one small,
+  designed note ("7 more pictures when you are back online", or similar) so the strip never
+  becomes a row of blanks. Same idea on the Pictures screen: saved pictures first, one note for
+  the rest, not sixty placeholders.
