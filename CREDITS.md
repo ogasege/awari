@@ -256,7 +256,7 @@ Resized to at most 800 px. Each links to its Commons file page.
 | packs/img/body-human-body.jpg | Human body | Leonardo da Vinci | Public domain | https://commons.wikimedia.org/wiki/File:Da_Vinci_Vitruve_Luc_Viatour_(cropped).jpg |
 | packs/img/body-human-skeleton.jpg | Human skeleton | Sklmsta | CC0 | https://commons.wikimedia.org/wiki/File:Human-Skeleton.jpg |
 | packs/img/body-immune-system.jpg | Immune system | Nadar | Public domain | https://commons.wikimedia.org/wiki/File:Ilya_Mechnikov_nobel.jpg |
-| packs/img/body-leg.jpg | Leg | Basile Morin | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Hypomeces_squamosus.jpg |
+| packs/img/body-leg.jpg | Leg | Eckhard Pecher ( Arcimboldo ) | CC BY 2.5 | https://commons.wikimedia.org/wiki/File:Osaka07_D6A_M200M_nearfinish.jpg |
 | packs/img/body-liver.jpg | Liver | Tvanbr | Public domain | https://commons.wikimedia.org/wiki/File:Anatomy_Abdomen_Tiesworks.jpg |
 | packs/img/body-lung.jpg | Lung | Gray's Anatomy | Public domain | https://commons.wikimedia.org/wiki/File:Heart-and-lungs.jpg |
 | packs/img/body-muscle.jpg | Muscle | OpenStax College | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Biceps_Muscle_CNX.jpg |

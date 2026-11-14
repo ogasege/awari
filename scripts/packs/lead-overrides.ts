@@ -42,7 +42,7 @@ export const LEAD_OVERRIDES: ReadonlyArray<readonly [string, PhotoOverride]> = [
   ["ancient/colosseum", { file: "Colosseum in Rome-April 2007-1- copie 2B.jpg", caption: "The Colosseum at dusk", alt: "The Colosseum in Rome at dusk, seen from outside" }],
   ["ancient/silk-road", { file: "China silk-crystalblue.jpg", caption: "Crystal-blue silk cloth", alt: "A bolt of crystal-blue silk cloth" }],
   ["ancient/wonders-of-the-world", { file: "Maerten van Heemskrerck.jpg", caption: "Seven Wonders, old print", alt: "An old print showing the Seven Wonders of the Ancient World" }],
-  ["body/leg", { file: "Hypomeces squamosus.jpg", caption: "A green weevil", alt: "A metallic green weevil on a green leaf" }],
+  ["body/leg", { file: "Osaka07 D6A M200M nearfinish.jpg", caption: "Sprinters near the finish", alt: "Sprinters racing toward the finish of a 200 metre race, their legs in full stride" }],
   ["countries/belize", { file: "The Belize River - panoramio.jpg", caption: "The Belize River" }],
   ["countries/bosnia-and-herzegovina", { file: "Tuzla View of Tuzla.jpg", caption: "View of Tuzla" }],
   ["countries/brunei", { file: "Brunei Pumpjack-1.jpg", caption: "An oil pumpjack, Seria", alt: "A pumpjack near the Billionth Barrel Monument in Seria, Brunei" }],
