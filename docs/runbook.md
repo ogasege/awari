@@ -10,7 +10,7 @@ online and free until **29 January 2027**.
 AWS: use your personal CLI profile and never paste keys into a file or chat.
 
 ```sh
-export AWS_PROFILE=personal
+export AWS_PROFILE=<your-aws-profile>
 aws sts get-caller-identity          # confirms the profile works; shows an account id, not a key
 # If it says the session expired:  aws login
 ```
