@@ -15,10 +15,11 @@ price_class = "PriceClass_All"
 # Quiz service (optional; the app works without it).
 enable_quiz_service = true
 
-# Claude Haiku 5.5, the current small fast Claude model on Bedrock.
+# Claude Haiku 4.5 through the US inference profile (Haiku 5.5 supports only inference
+# profiles and is not enabled on every account; it was refused on ours on 2026-11-14).
 # Fallback if Converse rejects it in your region:
 # bedrock_model_id = "global.anthropic.claude-haiku-4-5-20251001-v1:0"
-bedrock_model_id = "anthropic.claude-haiku-5-5"
+bedrock_model_id = "us.anthropic.claude-haiku-4-5-20251001-v1:0"
 # bedrock_region = "us-east-1"
 
 # Cost and abuse limits.

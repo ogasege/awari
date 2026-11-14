@@ -35,12 +35,21 @@ mock_provider "archive" {}
 run "least_privilege_default_model" {
   command = apply
 
+  # Pinned so a local terraform.tfvars (which terraform test loads) cannot change the defaults.
+  variables {
+    bedrock_model_id          = "us.anthropic.claude-haiku-4-5-20251001-v1:0"
+    quiz_reserved_concurrency = 2
+  }
+
   # Property 6 (Req 5.1-5.3)
   assert {
     condition = one([
       for s in jsondecode(aws_iam_role_policy.quiz[0].policy).Statement : s.Resource
       if s.Action == "bedrock:InvokeModel"
-    ]) == ["arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-haiku-5-5"]
+    ]) == [
+      "arn:aws:bedrock:us-east-1:123456789012:inference-profile/us.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "arn:aws:bedrock:*::foundation-model/anthropic.claude-haiku-4-5-20251001-v1:0",
+    ]
     error_message = "Property 6: Bedrock access must name only the chosen model."
   }
   assert {
@@ -77,7 +86,7 @@ run "least_privilege_default_model" {
     error_message = "Req 4.4: logs are kept 14 days."
   }
   assert {
-    condition     = aws_lambda_function.quiz[0].environment[0].variables.BEDROCK_MODEL_ID == "anthropic.claude-haiku-5-5"
+    condition     = aws_lambda_function.quiz[0].environment[0].variables.BEDROCK_MODEL_ID == "us.anthropic.claude-haiku-4-5-20251001-v1:0"
     error_message = "Req 4.2: the model ID reaches the function."
   }
 }

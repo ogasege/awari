@@ -28,7 +28,7 @@ credentials; Terraform uses your normal AWS profile or SSO session.
 - Terraform 1.10 or later, AWS CLI v2, Node.js 22, `jq`.
 - An AWS account and a profile with rights to create S3, CloudFront,
   Lambda, IAM and CloudWatch Logs resources.
-- For the quiz service: Claude Haiku 5.5 available to your account in
+- For the quiz service: Claude Haiku 4.5 (US inference profile) available to your account in
   `aws_region` (see step 2).
 
 ## Deploy
@@ -46,7 +46,7 @@ aws bedrock list-foundation-models --region us-east-1 --by-provider anthropic \
 aws bedrock list-inference-profiles --region us-east-1 \
   --query "inferenceProfileSummaries[].inferenceProfileId" --output text | tr '\t' '\n' | grep haiku
 # Anthropic models may ask for a one-time use-case form in the Bedrock
-# console (Model catalog > Claude Haiku 5.5) before the first call.
+# console (Model catalog > Claude Haiku 4.5) before the first call.
 
 # 3. Configure.
 cd infra/terraform
@@ -112,7 +112,7 @@ to the Lambda function URL and needs the hash of POST bodies. The app's
 client (`src/lib/quiz/remote.ts`) sends it automatically.
 
 If the quiz call returns 502 and the logs show `ValidationException`
-for the model, your region may not serve Claude Haiku 5.5 through the
+for the model, your region may not serve Claude Haiku 4.5 through the
 Converse API. Set
 `bedrock_model_id = "global.anthropic.claude-haiku-4-5-20251001-v1:0"`
 in `terraform.tfvars` and apply again; the IAM policy follows the ID.

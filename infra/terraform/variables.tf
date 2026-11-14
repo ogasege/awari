@@ -66,7 +66,7 @@ variable "enable_quiz_service" {
 variable "bedrock_model_id" {
   description = "Bedrock model ID or geo-prefixed inference profile ID used by the quiz service."
   type        = string
-  default     = "anthropic.claude-haiku-5-5"
+  default     = "us.anthropic.claude-haiku-4-5-20251001-v1:0"
 
   validation {
     condition     = can(regex("^((global|us|eu|apac|jp|au|ca)\\.)?anthropic\\.claude-[a-z0-9.:-]+$", var.bedrock_model_id))

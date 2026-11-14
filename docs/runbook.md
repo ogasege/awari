@@ -72,9 +72,12 @@ terraform plan -out tfplan           # expect "Plan: 20 to add" with the quiz se
 
 Notes from a plan run on 2026-11-12 with the example values: `Plan: 20 to
 add, 0 to change, 0 to destroy`; Claude Haiku 5.5 (`anthropic.claude-haiku-5-5`)
-is offered in `us-east-1` on the personal account. Anthropic models may ask for
-a one-time use-case form in the Bedrock console (*Model catalog → Claude Haiku
-5.5*) before the first call.
+is listed in `us-east-1`. On 2026-11-14 the live quiz service failed with
+`AccessDeniedException`. Haiku 5.5 accepts only inference-profile IDs, and the account is
+not enabled for it ("not available for this account"). The default is now Claude Haiku 4.5
+through the US inference profile (`us.anthropic.claude-haiku-4-5-20251001-v1:0`), which
+answered on that account. Anthropic models may ask for a one-time use-case form in the
+Bedrock console (*Model catalog → the model*) before the first call.
 
 To skip the quiz service entirely (the app works without it), set
 `enable_quiz_service = false` in `terraform.tfvars`: no Lambda, no Bedrock,
