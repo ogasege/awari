@@ -4,7 +4,7 @@
  * network. The precache list and version are injected by
  * `scripts/build-sw.ts`. The decisions live in `strategy.ts`.
  */
-import { cacheNameFor, planFor, staleCaches } from './strategy.ts';
+import { cacheNameFor, MEDIA_PREFIX, planFor, staleCaches } from './strategy.ts';
 
 /** Pictures looked at, kept for offline. Its name does not start with the site prefix, so a new site version keeps it. */
 const MEDIA_CACHE = 'media-awari-v1';
@@ -34,6 +34,7 @@ interface FetchEv {
   respondWith(r: Promise<Response> | Response): void;
 }
 interface MessageEv {
+  waitUntil(p: Promise<unknown>): void;
   data: unknown;
   ports: ReadonlyArray<{ postMessage(m: unknown): void }>;
 }
@@ -125,7 +126,8 @@ async function mediaAnswer(request: Request): Promise<Response> {
   // A picture from Commons arrives as an opaque response in an <img>; it can be kept all the same.
   if (res.ok || res.type === 'opaque') {
     await cache.put(request, res.clone());
-    const keys = await cache.keys();
+    // Only larger views count towards the limit; the small copies are the library the visitor may have chosen to save whole.
+    const keys = (await cache.keys()).filter((k) => !new URL(k.url).pathname.startsWith(MEDIA_PREFIX));
     for (const old of keys.slice(0, Math.max(0, keys.length - MEDIA_LIMIT))) {
       await cache.delete(old);
     }
@@ -166,8 +168,45 @@ scope.addEventListener('fetch', (event: FetchEv) => {
   event.respondWith(answer(event.request));
 });
 
+/** Saves every library thumbnail on request ("Save all pictures" on the Credits screen), with progress. */
+async function savePictures(): Promise<void> {
+  const index = (await (await fetch('/media/index.json')).json()) as { items: string[][] };
+  const urls = index.items.map((r) => `${MEDIA_PREFIX}${r[0]}.webp`);
+  const cache = await caches.open(MEDIA_CACHE);
+  const have = new Set((await cache.keys()).map((k) => new URL(k.url).pathname));
+  const missing = urls.filter((u) => !have.has(u));
+  const total = urls.length;
+  let done = total - missing.length;
+  let next = 0;
+  const tell = async (m: unknown): Promise<void> => {
+    for (const c of await scope.clients.matchAll({ includeUncontrolled: true, type: 'window' })) c.postMessage(m);
+  };
+  await tell({ type: 'pictures', saved: done, total });
+  await Promise.all(
+    Array.from({ length: Math.min(24, missing.length) }, async () => {
+      while (next < missing.length) {
+        const url = missing[next++] as string;
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`Could not save ${url} (${res.status})`);
+        await cache.put(url, res);
+        done += 1;
+        if (done % 40 === 0) void tell({ type: 'pictures', saved: done, total });
+      }
+    }),
+  );
+  await tell({ type: 'pictures-done', total });
+}
+
 scope.addEventListener('message', (event: MessageEv) => {
   const data = event.data as { type?: string } | null;
+  if (data?.type === 'save-pictures') {
+    event.waitUntil(
+      savePictures().catch(async () => {
+        for (const c of await scope.clients.matchAll({ includeUncontrolled: true, type: 'window' })) c.postMessage({ type: 'pictures-failed' });
+      }),
+    );
+    return;
+  }
   if (data?.type === 'status') {
     void caches.has(CACHE).then(async (has) => {
       const cache = has ? await caches.open(CACHE) : undefined;

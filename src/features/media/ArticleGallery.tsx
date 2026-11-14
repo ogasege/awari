@@ -5,6 +5,7 @@
  */
 import { useMemo, useState } from 'react';
 import { fileName, packOf, thumbUrl, useMedia, type MediaFile, type MediaItem } from '../../lib/media/media.ts';
+import { SafeImg } from '../../design/SafeImg.tsx';
 import { MediaViewer } from './MediaViewer.tsx';
 import './media.css';
 
@@ -23,17 +24,23 @@ export function ArticleGallery({ articleKey, leadCredit }: { articleKey: string;
   const file = useMedia<MediaFile>(articleKey.includes('/') && packOf(articleKey) !== 'wiki' ? `${packOf(articleKey)}.json` : null);
   const items = useMemo(() => (file.status === 'ready' ? galleryFor(file.data.items, articleKey, leadCredit) : []), [file, articleKey, leadCredit]);
   const [open, setOpen] = useState<number | null>(null);
+  const [missing, setMissing] = useState(false);
   if (items.length === 0) return null;
   const current = open === null ? undefined : items[open];
   return (
     <section className="gallery" aria-label={`More pictures of ${items[0]?.articleTitle ?? 'this article'}`}>
       <h2 className="gallery__title">More pictures</h2>
       <p className="gallery__note">From Wikimedia Commons, shown as small copies resized to 480 px. Open one for its author and licence.</p>
+      {missing ? (
+        <p className="gallery__note gallery__note--missing" role="status">
+          Some of these pictures need a connection the first time you look at them. Once you have seen one, it stays on this device.
+        </p>
+      ) : null}
       <ul className="gallery__strip">
         {items.map((m, i) => (
           <li key={m.id}>
             <button type="button" className="gallery__thumb lift" style={{ rotate: `${[-1.5, 1, -0.6, 1.4][i % 4]}deg` }} onClick={() => setOpen(i)}>
-              <img src={thumbUrl(m.thumb)} alt={m.alt} width={m.tw} height={m.th} loading="lazy" decoding="async" />
+              <SafeImg src={thumbUrl(m.thumb)} alt={m.alt} width={m.tw} height={m.th} loading="lazy" decoding="async" onFail={() => setMissing(true)} />
               <span className="gallery__cap hand">{m.caption}</span>
             </button>
           </li>

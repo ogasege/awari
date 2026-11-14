@@ -73,7 +73,7 @@ export function SavedNotice() {
   }
   return (
     <div className="saved-notice" role="status">
-      <span>Saved. Awari now works without a connection.</span>
+      <span>Saved. Awari now works without a connection. Pictures beyond the lead photos are kept as you look at them.</span>
       <button
         type="button"
         className="saved-notice__close"

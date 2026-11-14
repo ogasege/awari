@@ -10,6 +10,7 @@ import { SUBJECTS } from '../../lib/packs/subjects.ts';
 import { KIND_LABELS, packOf, thumbUrl, useMedia, type IndexRow, type MediaFile, type MediaIndex } from '../../lib/media/media.ts';
 import { MediaViewer } from './MediaViewer.tsx';
 import '../timeline/timeline.css';
+import { SafeImg } from '../../design/SafeImg.tsx';
 import './media.css';
 
 const PAGE = 60;
@@ -47,7 +48,7 @@ export function surprise(rows: readonly IndexRow[], count: number, random: () =>
 function Tile({ row, tilt, onOpen }: { row: IndexRow; tilt: number; onOpen: () => void }) {
   return (
     <button type="button" className="tile lift" style={{ rotate: `${tilt}deg` }} onClick={onOpen}>
-      <img src={thumbUrl(`img/${row[0]}.webp`)} alt={row[5]} width={row[3]} height={row[4]} loading="lazy" decoding="async" />
+      <SafeImg src={thumbUrl(`img/${row[0]}.webp`)} alt={row[5]} width={row[3]} height={row[4]} loading="lazy" decoding="async" />
       <span className="tile__cap hand">{row[5]}</span>
     </button>
   );

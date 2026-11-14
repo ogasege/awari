@@ -351,3 +351,8 @@
   color: var(--ink-soft);
   font-size: 14px;
 }
+
+.gallery__thumb .pic-missing,
+.tile .pic-missing {
+  height: 130px;
+}

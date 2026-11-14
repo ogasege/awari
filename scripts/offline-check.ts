@@ -97,6 +97,34 @@ await page.waitForFunction(
   undefined,
   { timeout: 20_000 },
 );
+// 26-final-review F-001: an article never opened online must not show broken pictures offline.
+const loadAllImages = async (p: Page): Promise<void> => {
+  await p.evaluate(() => document.querySelectorAll('img').forEach((i) => (i.loading = 'eager')));
+  await p.waitForFunction(() => [...document.querySelectorAll('img')].every((i) => i.complete), undefined, { timeout: 20_000 });
+};
+const brokenImages = (p: Page): Promise<number> =>
+  p.evaluate(() => [...document.querySelectorAll('img')].filter((i) => i.complete && i.naturalWidth === 0 && !i.src.endsWith('.svg')).length);
+
+await context.setOffline(true);
+await step('Unsaved pictures offline: designed placeholders, a plain note, no broken-image icon', async (p) => {
+  await open(p, '/article/countries/nigeria');
+  await p.locator('.gallery').waitFor({ timeout: 10_000 });
+  await loadAllImages(p);
+  if ((await brokenImages(p)) > 0) throw new Error('a broken image is showing');
+  if ((await p.locator('.gallery .pic-missing').count()) === 0) throw new Error('expected placeholders for pictures not saved yet');
+  await p.getByText('need a connection the first time').waitFor({ timeout: 5_000 });
+});
+await context.setOffline(false);
+await step('Save all pictures on Credits, then every picture works offline', async (p) => {
+  await open(p, '/credits');
+  await p.getByRole('button', { name: /Save all pictures/ }).click();
+  await p.getByText('All pictures are saved on this device.').waitFor({ timeout: liveUrl ? 900_000 : 240_000 });
+  await context.setOffline(true);
+  await open(p, '/article/countries/nigeria');
+  await p.locator('.gallery').waitFor({ timeout: 10_000 });
+  await loadAllImages(p);
+  if ((await brokenImages(p)) > 0 || (await p.locator('.gallery .pic-missing').count()) > 0) throw new Error('a picture is still missing after saving all');
+});
 await context.setOffline(true);
 
 // 2. Every pack feature, with the network gone.

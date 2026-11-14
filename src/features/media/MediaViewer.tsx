@@ -6,6 +6,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from '../../app/navigation.tsx';
 import { largeUrl, thumbUrl, type MediaItem } from '../../lib/media/media.ts';
+import { SafeImg } from '../../design/SafeImg.tsx';
 import './media.css';
 
 /** What the viewer needs to show a picture before its full record has loaded. */
@@ -61,7 +62,7 @@ export function MediaViewer({
           Close
         </button>
         <div className="viewer__frame" style={{ aspectRatio: `${shown.tw} / ${shown.th}` }}>
-          <img className="viewer__small" src={thumbUrl(shown.thumb)} alt={full?.alt ?? shown.caption} width={shown.tw} height={shown.th} />
+          <SafeImg className="viewer__small" src={thumbUrl(shown.thumb)} alt={full?.alt ?? shown.caption} width={shown.tw} height={shown.th} />
           {full && large !== 'failed' ? (
             <img
               key={shown.id}

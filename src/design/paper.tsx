@@ -17,6 +17,7 @@ import {
   wobblyStar,
   type Point,
 } from './wobble.ts';
+import { SafeImg } from './SafeImg.tsx';
 import './paper.css';
 
 /** Sizes in collage units: `u(14)` is 14 reference pixels. */
@@ -104,7 +105,7 @@ export function Print({
         <Tape key={`${t.left}${t.tilt}`} {...t} />
       ))}
       {pin ? <Pin left={pin} /> : null}
-      <img src={src} alt={alt} loading="lazy" decoding="async" style={{ aspectRatio: aspect }} />
+      <SafeImg src={src} alt={alt} loading="lazy" decoding="async" style={{ aspectRatio: aspect }} />
       {caption ? (
         <span className="print__caption hand" style={{ fontSize: u(captionSize) }}>
           {caption}

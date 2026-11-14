@@ -8,6 +8,7 @@ import { Link } from '../../app/navigation.tsx';
 import { sectionId } from '../article/ArticleBody.tsx';
 import type { Question } from '../../lib/packs/types.ts';
 import { MAX_HINTS, visibleOptions, type Action, type QuizState } from './quizMachine.ts';
+import { SafeImg } from '../../design/SafeImg.tsx';
 import './quiz.css';
 
 /** A hand-drawn light bulb: lit when the hint is still available. */
@@ -89,7 +90,7 @@ export function QuestionCard({
           </span>
           {q.prompt}
         </legend>
-        {q.image ? <img className="question__image" src={q.image.src} alt={q.image.alt} /> : null}
+        {q.image ? <SafeImg className="question__image" src={q.image.src} alt={q.image.alt} /> : null}
         <div className="question__options">
           {q.options.map((opt, i) =>
             visible.includes(i) ? (

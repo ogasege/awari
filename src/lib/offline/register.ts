@@ -50,6 +50,53 @@ export function useSaveProgress(): SaveProgress | null {
   return useSyncExternalStore(subscribe, getSaveProgress, () => null);
 }
 
+/** The pictures save ("Save all pictures" on Credits): files saved so far, or a final state. */
+export type PicturesState = { state: 'idle' } | { state: 'saving'; saved: number; total: number } | { state: 'done' } | { state: 'failed' };
+const PICTURES_KEY = 'awari.picturesSaved';
+let pictures: PicturesState = { state: 'idle' };
+try {
+  if (localStorage.getItem(PICTURES_KEY) === '1') pictures = { state: 'done' };
+} catch {
+  // storage unavailable: stays idle
+}
+
+function setPictures(next: PicturesState): void {
+  pictures = next;
+  if (next.state === 'done') {
+    try {
+      localStorage.setItem(PICTURES_KEY, '1');
+    } catch {
+      // ignored
+    }
+  }
+  listeners.forEach((l) => l());
+}
+
+export function getPicturesState(): PicturesState {
+  return pictures;
+}
+
+/** The pictures state, re-rendering when it changes. */
+export function usePicturesState(): PicturesState {
+  return useSyncExternalStore(subscribe, getPicturesState, () => ({ state: 'idle' }) as PicturesState);
+}
+
+/** Asks the worker to save every library thumbnail (about 85 MB). */
+export function savePictures(): void {
+  const worker = typeof navigator !== 'undefined' ? navigator.serviceWorker?.controller : null;
+  if (!worker) {
+    setPictures({ state: 'failed' });
+    return;
+  }
+  setPictures({ state: 'saving', saved: 0, total: 0 });
+  worker.postMessage({ type: 'save-pictures' });
+}
+
+/** Whether pictures can be saved here: not in the desktop app (its pictures are already on the device). */
+export function canSavePictures(): boolean {
+  return typeof location !== 'undefined' && /^https?:$/.test(location.protocol) && typeof navigator !== 'undefined' && 'serviceWorker' in navigator;
+}
+
 /** Set once the "Saved" notice has been dismissed, so it is shown only the first time. */
 export const SAVED_NOTICE_KEY = 'awari.savedNoticeDismissed';
 
@@ -109,6 +156,13 @@ export function registerServiceWorker(): void {
   navigator.serviceWorker.addEventListener(
     'message',
     (event: MessageEvent<{ type?: string; saved?: number; total?: number }>) => {
+      if (event.data?.type === 'pictures' && typeof event.data.saved === 'number' && typeof event.data.total === 'number') {
+        setPictures({ state: 'saving', saved: event.data.saved, total: event.data.total });
+      } else if (event.data?.type === 'pictures-done') {
+        setPictures({ state: 'done' });
+      } else if (event.data?.type === 'pictures-failed') {
+        setPictures({ state: 'failed' });
+      }
       if (event.data?.type === 'ready') {
         setProgress(null);
         set('ready');

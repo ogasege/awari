@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { SAVED_NOTICE_KEY, setOfflineStatusForTests, setSaveProgressForTests } from '../lib/offline/register.ts';
 import { Header, headerStatus } from './Header.tsx';
 
-const NOTICE = 'Saved. Awari now works without a connection.';
+const NOTICE = 'Saved. Awari now works without a connection. Pictures beyond the lead photos are kept as you look at them.';
 
 function setOnline(value: boolean): void {
   Object.defineProperty(navigator, 'onLine', { configurable: true, get: () => value });

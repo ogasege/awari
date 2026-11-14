@@ -219,3 +219,27 @@ memorable?")
 - Best Demo: automatic; depends on the video.
 - Best Kiro Crew App, Startup, Student, Ghost of Kiroween Past: list what each needs and mark them
   as the owner's decision. Do not build a Crew app in this spec.
+
+## 8. Found by the owner's own check of the live site (14 Nov, 20:15 UTC, Chromium 1440 px)
+
+The redeployed live site was opened in a fresh browser profile, left until the "Saved. Awari now
+works without a connection." notice appeared, then put offline and walked through.
+
+- Passed offline: Home, Atlas, Timeline, Castle, Quizzes, Subjects, Tours, Search, the Nigeria
+  article text and lead photo, the not-found screen. No page errors. The new header behaves as
+  specified (progress while saving, one notice, a quiet "Offline" pill).
+- **Blocker for the offline claim:** on `/article/countries/nigeria` offline, 10 of 12 pictures
+  are broken. The "More pictures" strip shows the browser's broken-image icon with the alt text
+  spilling over each print. The app has just told the visitor it "now works without a
+  connection", and the first article they open shows broken pictures. Fix it properly and test it
+  in the crawl for every article type, in the browser and the desktop app:
+  - never show a broken image: a picture that cannot load gets a designed paper placeholder or is
+    left out of the strip, with one plain line saying these pictures need a connection the first
+    time;
+  - decide and state what "works offline" covers. Either save the article thumbnails too (measure
+    the size and the time on a slow connection; consider saving them after the core, with progress,
+    or letting the visitor choose "Save pictures too"), or make the notice and the write-up say
+    exactly what is saved. The notice, the Credits line, README, devpost and video script must all
+    say the same true thing.
+- Add an offline pass to the crawl: after the save, go offline and visit every screen type and at
+  least 60 articles; fail on any broken image, blank area or network error shown to the visitor.
