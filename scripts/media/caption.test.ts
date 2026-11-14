@@ -25,13 +25,13 @@ describe('captions', () => {
     expect(hasCaption('', 'File:20230101 123456.jpg')).toBe(false);
   });
 
-  it('cuts a long text at a word with an ellipsis, never mid-word, and within the limit', () => {
+  it('cuts a long text in front of a joining word, never mid-word, and never with an ellipsis', () => {
     const long = 'A very long description that goes on and on about a mountain and its many slopes and valleys and rivers and forests';
     const s = shorten(long, 60);
-    expect(s.length).toBeLessThanOrEqual(61);
-    expect(s.endsWith('…')).toBe(true);
-    expect(long.startsWith(s.slice(0, -1))).toBe(true);
-    expect(long.slice(s.length - 1, s.length)).toBe(' ');
+    expect(s.length).toBeLessThanOrEqual(60);
+    expect(s).not.toContain('…');
+    expect(long.startsWith(s)).toBe(true);
+    expect(long.slice(s.length, s.length + 1)).toBe(' ');
   });
 
   it('every caption is traceable to the description or the file title (property)', () => {

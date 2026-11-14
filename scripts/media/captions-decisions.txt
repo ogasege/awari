@@ -243,7 +243,7 @@ title|Panier Basket 01.jpg|=>A basketball court in Bimbo
 title|Gran Comore landscape.jpg|=>A landscape on Grande Comore
 title|Moroni Mosque Photo by Sascha Grabow.jpg|=>The mosque in Moroni
 title|Comoros diver with fish|=>A diver with a fish in the Comoros
-title|Timorese Dancers.jpg|=>Timorese dancers
+title|Timorese Dancers.jpg|=>Timorese dancers with drums
 title|Lospalos klein.jpg|=>The town of Lospalos in 2002
 title|Portuguese School of Díli, Timor-Leste.jpg|=>A class at the Portuguese School in Díli
 title|20180818-Pale-mandibled aracari|=>A pale-mandibled aracari in Mindo
@@ -273,3 +273,37 @@ title|Zn reaction with HCl.JPG|=>Zinc reacting with hydrochloric acid
 title|Calibration equipments.JPG|=>Temperature calibration equipment
 title|CMB Timeline No Labels or WMAP.jpg|=>The universe over 13.77 billion years
 title|CMB Timeline uk.jpg|=>Timeline of the universe, from NASA
+# 26-final-review, fix batch 1 package C: pictures the design reviewer named as wrong for their article, and
+# captions written by hand from what the Commons file page itself says (checked through the Commons API, 14 Nov).
+drop|A plate of nachos with salsa sauce
+drop|Gross pathology of lung
+drop|NIST's atom-based magnetic sensor
+drop|The official poster for the series second season
+drop|South Korean delegation at the 2009 Kamakura
+drop|Shiraz wine is the most famous
+drop|Abandoned Schoolhouse - Pripyat
+drop|Kenyan Landscapes
+drop|A4 PAPER
+drop|Ambhibians in Ayyanmada cave
+drop|A beautiful Vine snake
+drop|Sony a9 sample photo
+drop|Postprocessed photo (fusion of two)
+# "Ben Campbell steamship at landing, restored version of a daguerreotype. Cropped, with artifacts removed, mild
+# denoising/sharpening, and levels adjusted." -- the picture is the steamboat; the note is about the restoration.
+title|SteamboatBenCampbellb.jpg|=>The steamship Ben Campbell at a landing
+# "NASA The dark region at the center of this image, pieced together from photographs taken by NASA's Messenger
+# spacecraft, includes the north pole of Mercury."
+title|North pole of Mercury -- NASA.jpg|=>The north pole of Mercury, seen by NASA's Messenger spacecraft
+# File page: description "Pristimantis moro", categories Anura (frogs), from iNaturalist.
+title|Pristimantis moro.jpg|=>Pristimantis moro, a frog
+# File page: description "A random toad that I found on the ground", category Anura.
+title|A toad.jpg|=>A toad on the ground
+# File page: description "Common road" (a misspelling), category Anura; the species is in the file name.
+title|Bufo melanostictus 2.0.jpg|=>A Bufo melanostictus toad
+# File page: "Illustration from Anatomy & Physiology, Connexions Web site", category Digestion; shown as "6/, Jun 19, 2013".
+title|2405 Digestive Process.jpg|=>An illustration of the digestive process
+# File page: "Illustration from Anatomy & Physiology, Connexions Web site", title "Two Models of Atomic Structure".
+title|202 Two Models of Atomic Structure.jpg|=>An illustration of two models of atomic structure
+# Advertising copy and a note about a figure inset, not about the picture (26-final-review, package C).
+drop|A Great Career Can Begin
+drop|At the insert in the upper left corner

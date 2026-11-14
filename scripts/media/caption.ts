@@ -65,6 +65,82 @@ const FOREIGN =
 
 /** A caption must not end on a word that needs a next word. */
 const DANGLING = /\b(?:from|of|in|at|on|to|by|with|and|or|the|a|an|for|as|into|near|that|which|during|under|over|between|after|before|about)$/i;
+/** More endings that leave the phrase hanging where a cut landed on a function word: "Pakistan is", "with such". */
+const DANGLING_MORE =
+  /\b(?:is|are|was|were|be|been|being|has|have|had|does|did|can|could|will|would|may|might|must|should|this|these|those|their|its|his|her|your|my|than|then|while|when|who|whom|whose|where|what|how|such|another|same|very|also|if|first|last|next|only|own)$/i;
+
+/** True when a caption stops on a word that needs the next one. */
+function endsOnFunctionWord(text: string): boolean {
+  const t = text.replace(/…$/, '').replace(/[.,;:\s]+$/, '');
+  return DANGLING.test(t) || DANGLING_MORE.test(t);
+}
+
+/**
+ * The words a caption may stop in front of: a cut there leaves a phrase that reads whole ("A pair of common toads
+ * migrating" out of "... migrating in the foliage of the mixed forest"). Used instead of an ellipsis.
+ */
+const JOINER =
+  /\s(?:of|in|on|at|to|by|with|from|for|and|or|but|as|into|near|that|which|who|whom|whose|where|when|while|during|under|over|between|among|across|along|against|behind|beside|below|above|within|without|through|throughout|because|since|than|though|although|until|upon|about|after|before|like|per|via|onto|off)\s/gi;
+
+/** The caption defects the final design review counted (26-final-review D-14 to D-16, D-36 to D-39), in report order. */
+export const DEFECTS = ['ellipsis', 'function word', 'first person', 'self-referring', 'processing note', 'date only', 'under three words', 'shouting', 'non-Latin'] as const;
+export type Defect = (typeof DEFECTS)[number];
+
+/** A caption is a whole phrase: it is never cut off with an ellipsis. */
+const ELLIPSIS = /…|\.\.\./;
+/**
+ * The uploader talking about themselves: "my letter", "a toad that I found", "this photo is not taken by me",
+ * "we see the mountain". "Our Lady" is a church, not a first person, and "mine" is usually a pit, so neither counts.
+ */
+const PERSON = /(?<!\p{L})(?:my|me|myself|ourselves)(?!\p{L})|(?<!\p{L})our(?!\p{L})(?!\s+(?:Lady|Lord|Saviour|Savior))|(?<!\p{L})we(?!\p{L})\s+\p{Ll}/iu;
+const PERSON_I = /(?<!\p{L})I\s+(?:found|took|made|created|photographed|shot|scanned|uploaded|noticed|saw|visited|collapsed|think|believe|like|love|decided|went|got|drove|walked|climbed|caught|spotted|have|am)(?!\p{L})/u;
+/** A caption about the picture rather than about what it shows: "the dark region at the center of this image". */
+const SELF_REF =
+  /(?<!\p{L})(?:this|these|those|that|the above|the following)\s+(?:image|images|photo|photos|photograph|photographs|picture|pictures|file|media|shot|snapshot)(?!\p{L})|(?:pictured|shown|seen|photographed|featured)\s+(?:here|above|below)(?!\p{L})|^here (?:are|is) (?:pictured|shown|seen)(?!\p{L})|^here we see(?!\p{L})/iu;
+/** What the uploader did to the file in an editor, never what the picture shows. */
+const PROCESSING =
+  /\bcropp?ed\b|\bdenois\w*|\bsharpening\b|\blevels adjusted\b|\bwhite[- ]balance\b|\bartifacts? removed\b|\bpost-?process\w*|\bstitched (?:together|from)\b|\bretouch\w*|\bupscal\w*|\brandom\b|\bunedited\b|\bSOOC\b|\brestored version\b|\bsample photo\b|\bcalibrated\b/i;
+/** Nothing but a date, however it is punctuated ("6/, Jun 19, 2013"). */
+const DATE_LIKE = /^(?:[\d\s,./-]|jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t|tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)+$/i;
+
+/** A letter a child reading English cannot sound out: another script, or a Greek or maths symbol (β, Ω). */
+function hasNonLatinLetter(text: string): boolean {
+  return [...text].some((c) => /\p{L}/u.test(c) && !/\p{Script=Latin}/u.test(c) && !/\p{Script=Common}/u.test(c));
+}
+
+/** A caption in capitals is shouting ("A4 PAPER"); an abbreviation beside ordinary words is not. */
+function isShouting(text: string): boolean {
+  const words = text.match(/\p{L}{2,}/gu) ?? [];
+  const letters = (text.match(/\p{L}/gu) ?? []).length;
+  return words.length > 0 && letters >= 5 && words.every((w) => w === w.toUpperCase());
+}
+
+/**
+ * Every reason a finished caption is not fit to print under a photograph, in report order; empty when it reads as a
+ * plain phrase about what the picture shows. Each caption in the library is checked against these, whatever its
+ * source, so a hand-written override is held to the same bar as a Commons description
+ * (`scripts/media/caption-quality.test.ts`).
+ */
+export function captionDefects(text: string): Defect[] {
+  const t = collapse(text);
+  const bare = t.replace(/[.\s]+$/, '');
+  const found: Defect[] = [];
+  if (ELLIPSIS.test(t)) found.push('ellipsis');
+  if (endsOnFunctionWord(bare)) found.push('function word');
+  if (PERSON.test(t) || PERSON_I.test(t)) found.push('first person');
+  if (SELF_REF.test(t)) found.push('self-referring');
+  if (PROCESSING.test(t)) found.push('processing note');
+  if (DATE_LIKE.test(bare) || DATE_ONLY.test(bare)) found.push('date only');
+  if ((bare.replace(/…$/, '').match(/[\p{L}\p{N}]+/gu) ?? []).length < 3) found.push('under three words');
+  if (isShouting(bare)) found.push('shouting');
+  if (hasNonLatinLetter(bare)) found.push('non-Latin');
+  return found;
+}
+
+/** The first reason a caption is not fit to print, or undefined when it is. */
+export function captionDefect(text: string): Defect | undefined {
+  return captionDefects(text)[0];
+}
 
 let words: Set<string> | undefined;
 
@@ -125,24 +201,34 @@ export function englishPart(description: string): string {
   return collapse(m?.[1] ?? d);
 }
 
-/** The first sentence, or the first words, of at most `max` characters, cut at a word and never on a word that needs another. */
+/**
+ * The first sentence, or the first whole phrase, of at most `max` characters: cut at a sentence end, at a clause
+ * boundary, or in front of a joining word, so a caption never trails off in an ellipsis (26-final-review D-14).
+ * Returns '' when the text has no such stopping place, and the caller then has nothing honest to show.
+ */
 export function shorten(text: string, max = MAX): string {
   const t = collapse(text).replace(/^["“”']+|["“”']+$/g, '');
   const sentence = /^(.{20,}?[a-z)0-9][.!?])(?:\s|$)/.exec(hideDots(t));
   if (sentence?.[1] && sentence[1].length <= max) return showDots(sentence[1]).replace(/[.]$/, '');
   if (t.length <= max) return t.replace(/[.;:,\s]+$/, '');
   const cut = t.slice(0, max);
-  // Prefer to stop at a clause ("..., and then ..."), which needs no ellipsis, over a cut in the middle of one.
-  const clause = [...cut.matchAll(/[,;]\s|\s[–—-]\s/g)].map((m) => m.index ?? 0).filter((i) => i >= 28).pop();
-  if (clause !== undefined) {
-    const head = cut.slice(0, clause).replace(/[\s,;:(–-]+$/, '');
-    if (!DANGLING.test(head) && (head.match(/\(/g) ?? []).length === (head.match(/\)/g) ?? []).length) return head;
+  const trim = (s: string): string => s.replace(/[\s,;:(–-]+$/, '');
+  const whole = (head: string): boolean =>
+    !endsOnFunctionWord(head) &&
+    (head.match(/\(/g) ?? []).length === (head.match(/\)/g) ?? []).length &&
+    ((head.match(/["“”]/g) ?? []).length % 2 === 0) &&
+    // A phrase cut out of a longer sentence needs enough words to say something: "Long ago, an ancestor" does not.
+    (head.match(/[\p{L}\p{N}]+/gu) ?? []).length >= 5;
+  // A clause ("..., and then ...") is the best place to stop; in front of a joining word is the next best. Both are
+  // looked for a few characters past the limit, so a stop that ends exactly at it is still found.
+  const window = t.slice(0, max + 12);
+  const stops = [...window.matchAll(/[,;]\s|\s[–—-]\s/g), ...window.matchAll(JOINER)].map((m) => m.index ?? 0).filter((i) => i >= 20 && i <= max).sort((a, b) => a - b);
+  for (const i of [...stops].reverse()) {
+    let head = trim(cut.slice(0, i));
+    while (endsOnFunctionWord(head) && head.includes(' ')) head = trim(head.slice(0, head.lastIndexOf(' ')));
+    if (whole(head)) return head;
   }
-  const space = cut.lastIndexOf(' ');
-  let out = cut.slice(0, space > 20 ? space : max).replace(/[\s,;:(–-]+$/, '');
-  // Back off over a trailing preposition or article: "... during" is not where a caption may stop.
-  while (DANGLING.test(out) && out.includes(' ')) out = out.slice(0, out.lastIndexOf(' ')).replace(/[\s,;:(–-]+$/, '');
-  return `${out}…`;
+  return '';
 }
 
 /** A readable name from a Commons file title, or '' when it is mostly numbers and camera codes. */
@@ -197,10 +283,6 @@ export function tidy(description: string): string {
 
 /** More words that only a caption in German, French, Spanish, Portuguese or a Nordic language holds. */
 const FOREIGN_MORE = /\b(?:und|auf|dem|mit|für|zur|zum|och|med|les|des|aux|avec|pour|sur|dans|con|por|para|una|uma|não|nad|pri|bei|über|nach|vom|vor|ist|sind|einer?|eines|ein)\b/i;
-const shouted = (s: string): boolean => {
-  const letters = s.replace(/[^\p{L}]/gu, '');
-  return letters.length >= 8 && letters === letters.toUpperCase();
-};
 
 /** Characters that never belong in a caption: handles, prices, markup, separators ("British Museum.FotoThalerTamas", "Sundy event@"). */
 const ODD_CHARS = /[@$#%^*_=<>|~\\]|\w\.\p{Lu}|\p{Ll}\p{Lu}\p{Ll}+\p{Lu}/u;
@@ -239,6 +321,7 @@ function englishShare(text: string): number {
 function usable(text: string, min = 3): boolean {
   const bare = text.replace(/…$/, '').trim();
   if (FRAGMENT.test(bare) || DATE_ONLY.test(bare) || unbalanced(bare)) return false;
+  if (captionDefect(bare) !== undefined) return false;
   const quotes = (bare.match(/["“”]/g) ?? []).length;
   return (
     bare.length >= (min === 3 ? 12 : 8) &&
@@ -252,10 +335,9 @@ function usable(text: string, min = 3): boolean {
     !FOREIGN_MORE.test(bare) &&
     !NAME_YEAR.test(bare) &&
     (bare.match(FOREIGN) ?? []).length === 0 &&
-    !shouted(bare) &&
     looksEnglish(bare) &&
     englishShare(bare) >= 0.5 &&
-    !DANGLING.test(bare)
+    !endsOnFunctionWord(bare)
   );
 }
 

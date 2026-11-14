@@ -21,10 +21,18 @@ const KNOWN_GAPS = new Set([
   'ancient/wonders-of-the-world',
   'body/artery',
   'body/blood-vessel',
+  // 26-final-review fix batch 1 (package C): five more articles fell under four when the caption bar went up and
+  // the pictures the design reviewer named as wrong for their article were dropped. Commons has nothing better for
+  // them: body/brain lost a laboratory sensor and a television poster, body/dna and science/sound lost pictures an
+  // earlier design review had already said to drop, body/pancreas lost two microscope slides captioned in Greek
+  // letters, science/acid lost a hand-drawn diagram labelled in Burmese.
+  'body/brain',
   'body/digestion',
+  'body/dna',
   'body/hormone',
   'body/leg',
   'body/nose',
+  'body/pancreas',
   'body/skin',
   'body/stomach',
   'body/thumb',
@@ -34,6 +42,7 @@ const KNOWN_GAPS = new Set([
   'physics/electric-current',
   'physics/electrical-conductor',
   'physics/electricity',
+  'science/acid',
   'science/chemical-reaction',
   'science/force',
   'science/light',
@@ -42,6 +51,7 @@ const KNOWN_GAPS = new Set([
   'science/molecule',
   'science/radioactive-decay',
   'science/solid',
+  'science/sound',
   'science/speed-of-light',
 ]);
 

@@ -14,6 +14,7 @@ import { authorName } from './allow.ts';
 import { captionWithBasis } from './caption.ts';
 import type { Collected } from './collect.ts';
 import { requestCount } from './http.ts';
+import { pinLead } from './leads.ts';
 import { readRecords } from './licences.ts';
 import { MIN_PER_ARTICLE, commonsTitle, keepFor, kindOf, qualityOf, selectForArticle, subjectOf, type Kind } from './select.ts';
 import { IMG_DIR, ensureThumb, folderBytes, thumbName } from './thumbs.ts';
@@ -59,7 +60,9 @@ function* articles(): Generator<{ saved: Saved; chosen: Collected[] }> {
     const saved = JSON.parse(readFileSync(join(CANDIDATES, f), 'utf8')) as Saved;
     // Candidates saved before titles were normalised may carry another wiki's "Datei:" or "Archivo:".
     saved.candidates = saved.candidates.map((c) => ({ ...c, title: commonsTitle(c.title) }));
-    yield { saved, chosen: selectForArticle(saved.candidates, keepFor(saved.article.pack), subjectOf(saved.article, saved.links)) };
+    const chosen = selectForArticle(saved.candidates, keepFor(saved.article.pack), subjectOf(saved.article, saved.links));
+    // A lead pinned by hand comes first, so the article opens on a picture of its own subject (26-final-review D-2, D-3, D-12).
+    yield { saved, chosen: pinLead(saved.article.key, chosen) };
   }
 }
 
