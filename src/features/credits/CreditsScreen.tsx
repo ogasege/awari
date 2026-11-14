@@ -2,7 +2,7 @@
 import { Fragment, type ReactNode } from 'react';
 import credits from '../../../CREDITS.md?raw';
 import { useTitle } from '../../app/useTitle.ts';
-import { canSavePictures, savePictures, useOfflineStatus, usePicturesState, type OfflineStatus } from '../../lib/offline/register.ts';
+import { canSavePictures, picturesOnDevice, savePictures, useOfflineStatus, usePicturesState, type OfflineStatus } from '../../lib/offline/register.ts';
 import { MarginNote, StripHeading } from '../../design/paper.tsx';
 import { parseMarkdown } from '../../lib/text/markdown.ts';
 import { MediaCredits } from './MediaCredits.tsx';
@@ -60,7 +60,11 @@ function inline(text: string): ReactNode[] {
 
 /** Whether this device has the whole site saved (the header stays quiet when it has). */
 export function offlineStateText(status: OfflineStatus): string {
-  if (status === 'ready') return 'On this device: saved. Articles, quizzes, maps, the atlas and lead photos work without a connection. Other pictures are kept as you look at them.';
+  if (status === 'ready') {
+    return picturesOnDevice()
+      ? 'On this device: saved. Everything, every picture included, works without a connection.'
+      : 'On this device: saved. Articles, quizzes, maps, the atlas and lead photos work without a connection. Other pictures are kept as you look at them.';
+  }
   if (status === 'preparing') return 'On this device: still saving for use without a connection.';
   return 'On this device: not saved for use without a connection.';
 }
@@ -79,7 +83,7 @@ function OfflineState() {
         ) : (
           <p>
             <button type="button" className="btn btn--ink" onClick={savePictures}>
-              Save all pictures (about 85 MB)
+              Save all pictures (about 87 MB)
             </button>{' '}
             {pics.state === 'failed' ? 'That did not finish. Check your connection and try again.' : 'Do this on a good connection, and every picture works offline.'}
           </p>

@@ -81,7 +81,7 @@ export function usePicturesState(): PicturesState {
   return useSyncExternalStore(subscribe, getPicturesState, () => ({ state: 'idle' }) as PicturesState);
 }
 
-/** Asks the worker to save every library thumbnail (about 85 MB). */
+/** Asks the worker to save every library thumbnail (about 87 MB). */
 export function savePictures(): void {
   const worker = typeof navigator !== 'undefined' ? navigator.serviceWorker?.controller : null;
   if (!worker) {
@@ -90,6 +90,11 @@ export function savePictures(): void {
   }
   setPictures({ state: 'saving', saved: 0, total: 0 });
   worker.postMessage({ type: 'save-pictures' });
+}
+
+/** True in the desktop app, where every picture is installed with the app and nothing is saved on demand. */
+export function picturesOnDevice(): boolean {
+  return typeof location !== 'undefined' && !/^https?:$/.test(location.protocol);
 }
 
 /** Whether pictures can be saved here: not in the desktop app (its pictures are already on the device). */

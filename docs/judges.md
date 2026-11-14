@@ -7,7 +7,7 @@ Awari is a free encyclopedia for curious students that works offline after one v
 
 1. **Open the live app** and wait a few seconds. The header shows "Saving for offline…" with a
    percentage, then a one-time notice says **"Saved. Awari now works without a connection."**: the
-   bundled library is on your device. After that the header stays quiet while you are online.
+   articles, quizzes, maps and lead photos are on your device (extra library pictures are kept as you view them, or all at once with **Save all pictures** on the Credits screen). After that the header stays quiet while you are online.
 2. **Search any topic.** Type something in the header search, for example *okapi*, and choose
    **Open**. The article opens from Wikipedia with its photo, credits and a quiz. Tap any word
    for its meaning.

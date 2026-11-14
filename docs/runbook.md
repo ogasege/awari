@@ -126,7 +126,7 @@ curl -s "$SITE/packs/manifest.json" | head -c 200      # JSON, not HTML
 
 Then, in a real browser, follow `docs/judges.md` against `$SITE`: the notice
 "Saved. Awari now works without a connection." must appear, and airplane mode must keep every
-feature working.
+feature working. Open Credits, press **Save all pictures**, and check an article's "More pictures" strip offline shows no broken images.
 If the quiz service is on, run the Ghana quiz check from
 `infra/terraform/README.md` ("Verify").
 

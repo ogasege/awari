@@ -39,7 +39,7 @@ paper strips, wobbly SVG doodles, torn edges.
   in a strip under each article, on a **Pictures** screen with filters, search and a surprise pile, as the
   **picture of the day** on Home, and as picture questions in the Castle and picture quizzes. Every picture's author
   and licence is read from the Commons API by `npm run licences`, which the submission check runs.
-- **Go offline.** After one visit every bundled feature works in airplane mode. Progress lives on
+- **Go offline.** After one visit every bundled feature works in airplane mode: articles, quizzes, maps, the atlas and every article's lead photo. The extra library pictures are kept as you look at them, or all at once with **Save all pictures** on Credits (about 87 MB); a picture not saved yet shows a plain placeholder, never a broken icon. The desktop app has every picture built in. Progress lives on
   your device; there are no accounts and no tracking.
 
 ## Download

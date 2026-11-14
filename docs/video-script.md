@@ -6,7 +6,7 @@ tune), nothing on screen that is not Awari, Kiro or your own terminal. Rows mark
 Kiro at work: together they run 50 seconds (the minimum is 40). Upload as public or unlisted.
 
 **Before recording:** `npm run build && npm run preview`, open the site once and wait for the
-notice "Saved. Awari now works without a connection." Seed reference stamps with `/?demo=reference` (it asks first).
+notice "Saved. Awari now works without a connection." (To show every picture offline, first press **Save all pictures** on Credits and wait for it to finish.) Seed reference stamps with `/?demo=reference` (it asks first).
 Screen 1440 × 900, zoom 100%. Record the Kiro rows from the real project folder; open the Kiro
 Crew session and the files named, do not stage anything that did not happen.
 
