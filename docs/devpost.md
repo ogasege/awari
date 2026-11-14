@@ -63,9 +63,9 @@ Everything below can be checked in the repo: `.kiro/`, `docs/kiro-log.md` and
 ### Kiro surfaces (IDE, CLI, Web, Crew)
 
 All build sessions ran in **Kiro Crew**, driven by chat: the brief, then "continue" messages, then
-a world-scope brief and a rules-alignment brief from the owner. Crew's agent backend was Claude
-Code through commit `fd8c464` (2026-11-11 22:44 UTC) and the **Kiro CLI** from `9f3cc2c` (23:47 UTC)
-onward (`docs/kiro-log.md`, Sessions table). Crew held the long build; the **Kiro CLI** ran three
+a world-scope brief and a rules-alignment brief from the owner. The first sessions ran Claude
+inside Kiro Crew (Crew's Claude Code agent backend); the rest ran on Crew's Kiro CLI backend
+(`docs/kiro-log.md`, Sessions table). Crew held the long build; the **Kiro CLI** ran three
 custom agents for narrow jobs with their own tools, hooks and MCP servers. The Kiro IDE and Kiro
 Web were not used. The Home design reference (`design/`) and the brief (`KICKOFF.md`) were
 prepared outside Kiro before the first session.

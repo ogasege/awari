@@ -13,9 +13,9 @@ Raw records behind the "How we used Kiro" write-up. Every claim in `README.md` a
 
 ## Surfaces
 
-All build work ran in Kiro Crew (a session manager on top of Kiro). Its agent backend
-was Claude Code until commit `fd8c464` (2026-11-11 22:44 UTC) and the Kiro CLI from
-`9f3cc2c` (23:47 UTC) onward. The custom agents in `.kiro/agents/` were run with
+All build work ran in Kiro Crew (a session manager on top of Kiro). The first sessions ran
+Claude inside Kiro Crew (Crew's Claude Code agent backend); the rest ran on Crew's Kiro CLI
+backend. The custom agents in `.kiro/agents/` were run with
 `kiro-cli chat --agent <name>` from that Kiro CLI backend. The Kiro IDE and Kiro Web were
 not used; the `.kiro/hooks/*.kiro.hook` files are there for the IDE and have not fired
 (see the runbook for the one IDE task the owner can run).

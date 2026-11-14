@@ -70,9 +70,9 @@ record of what drove each piece of work) and `docs/kiro-evidence/`.
 
 ### Kiro surfaces (IDE, CLI, Web, Crew)
 
-All build sessions ran in **Kiro Crew**, driven by chat. Crew's agent backend was Claude Code
-through commit `fd8c464` (2026-11-11 22:44 UTC) and the **Kiro CLI** from `9f3cc2c` (23:47 UTC)
-onward; the custom agents below were run with `kiro-cli chat --agent <name>` from that backend.
+All build sessions ran in **Kiro Crew**, driven by chat. The first sessions ran Claude inside Kiro Crew
+(Crew's Claude Code agent backend); the rest ran on Crew's Kiro CLI backend. The custom agents
+below were run with `kiro-cli chat --agent <name>` from that backend.
 Crew is where the long, multi-step build lived (briefs, specs, follow-ups); the CLI agents did
 narrow jobs with their own tools and hooks. The Kiro IDE and Kiro Web were not used. Two inputs
 were prepared outside Kiro before the first session: the Home design reference in `design/`
