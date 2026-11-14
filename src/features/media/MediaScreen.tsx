@@ -15,6 +15,13 @@ import './media.css';
 const PAGE = 60;
 const SUBJECT_NAME = new Map<string, string>(SUBJECTS.map((s) => [s.id as string, s.label]));
 
+/** A small stable hash of an id, to mix subjects in the default order. */
+export function mixOf(id: string): number {
+  let h = 2166136261;
+  for (const ch of id) h = Math.imul(h ^ ch.charCodeAt(0), 16777619);
+  return h >>> 0;
+}
+
 /** Rows that match a subject, a kind and every word of the query (in the caption or the article's name). */
 export function filterRows(rows: readonly IndexRow[], subject: string, kind: string, query: string, titles: ReadonlyMap<string, string> = new Map()): IndexRow[] {
   const words = query.toLowerCase().split(/[^\p{L}\p{N}]+/u).filter(Boolean);
@@ -60,7 +67,9 @@ export default function MediaScreen() {
   const filterKey = `${subject}|${kind}|${query}`;
   const [more, setMore] = useState<{ key: string; n: number }>({ key: filterKey, n: PAGE });
   const shown = more.key === filterKey ? more.n : PAGE;
-  const rows = useMemo(() => (index.status === 'ready' ? index.data.items : []), [index]);
+  // With no filter the grid starts with a mix of every subject, in a fixed order (a hash of the id), not with whichever
+  // subject file was written first.
+  const rows = useMemo(() => (index.status === 'ready' ? [...index.data.items].sort((a, b) => mixOf(a[0]) - mixOf(b[0])) : []), [index]);
   const matches = useMemo(() => filterRows(rows, subject, kind, query), [rows, subject, kind, query]);
   // Emblems are not collected, and a diagram only when it is a recognised picture: no chip for a kind the library skips.
   const kinds = useMemo(() => [...new Set(rows.map((r) => r[2]))].filter((k) => k !== 'emblem').sort(), [rows]);

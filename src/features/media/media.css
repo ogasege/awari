@@ -283,6 +283,7 @@
 /* The photo table: the Pictures screen lays its prints on Home's coral, between torn edges (media review N1). */
 .media__table {
   position: relative;
+  overflow-x: clip;
   margin: 18px calc(var(--gutter) * -1) 0;
   padding: 0 var(--gutter) 40px;
   background: var(--coral);
@@ -316,12 +317,15 @@
 .media__selects label {
   display: flex;
   flex: 1;
+  min-width: 0;
   flex-direction: column;
   gap: 4px;
   font-weight: 700;
 }
 
 .media__selects select {
+  width: 100%;
+  min-width: 0;
   height: 44px;
   padding: 0 10px;
   border: 2px solid var(--ink);
