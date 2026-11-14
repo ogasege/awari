@@ -6,6 +6,7 @@ import { SUBJECTS, normaliseContinent } from '../../lib/packs/subjects.ts';
 import type { PackIndex, Question, QuizSet } from '../../lib/packs/types.ts';
 import { getProgress, resetForTests, update } from '../../lib/store/progress.ts';
 import { servePacksFromDisk } from '../../test/packFetch.ts';
+import { PICTURE_PROMPT, pictureAnswer } from '../../test/pictureAnswer.ts';
 import { ROOMS, WINGS } from './castle.ts';
 import WingScreen from './WingScreen.tsx';
 
@@ -50,7 +51,7 @@ describe('every castle wing can be completed (17-castle-wings)', () => {
         expect(await screen.findByText(`Room ${room} of 12`, { selector: '.wing__room' })).toBeInTheDocument();
         const legend = document.querySelector('.question__prompt') as HTMLElement;
         const prompt = (legend.lastChild?.textContent ?? '').trim();
-        const answer = answers.get(prompt);
+        const answer = prompt === PICTURE_PROMPT ? pictureAnswer(WINGS.find((w) => w.id === wingId)?.pack ?? '') : answers.get(prompt);
         expect(answer, `answer for "${prompt}"`).toBeDefined();
         await user.click(screen.getByRole('radio', { name: answer as string }));
         await user.click(screen.getByRole('button', { name: 'Check my answer' }));

@@ -14,7 +14,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 
 import { join } from 'node:path';
 import { plainText } from './allow.ts';
 import { api, requestCount } from './http.ts';
-import { MIN_PER_ARTICLE, rejectReason, selectForArticle, type Candidate } from './select.ts';
+import { MIN_PER_ARTICLE, commonsTitle, rejectReason, selectForArticle, type Candidate } from './select.ts';
 
 const EN = 'https://en.wikipedia.org/w/api.php';
 const COMMONS = 'https://commons.wikimedia.org/w/api.php';
@@ -131,7 +131,7 @@ function toCollected(p: ImagePage, from: 'article' | 'category'): Collected | un
   if (!i || !(i.thumburl ?? i.url)) return undefined;
   const m = i.extmetadata ?? {};
   return {
-    title: p.title,
+    title: commonsTitle(p.title),
     width: i.width ?? 0,
     height: i.height ?? 0,
     mime: i.mime ?? '',

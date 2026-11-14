@@ -23,7 +23,7 @@ later.
 
 I built it in Kiro Crew, spec first, with three custom Kiro agents (a builder with hooks, a licence
 auditor and a design reviewer using the Playwright MCP server) and
-<!--n:properties-->114<!--/n--> property-based tests. All content is openly licensed and credited.
+<!--n:properties-->118<!--/n--> property-based tests. All content is openly licensed and credited.
 
 Try it: [LIVE URL]
 Code (MIT): [GITHUB URL]

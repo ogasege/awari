@@ -26,14 +26,14 @@ export interface Thumb {
 /** Converts a picture to WebP at 480 px wide, lowering the quality until it is near the target size. */
 export async function toWebp(input: Buffer, target = TARGET_BYTES): Promise<Thumb> {
   let last: Thumb | undefined;
-  for (const quality of [72, 64, 56, 48, 40, 34]) {
+  for (const quality of [72, 64, 56, 48, 40, 34, 28, 22, 16]) {
     const { data, info } = await sharp(input)
       .rotate()
       .resize({ width: THUMB_WIDTH, withoutEnlargement: true })
       .webp({ quality, effort: 5 })
       .toBuffer({ resolveWithObject: true });
     last = { buffer: data, width: info.width, height: info.height, quality };
-    if (data.length <= target) break;
+    if (data.length <= target || (quality <= 34 && data.length <= MAX_BYTES)) break;
   }
   return last as Thumb;
 }
@@ -73,7 +73,7 @@ export function folderBytes(dir = IMG_DIR): { files: number; bytes: number; bigg
 if (process.argv[1]?.endsWith('thumbs.ts') && process.argv.includes('--check')) {
   const f = folderBytes();
   console.log(`${f.files} thumbnails, ${(f.bytes / 1048576).toFixed(1)} MB, biggest ${(f.biggest / 1024).toFixed(0)} KB, average ${f.files ? Math.round(f.bytes / f.files / 1024) : 0} KB.`);
-  const problem = budgetProblem(f.bytes) ?? (f.biggest > MAX_BYTES * 1.5 ? `a thumbnail is ${(f.biggest / 1024).toFixed(0)} KB` : undefined);
+  const problem = budgetProblem(f.bytes) ?? (f.biggest > 100 * 1024 ? `a thumbnail is ${(f.biggest / 1024).toFixed(0)} KB` : undefined);
   if (problem) {
     console.error(problem);
     process.exit(1);

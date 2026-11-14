@@ -35,6 +35,15 @@ function testReport(dir: string, out: string, run: boolean): { total: number; pa
   return { total: report?.numTotalTests ?? 0, passed: report?.numPassedTests ?? 0, files: report?.testResults.length ?? 0 };
 }
 
+/** The media library: pictures, the size of the thumbnails and how many images the licence check covers. */
+function mediaStats(): Stats {
+  if (!existsSync('public/media/index.json')) return { mediaPictures: 0, mediaMB: '0', mediaVerified: 0 };
+  const dir = 'public/media/img';
+  const bytes = existsSync(dir) ? readdirSync(dir).reduce((n, f) => n + statSync(join(dir, f)).size, 0) : 0;
+  const lic = existsSync('public/media/licences.json') ? json<{ count: number; problems: number }>('public/media/licences.json') : { count: 0, problems: 0 };
+  return { mediaPictures: json<{ count: number }>('public/media/index.json').count, mediaMB: (bytes / 1048576).toFixed(0), mediaVerified: lic.count };
+}
+
 export function computeStats(runTests: boolean): Stats {
   mkdirSync('data/build', { recursive: true });
   const specs = readdirSync('.kiro/specs').filter((d) => statSync(join('.kiro/specs', d)).isDirectory());
@@ -121,6 +130,7 @@ export function computeStats(runTests: boolean): Stats {
     quizzes: quizIndex.length,
     questions: quizIndex.reduce((n, q) => n + q.questions, 0),
     events: events.length,
+    ...mediaStats(),
     eventContinents: new Set(events.map((e) => e.continent).filter(Boolean)).size,
     lemmas,
     atlasShapes: atlas,

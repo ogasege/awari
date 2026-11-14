@@ -7,13 +7,13 @@
  * The thumbnail pass skips every file that already exists, so it can be stopped and started again. The records
  * pass only lists pictures whose thumbnail exists, and reports the rest.
  */
-import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, unlinkSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { captionFor } from './caption.ts';
+import { captionFor, englishPart } from './caption.ts';
 import type { Collected } from './collect.ts';
 import { requestCount } from './http.ts';
 import { readRecords } from './licences.ts';
-import { MIN_PER_ARTICLE, keepFor, kindOf, selectForArticle, type Kind } from './select.ts';
+import { MIN_PER_ARTICLE, commonsTitle, keepFor, kindOf, selectForArticle, type Kind } from './select.ts';
 import { IMG_DIR, ensureThumb, folderBytes, thumbName } from './thumbs.ts';
 
 const CANDIDATES = join('data', 'media', 'candidates');
@@ -50,6 +50,8 @@ export interface MediaItem {
 function* articles(): Generator<{ saved: Saved; chosen: Collected[] }> {
   for (const f of readdirSync(CANDIDATES).filter((x) => x.endsWith('.json')).sort()) {
     const saved = JSON.parse(readFileSync(join(CANDIDATES, f), 'utf8')) as Saved;
+    // Candidates saved before titles were normalised may carry another wiki's "Datei:" or "Archivo:".
+    saved.candidates = saved.candidates.map((c) => ({ ...c, title: commonsTitle(c.title) }));
     yield { saved, chosen: selectForArticle(saved.candidates, keepFor(saved.article.pack)) };
   }
 }
@@ -152,7 +154,7 @@ function records(): void {
         caption: cap.text,
         captionFrom: cap.source,
         alt: cap.text,
-        description: c.description.slice(0, 400),
+        description: englishPart(c.description).slice(0, 400),
         width: c.width,
         height: c.height,
         thumb: `img/${file}`,
@@ -172,6 +174,15 @@ function records(): void {
   }
   writeFileSync(join(OUT, 'index.json'), `${JSON.stringify({ built: today, count: index.length, subjects: [...bySubject.keys()].sort(), items: index })}\n`);
   writeFileSync(join(OUT, 'daily.json'), `${JSON.stringify({ built: today, days: dailyPictures([...bySubject.values()].flat()) })}\n`);
+  // A thumbnail no record points to (a picture dropped by a later filter) is removed, so the folder holds only credited files.
+  let removed = 0;
+  for (const f of readdirSync(IMG_DIR).filter((x) => x.endsWith('.webp'))) {
+    if (!seen.has(f.replace('.webp', ''))) {
+      unlinkSync(join(IMG_DIR, f));
+      removed++;
+    }
+  }
+  if (removed > 0) console.log(`Removed ${removed} thumbnails no record uses.`);
   console.log(`${index.length} pictures in ${bySubject.size} subject files.`);
   if (missing.length > 0) console.log(`No thumbnail yet for ${missing.length} chosen pictures.`);
   if (short.length > 0) console.log(`Articles under ${MIN_PER_ARTICLE} pictures: ${short.length} (first: ${short.slice(0, 6).join(', ')})`);

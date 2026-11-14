@@ -21,6 +21,8 @@ export interface Candidate {
   description: string;
   /** Commons categories of the file, plain text. */
   categories: readonly string[];
+  /** Commons `Artist`, plain text. */
+  author?: string;
   /** Where the collector found it: used in the Wikipedia article itself, or only in its Commons category. */
   from?: 'article' | 'category';
 }
@@ -44,6 +46,20 @@ const NEVER = /\blogos?\b|wordmark|signature|autograph|\bicons?\b|\bcollage\b|mo
 const GRAPHIC =
   /nude|naked|nudity|sexual|erotic|porn|gore|graphic|bloody|blood[ -](?:stain|spatter|splatter|pool)|bleeding|mutilat|torture|lynching|hanging body|swastika|nazi|penis|vagina|genital|testic|scrotum|vulva|\banus\b|breast|nipple|sperm|menstru|copulat|mating|field dressing|dressing a deer|gutting|gutted|skinning|\bhunt(?:ing|ed|er|ers)\b|trophy|entrails|viscera|intestin|surgery|surgical|operation|open[- ]heart|wound|injur|\bscar\b|amputat|tumou?r|cancer|disease|infect|\bpus\b|rotting|decompos|roadkill|stuffed|taxiderm/i;
 
+/** A file title in any wiki's language ("Archivo:", "Datei:", "Fichier:") as the Commons `File:` title. */
+export function commonsTitle(title: string): string {
+  return title.replace(/^[^:]{2,20}:/, 'File:');
+}
+
+/**
+ * Whether a file is hosted on Commons, given how it was found. Asked through a Wikipedia, `shared` is Commons and
+ * `local` is a file uploaded to that wikipedia itself (often non-free); asked on Commons itself, `local` is Commons.
+ */
+export function hostedOnCommons(repository: string, from: 'article' | 'category' | undefined): boolean {
+  if (repository === 'shared') return true;
+  return repository === 'local' && from === 'category';
+}
+
 export type Kind = 'photo' | 'portrait' | 'map' | 'flag' | 'emblem' | 'art' | 'diagram';
 
 /** The kind of a picture, read from its title and categories (for variety, Req 15). */
@@ -60,9 +76,11 @@ export function kindOf(c: Pick<Candidate, 'title' | 'categories' | 'description'
 
 /** Why a candidate is rejected, or undefined when it may be used. */
 export function rejectReason(c: Candidate): string | undefined {
-  if (c.repository !== 'shared' && c.repository !== 'local') return 'not hosted on Commons';
+  if (!hostedOnCommons(c.repository, c.from)) return 'not hosted on Commons';
   if (!parseLicence(c.licence)) return 'licence not on the allow-list';
   if (c.restrictions.trim() !== '') return 'restrictions listed';
+  // CC BY and CC BY-SA need the author named; a file whose Commons page names none cannot be credited properly.
+  if (parseLicence(c.licence)?.family !== 'pd' && (c.author ?? '').trim() === '') return 'no author named for an attribution licence';
   if (!MIMES.has(c.mime)) return 'not a plain picture file';
   if (Math.max(c.width, c.height) < MIN_SIDE) return 'under 800 px on the long side';
   const text = `${c.title} ${c.description} ${c.categories.join(' ')}`;

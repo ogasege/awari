@@ -2,7 +2,7 @@
 import fc from 'fast-check';
 import { describe, expect, it } from 'vitest';
 import { parseLicence } from './allow.ts';
-import { MAX_PER_ARTICLE, MIN_SIDE, kindOf, rejectReason, score, selectForArticle, stemOf, type Candidate } from './select.ts';
+import { MAX_PER_ARTICLE, MIN_SIDE, commonsTitle, hostedOnCommons, kindOf, rejectReason, score, selectForArticle, stemOf, type Candidate } from './select.ts';
 
 const good: Candidate = {
   title: 'File:Mount Kenya at dawn.jpg',
@@ -10,8 +10,10 @@ const good: Candidate = {
   height: 2000,
   mime: 'image/jpeg',
   licence: 'CC BY-SA 4.0',
+  author: 'Jane Doe',
   restrictions: '',
   repository: 'local',
+  from: 'category',
   description: 'The peaks of Mount Kenya at dawn',
   categories: ['Mount Kenya'],
 };
@@ -22,8 +24,10 @@ const candidate: fc.Arbitrary<Candidate> = fc.record({
   height: fc.integer({ min: 200, max: 6000 }),
   mime: fc.constantFrom('image/jpeg', 'image/png', 'image/svg+xml', 'image/tiff', 'image/webp', 'application/pdf'),
   licence: fc.constantFrom('CC BY-SA 4.0', 'CC BY 2.0', 'Public domain', 'CC0', 'CC BY-NC 4.0', 'CC BY-ND 2.0', 'GFDL', 'Fair use', ''),
+  author: fc.constantFrom('Jane Doe', '', 'Someone'),
   restrictions: fc.constantFrom('', '', '', 'personality', 'trademarked'),
   repository: fc.constantFrom('shared', 'local', 'enwiki', 'foreign'),
+  from: fc.constantFrom<'article' | 'category'>('article', 'category'),
   description: fc.constantFrom('A view', 'A soldier with a gun', 'A collage of photos', 'The company logo', 'Children playing'),
   categories: fc.array(fc.constantFrom('Featured pictures', 'Quality images', 'Valued images', 'Maps', 'Flags', 'Portraits', 'Landscapes'), { maxLength: 3 }),
 });
@@ -60,7 +64,7 @@ describe('selectForArticle (Property 5)', () => {
         expect(chosen.length).toBeLessThanOrEqual(MAX_PER_ARTICLE);
         for (const c of chosen) {
           expect(c.restrictions.trim()).toBe('');
-          expect(['shared', 'local']).toContain(c.repository);
+          expect(hostedOnCommons(c.repository, c.from)).toBe(true);
           expect(Math.max(c.width, c.height)).toBeGreaterThanOrEqual(MIN_SIDE);
           expect(parseLicence(c.licence)).toBeDefined();
           expect(rejectReason(c)).toBeUndefined();
@@ -101,7 +105,7 @@ describe('selectForArticle (Property 5)', () => {
 
   it('keeps at most two pictures of one series and prefers pictures used in the article', () => {
     const series = Array.from({ length: 6 }, (_, i): Candidate => ({ ...good, title: `File:A horse rider at the carnival 0${i}.jpg`, from: 'category' }));
-    const other: Candidate = { ...good, title: 'File:Lake at dawn.jpg', from: 'article' };
+    const other: Candidate = { ...good, title: 'File:Lake at dawn.jpg', repository: 'shared', from: 'article' };
     const chosen = selectForArticle([...series, other]);
     expect(chosen.filter((c) => stemOf(c.title) === stemOf(series[0]?.title ?? '')).length).toBeLessThanOrEqual(2);
     expect(chosen[0]?.title).toBe('File:Lake at dawn.jpg');
@@ -118,5 +122,19 @@ describe('selectForArticle (Property 5)', () => {
     expect(rejectReason({ ...good, title: 'File:Blood vessel diagram.jpg' })).toBeUndefined();
     expect(rejectReason({ ...good, title: 'File:Red blood cells.jpg' })).toBeUndefined();
     expect(rejectReason({ ...good, title: 'File:Blood stain on a floor.jpg' })).toBeDefined();
+  });
+
+  it('rejects an attribution licence with no author, but not a public-domain file without one', () => {
+    expect(rejectReason({ ...good, author: '' })).toBeDefined();
+    expect(rejectReason({ ...good, licence: 'Public domain', author: '' })).toBeUndefined();
+    expect(commonsTitle('Archivo:Vasodilation.jpg')).toBe('File:Vasodilation.jpg');
+    expect(commonsTitle('Datei:Blutgefäße (1).jpg')).toBe('File:Blutgefäße (1).jpg');
+    expect(commonsTitle('File:Lake.jpg')).toBe('File:Lake.jpg');
+  });
+
+  it('treats a file local to a Wikipedia as not on Commons, but a local Commons file as on Commons', () => {
+    expect(rejectReason({ ...good, repository: 'local', from: 'article' })).toBeDefined();
+    expect(rejectReason({ ...good, repository: 'shared', from: 'article' })).toBeUndefined();
+    expect(rejectReason({ ...good, repository: 'local', from: 'category' })).toBeUndefined();
   });
 });

@@ -85,7 +85,8 @@ export function captionFor(description: string, title: string, articleTitle: str
 /** Whether a caption can be traced to its sources: the description, the file title, or the article title. */
 export function isTraceable(caption: Caption, description: string, title: string, articleTitle: string): boolean {
   const c = caption.text.replace(/…$/, '').trim();
-  const norm = (s: string): string => collapse(s).toLowerCase();
+  // Spaces before punctuation are closed up in a caption ("Garden , fresco"), so compare with them closed up on both sides.
+  const norm = (s: string): string => collapse(s).toLowerCase().replace(/\s+([,.;:!?])/g, '$1');
   if (c === '') return false;
   switch (caption.source) {
     case 'description':
