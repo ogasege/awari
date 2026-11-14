@@ -161,6 +161,6 @@ CloudFront, AWS Lambda, Amazon Bedrock, Kiro (Kiro Crew, Kiro CLI, custom agents
 
 ## Links
 
-- Live app: [LIVE URL]
-- Code (MIT): [GITHUB URL]
+- Live app: https://d3txwsv4mn6ye9.cloudfront.net
+- Code (MIT): https://github.com/ogasege/awari
 - Video: [VIDEO URL]

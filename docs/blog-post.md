@@ -1,6 +1,6 @@
 # I rebuilt the 1990s CD-ROM encyclopedia as a web app that works in airplane mode
 
-*Draft for the Kiroween 2026 blog-post bonus. Replace `[LIVE URL]` and `[GITHUB URL]` before
+*Draft for the Kiroween 2026 blog-post bonus. Replace `https://d3txwsv4mn6ye9.cloudfront.net` and `https://github.com/ogasege/awari` before
 publishing. Suggested tags: `kiro`, `kiroween`, `offline-first`, `react`, `aws`.*
 
 When I was young, an entire encyclopedia came on one shiny disc. You put it in the computer and
@@ -15,7 +15,7 @@ is a free web app for curious students: <!--n:countries-->197<!--/n--> countries
 with guided tours, quizzes whose hints teach, a trivia castle, a timeline, and a stamp book for
 every country in the world. Search any topic and, online, any Simple English Wikipedia article
 opens in the same page and is kept for later. After one visit, the bundled library works with the
-network off. Try it: [LIVE URL]. The code is MIT: [GITHUB URL].
+network off. Try it: https://d3txwsv4mn6ye9.cloudfront.net. The code is MIT: https://github.com/ogasege/awari.
 
 ## Three ideas I kept from the disc
 

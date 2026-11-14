@@ -1,7 +1,7 @@
 # Judge guide: test Awari in under two minutes
 
 Awari is a free encyclopedia for curious students that works offline after one visit. Live app:
-**[LIVE URL]**. Code: **[GITHUB URL]**. No account or sign-in.
+**https://d3txwsv4mn6ye9.cloudfront.net**. Code: **https://github.com/ogasege/awari**. No account or sign-in.
 
 ## The main journey (about 90 seconds)
 
@@ -35,7 +35,7 @@ optional quiz maker for articles outside the packs appears only when a quiz serv
 ## Check it from the code
 
 ```sh
-git clone [GITHUB URL] awari && cd awari
+git clone https://github.com/ogasege/awari awari && cd awari
 npm ci
 npm run build
 npm run offline-check     # visits once, goes offline, opens every feature

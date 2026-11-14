@@ -1,6 +1,6 @@
 # Social post drafts (Kiroween 2026 bonus)
 
-Replace `[LIVE URL]`, `[GITHUB URL]` and `[VIDEO URL]` first. Attach
+Replace `https://d3txwsv4mn6ye9.cloudfront.net`, `https://github.com/ogasege/awari` and `[VIDEO URL]` first. Attach
 `docs/screenshots/home-1440.png` or a 15-second clip of the airplane-mode moment (video script,
 1:45 to 2:00). Use the hashtags the hackathon asks for on its Devpost page.
 
@@ -8,7 +8,7 @@ Replace `[LIVE URL]`, `[GITHUB URL]` and `[VIDEO URL]` first. Attach
 
 I brought the 1990s CD-ROM encyclopedia back for #Kiroween: Awari, a free scrapbook-style
 encyclopedia for the whole world that works in airplane mode. Spin a globe, take a tour, tap any
-word, quiz with hints, collect stamps. Built spec-first with Kiro. [LIVE URL] #Kiroween
+word, quiz with hints, collect stamps. Built spec-first with Kiro. https://d3txwsv4mn6ye9.cloudfront.net #Kiroween
 
 ## Medium (LinkedIn, Facebook)
 
@@ -25,8 +25,8 @@ I built it in Kiro Crew, spec first, with three custom Kiro agents (a builder wi
 auditor and a design reviewer using the Playwright MCP server) and
 <!--n:properties-->118<!--/n--> property-based tests. All content is openly licensed and credited.
 
-Try it: [LIVE URL]
-Code (MIT): [GITHUB URL]
+Try it: https://d3txwsv4mn6ye9.cloudfront.net
+Code (MIT): https://github.com/ogasege/awari
 Video: [VIDEO URL]
 
 #Kiroween #Resurrection #OfflineFirst #OpenKnowledge
@@ -43,4 +43,4 @@ for its meaning, and collect a stamp for every country you visit.
 the sentence from the article that proves it.
 
 4/ Built spec-first in Kiro with custom agents: one builds, one audits licences, one reviews the
-design in a real browser. Code (MIT): [GITHUB URL] · Try it: [LIVE URL]
+design in a real browser. Code (MIT): https://github.com/ogasege/awari · Try it: https://d3txwsv4mn6ye9.cloudfront.net

@@ -6,6 +6,8 @@ inspired by Encarta and the CD-ROM encyclopedias of the 1990s, and brings back w
 best: a whole library that works with no network, wandering from one thing to the next, and
 learning that feels like play.
 
+Live app: https://d3txwsv4mn6ye9.cloudfront.net. Code (MIT): https://github.com/ogasege/awari.
+
 ![Awari Home at 1440 px: a scrapbook of photo prints, paper strips and handwritten notes](docs/screenshots/home-1440.png)
 
 Awari is an original design. It shares no name, logo, layout or artwork with any product of the
