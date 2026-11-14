@@ -4,6 +4,7 @@
  */
 import { UNSUITABLE } from '../packs/photos.ts';
 import { parseLicence } from './allow.ts';
+import { captionFor, hasCaption } from './caption.ts';
 
 /** What the collector knows about one Commons file. */
 export interface Candidate {
@@ -21,10 +22,47 @@ export interface Candidate {
   description: string;
   /** Commons categories of the file, plain text. */
   categories: readonly string[];
+  /** Commons sha1, so the same bitmap under two names is kept once. */
+  sha1?: string;
   /** Commons `Artist`, plain text. */
   author?: string;
   /** Where the collector found it: used in the Wikipedia article itself, or only in its Commons category. */
   from?: 'article' | 'category';
+}
+
+/** What an article is about: its pack and the words a picture must show some sign of (23-media-library Req 15). */
+export interface Subject {
+  pack: string;
+  terms: readonly string[];
+}
+
+/** Words too general to prove a picture belongs to an article. */
+const GENERIC = new Set([
+  'the', 'and', 'for', 'with', 'from', 'mount', 'mountain', 'mountains', 'river', 'lake', 'ocean', 'sea', 'republic', 'kingdom', 'united', 'states',
+  'empire', 'city', 'island', 'islands', 'great', 'new', 'saint', 'north', 'south', 'east', 'west', 'central', 'human', 'world', 'history', 'ancient',
+  'people', 'organ', 'ring', 'fire', 'space', 'solar', 'system',
+]);
+
+/** The words of an article's names (title, English Wikipedia title, Commons category) that say what it is about. */
+export function termsFor(...names: Array<string | undefined>): string[] {
+  const out = new Set<string>();
+  for (const name of names) {
+    for (const w of (name ?? '').replace(/\([^)]*\)/g, ' ').toLowerCase().split(/[^\p{L}\p{N}]+/u)) {
+      if (w.length >= 3 && !GENERIC.has(w)) out.add(w);
+    }
+  }
+  return [...out];
+}
+
+/** The subject of a saved article: its pack and the words of its names. */
+export function subjectOf(article: { pack: string; title: string }, links?: { enTitle?: string; category?: string }): Subject {
+  return { pack: article.pack, terms: termsFor(article.title, links?.enTitle, links?.category) };
+}
+
+/** True when the text mentions one of the terms (a prefix for long words, so "electric" matches "electricity"). */
+export function mentions(text: string, terms: readonly string[]): boolean {
+  const t = text.toLowerCase();
+  return terms.some((w) => new RegExp(w.length >= 5 ? `\\b${w}` : `\\b${w}\\b`, 'iu').test(t));
 }
 
 /** The smallest long side we keep (Req 8). */
@@ -41,10 +79,14 @@ export function keepFor(pack: string): number {
 
 const MIMES = new Set(['image/jpeg', 'image/png', 'image/webp']);
 /** Logos, signatures, icons and collages are never shown (Req 8). */
-const NEVER = /\blogos?\b|wordmark|signature|autograph|\bicons?\b|\bcollage\b|montage|composite|sprite|screenshot|\bscan of\b|\bsvg\b/i;
+const NEVER = /\blogos?\b|wordmark|signature|autograph|\bicons?\b|\bcollage\b|montage|composite|sprite|screenshot|\bscan of\b|\bsvg\b|\bsequence of\b|\bset of \d+ (?:images|photos|pictures)\b|\btitle page\b|\bfrontispiece\b|\bessay\b|\bpanels?\b|\bleft:|\bright:|\bheat ?map\b|bathymetr|\bconcentrations?\b|gravimetr|\bsite plan\b|\bplan of\b|\bflow ?chart\b|\bstatistics\b|\bpercentages?\b|\bwaxwork\b|wax (?:figure|museum)|tussauds|\brender(?:ing|ed)?\b|\bblender\b|\b3d model\b|\btoy\b/i;
 /** Frightening, graphic or sexual material, by title, description or category (Req 8); adds to the lead-photo list. */
 const GRAPHIC =
   /nude|naked|nudity|sexual|erotic|porn|gore|graphic|bloody|blood[ -](?:stain|spatter|splatter|pool)|bleeding|mutilat|torture|lynching|hanging body|swastika|nazi|penis|vagina|genital|testic|scrotum|vulva|\banus\b|breast|nipple|sperm|menstru|copulat|mating|field dressing|dressing a deer|gutting|gutted|skinning|\bhunt(?:ing|ed|er|ers)\b|trophy|entrails|viscera|intestin|surgery|surgical|operation|open[- ]heart|wound|injur|\bscar\b|amputat|tumou?r|cancer|disease|infect|\bpus\b|rotting|decompos|roadkill|stuffed|taxiderm/i;
+
+/** More that a ten-year-old should not meet by surprise (23-media-library review, 14 Nov): caricature, specimens, war machines, disaster. */
+const EXTRA_UNSUITABLE =
+  /zwarte piet|blackface|caricatur|specimen|formalin|preserved in|pathological|beached|stranded|aftermath|\bnavy\b|naval|troops|artillery|warship|battleship|missile|bomber|\bcannons?\b|\btanks?\b|fighter (?:jet|plane|aircraft)|tsunami|earthquake damage|rubble|wreckage|crash(?:ed)?\b|\bcorpses?\b|\bskulls?\b|\bbones? of\b/i;
 
 /** A file title in any wiki's language ("Archivo:", "Datei:", "Fichier:") as the Commons `File:` title. */
 export function commonsTitle(title: string): string {
@@ -64,18 +106,21 @@ export type Kind = 'photo' | 'portrait' | 'map' | 'flag' | 'emblem' | 'art' | 'd
 
 /** The kind of a picture, read from its title and categories (for variety, Req 15). */
 export function kindOf(c: Pick<Candidate, 'title' | 'categories' | 'description'>): Kind {
-  const t = `${c.title} ${c.categories.join(' ')}`.toLowerCase();
+  // Commons categories are full of "Photographs by ..." and "Buildings with flags in ...": drop those before reading
+  // the kind, and match whole words ("graph" is inside "photograph").
+  const cats = c.categories.filter((x) => !/photograph|\bphotos?\b|pictures? of|buildings? with|people with|\bwith flags?\b/i.test(x));
+  const t = `${c.title} ${cats.join(' ')}`.toLowerCase();
   if (/\bmaps?\b|locator|location map/.test(t)) return 'map';
-  if (/\bflags?\b/.test(t)) return 'flag';
-  if (/coats? of arms|emblem|\bseal\b|\bcrest\b/.test(t)) return 'emblem';
-  if (/diagram|chart|graph|schematic|infographic/.test(t)) return 'diagram';
-  if (/painting|drawing|illustration|engraving|lithograph|sketch|woodcut/.test(t)) return 'art';
-  if (/portrait|headshot/.test(t)) return 'portrait';
+  if (/\bflags?\b/.test(c.title.toLowerCase())) return 'flag';
+  if (/coats? of arms|\bemblem\b|\bseal\b|\bcrest\b/.test(t)) return 'emblem';
+  if (/\bdiagrams?\b|\bcharts?\b|\bgraphs?\b|\bschematic\b|\binfographic\b/.test(t)) return 'diagram';
+  if (/\bpaintings?\b|\bdrawings?\b|\billustrations?\b|\bengravings?\b|\blithograph\b|\bsketch\b|\bwoodcut\b/.test(t)) return 'art';
+  if (/\bportraits?\b|\bheadshot\b/.test(t)) return 'portrait';
   return 'photo';
 }
 
 /** Why a candidate is rejected, or undefined when it may be used. */
-export function rejectReason(c: Candidate): string | undefined {
+export function rejectReason(c: Candidate, subject?: Subject): string | undefined {
   if (!hostedOnCommons(c.repository, c.from)) return 'not hosted on Commons';
   if (!parseLicence(c.licence)) return 'licence not on the allow-list';
   if (c.restrictions.trim() !== '') return 'restrictions listed';
@@ -83,9 +128,20 @@ export function rejectReason(c: Candidate): string | undefined {
   if (parseLicence(c.licence)?.family !== 'pd' && (c.author ?? '').trim() === '') return 'no author named for an attribution licence';
   if (!MIMES.has(c.mime)) return 'not a plain picture file';
   if (Math.max(c.width, c.height) < MIN_SIDE) return 'under 800 px on the long side';
+  if (!hasCaption(c.description, c.title)) return 'nothing honest to say about it';
   const text = `${c.title} ${c.description} ${c.categories.join(' ')}`;
   if (NEVER.test(text)) return 'logo, signature, icon or collage';
-  if (GRAPHIC.test(text) || UNSUITABLE.test(text)) return 'unsuitable for children';
+  if (GRAPHIC.test(text) || UNSUITABLE.test(text) || EXTRA_UNSUITABLE.test(text)) return 'unsuitable for children';
+  if (subject) {
+    const kind = kindOf(c);
+    if ((kind === 'flag' || kind === 'emblem') && subject.pack !== 'countries') return 'a flag or emblem outside a country';
+    if (kind === 'diagram' && recognition(c) === 0) return 'a diagram: too small to read in a print';
+    // A picture found only through the Wikipedia article (not its Commons category) must show some sign of the
+    // subject in its title, description or categories, so a teddy bear is not Alan Turing and the Matterhorn is not Mount Aso.
+    if (c.from === 'article' && subject.terms.length > 0 && recognition(c) === 0 && !mentions(`${c.title} ${c.description} ${c.categories.join(' ')}`, subject.terms)) {
+      return 'no sign that it is about the article';
+    }
+  }
   return undefined;
 }
 
@@ -134,11 +190,22 @@ export const SERIES_CAP = 2;
  * country gets a landscape, a map, a flag and so on rather than twelve of one kind (Req 15). Emblems never lead.
  * Returns fewer than `min` when the article simply has fewer allowed pictures; the caller lists the gap.
  */
-export function selectForArticle<T extends Candidate>(candidates: readonly T[], max = MAX_PER_ARTICLE): T[] {
+export function selectForArticle<T extends Candidate>(candidates: readonly T[], max = MAX_PER_ARTICLE, subject?: Subject): T[] {
   const seen = new Set<string>();
   const allowed = candidates
-    .filter((c) => rejectReason(c) === undefined)
-    .filter((c) => (seen.has(c.title) ? false : (seen.add(c.title), true)))
+    .filter((c) => rejectReason(c, subject) === undefined)
+    .filter((c) => {
+      // The same bitmap under two names is kept once (Commons sha1), and so is the same title.
+      const key = c.sha1 ? `sha1:${c.sha1}` : c.title;
+      if (seen.has(key) || seen.has(c.title)) return false;
+      seen.add(key);
+      seen.add(c.title);
+      // Two pictures with the same caption in one article are one picture twice (near-duplicates).
+      const cap = `caption:${(captionFor(c.description, c.title)?.text ?? '').toLowerCase()}`;
+      if (seen.has(cap)) return false;
+      seen.add(cap);
+      return true;
+    })
     .sort((a, b) => score(b) - score(a) || a.title.localeCompare(b.title));
   // A series of near-identical shots (same stem) adds one or two pictures, not twelve.
   const perStem = new Map<string, number>();

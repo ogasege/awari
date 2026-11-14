@@ -7,7 +7,7 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import type { Collected } from './collect.ts';
-import { MIN_PER_ARTICLE, keepFor, selectForArticle } from './select.ts';
+import { MIN_PER_ARTICLE, commonsTitle, keepFor, selectForArticle, subjectOf } from './select.ts';
 
 const DIR = join('data', 'media', 'candidates');
 
@@ -23,8 +23,8 @@ export function tally(): Tally {
   const out: Tally = { articles: 0, total: 0, unique: 0, short: [], bySubject: {} };
   const seen = new Set<string>();
   for (const f of readdirSync(DIR).filter((x) => x.endsWith('.json')).sort()) {
-    const d = JSON.parse(readFileSync(join(DIR, f), 'utf8')) as { article: { key: string; pack: string }; candidates: Collected[] };
-    const chosen = selectForArticle(d.candidates, keepFor(d.article.pack));
+    const d = JSON.parse(readFileSync(join(DIR, f), 'utf8')) as { article: { key: string; pack: string; title: string }; links?: { enTitle?: string; category?: string }; candidates: Collected[] };
+    const chosen = selectForArticle(d.candidates.map((c) => ({ ...c, title: commonsTitle(c.title) })), keepFor(d.article.pack), subjectOf(d.article, d.links));
     out.articles++;
     out.total += chosen.length;
     for (const c of chosen) seen.add(c.sha1 || c.title);

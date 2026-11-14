@@ -9,11 +9,12 @@
  */
 import { existsSync, mkdirSync, readFileSync, readdirSync, unlinkSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import sharp from 'sharp';
 import { captionFor, englishPart } from './caption.ts';
 import type { Collected } from './collect.ts';
 import { requestCount } from './http.ts';
 import { readRecords } from './licences.ts';
-import { MIN_PER_ARTICLE, commonsTitle, keepFor, kindOf, selectForArticle, type Kind } from './select.ts';
+import { MIN_PER_ARTICLE, commonsTitle, keepFor, kindOf, selectForArticle, subjectOf, type Kind } from './select.ts';
 import { IMG_DIR, ensureThumb, folderBytes, thumbName } from './thumbs.ts';
 
 const CANDIDATES = join('data', 'media', 'candidates');
@@ -21,6 +22,7 @@ const OUT = join('public', 'media');
 
 interface Saved {
   article: { key: string; pack: string; id: string; title: string };
+  links?: { enTitle?: string; category?: string };
   candidates: Collected[];
 }
 
@@ -52,7 +54,7 @@ function* articles(): Generator<{ saved: Saved; chosen: Collected[] }> {
     const saved = JSON.parse(readFileSync(join(CANDIDATES, f), 'utf8')) as Saved;
     // Candidates saved before titles were normalised may carry another wiki's "Datei:" or "Archivo:".
     saved.candidates = saved.candidates.map((c) => ({ ...c, title: commonsTitle(c.title) }));
-    yield { saved, chosen: selectForArticle(saved.candidates, keepFor(saved.article.pack)) };
+    yield { saved, chosen: selectForArticle(saved.candidates, keepFor(saved.article.pack), subjectOf(saved.article, saved.links)) };
   }
 }
 
@@ -110,7 +112,7 @@ function hashOf(text: string): number {
 export function dailyPictures(items: readonly MediaItem[]): Array<Pick<MediaItem, 'id' | 'article' | 'articleTitle' | 'caption' | 'tw' | 'th' | 'author' | 'licence' | 'licenceUrl' | 'page'>> {
   const used = bundledTitles();
   const good = items
-    .filter((m) => m.kind === 'photo' && m.width >= 1600 && m.captionFrom !== 'article' && m.caption.length >= 12 && !used.has(m.title.toLowerCase()))
+    .filter((m) => m.kind === 'photo' && m.width >= 1600 && m.captionFrom === 'description' && m.caption.length >= 12 && !used.has(m.title.toLowerCase()))
     .sort((a, b) => hashOf(a.id) - hashOf(b.id));
   const groups = new Map<string, MediaItem[]>();
   for (const m of good) groups.set(m.article.split('/')[0] ?? '', [...(groups.get(m.article.split('/')[0] ?? '') ?? []), m]);
@@ -122,7 +124,7 @@ export function dailyPictures(items: readonly MediaItem[]): Array<Pick<MediaItem
   return Array.from({ length: 366 }, (_, i) => pick(order[i % Math.max(1, order.length)] as MediaItem)).filter(Boolean);
 }
 
-function records(): void {
+async function records(): Promise<void> {
   const today = new Date().toISOString().slice(0, 10);
   const bySubject = new Map<string, MediaItem[]>();
   const missing: string[] = [];
@@ -140,7 +142,9 @@ function records(): void {
       // One picture is listed once, with the first article that chose it (the thumbnail file is shared).
       if (seen.has(id)) continue;
       seen.add(id);
-      const cap = captionFor(c.description, c.title, saved.article.title);
+      const cap = captionFor(c.description, c.title);
+      const meta = await sharp(join(IMG_DIR, file)).metadata();
+      if (!cap) continue; // selection already drops these; a file with nothing honest to say is not listed
       items.push({
         id,
         article: saved.article.key,
@@ -158,8 +162,9 @@ function records(): void {
         width: c.width,
         height: c.height,
         thumb: `img/${file}`,
-        tw: 480,
-        th: Math.round((480 * c.height) / Math.max(1, c.width)),
+        // The size of the file on disk, so the <img> never shifts by a pixel.
+        tw: meta.width ?? 480,
+        th: meta.height ?? Math.round((480 * c.height) / Math.max(1, c.width)),
         verified: today,
       });
     }
@@ -193,7 +198,7 @@ if (process.argv[1]?.endsWith('build.ts')) {
   if (args.includes('--thumbs')) {
     await thumbs(Number(args[args.indexOf('--limit') + 1] || Infinity));
   } else if (args.includes('--records')) {
-    records();
+    await records();
   } else {
     console.log('Use --thumbs [--limit N] or --records.');
   }

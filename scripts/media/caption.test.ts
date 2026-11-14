@@ -1,22 +1,24 @@
-/** 23-media-library Property 4 (Req 13): captions are traceable shortenings of Commons text. */
+/** 23-media-library Property 4 (Req 13): captions are traceable shortenings of Commons text, and every audit defect stays fixed. */
 import fc from 'fast-check';
 import { describe, expect, it } from 'vitest';
-import { captionFor, englishPart, isTraceable, nameFromTitle, shorten } from './caption.ts';
+import { captionFor, englishPart, hasCaption, isTraceable, nameFromTitle, shorten } from './caption.ts';
+
+const text = (d: string, t = 'File:X.jpg') => captionFor(d, t)?.text;
 
 describe('captions', () => {
   it('uses the first sentence of a good description', () => {
-    const c = captionFor('The Colosseum in Rome at sunset. Taken from the Palatine Hill in July.', 'File:Colosseum.jpg', 'Colosseum');
-    expect(c).toEqual({ text: 'The Colosseum in Rome at sunset', source: 'description' });
+    expect(captionFor('The Colosseum in Rome at sunset. Taken from the Palatine Hill in July.', 'File:Colosseum.jpg')).toEqual({ text: 'The Colosseum in Rome at sunset', source: 'description' });
   });
 
   it('takes the English part of a multilingual description', () => {
     expect(englishPart('English: A red panda in a tree. Deutsch: Ein Roter Panda auf einem Baum.')).toBe('A red panda in a tree.');
   });
 
-  it('falls back to the file name, then to the article title, never to invented words', () => {
-    expect(captionFor('', 'File:Mount Kenya at dawn (27758444591).jpg', 'Kenya')).toEqual({ text: 'Mount Kenya at dawn', source: 'title' });
-    expect(captionFor('IMG_2043', 'File:DSC_0042.jpg', 'Kenya')).toEqual({ text: 'Kenya', source: 'article' });
-    expect(captionFor('Photo by John, uploaded from https://x.org', 'File:DSC_0042.jpg', 'Kenya').source).toBe('article');
+  it('falls back to the file name, and to nothing: never to the article title', () => {
+    expect(captionFor('', 'File:Mount Kenya at dawn (27758444591).jpg')).toEqual({ text: 'Mount Kenya at dawn', source: 'title' });
+    expect(captionFor('IMG_2043', 'File:DSC_0042.jpg')).toBeUndefined();
+    expect(captionFor('Photo by John, uploaded from https://x.org', 'File:DSC_0042.jpg')).toBeUndefined();
+    expect(hasCaption('', 'File:20230101 123456.jpg')).toBe(false);
   });
 
   it('cuts a long text at a word with an ellipsis, never mid-word, and within the limit', () => {
@@ -25,48 +27,86 @@ describe('captions', () => {
     expect(s.length).toBeLessThanOrEqual(61);
     expect(s.endsWith('…')).toBe(true);
     expect(long.startsWith(s.slice(0, -1))).toBe(true);
-    expect(long[s.length - 1]).toBeDefined();
     expect(long.slice(s.length - 1, s.length)).toBe(' ');
   });
 
-  it('every caption is traceable to the description, the file title or the article title (property)', () => {
+  it('every caption is traceable to the description or the file title (property)', () => {
     const word = fc.stringMatching(/^[A-Za-z]{2,9}$/);
-    const text = fc.array(word, { minLength: 0, maxLength: 30 }).map((w) => w.join(' '));
+    const words = fc.array(word, { minLength: 0, maxLength: 30 }).map((w) => w.join(' '));
     fc.assert(
-      fc.property(text, text, word, (description, titleWords, article) => {
+      fc.property(words, words, (description, titleWords) => {
         const title = `File:${titleWords || 'x'}.jpg`;
-        const c = captionFor(description, title, article);
-        expect(isTraceable(c, description, title, article)).toBe(true);
-        expect(c.text.length).toBeLessThanOrEqual(100);
+        const c = captionFor(description, title);
+        if (c) {
+          expect(isTraceable(c, description, title)).toBe(true);
+          expect(c.text.length).toBeLessThanOrEqual(100);
+        }
       }),
       { numRuns: 300 },
     );
   });
 
-  it('refuses a name made of camera codes and numbers', () => {
+  it('refuses a name made of camera codes and numbers, and reads hyphenated and parenthesised names', () => {
     expect(nameFromTitle('File:DSC_0042.jpg')).toBe('');
     expect(nameFromTitle('File:20230101 123456.jpg')).toBe('');
     expect(nameFromTitle('File:Lake Victoria at dawn 2.jpg')).toBe('Lake Victoria at dawn');
+    expect(nameFromTitle('File:Mt-Grizim-national-park-7920.jpg')).toBe('Mt Grizim national park');
+    expect(nameFromTitle('File:Official portrait of Rodney Williams (cropped).png')).toBe('Official portrait of Rodney Williams');
   });
 
   it('takes boilerplate off the front and refuses key-value metadata', () => {
-    expect(captionFor('This is a photo of a monument in Mexico City.', 'File:X.jpg', 'Mexico').text).toBe('A monument in Mexico City');
-    expect(captionFor('Photo of the place of the Persian Gate', 'File:X.jpg', 'Iran').text).toBe('The place of the Persian Gate');
-    expect(captionFor('object type: portrait statue - description: Head of Hatshepsut', 'File:X.jpg', 'Egypt').text).toBe('Head of Hatshepsut');
-    expect(captionFor('object type: portrait statue', 'File:Bust of Hatshepsut.jpg', 'Egypt')).toEqual({ text: 'Bust of Hatshepsut', source: 'title' });
+    expect(text('This is a photo of a monument in Mexico City.')).toBe('A monument in Mexico City');
+    expect(text('Photo of the place of the Persian Gate')).toBe('The place of the Persian Gate');
+    expect(text('object type: portrait statue - description: Head of Hatshepsut')).toBe('Head of Hatshepsut');
+    expect(captionFor('object type: portrait statue', 'File:Bust of Hatshepsut.jpg')).toEqual({ text: 'Bust of Hatshepsut', source: 'title' });
   });
 
   it('does not use metadata or non-English descriptions as captions', () => {
-    expect(captionFor('Version 8.25 from the Textbook OpenStax Anatomy and Physiology Published May 18, 2016', 'File:Heart diagram.jpg', 'Heart').source).toBe('title');
-    expect(captionFor('Royal Regalie, Museum der Präsente anlässlich der Inthronisierung des Sultans', 'File:Sultan regalia.jpg', 'Oman').source).toBe('title');
-    expect(captionFor('A lion resting in the shade of a tree', 'File:Lion.jpg', 'Lion').source).toBe('description');
+    expect(captionFor('Version 8.25 from the Textbook OpenStax Anatomy and Physiology Published May 18, 2016', 'File:Heart diagram.jpg')?.source).toBe('title');
+    expect(captionFor('Royal Regalie, Museum der Präsente anlässlich der Inthronisierung des Sultans', 'File:Sultan regalia.jpg')?.source).toBe('title');
+    expect(captionFor('A lion resting in the shade of a tree', 'File:Lion.jpg')?.source).toBe('description');
   });
 
   it('does not caption a picture with a sentence about the file, and closes up spaces before commas', () => {
     for (const d of ['This media has been taken in the country of Malta', 'This photo demonstrates the texture and colour of a dog nose', 'This is a visual depicting how T helper cells work', 'Appears to be an albino Elk, located in Sweden']) {
-      expect(captionFor(d, 'File:Dog nose.jpg', 'Dog').source, d).not.toBe('description');
+      expect(captionFor(d, 'File:X.jpg')?.source, d).not.toBe('description');
     }
-    expect(captionFor('Ravensburg , Germany: Papierkrattler at the carnival', 'File:X.jpg', 'Germany').text).toBe('Ravensburg, Germany: Papierkrattler at the carnival');
-    expect(captionFor('A lion resting in the shade of a tree', 'File:Lion.jpg', 'Lion').source).toBe('description');
+    expect(text('Ravensburg , Germany: Papierkrattler at the carnival')).toBe('Ravensburg, Germany: Papierkrattler at the carnival');
+  });
+
+  // The defects of the licence auditor's 5% sample (docs/kiro-evidence/crew/media-audit-review.md).
+  describe('stays fixed: the audit defects', () => {
+    it('G5: a good first sentence is kept although the description later has boilerplate', () => {
+      const d = 'Neil Armstrong works at the LM in the only photo taken of him on the moon. This is a cropped photo. Source http://nasa.gov File:Neil Armstrong.jpg';
+      expect(captionFor(d, 'File:Neil Armstrong cropped.jpg')).toEqual({ text: 'Neil Armstrong works at the LM in the only photo taken of him on the moon', source: 'description' });
+    });
+
+    it('a trailing (cropped) is dropped from a file name, not a reason to reject it', () => {
+      expect(captionFor('', 'File:David - Portrait of Monsieur Lavoisier (cropped).jpg')?.text).toBe('David - Portrait of Monsieur Lavoisier');
+    });
+
+    it('G6: an unfilled form field and a fragment ending in a preposition are not captions', () => {
+      expect(captionFor('"African people at work" from', 'File:Fernanda Nossa, Guinea-Bissau, photo 3.jpg')?.source).toBe('title');
+      expect(captionFor('This is an image of Cultural Fashion or Adornment from', 'File:BaAka woman dancing.jpg')).toEqual({ text: 'BaAka woman dancing', source: 'title' });
+    });
+
+    it('G7: "captures", "features" and "portrays" are about the photograph', () => {
+      const c = captionFor('This photograph captures the interior of an ornate Buddhist temple or memorial hall', 'File:DFC 5635 A serene shrine inside a Thai temple.jpg');
+      expect(c).toEqual({ text: 'A serene shrine inside a Thai temple', source: 'title' });
+    });
+
+    it('G8: a library catalogue line with a bare host is not a caption', () => {
+      const d = 'Persistent URL: digital.lib.muohio.edu/u?/snyder,1473 Subject (TGM): Calculators; Window displays';
+      expect(captionFor(d, 'File:Burroughs adding machine display in Oxford bank window 1916.jpg')?.source).toBe('title');
+    });
+
+    it('a first-person making-of and a panel marker are refused', () => {
+      expect(captionFor('A map of Saint Lucia that i created, based on a public domain map from the PCL', 'File:Saint Lucia geography map en.png')).toEqual({ text: 'Saint Lucia geography map en', source: 'title' });
+      expect(captionFor('• LEFT: A large mass (blue) belongs to the positive sector where it creates a positive curvature', 'File:Conjugate curvatures.png')).toEqual({ text: 'Conjugate curvatures', source: 'title' });
+    });
+
+    it('a caption never says what the file does not: no article title is borrowed', () => {
+      expect(captionFor('', 'File:Stick chart-BHM 1920.530.0032-P8260228.JPG')?.text ?? 'none').not.toMatch(/Marshall Islands/);
+    });
   });
 });

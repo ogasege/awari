@@ -69,8 +69,7 @@ export function pictureQuestion(picture: MediaItem, pool: readonly MediaItem[], 
  */
 export function pictureQuestions(items: readonly MediaItem[], count: number, seed: number): Question[] {
   const random = seeded(seed);
-  const usable = items.filter((m) => m.captionFrom !== 'article' || m.kind === 'photo');
-  const ranked = shuffle(usable, random).sort((a, b) => Number(['photo', 'art'].includes(b.kind)) - Number(['photo', 'art'].includes(a.kind)));
+  const ranked = shuffle(items, random).sort((a, b) => Number(['photo', 'art'].includes(b.kind)) - Number(['photo', 'art'].includes(a.kind)));
   const out: Question[] = [];
   const articles = new Set<string>();
   for (const m of ranked) {

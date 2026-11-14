@@ -57,7 +57,7 @@ describe('the media library', () => {
 
   it('Property 4: every caption is a traceable shortening of its Commons description, file name or article title', () => {
     for (const m of items) {
-      expect(isTraceable({ text: m.caption, source: m.captionFrom as 'description' | 'title' | 'article' }, m.description, m.title, m.articleTitle), `${m.id}: ${m.caption}`).toBe(true);
+      expect(isTraceable({ text: m.caption, source: m.captionFrom as 'description' | 'title' }, m.description, m.title), `${m.id}: ${m.caption}`).toBe(true);
       expect(m.caption.length).toBeLessThanOrEqual(100);
       expect(m.alt.length).toBeGreaterThan(1);
     }
