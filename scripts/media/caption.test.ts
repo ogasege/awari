@@ -63,7 +63,7 @@ describe('captions', () => {
 
   it('does not use metadata or non-English descriptions as captions', () => {
     expect(captionFor('Version 8.25 from the Textbook OpenStax Anatomy and Physiology Published May 18, 2016', 'File:Heart diagram.jpg')?.source).toBe('title');
-    expect(captionFor('Royal Regalie, Museum der Präsente anlässlich der Inthronisierung des Sultans', 'File:Sultan regalia.jpg')?.source).toBe('title');
+    expect(captionFor('Royal Regalie, Museum der Präsente anlässlich der Inthronisierung des Sultans', 'File:Sultan crown.jpg')?.source).toBe('title');
     expect(captionFor('A lion resting in the shade of a tree', 'File:Lion.jpg')?.source).toBe('description');
   });
 
@@ -101,12 +101,56 @@ describe('captions', () => {
     });
 
     it('a first-person making-of and a panel marker are refused', () => {
-      expect(captionFor('A map of Saint Lucia that i created, based on a public domain map from the PCL', 'File:Saint Lucia geography map en.png')).toEqual({ text: 'Saint Lucia geography map en', source: 'title' });
+      expect(captionFor('A map of Saint Lucia that i created, based on a public domain map from the PCL', 'File:Saint Lucia geography map en.png')).toEqual({ text: 'Saint Lucia geography map', source: 'title' });
       expect(captionFor('• LEFT: A large mass (blue) belongs to the positive sector where it creates a positive curvature', 'File:Conjugate curvatures.png')).toEqual({ text: 'Conjugate curvatures', source: 'title' });
     });
 
     it('a caption never says what the file does not: no article title is borrowed', () => {
       expect(captionFor('', 'File:Stick chart-BHM 1920.530.0032-P8260228.JPG')?.text ?? 'none').not.toMatch(/Marshall Islands/);
+    });
+  });
+
+  // Round 2 of the licence audit (docs/kiro-evidence/crew/media-audit-review-2.md): 31 of 206 captions missed the English bar.
+  describe('stays fixed: the round-2 audit defects', () => {
+    it('a description in another script or language falls back to the English file name', () => {
+      expect(captionFor('Портрет премьер-министра Сомали Хамзы Абди Барре', 'File:Hamza Abdi Barre 2025 official portrait.jpg')?.source).toBe('title');
+      expect(captionFor('Უბისის მონასტრის ფრესკა', 'File:Fresco of Ubisi (7).jpg')).toEqual({ text: 'Fresco of Ubisi', source: 'title' });
+      expect(captionFor('ساحل جزیره کیش', 'File:Kish Island, Persian Gulf, Iran.jpg')).toEqual({ text: 'Kish Island, Persian Gulf, Iran', source: 'title' });
+      expect(captionFor('Imagen de paisaje de Canadá en 2014', 'File:Canada in 2014.jpg')?.source).toBe('title');
+      expect(captionFor('Esquelete de necrópole romana', 'File:Esquelete de necrópole romana (7326104804).jpg')).toBeUndefined();
+    });
+
+    it('a name with no English source at all is not captioned', () => {
+      expect(captionFor('', 'File:ماشین تحریر مظفر الدین شاه قاجار.jpg')).toBeUndefined();
+      expect(captionFor('Vestigios de Tenochtitlan', 'File:Vestigios de Tenochtitlan.jpg')).toBeUndefined();
+      expect(captionFor('Casa foscolo', 'File:Casa foscolo.jpg')).toBeUndefined();
+    });
+
+    it('catalogue fields and camera gear are not captions', () => {
+      expect(captionFor('02 Bestanddeelnummer: 252-1255', 'File:Spaarnestad 02 Bestanddeelnummer 252-1255.jpg')?.source).not.toBe('description');
+      expect(captionFor('02 Bestanddeelnummer: 252-1255', 'File:DSC_0042.jpg')).toBeUndefined();
+      expect(captionFor('Identificatie Titel(s): Kniegelenk Objecttype: foto stereofoto Objectnummer: RP-F-F26541', 'File:Kniegelenk, RP-F-F26541.jpg')?.source).not.toBe('description');
+      expect(captionFor('10 mm. Voigtlander lens', 'File:Mountain scene. Best viewed large. (49909617046).jpg')?.text ?? '').not.toMatch(/lens/);
+    });
+
+    it('import residue is stripped from a file name: Flickr, Google Art Project, accession numbers, catalogue numbers, language codes, dates, glued digits', () => {
+      expect(nameFromTitle('File:Entebbe - Flickr - Dave Proffer.jpg')).toBe('');
+      expect(nameFromTitle('File:Kampala skyline - Flickr - Dave Proffer.jpg')).toBe('Kampala skyline');
+      expect(nameFromTitle('File:Claude Monet - Arrival of the Normandy Train - Google Art Project.jpg')).toBe('Claude Monet - Arrival of the Normandy Train');
+      expect(nameFromTitle('File:Portrait of Marie Curie (1867 - 1934), Polish chemist Wellcome M0000113.jpg')).toBe('Portrait of Marie Curie, Polish chemist');
+      expect(nameFromTitle('File:PIA00103 Venus - 3-D Perspective View of Lavinia Planitia.jpg')).toBe('Venus - 3-D Perspective View of Lavinia Planitia');
+      expect(nameFromTitle('File:Saint Lucia geography map en.png')).toBe('Saint Lucia geography map');
+      expect(nameFromTitle('File:201805 human skeleton.png')).toBe('human skeleton');
+      expect(nameFromTitle('File:Castelul Bran2.jpg')).toBe('Castelul Bran');
+      expect(nameFromTitle('File:Fernanda Nossa, Guinea-Bissau, photo 3.jpg')).toBe('Fernanda Nossa, Guinea-Bissau');
+      expect(nameFromTitle('File:Ring with engraved portrait of Ptolemy VI Philometor (3rd–2nd century BCE) - 2009.jpg')).toBe('Ring with engraved portrait of Ptolemy VI Philometor');
+    });
+
+    it('never stops on a word that needs another, drops an unbalanced quote, and strips (cropped) from a description', () => {
+      const long = 'Sheikh Zayed and their Highnesses the Rulers of the Emirates during the flag hoisting ceremony at the Union House in Dubai';
+      expect(shorten(long, 70).replace(/…$/, '')).not.toMatch(/\b(?:of|the|during|at|in)$/);
+      expect(captionFor('Apfelstrudel mit Vanillesoße" at the Edelweisshütte above Sölden, Tyrol', 'File:2015 0731 Apfelstrudel.jpg')?.text ?? '').not.toContain('"');
+      expect(captionFor('Official portrait of Rodney Williams (cropped)', 'File:Official portrait of Rodney Williams.png')?.text).toBe('Official portrait of Rodney Williams');
     });
   });
 });

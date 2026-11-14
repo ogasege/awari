@@ -10,7 +10,7 @@
 import { existsSync, mkdirSync, readFileSync, readdirSync, unlinkSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import sharp from 'sharp';
-import { captionFor, englishPart } from './caption.ts';
+import { captionWithBasis } from './caption.ts';
 import type { Collected } from './collect.ts';
 import { requestCount } from './http.ts';
 import { readRecords } from './licences.ts';
@@ -142,7 +142,7 @@ async function records(): Promise<void> {
       const id = file.replace('.webp', '');
       // One picture is listed once, with the first article that chose it (the thumbnail file is shared).
       if (seen.has(id)) continue;
-      const cap = captionFor(c.description, c.title);
+      const cap = captionWithBasis(c.description, c.title);
       const meta = await sharp(join(IMG_DIR, file)).metadata();
       if (!cap) continue; // selection already drops these; a file with nothing honest to say is not listed
       // The same caption twice in one subject reads as the same picture twice in the grid.
@@ -163,7 +163,7 @@ async function records(): Promise<void> {
         caption: cap.text,
         captionFrom: cap.source,
         alt: cap.text,
-        description: englishPart(c.description).slice(0, 400),
+        description: cap.basis.slice(0, 400),
         width: c.width,
         height: c.height,
         thumb: `img/${file}`,

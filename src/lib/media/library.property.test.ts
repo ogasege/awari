@@ -17,7 +17,25 @@ const licences = JSON.parse(readFileSync(join(DIR, 'licences.json'), 'utf8')) as
 const index = JSON.parse(readFileSync(join(DIR, 'index.json'), 'utf8')) as MediaIndex;
 
 /** Articles that have fewer than four allowed pictures on Commons: listed in docs/kiro-log.md and the report. */
-const KNOWN_GAPS = new Set(['ancient/wonders-of-the-world', 'body/thumb', 'earth/arctic-ocean', 'physics/electricity', 'science/light', 'science/radioactive-decay', 'science/solid']);
+const KNOWN_GAPS = new Set([
+  'ancient/hanging-gardens-of-babylon',
+  'ancient/wonders-of-the-world',
+  'arts/painting',
+  'body/thumb',
+  'countries/ivory-coast',
+  'people/chinua-achebe',
+  'physics/electric-charge',
+  'physics/electricity',
+  'science/chemical-reaction',
+  'science/force',
+  'science/light',
+  'science/mass',
+  'science/matter',
+  'science/molecule',
+  'science/radioactive-decay',
+  'science/solid',
+  'science/speed-of-light',
+]);
 
 describe('the media library', () => {
   it('Property 1: every picture has a verified, allow-listed licence in licences.json', () => {

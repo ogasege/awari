@@ -3,8 +3,20 @@
  * (23-media-library Req 6-8, 15). Pure: the candidates are passed in.
  */
 import { UNSUITABLE } from '../packs/photos.ts';
+import { readFileSync } from 'node:fs';
 import { parseLicence } from './allow.ts';
 import { captionFor, hasCaption } from './caption.ts';
+
+/** Files the design reviewer said to drop in two rounds of review (scripts/media/denylist.ts). */
+const DENIED = new Set<string>(
+  (() => {
+    try {
+      return (JSON.parse(readFileSync('scripts/media/denylist.json', 'utf8')) as { titles: string[] }).titles;
+    } catch {
+      return [];
+    }
+  })(),
+);
 
 /** What the collector knows about one Commons file. */
 export interface Candidate {
@@ -79,7 +91,7 @@ export function keepFor(pack: string): number {
 
 const MIMES = new Set(['image/jpeg', 'image/png', 'image/webp']);
 /** Logos, signatures, icons and collages are never shown (Req 8). */
-const NEVER = /\blogos?\b|wordmark|signature|autograph|\bicons?\b|\bcollage\b|montage|composite|sprite|screenshot|\bscan of\b|\bsvg\b|\bsequence of\b|\bset of \d+ (?:images|photos|pictures)\b|\btitle page\b|\bfrontispiece\b|\bessay\b|\bpanels?\b|\bleft:|\bright:|\bheat ?map\b|bathymetr|\bconcentrations?\b|gravimetr|\bsite plan\b|\bplan of\b|\bflow ?chart\b|\bstatistics\b|\bpercentages?\b|\bwaxwork\b|wax (?:figure|museum)|tussauds|\brender(?:ing|ed)?\b|\bblender\b|\b3d model\b|\btoy\b/i;
+const NEVER = /\blogos?\b|wordmark|signature|autograph|\bicons?\b|\bcollage\b|montage|composite|sprite|screenshot|\bscan of\b|\bsvg\b|\bsequence of\b|\bset of \d+ (?:images|photos|pictures)\b|\btitle page\b|\bfrontispiece\b|\bessay\b|\bpanels?\b|\bleft:|\bright:|\bheat ?map\b|bathymetr|\bconcentrations?\b|gravimetr|\bsite plan\b|\bplan of\b|\bflow ?chart\b|\bchart\b|\bstatistics\b|\bpercentages?\b|\bwaxwork\b|wax (?:figure|museum)|tussauds|\brender(?:ing|ed)?\b|\bblender\b|\b3d model\b|\btoy\b|\bpage from\b|\bold book\b|\bbook from \d{4}\b|\bplaque\b|\binscription\b|global footprint|\bour (?:offices|facilities)\b|corporate office|sales offices|customer footprint|micrograph|\bperspective view\b|\bsynthetic\b|\bsimulation\b|\bmicroscop(?:e|y)\b|\bhistolog/i;
 /** Frightening, graphic or sexual material, by title, description or category (Req 8); adds to the lead-photo list. */
 const GRAPHIC =
   /nude|naked|nudity|sexual|erotic|porn|gore|graphic|bloody|blood[ -](?:stain|spatter|splatter|pool)|bleeding|mutilat|torture|lynching|hanging body|swastika|nazi|penis|vagina|genital|testic|scrotum|vulva|\banus\b|breast|nipple|sperm|menstru|copulat|mating|field dressing|dressing a deer|gutting|gutted|skinning|\bhunt(?:ing|ed|er|ers)\b|trophy|entrails|viscera|intestin|surgery|surgical|operation|open[- ]heart|wound|injur|\bscar\b|amputat|tumou?r|cancer|disease|infect|\bpus\b|rotting|decompos|roadkill|stuffed|taxiderm/i;
@@ -111,17 +123,20 @@ export function kindOf(c: Pick<Candidate, 'title' | 'categories' | 'description'
   const cats = c.categories.filter((x) => !/photograph|\bphotos?\b|pictures? of|buildings? with|people with|\bwith flags?\b/i.test(x));
   const t = `${c.title} ${cats.join(' ')}`.toLowerCase();
   if (/\bmaps?\b|locator|location map/.test(t)) return 'map';
-  if (/\bflags?\b/.test(c.title.toLowerCase())) return 'flag';
+  // A flag image is "Flag of X"; a photograph of a flag-raising or a row of flagpoles is a photograph.
+  if (/^(?:file:)?(?:national )?flags? of\b|\bflags? of the\b|\bflags of\b/i.test(c.title)) return 'flag';
   if (/coats? of arms|\bemblem\b|\bseal\b|\bcrest\b/.test(t)) return 'emblem';
   if (/\bdiagrams?\b|\bcharts?\b|\bgraphs?\b|\bschematic\b|\binfographic\b/.test(t)) return 'diagram';
   if (/\bpaintings?\b|\bdrawings?\b|\billustrations?\b|\bengravings?\b|\blithograph\b|\bsketch\b|\bwoodcut\b/.test(t)) return 'art';
-  if (/\bportraits?\b|\bheadshot\b/.test(t)) return 'portrait';
+  // One sitter: "portrait" in the name of a lion family or a 29-person conference photograph does not make a portrait.
+  if (/\bportraits?\b|\bheadshot\b/.test(t) && !/\b(?:family|group|conference|lions?|tigers?|animals?|couple|team|crowd)\b/.test(t)) return 'portrait';
   return 'photo';
 }
 
 /** Why a candidate is rejected, or undefined when it may be used. */
 export function rejectReason(c: Candidate, subject?: Subject): string | undefined {
   if (!hostedOnCommons(c.repository, c.from)) return 'not hosted on Commons';
+  if (DENIED.has(c.title)) return 'dropped by a design review';
   if (!parseLicence(c.licence)) return 'licence not on the allow-list';
   if (c.restrictions.trim() !== '') return 'restrictions listed';
   // CC BY and CC BY-SA need the author named; a file whose Commons page names none cannot be credited properly.
@@ -137,9 +152,12 @@ export function rejectReason(c: Candidate, subject?: Subject): string | undefine
     if (kind === 'emblem') return 'an emblem or coat of arms';
     if (kind === 'flag' && subject.pack !== 'countries') return 'a flag outside a country';
     if (kind === 'diagram' && recognition(c) === 0) return 'a diagram: too small to read in a print';
-    // A picture found only through the Wikipedia article (not its Commons category) must show some sign of the
-    // subject in its title, description or categories, so a teddy bear is not Alan Turing and the Matterhorn is not Mount Aso.
-    if (c.from === 'article' && subject.terms.length > 0 && recognition(c) === 0 && !mentions(`${c.title} ${c.description} ${c.categories.join(' ')}`, subject.terms)) {
+    // A PNG that is not a map is nearly always a diagram, a figure or a graphic: not a picture for a print.
+    if (c.mime === 'image/png' && kind !== 'map' && recognition(c) === 0) return 'a PNG graphic';
+    // A picture found through the Wikipedia article (or, outside the countries, its category) must show some sign of
+    // the subject in its title, description or categories, so a teddy bear is not Alan Turing and the Matterhorn is
+    // not Mount Aso. A country's Commons category is trusted: its files rarely name the country.
+    if ((c.from === 'article' || subject.pack !== 'countries') && subject.terms.length > 0 && recognition(c) === 0 && !mentions(`${c.title} ${c.description} ${c.categories.join(' ')}`, subject.terms)) {
       return 'no sign that it is about the article';
     }
   }

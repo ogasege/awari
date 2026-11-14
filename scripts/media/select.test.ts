@@ -178,8 +178,9 @@ describe('selectForArticle (Property 5)', () => {
       const matterhorn: Candidate = { ...good, repository: 'shared', from: 'article', title: 'File:Matterhorn from Zermatt.jpg', description: 'The Matterhorn above Zermatt in Switzerland', categories: ['Matterhorn'] };
       expect(rejectReason(matterhorn, aso)).toMatch(/no sign/);
       expect(rejectReason({ ...matterhorn, title: 'File:Mount Aso crater.jpg', description: 'The crater of Mount Aso in Kyushu', categories: ['Mount Aso'] }, aso)).toBeUndefined();
-      // A Commons category member belongs to the subject by construction.
-      expect(rejectReason({ ...matterhorn, from: 'category' }, aso)).toBeUndefined();
+      // Outside the countries a category member must show the sign too; a country's own category is trusted.
+      expect(rejectReason({ ...matterhorn, from: 'category' }, aso)).toMatch(/no sign/);
+      expect(rejectReason({ ...matterhorn, from: 'category' }, { pack: 'countries', terms: ['kenya'] })).toBeUndefined();
       // A Featured picture is not asked for the sign.
       expect(rejectReason({ ...matterhorn, categories: ['Featured pictures'] }, aso)).toBeUndefined();
       expect(rejectReason({ ...good, repository: 'shared', from: 'article', title: 'File:Teddy bear.jpg', description: 'A small brown teddy bear on a shelf' }, turing)).toMatch(/no sign/);
