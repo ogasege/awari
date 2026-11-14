@@ -132,6 +132,8 @@ export function authorName(raw: string | undefined): string {
     .replace(/[\s/,;&.-]+$/, '');
   if (t === '') {
     // Only an uploader was named ("Original uploader was Cormullion at en.wikipedia"): the uploader is the name.
+    const mail = /^([\w.+-]+)@[\w.-]+$/.exec(plainText(raw));
+    if (mail?.[1]) return mail[1].replace(/[._+-]+/g, ' ').replace(/\b\p{Ll}/gu, (c) => c.toUpperCase());
     const uploader = /Original uploader was (.+?)(?: at \S+)?$/i.exec(plainText(raw));
     return uploader?.[1]?.trim() ?? '';
   }

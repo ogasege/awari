@@ -1,7 +1,11 @@
 /** 23-media-library Property 4 (Req 13): captions are traceable shortenings of Commons text, and every audit defect stays fixed. */
 import fc from 'fast-check';
-import { describe, expect, it } from 'vitest';
-import { captionFor, englishPart, hasCaption, isTraceable, nameFromTitle, shorten } from './caption.ts';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { captionFor, englishPart, hasCaption, isTraceable, nameFromTitle, shorten, useSources } from './caption.ts';
+
+// These rules are tested on their own, without the hand-checked overrides and structured captions of the real library.
+beforeEach(() => useSources({ overrides: {}, labels: {} }));
+afterEach(() => useSources(undefined));
 
 const text = (d: string, t = 'File:X.jpg') => captionFor(d, t)?.text;
 

@@ -55,3 +55,9 @@ describe('authorName fallbacks', () => {
     expect(authorName('Original uploader was Cormullion at en.wikipedia')).toBe('Cormullion');
   });
 });
+
+describe('authorName from an e-mail address alone', () => {
+  it('uses the part before the @ as a name', () => {
+    expect(authorName('Lorenz.King@geogr.uni-giessen.de')).toBe('Lorenz King');
+  });
+});

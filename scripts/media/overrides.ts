@@ -3,19 +3,23 @@
  * caption code reads (`scripts/media/captions-override.json`, keyed by Commons file title).
  *
  * A decision is one line: `drop|<start of the caption>` removes the picture, and
- * `set|<start of the caption>|=><new caption>` replaces the caption. The start of the caption is matched against
+ * `set|<start of the caption>|=><new caption>` replaces the caption, and
+ * `title|<start of the Commons file name>|=><caption>` gives a picture a caption of its own (a file whose Commons
+ * description says nothing a child can read: the caption is written by hand from what the file's own page says). The start of the caption is matched against
  * the captions the library would show now (taken from `--dump <file>`, a JSON list of `{ title, text }`), so a
  * decision survives a rebuild: it is stored against the Commons title, not the caption.
  *
  *   npx tsx scripts/media/overrides.ts --dump .scratch/dump.json
  */
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { commonsTitle } from './select.ts';
 
 const OVERRIDES = 'scripts/media/captions-override.json';
 const DECISIONS = 'scripts/media/captions-decisions.txt';
 
 export interface Decision {
-  action: 'drop' | 'set';
+  action: 'drop' | 'set' | 'title';
   prefix: string;
   to?: string;
 }
@@ -25,8 +29,8 @@ export function parseDecisions(text: string): Decision[] {
   for (const line of text.split('\n')) {
     if (line.trim() === '' || line.startsWith('#')) continue;
     const [action, prefix, rest] = line.split('|');
-    if ((action !== 'drop' && action !== 'set') || !prefix) throw new Error(`Not a decision: ${line}`);
-    out.push(action === 'set' ? { action, prefix, to: (rest ?? '').replace(/^=>/, '') } : { action, prefix });
+    if ((action !== 'drop' && action !== 'set' && action !== 'title') || !prefix) throw new Error(`Not a decision: ${line}`);
+    out.push(action === 'drop' ? { action, prefix } : { action, prefix, to: (rest ?? '').replace(/^=>/, '') });
   }
   return out;
 }
@@ -44,7 +48,23 @@ if (process.argv[1]?.endsWith('overrides.ts')) {
   const unresolved: string[] = [];
   let dropped = 0;
   let rewritten = 0;
+  const candidateTitles = new Set<string>();
+  if (decisions.some((d) => d.action === 'title')) {
+    const dir = join('data', 'media', 'candidates');
+    for (const f of readdirSync(dir).filter((x) => x.endsWith('.json'))) {
+      for (const c of (JSON.parse(readFileSync(join(dir, f), 'utf8')) as { candidates: Array<{ title: string }> }).candidates) candidateTitles.add(commonsTitle(c.title));
+    }
+  }
   for (const d of decisions) {
+    if (d.action === 'title') {
+      const found = [...candidateTitles].filter((t) => t.startsWith(`File:${d.prefix}`));
+      if (found.length === 0) unresolved.push(d.prefix);
+      for (const t of found) {
+        captions[t] = d.to ?? null;
+        rewritten++;
+      }
+      continue;
+    }
     const hits = rows.filter((r) => r.text.startsWith(d.prefix));
     if (hits.length === 0) unresolved.push(d.prefix);
     for (const h of hits) {
