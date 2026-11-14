@@ -5,6 +5,7 @@ import { useTitle } from '../../app/useTitle.ts';
 import { MarginNote, StripHeading } from '../../design/paper.tsx';
 import { parseMarkdown } from '../../lib/text/markdown.ts';
 import { MediaCredits } from './MediaCredits.tsx';
+import { PAGE_SIZE, Paged } from './Paged.tsx';
 import './credits.css';
 
 /** Renders `code`, [links](url) and plain text without injecting HTML. */
@@ -58,7 +59,35 @@ export default function CreditsScreen() {
               ))}
             </ul>
           ) : null}
-          {b.kind === 'table' ? (
+          {b.kind === 'table' && b.rows.length > PAGE_SIZE ? (
+            <Paged rows={b.rows} text={(r) => r.join(' ')} label="credits">
+              {(shown) => (
+                <div className="credits__table">
+                  <table>
+                    <thead>
+                      <tr>
+                        {b.head.map((h) => (
+                          <th key={h} scope="col">
+                            {h}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {shown.map((r) => (
+                        <tr key={r.join('|')}>
+                          {r.map((c, j) => (
+                            <td key={j}>{inline(c)}</td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </Paged>
+          ) : null}
+          {b.kind === 'table' && b.rows.length <= PAGE_SIZE ? (
             <div className="credits__table">
               <table>
                 <thead>
