@@ -1,16 +1,15 @@
 # Credits
 
-Awari is built from openly licensed material. Every bundled photo and data
-file under `public/` is listed here with its source and licence; the
-`npm run credits` check (and a Kiro hook) fails if one is missing.
+Awari is built from openly licensed material. Every photo and every data file
+in the app is listed here with where it came from and the licence it comes
+with. A check stops the build if one is missing.
 
 ## Design kit photos
 
 Resized copies of photos from Wikimedia Commons, used on Home and as
-stamps. Each row names its Commons file, and `npm run licences` asks the
-Commons API for every one of them (existence, licence, author and listed
-restrictions); the result is saved in `public/media/licences.json` and the
-submission check fails on any mismatch.
+stamps. Each row names its Commons file. Before every release a check asks
+Wikimedia Commons about each one (does it exist, which licence, who is the
+author, any restrictions) and the build stops on any mismatch.
 
 | File | Subject | Author | Licence | Commons page |
 | --- | --- | --- | --- | --- |

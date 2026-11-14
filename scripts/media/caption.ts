@@ -100,6 +100,12 @@ export function shorten(text: string, max = MAX): string {
   if (sentence?.[1] && sentence[1].length <= max) return sentence[1].replace(/[.]$/, '');
   if (t.length <= max) return t.replace(/[.;:,\s]+$/, '');
   const cut = t.slice(0, max);
+  // Prefer to stop at a clause ("..., and then ..."), which needs no ellipsis, over a cut in the middle of one.
+  const clause = [...cut.matchAll(/[,;]\s|\s[–—-]\s/g)].map((m) => m.index ?? 0).filter((i) => i >= 28).pop();
+  if (clause !== undefined) {
+    const head = cut.slice(0, clause).replace(/[\s,;:(–-]+$/, '');
+    if (!DANGLING.test(head) && (head.match(/\(/g) ?? []).length === (head.match(/\)/g) ?? []).length) return head;
+  }
   const space = cut.lastIndexOf(' ');
   let out = cut.slice(0, space > 20 ? space : max).replace(/[\s,;:(–-]+$/, '');
   // Back off over a trailing preposition or article: "... during" is not where a caption may stop.
@@ -142,6 +148,10 @@ export function tidy(description: string): string {
   const keyed = /^[a-z ]{3,24}:\s/i.test(d) ? /\bdescription\s*:\s*(.+)$/i.exec(d) : null;
   if (/^(?:object type|title|name|object|inscription)\s*:/i.test(d)) d = keyed?.[1] ? collapse(keyed[1]) : '';
   d = d.replace(/^[*•\s]+/, '');
+  // Archive and pipeline residue at the front of a description.
+  d = d.replace(/^(?:\([^)]{0,80}\)\s*)+(?=\p{L})/u, '');
+  d = d.replace(/^(?:depicted (?:person|people|place|object)|abstract|summary|translation of (?:the )?original description|(?:\d+px|flickr|wikipedia|google|geograph|nasa|esa) (?:provided )?description|html|description|beschreibung)\s*[:–-]?\s+/i, '');
+  d = d.replace(/^[A-Z]{0,4}\d{5,}[A-Z0-9-]*\s*[-–:]?\s+/, '');
   d = d.replace(/^caption\s*:\s*/i, '');
   d = d.replace(/^original caption(?: from [^:]{1,40})?\s*:\s*/i, '');
   d = d.replace(/^(?:this is (?:an?|the) (?:photo|picture|image|photograph) (?:of|showing)\s+|(?:photo|picture|image|photograph) of\s+)/i, '');

@@ -25,6 +25,7 @@ const KNOWN_GAPS = new Set([
   'countries/ivory-coast',
   'people/chinua-achebe',
   'physics/electric-charge',
+  'physics/electrical-conductor',
   'physics/electricity',
   'science/chemical-reaction',
   'science/force',

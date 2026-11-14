@@ -141,7 +141,7 @@ export function Quiz({ quiz, externalUrl }: { quiz: QuizSet; externalUrl?: strin
         </div>
       </div>
       <MarginNote tilt={-2} size={28} className="quiz__note crowding" style={{ color: 'var(--teal-ink)' }}>
-        Stuck? Every question has three hints.
+        How many can you get without a hint?
       </MarginNote>
       {state.status === 'done' || !q ? (
         <Finished quiz={quiz} state={state} externalUrl={externalUrl} />
