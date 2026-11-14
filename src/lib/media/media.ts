@@ -5,8 +5,8 @@
  */
 import { useEffect, useState } from 'react';
 
-/** One row of `index.json`: id, article key, kind, thumbnail width and height, caption. */
-export type IndexRow = readonly [id: string, article: string, kind: string, tw: number, th: number, caption: string];
+/** One row of `index.json`: id, article key, kind, thumbnail width and height, caption, and the place in the default order (0 is first). */
+export type IndexRow = readonly [id: string, article: string, kind: string, tw: number, th: number, caption: string, rank?: number];
 
 export interface MediaIndex {
   built: string;
@@ -36,6 +36,10 @@ export interface MediaItem {
   tw: number;
   th: number;
   verified: string;
+  /** 3 Commons Featured, 2 Quality image, 1 Valued image, 0 none. */
+  quality?: number;
+  /** The first picture of its article. */
+  lead?: boolean;
 }
 
 export interface MediaFile {

@@ -4,7 +4,7 @@ One commit per task, log row in `docs/kiro-log.md`, tests before ticking.
 
 - [x] 1. Captions: stricter rules, structured captions, hand-checked overrides, counts per rule.
 - [x] 2. Author display names.
-- [ ] 3. Pictures screen default order by quality.
+- [x] 3. Pictures screen default order by quality.
 - [ ] 4. Lead pictures (whole subject, highest score).
 - [ ] 5. Quiz card picture from its own article, with test.
 - [ ] 6. Articles under four pictures: list, fill from Commons category.

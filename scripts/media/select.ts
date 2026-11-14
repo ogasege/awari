@@ -174,6 +174,12 @@ function recognition(c: Candidate): number {
   return n;
 }
 
+/** 3 for a Commons Featured picture, 2 for a Quality image, 1 for a Valued image, else 0. */
+export function qualityOf(c: Pick<Candidate, 'categories'>): number {
+  const cats = c.categories.join(' ').toLowerCase();
+  return /featured pictures/.test(cats) ? 3 : /quality images/.test(cats) ? 2 : /valued images/.test(cats) ? 1 : 0;
+}
+
 /** A score for an allowed candidate: recognition, then use in the article itself, a landscape frame and size. */
 export function score(c: Candidate): number {
   const ratio = c.width / Math.max(1, c.height);

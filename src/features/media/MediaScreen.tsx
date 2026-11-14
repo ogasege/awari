@@ -67,9 +67,9 @@ export default function MediaScreen() {
   const filterKey = `${subject}|${kind}|${query}`;
   const [more, setMore] = useState<{ key: string; n: number }>({ key: filterKey, n: PAGE });
   const shown = more.key === filterKey ? more.n : PAGE;
-  // With no filter the grid starts with a mix of every subject, in a fixed order (a hash of the id), not with whichever
-  // subject file was written first.
-  const rows = useMemo(() => (index.status === 'ready' ? [...index.data.items].sort((a, b) => mixOf(a[0]) - mixOf(b[0])) : []), [index]);
+  // With no filter the grid opens on the best pictures (Commons Featured, Quality and Valued, then article leads, one per
+  // article before any repeats), in the order the build ranked them; rows without a rank keep a fixed mix.
+  const rows = useMemo(() => (index.status === 'ready' ? [...index.data.items].sort((a, b) => (a[6] ?? 1e9) - (b[6] ?? 1e9) || mixOf(a[0]) - mixOf(b[0])) : []), [index]);
   const matches = useMemo(() => filterRows(rows, subject, kind, query), [rows, subject, kind, query]);
   // Emblems are not collected, and a diagram only when it is a recognised picture: no chip for a kind the library skips.
   const kinds = useMemo(() => [...new Set(rows.map((r) => r[2]))].filter((k) => k !== 'emblem').sort(), [rows]);

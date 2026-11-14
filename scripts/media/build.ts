@@ -15,7 +15,7 @@ import { captionWithBasis } from './caption.ts';
 import type { Collected } from './collect.ts';
 import { requestCount } from './http.ts';
 import { readRecords } from './licences.ts';
-import { MIN_PER_ARTICLE, commonsTitle, keepFor, kindOf, selectForArticle, subjectOf, type Kind } from './select.ts';
+import { MIN_PER_ARTICLE, commonsTitle, keepFor, kindOf, qualityOf, selectForArticle, subjectOf, type Kind } from './select.ts';
 import { IMG_DIR, ensureThumb, folderBytes, thumbName } from './thumbs.ts';
 
 const CANDIDATES = join('data', 'media', 'candidates');
@@ -48,6 +48,10 @@ export interface MediaItem {
   tw: number;
   th: number;
   verified: string;
+  /** 3 Commons Featured picture, 2 Quality image, 1 Valued image, 0 none. */
+  quality: number;
+  /** The first picture of its article (the lead). */
+  lead: boolean;
 }
 
 function* articles(): Generator<{ saved: Saved; chosen: Collected[] }> {
@@ -125,6 +129,35 @@ export function dailyPictures(items: readonly MediaItem[]): Array<Pick<MediaItem
   return Array.from({ length: 366 }, (_, i) => pick(order[i % Math.max(1, order.length)] as MediaItem)).filter(Boolean);
 }
 
+/** Subjects whose pictures look good on a first screen: not anatomy, not apparatus. */
+const SHOWY = new Set(['wildlife', 'earth', 'space', 'ancient', 'countries', 'arts', 'people']);
+
+/**
+ * The default order of the Pictures screen (24-review-4 Req 3). Tiers, best first: Commons Featured, Quality and
+ * Valued photographs and art of the showy subjects; the lead pictures of those; other recognised pictures; other
+ * leads; the rest. Inside a tier one picture per article comes before any article repeats, and the articles are
+ * mixed by a hash so no subject runs. Body pictures, maps, diagrams and flags never open the screen. Returns each
+ * picture's position (0 is first).
+ */
+export function rankPictures(items: readonly Pick<MediaItem, 'id' | 'article' | 'kind' | 'quality' | 'lead'>[]): Map<string, number> {
+  const tierOf = (m: Pick<MediaItem, 'article' | 'kind' | 'quality' | 'lead'>): number => {
+    const showy = SHOWY.has(m.article.split('/')[0] ?? '') && !['map', 'diagram', 'flag', 'emblem'].includes(m.kind);
+    if (showy && m.quality > 0) return 0;
+    if (showy && m.lead) return 1;
+    if (m.quality > 0 && m.kind !== 'diagram') return 2;
+    if (m.lead) return 3;
+    return 4;
+  };
+  const seenInArticle = new Map<string, number>();
+  const keyed = items.map((m) => {
+    const n = seenInArticle.get(m.article) ?? 0;
+    seenInArticle.set(m.article, n + 1);
+    return { m, tier: tierOf(m), n };
+  });
+  keyed.sort((a, b) => a.tier - b.tier || a.n - b.n || b.m.quality - a.m.quality || hashOf(a.m.article) - hashOf(b.m.article) || a.m.id.localeCompare(b.m.id));
+  return new Map(keyed.map((k, i) => [k.m.id, i]));
+}
+
 async function records(): Promise<void> {
   const today = new Date().toISOString().slice(0, 10);
   const bySubject = new Map<string, MediaItem[]>();
@@ -172,16 +205,19 @@ async function records(): Promise<void> {
         tw: meta.width ?? 480,
         th: meta.height ?? Math.round((480 * c.height) / Math.max(1, c.width)),
         verified: today,
+        quality: qualityOf(c),
+        lead: items.length === 0,
       });
     }
     if (items.length < MIN_PER_ARTICLE) short.push(`${saved.article.key} (${items.length})`);
     bySubject.set(saved.article.pack, [...(bySubject.get(saved.article.pack) ?? []), ...items]);
   }
   mkdirSync(OUT, { recursive: true });
-  const index: Array<[string, string, string, number, number, string]> = [];
+  const index: Array<[string, string, string, number, number, string, number]> = [];
+  const rank = rankPictures([...bySubject.values()].flat());
   for (const [subject, items] of bySubject) {
     writeFileSync(join(OUT, `${subject}.json`), `${JSON.stringify({ subject, built: today, count: items.length, items })}\n`);
-    for (const m of items) index.push([m.id, m.article, m.kind, m.tw, m.th, m.caption]);
+    for (const m of items) index.push([m.id, m.article, m.kind, m.tw, m.th, m.caption, rank.get(m.id) ?? 0]);
   }
   writeFileSync(join(OUT, 'index.json'), `${JSON.stringify({ built: today, count: index.length, subjects: [...bySubject.keys()].sort(), items: index })}\n`);
   writeFileSync(join(OUT, 'daily.json'), `${JSON.stringify({ built: today, days: dailyPictures([...bySubject.values()].flat()) })}\n`);
