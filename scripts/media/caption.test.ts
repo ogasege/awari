@@ -61,4 +61,12 @@ describe('captions', () => {
     expect(captionFor('Royal Regalie, Museum der Präsente anlässlich der Inthronisierung des Sultans', 'File:Sultan regalia.jpg', 'Oman').source).toBe('title');
     expect(captionFor('A lion resting in the shade of a tree', 'File:Lion.jpg', 'Lion').source).toBe('description');
   });
+
+  it('does not caption a picture with a sentence about the file, and closes up spaces before commas', () => {
+    for (const d of ['This media has been taken in the country of Malta', 'This photo demonstrates the texture and colour of a dog nose', 'This is a visual depicting how T helper cells work', 'Appears to be an albino Elk, located in Sweden']) {
+      expect(captionFor(d, 'File:Dog nose.jpg', 'Dog').source, d).not.toBe('description');
+    }
+    expect(captionFor('Ravensburg , Germany: Papierkrattler at the carnival', 'File:X.jpg', 'Germany').text).toBe('Ravensburg, Germany: Papierkrattler at the carnival');
+    expect(captionFor('A lion resting in the shade of a tree', 'File:Lion.jpg', 'Lion').source).toBe('description');
+  });
 });

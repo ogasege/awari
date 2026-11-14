@@ -14,6 +14,9 @@ export interface Caption {
 const MAX = 90;
 const JUNK = /https?:|\{\{|\}\}|wikidata|category:|\bq\d{3,}\b|\.jpe?g|\.png|\bimg[_ ]?\d|\bdsc[_n ]?\d|\bcopyright\b|\bphoto by\b|\buploaded\b|\bsource:|\bown work\b|\bversion \d|textbook|\bpublished\b|\bfig(?:ure)?\.? ?\d|\d{4}-\d{2}-\d{2}|\bretrieved\b|\bvia\b|\bscan(?:ned)?\b|\bcrop(?:ped)?\b|\bdetail of\b|\bfile:/i;
 
+/** A description that talks about the file itself ("This media has been taken in ...") says nothing about the picture. */
+const SELF = /^(?:this|these|the following|here is|here are|appears to|seems to|a media|media|file|image|photo|picture|photograph|diagram|illustration|map)\b[^.]{0,40}\b(?:is|are|was|were|has|have|been|demonstrates?|shows?|depicts?|illustrates?|represents?|appears?|seems?|taken|made|created|uploaded)\b/i;
+
 const ENGLISH = /\b(?:the|of|in|a|an|and|from|with|at|on|is|are|was|by|to|near|view)\b/gi;
 const FOREIGN = /\b(?:der|die|das|und|von|mit|f[üu]r|anl[äa]sslich|im|zum|le|la|les|des|du|une|et|dans|sur|el|los|las|del|una|con|por|il|lo|gli|di|che|het|een|voor)\b/gi;
 
@@ -64,13 +67,14 @@ export function tidy(description: string): string {
   const keyed = /^[a-z ]{3,24}:\s/i.test(d) ? /\bdescription\s*:\s*(.+)$/i.exec(d) : null;
   if (/^(?:object type|title|name|object|inscription)\s*:/i.test(d)) d = keyed?.[1] ? collapse(keyed[1]) : '';
   d = d.replace(/^(?:this is (?:an?|the) (?:photo|picture|image|photograph) (?:of|showing)\s+|(?:photo|picture|image|photograph) of\s+)/i, '');
+  d = d.replace(/\s+([,.;:!?])/g, '$1');
   return d.charAt(0).toUpperCase() + d.slice(1);
 }
 
 /** The caption for one picture. */
 export function captionFor(description: string, title: string, articleTitle: string): Caption {
   const d = tidy(description);
-  if (d.length >= 12 && d.split(' ').length >= 3 && !JUNK.test(d) && looksEnglish(d)) {
+  if (d.length >= 12 && d.split(' ').length >= 3 && !JUNK.test(d) && !SELF.test(d) && !/^appears to\b/i.test(d) && looksEnglish(d)) {
     return { text: shorten(d), source: 'description' };
   }
   const n = nameFromTitle(title);
