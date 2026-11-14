@@ -33,7 +33,7 @@ paper strips, wobbly SVG doodles, torn edges.
 - **Wander the timeline** of <!--n:events-->1530<!--/n--> dates from Wikidata, by subject and by
   continent, and see what happened **on this day** on Home, where the prints, notes and
   suggestions change every day.
-- **Look at the world**: <!--n:mediaPictures-->4106<!--/n--> pictures from Wikimedia Commons, four or more for every article but one (Radioactive decay has two usable ones),
+- **Look at the world**: <!--n:mediaPictures-->4106<!--/n--> pictures from Wikimedia Commons, four or more for all but seven articles (where Commons has too few pictures that pass the filters),
   in a strip under each article, on a **Pictures** screen with filters, search and a surprise pile, as the
   **picture of the day** on Home, and as picture questions in the Castle and picture quizzes. Every picture's author
   and licence is read from the Commons API by `npm run licences`, which the submission check runs.

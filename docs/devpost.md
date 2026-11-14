@@ -39,7 +39,7 @@ discovery.
   rooms each.
 - **A timeline** of <!--n:events-->1530<!--/n--> dates across every subject and continent, and **On
   this day** on Home, which also rotates its prints, notes and suggestions daily.
-- **A picture library** of <!--n:mediaPictures-->4106<!--/n--> Commons pictures (four or more per article but one, <!--n:mediaMB-->89<!--/n--> MB of small WebP copies): an article strip, a large view with the credit, a Pictures screen, the picture of the day and picture questions. No licence is typed by hand: `npm run licences` asks the Commons API about <!--n:mediaVerified-->4602<!--/n--> images and fails the submission check on any mismatch.
+- **A picture library** of <!--n:mediaPictures-->4106<!--/n--> Commons pictures (four or more per article but seven, <!--n:mediaMB-->88<!--/n--> MB of small WebP copies): an article strip, a large view with the credit, a Pictures screen, the picture of the day and picture questions. No licence is typed by hand: `npm run licences` asks the Commons API about <!--n:mediaVerified-->4602<!--/n--> images and fails the submission check on any mismatch.
 - **Offline**: a hand-written service worker saves the whole bundle. After one visit every bundled
   feature works in airplane mode, and the header says honestly whether the site has been saved.
 - **An optional quiz service** (AWS Lambda calling Amazon Bedrock) that checks every generated
@@ -48,7 +48,7 @@ discovery.
 ## How we built it
 
 React 19, TypeScript and Vite, with hand-made components for the scrapbook look and no UI
-framework. The main script is <!--n:mainScriptKB-->267<!--/n--> KB, under the 300 KB budget;
+framework. The main script is <!--n:mainScriptKB-->269<!--/n--> KB, under the 300 KB budget;
 packs load on demand. Content is built by one command, `npm run packs`, from Simple English
 Wikipedia, Wikidata, Natural Earth, Open English WordNet and Wikimedia Commons, and every record
 carries its source and licence. Infrastructure is Terraform (private S3 behind CloudFront, and

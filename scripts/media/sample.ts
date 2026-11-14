@@ -57,7 +57,7 @@ async function sheet(items: readonly MediaItem[], n: number): Promise<string> {
   return file;
 }
 
-const random = seeded(20261114);
+const random = seeded(20261115);
 const subjects = readdirSync(MEDIA).filter((f) => f.endsWith('.json') && !['index.json', 'daily.json', 'licences.json'].includes(f));
 const all: MediaItem[] = subjects.flatMap((f) => (JSON.parse(readFileSync(join(MEDIA, f), 'utf8')) as { items: MediaItem[] }).items);
 
@@ -67,7 +67,7 @@ const audit = shuffle(all, random).slice(0, auditN);
 mkdirSync(SHEETS, { recursive: true });
 writeFileSync(
   join(OUT, 'media-sample.json'),
-  `${JSON.stringify({ seed: 20261114, total: all.length, sample: auditN, items: audit.map((m) => ({ id: m.id, path: `media/${m.thumb}`, title: m.title, author: m.author, licence: m.licence, page: m.page })) }, null, 1)}\n`,
+  `${JSON.stringify({ seed: 20261115, total: all.length, sample: auditN, items: audit.map((m) => ({ id: m.id, path: `media/${m.thumb}`, title: m.title, author: m.author, licence: m.licence, page: m.page })) }, null, 1)}\n`,
 );
 
 // 2. 200 pictures spread over the subjects, for the design reviewer.

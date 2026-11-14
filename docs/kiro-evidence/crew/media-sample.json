@@ -1,1511 +1,687 @@
 {
- "seed": 20261114,
+ "seed": 20261115,
  "total": 4106,
  "sample": 206,
  "items": [
   {
-   "id": "aea274348e7f284a",
-   "path": "media/img/aea274348e7f284a.webp",
-   "title": "File:No 18 Rektorat Universitas Indonesia.jpg",
-   "author": "Ilham Kuniawan Gumilang",
+   "id": "60672c178d7dcf73",
+   "path": "media/img/60672c178d7dcf73.webp",
+   "title": "File:Academy of Athens by ArmAg (2).jpg",
+   "author": "Armineaghayan",
    "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:No_18_Rektorat_Universitas_Indonesia.jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Academy_of_Athens_by_ArmAg_(2).jpg"
   },
   {
-   "id": "c8c3518adaa7f8b1",
-   "path": "media/img/c8c3518adaa7f8b1.webp",
-   "title": "File:Place D’Armes, Port Louis, Mauritius 1930s.jpg",
-   "author": "Oderuth",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Place_D%E2%80%99Armes,_Port_Louis,_Mauritius_1930s.jpg"
-  },
-  {
-   "id": "70633c67b9f32043",
-   "path": "media/img/70633c67b9f32043.webp",
-   "title": "File:Seven sleepers (Menologion of Basil II).jpg",
-   "author": "Authors of Menologion of Basil II (circa 985 AC, Constantinople), Byzantine manuscript illuminators [1] : Pantoleon with Georgios, Michael the Younger, Michael of Blachernae, Symeon, Symeon of Blachernae, Menas, and Nestor ( Online on Vatican site )",
+   "id": "1fd99809952e3fc5",
+   "path": "media/img/1fd99809952e3fc5.webp",
+   "title": "File:Still life Tor Marancia Vatican.jpg",
+   "author": "Unknown artist Unknown artist",
    "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Seven_sleepers_(Menologion_of_Basil_II).jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Still_life_Tor_Marancia_Vatican.jpg"
   },
   {
-   "id": "e8f796209ccfb221",
-   "path": "media/img/e8f796209ccfb221.webp",
-   "title": "File:Pro-constitutional reform demonstration in Brazzaville - 2015-10 (21518932913).jpg",
-   "author": "Daniel Massamba",
-   "licence": "CC BY 2.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Pro-constitutional_reform_demonstration_in_Brazzaville_-_2015-10_(21518932913).jpg"
-  },
-  {
-   "id": "e9351f64f0959e0e",
-   "path": "media/img/e9351f64f0959e0e.webp",
-   "title": "File:Brasão de São Tome 1962 (Cidade).png",
-   "author": "Motiv888",
+   "id": "5b74f278f018bb27",
+   "path": "media/img/5b74f278f018bb27.webp",
+   "title": "File:Composition of the Universe by Mass 01.png",
+   "author": "Dimitrios Kazantzidis",
    "licence": "CC BY 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Bras%C3%A3o_de_S%C3%A3o_Tome_1962_(Cidade).png"
+   "page": "https://commons.wikimedia.org/wiki/File:Composition_of_the_Universe_by_Mass_01.png"
   },
   {
-   "id": "3cefd7992696d23e",
-   "path": "media/img/3cefd7992696d23e.webp",
-   "title": "File:Oasis de Tergit (02).jpg",
-   "author": "Ji-Elle",
+   "id": "0cd6ee0cebbfc498",
+   "path": "media/img/0cd6ee0cebbfc498.webp",
+   "title": "File:Mountain in Wadi Rum, Jordan.jpg",
+   "author": "Daniel Case",
    "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Oasis_de_Tergit_(02).jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Mountain_in_Wadi_Rum,_Jordan.jpg"
   },
   {
-   "id": "488b5734fe22fe2f",
-   "path": "media/img/488b5734fe22fe2f.webp",
-   "title": "File:Traffic police stand in Nassau.jpg",
-   "author": "Jay.Jarosz",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Traffic_police_stand_in_Nassau.jpg"
+   "id": "ea9471c8f95c8754",
+   "path": "media/img/ea9471c8f95c8754.webp",
+   "title": "File:Castelul Bran2.jpg",
+   "author": "Dobre Cezar",
+   "licence": "CC BY-SA 3.0 ro",
+   "page": "https://commons.wikimedia.org/wiki/File:Castelul_Bran2.jpg"
   },
   {
-   "id": "ac598239b2d4ea87",
-   "path": "media/img/ac598239b2d4ea87.webp",
-   "title": "File:Saint Lucia geography map en.png",
-   "author": "No machine-readable author provided. Doviende~commonswiki assumed (based on copyright claims).",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Saint_Lucia_geography_map_en.png"
+   "id": "8c5b4c69de6bec89",
+   "path": "media/img/8c5b4c69de6bec89.webp",
+   "title": "File:Canada in 2014.jpg",
+   "author": "Davy Landman",
+   "licence": "CC BY-SA 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Canada_in_2014.jpg"
   },
   {
-   "id": "80adcfb79b624ace",
-   "path": "media/img/80adcfb79b624ace.webp",
-   "title": "File:Antistatic bag.jpg",
-   "author": "Zidane2k1 at English Wikipedia",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Antistatic_bag.jpg"
-  },
-  {
-   "id": "fbfefc55f164bdd3",
-   "path": "media/img/fbfefc55f164bdd3.webp",
-   "title": "File:Ptuj, city cinema.jpg",
-   "author": "Ajznponar",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Ptuj,_city_cinema.jpg"
-  },
-  {
-   "id": "c58d83a0a9a86789",
-   "path": "media/img/c58d83a0a9a86789.webp",
-   "title": "File:Historic copy of selected parts of the Travel Report by Ibn Battuta, 1836 CE, Cairo.jpg",
-   "author": "Osama Shukir Muhammed Amin FRCP(Glasg)",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Historic_copy_of_selected_parts_of_the_Travel_Report_by_Ibn_Battuta,_1836_CE,_Cairo.jpg"
-  },
-  {
-   "id": "597b414e5ce1c4f2",
-   "path": "media/img/597b414e5ce1c4f2.webp",
-   "title": "File:Gurudongmar Lake Sikkim, India (edit).jpg",
-   "author": "Original: Yoghya Derivative work: UnpetitproleX",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Gurudongmar_Lake_Sikkim,_India_(edit).jpg"
-  },
-  {
-   "id": "12269a1a1a0e9531",
-   "path": "media/img/12269a1a1a0e9531.webp",
-   "title": "File:Mammoth ivory hg.jpg",
-   "author": "Hannes Grobe, Hgrobe 21:21, 4 July 2006 (UTC)",
+   "id": "0a35d6ef2aabf6c8",
+   "path": "media/img/0a35d6ef2aabf6c8.webp",
+   "title": "File:2045 - Salzburg - Mozartplatz.JPG",
+   "author": "Andrew Bossi",
    "licence": "CC BY-SA 2.5",
-   "page": "https://commons.wikimedia.org/wiki/File:Mammoth_ivory_hg.jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:2045_-_Salzburg_-_Mozartplatz.JPG"
   },
   {
-   "id": "a4845f02bbcc88f5",
-   "path": "media/img/a4845f02bbcc88f5.webp",
-   "title": "File:Antananarivo Madagascar people reading news.JPG",
-   "author": "Lemurbaby",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Antananarivo_Madagascar_people_reading_news.JPG"
-  },
-  {
-   "id": "4ebaa1190bddcd17",
-   "path": "media/img/4ebaa1190bddcd17.webp",
-   "title": "File:Valtice - Coats of Arms from Liechtenstein Family.jpg",
-   "author": "Txllxt TxllxT",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Valtice_-_Coats_of_Arms_from_Liechtenstein_Family.jpg"
-  },
-  {
-   "id": "d95ace2fb7f9c6ef",
-   "path": "media/img/d95ace2fb7f9c6ef.webp",
-   "title": "File:Aksum obelisk.jpg",
-   "author": "Tesfawel",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Aksum_obelisk.jpg"
-  },
-  {
-   "id": "183bafb962e2ff14",
-   "path": "media/img/183bafb962e2ff14.webp",
-   "title": "File:50 largest Greek diaspora.png",
-   "author": "Wiz9999",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:50_largest_Greek_diaspora.png"
-  },
-  {
-   "id": "520d6c988e63097c",
-   "path": "media/img/520d6c988e63097c.webp",
-   "title": "File:Hotel in Lobito.JPG",
-   "author": "Paulo César Santos",
-   "licence": "CC0",
-   "page": "https://commons.wikimedia.org/wiki/File:Hotel_in_Lobito.JPG"
-  },
-  {
-   "id": "a84c9082cacb45cf",
-   "path": "media/img/a84c9082cacb45cf.webp",
-   "title": "File:Polish-Lithuanian Commonwealth in 1619.PNG",
-   "author": "User:Mathiasrex , based on layers of User:Halibutt",
-   "licence": "CC BY 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Polish-Lithuanian_Commonwealth_in_1619.PNG"
-  },
-  {
-   "id": "83f002e6450d51f3",
-   "path": "media/img/83f002e6450d51f3.webp",
-   "title": "File:Burroughs adding machine display in Oxford National Bank window 1916 (3191737484).jpg",
-   "author": "Snyder, Frank R. Flickr: Miami U. Libraries - Digital Collections",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Burroughs_adding_machine_display_in_Oxford_National_Bank_window_1916_(3191737484).jpg"
-  },
-  {
-   "id": "32a85dcc4119bb14",
-   "path": "media/img/32a85dcc4119bb14.webp",
-   "title": "File:X-Ray Photograph of Tesla's left hand.jpg",
-   "author": "Nikola Tesla",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:X-Ray_Photograph_of_Tesla%27s_left_hand.jpg"
-  },
-  {
-   "id": "34acc3c62a7c2ed5",
-   "path": "media/img/34acc3c62a7c2ed5.webp",
-   "title": "File:Stick chart-BHM 1920.530.0032-P8260228.JPG",
-   "author": "Rama",
-   "licence": "CC BY-SA 3.0 fr",
-   "page": "https://commons.wikimedia.org/wiki/File:Stick_chart-BHM_1920.530.0032-P8260228.JPG"
-  },
-  {
-   "id": "8e9155627efa7c41",
-   "path": "media/img/8e9155627efa7c41.webp",
-   "title": "File:Reza Abbasi - Two Lovers (1630).jpg",
-   "author": "Reza Abbasi",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Reza_Abbasi_-_Two_Lovers_(1630).jpg"
-  },
-  {
-   "id": "e63390aa4b1e90da",
-   "path": "media/img/e63390aa4b1e90da.webp",
-   "title": "File:Ada Lovelace statue 2024-10-03.jpg",
-   "author": "Matt Brown",
+   "id": "ca02eef6a42734b1",
+   "path": "media/img/ca02eef6a42734b1.webp",
+   "title": "File:Cruise Port.jpg",
+   "author": "Thank You (23 Millions+) views",
    "licence": "CC BY 2.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Ada_Lovelace_statue_2024-10-03.jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Cruise_Port.jpg"
   },
   {
-   "id": "49f97db7e3a41600",
-   "path": "media/img/49f97db7e3a41600.webp",
-   "title": "File:David - Portrait of Monsieur Lavoisier (cropped).jpg",
-   "author": "Jacques-Louis David",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:David_-_Portrait_of_Monsieur_Lavoisier_(cropped).jpg"
+   "id": "c56eb49e11b596c6",
+   "path": "media/img/c56eb49e11b596c6.webp",
+   "title": "File:CongoLualaba watershed plain political.png",
+   "author": "Imagico",
+   "licence": "CC BY-SA 2.5",
+   "page": "https://commons.wikimedia.org/wiki/File:CongoLualaba_watershed_plain_political.png"
   },
   {
-   "id": "c4abe556552bf90a",
-   "path": "media/img/c4abe556552bf90a.webp",
-   "title": "File:Isa Bin Ali House.jpg",
-   "author": "fuzzytnth3",
-   "licence": "CC BY-SA 2.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Isa_Bin_Ali_House.jpg"
-  },
-  {
-   "id": "4907a41609173b62",
-   "path": "media/img/4907a41609173b62.webp",
-   "title": "File:Antennae galaxies xl.jpg",
-   "author": "NASA, ESA, and the Hubble Heritage Team (STScI/AURA)-ESA/Hubble Collaboration",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Antennae_galaxies_xl.jpg"
-  },
-  {
-   "id": "c6716effe47f7eb6",
-   "path": "media/img/c6716effe47f7eb6.webp",
-   "title": "File:Cristo Redentor - Rio de Janeiro - 20230321174546.jpg",
-   "author": "Donatas Dabravolskas",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Cristo_Redentor_-_Rio_de_Janeiro_-_20230321174546.jpg"
-  },
-  {
-   "id": "0e2d5e937f1b0926",
-   "path": "media/img/0e2d5e937f1b0926.webp",
-   "title": "File:Nile Crocodile (Crocodylus niloticus) trying to swallow a big Tilapia (Oreochromis sp.)... (16818888756).jpg",
-   "author": "Bernard DUPONT from FRANCE",
-   "licence": "CC BY-SA 2.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Nile_Crocodile_(Crocodylus_niloticus)_trying_to_swallow_a_big_Tilapia_(Oreochromis_sp.)..._(16818888756).jpg"
-  },
-  {
-   "id": "f40ab61a973db007",
-   "path": "media/img/f40ab61a973db007.webp",
-   "title": "File:Sthenurus.jpg",
-   "author": "Enlil Ninlil2",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Sthenurus.jpg"
-  },
-  {
-   "id": "65baa562534346c3",
-   "path": "media/img/65baa562534346c3.webp",
-   "title": "File:00 Bruxelles - Mont des Arts.jpg",
-   "author": "Jean-Pol GRANDMONT",
-   "licence": "CC BY 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:00_Bruxelles_-_Mont_des_Arts.jpg"
-  },
-  {
-   "id": "34706d6154c5fa61",
-   "path": "media/img/34706d6154c5fa61.webp",
-   "title": "File:Frans Hogenberg battle of Tunis.jpg",
-   "author": "Frans Hogenberg",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Frans_Hogenberg_battle_of_Tunis.jpg"
-  },
-  {
-   "id": "58e14ea5c280ba4c",
-   "path": "media/img/58e14ea5c280ba4c.webp",
-   "title": "File:Mitchell Map Liberia colony 1839.jpg",
-   "author": "Samuel Augustus Mitchell",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Mitchell_Map_Liberia_colony_1839.jpg"
-  },
-  {
-   "id": "87cf78eb395009b7",
-   "path": "media/img/87cf78eb395009b7.webp",
-   "title": "File:20191121 Guyana 0048 Georgetown sRGB (49295795336).jpg",
-   "author": "Dan Lundberg",
-   "licence": "CC BY-SA 2.0",
-   "page": "https://commons.wikimedia.org/wiki/File:20191121_Guyana_0048_Georgetown_sRGB_(49295795336).jpg"
-  },
-  {
-   "id": "a688a2bf55500679",
-   "path": "media/img/a688a2bf55500679.webp",
-   "title": "File:Gluehlampe 01 KMJ.png",
-   "author": "KMJ , alpha masking by Edokter",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Gluehlampe_01_KMJ.png"
-  },
-  {
-   "id": "8e8d2fdacf6cbdb8",
-   "path": "media/img/8e8d2fdacf6cbdb8.webp",
-   "title": "File:Coat Of Arms CY.jpg",
-   "author": "Andrikospro100",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Coat_Of_Arms_CY.jpg"
-  },
-  {
-   "id": "98d890af37ba1655",
-   "path": "media/img/98d890af37ba1655.webp",
-   "title": "File:Palestinian farmers harvesting olives, November 2015.jpg",
-   "author": "TrickyH",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Palestinian_farmers_harvesting_olives,_November_2015.jpg"
-  },
-  {
-   "id": "b5b6d8565ea31b29",
-   "path": "media/img/b5b6d8565ea31b29.webp",
-   "title": "File:Palácio Presidencial em Bissau (2).jpg",
-   "author": "Joehawkins",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Pal%C3%A1cio_Presidencial_em_Bissau_(2).jpg"
-  },
-  {
-   "id": "85df9183a677c8d6",
-   "path": "media/img/85df9183a677c8d6.webp",
-   "title": "File:José Antonio Kast en 2025 (cropped2).jpg",
-   "author": "Equipo Kast",
+   "id": "6e86158267888ccb",
+   "path": "media/img/6e86158267888ccb.webp",
+   "title": "File:Vladimir Putin and Denis Sassou Nguesso (2025-05-09).jpg",
+   "author": "Official website of the President of Russia",
    "licence": "CC BY 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Jos%C3%A9_Antonio_Kast_en_2025_(cropped2).jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Vladimir_Putin_and_Denis_Sassou_Nguesso_(2025-05-09).jpg"
   },
   {
-   "id": "925c9665f3e0ae96",
-   "path": "media/img/925c9665f3e0ae96.webp",
-   "title": "File:Ilustración diccionario Calleja Rodríguez-Navas biblioteca Gustavo Sandoval López 1909 Cont. 38.jpg",
-   "author": "Correogsk",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Ilustraci%C3%B3n_diccionario_Calleja_Rodr%C3%ADguez-Navas_biblioteca_Gustavo_Sandoval_L%C3%B3pez_1909_Cont._38.jpg"
+   "id": "672d070506c6eb10",
+   "path": "media/img/672d070506c6eb10.webp",
+   "title": "File:Murchison falls National Park.2.jpg",
+   "author": "Ssemmanda will",
+   "licence": "CC0",
+   "page": "https://commons.wikimedia.org/wiki/File:Murchison_falls_National_Park.2.jpg"
   },
   {
-   "id": "b156a6f17d4e736e",
-   "path": "media/img/b156a6f17d4e736e.webp",
-   "title": "File:Odissi Performance DS.jpg",
-   "author": "Augustus Binu / facebook",
+   "id": "31fa044c45830e35",
+   "path": "media/img/31fa044c45830e35.webp",
+   "title": "File:London City Airport Sunset.jpg",
+   "author": "James Petts",
+   "licence": "CC BY-SA 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:London_City_Airport_Sunset.jpg"
+  },
+  {
+   "id": "eb028c12281e0438",
+   "path": "media/img/eb028c12281e0438.webp",
+   "title": "File:Venus Drawing.jpg",
+   "author": "Captain James Cook and Charles Green",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:Venus_Drawing.jpg"
+  },
+  {
+   "id": "9fb83b7f08d49a86",
+   "path": "media/img/9fb83b7f08d49a86.webp",
+   "title": "File:Flag-hoisting at the Union Declaration.jpg",
+   "author": "National Archives of the United Arab Emirates, Ministry of Presidential Affairs",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:Flag-hoisting_at_the_Union_Declaration.jpg"
+  },
+  {
+   "id": "209b4937f19fd878",
+   "path": "media/img/209b4937f19fd878.webp",
+   "title": "File:OLPC classroom teaching.JPG",
+   "author": "RudolfSimon",
    "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Odissi_Performance_DS.jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:OLPC_classroom_teaching.JPG"
   },
   {
-   "id": "09206be3da2cb0a1",
-   "path": "media/img/09206be3da2cb0a1.webp",
-   "title": "File:Official portrait of Rodney Williams (cropped).png",
-   "author": "Government of Antigua and Barbuda",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Official_portrait_of_Rodney_Williams_(cropped).png"
-  },
-  {
-   "id": "21bcb71a05f0e66a",
-   "path": "media/img/21bcb71a05f0e66a.webp",
-   "title": "File:Marina Bay Sands 20250903 (1).jpg",
-   "author": "DvTor8303",
-   "licence": "CC0",
-   "page": "https://commons.wikimedia.org/wiki/File:Marina_Bay_Sands_20250903_(1).jpg"
-  },
-  {
-   "id": "3b1db385a2df8f13",
-   "path": "media/img/3b1db385a2df8f13.webp",
-   "title": "File:Concerto orchestrale Chiesa Luterana di Sanremo.jpg",
-   "author": "CELI comunicazione",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Concerto_orchestrale_Chiesa_Luterana_di_Sanremo.jpg"
-  },
-  {
-   "id": "865489345636cef9",
-   "path": "media/img/865489345636cef9.webp",
-   "title": "File:Berners-Lee announcing W3F.jpg",
-   "author": "John S. and James L. Knight Foundation , photo by Scott Henrichsen",
-   "licence": "CC BY 2.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Berners-Lee_announcing_W3F.jpg"
-  },
-  {
-   "id": "9aeeccc439626d0d",
-   "path": "media/img/9aeeccc439626d0d.webp",
-   "title": "File:Conjugate curvatures.png",
-   "author": "Tokamac",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Conjugate_curvatures.png"
-  },
-  {
-   "id": "91361cfee9701cb9",
-   "path": "media/img/91361cfee9701cb9.webp",
-   "title": "File:Malta armed forces marine ships 02.jpg",
-   "author": "Sparrow (2019)",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Malta_armed_forces_marine_ships_02.jpg"
-  },
-  {
-   "id": "5e881073b34f55ca",
-   "path": "media/img/5e881073b34f55ca.webp",
-   "title": "File:BaAka woman dancing.jpg",
-   "author": "Max Chiswick",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:BaAka_woman_dancing.jpg"
-  },
-  {
-   "id": "93b1300450cf8d6a",
-   "path": "media/img/93b1300450cf8d6a.webp",
-   "title": "File:Etna storia geologica.png",
-   "author": "Antonov - Antonio Valdisturlo",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Etna_storia_geologica.png"
-  },
-  {
-   "id": "d9d0314a57389e4f",
-   "path": "media/img/d9d0314a57389e4f.webp",
-   "title": "File:Iván Ernesto Gómez Carrasco en la cima del Monte Everest.jpg",
-   "author": "Igomezc",
+   "id": "896a1332c5d9b52d",
+   "path": "media/img/896a1332c5d9b52d.webp",
+   "title": "File:Actroid-DER 01.jpg",
+   "author": "Photo by Gnsin",
    "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Iv%C3%A1n_Ernesto_G%C3%B3mez_Carrasco_en_la_cima_del_Monte_Everest.jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Actroid-DER_01.jpg"
   },
   {
-   "id": "13e346f6061f4917",
-   "path": "media/img/13e346f6061f4917.webp",
-   "title": "File:Şirvanşahlar saray kompleksi.jpg",
-   "author": "Sefer azeri",
+   "id": "6aa7647e94885383",
+   "path": "media/img/6aa7647e94885383.webp",
+   "title": "File:Trage massa.png",
+   "author": "Jack Ver",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:Trage_massa.png"
+  },
+  {
+   "id": "769675aad737f044",
+   "path": "media/img/769675aad737f044.webp",
+   "title": "File:Basilica de los Angeles 2007.jpg",
+   "author": "Crisdiaz13",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Basilica_de_los_Angeles_2007.jpg"
+  },
+  {
+   "id": "986798073f316d34",
+   "path": "media/img/986798073f316d34.webp",
+   "title": "File:AntiStatic-Wrist-Guard.jpg",
+   "author": "Evan-Amos",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:AntiStatic-Wrist-Guard.jpg"
+  },
+  {
+   "id": "ccc40d8173f10c42",
+   "path": "media/img/ccc40d8173f10c42.webp",
+   "title": "File:Monaco 2022.jpg",
+   "author": "Nik",
    "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:%C5%9Eirvan%C5%9Fahlar_saray_kompleksi.jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Monaco_2022.jpg"
   },
   {
-   "id": "41e355f0301ebcd6",
-   "path": "media/img/41e355f0301ebcd6.webp",
-   "title": "File:蔡英文總統接見索羅門群島總理蘇嘉瓦瑞伉儷訪華團.jpg",
-   "author": "Office of the President, Republic of China (Taiwan)",
+   "id": "ee6dcfe224df656a",
+   "path": "media/img/ee6dcfe224df656a.webp",
+   "title": "File:Robin.dr400slash500.g-rndd.arp.jpg",
+   "author": "Adrian Pingstone",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:Robin.dr400slash500.g-rndd.arp.jpg"
+  },
+  {
+   "id": "335e1d5429ce6f3e",
+   "path": "media/img/335e1d5429ce6f3e.webp",
+   "title": "File:Association IYAWO 01.jpg",
+   "author": "Baname LARE",
+   "licence": "CC BY 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Association_IYAWO_01.jpg"
+  },
+  {
+   "id": "e7e958e276343043",
+   "path": "media/img/e7e958e276343043.webp",
+   "title": "File:Hamza Abdi Barre 2025 official portrait.jpg",
+   "author": "Government of Somalia",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:Hamza_Abdi_Barre_2025_official_portrait.jpg"
+  },
+  {
+   "id": "af7ae301b14c2aa5",
+   "path": "media/img/af7ae301b14c2aa5.webp",
+   "title": "File:Suomenlinna.jpg",
+   "author": "Michal Pise, Michal.Pise",
    "licence": "CC BY 2.0",
-   "page": "https://commons.wikimedia.org/wiki/File:%E8%94%A1%E8%8B%B1%E6%96%87%E7%B8%BD%E7%B5%B1%E6%8E%A5%E8%A6%8B%E7%B4%A2%E7%BE%85%E9%96%80%E7%BE%A4%E5%B3%B6%E7%B8%BD%E7%90%86%E8%98%87%E5%98%89%E7%93%A6%E7%91%9E%E4%BC%89%E5%84%B7%E8%A8%AA%E8%8F%AF%E5%9C%98.jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Suomenlinna.jpg"
   },
   {
-   "id": "a801f348715fe39f",
-   "path": "media/img/a801f348715fe39f.webp",
-   "title": "File:Indonesische nationalisten - revolusi.jpg",
-   "author": "John Florea, photographer. Donated to Rijksmuseum Amsterdam",
-   "licence": "CC0",
-   "page": "https://commons.wikimedia.org/wiki/File:Indonesische_nationalisten_-_revolusi.jpg"
+   "id": "383bdc2a8f03e9be",
+   "path": "media/img/383bdc2a8f03e9be.webp",
+   "title": "File:Baltic thunder.jpg",
+   "author": "Lukas Schmidt",
+   "licence": "CC BY-SA 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Baltic_thunder.jpg"
   },
   {
-   "id": "28697c0635b69901",
-   "path": "media/img/28697c0635b69901.webp",
-   "title": "File:Armstrong on Moon (As11-40-5886) (cropped).jpg",
-   "author": "Buzz Aldrin",
+   "id": "70b86ba596c9aeaa",
+   "path": "media/img/70b86ba596c9aeaa.webp",
+   "title": "File:Landsgemeinde Glarus 2006.jpg",
+   "author": "Adrian Sulc",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Landsgemeinde_Glarus_2006.jpg"
+  },
+  {
+   "id": "45535a91d2e9231a",
+   "path": "media/img/45535a91d2e9231a.webp",
+   "title": "File:Enver Hoxha (portret).jpg",
+   "author": "Petrit Kumi",
    "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Armstrong_on_Moon_(As11-40-5886)_(cropped).jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Enver_Hoxha_(portret).jpg"
   },
   {
-   "id": "d3c9827bc4a5ae50",
-   "path": "media/img/d3c9827bc4a5ae50.webp",
-   "title": "File:Mandraki colosseus harbour rhodes.jpg",
-   "author": "Jebulon",
-   "licence": "CC0",
-   "page": "https://commons.wikimedia.org/wiki/File:Mandraki_colosseus_harbour_rhodes.jpg"
+   "id": "b713d54315f86d98",
+   "path": "media/img/b713d54315f86d98.webp",
+   "title": "File:Sierra Leone electricity generation by source.png",
+   "author": "EMBER",
+   "licence": "CC BY 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Sierra_Leone_electricity_generation_by_source.png"
   },
   {
-   "id": "3d4c0d925c0a85a6",
-   "path": "media/img/3d4c0d925c0a85a6.webp",
-   "title": "File:Vlad Tepes 002.jpg",
-   "author": "Anonymous Unknown author",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Vlad_Tepes_002.jpg"
-  },
-  {
-   "id": "603c3d97dd289ad1",
-   "path": "media/img/603c3d97dd289ad1.webp",
-   "title": "File:Niger single age population pyramid 2020.png",
-   "author": "Sdgedfegw",
+   "id": "d4432c0531271f26",
+   "path": "media/img/d4432c0531271f26.webp",
+   "title": "File:015 Chimpanzee at Kibale forest National Park Photo by Giles Laurent.jpg",
+   "author": "Giles Laurent",
    "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Niger_single_age_population_pyramid_2020.png"
+   "page": "https://commons.wikimedia.org/wiki/File:015_Chimpanzee_at_Kibale_forest_National_Park_Photo_by_Giles_Laurent.jpg"
   },
   {
-   "id": "8c0e50e62179d1a1",
-   "path": "media/img/8c0e50e62179d1a1.webp",
-   "title": "File:Hapee Tonga boxing SLNSW FL3445398.jpg",
-   "author": "John Webber",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Hapee_Tonga_boxing_SLNSW_FL3445398.jpg"
+   "id": "f8ac43f05327742d",
+   "path": "media/img/f8ac43f05327742d.webp",
+   "title": "File:Landscape, Kiribati, 2011. Photo- Erin Magee - DFAT (12425893525).jpg",
+   "author": "Erin Magee/DFAT",
+   "licence": "CC BY 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Landscape,_Kiribati,_2011._Photo-_Erin_Magee_-_DFAT_(12425893525).jpg"
   },
   {
-   "id": "ff0053fc8a4b9fca",
-   "path": "media/img/ff0053fc8a4b9fca.webp",
-   "title": "File:Amjad Masih Naz.jpg",
-   "author": "Amjadmasihnaz",
-   "licence": "CC0",
-   "page": "https://commons.wikimedia.org/wiki/File:Amjad_Masih_Naz.jpg"
+   "id": "35cbac91b1d3165e",
+   "path": "media/img/35cbac91b1d3165e.webp",
+   "title": "File:The Lone Pollinator.jpg",
+   "author": "Tanner Smida",
+   "licence": "CC BY 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Lone_Pollinator.jpg"
   },
   {
-   "id": "eff2bae3824b5290",
-   "path": "media/img/eff2bae3824b5290.webp",
-   "title": "File:Government House Port Louis.JPG",
-   "author": "Martin Falbisoner",
+   "id": "82f833c749f94dbf",
+   "path": "media/img/82f833c749f94dbf.webp",
+   "title": "File:2015 0731 Apfelstrudel Vanillesoße Edelweisshütte Sölden.jpg",
+   "author": "Takeaway",
    "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Government_House_Port_Louis.JPG"
+   "page": "https://commons.wikimedia.org/wiki/File:2015_0731_Apfelstrudel_Vanilleso%C3%9Fe_Edelweissh%C3%BCtte_S%C3%B6lden.jpg"
   },
   {
-   "id": "1ce37a0186506df6",
-   "path": "media/img/1ce37a0186506df6.webp",
-   "title": "File:Puente de Don Luis I, Oporto, Portugal, 2019-06-02, DD 29-31 HDR.jpg",
+   "id": "925a749a9c2b58a1",
+   "path": "media/img/925a749a9c2b58a1.webp",
+   "title": "File:2020-Hidden-Chua-attractors-Circuit-realization.jpg",
+   "author": "Kuznetsov N.V.",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:2020-Hidden-Chua-attractors-Circuit-realization.jpg"
+  },
+  {
+   "id": "e28de1c801d9b840",
+   "path": "media/img/e28de1c801d9b840.webp",
+   "title": "File:North Macedonia relief location map.jpg",
+   "author": "Eric Gaba ( Sting - fr:Sting ) and NordNordWest",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:North_Macedonia_relief_location_map.jpg"
+  },
+  {
+   "id": "4a3599146e8bf03e",
+   "path": "media/img/4a3599146e8bf03e.webp",
+   "title": "File:HMS Beagle by Conrad Martens.jpg",
+   "author": "Conrad Martens (1801 - 21 August 1878)",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:HMS_Beagle_by_Conrad_Martens.jpg"
+  },
+  {
+   "id": "707eef066ab863e3",
+   "path": "media/img/707eef066ab863e3.webp",
+   "title": "File:Milos Forman.jpg",
+   "author": "che (Please credit as \"Petr Novák, Wikipedia\" in case you use this outside Wikimedia projects.)",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Milos_Forman.jpg"
+  },
+  {
+   "id": "72af5bcb5ba47ffa",
+   "path": "media/img/72af5bcb5ba47ffa.webp",
+   "title": "File:Bolungarvik 02.jpg",
+   "author": "Herbert Ortner, Vienna, Austria",
+   "licence": "CC BY 2.5",
+   "page": "https://commons.wikimedia.org/wiki/File:Bolungarvik_02.jpg"
+  },
+  {
+   "id": "a2a5ea7e88d9a060",
+   "path": "media/img/a2a5ea7e88d9a060.webp",
+   "title": "File:Trajan's Bridge Across the Danube, Modern Reconstruction.jpg",
+   "author": "Rapsak",
+   "licence": "CC BY-SA 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Trajan%27s_Bridge_Across_the_Danube,_Modern_Reconstruction.jpg"
+  },
+  {
+   "id": "1f8a123e5d35f8a5",
+   "path": "media/img/1f8a123e5d35f8a5.webp",
+   "title": "File:Sediments in sea ice.jpg",
+   "author": "Evgenii Salganik",
+   "licence": "CC BY 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Sediments_in_sea_ice.jpg"
+  },
+  {
+   "id": "ab51a36ff5b6db08",
+   "path": "media/img/ab51a36ff5b6db08.webp",
+   "title": "File:Castillo, Vaduz, Liechtenstein, 2022-10-23, DD 65.jpg",
    "author": "Diego Delso",
    "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Puente_de_Don_Luis_I,_Oporto,_Portugal,_2019-06-02,_DD_29-31_HDR.jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Castillo,_Vaduz,_Liechtenstein,_2022-10-23,_DD_65.jpg"
   },
   {
-   "id": "f13ff646327de17e",
-   "path": "media/img/f13ff646327de17e.webp",
-   "title": "File:Propuesta Sullana.png",
-   "author": "Ashuwu01",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Propuesta_Sullana.png"
-  },
-  {
-   "id": "75e5300c3938c698",
-   "path": "media/img/75e5300c3938c698.webp",
-   "title": "File:Cerrejón mine.JPG",
-   "author": "Hour.poing",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Cerrej%C3%B3n_mine.JPG"
-  },
-  {
-   "id": "2a55ac0ea81d9dc1",
-   "path": "media/img/2a55ac0ea81d9dc1.webp",
-   "title": "File:Mt-Grizim-national-park-7920.jpg",
-   "author": "Bukvoed",
-   "licence": "CC BY 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Mt-Grizim-national-park-7920.jpg"
-  },
-  {
-   "id": "d7fe319a037125c4",
-   "path": "media/img/d7fe319a037125c4.webp",
-   "title": "File:Mississippiriver-new-01.png",
-   "author": "Shannon1",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Mississippiriver-new-01.png"
-  },
-  {
-   "id": "d28825513a086b29",
-   "path": "media/img/d28825513a086b29.webp",
-   "title": "File:Birdsclosing.jpg",
-   "author": "Jmex60",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Birdsclosing.jpg"
-  },
-  {
-   "id": "69d854ff9a406694",
-   "path": "media/img/69d854ff9a406694.webp",
-   "title": "File:Fundacion de Santiago.jpg",
-   "author": "Pedro Lira Rencoret",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Fundacion_de_Santiago.jpg"
-  },
-  {
-   "id": "196f036191815ba8",
-   "path": "media/img/196f036191815ba8.webp",
-   "title": "File:Neptune Cloud Cover Over Three Decades (2023-019).png",
-   "author": "Science",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Neptune_Cloud_Cover_Over_Three_Decades_(2023-019).png"
-  },
-  {
-   "id": "03123f4c0630fdd6",
-   "path": "media/img/03123f4c0630fdd6.webp",
-   "title": "File:Ghana Regions map.png",
-   "author": "Burmesedays , minor amendments by Joelf",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Ghana_Regions_map.png"
-  },
-  {
-   "id": "482a8887ae08bb0d",
-   "path": "media/img/482a8887ae08bb0d.webp",
-   "title": "File:Amth33.jpg",
-   "author": "O.Mustafin",
-   "licence": "CC0",
-   "page": "https://commons.wikimedia.org/wiki/File:Amth33.jpg"
-  },
-  {
-   "id": "67de8012aeef3088",
-   "path": "media/img/67de8012aeef3088.webp",
-   "title": "File:Amulet from the Eeyou people, dating to around 1970.jpg",
-   "author": "Wilfredor",
-   "licence": "CC0",
-   "page": "https://commons.wikimedia.org/wiki/File:Amulet_from_the_Eeyou_people,_dating_to_around_1970.jpg"
-  },
-  {
-   "id": "87d80d5989e6a89a",
-   "path": "media/img/87d80d5989e6a89a.webp",
-   "title": "File:SSEM Manchester museum.jpg",
-   "author": "Parrot of Doom",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:SSEM_Manchester_museum.jpg"
-  },
-  {
-   "id": "67fdc375b08d07c8",
-   "path": "media/img/67fdc375b08d07c8.webp",
-   "title": "File:KnightsTemplarPlayingChess1283.jpg",
-   "author": "Alphonse le Sage (Alfonso X)",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:KnightsTemplarPlayingChess1283.jpg"
-  },
-  {
-   "id": "59876b653b70fa2f",
-   "path": "media/img/59876b653b70fa2f.webp",
-   "title": "File:Ho Chi Minh City Skyline (night).jpg",
-   "author": "Jim 陳",
+   "id": "6e2eca0b98167ba7",
+   "path": "media/img/6e2eca0b98167ba7.webp",
+   "title": "File:Esquelete de necrópole romana (7326104804).jpg",
+   "author": "Álvaro Pérez Vilariño",
    "licence": "CC BY-SA 2.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Ho_Chi_Minh_City_Skyline_(night).jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Esquelete_de_necr%C3%B3pole_romana_(7326104804).jpg"
   },
   {
-   "id": "a68cd57dd78cfee9",
-   "path": "media/img/a68cd57dd78cfee9.webp",
-   "title": "File:Turing's teddy bear.jpg",
-   "author": "Antoine Taveneaux",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Turing%27s_teddy_bear.jpg"
-  },
-  {
-   "id": "3fd1458de871b2d0",
-   "path": "media/img/3fd1458de871b2d0.webp",
-   "title": "File:Himalaya annotated.jpg",
-   "author": "NASA, Janderk Jan Derk",
+   "id": "1cb7d999984f951c",
+   "path": "media/img/1cb7d999984f951c.webp",
+   "title": "File:Jitterbug Wolcott FSA.jpg",
+   "author": "Marion Post Wolcott",
    "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Himalaya_annotated.jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Jitterbug_Wolcott_FSA.jpg"
   },
   {
-   "id": "f03b1460d45b60bd",
-   "path": "media/img/f03b1460d45b60bd.webp",
-   "title": "File:Shang Bronze You 02a.jpg",
-   "author": "Gary Lee Todd, Ph.D.",
-   "licence": "CC0",
-   "page": "https://commons.wikimedia.org/wiki/File:Shang_Bronze_You_02a.jpg"
-  },
-  {
-   "id": "95c70e93aeb61f1b",
-   "path": "media/img/95c70e93aeb61f1b.webp",
-   "title": "File:Conselho Municipal de Maputo frente.jpg",
-   "author": "Teixant",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Conselho_Municipal_de_Maputo_frente.jpg"
-  },
-  {
-   "id": "dc31120a655cb539",
-   "path": "media/img/dc31120a655cb539.webp",
-   "title": "File:Traditional and modern jeepneys in Diliman, Quezon City on March 16, 2023.jpg",
-   "author": "PNA photo by Ben Briones",
+   "id": "42034396bb5b7059",
+   "path": "media/img/42034396bb5b7059.webp",
+   "title": "File:Dziejačy BNR.jpg",
+   "author": "Unknown author Unknown author",
    "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Traditional_and_modern_jeepneys_in_Diliman,_Quezon_City_on_March_16,_2023.jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Dzieja%C4%8Dy_BNR._%D0%94%D0%B7%D0%B5%D1%8F%D1%87%D1%8B_%D0%91%D0%9D%D0%A0_(1918).jpg"
   },
   {
-   "id": "70077c0811f38c76",
-   "path": "media/img/70077c0811f38c76.webp",
-   "title": "File:Estrazione DNA (cropped).jpg",
-   "author": "Mariano Avagliano",
+   "id": "dbe5ddf83ed5f1a0",
+   "path": "media/img/dbe5ddf83ed5f1a0.webp",
+   "title": "File:Gilas Cadets 2015 SEA Games.jpg",
+   "author": "jhanxg",
+   "licence": "CC BY-SA 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Gilas_Cadets_2015_SEA_Games.jpg"
+  },
+  {
+   "id": "fea91168ae9e7372",
+   "path": "media/img/fea91168ae9e7372.webp",
+   "title": "File:IMG-TAI-TFX.jpg",
+   "author": "Dimir",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:IMG-TAI-TFX.jpg"
+  },
+  {
+   "id": "67c80d77e57ad273",
+   "path": "media/img/67c80d77e57ad273.webp",
+   "title": "File:Steam locomotive Inhambane.jpg",
+   "author": "Rosino",
+   "licence": "CC BY-SA 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Steam_locomotive_Inhambane.jpg"
+  },
+  {
+   "id": "849beb78a075d91c",
+   "path": "media/img/849beb78a075d91c.webp",
+   "title": "File:Seal of the Slovak Republic.png",
+   "author": "Hayden Soloviev",
    "licence": "CC BY 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Estrazione_DNA_(cropped).jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Seal_of_the_Slovak_Republic.png"
   },
   {
-   "id": "e6f85947b870b06c",
-   "path": "media/img/e6f85947b870b06c.webp",
-   "title": "File:MIM Double Manual Piano CN5266.jpg",
-   "author": "Morn the Gorn",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:MIM_Double_Manual_Piano_CN5266.jpg"
-  },
-  {
-   "id": "568d155315c28fb8",
-   "path": "media/img/568d155315c28fb8.webp",
-   "title": "File:Prehistoric pottery shards, Sierra Leone.jpg",
-   "author": "John Atherton",
-   "licence": "CC BY-SA 2.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Prehistoric_pottery_shards,_Sierra_Leone.jpg"
-  },
-  {
-   "id": "c35d7df87c4a3b1f",
-   "path": "media/img/c35d7df87c4a3b1f.webp",
-   "title": "File:Crocodylidae Distribution-ar.png",
-   "author": "Original: Sagqs Derivative: باسم",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Crocodylidae_Distribution-ar.png"
-  },
-  {
-   "id": "810f9a235fdfc61b",
-   "path": "media/img/810f9a235fdfc61b.webp",
-   "title": "File:Addis Ababa-8e00855u.jpg",
-   "author": "British Press Service, no 3757 Transfer; United States. Office of War Information. Overseas Picture Division. Washington Division; 1944.",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Addis_Ababa-8e00855u.jpg"
-  },
-  {
-   "id": "677062e7fd42bb4c",
-   "path": "media/img/677062e7fd42bb4c.webp",
-   "title": "File:RobotsMODO.jpg",
-   "author": "AlejandroLinaresGarcia",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:RobotsMODO.jpg"
-  },
-  {
-   "id": "ce6b1fff30ce7da3",
-   "path": "media/img/ce6b1fff30ce7da3.webp",
-   "title": "File:Edison machine works goerck street new york 1881.png",
-   "author": "Charles L. Clarke (1853 – 1941)",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Edison_machine_works_goerck_street_new_york_1881.png"
-  },
-  {
-   "id": "7ebd3361637e8e3a",
-   "path": "media/img/7ebd3361637e8e3a.webp",
-   "title": "File:Wien - Parlamentsgebäude.JPG",
-   "author": "C.Stadler/Bwag",
+   "id": "60721448cd01722b",
+   "path": "media/img/60721448cd01722b.webp",
+   "title": "File:Arc-suppression coil tuning in an unbalanced network.jpg",
+   "author": "Efee91",
    "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Wien_-_Parlamentsgeb%C3%A4ude.JPG"
+   "page": "https://commons.wikimedia.org/wiki/File:Arc-suppression_coil_tuning_in_an_unbalanced_network.jpg"
   },
   {
-   "id": "276c74374d1534d3",
-   "path": "media/img/276c74374d1534d3.webp",
-   "title": "File:Respiratory tract.jpg",
-   "author": "http://www.scientificanimations.com",
+   "id": "b8b4203c746fa7fa",
+   "path": "media/img/b8b4203c746fa7fa.webp",
+   "title": "File:Zemo Svaneti, June, 2018-10.jpg",
+   "author": "Alexey Komarov",
    "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Respiratory_tract.jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Zemo_Svaneti,_June,_2018-10.jpg"
   },
   {
-   "id": "4712d9d02ceff7fa",
-   "path": "media/img/4712d9d02ceff7fa.webp",
-   "title": "File:Usain Bolt, Anniversary Games, London 2013.jpg",
-   "author": "J. Brichto",
+   "id": "30c981224a6bf8c8",
+   "path": "media/img/30c981224a6bf8c8.webp",
+   "title": "File:WashingMachine, manufactured by ArcticRomania.jpg",
+   "author": "O mores at English Wikipedia",
    "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Usain_Bolt,_Anniversary_Games,_London_2013.jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:WashingMachine,_manufactured_by_ArcticRomania.jpg"
   },
   {
-   "id": "543c9b3c28a18360",
-   "path": "media/img/543c9b3c28a18360.webp",
-   "title": "File:Dawn - PIA12033.jpg",
-   "author": "NASA / JPL",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Dawn_-_PIA12033.jpg"
+   "id": "6e142e970760da7f",
+   "path": "media/img/6e142e970760da7f.webp",
+   "title": "File:Flintlock 2016 kicks off in Senegal.jpg",
+   "author": "U.S. Army Southern European Task Force, Africa",
+   "licence": "CC BY 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Flintlock_2016_kicks_off_in_Senegal.jpg"
   },
   {
-   "id": "37541bfd499ed6e9",
-   "path": "media/img/37541bfd499ed6e9.webp",
-   "title": "File:Phascolarctos cinereus Bonorong.jpg",
-   "author": "JJ Harrison ( https://www.jjharrison.com.au/ )",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Phascolarctos_cinereus_Bonorong.jpg"
-  },
-  {
-   "id": "9bc0c5b06799b313",
-   "path": "media/img/9bc0c5b06799b313.webp",
-   "title": "File:Jagiellonian University Collegium Maius, courtyard, 15 Jagiellońska Street, Old Town, Kraków, Poland.jpg",
-   "author": "Jeremiah Z. Cockroach",
+   "id": "30bc441d75bc3dc1",
+   "path": "media/img/30bc441d75bc3dc1.webp",
+   "title": "File:Kemna road roller.jpg",
+   "author": "Haydnbachundbrahms",
    "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Jagiellonian_University_Collegium_Maius,_courtyard,_15_Jagiello%C5%84ska_Street,_Old_Town,_Krak%C3%B3w,_Poland.jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Kemna_road_roller.jpg"
   },
   {
-   "id": "3bb2b940bbe76b97",
-   "path": "media/img/3bb2b940bbe76b97.webp",
-   "title": "File:Artery.png",
-   "author": "Lord of Konrad",
+   "id": "36e4babed0e9e3ae",
+   "path": "media/img/36e4babed0e9e3ae.webp",
+   "title": "File:Amelia Earhart birthplace from NE 1.JPG",
+   "author": "Ammodramus",
    "licence": "CC0",
-   "page": "https://commons.wikimedia.org/wiki/File:Artery.png"
+   "page": "https://commons.wikimedia.org/wiki/File:Amelia_Earhart_birthplace_from_NE_1.JPG"
   },
   {
-   "id": "5979dc01bd9901a9",
-   "path": "media/img/5979dc01bd9901a9.webp",
-   "title": "File:Gibbous Moon Highlighting the Tycho and Copernicus Craters.jpg",
-   "author": "Msadler13",
-   "licence": "CC BY 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Gibbous_Moon_Highlighting_the_Tycho_and_Copernicus_Craters.jpg"
-  },
-  {
-   "id": "1573b4e50a526eab",
-   "path": "media/img/1573b4e50a526eab.webp",
-   "title": "File:Vaticano - Smart elettrica Gendarmeria 20231230.jpg",
-   "author": "Pymouss",
-   "licence": "CC BY 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Vaticano_-_Smart_elettrica_Gendarmeria_20231230.jpg"
-  },
-  {
-   "id": "079ff28d56eaf850",
-   "path": "media/img/079ff28d56eaf850.webp",
-   "title": "File:Map of Abyssinia and Nubia - DPLA - 83edec2a46dd4cc5c780681e653753e5.jpg",
-   "author": "Dunn, Samuel, -1794",
+   "id": "1cf1bda77b892050",
+   "path": "media/img/1cf1bda77b892050.webp",
+   "title": "File:LIC U70.jpg",
+   "author": "The original uploader was DonSergos at English Wikipedia .",
    "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Map_of_Abyssinia_and_Nubia_-_DPLA_-_83edec2a46dd4cc5c780681e653753e5.jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:LIC_U70.jpg"
   },
   {
-   "id": "15ca05d1c5c359cc",
-   "path": "media/img/15ca05d1c5c359cc.webp",
-   "title": "File:Svømmende blodigle.JPG",
-   "author": "Karl Ragnar Gjertsen Please credit Karl Ragnar Gjertsen This photo was taken by Karl Ragnar Gjertsen . Please credit this photo Karl Ragnar Gjertsen in the immediate vicinity of the image.",
-   "licence": "CC BY 2.5",
-   "page": "https://commons.wikimedia.org/wiki/File:Sv%C3%B8mmende_blodigle.JPG"
-  },
-  {
-   "id": "a9154e61ef4bc090",
-   "path": "media/img/a9154e61ef4bc090.webp",
-   "title": "File:Supreme Court of Nepal 01.jpg",
-   "author": "Sandeep Raut",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Supreme_Court_of_Nepal_01.jpg"
-  },
-  {
-   "id": "eb4872e53e21a5f2",
-   "path": "media/img/eb4872e53e21a5f2.webp",
-   "title": "File:Clermont replica.jpg",
-   "author": "Detroit Publishing Co.",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Clermont_replica.jpg"
-  },
-  {
-   "id": "f0bf191b177b433c",
-   "path": "media/img/f0bf191b177b433c.webp",
-   "title": "File:Graphite-and-diamond-with-scale.jpg",
-   "author": "Robert M. Lavinsky",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Graphite-and-diamond-with-scale.jpg"
-  },
-  {
-   "id": "5594c014e91c1228",
-   "path": "media/img/5594c014e91c1228.webp",
-   "title": "File:Common-salt.jpg",
-   "author": "Edal Anton Lefterov",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Common-salt.jpg"
-  },
-  {
-   "id": "ded22253d3ec2de4",
-   "path": "media/img/ded22253d3ec2de4.webp",
-   "title": "File:Justinian555AD.png",
-   "author": "Tataryn",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Justinian555AD.png"
-  },
-  {
-   "id": "16f0921ad19677bb",
-   "path": "media/img/16f0921ad19677bb.webp",
-   "title": "File:Gamla Uppsala - line of tumuli.jpg",
-   "author": "Szilas",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Gamla_Uppsala_-_line_of_tumuli.jpg"
-  },
-  {
-   "id": "4864b2d6f5219151",
-   "path": "media/img/4864b2d6f5219151.webp",
-   "title": "File:Estadio Mateo Flores Guatemala.JPG",
-   "author": "JMRAFFi",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Estadio_Mateo_Flores_Guatemala.JPG"
-  },
-  {
-   "id": "6753a005cfe78182",
-   "path": "media/img/6753a005cfe78182.webp",
-   "title": "File:Puerto Madero - Puente de la mujer (44673627614).jpg",
-   "author": "leonardo samrani from rosario, argentina",
+   "id": "be08428bf1d01d90",
+   "path": "media/img/be08428bf1d01d90.webp",
+   "title": "File:Templo de Kalasasaya, Tiwanaku.jpg",
+   "author": "Danielle Pereira",
    "licence": "CC BY 2.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Puerto_Madero_-_Puente_de_la_mujer_(44673627614).jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Templo_de_Kalasasaya,_Tiwanaku.jpg"
   },
   {
-   "id": "c05c94e322862aec",
-   "path": "media/img/c05c94e322862aec.webp",
-   "title": "File:Blood vessels-3D rendering.jpg",
-   "author": "Antonino Paolo Di Giovanna",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Blood_vessels-3D_rendering.jpg"
-  },
-  {
-   "id": "4a6d47f5cef3ae31",
-   "path": "media/img/4a6d47f5cef3ae31.webp",
-   "title": "File:Samoa Familie.JPG",
-   "author": "Plenz",
-   "licence": "CC BY-SA 2.5",
-   "page": "https://commons.wikimedia.org/wiki/File:Samoa_Familie.JPG"
-  },
-  {
-   "id": "78dc4ee53baf1a34",
-   "path": "media/img/78dc4ee53baf1a34.webp",
-   "title": "File:Have a Nice Day! styrofoam food container.JPG",
-   "author": "BrokenSphere",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Have_a_Nice_Day!_styrofoam_food_container.JPG"
-  },
-  {
-   "id": "859e2b3c76a397bc",
-   "path": "media/img/859e2b3c76a397bc.webp",
-   "title": "File:Uzbekistan satellite photo.jpg",
-   "author": "Poulpy , based on work by NASA.",
+   "id": "d9b14a0e0b47c6fd",
+   "path": "media/img/d9b14a0e0b47c6fd.webp",
+   "title": "File:Advanced Helicopter Rescue School (cropped).jpg",
+   "author": "Petty Officer 1st Class Levi Read",
    "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Uzbekistan_satellite_photo.jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Advanced_Helicopter_Rescue_School_(cropped).jpg"
   },
   {
-   "id": "c3c4b5a5b4942e65",
-   "path": "media/img/c3c4b5a5b4942e65.webp",
-   "title": "File:Anatomical Male Figure Showing Heart, Lungs, and Main Arteries.jpg",
-   "author": "Leonardo da Vinci",
+   "id": "033b2bdafdc5de81",
+   "path": "media/img/033b2bdafdc5de81.webp",
+   "title": "File:Mozart Family Croce.jpg",
+   "author": "Possibly Johann Nepomuk della Croce",
    "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Anatomical_Male_Figure_Showing_Heart,_Lungs,_and_Main_Arteries.jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Mozart_Family_Croce.jpg"
   },
   {
-   "id": "005b69ff37d56866",
-   "path": "media/img/005b69ff37d56866.webp",
-   "title": "File:Mažvydo Katekizmas, Vilnius.jpg",
-   "author": "Pinkizz",
-   "licence": "CC BY 2.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Ma%C5%BEvydo_Katekizmas,_Vilnius.jpg"
-  },
-  {
-   "id": "ce8fbf5db437f0c4",
-   "path": "media/img/ce8fbf5db437f0c4.webp",
-   "title": "File:2007 Bahrain GP podium.jpg",
-   "author": "Fractal 00",
-   "licence": "CC BY 2.0",
-   "page": "https://commons.wikimedia.org/wiki/File:2007_Bahrain_GP_podium.jpg"
-  },
-  {
-   "id": "e69da92486e0c78f",
-   "path": "media/img/e69da92486e0c78f.webp",
-   "title": "File:Crater Lake winter pano2.jpg",
-   "author": "WolfmanSF",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Crater_Lake_winter_pano2.jpg"
-  },
-  {
-   "id": "9082d46e80303a7d",
-   "path": "media/img/9082d46e80303a7d.webp",
-   "title": "File:25 de mayo por F. Fortuny.jpg",
-   "author": "Francisco Fortuny",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:25_de_mayo_por_F._Fortuny.jpg"
-  },
-  {
-   "id": "1095d6c8a209c3ac",
-   "path": "media/img/1095d6c8a209c3ac.webp",
-   "title": "File:Fishing on Nauru.jpg",
-   "author": "Taken in 1938 by Hans Zache and uploaded by Rémih",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Fishing_on_Nauru.jpg"
-  },
-  {
-   "id": "3d1b48751eaba380",
-   "path": "media/img/3d1b48751eaba380.webp",
-   "title": "File:Alie & Georgia at 2015 Taste Awards.jpg",
-   "author": "RedCarpetReport",
-   "licence": "CC BY-SA 2.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Alie_%26_Georgia_at_2015_Taste_Awards.jpg"
-  },
-  {
-   "id": "359aefa828c990b6",
-   "path": "media/img/359aefa828c990b6.webp",
-   "title": "File:Portrait of a Man, Said to be Christopher Columbus.jpg",
-   "author": "Sebastiano del Piombo",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Portrait_of_a_Man,_Said_to_be_Christopher_Columbus.jpg"
-  },
-  {
-   "id": "229753bb180a789e",
-   "path": "media/img/229753bb180a789e.webp",
-   "title": "File:Meiji tenno1.jpg",
-   "author": "Artist: Eduardo Chiossone (1833–98); Photographer: Maruki Riyō (also misspelt as Maruki Toshiaki) [ 3 ]",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Meiji_tenno1.jpg"
-  },
-  {
-   "id": "90bf4d3963ec2f0a",
-   "path": "media/img/90bf4d3963ec2f0a.webp",
-   "title": "File:Boeing 777-22KLR EZ-A778.jpg",
-   "author": "Eric Salard",
-   "licence": "CC BY-SA 2.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Boeing_777-22KLR_EZ-A778.jpg"
-  },
-  {
-   "id": "a2d03ae042f889e7",
-   "path": "media/img/a2d03ae042f889e7.webp",
-   "title": "File:Cross-current exchanger.jpg",
-   "author": "Cruithne9",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Cross-current_exchanger.jpg"
-  },
-  {
-   "id": "8a39036acdcc45f1",
-   "path": "media/img/8a39036acdcc45f1.webp",
-   "title": "File:HMAS Arunta and Canberra sailing in formation with other warships.jpg",
-   "author": "U.S. Navy photo by Mass Communication Specialist 3rd Class Erica Bechard",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:HMAS_Arunta_and_Canberra_sailing_in_formation_with_other_warships.jpg"
-  },
-  {
-   "id": "0536fae71fd0ccbe",
-   "path": "media/img/0536fae71fd0ccbe.webp",
-   "title": "File:Bernhardt Hamlet2.jpg",
-   "author": "Lafayette Photo, London",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Bernhardt_Hamlet2.jpg"
-  },
-  {
-   "id": "fc6fe21dcf101ee7",
-   "path": "media/img/fc6fe21dcf101ee7.webp",
-   "title": "File:Recherches pour servir à l'histoire naturelle des mammifères (Pl. 50) (white background).jpg",
-   "author": "Iconographia Zoologica",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Recherches_pour_servir_%C3%A0_l%27histoire_naturelle_des_mammif%C3%A8res_(Pl._50)_(white_background).jpg"
-  },
-  {
-   "id": "4f134a728cc387ee",
-   "path": "media/img/4f134a728cc387ee.webp",
-   "title": "File:New Horizons spacecraft model 1.png",
-   "author": "National Aeronautics and Space Administration (NASA) , Applied Physics Laboratory",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:New_Horizons_spacecraft_model_1.png"
-  },
-  {
-   "id": "bae6d97819fad97b",
-   "path": "media/img/bae6d97819fad97b.webp",
-   "title": "File:Camel Market.jpg",
-   "author": "Souguimia",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Camel_Market.jpg"
-  },
-  {
-   "id": "86ce4a6c27f80364",
-   "path": "media/img/86ce4a6c27f80364.webp",
-   "title": "File:Siva Afi - Fire spinning.jpg",
-   "author": "CloudSurfer",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Siva_Afi_-_Fire_spinning.jpg"
-  },
-  {
-   "id": "9f56c2ced1ffcf97",
-   "path": "media/img/9f56c2ced1ffcf97.webp",
-   "title": "File:Greencap Energy Solar Panels on Airedale Hospital.jpg",
-   "author": "Wikipedeon",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Greencap_Energy_Solar_Panels_on_Airedale_Hospital.jpg"
-  },
-  {
-   "id": "ea5adcbdbc1eeb63",
-   "path": "media/img/ea5adcbdbc1eeb63.webp",
-   "title": "File:Great-zim-aerial-looking-West.JPG",
-   "author": "Janice Bell",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Great-zim-aerial-looking-West.JPG"
-  },
-  {
-   "id": "024349123c1a8f6a",
-   "path": "media/img/024349123c1a8f6a.webp",
-   "title": "File:Soja en Mongomo.png",
-   "author": "Miguel Obono Ekieme",
-   "licence": "CC BY 2.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Soja_en_Mongomo.png"
-  },
-  {
-   "id": "9856e3158278a022",
-   "path": "media/img/9856e3158278a022.webp",
-   "title": "File:Baghdad 150 to 300 AH.png",
-   "author": "William Muir",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Baghdad_150_to_300_AH.png"
-  },
-  {
-   "id": "a08ae7f2817aee29",
-   "path": "media/img/a08ae7f2817aee29.webp",
-   "title": "File:2021-04-17 14-51-47 ILCE-7C DSC05825 DxO (51160793468).jpg",
-   "author": "Miguel Discart from Bruxelles, Belgique",
-   "licence": "CC BY-SA 2.0",
-   "page": "https://commons.wikimedia.org/wiki/File:2021-04-17_14-51-47_ILCE-7C_DSC05825_DxO_(51160793468).jpg"
-  },
-  {
-   "id": "195c97ef46f0d80e",
-   "path": "media/img/195c97ef46f0d80e.webp",
-   "title": "File:Human pancreatic islet.jpg",
-   "author": "Afferent",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Human_pancreatic_islet.jpg"
-  },
-  {
-   "id": "4f6e28210def7fca",
-   "path": "media/img/4f6e28210def7fca.webp",
-   "title": "File:Coloured, textured craft card.jpg",
-   "author": "MichaelMaggs",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Coloured,_textured_craft_card.jpg"
-  },
-  {
-   "id": "d1fef4d4270504b4",
-   "path": "media/img/d1fef4d4270504b4.webp",
-   "title": "File:Linz Ars electronica center lila DL.jpg",
-   "author": "Walter Isack( Isiwal )",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Linz_Ars_electronica_center_lila_DL.jpg"
-  },
-  {
-   "id": "b15f1aa12acec49f",
-   "path": "media/img/b15f1aa12acec49f.webp",
-   "title": "File:Inside a refrigerator – 360° Photo.jpg",
-   "author": "Maximilian Schönherr",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Inside_a_refrigerator_%E2%80%93_360%C2%B0_Photo.jpg"
-  },
-  {
-   "id": "915d8d09b1ffce8b",
-   "path": "media/img/915d8d09b1ffce8b.webp",
-   "title": "File:Giraffa camelopardalis camelopardalis (Al Ain Zoo, UAE), crop & flip.jpg",
-   "author": "Doug Belshaw",
-   "licence": "CC BY 2.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Giraffa_camelopardalis_camelopardalis_(Al_Ain_Zoo,_UAE),_crop_%26_flip.jpg"
-  },
-  {
-   "id": "c1b21a176ddc0966",
-   "path": "media/img/c1b21a176ddc0966.webp",
-   "title": "File:Guanaco Patagonico.jpg",
-   "author": "Georgibulgaro",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Guanaco_Patagonico.jpg"
-  },
-  {
-   "id": "e7178703f9399918",
-   "path": "media/img/e7178703f9399918.webp",
-   "title": "File:Visual processing areas of the brains of four species of birds.png",
-   "author": "see above",
-   "licence": "CC BY 2.5",
-   "page": "https://commons.wikimedia.org/wiki/File:Visual_processing_areas_of_the_brains_of_four_species_of_birds.png"
-  },
-  {
-   "id": "584345dee24d34ba",
-   "path": "media/img/584345dee24d34ba.webp",
-   "title": "File:Tribute Giraffe with Attendant.jpg",
-   "author": "Shen Du (沈度, 1357–1434) Note: In contrast to the other references, the Philadelphia Museum of Art considers this to be rather a later work by an unknown painter from the 16th century.",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Tribute_Giraffe_with_Attendant.jpg"
-  },
-  {
-   "id": "512c97cb55948b90",
-   "path": "media/img/512c97cb55948b90.webp",
-   "title": "File:Creissels et Viaduct de Millau.jpg",
-   "author": "Stefan Krause, Germany",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Creissels_et_Viaduct_de_Millau.jpg"
-  },
-  {
-   "id": "d85a931f25588526",
-   "path": "media/img/d85a931f25588526.webp",
-   "title": "File:Alexander Nevsky Cathedral, Sofia (by Pudelek).JPG",
-   "author": "Pudelek (Marcin Szala)",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Alexander_Nevsky_Cathedral,_Sofia_(by_Pudelek).JPG"
-  },
-  {
-   "id": "fa9588bae189b2e5",
-   "path": "media/img/fa9588bae189b2e5.webp",
-   "title": "File:Catalan Atlas BNF Sheet 6 Western Sahara.jpg",
-   "author": "attributed to Abraham Cresques",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Catalan_Atlas_BNF_Sheet_6_Western_Sahara.jpg"
-  },
-  {
-   "id": "cb5e6bfb47800bb1",
-   "path": "media/img/cb5e6bfb47800bb1.webp",
-   "title": "File:Bouri NC 41 DP4 platform.jpg",
-   "author": "Cipiota",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Bouri_NC_41_DP4_platform.jpg"
-  },
-  {
-   "id": "fc978df67a02bc3f",
-   "path": "media/img/fc978df67a02bc3f.webp",
-   "title": "File:Havacılık ve Uzay.jpg",
-   "author": "Yusuf Küçük",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Havac%C4%B1l%C4%B1k_ve_Uzay.jpg"
-  },
-  {
-   "id": "3fb3744ff90d81b0",
-   "path": "media/img/3fb3744ff90d81b0.webp",
-   "title": "File:2900 K Street NW.jpg",
-   "author": "APK",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:2900_K_Street_NW.jpg"
-  },
-  {
-   "id": "62b7f2b7eaecb21d",
-   "path": "media/img/62b7f2b7eaecb21d.webp",
-   "title": "File:LuxorTemple03.jpg",
-   "author": "Asta",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:LuxorTemple03.jpg"
-  },
-  {
-   "id": "fa5dce5a19863bbd",
-   "path": "media/img/fa5dce5a19863bbd.webp",
-   "title": "File:La maison des esclaves.jpg",
-   "author": "Charlottedkr",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:La_maison_des_esclaves.jpg"
-  },
-  {
-   "id": "bc970cd1400db7b6",
-   "path": "media/img/bc970cd1400db7b6.webp",
-   "title": "File:Kanga Moussa Atlas Catalan.jpg",
-   "author": "Cresques Abraham",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Kanga_Moussa_Atlas_Catalan.jpg"
-  },
-  {
-   "id": "11b76316e029d858",
-   "path": "media/img/11b76316e029d858.webp",
-   "title": "File:Bildstock an der Alpe Bardughe.jpg",
-   "author": "Uwelino",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Bildstock_an_der_Alpe_Bardughe.jpg"
-  },
-  {
-   "id": "739373a63aa4c51b",
-   "path": "media/img/739373a63aa4c51b.webp",
-   "title": "File:Meshtastic Ukraine Map.png",
-   "author": "Sverdlyuk",
+   "id": "f78945eb560bd261",
+   "path": "media/img/f78945eb560bd261.webp",
+   "title": "File:Mountain scene. Best viewed large. (49909617046).jpg",
+   "author": "sandro bisotti",
    "licence": "CC0",
-   "page": "https://commons.wikimedia.org/wiki/File:Meshtastic_Ukraine_Map.png"
+   "page": "https://commons.wikimedia.org/wiki/File:Mountain_scene._Best_viewed_large._(49909617046).jpg"
   },
   {
-   "id": "fedba0cbc7960ef9",
-   "path": "media/img/fedba0cbc7960ef9.webp",
-   "title": "File:QTR A7-APA A380!137 EDHI 16-04-14.jpg",
-   "author": "sezaun",
-   "licence": "CC BY-SA 2.0",
-   "page": "https://commons.wikimedia.org/wiki/File:QTR_A7-APA_A380!137_EDHI_16-04-14.jpg"
-  },
-  {
-   "id": "9776ceb88b9a6cd4",
-   "path": "media/img/9776ceb88b9a6cd4.webp",
-   "title": "File:Qendra historike e Prizrenitaa.jpg",
-   "author": "GentiBehramaj",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Qendra_historike_e_Prizrenitaa.jpg"
-  },
-  {
-   "id": "bb3b950624cb0f17",
-   "path": "media/img/bb3b950624cb0f17.webp",
-   "title": "File:Estadio Defensores del Chaco en 2019.jpg",
-   "author": "Hazaña17",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Estadio_Defensores_del_Chaco_en_2019.jpg"
-  },
-  {
-   "id": "219712c37f0da208",
-   "path": "media/img/219712c37f0da208.webp",
-   "title": "File:ARG-2016-Aerial-Tierra del Fuego (Ushuaia)–Valle Carbajal 01.jpg",
-   "author": "Godot13",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:ARG-2016-Aerial-Tierra_del_Fuego_(Ushuaia)%E2%80%93Valle_Carbajal_01.jpg"
-  },
-  {
-   "id": "c1758d55f41a8de0",
-   "path": "media/img/c1758d55f41a8de0.webp",
-   "title": "File:Willow Flats area and Teton Range in Grand Teton National Park.jpg",
-   "author": "Michael Gäbler",
-   "licence": "CC BY 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Willow_Flats_area_and_Teton_Range_in_Grand_Teton_National_Park.jpg"
-  },
-  {
-   "id": "635176fe1a8e8972",
-   "path": "media/img/635176fe1a8e8972.webp",
-   "title": "File:EcoRV 1RVA.png",
-   "author": "The original uploader was Zephyris at English Wikipedia .",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:EcoRV_1RVA.png"
-  },
-  {
-   "id": "29eaf363a4ceb997",
-   "path": "media/img/29eaf363a4ceb997.webp",
-   "title": "File:Falkland Islands Penguins 70.jpg",
-   "author": "Ben Tubby",
-   "licence": "CC BY 2.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Falkland_Islands_Penguins_70.jpg"
-  },
-  {
-   "id": "67ef4f39f26bb349",
-   "path": "media/img/67ef4f39f26bb349.webp",
-   "title": "File:Prague Václav Havel Airport in 2019.02.jpg",
-   "author": "CAPTAIN RAJU",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Prague_V%C3%A1clav_Havel_Airport_in_2019.02.jpg"
-  },
-  {
-   "id": "179fa0b47a29a4cc",
-   "path": "media/img/179fa0b47a29a4cc.webp",
-   "title": "File:Meister von Mileseva 001.jpg",
-   "author": "Meister von Mileseva",
+   "id": "50f9726972bd0e5a",
+   "path": "media/img/50f9726972bd0e5a.webp",
+   "title": "File:2438 pioneer venus map of venus.jpg",
+   "author": "NASA/Ames/U.S. Geological Survey/Massachusetts Institute of Technology",
    "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Meister_von_Mileseva_001.jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:2438_pioneer_venus_map_of_venus.jpg"
   },
   {
-   "id": "168d95a2a5c8df70",
-   "path": "media/img/168d95a2a5c8df70.webp",
-   "title": "File:EritreaInstituteOfTechnology.jpg",
-   "author": "Grullab",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:EritreaInstituteOfTechnology.jpg"
-  },
-  {
-   "id": "3aa23b526c851725",
-   "path": "media/img/3aa23b526c851725.webp",
-   "title": "File:Yambo - Manoscritto trovato in una bottiglia, Roma, Scotti, 1905 (page 9 crop).jpg",
-   "author": "Yambo (Enrico Novelli)",
+   "id": "45c5aa9d55fd8239",
+   "path": "media/img/45c5aa9d55fd8239.webp",
+   "title": "File:Pluto's Sputnik Planum geologic map (cropped).jpg",
+   "author": "NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute",
    "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Yambo_-_Manoscritto_trovato_in_una_bottiglia,_Roma,_Scotti,_1905_(page_9_crop).jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Pluto%27s_Sputnik_Planum_geologic_map_(cropped).jpg"
   },
   {
-   "id": "87fedc4e0df17783",
-   "path": "media/img/87fedc4e0df17783.webp",
-   "title": "File:Siliconchip by shapeshifter.png",
-   "author": "David Carron at English Wikipedia",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Siliconchip_by_shapeshifter.png"
-  },
-  {
-   "id": "e86dfa6b4c69db65",
-   "path": "media/img/e86dfa6b4c69db65.webp",
-   "title": "File:Mural de la Madre Teresa en La Barca de la Fe.jpg",
-   "author": "Oficial K",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Mural_de_la_Madre_Teresa_en_La_Barca_de_la_Fe.jpg"
-  },
-  {
-   "id": "4cf9d9e8c20ce081",
-   "path": "media/img/4cf9d9e8c20ce081.webp",
-   "title": "File:Anne Sullivan - Helen Keller memorial - Tewksbury, Massachusetts - DSC00072.JPG",
-   "author": "Daderot",
+   "id": "3189f9efb99f9184",
+   "path": "media/img/3189f9efb99f9184.webp",
+   "title": "File:Apollo 11 Launch - GPN-2000-000630.jpg",
+   "author": "NASA",
    "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Anne_Sullivan_-_Helen_Keller_memorial_-_Tewksbury,_Massachusetts_-_DSC00072.JPG"
+   "page": "https://commons.wikimedia.org/wiki/File:Apollo_11_Launch_-_GPN-2000-000630.jpg"
   },
   {
-   "id": "10beacb1744a6d71",
-   "path": "media/img/10beacb1744a6d71.webp",
-   "title": "File:Fornovolasco - Grotta del Vento 0001.jpg",
-   "author": "Andrea Massagli",
-   "licence": "CC BY 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Fornovolasco_-_Grotta_del_Vento_0001.jpg"
-  },
-  {
-   "id": "11ef510e641b2a00",
-   "path": "media/img/11ef510e641b2a00.webp",
-   "title": "File:Tasman-dagboek-a.jpg",
-   "author": "Isaack Gilsemans",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Tasman-dagboek-a.jpg"
-  },
-  {
-   "id": "b1eb4022c48036d8",
-   "path": "media/img/b1eb4022c48036d8.webp",
-   "title": "File:Great Pyramid of Giza May 2015.JPG",
-   "author": "MusikAnimal",
-   "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Great_Pyramid_of_Giza_May_2015.JPG"
-  },
-  {
-   "id": "32fbcd2511f71c5a",
-   "path": "media/img/32fbcd2511f71c5a.webp",
-   "title": "File:Princess Reema Remarks.jpg",
-   "author": "Dom.Ross",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Princess_Reema_Remarks.jpg"
-  },
-  {
-   "id": "6cdcdf49da2be2aa",
-   "path": "media/img/6cdcdf49da2be2aa.webp",
-   "title": "File:Cariche+-+-.png",
-   "author": "Mattruffoni",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Cariche%2B-%2B-.png"
-  },
-  {
-   "id": "80931ff6763a8307",
-   "path": "media/img/80931ff6763a8307.webp",
-   "title": "File:Rocca dell'Abisso, Fondachelli Fantina, Sicilia.JPG",
-   "author": "Fediona",
-   "licence": "CC0",
-   "page": "https://commons.wikimedia.org/wiki/File:Rocca_dell%27Abisso,_Fondachelli_Fantina,_Sicilia.JPG"
-  },
-  {
-   "id": "ed4a0b7b9525908f",
-   "path": "media/img/ed4a0b7b9525908f.webp",
-   "title": "File:Tortilleras Nebel.jpg",
-   "author": "Carl Nebel",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Tortilleras_Nebel.jpg"
-  },
-  {
-   "id": "5303f79b47e5d6b7",
-   "path": "media/img/5303f79b47e5d6b7.webp",
-   "title": "File:Maurice religions 2011.png",
-   "author": "Semoziade",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Maurice_religions_2011.png"
-  },
-  {
-   "id": "cea34ba0bb8fdecd",
-   "path": "media/img/cea34ba0bb8fdecd.webp",
-   "title": "File:Colosseum in Rome, Italy - April 2007.jpg",
-   "author": "Diliff",
-   "licence": "CC BY-SA 2.5",
-   "page": "https://commons.wikimedia.org/wiki/File:Colosseum_in_Rome,_Italy_-_April_2007.jpg"
-  },
-  {
-   "id": "b7bae4b56dae2a2d",
-   "path": "media/img/b7bae4b56dae2a2d.webp",
-   "title": "File:Nord-Kivu, RD Congo - Vue sur un cratère aux abords de la ville de Goma. (22722760943).jpg",
-   "author": "MONUSCO Photos",
-   "licence": "CC BY-SA 2.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Nord-Kivu,_RD_Congo_-_Vue_sur_un_crat%C3%A8re_aux_abords_de_la_ville_de_Goma._(22722760943).jpg"
-  },
-  {
-   "id": "fc8bedd705acc175",
-   "path": "media/img/fc8bedd705acc175.webp",
-   "title": "File:Portret van Robert Boyle, RP-P-OB-4578 (cropped).jpg",
+   "id": "819083eb76d6427a",
+   "path": "media/img/819083eb76d6427a.webp",
+   "title": "File:Kniegelenk, RP-F-F26541.jpg",
    "author": "Rijksmuseum",
    "licence": "CC0",
-   "page": "https://commons.wikimedia.org/wiki/File:Portret_van_Robert_Boyle,_RP-P-OB-4578_(cropped).jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Kniegelenk,_RP-F-F26541.jpg"
   },
   {
-   "id": "e6e81a2723cd8e0e",
-   "path": "media/img/e6e81a2723cd8e0e.webp",
-   "title": "File:Battle of Sarandi, Juan Manuel Blanes.jpg",
-   "author": "Juan Manuel Blanes",
+   "id": "c02ed22ab9f117cf",
+   "path": "media/img/c02ed22ab9f117cf.webp",
+   "title": "File:Kapsowarhospital1.jpg",
+   "author": "Masai29",
    "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Battle_of_Sarandi,_Juan_Manuel_Blanes.jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Kapsowarhospital1.jpg"
   },
   {
-   "id": "f8874718b561e2e0",
-   "path": "media/img/f8874718b561e2e0.webp",
-   "title": "File:Calle Crisologo, Vigan City, Ilocos Sur.JPG",
-   "author": "Joelaldor",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Calle_Crisologo,_Vigan_City,_Ilocos_Sur.JPG"
-  },
-  {
-   "id": "0ecb3ae7ee6a1c82",
-   "path": "media/img/0ecb3ae7ee6a1c82.webp",
-   "title": "File:ParliamentEswatini.jpg",
-   "author": "ZS Khumalo",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:ParliamentEswatini.jpg"
-  },
-  {
-   "id": "7e5d9bec487925ea",
-   "path": "media/img/7e5d9bec487925ea.webp",
-   "title": "File:Anak Krakatau Nature Reserve (50779565326).png",
-   "author": "Sentinel Hub",
-   "licence": "CC BY 2.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Anak_Krakatau_Nature_Reserve_(50779565326).png"
-  },
-  {
-   "id": "620e4fbe5b2ce3c4",
-   "path": "media/img/620e4fbe5b2ce3c4.webp",
-   "title": "File:Gorilla nest.jpg",
-   "author": "Jefe Le Gran",
-   "licence": "CC BY 2.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Gorilla_nest.jpg"
-  },
-  {
-   "id": "a11911fddfa59686",
-   "path": "media/img/a11911fddfa59686.webp",
-   "title": "File:Bangui Shopping District.jpg",
-   "author": "Afrika Force from South Africa",
-   "licence": "CC BY 2.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Bangui_Shopping_District.jpg"
-  },
-  {
-   "id": "8681f13415904073",
-   "path": "media/img/8681f13415904073.webp",
-   "title": "File:Heron Island.jpg",
-   "author": "Ciambue",
-   "licence": "CC BY 2.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Heron_Island.jpg"
-  },
-  {
-   "id": "cc11196c50924d83",
-   "path": "media/img/cc11196c50924d83.webp",
-   "title": "File:Stonehenge visitors centre.png",
-   "author": "Sam.hill7",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Stonehenge_visitors_centre.png"
-  },
-  {
-   "id": "6baf5fabeac0b416",
-   "path": "media/img/6baf5fabeac0b416.webp",
-   "title": "File:Yuri Gagarin with awards (cropped) 2.jpg",
-   "author": "Александр Моклецов / СовИнформБюро",
-   "licence": "CC BY 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Yuri_Gagarin_with_awards_(cropped)_2.jpg"
-  },
-  {
-   "id": "0d3fc0d7245f9610",
-   "path": "media/img/0d3fc0d7245f9610.webp",
-   "title": "File:GreenEssay.png",
-   "author": "",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:GreenEssay.png"
-  },
-  {
-   "id": "3eb68490854fce4f",
-   "path": "media/img/3eb68490854fce4f.webp",
-   "title": "File:Comet P1 McNaught02 - 23-01-07-edited.jpg",
-   "author": "Soerfm",
+   "id": "f8199d30e51fc5f8",
+   "path": "media/img/f8199d30e51fc5f8.webp",
+   "title": "File:RIAN archive 848095 Signing the Agreement to eliminate the USSR and establish the Commonwealth of Independent States.jpg",
+   "author": "U. Ivanov / Ю. Иванов",
    "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Comet_P1_McNaught02_-_23-01-07-edited.jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:RIAN_archive_848095_Signing_the_Agreement_to_eliminate_the_USSR_and_establish_the_Commonwealth_of_Independent_States.jpg"
   },
   {
-   "id": "5b6d101e23dc7ce2",
-   "path": "media/img/5b6d101e23dc7ce2.webp",
-   "title": "File:Bacteria, Klebsiella displaced the medium by producing the gas.jpg",
-   "author": "Ajay Kumar Chaurasiya",
+   "id": "95c5c18e3cc98a2f",
+   "path": "media/img/95c5c18e3cc98a2f.webp",
+   "title": "File:Rome Stele.jpg",
+   "author": "Ondřej Žváček",
+   "licence": "CC BY 2.5",
+   "page": "https://commons.wikimedia.org/wiki/File:Rome_Stele.jpg"
+  },
+  {
+   "id": "e7bc2589aa439726",
+   "path": "media/img/e7bc2589aa439726.webp",
+   "title": "File:Guinea corn during Kaduna trade fair.jpg",
+   "author": "Weyham",
    "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Bacteria,_Klebsiella_displaced_the_medium_by_producing_the_gas.jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Guinea_corn_during_Kaduna_trade_fair.jpg"
   },
   {
-   "id": "22c1ffd2297b9371",
-   "path": "media/img/22c1ffd2297b9371.webp",
-   "title": "File:Percentage of Individuals in the United States Without Health Insurance, 1963-2015.png",
-   "author": "Barack Obama",
+   "id": "ac2aa51af9808041",
+   "path": "media/img/ac2aa51af9808041.webp",
+   "title": "File:Mozambican Chicken piri piri.jpg",
+   "author": "Andrés Moreno",
+   "licence": "CC BY-SA 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Mozambican_Chicken_piri_piri.jpg"
+  },
+  {
+   "id": "13f1b367c01edba8",
+   "path": "media/img/13f1b367c01edba8.webp",
+   "title": "File:Laos 2009. Photo- AusAID (10707863455).jpg",
+   "author": "Department of Foreign Affairs and Trade",
+   "licence": "CC BY 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Laos_2009._Photo-_AusAID_(10707863455).jpg"
+  },
+  {
+   "id": "22deb0a4a3dbb9c1",
+   "path": "media/img/22deb0a4a3dbb9c1.webp",
+   "title": "File:Global subducted slabs USGS.png",
+   "author": "Gavin P. Hayes",
    "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Percentage_of_Individuals_in_the_United_States_Without_Health_Insurance,_1963-2015.png"
+   "page": "https://commons.wikimedia.org/wiki/File:Global_subducted_slabs_USGS.png"
+  },
+  {
+   "id": "e2c465ad29bddc18",
+   "path": "media/img/e2c465ad29bddc18.webp",
+   "title": "File:6 (C I) NIST ASD emission spectrum.png",
+   "author": "Kramida, A., Ralchenko, Yu., Reader, J., and NIST ASD Team (2024). NIST Atomic Spectra Database (ver. 5.12), Online. Available: [2] (2025, January 20). National Institute of Standards and Technology, Gaithersburg, MD. doi:10.18434/T4W30F",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:6_(C_I)_NIST_ASD_emission_spectrum.png"
+  },
+  {
+   "id": "19a1e28b0eac732d",
+   "path": "media/img/19a1e28b0eac732d.webp",
+   "title": "File:Vlkolinec 02.jpg",
+   "author": "10ricardo",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Vlkolinec_02.jpg"
+  },
+  {
+   "id": "7419747499da925b",
+   "path": "media/img/7419747499da925b.webp",
+   "title": "File:Shahid mosque Algomah prayers in Ramadan1.JPG",
+   "author": "ASIM",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Shahid_mosque_Algomah_prayers_in_Ramadan1.JPG"
+  },
+  {
+   "id": "a016459ae5b706b6",
+   "path": "media/img/a016459ae5b706b6.webp",
+   "title": "File:3-D Printed Tissue Simulation (5218) (18304757960).jpg",
+   "author": "The U.S. Food and Drug Administration",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:3-D_Printed_Tissue_Simulation_(5218)_(18304757960).jpg"
+  },
+  {
+   "id": "3180be98baac96b4",
+   "path": "media/img/3180be98baac96b4.webp",
+   "title": "File:1939 RCA Television Advertisement.jpg",
+   "author": "Radio Corporation of America, Radio City, New York City, NY",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:1939_RCA_Television_Advertisement.jpg"
+  },
+  {
+   "id": "347db98b08c82b48",
+   "path": "media/img/347db98b08c82b48.webp",
+   "title": "File:Jahorina mountain 2018.jpg",
+   "author": "EXIT Photo Team",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Jahorina_mountain_2018.jpg"
+  },
+  {
+   "id": "326ba7b0efe083ad",
+   "path": "media/img/326ba7b0efe083ad.webp",
+   "title": "File:Curious - Flickr - Stiller Beobachter (1).jpg",
+   "author": "Stiller Beobachter from Ansbach, Germany",
+   "licence": "CC BY 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Curious_-_Flickr_-_Stiller_Beobachter_(1).jpg"
+  },
+  {
+   "id": "d4ff0738ce861aaf",
+   "path": "media/img/d4ff0738ce861aaf.webp",
+   "title": "File:Licking her chops (7030763521).jpg",
+   "author": "Mount Rainier National Park from Ashford, WA, United States",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:Licking_her_chops_(7030763521).jpg"
+  },
+  {
+   "id": "77ce2767ba1db4e5",
+   "path": "media/img/77ce2767ba1db4e5.webp",
+   "title": "File:Pristiophorus nudipinnis McCoy.jpg",
+   "author": "F. Schönfeld",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:Pristiophorus_nudipinnis_McCoy.jpg"
+  },
+  {
+   "id": "f11996221ecd224b",
+   "path": "media/img/f11996221ecd224b.webp",
+   "title": "File:Electric Bicycle.jpg",
+   "author": "Mikefairbanks",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Electric_Bicycle.jpg"
+  },
+  {
+   "id": "8b47516c49223fa5",
+   "path": "media/img/8b47516c49223fa5.webp",
+   "title": "File:One horned Rhino.jpg",
+   "author": "Krish Dulal",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:One_horned_Rhino.jpg"
+  },
+  {
+   "id": "6cdc5c2e2e42cb82",
+   "path": "media/img/6cdc5c2e2e42cb82.webp",
+   "title": "File:How to Measure the Spin of a Black Hole.jpg",
+   "author": "NASA/JPL-Caltech",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:How_to_Measure_the_Spin_of_a_Black_Hole.jpg"
+  },
+  {
+   "id": "686b7b1b2f4362c1",
+   "path": "media/img/686b7b1b2f4362c1.webp",
+   "title": "File:Fresco of Ubisi (7).jpg",
+   "author": "Jaba1977",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Fresco_of_Ubisi_(7).jpg"
+  },
+  {
+   "id": "1f5c53a6b84e99db",
+   "path": "media/img/1f5c53a6b84e99db.webp",
+   "title": "File:OV-101 first flight.jpg",
+   "author": "NASA/Dryden Flight Research Center",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:OV-101_first_flight.jpg"
+  },
+  {
+   "id": "a760843ca26f9678",
+   "path": "media/img/a760843ca26f9678.webp",
+   "title": "File:Greek Salad from Thessaloniki.jpg",
+   "author": "Armineaghayan",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Greek_Salad_from_Thessaloniki.jpg"
+  },
+  {
+   "id": "fbd14246574e8f77",
+   "path": "media/img/fbd14246574e8f77.webp",
+   "title": "File:Seifpalace.jpg",
+   "author": "xiquinhosilva",
+   "licence": "CC BY-SA 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Seifpalace.jpg"
   },
   {
    "id": "ad2c3c0010828b06",
@@ -1516,140 +692,964 @@
    "page": "https://commons.wikimedia.org/wiki/File:Fernanda_Nossa,_Guinea-Bissau,_photo_3.jpg"
   },
   {
-   "id": "51a9abf72c8f561e",
-   "path": "media/img/51a9abf72c8f561e.webp",
-   "title": "File:Mikalojus Konstantinas Čiurlionis photo portrait.jpg",
-   "author": "S.Fleury",
+   "id": "0fdc86a41042f2f1",
+   "path": "media/img/0fdc86a41042f2f1.webp",
+   "title": "File:Devi Prasad Roy Chowdhury.jpg",
+   "author": "Unknown author Unknown author",
    "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Mikalojus_Konstantinas_%C4%8Ciurlionis_photo_portrait.jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Devi_Prasad_Roy_Chowdhury.jpg"
   },
   {
-   "id": "734ae3d9ed69c810",
-   "path": "media/img/734ae3d9ed69c810.webp",
-   "title": "File:Timor Lorosa'e centavo coin -2.JPG",
-   "author": "Indiana jo",
+   "id": "c4c7afe655e2d811",
+   "path": "media/img/c4c7afe655e2d811.webp",
+   "title": "File:201805 human skeleton.png",
+   "author": "DataBase Center for Life Science (DBCLS)",
+   "licence": "CC BY 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:201805_human_skeleton.png"
+  },
+  {
+   "id": "99015338b0999117",
+   "path": "media/img/99015338b0999117.webp",
+   "title": "File:Bhutan Map en dz.png",
+   "author": "Tshering Nidup",
    "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Timor_Lorosa%27e_centavo_coin_-2.JPG"
+   "page": "https://commons.wikimedia.org/wiki/File:Bhutan_Map_en_dz.png"
   },
   {
-   "id": "5bb43e5a10f4434f",
-   "path": "media/img/5bb43e5a10f4434f.webp",
-   "title": "File:Fli e pjekur me saç.jpg",
-   "author": "Rrahmani.v",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Fli_e_pjekur_me_sa%C3%A7.jpg"
-  },
-  {
-   "id": "2c9aad5247a2d0f6",
-   "path": "media/img/2c9aad5247a2d0f6.webp",
-   "title": "File:Mähler - Ludwig van Beethoven, um 1804-1805.png",
-   "author": "Joseph Willibrord Mähler",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:M%C3%A4hler_-_Ludwig_van_Beethoven,_um_1804-1805.png"
-  },
-  {
-   "id": "d078f2b5be8e667e",
-   "path": "media/img/d078f2b5be8e667e.webp",
-   "title": "File:Portable LP- records holder.jpg",
-   "author": "Amitbalani",
-   "licence": "CC0",
-   "page": "https://commons.wikimedia.org/wiki/File:Portable_LP-_records_holder.jpg"
-  },
-  {
-   "id": "29c69e3acb627bf4",
-   "path": "media/img/29c69e3acb627bf4.webp",
-   "title": "File:DFC 5635 A serene shrine inside a Thai temple ornate white-and-gold stupa with offerings and a framed monk portrait in the background Huai Yai Chon Buri.jpg",
-   "author": "PattayaPatrol",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:DFC_5635_A_serene_shrine_inside_a_Thai_temple_ornate_white-and-gold_stupa_with_offerings_and_a_framed_monk_portrait_in_the_background_Huai_Yai_Chon_Buri.jpg"
-  },
-  {
-   "id": "1a21100bd514a784",
-   "path": "media/img/1a21100bd514a784.webp",
-   "title": "File:The place where Imam Yahya Hamid al-Din was sitting.jpg",
-   "author": "Omar Abdulrhman Salam",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:The_place_where_Imam_Yahya_Hamid_al-Din_was_sitting.jpg"
-  },
-  {
-   "id": "aa98c09aa2debf06",
-   "path": "media/img/aa98c09aa2debf06.webp",
-   "title": "File:Sofia University \"St. Kliment Ohridski\" (37849719131).jpg",
-   "author": "Deensel",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Sofia_University_%22St._Kliment_Ohridski%22_(37849719131).jpg"
-  },
-  {
-   "id": "c759bf720863ec8c",
-   "path": "media/img/c759bf720863ec8c.webp",
-   "title": "File:Belianske Tatry.jpg",
-   "author": "Michalsmr",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Belianske_Tatry.jpg"
-  },
-  {
-   "id": "e31ea30faa08496a",
-   "path": "media/img/e31ea30faa08496a.webp",
-   "title": "File:Saltair-Pavilion-1900.jpeg",
-   "author": "Detroit Publishing Co. Photographer is unknown.",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Saltair-Pavilion-1900.jpeg"
-  },
-  {
-   "id": "071220a8827d35e9",
-   "path": "media/img/071220a8827d35e9.webp",
-   "title": "File:Bennu mosaic OSIRIS-REx (square).png",
-   "author": "NASA/Goddard/University of Arizona",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Bennu_mosaic_OSIRIS-REx_(square).png"
-  },
-  {
-   "id": "70fb3a381f13336c",
-   "path": "media/img/70fb3a381f13336c.webp",
-   "title": "File:Čuvajte Jugoslaviju.jpg",
-   "author": "Danica (Duna) Peklic – Peyer",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:%C4%8Cuvajte_Jugoslaviju.jpg"
-  },
-  {
-   "id": "29c5bb8f4493bb7f",
-   "path": "media/img/29c5bb8f4493bb7f.webp",
-   "title": "File:Mt.Fuji Shizuoka Airport.jpg",
-   "author": "Asrsgk",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Mt.Fuji_Shizuoka_Airport.jpg"
-  },
-  {
-   "id": "5cf80da99e1859c2",
-   "path": "media/img/5cf80da99e1859c2.webp",
-   "title": "File:Archiginnasio ora blu Bologna.jpg",
-   "author": "Wwikiwalter",
-   "licence": "CC BY-SA 4.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Archiginnasio_ora_blu_Bologna.jpg"
-  },
-  {
-   "id": "b53d659228dbbac7",
-   "path": "media/img/b53d659228dbbac7.webp",
-   "title": "File:Cubanfood.jpg",
-   "author": "Marc Averette",
-   "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Cubanfood.jpg"
-  },
-  {
-   "id": "ecb36a2310c19a16",
-   "path": "media/img/ecb36a2310c19a16.webp",
-   "title": "File:PortVilaWallPainting.jpg",
-   "author": "Torbenbrinker",
+   "id": "ac598239b2d4ea87",
+   "path": "media/img/ac598239b2d4ea87.webp",
+   "title": "File:Saint Lucia geography map en.png",
+   "author": "No machine-readable author provided. Doviende~commonswiki assumed (based on copyright claims).",
    "licence": "CC BY-SA 3.0",
-   "page": "https://commons.wikimedia.org/wiki/File:PortVilaWallPainting.jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Saint_Lucia_geography_map_en.png"
   },
   {
-   "id": "e04d2080c658e4af",
-   "path": "media/img/e04d2080c658e4af.webp",
-   "title": "File:Complex-adaptive-system.jpg",
-   "author": "Acadac",
+   "id": "73ee6dbcc7e1da50",
+   "path": "media/img/73ee6dbcc7e1da50.webp",
+   "title": "File:Tongan church missionaries wearing traditional ta'ovala.jpg",
+   "author": "Carlyashaffer",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Tongan_church_missionaries_wearing_traditional_ta%27ovala.jpg"
+  },
+  {
+   "id": "5c1a008364e30134",
+   "path": "media/img/5c1a008364e30134.webp",
+   "title": "File:Lions Family Portrait Masai Mara.jpg",
+   "author": "Benh LIEU SONG",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Lions_Family_Portrait_Masai_Mara.jpg"
+  },
+  {
+   "id": "b3aa01fe4bd93d26",
+   "path": "media/img/b3aa01fe4bd93d26.webp",
+   "title": "File:Description iconographique comparée du squelette et du système dentaire des mammifères récents et fossiles (Ursus maritimus skeleton).jpg",
+   "author": "Blainville, H.-M. Ducrotay de (Henri-Marie Ducrotay)",
    "licence": "Public domain",
-   "page": "https://commons.wikimedia.org/wiki/File:Complex-adaptive-system.jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Description_iconographique_compar%C3%A9e_du_squelette_et_du_syst%C3%A8me_dentaire_des_mammif%C3%A8res_r%C3%A9cents_et_fossiles_(Ursus_maritimus_skeleton).jpg"
+  },
+  {
+   "id": "53ac9d01fc1b5f0f",
+   "path": "media/img/53ac9d01fc1b5f0f.webp",
+   "title": "File:Vesuvius (erupting), Brooklyn Museum Archives.jpg",
+   "author": "William Henry Goodyear",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:Vesuvius_(erupting),_Brooklyn_Museum_Archives.jpg"
+  },
+  {
+   "id": "fe7276d4fe20cb6f",
+   "path": "media/img/fe7276d4fe20cb6f.webp",
+   "title": "File:Portrait of Marie Curie (1867 - 1934), Polish chemist Wellcome M0000113.jpg",
+   "author": "Henri Manuel",
+   "licence": "CC BY 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Portrait_of_Marie_Curie_(1867_-_1934),_Polish_chemist_Wellcome_M0000113.jpg"
+  },
+  {
+   "id": "85e7f54fd661ae50",
+   "path": "media/img/85e7f54fd661ae50.webp",
+   "title": "File:Nelson Mandela - full (cropped).jpg",
+   "author": "South Africa The Good News",
+   "licence": "CC BY 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Nelson_Mandela_-_full_(cropped).jpg"
+  },
+  {
+   "id": "36f43422da222949",
+   "path": "media/img/36f43422da222949.webp",
+   "title": "File:Olympus National Park 30.jpg",
+   "author": "kallerna",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Olympus_National_Park_30.jpg"
+  },
+  {
+   "id": "ea4e2eab18521ac3",
+   "path": "media/img/ea4e2eab18521ac3.webp",
+   "title": "File:DemoticScriptsRosettaStoneReplica.jpg",
+   "author": "Chris 73 ( Talk )",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:DemoticScriptsRosettaStoneReplica.jpg"
+  },
+  {
+   "id": "85a16e75f01e13ba",
+   "path": "media/img/85a16e75f01e13ba.webp",
+   "title": "File:Family from manasir tribe.jpg",
+   "author": "David Haberlah",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Family_from_manasir_tribe.jpg"
+  },
+  {
+   "id": "be73726049e1e4a1",
+   "path": "media/img/be73726049e1e4a1.webp",
+   "title": "File:Adiponectin structure.png",
+   "author": "מעיןבר",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Adiponectin_structure.png"
+  },
+  {
+   "id": "d0dc9352ce462ab9",
+   "path": "media/img/d0dc9352ce462ab9.webp",
+   "title": "File:Photo of old book from 1756 prasing vaccine.jpg",
+   "author": "Epkwilk",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Photo_of_old_book_from_1756_prasing_vaccine.jpg"
+  },
+  {
+   "id": "27b06a9270857251",
+   "path": "media/img/27b06a9270857251.webp",
+   "title": "File:Opera cake.jpg",
+   "author": "Behruznurullayevv",
+   "licence": "CC0",
+   "page": "https://commons.wikimedia.org/wiki/File:Opera_cake.jpg"
+  },
+  {
+   "id": "0bee63bf26791673",
+   "path": "media/img/0bee63bf26791673.webp",
+   "title": "File:Obamas at church on Inauguration Day 2013.jpg",
+   "author": "Pete Souza",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:Obamas_at_church_on_Inauguration_Day_2013.jpg"
+  },
+  {
+   "id": "0f684541e8b75df6",
+   "path": "media/img/0f684541e8b75df6.webp",
+   "title": "File:Panier Basket 01.jpg",
+   "author": "Kondotikodro",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Panier_Basket_01.jpg"
+  },
+  {
+   "id": "2eaa7491d037d747",
+   "path": "media/img/2eaa7491d037d747.webp",
+   "title": "File:Berliner Physiker u Chemiker 1920.jpg",
+   "author": "Unknown author Unknown author",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:Berliner_Physiker_u_Chemiker_1920.jpg"
+  },
+  {
+   "id": "002890853f2d5a25",
+   "path": "media/img/002890853f2d5a25.webp",
+   "title": "File:Ethnic Map of Fiji.png",
+   "author": "CrimsonMagma",
+   "licence": "CC0",
+   "page": "https://commons.wikimedia.org/wiki/File:Ethnic_Map_of_Fiji.png"
+  },
+  {
+   "id": "05104b67fd7152f2",
+   "path": "media/img/05104b67fd7152f2.webp",
+   "title": "File:Stara planina, vrh Midžor.jpg",
+   "author": "Petkovic Boris",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Stara_planina,_vrh_Mid%C5%BEor.jpg"
+  },
+  {
+   "id": "304603c23e251315",
+   "path": "media/img/304603c23e251315.webp",
+   "title": "File:Piano player.jpg",
+   "author": "Arto Alanenpää",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Piano_player.jpg"
+  },
+  {
+   "id": "002f144a7296725f",
+   "path": "media/img/002f144a7296725f.webp",
+   "title": "File:Plenty of oxygen here - geograph.org.uk - 5677619.jpg",
+   "author": "Chris Morgan",
+   "licence": "CC BY-SA 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Plenty_of_oxygen_here_-_geograph.org.uk_-_5677619.jpg"
+  },
+  {
+   "id": "6f2437f07e0153f0",
+   "path": "media/img/6f2437f07e0153f0.webp",
+   "title": "File:Aqaba Railway Corporation BW 1.JPG",
+   "author": "Berthold Werner",
+   "licence": "CC BY 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Aqaba_Railway_Corporation_BW_1.JPG"
+  },
+  {
+   "id": "009089905dc874c8",
+   "path": "media/img/009089905dc874c8.webp",
+   "title": "File:Ecuador-peru-land-claims-01.png",
+   "author": "Haylli",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Ecuador-peru-land-claims-01.png"
+  },
+  {
+   "id": "19966d2101421cf4",
+   "path": "media/img/19966d2101421cf4.webp",
+   "title": "File:The Earth seen from Apollo 17 with transparent background.png",
+   "author": "NASA",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Earth_seen_from_Apollo_17_with_transparent_background.png"
+  },
+  {
+   "id": "33e5cdd51e3d4698",
+   "path": "media/img/33e5cdd51e3d4698.webp",
+   "title": "File:20250314 142642 Gaëtan Faucer.jpg",
+   "author": "Lafloche",
+   "licence": "CC0",
+   "page": "https://commons.wikimedia.org/wiki/File:20250314_142642_Ga%C3%ABtan_Faucer.jpg"
+  },
+  {
+   "id": "1e71fa96be9e48df",
+   "path": "media/img/1e71fa96be9e48df.webp",
+   "title": "File:Israel relief location map.jpg",
+   "author": "Eric Gaba ( Sting - fr:Sting ) and NordNordWest",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Israel_relief_location_map.jpg"
+  },
+  {
+   "id": "44815ae0e6769706",
+   "path": "media/img/44815ae0e6769706.webp",
+   "title": "File:Masikryong North Korea Ski Resort (12300043424).jpg",
+   "author": "Uri Tours",
+   "licence": "CC BY-SA 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Masikryong_North_Korea_Ski_Resort_(12300043424).jpg"
+  },
+  {
+   "id": "d8903d29b6cbbec0",
+   "path": "media/img/d8903d29b6cbbec0.webp",
+   "title": "File:2020-21 Ahed vs Ansar 02.jpg",
+   "author": "Mohammad Moussa",
+   "licence": "CC BY 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:2020-21_Ahed_vs_Ansar_02.jpg"
+  },
+  {
+   "id": "d1ebfb589550bdd9",
+   "path": "media/img/d1ebfb589550bdd9.webp",
+   "title": "File:Gustave Wappers - Episode of the September Days 1830, on the Grand Place of Brussels - Google Art Project.jpg",
+   "author": "Gustaaf Wappers",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:Gustave_Wappers_-_Episode_of_the_September_Days_1830,_on_the_Grand_Place_of_Brussels_-_Google_Art_Project.jpg"
+  },
+  {
+   "id": "2040763a3a42c92d",
+   "path": "media/img/2040763a3a42c92d.webp",
+   "title": "File:Fotothek df roe-neg 0000331 002 Portrait eines Rundfunktechnikers.jpg",
+   "author": "Roger Rössing / Renate Rössing",
+   "licence": "CC BY-SA 3.0 de",
+   "page": "https://commons.wikimedia.org/wiki/File:Fotothek_df_roe-neg_0000331_002_Portrait_eines_Rundfunktechnikers.jpg"
+  },
+  {
+   "id": "cff58839c35622ec",
+   "path": "media/img/cff58839c35622ec.webp",
+   "title": "File:Lybia (Gaddafi loyalists) flag (2019- ).png",
+   "author": "Anusic99",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Lybia_(Gaddafi_loyalists)_flag_(2019-_).png"
+  },
+  {
+   "id": "b3d79d7b6615181a",
+   "path": "media/img/b3d79d7b6615181a.webp",
+   "title": "File:Equus quagga burchellii - Etosha, 2014.jpg",
+   "author": "Yathin S Krishnappa",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Equus_quagga_burchellii_-_Etosha,_2014.jpg"
+  },
+  {
+   "id": "4688d5fef44fb2a5",
+   "path": "media/img/4688d5fef44fb2a5.webp",
+   "title": "File:Puu Oo cropped.jpg",
+   "author": "G.E. Ulrich, USGS. Cropping by Hike395 ( talk · contribs )",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:Puu_Oo_cropped.jpg"
+  },
+  {
+   "id": "464f8f8daa15e637",
+   "path": "media/img/464f8f8daa15e637.webp",
+   "title": "File:Colourful Skirts at Seychelles Market.jpg",
+   "author": "Tribalninja",
+   "licence": "CC BY 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Colourful_Skirts_at_Seychelles_Market.jpg"
+  },
+  {
+   "id": "90f508c2e83f38c6",
+   "path": "media/img/90f508c2e83f38c6.webp",
+   "title": "File:Active osteoblasts.jpg",
+   "author": "Robert M. Hunt",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Active_osteoblasts.jpg"
+  },
+  {
+   "id": "91fad905cee8eabb",
+   "path": "media/img/91fad905cee8eabb.webp",
+   "title": "File:1963 Frigidaire Imperial refrigerator.jpg",
+   "author": "Phil Racicot",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:1963_Frigidaire_Imperial_refrigerator.jpg"
+  },
+  {
+   "id": "b53d4d79b63b6603",
+   "path": "media/img/b53d4d79b63b6603.webp",
+   "title": "File:Petar I Petrović-Njegoš Знаменити Срби XIX. века.jpg",
+   "author": "Andra Gavrilović",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:Petar_I_Petrovi%C4%87-Njego%C5%A1_%D0%97%D0%BD%D0%B0%D0%BC%D0%B5%D0%BD%D0%B8%D1%82%D0%B8_%D0%A1%D1%80%D0%B1%D0%B8_XIX._%D0%B2%D0%B5%D0%BA%D0%B0.jpg"
+  },
+  {
+   "id": "12ea4024ba8187e0",
+   "path": "media/img/12ea4024ba8187e0.webp",
+   "title": "File:The Lighthouse of Alexandria by Magdalena van de Pasee.jpg",
+   "author": "Magdalena van de Pasee",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Lighthouse_of_Alexandria_by_Magdalena_van_de_Pasee.jpg"
+  },
+  {
+   "id": "8ff53e2b87f27dad",
+   "path": "media/img/8ff53e2b87f27dad.webp",
+   "title": "File:Anna's hummingbird (Calypte anna) male in flight Campbell River.jpg",
+   "author": "Charles J. Sharp",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Anna%27s_hummingbird_(Calypte_anna)_male_in_flight_Campbell_River.jpg"
+  },
+  {
+   "id": "a13fefb264cb6c8f",
+   "path": "media/img/a13fefb264cb6c8f.webp",
+   "title": "File:Frühmittelalterliches Dorf.jpg",
+   "author": "Barbara Brunner",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Fr%C3%BChmittelalterliches_Dorf.jpg"
+  },
+  {
+   "id": "169094b907b0bbb9",
+   "path": "media/img/169094b907b0bbb9.webp",
+   "title": "File:Akella Mallikarjuna Sarma playing the Violin in the Indian Carnatic Style.jpg",
+   "author": "Vyasa Saatvik Akundi",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Akella_Mallikarjuna_Sarma_playing_the_Violin_in_the_Indian_Carnatic_Style.jpg"
+  },
+  {
+   "id": "62cbc361e3080b0a",
+   "path": "media/img/62cbc361e3080b0a.webp",
+   "title": "File:FOOD Doubles 2.jpg",
+   "author": "Grueslayer",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:FOOD_Doubles_2.jpg"
+  },
+  {
+   "id": "ee67f87b6a4cbe41",
+   "path": "media/img/ee67f87b6a4cbe41.webp",
+   "title": "File:Eyjafjallajokull-April-17.JPG",
+   "author": "Árni Friðriksson",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Eyjafjallajokull-April-17.JPG"
+  },
+  {
+   "id": "14c2344e79fa490d",
+   "path": "media/img/14c2344e79fa490d.webp",
+   "title": "File:Festival da Canción Letoa.jpg",
+   "author": "Iscream icecream",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Festival_da_Canci%C3%B3n_Letoa.jpg"
+  },
+  {
+   "id": "726b94cbfa131a2e",
+   "path": "media/img/726b94cbfa131a2e.webp",
+   "title": "File:Raising the Flag on Iwo Jima, larger - edit1.jpg",
+   "author": "Joe Rosenthal",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:Raising_the_Flag_on_Iwo_Jima,_larger_-_edit1.jpg"
+  },
+  {
+   "id": "2a5fa14a08810729",
+   "path": "media/img/2a5fa14a08810729.webp",
+   "title": "File:Narodni Divadlo, Estates Theater, Prague - 8604.jpg",
+   "author": "Jorge Royan",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Narodni_Divadlo,_Estates_Theater,_Prague_-_8604.jpg"
+  },
+  {
+   "id": "7e6c2a557fb37b0d",
+   "path": "media/img/7e6c2a557fb37b0d.webp",
+   "title": "File:Fotothek df tg 0000114 Architektur ^ Fallberechnung.jpg",
+   "author": "",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:Fotothek_df_tg_0000114_Architektur_%5E_Fallberechnung.jpg"
+  },
+  {
+   "id": "e2a6595c6095b2a0",
+   "path": "media/img/e2a6595c6095b2a0.webp",
+   "title": "File:万国来朝图 Brunei (汶莱國) delegates in Peking in 1761.jpg",
+   "author": "China, 1761 painter",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:%E4%B8%87%E5%9B%BD%E6%9D%A5%E6%9C%9D%E5%9B%BE_Brunei_(%E6%B1%B6%E8%8E%B1%E5%9C%8B)_delegates_in_Peking_in_1761.jpg"
+  },
+  {
+   "id": "a60737eec2ed5a80",
+   "path": "media/img/a60737eec2ed5a80.webp",
+   "title": "File:Tree of Life Bahrain.jpg",
+   "author": "Alawadhi3000",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Tree_of_Life_Bahrain.jpg"
+  },
+  {
+   "id": "88ffa3e093a75594",
+   "path": "media/img/88ffa3e093a75594.webp",
+   "title": "File:Eswatini, administrative divisions - en - colored.png",
+   "author": "Bestoernesto ,",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Eswatini,_administrative_divisions_-_en_-_colored.png"
+  },
+  {
+   "id": "b6f46ac79ae28193",
+   "path": "media/img/b6f46ac79ae28193.webp",
+   "title": "File:Ring with engraved portrait of Ptolemy VI Philometor (3rd–2nd century BCE) - 2009.jpg",
+   "author": "Unknown artist Unknown artist .",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:Ring_with_engraved_portrait_of_Ptolemy_VI_Philometor_(3rd%E2%80%932nd_century_BCE)_-_2009.jpg"
+  },
+  {
+   "id": "de29c12415da0c7b",
+   "path": "media/img/de29c12415da0c7b.webp",
+   "title": "File:Metal film resistor.jpg",
+   "author": "Haragayato , cropd by hidro .",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Metal_film_resistor.jpg"
+  },
+  {
+   "id": "39051fc7e496d36f",
+   "path": "media/img/39051fc7e496d36f.webp",
+   "title": "File:Neptune Dark Spot Jr. Hubble.png",
+   "author": "NASA, ESA, STScI, M.H. Wong (University of California, Berkeley), and L.A. Sromovsky and P.M. Fry (University of Wisconsin-Madison)",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:Neptune_Dark_Spot_Jr._Hubble.png"
+  },
+  {
+   "id": "38a959e7ad5f327d",
+   "path": "media/img/38a959e7ad5f327d.webp",
+   "title": "File:Save the sundarbans 20.jpg",
+   "author": "Shihabur Rahman",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Save_the_sundarbans_20.jpg"
+  },
+  {
+   "id": "f327ca3c8ea7075e",
+   "path": "media/img/f327ca3c8ea7075e.webp",
+   "title": "File:Martin Luther King Jr National Historic Site (36233249121).jpg",
+   "author": "National Park Service",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:Martin_Luther_King_Jr_National_Historic_Site_(36233249121).jpg"
+  },
+  {
+   "id": "af87e3bdc82f0739",
+   "path": "media/img/af87e3bdc82f0739.webp",
+   "title": "File:Eritrea and Tigray on map by James Bruce.jpg",
+   "author": "James Bruce",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:Eritrea_and_Tigray_on_map_by_James_Bruce.jpg"
+  },
+  {
+   "id": "8812c042fb36d561",
+   "path": "media/img/8812c042fb36d561.webp",
+   "title": "File:3 Samoan girls making ava 1909.jpg",
+   "author": "Bartlett Tripp (1842-1911) Publisher: Cedar Rapids IA : Torch Press uploaded by Teinesavaii",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:3_Samoan_girls_making_ava_1909.jpg"
+  },
+  {
+   "id": "6836df773b042f26",
+   "path": "media/img/6836df773b042f26.webp",
+   "title": "File:Map of setteling phases of Pompeii.png",
+   "author": "No machine-readable author provided. Marcus Cyron assumed (based on copyright claims).",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Map_of_setteling_phases_of_Pompeii.png"
+  },
+  {
+   "id": "cc59cc2edb7aaf12",
+   "path": "media/img/cc59cc2edb7aaf12.webp",
+   "title": "File:Kenyan flag on 2016-08-02 11.01.27.jpg",
+   "author": "Gustavo Ribeiro Faria",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Kenyan_flag_on_2016-08-02_11.01.27.jpg"
+  },
+  {
+   "id": "227b11467cb63a05",
+   "path": "media/img/227b11467cb63a05.webp",
+   "title": "File:Mămăligă2020-02-12.jpg",
+   "author": "NicolaS961",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:M%C4%83m%C4%83lig%C4%832020-02-12.jpg"
+  },
+  {
+   "id": "04368aa3d6ba725e",
+   "path": "media/img/04368aa3d6ba725e.webp",
+   "title": "File:DEA to host national prescription drug take-back 160324-F-HC995-002.jpg",
+   "author": "Airman Valerie Monroy",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:DEA_to_host_national_prescription_drug_take-back_160324-F-HC995-002.jpg"
+  },
+  {
+   "id": "a6c2f558e75962c4",
+   "path": "media/img/a6c2f558e75962c4.webp",
+   "title": "File:2004-Bremerhaven U-Boot-Museum-Sicherlich retouched.jpg",
+   "author": "Sicherlich at German Wikipedia Retouched version of de:Bild:2004-Bremerhaven U-Boot-Museum-Sicherlich.jpg , which has the following description:",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:2004-Bremerhaven_U-Boot-Museum-Sicherlich_retouched.jpg"
+  },
+  {
+   "id": "5334f8a403366126",
+   "path": "media/img/5334f8a403366126.webp",
+   "title": "File:Widmanstatten hand.jpg",
+   "author": "Waifer X",
+   "licence": "CC BY 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Widmanstatten_hand.jpg"
+  },
+  {
+   "id": "4a2bdac21ea6f115",
+   "path": "media/img/4a2bdac21ea6f115.webp",
+   "title": "File:Banaue Philippines Banaue-Rice-Terraces-01.jpg",
+   "author": "CEphoto, Uwe Aranas",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Banaue_Philippines_Banaue-Rice-Terraces-01.jpg"
+  },
+  {
+   "id": "4987d673c7d494a2",
+   "path": "media/img/4987d673c7d494a2.webp",
+   "title": "File:Ganges-Brahmaputra-Meghna basins.jpg",
+   "author": "Pfly",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Ganges-Brahmaputra-Meghna_basins.jpg"
+  },
+  {
+   "id": "2afa5a8801862fbe",
+   "path": "media/img/2afa5a8801862fbe.webp",
+   "title": "File:Muharraq Blick nach Manama 2.jpg",
+   "author": "Zairon",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Muharraq_Blick_nach_Manama_2.jpg"
+  },
+  {
+   "id": "f0d6fac7772b7449",
+   "path": "media/img/f0d6fac7772b7449.webp",
+   "title": "File:A rainstorm at a beach lodge in Mozambique.jpg",
+   "author": "FrogsLegs71",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:A_rainstorm_at_a_beach_lodge_in_Mozambique.jpg"
+  },
+  {
+   "id": "e249ccef66ffeb08",
+   "path": "media/img/e249ccef66ffeb08.webp",
+   "title": "File:Hockey Hall of Fame Statue (9162222032).jpg",
+   "author": "Richie Diesterheft from Santa Barbara, CA, USA",
+   "licence": "CC BY 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Hockey_Hall_of_Fame_Statue_(9162222032).jpg"
+  },
+  {
+   "id": "84abd84bbbe84682",
+   "path": "media/img/84abd84bbbe84682.webp",
+   "title": "File:Rhein bei Balzers - Blick auf Gonzen.JPG",
+   "author": "St9191",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Rhein_bei_Balzers_-_Blick_auf_Gonzen.JPG"
+  },
+  {
+   "id": "46f28105a95b81c5",
+   "path": "media/img/46f28105a95b81c5.webp",
+   "title": "File:Зимова фортеця.jpg",
+   "author": "Moahim",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:%D0%97%D0%B8%D0%BC%D0%BE%D0%B2%D0%B0_%D1%84%D0%BE%D1%80%D1%82%D0%B5%D1%86%D1%8F.jpg"
+  },
+  {
+   "id": "605c47f7e2f07b74",
+   "path": "media/img/605c47f7e2f07b74.webp",
+   "title": "File:PopoAmeca2.JPG",
+   "author": "AlejandroLinaresGarcia",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:PopoAmeca2.JPG"
+  },
+  {
+   "id": "ac427316acab5b9c",
+   "path": "media/img/ac427316acab5b9c.webp",
+   "title": "File:Claude Monet - Arrival of the Normandy Train, Gare Saint-Lazare - Google Art Project.jpg",
+   "author": "Claude Monet",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:Claude_Monet_-_Arrival_of_the_Normandy_Train,_Gare_Saint-Lazare_-_Google_Art_Project.jpg"
+  },
+  {
+   "id": "852fb6ac4ff409f2",
+   "path": "media/img/852fb6ac4ff409f2.webp",
+   "title": "File:PIA00103 Venus - 3-D Perspective View of Lavinia Planitia.jpg",
+   "author": "NASA/JPL",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:PIA00103_Venus_-_3-D_Perspective_View_of_Lavinia_Planitia.jpg"
+  },
+  {
+   "id": "9d74be60ba6a2125",
+   "path": "media/img/9d74be60ba6a2125.webp",
+   "title": "File:Paediatric ward, General hospital, Ilorin.jpg",
+   "author": "Jamie Tubers",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Paediatric_ward,_General_hospital,_Ilorin.jpg"
+  },
+  {
+   "id": "65baa562534346c3",
+   "path": "media/img/65baa562534346c3.webp",
+   "title": "File:00 Bruxelles - Mont des Arts.jpg",
+   "author": "Jean-Pol GRANDMONT",
+   "licence": "CC BY 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:00_Bruxelles_-_Mont_des_Arts.jpg"
+  },
+  {
+   "id": "1fc862158c648c90",
+   "path": "media/img/1fc862158c648c90.webp",
+   "title": "File:Lilongwe (Malawi) - crafts market.JPG",
+   "author": "Hans Hillewaert",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Lilongwe_(Malawi)_-_crafts_market.JPG"
+  },
+  {
+   "id": "8ccb5a4c16af4a97",
+   "path": "media/img/8ccb5a4c16af4a97.webp",
+   "title": "File:Entebbe - Flickr - Dave Proffer.jpg",
+   "author": "Dave Proffer",
+   "licence": "CC BY 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Entebbe_-_Flickr_-_Dave_Proffer.jpg"
+  },
+  {
+   "id": "55e0979c669a2693",
+   "path": "media/img/55e0979c669a2693.webp",
+   "title": "File:Upclose photo of a female ocicat's face.jpg",
+   "author": "Ljhlusko",
+   "licence": "CC0",
+   "page": "https://commons.wikimedia.org/wiki/File:Upclose_photo_of_a_female_ocicat%27s_face.jpg"
+  },
+  {
+   "id": "1592b7d9fd70e2ce",
+   "path": "media/img/1592b7d9fd70e2ce.webp",
+   "title": "File:Malagasy girls Madagascar Merina.jpg",
+   "author": "Saveoursmile (Hery Zo Rakotondramanana)",
+   "licence": "CC BY-SA 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Malagasy_girls_Madagascar_Merina.jpg"
+  },
+  {
+   "id": "25e71441e8b3b879",
+   "path": "media/img/25e71441e8b3b879.webp",
+   "title": "File:Centro de Manaus.jpg",
+   "author": "Pedro Angelini",
+   "licence": "CC BY 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Centro_de_Manaus.jpg"
+  },
+  {
+   "id": "8c35c46d79dbe1e6",
+   "path": "media/img/8c35c46d79dbe1e6.webp",
+   "title": "File:2006-12-09 Chimpanzee Gregoire D Bruyere.JPG",
+   "author": "Delphine Bruyère",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:2006-12-09_Chimpanzee_Gregoire_D_Bruyere.JPG"
+  },
+  {
+   "id": "fa61339d2ae7433b",
+   "path": "media/img/fa61339d2ae7433b.webp",
+   "title": "File:Kenyan dancers.jpg",
+   "author": "Angela Sevin",
+   "licence": "CC BY 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Kenyan_dancers.jpg"
+  },
+  {
+   "id": "716fc76bef27d51b",
+   "path": "media/img/716fc76bef27d51b.webp",
+   "title": "File:48th Rescue Squadron - HH-60 Pave Hawk - 2010.jpg",
+   "author": "U.S. Air Force photo/Master Sgt. Heather Cabral",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:48th_Rescue_Squadron_-_HH-60_Pave_Hawk_-_2010.jpg"
+  },
+  {
+   "id": "ba2c33a8a3f92c85",
+   "path": "media/img/ba2c33a8a3f92c85.webp",
+   "title": "File:Column drum Ephesus.JPG",
+   "author": "Unknown artist Unknown artist",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Column_drum_Ephesus.JPG"
+  },
+  {
+   "id": "bfbb4a44b92151ee",
+   "path": "media/img/bfbb4a44b92151ee.webp",
+   "title": "File:Muralitharan bowling to Adam Gilchrist.jpg",
+   "author": "Rae Allen from Brisbane, Australia",
+   "licence": "CC BY 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Muralitharan_bowling_to_Adam_Gilchrist.jpg"
+  },
+  {
+   "id": "e5da141d8a528bb2",
+   "path": "media/img/e5da141d8a528bb2.webp",
+   "title": "File:Blausen 0451 Heart Anterior.png",
+   "author": "Blausen Medical Communications, Inc.",
+   "licence": "CC BY 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Blausen_0451_Heart_Anterior.png"
+  },
+  {
+   "id": "4615ec8d30ca757b",
+   "path": "media/img/4615ec8d30ca757b.webp",
+   "title": "File:German UC-1 class submarine.jpg",
+   "author": "Post-Work: User:W.wolny",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:German_UC-1_class_submarine.jpg"
+  },
+  {
+   "id": "c0c80245adfc1087",
+   "path": "media/img/c0c80245adfc1087.webp",
+   "title": "File:Luxembourg City Chambre des députés Nov 2009.jpg",
+   "author": "Cayambe",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Luxembourg_City_Chambre_des_d%C3%A9put%C3%A9s_Nov_2009.jpg"
+  },
+  {
+   "id": "378fc57d914f1ae5",
+   "path": "media/img/378fc57d914f1ae5.webp",
+   "title": "File:ماشین تحریر مظفر الدین شاه قاجار.jpg",
+   "author": "Nasser-sadeghi",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:%D9%85%D8%A7%D8%B4%DB%8C%D9%86_%D8%AA%D8%AD%D8%B1%DB%8C%D8%B1_%D9%85%D8%B8%D9%81%D8%B1_%D8%A7%D9%84%D8%AF%DB%8C%D9%86_%D8%B4%D8%A7%D9%87_%D9%82%D8%A7%D8%AC%D8%A7%D8%B1.jpg"
+  },
+  {
+   "id": "edb6c8b0d39f7f03",
+   "path": "media/img/edb6c8b0d39f7f03.webp",
+   "title": "File:RobertHookeMicrographia1665.jpg",
+   "author": "Robert Hooke (1635–1707)",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:RobertHookeMicrographia1665.jpg"
+  },
+  {
+   "id": "b18ea6f7c4761b23",
+   "path": "media/img/b18ea6f7c4761b23.webp",
+   "title": "File:Cosmo Films Map.png",
+   "author": "Divyasinghrathore",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Cosmo_Films_Map.png"
+  },
+  {
+   "id": "2c862ba3e1a56542",
+   "path": "media/img/2c862ba3e1a56542.webp",
+   "title": "File:PILA 9290013873.JPG",
+   "author": "Dmitry G",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:PILA_9290013873.JPG"
+  },
+  {
+   "id": "fdd4ff95923564ac",
+   "path": "media/img/fdd4ff95923564ac.webp",
+   "title": "File:Flickr - Rainbirder - Reticulated Giraffe drinking.jpg",
+   "author": "Steve Garvie from Dunfermline, Fife, Scotland",
+   "licence": "CC BY-SA 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Flickr_-_Rainbirder_-_Reticulated_Giraffe_drinking.jpg"
+  },
+  {
+   "id": "6b9607b935d115b2",
+   "path": "media/img/6b9607b935d115b2.webp",
+   "title": "File:Two dancers.jpg",
+   "author": "Barry Goyette from San Luis Obispo, USA",
+   "licence": "CC BY 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Two_dancers.jpg"
+  },
+  {
+   "id": "2156b30c6c80eabf",
+   "path": "media/img/2156b30c6c80eabf.webp",
+   "title": "File:Red Gate Woods DSCF0605 (50143996582).jpg",
+   "author": "Joseph Gage from USA",
+   "licence": "CC BY-SA 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Red_Gate_Woods_DSCF0605_(50143996582).jpg"
+  },
+  {
+   "id": "9289d173a860dba4",
+   "path": "media/img/9289d173a860dba4.webp",
+   "title": "File:Map of Chinese provinces in Czech and Slovak.jpg",
+   "author": "Matěj Pánek",
+   "licence": "CC BY 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Map_of_Chinese_provinces_in_Czech_and_Slovak.jpg"
+  },
+  {
+   "id": "e98702ae8e9ed81a",
+   "path": "media/img/e98702ae8e9ed81a.webp",
+   "title": "File:Winston Churchill at a conference in Quebec - NARA - 197118.jpg",
+   "author": "Not mentioned in the source",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:Winston_Churchill_at_a_conference_in_Quebec_-_NARA_-_197118.jpg"
+  },
+  {
+   "id": "1dad78419cf0febd",
+   "path": "media/img/1dad78419cf0febd.webp",
+   "title": "File:Nouakchott camel market2.jpg",
+   "author": "Ferdinand Reus from Arnhem, Holland",
+   "licence": "CC BY-SA 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Nouakchott_camel_market2.jpg"
+  },
+  {
+   "id": "05830de24ee098f3",
+   "path": "media/img/05830de24ee098f3.webp",
+   "title": "File:Kish Island, Persian Gulf, Iran.jpg",
+   "author": "Mehrraz",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Kish_Island,_Persian_Gulf,_Iran.jpg"
+  },
+  {
+   "id": "1e0524bac24859bb",
+   "path": "media/img/1e0524bac24859bb.webp",
+   "title": "File:Ahmed Dini Ahmed proclaiming the Djibouti Declaration of Independence on 27 June 1977.jpg",
+   "author": "Skilla1st",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Ahmed_Dini_Ahmed_proclaiming_the_Djibouti_Declaration_of_Independence_on_27_June_1977.jpg"
+  },
+  {
+   "id": "3e09a59a46551426",
+   "path": "media/img/3e09a59a46551426.webp",
+   "title": "File:Ruins atop Tel Megiddo with circular altar-like shrine and a series of temples on top of the other dating from the early bronze-age through the iron-age periods, Tel Meggido, Israel (19888642855).jpg",
+   "author": "Carole Raddato from FRANKFURT, Germany",
+   "licence": "CC BY-SA 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Ruins_atop_Tel_Megiddo_with_circular_altar-like_shrine_and_a_series_of_temples_on_top_of_the_other_dating_from_the_early_bronze-age_through_the_iron-age_periods,_Tel_Meggido,_Israel_(19888642855).jpg"
+  },
+  {
+   "id": "3012b2d6cfd97fc7",
+   "path": "media/img/3012b2d6cfd97fc7.webp",
+   "title": "File:Tainan Taiwan Fort-Provintia-01.jpg",
+   "author": "CEphoto, Uwe Aranas",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Tainan_Taiwan_Fort-Provintia-01.jpg"
+  },
+  {
+   "id": "5806e854b08b3c0c",
+   "path": "media/img/5806e854b08b3c0c.webp",
+   "title": "File:Sveriges Nationaldag 2014.jpg",
+   "author": "Frankie Fouganthin",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Sveriges_Nationaldag_2014.jpg"
+  },
+  {
+   "id": "f6f29c21ed7a176f",
+   "path": "media/img/f6f29c21ed7a176f.webp",
+   "title": "File:WLA metmuseum Bronze statue of Eros sleeping 7.jpg",
+   "author": "Wikipedia Loves Art participant \" shooting_brooklyn \"",
+   "licence": "CC BY-SA 2.5",
+   "page": "https://commons.wikimedia.org/wiki/File:WLA_metmuseum_Bronze_statue_of_Eros_sleeping_7.jpg"
+  },
+  {
+   "id": "4a5ba8ace364aa44",
+   "path": "media/img/4a5ba8ace364aa44.webp",
+   "title": "File:Le Jardin de Nébamoun.jpg",
+   "author": "anonymous",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:Le_Jardin_de_N%C3%A9bamoun.jpg"
+  },
+  {
+   "id": "418d4484fd76da81",
+   "path": "media/img/418d4484fd76da81.webp",
+   "title": "File:STScl-2005-15.png",
+   "author": "NASA, ESA, HEIC, and The Hubble Heritage Team (STScI/AURA)",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:STScl-2005-15.png"
+  },
+  {
+   "id": "25260c35f13f5555",
+   "path": "media/img/25260c35f13f5555.webp",
+   "title": "File:AhmedMestiri-HaileSelassie-1962.jpg",
+   "author": "Official Press Photographer - Tunisian Ministry of Information",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:AhmedMestiri-HaileSelassie-1962.jpg"
+  },
+  {
+   "id": "d9c177088473ce22",
+   "path": "media/img/d9c177088473ce22.webp",
+   "title": "File:Solvay conference 1927.jpg",
+   "author": "Benjamin Couprie",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:Solvay_conference_1927.jpg"
+  },
+  {
+   "id": "4936039437042500",
+   "path": "media/img/4936039437042500.webp",
+   "title": "File:HMNZS Te Kaha sound-powered telephone 20080702.jpg",
+   "author": "Ingolfson",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:HMNZS_Te_Kaha_sound-powered_telephone_20080702.jpg"
+  },
+  {
+   "id": "bb994f06b527025b",
+   "path": "media/img/bb994f06b527025b.webp",
+   "title": "File:WKA spannglieder.jpg",
+   "author": "VanGore",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:WKA_spannglieder.jpg"
+  },
+  {
+   "id": "e01e7bd161575115",
+   "path": "media/img/e01e7bd161575115.webp",
+   "title": "File:Pont-pagode \"japonais\" de Hoi-an, vue de nuit.jpg",
+   "author": "Antonin Subtil",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Pont-pagode_%22japonais%22_de_Hoi-an,_vue_de_nuit.jpg"
+  },
+  {
+   "id": "6d76818a0b84cfba",
+   "path": "media/img/6d76818a0b84cfba.webp",
+   "title": "File:Howland idea 1000.jpg",
+   "author": "Cyril Mechkov -- Circuit-fantasist",
+   "licence": "CC BY-SA 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Howland_idea_1000.jpg"
+  },
+  {
+   "id": "b345558c7ceea4f3",
+   "path": "media/img/b345558c7ceea4f3.webp",
+   "title": "File:Hubble stretches the stellar tape measure ten times further.jpg",
+   "author": "Illustration Credit: NASA, ESA, and A. Feild (STScI)Science Credit: NASA, ESA, A. Riess (JHU/STScI), S. Casertano (STScI/JHU), J. Anderson and J. MacKenty (STScI), and A. Filippenko (University of California, Berkeley)",
+   "licence": "CC BY 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Hubble_stretches_the_stellar_tape_measure_ten_times_further.jpg"
+  },
+  {
+   "id": "9da19cc1b9610c70",
+   "path": "media/img/9da19cc1b9610c70.webp",
+   "title": "File:Dolphin looks at Guest - SeaWorld San Diego.jpg",
+   "author": "Noah Wulf",
+   "licence": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Dolphin_looks_at_Guest_-_SeaWorld_San_Diego.jpg"
+  },
+  {
+   "id": "602a39f73739ebb1",
+   "path": "media/img/602a39f73739ebb1.webp",
+   "title": "File:Mount Fuji from Omiya by Kusakabe Kimbei c1890.png",
+   "author": "Kusakabe Kimbei",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:Mount_Fuji_from_Omiya_by_Kusakabe_Kimbei_c1890.png"
+  },
+  {
+   "id": "b20c68004e4de081",
+   "path": "media/img/b20c68004e4de081.webp",
+   "title": "File:Saturn in natural colors (captured by the Hubble Space Telescope).jpg",
+   "author": "Hubble Heritage Team (AURA/STScI/NASA/ESA)",
+   "licence": "Public domain",
+   "page": "https://commons.wikimedia.org/wiki/File:Saturn_in_natural_colors_(captured_by_the_Hubble_Space_Telescope).jpg"
+  },
+  {
+   "id": "b41ce14b8d5892da",
+   "path": "media/img/b41ce14b8d5892da.webp",
+   "title": "File:Arri Alexa camera.jpg",
+   "author": "Sean P. Anderson from Dallas, TX, USA",
+   "licence": "CC BY 2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Arri_Alexa_camera.jpg"
+  },
+  {
+   "id": "496657a4c919cd22",
+   "path": "media/img/496657a4c919cd22.webp",
+   "title": "File:Immersive Sound 01.jpg",
+   "author": "Andrzej Lipiński",
+   "licence": "CC BY 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Immersive_Sound_01.jpg"
   }
  ]
 }

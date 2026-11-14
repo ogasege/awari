@@ -12,7 +12,7 @@
   "ideHooks": 5,
   "agents": 3,
   "mcpServers": 3,
-  "commits": 118,
+  "commits": 120,
   "logEntries": 137,
   "hookFirings": 27,
   "subjects": 11,
@@ -25,7 +25,7 @@
   "questions": 2364,
   "events": 1530,
   "mediaPictures": 4106,
-  "mediaMB": "89",
+  "mediaMB": "88",
   "mediaVerified": 4602,
   "eventContinents": 7,
   "lemmas": 14593,
@@ -47,5 +47,5 @@
   "articles_inventions": 30,
   "articles_people": 30,
   "articles_arts": 30,
-  "mainScriptKB": "267"
+  "mainScriptKB": "269"
 }
