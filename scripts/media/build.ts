@@ -10,6 +10,7 @@
 import { existsSync, mkdirSync, readFileSync, readdirSync, unlinkSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import sharp from 'sharp';
+import { authorName } from './allow.ts';
 import { captionWithBasis } from './caption.ts';
 import type { Collected } from './collect.ts';
 import { requestCount } from './http.ts';
@@ -157,7 +158,7 @@ async function records(): Promise<void> {
         kind: kindOf(c),
         title: c.title,
         page: c.page,
-        author: c.author,
+        author: authorName(c.author),
         licence: c.licence,
         licenceUrl: c.licenceUrl,
         caption: cap.text,

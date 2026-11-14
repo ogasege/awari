@@ -96,6 +96,13 @@ describe('the media library', () => {
     expect(low).toEqual([]);
   });
 
+  it('24-review-4: every credit shows a name, never a web address or an e-mail', () => {
+    // A public-domain file may have no named author (the viewer says so); a link or an address is never shown.
+    const bad = items.filter((m) => /https?:|www\.|@/i.test(m.author)).map((m) => `${m.id}: ${m.author}`);
+    expect(bad).toEqual([]);
+    expect(items.filter((m) => !m.author.trim() && !/public domain|cc0|pd/i.test(m.licence))).toEqual([]);
+  });
+
   it('Property 3: no picture is listed twice, and the index agrees with the records', () => {
     expect(new Set(items.map((m) => m.id)).size).toBe(items.length);
     expect(new Set(items.map((m) => m.title.toLowerCase())).size).toBe(items.length);
