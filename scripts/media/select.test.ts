@@ -158,9 +158,10 @@ describe('selectForArticle (Property 5)', () => {
     expect(rejectReason({ ...good, description: 'Left: a large mass. Right: a small mass' })).toBeDefined();
   });
 
-  it('a picture with no honest caption (nothing in the description, a file name of camera codes) is not used', () => {
+  it('a picture with no honest caption (nothing in the description, a file name, camera codes) is not used', () => {
     expect(rejectReason({ ...good, title: 'File:DSC_0042.jpg', description: '' })).toBeDefined();
-    expect(rejectReason({ ...good, title: 'File:Lake Victoria at dawn.jpg', description: '' })).toBeUndefined();
+    expect(rejectReason({ ...good, title: 'File:Lake Victoria at dawn.jpg', description: '' })).toBeDefined(); // a file name is never a caption
+    expect(rejectReason({ ...good, title: 'File:Lake Victoria at dawn.jpg', description: 'Fishing boats on Lake Victoria at dawn' })).toBeUndefined();
   });
 
   it('keeps one of two files with the same sha1', () => {

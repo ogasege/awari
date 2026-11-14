@@ -2,7 +2,7 @@
 
 One commit per task, log row in `docs/kiro-log.md`, tests before ticking.
 
-- [ ] 1. Captions: stricter rules, structured captions, hand-checked overrides, counts per rule.
+- [x] 1. Captions: stricter rules, structured captions, hand-checked overrides, counts per rule.
 - [ ] 2. Author display names.
 - [ ] 3. Pictures screen default order by quality.
 - [ ] 4. Lead pictures (whole subject, highest score).

@@ -134,7 +134,7 @@ export function kindOf(c: Pick<Candidate, 'title' | 'categories' | 'description'
 }
 
 /** Why a candidate is rejected, or undefined when it may be used. */
-export function rejectReason(c: Candidate, subject?: Subject): string | undefined {
+export function rejectReason(c: Candidate, subject?: Subject, opts: { skipCaption?: boolean } = {}): string | undefined {
   if (!hostedOnCommons(c.repository, c.from)) return 'not hosted on Commons';
   if (DENIED.has(c.title)) return 'dropped by a design review';
   if (!parseLicence(c.licence)) return 'licence not on the allow-list';
@@ -143,7 +143,7 @@ export function rejectReason(c: Candidate, subject?: Subject): string | undefine
   if (parseLicence(c.licence)?.family !== 'pd' && (c.author ?? '').trim() === '') return 'no author named for an attribution licence';
   if (!MIMES.has(c.mime)) return 'not a plain picture file';
   if (Math.max(c.width, c.height) < MIN_SIDE) return 'under 800 px on the long side';
-  if (!hasCaption(c.description, c.title)) return 'nothing honest to say about it';
+  if (opts.skipCaption !== true && !hasCaption(c.description, c.title)) return 'nothing honest to say about it';
   const text = `${c.title} ${c.description} ${c.categories.join(' ')}`;
   if (NEVER.test(text)) return 'logo, signature, icon or collage';
   if (GRAPHIC.test(text) || UNSUITABLE.test(text) || EXTRA_UNSUITABLE.test(text)) return 'unsuitable for children';

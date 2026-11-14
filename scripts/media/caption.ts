@@ -1,14 +1,15 @@
 /**
- * Captions for library pictures (23-media-library Req 13, 14, Property 4): a short, honest shortening of what
- * Commons says about the file. Nothing is invented. A caption is cut from the English Commons description or from
- * the file name; when neither says anything usable the picture has no caption and is not used at all (the
+ * Captions for library pictures (23-media-library Req 13, 14, Property 4; 24-review-4 Req 1): a short, honest
+ * shortening of what Commons says about the file. Nothing is invented. A caption comes from a hand-checked override,
+ * the English Commons description or the Commons structured caption, never from the file name; when none says
+ * anything usable the picture has no caption and is not used at all (the
  * article's own title is never borrowed, because it can describe the wrong thing: a portrait of Lavoisier
  * captioned "Chemical reaction").
  */
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
-export type CaptionSource = 'description' | 'title';
+export type CaptionSource = 'description' | 'structured' | 'override';
 
 export interface Caption {
   text: string;
@@ -16,6 +17,32 @@ export interface Caption {
 }
 
 const MAX = 90;
+
+/** Hand-checked captions (`null` drops the picture) and Commons structured captions, both keyed by Commons file title. */
+interface Sources {
+  overrides: Record<string, string | null>;
+  labels: Record<string, string>;
+}
+let sources: Sources | undefined;
+const OVERRIDE_FILE = join('scripts', 'media', 'captions-override.json');
+const STRUCTURED_FILE = join('scripts', 'media', 'structured-captions.json');
+
+function readSources(): Sources {
+  if (sources) return sources;
+  const read = <T>(f: string, pick: (j: any) => T, empty: T): T => (existsSync(f) ? pick(JSON.parse(readFileSync(f, 'utf8'))) : empty); // eslint-disable-line @typescript-eslint/no-explicit-any
+  sources = { overrides: read(OVERRIDE_FILE, (j) => j.captions ?? {}, {}), labels: read(STRUCTURED_FILE, (j) => j.labels ?? {}, {}) };
+  return sources;
+}
+
+/** For tests: replace the caption sources (or pass undefined to read the files again). */
+export function useSources(s: Sources | undefined): void {
+  sources = s;
+}
+
+/** The options of a caption lookup: `onlyDescription` ignores overrides and structured captions (used to find what still needs a label). */
+export interface CaptionOptions {
+  onlyDescription?: boolean;
+}
 
 /** Text that is about the file, the upload or the catalogue record, not about the picture. Tested on the shortened candidate. */
 const JUNK =
@@ -86,6 +113,11 @@ export function looksEnglish(text: string): boolean {
 
 const collapse = (s: string): string => s.replace(/\s+/g, ' ').trim();
 
+/** The full stop of an abbreviation ("c.", "St.", "Oct.", "R.") is not the end of a sentence: hide it while sentences are cut. */
+const ABBREV = /(?<![\p{L}\p{N}])(?:c|ca|st|mt|dr|mr|mrs|ms|jr|sr|vs|jan|feb|mar|apr|aug|sep|sept|oct|nov|dec|approx|no|nr|prof|gen|col|fr|ft|inc|ltd|[a-z])\.(?=\s)/giu;
+const hideDots = (t: string): string => t.replace(ABBREV, (m) => m.replace('.', '\u0001'));
+const showDots = (t: string): string => t.split('\u0001').join('.');
+
 /** The English part of a multilingual Commons description ("English: ... Deutsch: ..."). */
 export function englishPart(description: string): string {
   const d = collapse(description);
@@ -96,8 +128,8 @@ export function englishPart(description: string): string {
 /** The first sentence, or the first words, of at most `max` characters, cut at a word and never on a word that needs another. */
 export function shorten(text: string, max = MAX): string {
   const t = collapse(text).replace(/^["“”']+|["“”']+$/g, '');
-  const sentence = /^(.{20,}?[a-z)0-9][.!?])(?:\s|$)/.exec(t);
-  if (sentence?.[1] && sentence[1].length <= max) return sentence[1].replace(/[.]$/, '');
+  const sentence = /^(.{20,}?[a-z)0-9][.!?])(?:\s|$)/.exec(hideDots(t));
+  if (sentence?.[1] && sentence[1].length <= max) return showDots(sentence[1]).replace(/[.]$/, '');
   if (t.length <= max) return t.replace(/[.;:,\s]+$/, '');
   const cut = t.slice(0, max);
   // Prefer to stop at a clause ("..., and then ..."), which needs no ellipsis, over a cut in the middle of one.
@@ -170,41 +202,87 @@ const shouted = (s: string): boolean => {
   return letters.length >= 8 && letters === letters.toUpperCase();
 };
 
-/** Whether a candidate caption is fit to show. */
-function usable(text: string): boolean {
+/** Characters that never belong in a caption: handles, prices, markup, separators ("British Museum.FotoThalerTamas", "Sundy event@"). */
+const ODD_CHARS = /[@$#%^*_=<>|~\\]|\w\.\p{Lu}|\p{Ll}\p{Lu}\p{Ll}+\p{Lu}/u;
+const ODD_WORDS = /\b(?:foto|translated|version|file|google art project|art project)/i;
+
+/** A catalogue or camera number left in a caption: a run of five or more digits, or a letter code with a dotted number ("M.2000.179"). */
+const NUMBERED = /\b\d{5,}\b|\b[A-Z]{1,3}[ .]?\d{2,}\.\d+\b|\b[A-Z]\d{3,}\b/;
+
+/**
+ * The shape of a fragment, a credit or a bare date rather than a caption: it starts with a bracket, a lower-case
+ * letter or an initial ("S. Marine Corps"), starts with "By" or "Photo", ends with a frame number ("... 13",
+ * "Pto 0610 004", "Mongolia18"), or is only a date.
+ */
+const FRAGMENT = /^[^\p{L}\p{N}"“'‘]|^\d+\s+(?:The|A|An|Of)\b|^\p{Ll}|^\p{Lu}\.\s|^(?:By|Pic by|Photo|Credit|Source|Obtained|Made in|Vintage)\b|\)\s*\d{1,3}$|\b(?:Pto|No|Nr|Photo|Image|Picture|Pic|Img)\.?\s*\d[\d ]*$|\p{L}\d{1,3}$|\s0\d+(?: \d+)*$/u;
+const DATE_ONLY = /^(?:\d{1,2} )?(?:january|february|march|april|may|june|july|august|september|october|november|december)(?: \d{1,2},?)?(?: \d{4})?$|^\d{1,2}[ ./-]\w+[ ./-]\d{2,4}$/i;
+
+/** A bracket that is opened and not closed (or the reverse) is a cut sentence. */
+const unbalanced = (t: string): boolean => (t.match(/\(/g) ?? []).length !== (t.match(/\)/g) ?? []).length;
+
+/** Words that mark Spanish, Indonesian, Dutch, German, French or Portuguese names and phrases. */
+const FOREIGN_WORDS = /(?<!\p{L})(?:acceso|coliseo|puente|vista|iglesia|plaza|calle|monte|cerro|rio|río|catedral|castillo|medieval[ae]s?|cahaya|pertama|puncak|menyinari|gunung|danau|pulau|selbstversorgung|ackerbau|zur|auf|bei|zum|stadt|berg|kirche|schloss|ville|château|pont|vue|rue|mont|lac|igreja|ponte|praia|monte|dichtbij|bij|kerk|brug|zicht)(?!\p{L})/iu;
+
+/**
+ * The share of the common words (four letters or more) that are English words (Open English WordNet). A capitalised
+ * word inside the text is a name (Benidorm, Mérida) and is neutral; the first word counts, so "Acceso a Abai" and
+ * "Cahaya Pertama Menyinari Puncak" are not English.
+ */
+function englishShare(text: string): number {
+  const ws = (text.match(/[\p{L}'’-]+/gu) ?? []).map((w, i) => ({ w, first: i === 0 })).filter(({ w }) => w.length >= 4);
+  const counted = ws.filter(({ w, first }) => first || w === w.toLowerCase());
+  if (counted.length === 0) return 1;
+  return counted.filter(({ w }) => known(w)).length / counted.length;
+}
+
+/** Whether a candidate caption is fit to show. `min` is the fewest words a caption may have. */
+function usable(text: string, min = 3): boolean {
   const bare = text.replace(/…$/, '').trim();
+  if (FRAGMENT.test(bare) || DATE_ONLY.test(bare) || unbalanced(bare)) return false;
   const quotes = (bare.match(/["“”]/g) ?? []).length;
   return (
-    bare.length >= 12 &&
-    bare.split(' ').length >= 3 &&
+    bare.length >= (min === 3 ? 12 : 8) &&
+    bare.split(' ').length >= min &&
     quotes % 2 === 0 &&
     !JUNK.test(bare) &&
+    !ODD_CHARS.test(bare) &&
+    !ODD_WORDS.test(bare) &&
+    !NUMBERED.test(bare) &&
+    !(FOREIGN_WORDS.test(bare) && (bare.match(ENGLISH) ?? []).length < 2) &&
+    !FOREIGN_MORE.test(bare) &&
     !NAME_YEAR.test(bare) &&
-    !FOREIGN.test(bare) &&
+    (bare.match(FOREIGN) ?? []).length === 0 &&
     !shouted(bare) &&
     looksEnglish(bare) &&
+    englishShare(bare) >= 0.5 &&
     !DANGLING.test(bare)
   );
 }
 
 /**
- * The caption for one picture, or undefined when Commons gives nothing honest to say: the picture is then not
- * used. The description is judged as it stands (untidied) for self-reference; its sentences are tried in order and
- * the first fit one is used, so good text is not thrown away for boilerplate further down; then the file name.
+ * The caption for one picture, or undefined when nothing honest can be said: the picture is then not used. Order:
+ * a hand-checked override (`null` drops the picture), the English Commons description (judged as it stands for
+ * self-reference; its sentences are tried in order), then the Commons structured caption. A file name is never a
+ * caption (24-review-4 Req 1).
  */
-export function captionFor(description: string, title: string): Caption | undefined {
-  const full = captionWithBasis(description, title);
+export function captionFor(description: string, title: string, opts: CaptionOptions = {}): Caption | undefined {
+  const full = captionWithBasis(description, title, opts);
   return full ? { text: full.text, source: full.source } : undefined;
 }
 
 /** The caption and the exact text it was cut from (stored in the record, so it can always be traced). */
-export function captionWithBasis(description: string, title: string): (Caption & { basis: string }) | undefined {
+export function captionWithBasis(description: string, title: string, opts: CaptionOptions = {}): (Caption & { basis: string }) | undefined {
+  const src = readSources();
+  if (opts.onlyDescription !== true && Object.hasOwn(src.overrides, title)) {
+    const o = src.overrides[title];
+    return o ? { text: o, source: 'override', basis: o } : undefined;
+  }
   const raw = englishPart(description);
   // "This is a photo of X" is a plain way to introduce X (tidy takes it off); other talk about the file is refused.
   const introduces = /^this is (?:an?|the) (?:photo|picture|image|photograph) (?:of|showing)\s/i.test(raw);
   if (raw !== '' && (introduces || !SELF.test(raw)) && !/^appears to\b/i.test(raw) && !MAKING.test(raw.slice(0, 160)) && !PANEL.test(raw)) {
     const tidied = tidy(description);
-    const sentences = tidied.match(/[^.!?]+(?:[.!?]+(?=\s|$)|$)/g) ?? [tidied];
+    const sentences = (hideDots(tidied).match(/[^.!?]+(?:[.!?]+(?=\s|$)|$)/g) ?? [tidied]).map(showDots);
     for (const s of sentences.slice(0, 2)) {
       const piece = collapse(s);
       if (piece === '' || SELF.test(piece) || MAKING.test(piece)) continue;
@@ -212,17 +290,17 @@ export function captionWithBasis(description: string, title: string): (Caption &
       if (usable(candidate)) return { text: candidate, source: 'description', basis: piece };
     }
   }
-  const n = nameFromTitle(title);
-  if (n !== '') {
-    const candidate = shorten(n);
-    const bare = candidate.replace(/…$/, '');
-    const ok = usable(candidate) || (bare.split(' ').length >= 2 && !JUNK.test(bare) && !NAME_YEAR.test(bare) && !FOREIGN_MORE.test(bare) && !shouted(bare) && looksEnglish(bare) && !DANGLING.test(bare) && bare.length >= 8);
-    if (ok) return { text: candidate, source: 'title', basis: n };
+  if (opts.onlyDescription === true) return undefined;
+  const label = src.labels[title];
+  if (label) {
+    const piece = collapse(label);
+    const candidate = shorten(piece);
+    if (!SELF.test(piece) && !MAKING.test(piece) && usable(candidate, 2)) return { text: candidate, source: 'structured', basis: piece };
   }
   return undefined;
 }
 
-/** Whether a caption can be traced to its sources: the English description or the file title. */
+/** Whether a caption can be traced to its source: an override, the English description or the structured caption. */
 export function isTraceable(caption: Caption, description: string, title: string): boolean {
   const c = caption.text.replace(/…$/, '').trim();
   // Spaces before punctuation, stray quotes and "(cropped)" are tidied in a caption, so compare with all of them removed on each side.
@@ -233,11 +311,13 @@ export function isTraceable(caption: Caption, description: string, title: string
       .replace(/\s+([,.;:!?])/g, '$1')
       .replace(/["“”]/g, '');
   if (c === '') return false;
-  const inDescription = (): boolean => norm(englishPart(description)).includes(norm(c)) || norm(tidy(description)).includes(norm(c));
-  return caption.source === 'description' ? inDescription() : norm(title.replace(/^File:/i, '').replace(/[_]/g, ' ')).replace(/[-–]/g, ' ').includes(norm(c).replace(/[-–]/g, ' ')) || norm(nameFromTitle(title)).includes(norm(c));
+  const src = readSources();
+  if (caption.source === 'override') return src.overrides[title] === caption.text;
+  if (caption.source === 'structured') return norm(src.labels[title] ?? '').includes(norm(c));
+  return norm(englishPart(description)).includes(norm(c)) || norm(tidy(description)).includes(norm(c));
 }
 
-/** True when the description or the file name gives something honest to caption. */
+/** True when an override, the description or a structured caption gives something honest to show. */
 export function hasCaption(description: string, title: string): boolean {
   return captionFor(description, title) !== undefined;
 }
