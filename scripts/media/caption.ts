@@ -163,6 +163,13 @@ export function tidy(description: string): string {
   return /^\p{Ll}/u.test(d) && /^\p{Script=Latin}/u.test(d) ? d.charAt(0).toUpperCase() + d.slice(1) : d;
 }
 
+/** More words that only a caption in German, French, Spanish, Portuguese or a Nordic language holds. */
+const FOREIGN_MORE = /\b(?:und|auf|dem|mit|für|zur|zum|och|med|les|des|aux|avec|pour|sur|dans|con|por|para|una|uma|não|nad|pri|bei|über|nach|vom|vor|ist|sind|einer?|eines|ein)\b/i;
+const shouted = (s: string): boolean => {
+  const letters = s.replace(/[^\p{L}]/gu, '');
+  return letters.length >= 8 && letters === letters.toUpperCase();
+};
+
 /** Whether a candidate caption is fit to show. */
 function usable(text: string): boolean {
   const bare = text.replace(/…$/, '').trim();
@@ -173,6 +180,8 @@ function usable(text: string): boolean {
     quotes % 2 === 0 &&
     !JUNK.test(bare) &&
     !NAME_YEAR.test(bare) &&
+    !FOREIGN.test(bare) &&
+    !shouted(bare) &&
     looksEnglish(bare) &&
     !DANGLING.test(bare)
   );
@@ -207,7 +216,7 @@ export function captionWithBasis(description: string, title: string): (Caption &
   if (n !== '') {
     const candidate = shorten(n);
     const bare = candidate.replace(/…$/, '');
-    const ok = usable(candidate) || (bare.split(' ').length >= 2 && !JUNK.test(bare) && !NAME_YEAR.test(bare) && looksEnglish(bare) && !DANGLING.test(bare) && bare.length >= 8);
+    const ok = usable(candidate) || (bare.split(' ').length >= 2 && !JUNK.test(bare) && !NAME_YEAR.test(bare) && !FOREIGN_MORE.test(bare) && !shouted(bare) && looksEnglish(bare) && !DANGLING.test(bare) && bare.length >= 8);
     if (ok) return { text: candidate, source: 'title', basis: n };
   }
   return undefined;

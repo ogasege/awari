@@ -39,7 +39,7 @@ discovery.
   rooms each.
 - **A timeline** of <!--n:events-->1530<!--/n--> dates across every subject and continent, and **On
   this day** on Home, which also rotates its prints, notes and suggestions daily.
-- **A picture library** of <!--n:mediaPictures-->3985<!--/n--> Commons pictures (four or more per article but eighteen, <!--n:mediaMB-->87<!--/n--> MB of small WebP copies): an article strip, a large view with the credit, a Pictures screen, the picture of the day and picture questions. No licence is typed by hand: `npm run licences` asks the Commons API about <!--n:mediaVerified-->4481<!--/n--> images and fails the submission check on any mismatch.
+- **A picture library** of <!--n:mediaPictures-->3982<!--/n--> Commons pictures (four or more per article but eighteen, <!--n:mediaMB-->87<!--/n--> MB of small WebP copies): an article strip, a large view with the credit, a Pictures screen, the picture of the day and picture questions. No licence is typed by hand: `npm run licences` asks the Commons API about <!--n:mediaVerified-->4478<!--/n--> images and fails the submission check on any mismatch.
 - **Offline**: a hand-written service worker saves the whole bundle. After one visit every bundled
   feature works in airplane mode, and the header says honestly whether the site has been saved.
 - **An optional quiz service** (AWS Lambda calling Amazon Bedrock) that checks every generated
@@ -98,7 +98,7 @@ Kiro IDE; they have not fired, because the IDE was not used.
 ### Spec-driven development
 
 <!--n:specs-->23<!--/n--> specs, each with EARS requirements and numbered acceptance criteria, a
-design that derives correctness properties, and tasks; <!--n:specTasksDone-->196<!--/n--> of
+design that derives correctness properties, and tasks; <!--n:specTasksDone-->198<!--/n--> of
 <!--n:specTasks-->198<!--/n--> tasks are done, each committed as `<spec> <task>: <summary>`. The
 difference from vibe coding showed most when the scope grew to the whole world: specs 14 to 20
 were written before any code. The design for the timeline made us check what Wikidata's

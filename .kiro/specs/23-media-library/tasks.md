@@ -20,7 +20,7 @@ Starts after spec 22 is committed. Run through the conductor with `awari-builder
 - [x] 10. Picture of the day on Home (Property 3). _Req 19_
 - [x] 11. Picture questions in quizzes and the Castle (Property 6). _Req 20_
 - [x] 12. Credits page from media data; `CREDITS.md` summary; README and LICENSE notes. _Req 22, 23_
-- [ ] 13. Sample reviews: auditor checks a random 5% against Commons; the design reviewer checks at
+- [x] 13. Sample reviews: auditor checks a random 5% against Commons; the design reviewer checks at
       least 150 pictures and the new screens. _Req 24_
-- [ ] 14. Retake screenshots, `submission-check`, `offline-check`, post-batch workflow, report with
+- [x] 14. Retake screenshots, `submission-check`, `offline-check`, post-batch workflow, report with
       counts and anything not obtained.

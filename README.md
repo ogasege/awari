@@ -33,7 +33,7 @@ paper strips, wobbly SVG doodles, torn edges.
 - **Wander the timeline** of <!--n:events-->1530<!--/n--> dates from Wikidata, by subject and by
   continent, and see what happened **on this day** on Home, where the prints, notes and
   suggestions change every day.
-- **Look at the world**: <!--n:mediaPictures-->3985<!--/n--> pictures from Wikimedia Commons, four or more for all but eighteen articles (where Commons has too few pictures that pass the filters, mostly abstract science topics),
+- **Look at the world**: <!--n:mediaPictures-->3982<!--/n--> pictures from Wikimedia Commons, four or more for all but eighteen articles (where Commons has too few pictures that pass the filters, mostly abstract science topics),
   in a strip under each article, on a **Pictures** screen with filters, search and a surprise pile, as the
   **picture of the day** on Home, and as picture questions in the Castle and picture quizzes. Every picture's author
   and licence is read from the Commons API by `npm run licences`, which the submission check runs.
@@ -106,7 +106,7 @@ Kiro IDE format; they have not fired, because the IDE was not used.
 
 <!--n:specs-->23<!--/n--> specs in `.kiro/specs/`, each with EARS requirements, numbered acceptance
 criteria, a design that derives correctness properties, and tasks
-(<!--n:specTasksDone-->196<!--/n--> of <!--n:specTasks-->198<!--/n--> done). Every spec was written
+(<!--n:specTasksDone-->198<!--/n--> of <!--n:specTasks-->198<!--/n--> done). Every spec was written
 before its code, and each task became a commit named `<spec> <task>: <summary>`. Compared with
 vibe coding, the specs changed outcomes: when the owner widened the scope to the whole world,
 specs 14 to 20 were written first and caught that Wikidata's "inception" is not independence,

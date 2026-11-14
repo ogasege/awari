@@ -25,6 +25,27 @@ Brief: `docs/crew-capabilities.md`. This file records what really ran in Kiro Cr
 - **`awari-design-reviewer` run `8b50276e`: failed** with "Request exceeds the maximum allowed size": it was handed all 40 full-page screenshots. I did the design check myself on the retaken screens and recorded it in `design-review-review-3.md`. A retry with fewer, smaller images is left for the owner to decide.
 - **Workflow `awari-post-batch-verification`: still not run.** Its steps were run by hand in this session: screenshots, the auditor, `submission-check`, `offline-check`.
 
+## Media library (spec 23, 14 Nov): what really ran
+
+Three review rounds, each by an independent crew member working read-only from a fresh random sample.  In round 3 each reviewer was spawned under its own crew name.
+
+| Round | Auditor (licence and captions) | Design reviewer (pictures and screens) |
+|---|---|---|
+| 1 (`db9bff28`, `2bc97c86`) | 0 licence problems; 16 caption defects | 124 of 200 sampled pictures with a problem (62%); 20 screen defects N1 to N20 |
+| 2 (`d1968cf1`, `3833edf6`) | 0 licence problems; 31 of 206 captions below the English bar; kind mislabels | 159 of 200 (80%); its screen captures predated the fixes, so most screen fixes were unverifiable |
+| 3 (`ee596cb2`, `23537e96`) | 0 licence problems on 200 of 200; caption defects 33 (four sub-classes), 49 (round 2 classes) or 68 (its full bar); 11 kind defects | 98 of the 120 pictures it opened (82%); 53% on substantive faults only; screens: 11 of N1 to N20 fixed, 4 partly, 4 standing, 1 unverifiable |
+
+What the rounds changed in the product: relevance terms and English-only captions (round 1); a WordNet English check, residue stripping, a denylist of 144 Commons files and stricter kinds (round 2); clause-boundary captions, more residue rules, foreign function words, sentence-cased shouting, four flag pictures and the non-English sample captions dropped, a quiz note that is a question, plain credits wording (round 3).
+
+What did not work, and is not claimed as fixed:
+- The design reviewer judged only 120 of its 200 sample pictures by eye (image budget) and 80 from captions. Its rate is high at every round and the selection is automatic, not curated by hand.
+- The auditor sampled the library partway through my round-3 rebuild, so a few of its caption findings were already changed when it wrote them. The numbers above are its own, not re-measured on the final library.
+- Still present at the end: about 18% of captions are three words or fewer, 8% end in an ellipsis, diagram is almost unused as a kind (3 records), some captions are wrong in small ways (a painting dated after the painter died), and the article strip mixes drawings with photographs without saying so.
+- Not seen by the design reviewer in any round: the picture of the day on Home, the large picture view, the end of the credits page.
+- Licences: 0 problems in all three rounds and in the library's own check against Commons (4,478 images in the final library).
+- `awari-builder` was not used for spec 23 and the `awari-post-batch-verification` workflow was not run; its steps were run by hand (screenshots, both reviewers, `submission-check`, `offline-check`).
+- Each reviewer was told to write its own file (`media-audit-review-N.md`, `media-design-review-N.md`); all six are kept.
+
 ## What this does not show
 
 The write-up must not say a conductor, a workflow run or `awari-builder` crew run was used. Say that two Crew members (the licence auditor and the design reviewer) reviewed the final screenshots and photos, that three Crew hooks fired during the build, and that Knowledge holds the three documents.
