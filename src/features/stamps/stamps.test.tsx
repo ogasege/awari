@@ -17,14 +17,14 @@ describe('World stamp book screens (16-world-stamp-book 3)', () => {
     expect(await screen.findByText(/Your book is empty so far/)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Spin the globe' })).toHaveAttribute('href', '/atlas');
     expect(screen.getByRole('status')).toHaveTextContent('0 of 197 countries');
-    const cards = screen.getAllByRole('link', { name: /Open this page$/ });
+    const cards = screen.getAllByRole('link', { name: /Open this stamp page$/ });
     expect(cards.map((c) => c.textContent)).toEqual([
-      'Africa0 of 54',
-      'Asia0 of 49',
-      'Europe0 of 45',
-      'North America0 of 23',
-      'South America0 of 12',
-      'Oceania0 of 14',
+      'Africa 0 of 54',
+      'Asia 0 of 49',
+      'Europe 0 of 45',
+      'North America 0 of 23',
+      'South America 0 of 12',
+      'Oceania 0 of 14',
     ]);
     expect(cards[3]).toHaveAttribute('href', '/stamps/north-america');
   });
@@ -33,9 +33,9 @@ describe('World stamp book screens (16-world-stamp-book 3)', () => {
     await update((p) => ['nigeria', 'ghana', 'france', 'japan', 'brazil', 'fiji'].reduce(withDiscovered, p));
     render(<StampsScreen />);
     expect(await screen.findByText(/6 of 197/)).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /^Africa: 2 of 54 countries/ })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /^Oceania: 1 of 14 countries/ })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /^South America: 1 of 12 countries/ })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /^Africa 2 of 54\./ })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /^Oceania 1 of 14\./ })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /^South America 1 of 12\./ })).toBeInTheDocument();
   });
 
   it('shows a continent page with a slot per country, found ones linked, the rest in words. _Req 3_', async () => {

@@ -1,0 +1,7129 @@
+{
+ "base": "http://127.0.0.1:4173",
+ "offlineMode": false,
+ "when": "2026-11-14T22:15:05.635Z",
+ "visits": [],
+ "activations": [
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/",
+   "control": "link /",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/subjects",
+   "control": "link /subjects",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/atlas",
+   "control": "link /atlas",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/tours",
+   "control": "link /tours",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/timeline",
+   "control": "link /timeline",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/media",
+   "control": "link /media",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/castle",
+   "control": "link /castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/quizzes",
+   "control": "link /quizzes",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/article/countries/seychelles",
+   "control": "link /article/countries/random",
+   "ok": false,
+   "note": "ok; blank screen"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/article/earth/sahara",
+   "control": "link /article/earth/sahara",
+   "ok": false,
+   "note": "ok; blank screen"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/article/countries/madagascar",
+   "control": "link /article/countries/madagascar",
+   "ok": false,
+   "note": "ok; blank screen"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/article/wildlife/penguin",
+   "control": "link /article/wildlife/penguin",
+   "ok": false,
+   "note": "ok; blank screen"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/subject/earth",
+   "control": "link /subject/earth",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/subject/body",
+   "control": "link /subject/body",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/subject/science",
+   "control": "link /subject/science",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/subject/physics",
+   "control": "link /subject/physics",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/subject/inventions",
+   "control": "link /subject/inventions",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/timeline?year=1765",
+   "control": "link /timeline?year=1765",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/timeline?year=1797",
+   "control": "link /timeline?year=1797",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/timeline?year=1840",
+   "control": "link /timeline?year=1840",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/atlas?c=nauru",
+   "control": "link /atlas?c=nauru",
+   "ok": false,
+   "note": "ok; blank screen"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/media?pic=560402aae442c9ed",
+   "control": "link /media?pic=560402aae442c9ed",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/article/science/gold",
+   "control": "link /article/science/gold",
+   "ok": false,
+   "note": "ok; blank screen"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/castle/north-america",
+   "control": "link /castle/north-america",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/quiz/body/leg",
+   "control": "link /quiz/body/leg",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/credits",
+   "control": "link /credits",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/",
+   "control": "On this day on 2026-01-01",
+   "ok": false,
+   "note": "threw: no On this day notes"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/",
+   "control": "On this day on 2026-02-29",
+   "ok": false,
+   "note": "threw: no On this day notes"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/",
+   "control": "On this day on 2026-03-15",
+   "ok": false,
+   "note": "threw: no On this day notes"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/",
+   "control": "On this day on 2026-12-31",
+   "ok": false,
+   "note": "threw: no On this day notes"
+  },
+  {
+   "viewport": "1440",
+   "type": "home",
+   "screen": "/",
+   "control": "On this day on 2026-07-04",
+   "ok": false,
+   "note": "threw: no On this day notes"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "hint 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "hint 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "hint 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "hint 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "hint 5",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "result screen shows a score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/wildlife/okapi",
+   "control": "open /quiz/wildlife/okapi",
+   "ok": true,
+   "note": "no questions here (quiz not available for this article)"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "hint 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "hint 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "hint 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "hint 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "hint 5",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "result screen shows a score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "hint 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "hint 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "hint 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "hint 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "hint 5",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "result screen shows a score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "hint 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "hint 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "hint 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "hint 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "hint 5",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "result screen shows a score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "hint 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "hint 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "hint 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "hint 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "hint 5",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "result screen shows a score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "hint 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "hint 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "hint 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "hint 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "hint 5",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "result screen shows a score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "hint 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "hint 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "hint 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "hint 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "hint 5",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "result screen shows a score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "hint 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "hint 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "hint 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "hint 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "hint 5",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "result screen shows a score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "hint 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "hint 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "hint 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "hint 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "hint 5",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "result screen shows a score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "hint 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "hint 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "hint 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "hint 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "hint 5",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "result screen shows a score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "make-a-quiz",
+   "screen": "/quizzes",
+   "control": "empty",
+   "ok": true,
+   "note": "says: gainst the article before you see it. Article name Make my quiz it can take half a minute!"
+  },
+  {
+   "viewport": "1440",
+   "type": "make-a-quiz",
+   "screen": "/quizzes",
+   "control": "bad title",
+   "ok": true,
+   "note": "says: not find a long enough Simple English Wikipedia article with that name. Try another title."
+  },
+  {
+   "viewport": "1440",
+   "type": "make-a-quiz",
+   "screen": "/quizzes",
+   "control": "good title",
+   "ok": false,
+   "note": "says: er could not write fair questions for that article just now. The quizzes below still work.; console: Failed to load resource: the server responded with a status of 404 (Not Found)"
+  },
+  {
+   "viewport": "1440",
+   "type": "make-a-quiz",
+   "screen": "/quizzes",
+   "control": "very long",
+   "ok": true,
+   "note": "says: not find a long enough Simple English Wikipedia article with that name. Try another title."
+  },
+  {
+   "viewport": "1440",
+   "type": "make-a-quiz",
+   "screen": "/quizzes",
+   "control": "punctuation",
+   "ok": true,
+   "note": "says: not find a long enough Simple English Wikipedia article with that name. Try another title."
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle/africa",
+   "control": "enter /castle/africa",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle/asia",
+   "control": "enter /castle/asia",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle/europe",
+   "control": "enter /castle/europe",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle/north-america",
+   "control": "enter /castle/north-america",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle/south-america",
+   "control": "enter /castle/south-america",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle/oceania",
+   "control": "enter /castle/oceania",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle/wildlife",
+   "control": "enter /castle/wildlife",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle/space",
+   "control": "enter /castle/space",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle/ancient",
+   "control": "enter /castle/ancient",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle/earth",
+   "control": "enter /castle/earth",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle/body",
+   "control": "enter /castle/body",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle/science",
+   "control": "enter /castle/science",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle/electricity",
+   "control": "enter /castle/electricity",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle/inventions",
+   "control": "enter /castle/inventions",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle/people",
+   "control": "enter /castle/people",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle/arts",
+   "control": "enter /castle/arts",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "1440",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "pick Nigeria",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "pick Egypt",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "pick Japan",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "pick India",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "pick France",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "pick Italy",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "pick Canada",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "pick Mexico",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "pick Brazil",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "pick Argentina",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "pick Australia",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "pick New Zealand",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "atlas",
+   "screen": "/article/countries/new-zealand",
+   "control": "Read about the country",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "spin the globe (drag)",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "zoom the globe (wheel)",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "click a country on the globe",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "stamp book",
+   "screen": "/stamps/africa",
+   "control": "continent page /stamps/africa",
+   "ok": true,
+   "note": "2 stamp pictures, 3 links"
+  },
+  {
+   "viewport": "1440",
+   "type": "stamp book",
+   "screen": "/stamps/asia",
+   "control": "continent page /stamps/asia",
+   "ok": true,
+   "note": "2 stamp pictures, 3 links"
+  },
+  {
+   "viewport": "1440",
+   "type": "stamp book",
+   "screen": "/stamps/europe",
+   "control": "continent page /stamps/europe",
+   "ok": true,
+   "note": "2 stamp pictures, 3 links"
+  },
+  {
+   "viewport": "1440",
+   "type": "stamp book",
+   "screen": "/stamps/north-america",
+   "control": "continent page /stamps/north-america",
+   "ok": true,
+   "note": "2 stamp pictures, 3 links"
+  },
+  {
+   "viewport": "1440",
+   "type": "stamp book",
+   "screen": "/stamps/south-america",
+   "control": "continent page /stamps/south-america",
+   "ok": true,
+   "note": "2 stamp pictures, 3 links"
+  },
+  {
+   "viewport": "1440",
+   "type": "stamp book",
+   "screen": "/stamps/oceania",
+   "control": "continent page /stamps/oceania",
+   "ok": true,
+   "note": "2 stamp pictures, 3 links"
+  },
+  {
+   "viewport": "1440",
+   "type": "tour",
+   "screen": "/tours/rivers?stop=2",
+   "control": "/tours/rivers next stop 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "tour",
+   "screen": "/tours/rivers?stop=3",
+   "control": "/tours/rivers next stop 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "tour",
+   "screen": "/tours/rivers?stop=4",
+   "control": "/tours/rivers next stop 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "tour",
+   "screen": "/tours/rivers?stop=5",
+   "control": "/tours/rivers next stop 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "tour",
+   "screen": "/tours/rivers?stop=6",
+   "control": "/tours/rivers next stop 5",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "tour",
+   "screen": "/tours/rivers?stop=7",
+   "control": "/tours/rivers next stop 6",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "tour",
+   "screen": "/tours/rivers?stop=8",
+   "control": "/tours/rivers next stop 7",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "tour",
+   "screen": "/article/earth/nile?tour=rivers&stop=1",
+   "control": "/tours/rivers open the article",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "tour",
+   "screen": "/tours/wonders?stop=2",
+   "control": "/tours/wonders next stop 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "tour",
+   "screen": "/tours/wonders?stop=3",
+   "control": "/tours/wonders next stop 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "tour",
+   "screen": "/tours/wonders?stop=4",
+   "control": "/tours/wonders next stop 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "tour",
+   "screen": "/tours/wonders?stop=5",
+   "control": "/tours/wonders next stop 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "tour",
+   "screen": "/tours/wonders?stop=6",
+   "control": "/tours/wonders next stop 5",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "tour",
+   "screen": "/article/ancient/great-pyramid-of-giza?tour=wonders&stop=1",
+   "control": "/tours/wonders open the article",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "tour",
+   "screen": "/tours/volcanoes?stop=2",
+   "control": "/tours/volcanoes next stop 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "tour",
+   "screen": "/tours/volcanoes?stop=3",
+   "control": "/tours/volcanoes next stop 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "tour",
+   "screen": "/tours/volcanoes?stop=4",
+   "control": "/tours/volcanoes next stop 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "tour",
+   "screen": "/tours/volcanoes?stop=5",
+   "control": "/tours/volcanoes next stop 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "tour",
+   "screen": "/tours/volcanoes?stop=6",
+   "control": "/tours/volcanoes next stop 5",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "tour",
+   "screen": "/tours/volcanoes?stop=7",
+   "control": "/tours/volcanoes next stop 6",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "tour",
+   "screen": "/article/earth/krakatoa?tour=volcanoes&stop=1",
+   "control": "/tours/volcanoes open the article",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip All",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Countries",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Wildlife",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Space",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Ancient worlds",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Mountains and rivers",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip The human body",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Physics and chemistry",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Electricity",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Inventions",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Famous people",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Arts, music and sport",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Everywhere",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Africa",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Asia",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Europe",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip North America",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip South America",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Oceania",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Antarctica",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 20",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 21",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 22",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 23",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 24",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 25",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 26",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 27",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 28",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 29",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 30",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 31",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 32",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 33",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 34",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "1440",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "note link goes to an article",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 4000ms exceeded."
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter All subjects",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Countries",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Wildlife",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Space",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Ancient worlds",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Mountains and rivers",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter The human body",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Physics and chemistry",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Electricity",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Inventions",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Famous people",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Arts, music and sport",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Every kind",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Art",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Diagrams",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Maps",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Photographs",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Portraits",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "search \"lion\"",
+   "ok": true,
+   "note": "Showing 60 of 3720 pictures."
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "search \"zzqxj\"",
+   "ok": true,
+   "note": "Showing 60 of 3720 pictures."
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "search \"a\"",
+   "ok": true,
+   "note": "Showing 60 of 3720 pictures."
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "search \"\"; <b>\"",
+   "ok": true,
+   "note": "Showing 60 of 3720 pictures."
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "search \"colosseum 1000\"",
+   "ok": true,
+   "note": "Showing 60 of 3720 pictures."
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "Surprise me",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "open a picture (large view)",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "Next picture",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "Previous picture",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "close with Escape",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "search",
+   "screen": "/search?q=nile",
+   "control": "query \"nile\"",
+   "ok": true,
+   "note": "0 hits; Search find anything Search articles, events and words Search Looking "
+  },
+  {
+   "viewport": "1440",
+   "type": "search",
+   "screen": "/search?q=nilee",
+   "control": "query \"nilee\"",
+   "ok": true,
+   "note": "0 hits; Search find anything Search articles, events and words Search Looking "
+  },
+  {
+   "viewport": "1440",
+   "type": "search",
+   "screen": "/search?q=a",
+   "control": "query \"a\"",
+   "ok": true,
+   "note": "0 hits; Search find anything Search articles, events and words Search Looking "
+  },
+  {
+   "viewport": "1440",
+   "type": "search",
+   "screen": "/search?q=zzqxjvk",
+   "control": "query \"zzqxjvk\"",
+   "ok": true,
+   "note": "0 hits; Search find anything Search articles, events and words Search Looking "
+  },
+  {
+   "viewport": "1440",
+   "type": "search",
+   "screen": "/search?q=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   "control": "query \"xxxxxxxxxxxxxxxxxxxx\"",
+   "ok": true,
+   "note": "0 hits; Search find anything Search articles, events and words Search Looking "
+  },
+  {
+   "viewport": "1440",
+   "type": "search",
+   "screen": "/search?q=%22%3B%20%3Cscript%3Ealert(1)%3C%2Fscript%3E",
+   "control": "query \"\\\"; <script>alert(1)<\"",
+   "ok": true,
+   "note": "0 hits; Search find anything Search articles, events and words Search Looking "
+  },
+  {
+   "viewport": "1440",
+   "type": "search",
+   "screen": "/search?q=caf%C3%A9",
+   "control": "query \"café\"",
+   "ok": true,
+   "note": "0 hits; Search find anything Search articles, events and words Search Looking "
+  },
+  {
+   "viewport": "1440",
+   "type": "search",
+   "screen": "/search?q=%20%20%20",
+   "control": "query \"   \"",
+   "ok": true,
+   "note": "0 hits; Search find anything Search articles, events and words Search Type a w"
+  },
+  {
+   "viewport": "1440",
+   "type": "search",
+   "screen": "/search?q=%3F*%2B(",
+   "control": "query \"?*+(\"",
+   "ok": true,
+   "note": "0 hits; Search find anything Search articles, events and words Search Type a w"
+  },
+  {
+   "viewport": "1440",
+   "type": "search",
+   "screen": "/search?q=%D0%96%D0%96",
+   "control": "query \"ЖЖ\"",
+   "ok": true,
+   "note": "0 hits; Search find anything Search articles, events and words Search Looking "
+  },
+  {
+   "viewport": "1440",
+   "type": "search",
+   "screen": "/search?q=%E6%97%A5%E6%9C%AC",
+   "control": "query \"日本\"",
+   "ok": true,
+   "note": "0 hits; Search find anything Search articles, events and words Search Looking "
+  },
+  {
+   "viewport": "1440",
+   "type": "search",
+   "screen": "/search?q=okapi",
+   "control": "header search box submits",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "article",
+   "screen": "/article/countries/nigeria",
+   "control": "double-click a word opens a word card",
+   "ok": true,
+   "note": "word card shown"
+  },
+  {
+   "viewport": "1440",
+   "type": "credits",
+   "screen": "/credits",
+   "control": "page forward 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "credits",
+   "screen": "/credits",
+   "control": "page forward 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "credits",
+   "screen": "/credits",
+   "control": "page forward 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "credits",
+   "screen": "/credits",
+   "control": "page forward 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "credits",
+   "screen": "/credits",
+   "control": "page back",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "credits",
+   "screen": "/credits",
+   "control": "search the pictures table",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "1440",
+   "type": "not-found",
+   "screen": "/",
+   "control": "a helpful way back",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/",
+   "control": "link /",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/subjects",
+   "control": "link /subjects",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/atlas",
+   "control": "link /atlas",
+   "ok": false,
+   "note": "ok; blank screen"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/tours",
+   "control": "link /tours",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/timeline",
+   "control": "link /timeline",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/media",
+   "control": "link /media",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/castle",
+   "control": "link /castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/quizzes",
+   "control": "link /quizzes",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/article/countries/random",
+   "control": "link /article/countries/random",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/",
+   "control": "link /article/earth/sahara",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 4000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/",
+   "control": "link /article/countries/madagascar",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 4000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/",
+   "control": "link /article/wildlife/penguin",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 4000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/subject/earth",
+   "control": "link /subject/earth",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/subject/body",
+   "control": "link /subject/body",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/subject/science",
+   "control": "link /subject/science",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/subject/physics",
+   "control": "link /subject/physics",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/subject/inventions",
+   "control": "link /subject/inventions",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/timeline?year=1765",
+   "control": "link /timeline?year=1765",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/timeline?year=1797",
+   "control": "link /timeline?year=1797",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/timeline?year=1840",
+   "control": "link /timeline?year=1840",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/atlas?c=nauru",
+   "control": "link /atlas?c=nauru",
+   "ok": false,
+   "note": "ok; blank screen"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/media?pic=560402aae442c9ed",
+   "control": "link /media?pic=560402aae442c9ed",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/article/science/gold",
+   "control": "link /article/science/gold",
+   "ok": false,
+   "note": "ok; blank screen"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/castle/north-america",
+   "control": "link /castle/north-america",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/quiz/body/leg",
+   "control": "link /quiz/body/leg",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/credits",
+   "control": "link /credits",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/",
+   "control": "On this day on 2026-01-01",
+   "ok": false,
+   "note": "threw: no On this day notes"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/",
+   "control": "On this day on 2026-02-29",
+   "ok": false,
+   "note": "threw: no On this day notes"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/",
+   "control": "On this day on 2026-03-15",
+   "ok": false,
+   "note": "threw: no On this day notes"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/",
+   "control": "On this day on 2026-12-31",
+   "ok": false,
+   "note": "threw: no On this day notes"
+  },
+  {
+   "viewport": "390",
+   "type": "home",
+   "screen": "/",
+   "control": "On this day on 2026-07-04",
+   "ok": false,
+   "note": "threw: no On this day notes"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "hint 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "hint 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "hint 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "hint 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "hint 5",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/nigeria",
+   "control": "result screen shows a score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/wildlife/okapi",
+   "control": "open /quiz/wildlife/okapi",
+   "ok": true,
+   "note": "no questions here (quiz not available for this article)"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "hint 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "hint 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "hint 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "hint 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "hint 5",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/space/moon",
+   "control": "result screen shows a score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "hint 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "hint 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "hint 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "hint 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "hint 5",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/science/temperature",
+   "control": "result screen shows a score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "hint 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "hint 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "hint 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "hint 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "hint 5",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/people/albert-einstein",
+   "control": "result screen shows a score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "hint 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "hint 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "hint 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "hint 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "hint 5",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/ancient/colosseum",
+   "control": "result screen shows a score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "hint 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "hint 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "hint 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "hint 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "hint 5",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/pictures/countries",
+   "control": "result screen shows a score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "hint 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "hint 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "hint 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "hint 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "hint 5",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/afghanistan",
+   "control": "result screen shows a score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "hint 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "hint 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "hint 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "hint 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "hint 5",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/armenia",
+   "control": "result screen shows a score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "hint 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "hint 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "hint 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "hint 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "hint 5",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/belarus",
+   "control": "result screen shows a score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "hint 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "hint 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "hint 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "hint 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "hint 5",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "answer 1 then Check my answer",
+   "ok": true,
+   "note": "not quite"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "answer 2 then Check my answer",
+   "ok": true,
+   "note": "right, proof shown"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "proof source link visible",
+   "ok": true,
+   "note": "has href"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "Next question / See my score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "quiz",
+   "screen": "/quiz/countries/botswana",
+   "control": "result screen shows a score",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "make-a-quiz",
+   "screen": "/quizzes",
+   "control": "empty",
+   "ok": true,
+   "note": "says: gainst the article before you see it. Article name Make my quiz it can take half a minute!"
+  },
+  {
+   "viewport": "390",
+   "type": "make-a-quiz",
+   "screen": "/quizzes",
+   "control": "bad title",
+   "ok": true,
+   "note": "says: not find a long enough Simple English Wikipedia article with that name. Try another title."
+  },
+  {
+   "viewport": "390",
+   "type": "make-a-quiz",
+   "screen": "/quizzes",
+   "control": "good title",
+   "ok": false,
+   "note": "says: er could not write fair questions for that article just now. The quizzes below still work.; console: Failed to load resource: the server responded with a status of 404 (Not Found)"
+  },
+  {
+   "viewport": "390",
+   "type": "make-a-quiz",
+   "screen": "/quizzes",
+   "control": "very long",
+   "ok": true,
+   "note": "says: not find a long enough Simple English Wikipedia article with that name. Try another title."
+  },
+  {
+   "viewport": "390",
+   "type": "make-a-quiz",
+   "screen": "/quizzes",
+   "control": "punctuation",
+   "ok": true,
+   "note": "says: not find a long enough Simple English Wikipedia article with that name. Try another title."
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle/africa",
+   "control": "enter /castle/africa",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle/asia",
+   "control": "enter /castle/asia",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle/europe",
+   "control": "enter /castle/europe",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle/north-america",
+   "control": "enter /castle/north-america",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle/south-america",
+   "control": "enter /castle/south-america",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle/oceania",
+   "control": "enter /castle/oceania",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle/wildlife",
+   "control": "enter /castle/wildlife",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle/space",
+   "control": "enter /castle/space",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle/ancient",
+   "control": "enter /castle/ancient",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle/earth",
+   "control": "enter /castle/earth",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle/body",
+   "control": "enter /castle/body",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle/science",
+   "control": "enter /castle/science",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle/electricity",
+   "control": "enter /castle/electricity",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle/inventions",
+   "control": "enter /castle/inventions",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle/people",
+   "control": "enter /castle/people",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle/arts",
+   "control": "enter /castle/arts",
+   "ok": true,
+   "note": "1 controls"
+  },
+  {
+   "viewport": "390",
+   "type": "castle",
+   "screen": "/castle",
+   "control": "back to the castle",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "pick Nigeria",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "pick Egypt",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "pick Japan",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "pick India",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "pick France",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "pick Italy",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "pick Canada",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "pick Mexico",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "pick Brazil",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "pick Argentina",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "pick Australia",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "pick New Zealand",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "atlas",
+   "screen": "/article/countries/new-zealand",
+   "control": "Read about the country",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "spin the globe (drag)",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "zoom the globe (wheel)",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "atlas",
+   "screen": "/atlas",
+   "control": "click a country on the globe",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "stamp book",
+   "screen": "/stamps/africa",
+   "control": "continent page /stamps/africa",
+   "ok": true,
+   "note": "2 stamp pictures, 3 links"
+  },
+  {
+   "viewport": "390",
+   "type": "stamp book",
+   "screen": "/stamps/asia",
+   "control": "continent page /stamps/asia",
+   "ok": true,
+   "note": "2 stamp pictures, 3 links"
+  },
+  {
+   "viewport": "390",
+   "type": "stamp book",
+   "screen": "/stamps/europe",
+   "control": "continent page /stamps/europe",
+   "ok": true,
+   "note": "2 stamp pictures, 3 links"
+  },
+  {
+   "viewport": "390",
+   "type": "stamp book",
+   "screen": "/stamps/north-america",
+   "control": "continent page /stamps/north-america",
+   "ok": true,
+   "note": "2 stamp pictures, 3 links"
+  },
+  {
+   "viewport": "390",
+   "type": "stamp book",
+   "screen": "/stamps/south-america",
+   "control": "continent page /stamps/south-america",
+   "ok": true,
+   "note": "2 stamp pictures, 3 links"
+  },
+  {
+   "viewport": "390",
+   "type": "stamp book",
+   "screen": "/stamps/oceania",
+   "control": "continent page /stamps/oceania",
+   "ok": true,
+   "note": "2 stamp pictures, 3 links"
+  },
+  {
+   "viewport": "390",
+   "type": "tour",
+   "screen": "/tours/rivers?stop=2",
+   "control": "/tours/rivers next stop 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "tour",
+   "screen": "/tours/rivers?stop=3",
+   "control": "/tours/rivers next stop 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "tour",
+   "screen": "/tours/rivers?stop=4",
+   "control": "/tours/rivers next stop 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "tour",
+   "screen": "/tours/rivers?stop=5",
+   "control": "/tours/rivers next stop 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "tour",
+   "screen": "/tours/rivers?stop=6",
+   "control": "/tours/rivers next stop 5",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "tour",
+   "screen": "/tours/rivers?stop=7",
+   "control": "/tours/rivers next stop 6",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "tour",
+   "screen": "/tours/rivers?stop=8",
+   "control": "/tours/rivers next stop 7",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "tour",
+   "screen": "/article/earth/nile?tour=rivers&stop=1",
+   "control": "/tours/rivers open the article",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "tour",
+   "screen": "/tours/wonders?stop=2",
+   "control": "/tours/wonders next stop 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "tour",
+   "screen": "/tours/wonders?stop=3",
+   "control": "/tours/wonders next stop 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "tour",
+   "screen": "/tours/wonders?stop=4",
+   "control": "/tours/wonders next stop 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "tour",
+   "screen": "/tours/wonders?stop=5",
+   "control": "/tours/wonders next stop 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "tour",
+   "screen": "/tours/wonders?stop=6",
+   "control": "/tours/wonders next stop 5",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "tour",
+   "screen": "/article/ancient/great-pyramid-of-giza?tour=wonders&stop=1",
+   "control": "/tours/wonders open the article",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "tour",
+   "screen": "/tours/volcanoes?stop=2",
+   "control": "/tours/volcanoes next stop 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "tour",
+   "screen": "/tours/volcanoes?stop=3",
+   "control": "/tours/volcanoes next stop 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "tour",
+   "screen": "/tours/volcanoes?stop=4",
+   "control": "/tours/volcanoes next stop 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "tour",
+   "screen": "/tours/volcanoes?stop=5",
+   "control": "/tours/volcanoes next stop 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "tour",
+   "screen": "/tours/volcanoes?stop=6",
+   "control": "/tours/volcanoes next stop 5",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "tour",
+   "screen": "/tours/volcanoes?stop=7",
+   "control": "/tours/volcanoes next stop 6",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "tour",
+   "screen": "/article/earth/krakatoa?tour=volcanoes&stop=1",
+   "control": "/tours/volcanoes open the article",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip All",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Countries",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Wildlife",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Space",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Ancient worlds",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Mountains and rivers",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip The human body",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Physics and chemistry",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Electricity",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Inventions",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Famous people",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Arts, music and sport",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Everywhere",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Africa",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Asia",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Europe",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip North America",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip South America",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Oceania",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip Antarctica",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 20",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 21",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 22",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 23",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 24",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 25",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 26",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 27",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 28",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 29",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 30",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 31",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 32",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 33",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "chip chip 34",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "timeline",
+   "screen": "/timeline",
+   "control": "note link goes to an article",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 4000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter All subjects",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Countries",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Wildlife",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Space",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Ancient worlds",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Mountains and rivers",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter The human body",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Physics and chemistry",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Electricity",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Inventions",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Famous people",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Arts, music and sport",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Every kind",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Art",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Diagrams",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Maps",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Photographs",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "filter Portraits",
+   "ok": false,
+   "note": "threw: locator.click: Timeout 3000ms exceeded."
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "search \"lion\"",
+   "ok": true,
+   "note": "Showing 60 of 3720 pictures."
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "search \"zzqxj\"",
+   "ok": true,
+   "note": "Showing 60 of 3720 pictures."
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "search \"a\"",
+   "ok": true,
+   "note": "Showing 60 of 3720 pictures."
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "search \"\"; <b>\"",
+   "ok": true,
+   "note": "Showing 60 of 3720 pictures."
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "search \"colosseum 1000\"",
+   "ok": true,
+   "note": "Showing 60 of 3720 pictures."
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "Surprise me",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "open a picture (large view)",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "Next picture",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "Previous picture",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "pictures",
+   "screen": "/media",
+   "control": "close with Escape",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "search",
+   "screen": "/search?q=nile",
+   "control": "query \"nile\"",
+   "ok": true,
+   "note": "0 hits; Search find anything Search articles, events and words Search Looking "
+  },
+  {
+   "viewport": "390",
+   "type": "search",
+   "screen": "/search?q=nilee",
+   "control": "query \"nilee\"",
+   "ok": true,
+   "note": "0 hits; Search find anything Search articles, events and words Search Looking "
+  },
+  {
+   "viewport": "390",
+   "type": "search",
+   "screen": "/search?q=a",
+   "control": "query \"a\"",
+   "ok": true,
+   "note": "0 hits; Search find anything Search articles, events and words Search Looking "
+  },
+  {
+   "viewport": "390",
+   "type": "search",
+   "screen": "/search?q=zzqxjvk",
+   "control": "query \"zzqxjvk\"",
+   "ok": true,
+   "note": "0 hits; Search find anything Search articles, events and words Search Looking "
+  },
+  {
+   "viewport": "390",
+   "type": "search",
+   "screen": "/search?q=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   "control": "query \"xxxxxxxxxxxxxxxxxxxx\"",
+   "ok": true,
+   "note": "0 hits; Search find anything Search articles, events and words Search Looking "
+  },
+  {
+   "viewport": "390",
+   "type": "search",
+   "screen": "/search?q=%22%3B%20%3Cscript%3Ealert(1)%3C%2Fscript%3E",
+   "control": "query \"\\\"; <script>alert(1)<\"",
+   "ok": true,
+   "note": "0 hits; Search find anything Search articles, events and words Search Looking "
+  },
+  {
+   "viewport": "390",
+   "type": "search",
+   "screen": "/search?q=caf%C3%A9",
+   "control": "query \"café\"",
+   "ok": true,
+   "note": "0 hits; Search find anything Search articles, events and words Search Looking "
+  },
+  {
+   "viewport": "390",
+   "type": "search",
+   "screen": "/search?q=%20%20%20",
+   "control": "query \"   \"",
+   "ok": true,
+   "note": "0 hits; Search find anything Search articles, events and words Search Type a w"
+  },
+  {
+   "viewport": "390",
+   "type": "search",
+   "screen": "/search?q=%3F*%2B(",
+   "control": "query \"?*+(\"",
+   "ok": true,
+   "note": "0 hits; Search find anything Search articles, events and words Search Type a w"
+  },
+  {
+   "viewport": "390",
+   "type": "search",
+   "screen": "/search?q=%D0%96%D0%96",
+   "control": "query \"ЖЖ\"",
+   "ok": true,
+   "note": "0 hits; Search find anything Search articles, events and words Search Looking "
+  },
+  {
+   "viewport": "390",
+   "type": "search",
+   "screen": "/search?q=%E6%97%A5%E6%9C%AC",
+   "control": "query \"日本\"",
+   "ok": true,
+   "note": "0 hits; Search find anything Search articles, events and words Search Looking "
+  },
+  {
+   "viewport": "390",
+   "type": "search",
+   "screen": "/search?q=okapi",
+   "control": "header search box submits",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "article",
+   "screen": "/article/countries/nigeria",
+   "control": "double-click a word opens a word card",
+   "ok": false,
+   "note": "word card shown; console: Failed to load resource: the server responded with a status of 404 ()"
+  },
+  {
+   "viewport": "390",
+   "type": "credits",
+   "screen": "/credits",
+   "control": "page forward 1",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "credits",
+   "screen": "/credits",
+   "control": "page forward 2",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "credits",
+   "screen": "/credits",
+   "control": "page forward 3",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "credits",
+   "screen": "/credits",
+   "control": "page forward 4",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "credits",
+   "screen": "/credits",
+   "control": "page back",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "credits",
+   "screen": "/credits",
+   "control": "search the pictures table",
+   "ok": true,
+   "note": "ok"
+  },
+  {
+   "viewport": "390",
+   "type": "not-found",
+   "screen": "/",
+   "control": "a helpful way back",
+   "ok": true,
+   "note": "ok"
+  }
+ ],
+ "smallByComponent": {}
+}

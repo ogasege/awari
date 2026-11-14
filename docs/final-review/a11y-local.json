@@ -1,0 +1,469 @@
+{
+ "base": "http://127.0.0.1:4173",
+ "when": "2026-11-14T22:02:06.249Z",
+ "rows": [
+  {
+   "viewport": "1440",
+   "screen": "Home",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Search results",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Search, no hits",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Country article",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Subject article",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Quiz",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Quizzes",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Castle",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Atlas",
+   "state": "loaded",
+   "serious": [
+    {
+     "id": "label-content-name-mismatch",
+     "impact": "serious",
+     "help": "Elements must have their visible text as part of their accessible name",
+     "nodes": 6,
+     "example": "<a href=\"/stamps/africa\" class=\"stamp-sheet__link\" aria-label=\"Africa: 1 of 54 countries. Open this page\">"
+    }
+   ]
+  },
+  {
+   "viewport": "1440",
+   "screen": "Atlas with a country",
+   "state": "loaded",
+   "serious": [
+    {
+     "id": "label-content-name-mismatch",
+     "impact": "serious",
+     "help": "Elements must have their visible text as part of their accessible name",
+     "nodes": 6,
+     "example": "<a href=\"/stamps/africa\" class=\"stamp-sheet__link\" aria-label=\"Africa: 1 of 54 countries. Open this page\">"
+    }
+   ]
+  },
+  {
+   "viewport": "1440",
+   "screen": "Pictures",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Timeline",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Tours",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Subjects",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Subject",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Stamps",
+   "state": "loaded",
+   "serious": [
+    {
+     "id": "label-content-name-mismatch",
+     "impact": "serious",
+     "help": "Elements must have their visible text as part of their accessible name",
+     "nodes": 6,
+     "example": "<a href=\"/stamps/africa\" class=\"stamp-sheet__link\" aria-label=\"Africa: 1 of 54 countries. Open this page\">"
+    }
+   ]
+  },
+  {
+   "viewport": "1440",
+   "screen": "Credits",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Not found",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Pictures",
+   "state": "large view open",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Quiz",
+   "state": "hint and an answer checked",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Home",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Search results",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Search, no hits",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Country article",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Subject article",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Quiz",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Quizzes",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Castle",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Atlas",
+   "state": "loaded",
+   "serious": [
+    {
+     "id": "label-content-name-mismatch",
+     "impact": "serious",
+     "help": "Elements must have their visible text as part of their accessible name",
+     "nodes": 6,
+     "example": "<a href=\"/stamps/africa\" class=\"stamp-sheet__link\" aria-label=\"Africa: 1 of 54 countries. Open this page\">"
+    }
+   ]
+  },
+  {
+   "viewport": "390",
+   "screen": "Atlas with a country",
+   "state": "loaded",
+   "serious": [
+    {
+     "id": "label-content-name-mismatch",
+     "impact": "serious",
+     "help": "Elements must have their visible text as part of their accessible name",
+     "nodes": 6,
+     "example": "<a href=\"/stamps/africa\" class=\"stamp-sheet__link\" aria-label=\"Africa: 1 of 54 countries. Open this page\">"
+    }
+   ]
+  },
+  {
+   "viewport": "390",
+   "screen": "Pictures",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Timeline",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Tours",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Subjects",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Subject",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Stamps",
+   "state": "loaded",
+   "serious": [
+    {
+     "id": "label-content-name-mismatch",
+     "impact": "serious",
+     "help": "Elements must have their visible text as part of their accessible name",
+     "nodes": 6,
+     "example": "<a href=\"/stamps/africa\" class=\"stamp-sheet__link\" aria-label=\"Africa: 1 of 54 countries. Open this page\">"
+    }
+   ]
+  },
+  {
+   "viewport": "390",
+   "screen": "Credits",
+   "state": "loaded",
+   "serious": [
+    {
+     "id": "scrollable-region-focusable",
+     "impact": "serious",
+     "help": "Scrollable region must have keyboard access",
+     "nodes": 1,
+     "example": "<div class=\"credits__table\">"
+    }
+   ]
+  },
+  {
+   "viewport": "390",
+   "screen": "Not found",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Pictures",
+   "state": "large view open",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Quiz",
+   "state": "hint and an answer checked",
+   "serious": []
+  }
+ ],
+ "keyboard": [
+  {
+   "screen": "Home (1440)",
+   "stops": 37,
+   "unnamed": [],
+   "noFocusRing": [
+    "input."
+   ],
+   "trap": false
+  },
+  {
+   "screen": "Search results (1440)",
+   "stops": 30,
+   "unnamed": [],
+   "noFocusRing": [
+    "input."
+   ],
+   "trap": false
+  },
+  {
+   "screen": "Country article (1440)",
+   "stops": 33,
+   "unnamed": [],
+   "noFocusRing": [
+    "input."
+   ],
+   "trap": false
+  },
+  {
+   "screen": "Quiz (1440)",
+   "stops": 15,
+   "unnamed": [],
+   "noFocusRing": [
+    "input."
+   ],
+   "trap": false
+  },
+  {
+   "screen": "Castle (1440)",
+   "stops": 28,
+   "unnamed": [],
+   "noFocusRing": [
+    "input."
+   ],
+   "trap": false
+  },
+  {
+   "screen": "Atlas (1440)",
+   "stops": 22,
+   "unnamed": [],
+   "noFocusRing": [
+    "input."
+   ],
+   "trap": false
+  },
+  {
+   "screen": "Pictures (1440)",
+   "stops": 69,
+   "unnamed": [],
+   "noFocusRing": [
+    "input."
+   ],
+   "trap": false
+  },
+  {
+   "screen": "Home (390)",
+   "stops": 34,
+   "unnamed": [],
+   "noFocusRing": [
+    "input."
+   ],
+   "trap": false
+  },
+  {
+   "screen": "Search results (390)",
+   "stops": 30,
+   "unnamed": [],
+   "noFocusRing": [
+    "input."
+   ],
+   "trap": false
+  },
+  {
+   "screen": "Country article (390)",
+   "stops": 33,
+   "unnamed": [],
+   "noFocusRing": [
+    "input."
+   ],
+   "trap": false
+  },
+  {
+   "screen": "Quiz (390)",
+   "stops": 15,
+   "unnamed": [],
+   "noFocusRing": [
+    "input."
+   ],
+   "trap": false
+  },
+  {
+   "screen": "Castle (390)",
+   "stops": 28,
+   "unnamed": [],
+   "noFocusRing": [
+    "input."
+   ],
+   "trap": false
+  },
+  {
+   "screen": "Atlas (390)",
+   "stops": 22,
+   "unnamed": [],
+   "noFocusRing": [
+    "input."
+   ],
+   "trap": false
+  },
+  {
+   "screen": "Pictures (390)",
+   "stops": 69,
+   "unnamed": [],
+   "noFocusRing": [
+    "input."
+   ],
+   "trap": false
+  }
+ ],
+ "extras": [
+  "[1440] Search results/loaded: landmark-unique(moderate,1)",
+  "[1440] Search, no hits/loaded: landmark-unique(moderate,1)",
+  "[1440] Country article/loaded: image-redundant-alt(minor,10)",
+  "[1440] Subject article/loaded: image-redundant-alt(minor,6)",
+  "[1440] Pictures/loaded: image-redundant-alt(minor,60)",
+  "[1440] Pictures/large view open: image-redundant-alt(minor,60)",
+  "[1440] 200% text on Home: no horizontal overflow",
+  "[1440] 200% text on Country article: no horizontal overflow",
+  "[1440] 200% text on Quiz: no horizontal overflow",
+  "[1440] 200% text on Pictures: no horizontal overflow",
+  "[1440] 200% text on Credits: no horizontal overflow",
+  "[390] Search results/loaded: landmark-unique(moderate,1)",
+  "[390] Search, no hits/loaded: landmark-unique(moderate,1)",
+  "[390] Country article/loaded: image-redundant-alt(minor,10)",
+  "[390] Subject article/loaded: image-redundant-alt(minor,6)",
+  "[390] Pictures/loaded: image-redundant-alt(minor,60)",
+  "[390] Pictures/large view open: image-redundant-alt(minor,60)",
+  "[390] 200% text on Home: no horizontal overflow",
+  "[390] 200% text on Country article: no horizontal overflow",
+  "[390] 200% text on Quiz: no horizontal overflow",
+  "[390] 200% text on Pictures: no horizontal overflow",
+  "[390] 200% text on Credits: no horizontal overflow",
+  "reduced motion on /: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "reduced motion on /atlas: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "reduced motion on /castle: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "reduced motion on /media: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "reduced motion on /article/countries/nigeria: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "dark colour scheme on /: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "dark colour scheme on /atlas: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "dark colour scheme on /castle: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "dark colour scheme on /media: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "dark colour scheme on /article/countries/nigeria: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "light colour scheme on /: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "light colour scheme on /atlas: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "light colour scheme on /castle: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "light colour scheme on /media: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "light colour scheme on /article/countries/nigeria: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)"
+ ]
+}

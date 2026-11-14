@@ -11,6 +11,9 @@ Severity: blocker, major, minor, polish. Status is `fixed` only when the fix was
 | F-005 | `/article/science/temperature` at 390 px | A 43-character number made the page 453 px wide (horizontal scroll). | major | `crawl-local-before.md` | fixed: `overflow-wrap: anywhere` on article text; scrollWidth now 390 | this commit |
 | F-006 | `/article/countries/cuba` | Text read "such as the Salsa_music and undefined" and "Yoruba_people tribes" (leftover link markup). | major (visible developer text) | `crawl-local-before.md` | fixed in the pack (manifest rebuilt); `src/lib/packs/clean-text.test.ts` checks every pack. Note: a full pack rebuild from Wikipedia would bring it back, so the test is the guard | this commit |
 | F-007 | every screen at 390 px, after the first save | The "Got it" button on the saved notice was 36 px high (3,728 small controls in the first run were this one button). | minor | probe at 390 px | fixed: 44 px | this commit |
+| F-008 | Atlas, Stamps (6 links each) | axe serious `label-content-name-mismatch`: the continent stamp links' accessible name did not contain their visible text ("Africa0 of 54"). | major (WCAG 2.5.3) | `a11y-local.md` | fixed: visible text now "Africa 0 of 54" and the name starts with it; axe re-run | this commit |
+| F-009 | Credits at 390 px | axe serious `scrollable-region-focusable`: the wide credits tables scroll sideways but a keyboard user could not focus them. | major | `a11y-local.md` | fixed: each table is a named, focusable region | this commit |
+| F-010 | Home and article on desktop (live) | Lighthouse CLS 0.19 (Home) and 0.12 (article), above the 0.1 "good" line. Mobile CLS is 0.000 to 0.004. | minor | `lighthouse.md` | open: being investigated | |
 
 ## F-001: what was decided and what "works offline" now covers
 

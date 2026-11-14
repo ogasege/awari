@@ -37,7 +37,7 @@ export function MediaCredits() {
       {items.length > 0 ? (
         <Paged key={subject} rows={items} text={(m) => `${m.caption} ${m.articleTitle} ${m.author} ${m.licence} ${m.title}`} label="pictures">
           {(shown) => (
-            <div className="credits__table">
+            <div className="credits__table" role="region" aria-label="Picture credits table" tabIndex={0}>
               <table>
                 <thead>
                   <tr>

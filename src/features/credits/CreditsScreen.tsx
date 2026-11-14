@@ -126,7 +126,7 @@ export default function CreditsScreen() {
           {b.kind === 'table' && b.rows.length > PAGE_SIZE ? (
             <Paged rows={b.rows} text={(r) => r.join(' ')} label="credits">
               {(shown) => (
-                <div className="credits__table">
+                <div className="credits__table" role="region" aria-label="Credits table" tabIndex={0}>
                   <table>
                     <thead>
                       <tr>
@@ -152,7 +152,7 @@ export default function CreditsScreen() {
             </Paged>
           ) : null}
           {b.kind === 'table' && b.rows.length <= PAGE_SIZE ? (
-            <div className="credits__table">
+            <div className="credits__table" role="region" aria-label="Credits table" tabIndex={0}>
               <table>
                 <thead>
                   <tr>

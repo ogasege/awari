@@ -22,9 +22,10 @@ export function StampSheets({ book }: { book: WorldBook }) {
         const found = book.stamps.filter((s) => s.continent === c.continent);
         return (
           <li key={c.continent} className="stamp-sheet" style={{ rotate: `${TILTS[i % TILTS.length]}deg` }}>
-            <Link to={`/stamps/${continentSlug(c.continent)}`} className="stamp-sheet__link" aria-label={`${c.continent}: ${c.count} of ${c.total} countries. Open this page`}>
+            <Link to={`/stamps/${continentSlug(c.continent)}`} className="stamp-sheet__link" aria-label={`${c.continent} ${c.count} of ${c.total}. Open this stamp page`}>
               <span className="stamp-sheet__head">
                 <span className="stamp-sheet__name">{c.continent}</span>
+                {' '}
                 <span className="stamp-sheet__count">
                   {c.count} of {c.total}
                 </span>

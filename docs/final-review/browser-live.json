@@ -1,0 +1,271 @@
+{
+ "base": "https://d3txwsv4mn6ye9.cloudfront.net",
+ "when": "2026-11-14T22:21:41.785Z",
+ "results": [
+  {
+   "check": "deep link and refresh /",
+   "ok": true,
+   "note": "Explore Subjects Atlas Tours Timeline Pictures Cas"
+  },
+  {
+   "check": "deep link and refresh /atlas",
+   "ok": true,
+   "note": "Spin the globe Drag the Earth to turn it, then tap"
+  },
+  {
+   "check": "deep link and refresh /atlas?c=ghana",
+   "ok": true,
+   "note": "Spin the globe Drag the Earth to turn it, then tap"
+  },
+  {
+   "check": "deep link and refresh /quizzes",
+   "ok": true,
+   "note": "Pick a quiz any quiz Every quiz has five questions"
+  },
+  {
+   "check": "deep link and refresh /castle",
+   "ok": true,
+   "note": "The Castle Every door asks a question. Answer it a"
+  },
+  {
+   "check": "deep link and refresh /subjects",
+   "ok": true,
+   "note": "Every subject pick one 11 subjects. Tap a picture "
+  },
+  {
+   "check": "deep link and refresh /subject/space",
+   "ok": true,
+   "note": "Space step inside Planets, stars, rockets and the "
+  },
+  {
+   "check": "deep link and refresh /tours",
+   "ok": true,
+   "note": "Guided tours around the globe Hop from stop to sto"
+  },
+  {
+   "check": "deep link and refresh /tours/rivers",
+   "ok": true,
+   "note": "Great rivers of the world All tours Stop 1 of 8: T"
+  },
+  {
+   "check": "deep link and refresh /timeline",
+   "ok": true,
+   "note": "Timeline walk through the years Every note here is"
+  },
+  {
+   "check": "deep link and refresh /timeline?year=1969",
+   "ok": true,
+   "note": "Timeline walk through the years Every note here is"
+  },
+  {
+   "check": "deep link and refresh /stamps",
+   "ok": true,
+   "note": "Your stamp book one stamp per country You have 1 o"
+  },
+  {
+   "check": "deep link and refresh /stamps/africa",
+   "ok": true,
+   "note": "Africa stamps You have 1 of 54 countries here, and"
+  },
+  {
+   "check": "deep link and refresh /search?q=nile",
+   "ok": true,
+   "note": "Search find anything Search articles, events and w"
+  },
+  {
+   "check": "deep link and refresh /credits",
+   "ok": true,
+   "note": "Thank you, open knowledge Every picture here has a"
+  },
+  {
+   "check": "deep link and refresh /media",
+   "ok": true,
+   "note": "Pictures look at the world 3720 pictures from Wiki"
+  },
+  {
+   "check": "deep link and refresh /media?subject=wildlife",
+   "ok": true,
+   "note": "Pictures look at the world 3720 pictures from Wiki"
+  },
+  {
+   "check": "deep link and refresh /article/ancient/alexander-the-great",
+   "ok": true,
+   "note": "Alexander the Great Ancient worlds and history Ale"
+  },
+  {
+   "check": "deep link and refresh /article/ancient/temple-of-artemis",
+   "ok": true,
+   "note": "Temple of Artemis Ancient worlds and history The T"
+  },
+  {
+   "check": "deep link and refresh /article/arts/photography",
+   "ok": true,
+   "note": "Photography Arts, music and sport Photography is a"
+  },
+  {
+   "check": "deep link and refresh /article/body/liver",
+   "ok": true,
+   "note": "Liver The human body The liver is an organ in the "
+  },
+  {
+   "check": "deep link and refresh /article/countries/belarus",
+   "ok": true,
+   "note": "Belarus A country Belarus (officially called Repub"
+  },
+  {
+   "check": "deep link and refresh /article/countries/czech-republic",
+   "ok": true,
+   "note": "Czech Republic A country The Czech Republic (Czech"
+  },
+  {
+   "check": "deep link and refresh /article/countries/guinea-bissau",
+   "ok": true,
+   "note": "Guinea-Bissau A country Guinea-Bissau is a country"
+  },
+  {
+   "check": "deep link and refresh /article/countries/lesotho",
+   "ok": true,
+   "note": "Lesotho A country Lesotho is a small country in so"
+  },
+  {
+   "check": "deep link and refresh /article/countries/netherlands",
+   "ok": true,
+   "note": "Netherlands A country The Netherlands (also referr"
+  },
+  {
+   "check": "deep link and refresh /article/countries/saint-kitts-and-nevis",
+   "ok": true,
+   "note": "Saint Kitts and Nevis A country The Federation of "
+  },
+  {
+   "check": "deep link and refresh /article/countries/taiwan",
+   "ok": true,
+   "note": "Taiwan A country The Republic of China (ROC; Chine"
+  },
+  {
+   "check": "deep link and refresh /article/countries/zimbabwe",
+   "ok": true,
+   "note": "Zimbabwe A country The Republic of Zimbabwe is a c"
+  },
+  {
+   "check": "deep link and refresh /article/earth/nile",
+   "ok": true,
+   "note": "Nile Earth The Nile (النيل an-nīl) is a river in A"
+  },
+  {
+   "check": "deep link and refresh /article/inventions/robot",
+   "ok": true,
+   "note": "Robot Inventions and technology A robot is a machi"
+  },
+  {
+   "check": "deep link and refresh /article/people/jane-goodall",
+   "ok": true,
+   "note": "Jane Goodall Famous people Dame Valerie Jane Morri"
+  },
+  {
+   "check": "deep link and refresh /article/physics/ohms-law",
+   "ok": true,
+   "note": "Ohm's law Electricity Ohm's law says that in an el"
+  },
+  {
+   "check": "deep link and refresh /article/science/radioactive-decay",
+   "ok": true,
+   "note": "Radioactive decay Physics and chemistry Radioactiv"
+  },
+  {
+   "check": "deep link and refresh /article/space/solar-eclipse",
+   "ok": true,
+   "note": "Solar eclipse Space As seen from earth, a solar ec"
+  },
+  {
+   "check": "deep link and refresh /quiz/ancient/alexander-the-great",
+   "ok": true,
+   "note": "Alexander the Great Alexander the Great quiz Quest"
+  },
+  {
+   "check": "deep link and refresh /quiz/arts/fifa-world-cup",
+   "ok": true,
+   "note": "FIFA World Cup FIFA World Cup quiz Question 1 of 5"
+  },
+  {
+   "check": "deep link and refresh /quiz/body/heart",
+   "ok": true,
+   "note": "Heart Heart quiz Question 1 of 5 How many can you "
+  },
+  {
+   "check": "deep link and refresh /quiz/countries/bhutan",
+   "ok": true,
+   "note": "Bhutan Bhutan quiz Question 1 of 5 How many can yo"
+  },
+  {
+   "check": "deep link and refresh /quiz/countries/ethiopia",
+   "ok": true,
+   "note": "Ethiopia Ethiopia quiz Question 1 of 5 How many ca"
+  },
+  {
+   "check": "unknown URL /nothing-here",
+   "ok": true,
+   "note": "This page is not on the map We looked in every drawer. Try the atlas, or head ba"
+  },
+  {
+   "check": "unknown URL /article/countries/atlantis",
+   "ok": true,
+   "note": "No page called atlantis That article is not in Awari yet. Search for it or find "
+  },
+  {
+   "check": "unknown URL /article/nope/zzz",
+   "ok": true,
+   "note": "No page called zzz That article is not in Awari yet. Search for it or find a cou"
+  },
+  {
+   "check": "unknown URL /quiz/countries/atlantis",
+   "ok": true,
+   "note": "No quiz here yet There is no quiz for that page. See every quiz."
+  },
+  {
+   "check": "unknown URL /castle/dungeon",
+   "ok": true,
+   "note": "That wing is not in the castle. Back to the castle"
+  },
+  {
+   "check": "unknown URL /subject/cooking",
+   "ok": true,
+   "note": "No such subject There is no subject called “cooking”. See every subject."
+  },
+  {
+   "check": "unknown URL /tours/zzz",
+   "ok": true,
+   "note": "No such tour There is no tour with that name. See every tour."
+  },
+  {
+   "check": "unknown URL /stamps/atlantis",
+   "ok": true,
+   "note": "No such page There is no stamp page for that place. Pick a continent: Africa, As"
+  },
+  {
+   "check": "unknown URL /a/b/c/d",
+   "ok": true,
+   "note": "This page is not on the map We looked in every drawer. Try the atlas, or head ba"
+  },
+  {
+   "check": "back through ten screens returns to each in turn",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "check": "forward through ten screens returns to each in turn",
+   "ok": true,
+   "note": ""
+  },
+  {
+   "check": "reload in the middle of a quiz leaves a playable quiz",
+   "ok": true,
+   "note": "Nigeria Nigeria quiz Question 1 of 5 How many can you get without a hi"
+  },
+  {
+   "check": "two tabs open at once both keep working",
+   "ok": true,
+   "note": "10 of 197 -> 10 of 197"
+  }
+ ]
+}
