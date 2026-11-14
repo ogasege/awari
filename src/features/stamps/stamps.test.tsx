@@ -1,6 +1,7 @@
 import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { EMPTY_PROGRESS, resetForTests, update, withDiscovered } from '../../lib/store/progress.ts';
+import { EMPTY_PROGRESS, getProgress, resetForTests, update, withDiscovered } from '../../lib/store/progress.ts';
 import { servePacksFromDisk } from '../../test/packFetch.ts';
 import ContinentStamps from './ContinentStamps.tsx';
 import StampsScreen from './StampsScreen.tsx';
@@ -27,6 +28,20 @@ describe('World stamp book screens (16-world-stamp-book 3)', () => {
       'Oceania 0 of 14',
     ]);
     expect(cards[3]).toHaveAttribute('href', '/stamps/north-america');
+  });
+
+  it('forgets progress only after a second tap, and keeps it if the child says no (26-final-review)', async () => {
+    const user = userEvent.setup();
+    await update((p) => ['nigeria', 'ghana'].reduce(withDiscovered, p));
+    render(<StampsScreen />);
+    expect(await screen.findByText(/2 of 197/)).toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: 'Start my stamp book again' }));
+    await user.click(screen.getByRole('button', { name: 'No, keep my book' }));
+    expect(getProgress().discovered).toHaveLength(2);
+    await user.click(screen.getByRole('button', { name: 'Start my stamp book again' }));
+    await user.click(screen.getByRole('button', { name: 'Yes, start again' }));
+    expect(await screen.findByText(/have been forgotten/)).toBeInTheDocument();
+    expect(getProgress().discovered).toHaveLength(0);
   });
 
   it('counts discovered countries in the world and on their continents. _Req 2, 5_', async () => {

@@ -298,6 +298,8 @@ export async function runJourneys(ctx: BrowserContext, base: string, viewport: s
   for (const q of ['nile', 'nilee', 'a', 'zzqxjvk', 'x'.repeat(500), '"; <script>alert(1)</script>', 'café', '   ', '?*+(', 'ЖЖ', '日本']) {
     await go(`/search?q=${encodeURIComponent(q)}`);
     await act('search', `query ${JSON.stringify(q.slice(0, 20))}`, async () => {
+      await page.getByRole('status').filter({ hasText: /result|Nothing|Type a word|offline/i }).first().waitFor({ timeout: 12_000 }).catch(() => undefined);
+      await page.locator('.search__list, .search__none').first().waitFor({ timeout: 4000 }).catch(() => undefined);
       const t = (await page.locator('main').innerText()).replace(/\s+/g, ' ');
       return `${await page.locator('main a.search__title').count()} hits; ${t.slice(0, 70)}`;
     });
@@ -334,6 +336,35 @@ export async function runJourneys(ctx: BrowserContext, base: string, viewport: s
   await act('credits', 'search the pictures table', async () => {
     await page.getByRole('searchbox').first().fill('pyramid');
     await page.waitForTimeout(300);
+  });
+
+  // ---- Search: find as you type, and A to Z ----
+  await go('/search');
+  await act('search', 'results appear while typing', async () => {
+    await page.getByLabel('Search articles, events and words').pressSequentially('lion', { delay: 60 });
+    await page.locator('a.search__title', { hasText: /lion/i }).first().waitFor({ timeout: 8000 });
+  });
+  await go('/search');
+  await act('search', 'A to Z letter lists articles', async () => {
+    await page.getByRole('button', { name: 'L', exact: true }).click({ timeout: 4000 });
+    const n = await page.locator('.search__az-list a').count();
+    if (n < 3) throw new Error(`only ${n} articles under L`);
+    return `${n} articles under L`;
+  });
+
+  // ---- Stamp book: start again needs two taps ----
+  await go('/stamps');
+  await act('stamp book', 'Start again, then No', async () => {
+    await page.getByRole('button', { name: 'Start my stamp book again' }).click({ timeout: 3000 });
+    await page.getByRole('button', { name: 'No, keep my book' }).click({ timeout: 3000 });
+  });
+
+  // ---- Article: contents list ----
+  await go('/article/countries/nigeria');
+  await act('article', 'contents list jumps to a section', async () => {
+    const link = page.getByRole('navigation', { name: 'In this article' }).getByRole('link').nth(2);
+    await link.click({ timeout: 3000 });
+    return `now at ${new URL(page.url()).hash}`;
   });
 
   // ---- Not-found ----

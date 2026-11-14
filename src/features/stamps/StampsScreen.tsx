@@ -9,6 +9,7 @@ import { MarginNote, Print, Stamp, StripHeading } from '../../design/paper.tsx';
 import { usePack } from '../../lib/packs/load.ts';
 import type { PackIndex } from '../../lib/packs/types.ts';
 import { useProgress } from '../../lib/store/useProgress.ts';
+import { ForgetProgress } from './ForgetProgress.tsx';
 import { StampSheets } from './StampSheets.tsx';
 import { worldBook } from './stamps.ts';
 import './stamps.css';
@@ -82,6 +83,8 @@ export default function StampsScreen() {
           </ul>
         </>
       ) : null}
+
+      <ForgetProgress />
     </section>
   );
 }
