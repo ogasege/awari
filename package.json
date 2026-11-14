@@ -26,7 +26,8 @@
     "offline-check": "tsx scripts/offline-check.ts",
     "submission-check": "tsx scripts/submission-check.ts",
     "stats": "tsx scripts/stats.ts && tsx scripts/fill-numbers.ts",
-    "desktop:prepare": "npm run build && tsx scripts/desktop-prepare.ts"
+    "desktop:prepare": "npm run build && tsx scripts/desktop-prepare.ts",
+    "desktop-check": "tsx scripts/desktop-check.ts"
   },
   "dependencies": {
     "@fontsource/bricolage-grotesque": "^5.3.0",

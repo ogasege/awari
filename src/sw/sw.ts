@@ -43,6 +43,11 @@ const CACHE = cacheNameFor(__VERSION__);
 const PRECACHE = new Set(__PRECACHE__);
 /** Files fetched at once during install (HTTP/2 to CloudFront handles this well). */
 const POOL = 48;
+/**
+ * True when the site is served from local files (the desktop app's app:// scheme). The Cache API
+ * stores only http(s) requests, and every file is already on the device, so nothing is saved.
+ */
+const LOCAL = !/^https?:$/.test(scope.location.protocol);
 
 async function announce(type: 'ready'): Promise<void> {
   const clients = await scope.clients.matchAll({ includeUncontrolled: true, type: 'window' });
@@ -78,7 +83,7 @@ async function saveSite(): Promise<void> {
 
 scope.addEventListener('install', (event: WaitEvent) => {
   event.waitUntil(
-    saveSite().then(async () => {
+    (LOCAL ? Promise.resolve() : saveSite()).then(async () => {
       await scope.skipWaiting();
       await announce('ready');
     }),
@@ -140,6 +145,10 @@ async function answer(request: Request): Promise<Response> {
 }
 
 scope.addEventListener('fetch', (event: FetchEv) => {
+  // Served from local files (desktop app): same-origin files are already on the device.
+  if (LOCAL && new URL(event.request.url).origin === scope.location.origin) {
+    return;
+  }
   const plan = planFor(event.request, scope.location.origin, PRECACHE);
   if (plan === 'network-only') {
     return; // let the browser handle it; it is never cached
@@ -155,7 +164,7 @@ scope.addEventListener('message', (event: MessageEv) => {
       const saved = cache ? (await cache.keys()).length : 0;
       event.ports[0]?.postMessage({
         type: 'status',
-        ready: saved >= __PRECACHE__.length,
+        ready: LOCAL || saved >= __PRECACHE__.length,
         version: __VERSION__,
         files: __PRECACHE__.length,
       });

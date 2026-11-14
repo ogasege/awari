@@ -24,3 +24,4 @@ desktop/release/
 *.dmg
 *.AppImage
 *.blockmap
+.tmp/

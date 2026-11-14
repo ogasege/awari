@@ -93,8 +93,10 @@ export default function MediaScreen() {
         ]}
       />
       <p className="media__lead">
-        {index.status === 'ready' ? `${index.data.count} pictures` : 'Pictures'} from Wikimedia Commons, each with its author and licence.
-        Pictures you have looked at stay on this device; the rest need a connection.
+        {index.status === 'ready' ? `${index.data.count} pictures` : 'Pictures'} from Wikimedia Commons, each with its author and licence.{' '}
+        {/^https?:$/.test(location.protocol)
+          ? 'Pictures you have looked at stay on this device; the rest need a connection.'
+          : 'Every small picture is on this device; the bigger versions need a connection.'}
       </p>
       {index.status === 'ready' ? (
         <MarginNote decorative tilt={-3} size={30} className="media__note crowding" style={{ color: 'var(--teal-ink)' }}>
