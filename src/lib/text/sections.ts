@@ -140,18 +140,39 @@ export function splitSentences(paragraph: string): string[] {
   return out;
 }
 
-/** The first one or two sentences of the lead, at most `max` chars. */
-export function summarise(sections: ArticleSection[], max = 300): string {
+/** Words in `text`, for the lead length budget. */
+export function wordCount(text: string): number {
+  return text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+}
+
+/** The longest lead a nine-year-old reads before giving up (26-final-review D-21). */
+export const MAX_SUMMARY_WORDS = 45;
+
+/**
+ * The lead sentences for cards, the atlas and search: the first two
+ * sentences of the lead paragraph when they fit in `max` characters and
+ * `maxWords` words, else the first sentence, else the first later
+ * sentence of the lead that fits. Only a lead whose every sentence is
+ * over the budget is cut, at a word boundary.
+ */
+export function summarise(
+  sections: ArticleSection[],
+  max = 300,
+  maxWords = MAX_SUMMARY_WORDS,
+): string {
   const lead = sections[0]?.paragraphs[0] ?? '';
   const sentences = splitSentences(lead);
-  const first = sentences[0] ?? '';
+  const fits = (text: string): boolean =>
+    text.length <= max && wordCount(text) <= maxWords;
   const two = sentences.slice(0, 2).join(' ');
-  if (two.length <= max) {
+  if (fits(two)) {
     return two;
   }
-  if (first.length <= max) {
-    return first;
+  const single = sentences.find(fits);
+  if (single !== undefined) {
+    return single;
   }
+  const first = sentences[0] ?? '';
   return `${first.slice(0, max - 1).replace(/\s+\S*$/, '')}…`;
 }
 

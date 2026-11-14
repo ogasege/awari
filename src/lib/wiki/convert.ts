@@ -6,6 +6,7 @@
 import type { Article, Licence, Photo, Source } from '../packs/types.ts';
 import { stripCoordinates } from '../text/coordinates.ts';
 import { stripHtml } from '../text/html.ts';
+import { cleanLead } from '../text/leads.ts';
 import { licenceUrl, normaliseLicence } from '../text/licence.ts';
 import { deriveNotes } from '../text/notes.ts';
 import { slugify } from '../text/slug.ts';
@@ -153,7 +154,10 @@ export class WikiError extends Error {
 export function toArticle(page: WikiPage, meta?: PhotoMeta): Article {
   // Position strings ("30°54′N 31°07′E / 30.900; 31.117") are not text a child reads: cut them from every line, keeping the line breaks.
   const extract = stripCoordinates(page.extract);
-  const sections = capText(splitSections(extract), MAX_TEXT);
+  // The extract keeps the brackets and labels of the templates it strips
+  // (26-final-review D-17 to D-22): the lead is cleaned before the
+  // summary and the margin notes are taken from it.
+  const sections = cleanLead(capText(splitSections(extract), MAX_TEXT));
   const length = sections.reduce((n, s) => n + s.paragraphs.join(' ').length, 0);
   if (length < MIN_TEXT) {
     throw new WikiError('empty', `"${page.title}" has no text to show`);

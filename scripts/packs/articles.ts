@@ -3,6 +3,8 @@
  * shared by the Countries and Physics packs.
  */
 import type { Article, PackId } from '../../src/lib/packs/types.ts';
+import { cleanLead } from '../../src/lib/text/leads.ts';
+import { applyLeadTextOverride } from './lead-text-overrides.ts';
 import { deriveNotes } from './notes.ts';
 import { stripParenthetical, slugify } from './slug.ts';
 import { isoDate, wikipediaSource } from './sources.ts';
@@ -15,13 +17,22 @@ export async function buildArticle(
   wikiTitle: string,
 ): Promise<Article> {
   const extract = await getExtract(wikiTitle);
-  const sections = splitSections(extract.extract);
+  const id = slugify(extract.title);
+  // The extract keeps the brackets and labels of the templates it strips,
+  // so the lead needs cleaning before anything is derived from it
+  // (26-final-review D-17 to D-22).
+  const sections = cleanLead(splitSections(extract.extract));
+  const lead = sections[0];
+  if (lead) {
+    const repaired = applyLeadTextOverride(`${pack}/${id}`, lead.paragraphs[0] ?? '');
+    lead.paragraphs = [repaired, ...lead.paragraphs.slice(1)];
+  }
   if (sections.length === 0) {
     throw new Error(`Article "${wikiTitle}" has no usable sections`);
   }
   const title = stripParenthetical(extract.title);
   return {
-    id: slugify(extract.title),
+    id,
     pack,
     title,
     summary: summarise(sections),
