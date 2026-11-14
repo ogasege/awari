@@ -83,7 +83,7 @@ function OfflineState() {
         ) : (
           <p>
             <button type="button" className="btn btn--ink" onClick={savePictures}>
-              Save all pictures (about 87 MB)
+              Save all pictures (about 86 MB)
             </button>{' '}
             {pics.state === 'failed' ? 'That did not finish. Check your connection and try again.' : 'Do this on a good connection, and every picture works offline.'}
           </p>

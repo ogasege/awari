@@ -81,6 +81,20 @@ export const ArticleBody = memo(function ArticleBody({
     // Clicks on words are a shortcut; the side card's field is the
     // keyboard-accessible way to look a word up (Req 3.4).
     <div className="article__body" onClick={click}>
+      {sections.filter((s) => s.heading).length >= 3 ? (
+        <nav className="article__toc" aria-label="In this article">
+          <h2 className="article__toc-title">In this article</h2>
+          <ol>
+            {sections
+              .filter((s) => s.heading)
+              .map((s) => (
+                <li key={s.heading}>
+                  <a href={`#${sectionId(s.heading)}`}>{s.heading}</a>
+                </li>
+              ))}
+          </ol>
+        </nav>
+      ) : null}
       {sections.map((s) => (
         <section key={s.heading || 'lead'} id={sectionId(s.heading)} aria-labelledby={s.heading ? `${sectionId(s.heading)}-h` : undefined}>
           {s.heading ? <h2 id={`${sectionId(s.heading)}-h`}>{s.heading}</h2> : null}

@@ -42,7 +42,8 @@ export async function runJourneys(ctx: BrowserContext, base: string, viewport: s
   /** Runs one activation and records it. */
   async function act(type: string, control: string, fn: () => Promise<string | void>): Promise<boolean> {
     const before = problems.length;
-    const ignoreService = type === 'make-a-quiz';
+    // The optional quiz service and the third-party Wiktionary lookup answer 404 for some inputs by design; the screen's own message is what is checked.
+    const ignoreService = type === 'make-a-quiz' || control.startsWith('double-click');
     let note: string;
     let ok = true;
     try {
@@ -101,7 +102,7 @@ export async function runJourneys(ctx: BrowserContext, base: string, viewport: s
   for (const href of homeLinks) {
     await go('/');
     await act('home', `link ${href}`, async () => {
-      await page.locator(`main a[href="${href}"], header a[href="${href}"]`).first().click({ timeout: 4000 });
+      await page.locator(`main a[href="${href}"], header a[href="${href}"]`).locator('visible=true').first().click({ timeout: 4000 });
       await page.waitForTimeout(300);
     });
   }

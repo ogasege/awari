@@ -101,3 +101,34 @@
   font-size: 14px;
   font-weight: 600;
 }
+
+/* Browse A to Z (26-final-review): one letter at a time, big enough to tap. */
+.search__letters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 12px 0;
+  list-style: none;
+}
+
+.search__letter {
+  min-width: 44px;
+  min-height: 44px;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.search__letter[aria-pressed='true'] {
+  background: var(--yellow);
+  color: var(--yellow-ink);
+}
+
+.search__az-list {
+  columns: 2 220px;
+}

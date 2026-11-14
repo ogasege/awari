@@ -15,6 +15,23 @@ describe('Search screen from the committed packs (13-search 3.1)', () => {
     expect(screen.getByText('Type a word or a name to start.')).toBeInTheDocument();
   });
 
+  it('shows results while typing, without pressing Search (26-final-review)', async () => {
+    const user = userEvent.setup();
+    render(<SearchScreen />);
+    await user.type(screen.getByLabelText('Search articles, events and words'), 'nigeria');
+    expect(await screen.findByRole('link', { name: 'Nigeria' }, { timeout: 3000 })).toHaveAttribute('href', '/article/countries/nigeria');
+  });
+
+  it('browses A to Z: a letter lists every article that starts with it (26-final-review)', async () => {
+    const user = userEvent.setup();
+    render(<SearchScreen />);
+    const letterN = await screen.findByRole('button', { name: 'N', pressed: false }, { timeout: 3000 });
+    await user.click(letterN);
+    const list = await screen.findByRole('list', { name: 'Articles starting with N' });
+    expect(list.textContent).toContain('Nigeria');
+    expect(list.textContent).not.toContain('Ghana');
+  });
+
   it('finds the Nigeria article and its quiz from ?q=. _Req 2.1, 2.2_', async () => {
     window.history.replaceState(null, '', '/search?q=nigeria');
     render(<SearchScreen />);

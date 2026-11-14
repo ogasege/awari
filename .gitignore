@@ -25,3 +25,4 @@ desktop/release/
 *.AppImage
 *.blockmap
 .tmp/
+docs/final-review/shots/

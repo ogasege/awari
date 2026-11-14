@@ -81,7 +81,7 @@ export function usePicturesState(): PicturesState {
   return useSyncExternalStore(subscribe, getPicturesState, () => ({ state: 'idle' }) as PicturesState);
 }
 
-/** Asks the worker to save every library thumbnail (about 87 MB). */
+/** Asks the worker to save every library thumbnail (about 86 MB). */
 export function savePictures(): void {
   const worker = typeof navigator !== 'undefined' ? navigator.serviceWorker?.controller : null;
   if (!worker) {

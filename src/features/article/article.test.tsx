@@ -12,6 +12,17 @@ describe('Nigeria article from the pack (03-articles-dictionary)', () => {
     resetForTests();
   });
 
+  it('lists the sections of a long article as links (26-final-review)', async () => {
+    render(<ArticleScreen params={{ pack: 'countries', id: 'nigeria' }} />);
+    const toc = await screen.findByRole('navigation', { name: 'In this article' });
+    const links = within(toc).getAllByRole('link');
+    expect(links.length).toBeGreaterThanOrEqual(3);
+    for (const l of links) {
+      const target = l.getAttribute('href')?.slice(1) ?? '';
+      expect(document.getElementById(target), `section ${target}`).not.toBeNull();
+    }
+  });
+
   it('“delta” resolves from the committed dictionary shards (Req 3.5)', async () => {
     const def = await lookupWord('Delta');
     expect(def?.lemma).toBe('delta');

@@ -18,6 +18,8 @@ const label = process.argv[3] ?? 'run';
 const offlineMode = process.argv.includes('--offline');
 const journeysOnly = process.argv.includes('--journeys-only');
 const routesOnly = process.argv.includes('--routes-only');
+/** Live runs visit a defined sample (every country, a third of the other articles) and do not follow every link found. */
+const noFollow = process.argv.includes('--no-follow');
 /** Small controls on the phone layout, grouped by component (tag and first class). */
 const smallByComponent = new Map<string, number>();
 const VIEWPORTS = [
@@ -50,7 +52,8 @@ const subjects = ['ancient', 'arts', 'body', 'countries', 'earth', 'inventions',
 const fixed = ['/', '/atlas', '/quizzes', '/castle', '/subjects', '/tours', '/timeline', '/stamps', '/search', '/search?q=nile', '/search?q=zzqxj', '/search?q=a', '/credits', '/media', '/no-such-page', '/article/wiki/Okapi'];
 // Offline pass: the fixed screens, every subject, 60 articles spread over all subjects and a few quizzes.
 const spread = articles.filter((_, i) => i % Math.max(1, Math.floor(articles.length / 60)) === 0).slice(0, 60);
-const seeds = offlineMode ? [...new Set([...fixed.filter((f) => !f.includes('wiki')), ...subjects, ...spread, ...quizzes.slice(0, 12)])] : [...new Set([...fixed, ...subjects, ...articles, ...quizzes])];
+const liveSample = articles.filter((a) => a.startsWith('/article/countries/') || articles.indexOf(a) % 3 === 0);
+const seeds = noFollow && !offlineMode ? [...new Set([...fixed, ...subjects, ...liveSample, ...quizzes.slice(0, 40)])] : offlineMode ? [...new Set([...fixed.filter((f) => !f.includes('wiki')), ...subjects, ...spread, ...quizzes.slice(0, 12)])] : [...new Set([...fixed, ...subjects, ...articles, ...quizzes])];
 // `index.json` and `facts.json` are data files, not articles; their routes are checked once as not-found.
 
 const visits: Visit[] = [];
@@ -173,7 +176,7 @@ for (const vp of VIEWPORTS.filter((v) => !process.env.VIEWPORT || v.name === pro
     if (seen.has(route)) continue;
     seen.add(route);
     const links = await visit(ctx, vp, route);
-    if (seen.size < 1500) {
+    if (!noFollow && seen.size < 1500) {
       for (const l of links) {
         const clean = l.split('#')[0] ?? '';
         if (clean && !seen.has(clean) && !clean.startsWith('/article/wiki/') && !clean.startsWith('/assets/') && !clean.startsWith('/media/img') && !queue.includes(clean)) queue.push(clean);

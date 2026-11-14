@@ -53,6 +53,12 @@ export default function SearchScreen() {
     setQuery(urlQuery);
   }
   useTitle(query.trim() ? `Search: ${query.trim()}` : 'Search');
+  // Results follow the typing, a moment after the last key, like an encyclopedia's find-as-you-type box.
+  useEffect(() => {
+    const t = setTimeout(() => setQuery((q) => (q === field.trim() ? q : field.trim())), 220);
+    return () => clearTimeout(t);
+  }, [field]);
+  const [letter, setLetter] = useState<string | null>(null);
 
   const indexes = usePackIndexes();
   const quizzes = usePack<QuizIndex>('quizzes/index.json');
@@ -133,6 +139,11 @@ export default function SearchScreen() {
   }, [single]);
   const def = single && meaning?.word === single ? meaning.def : null;
 
+  const azLetters = useMemo(() => [...new Set(docs.filter((d) => d.kind === 'article').map((d) => d.title.charAt(0).toUpperCase()).filter((c) => /[A-Z]/.test(c)))].sort(), [docs]);
+  const azArticles = useMemo(
+    () => (letter ? docs.filter((d) => d.kind === 'article' && d.title.toUpperCase().startsWith(letter)).sort((a, b) => a.title.localeCompare(b.title)) : []),
+    [docs, letter],
+  );
   const loading = indexes.loading || timeline.status === 'loading' || searching;
   const submit = (e: FormEvent): void => {
     e.preventDefault();
@@ -167,6 +178,32 @@ export default function SearchScreen() {
             ? 'Looking through the packs…'
             : `${articles.length + events.length} ${articles.length + events.length === 1 ? 'result' : 'results'} for “${query.trim()}”.${typeof navigator !== 'undefined' && navigator.onLine === false ? ' You are offline, so only saved articles are searched.' : ''}`}
       </div>
+
+      {words.length === 0 && azLetters.length > 0 ? (
+        <section className="search__az" aria-labelledby="search-az">
+          <h2 id="search-az">Browse A to Z</h2>
+          <ul className="search__letters">
+            {azLetters.map((l) => (
+              <li key={l}>
+                <button type="button" className="search__letter" aria-pressed={letter === l} onClick={() => setLetter(letter === l ? null : l)}>
+                  {l}
+                </button>
+              </li>
+            ))}
+          </ul>
+          {letter ? (
+            <ul className="search__list search__az-list" aria-label={`Articles starting with ${letter}`}>
+              {azArticles.map((d) => (
+                <li key={d.to}>
+                  <Link to={d.to} className="search__title">
+                    {d.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </section>
+      ) : null}
 
       {best && !loading ? (
         <p className="search__best">
