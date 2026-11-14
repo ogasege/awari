@@ -3,12 +3,24 @@
  * for countries, its Wikidata facts. Every question is checked with the
  * shared validator before it is kept, and all choices are seeded so the
  * same packs always build the same quizzes (05-quizzes).
+ *
+ * Fairness rules added after the final design review (26-final-review):
+ * rung one of the hint ladder never singles out an option (D-1, see
+ * `hints.ts`); the four options always share their capitalisation and
+ * their kind, so neither the shape of a word nor its capital letter can
+ * answer the question (D-5, D-6); wrong answers for a place come from
+ * the same corner of the world (D-7); and the proof is a second
+ * sentence from the article where the article has one, rather than the
+ * gap sentence filled in (D-8).
  */
 import { rng, seedFrom } from '../../design/wobble.ts';
 import type { Article, CountryFacts, Question } from '../packs/types.ts';
+import { safeNudge, type QuestionKind } from './hints.ts';
 import { heuristicPos, sameKind, type PosOf } from './pos.ts';
-import { sentencesOf, type Located } from './sentences.ts';
+import { sentencesOf, splitSentences, type Located } from './sentences.ts';
 import { fold, validateQuestion } from './validate.ts';
+
+export { nudgeFor } from './hints.ts';
 
 export const QUIZ_LENGTH = 5;
 
@@ -25,43 +37,32 @@ export const PHYSICS_TERMS = [
 ];
 
 interface Candidate {
-  kind: string;
+  kind: QuestionKind;
   prompt: string;
   answer: string;
   distractors: string[];
   proof: Located;
-  nudge: string;
+  /** A content word standing beside the gap, for the nudge. */
+  beside?: string;
+  /** False when the sentence has nothing to do with its own heading. */
+  fitsSection: boolean;
 }
 
-/** A clue about a word or name that never contains it. */
-export function nudgeFor(answer: string): string {
-  if (/^\d{4}$/.test(answer)) {
-    // In words, so the hint never contains the year itself.
-    const y = Number(answer);
-    const centuries = ['tenth', 'eleventh', 'twelfth', 'thirteenth', 'fourteenth', 'fifteenth',
-      'sixteenth', 'seventeenth', 'eighteenth', 'nineteenth', 'twentieth', 'twenty-first'];
-    const century = centuries[Math.floor((y - 1) / 100) - 9] ?? 'distant';
-    const decade = Math.floor((y % 100) / 10) * 10;
-    const part = decade === 0 ? 'early in' : `in the ${decade}s of`;
-    return `It is a year ${part} the ${century} century.`;
+/**
+ * "Look in the “History” part…" without naming the answer. When the
+ * sentence has nothing to do with its own heading, the hint says where
+ * the sentence is on the page instead of claiming what it is about: the
+ * Biafra war really is written up inside Nigeria's "Religion" section,
+ * and "Look in the Religion part" sent students after the wrong idea
+ * (26-final-review).
+ */
+export function whereToLookFor(section: string, title: string, fitsSection = true): string {
+  if (section === '') {
+    return `Look in the opening paragraphs of the ${title} article.`;
   }
-  if (/^[\d,.]+$/.test(answer)) {
-    const digits = answer.replace(/\D/g, '').length;
-    return `It is a number with ${digits} digit${digits === 1 ? '' : 's'}.`;
-  }
-  const letters = answer.replace(/[^A-Za-z]/g, '').length;
-  const words = answer.trim().split(/\s+/).length;
-  const first = answer.trim().charAt(0).toUpperCase();
-  return words > 1
-    ? `It is ${words} words long and starts with the letter ${first}.`
-    : `It starts with the letter ${first} and has ${letters} letters.`;
-}
-
-/** "Look in the “History” part…" without naming the answer. */
-export function whereToLookFor(section: string, title: string): string {
-  return section
+  return fitsSection
     ? `Look in the “${section}” part of the ${title} article.`
-    : `Look in the opening paragraphs of the ${title} article.`;
+    : `It is further down the ${title} article, under the heading “${section}”.`;
 }
 
 /** Deterministic Fisher–Yates shuffle. */
@@ -77,7 +78,30 @@ function shuffle<T>(items: readonly T[], next: () => number): T[] {
 const mentions = (text: string, needle: string): boolean =>
   fold(needle) !== '' && fold(text).includes(fold(needle));
 
-/** Picks three distractors that the proof sentence does not mention. */
+/** True when a word is written as a name, e.g. "Pyramids" but not "palaces". */
+const isName = (term: string): boolean => /^[A-Z]/.test(term.trim());
+
+/**
+ * Two place names crammed into one value, as Wikidata gives for countries with
+ * more than one seat of government: "Sri Jayawardenepura Kotte, Colombo",
+ * "Sucre, La Paz". "Washington, D.C." is one name and stays (26-final-review D-7).
+ */
+export function isTwoNames(value: string): boolean {
+  const parts = value.split(',').map((p) => p.trim());
+  return parts.length > 1 && parts.every((p) => p.replace(/[^A-Za-z]/g, '').length >= 3 && !p.includes('.'));
+}
+
+/**
+ * A value no student should ever be offered: two names crammed into one
+ * option ("Sri Jayawardenepura Kotte, Colombo"), or a sign language
+ * among spoken ones (26-final-review D-7).
+ */
+function usableOption(term: string, answer: string): boolean {
+  if (term.trim() === '' || isTwoNames(term)) return false;
+  return !/\bsign language\b/i.test(term) || /\bsign language\b/i.test(answer);
+}
+
+/** Picks three distractors of the same kind that the proof does not mention. */
 function pickDistractors(
   pool: readonly string[],
   answer: string,
@@ -87,9 +111,11 @@ function pickDistractors(
   const seen = new Set([fold(answer)]);
   const ok = shuffle(pool, next).filter((d) => {
     const f = fold(d);
-    if (f === '' || seen.has(f) || mentions(proof, d) || mentions(d, answer) || mentions(answer, d)) {
-      return false;
-    }
+    if (f === '' || seen.has(f) || !usableOption(d, answer)) return false;
+    // Wrong answers must read as the same sort of word as the right one, so
+    // neither a capital letter nor a plural "s" can answer the question.
+    if (isName(d) !== isName(answer)) return false;
+    if (mentions(proof, d) || mentions(d, answer) || mentions(answer, d)) return false;
     seen.add(f);
     return true;
   });
@@ -105,20 +131,94 @@ function proofFor(sentences: readonly Located[], answer: string, also?: RegExp):
   );
 }
 
+/** Words that say nothing about what a sentence is about. */
+const COMMON = new Set(
+  ('about after also another because been before being both called came come could each every first from have here ' +
+    'into just like made make many more most much must only other over said same some such than that their them then ' +
+    'there these they this those through time very were what when where which while will with would your').split(' '),
+);
+
+/** The content words of a text, folded, for comparing two sentences. */
+const keyWords = (text: string): string[] =>
+  (text.match(/[A-Za-z][A-Za-z'-]{3,}/g) ?? []).map(fold).filter((w) => !COMMON.has(w));
+
+/**
+ * Whether a sentence belongs under its own heading by its own words. A
+ * sentence about the Biafra war sitting in the "Religion" section does
+ * not, and a "Look in the Religion part" hint would send a student to
+ * the wrong idea, so those sentences are used last (26-final-review).
+ */
+function fitsItsSection(s: Located): boolean {
+  const keys = keyWords(s.section).map((k) => k.replace(/(?:ies|s)$/, ''));
+  if (keys.length === 0) return true; // the lead, or a heading of common words
+  const text = fold(s.sentence);
+  return keys.some((k) => text.includes(k));
+}
+
+/**
+ * A second sentence from the article that states the same fact as the
+ * gap sentence, so the proof adds something the student has not just
+ * read (26-final-review D-8). It must name the answer, name none of the
+ * wrong options, and share at least two content words with the gap
+ * sentence. A sentence from the same section is preferred, so the
+ * "where to look" hint keeps sending the student to one place.
+ */
+function sameFactProof(
+  sentences: readonly Located[],
+  gap: Located,
+  answer: string,
+  wrong: readonly string[],
+): Located | null {
+  const shared = new Set(keyWords(gap.sentence));
+  const overlap = (s: Located): number =>
+    keyWords(s.sentence).filter((w) => shared.has(w) && !mentions(answer, w)).length;
+  const usable = (s: Located): boolean => {
+    // "farmers relied on the Nile to water their crops" does not prove the word
+    // "water" for a gap that needs a thing: after "to", "that" or "will" the
+    // word is being read as a verb.
+    const before = new RegExp(`([A-Za-z']+)\\s+${answer}\\b`, 'i').exec(s.sentence)?.[1] ?? '';
+    if (VERB_CUES.has(before.toLowerCase())) return false;
+    return !/\bp\d{2,4}\b/.test(s.sentence); // a citation marker the extract left in
+  };
+  const candidates = sentences.filter(
+    (s) =>
+      s.sentence !== gap.sentence &&
+      s.sentence.length >= 40 &&
+      mentions(s.sentence, answer) &&
+      !wrong.some((w) => mentions(s.sentence, w)) &&
+      usable(s),
+  );
+  return (
+    candidates.find((s) => s.section === gap.section && overlap(s) >= 2) ??
+    // A sentence from another part of the article has to look more like the same
+    // fact before it is worth sending the student somewhere else for it.
+    candidates.find((s) => overlap(s) >= 3) ??
+    null
+  );
+}
+
 function factCandidates(
   article: Article,
   facts: CountryFacts,
   all: readonly CountryFacts[],
   sentences: readonly Located[],
 ): Candidate[] {
-  const near = all.filter((c) => c.id !== facts.id && c.continent === facts.continent);
-  const others = near.length >= 6 ? near : all.filter((c) => c.id !== facts.id);
+  // Wrong answers come from the same corner of the world as the country asked
+  // about, so no child can rule out Lesotho or Cape Verde without the map (D-7).
+  const region = regionOf(facts.id, all);
+  const others = region.length >= 6 ? region : all.filter((c) => c.id !== facts.id);
   const nameOf = new Map(all.map((c) => [c.id, c.name]));
   const out: Candidate[] = [];
-  const add = (kind: string, prompt: string, answer: string | undefined, pool: string[], also?: RegExp): void => {
+  const add = (
+    kind: QuestionKind,
+    prompt: string,
+    answer: string | undefined,
+    pool: string[],
+    also?: RegExp,
+  ): void => {
     if (!answer) return;
     const proof = proofFor(sentences, answer, also);
-    if (proof) out.push({ kind, prompt, answer, distractors: pool, proof, nudge: nudgeFor(answer) });
+    if (proof) out.push({ kind, prompt, answer, distractors: pool, proof, fitsSection: true });
   };
   add(
     'capital',
@@ -154,6 +254,37 @@ function factCandidates(
   return out;
 }
 
+/** Country ids within `hops` shared borders of `id`, including itself. */
+function nearbyIds(id: string, all: readonly CountryFacts[], hops: number): Set<string> {
+  const graph = new Map(all.map((c) => [c.id, c.neighbours]));
+  const seen = new Set([id]);
+  let edge = new Set([id]);
+  for (let h = 0; h < hops; h += 1) {
+    const next = new Set<string>();
+    for (const c of edge) {
+      for (const n of graph.get(c) ?? []) if (!seen.has(n)) { seen.add(n); next.add(n); }
+    }
+    edge = next;
+  }
+  return seen;
+}
+
+/** How many borders away a wrong answer about a place may be (26-final-review D-7). */
+export const REGION_HOPS = 3;
+
+/**
+ * The countries a student could reasonably confuse with a given one: those
+ * within three shared borders. An island has no land neighbours, so for those
+ * the whole continent is the region.
+ */
+export function regionOf(id: string, all: readonly CountryFacts[]): CountryFacts[] {
+  const near = nearbyIds(id, all, REGION_HOPS);
+  const out = all.filter((c) => c.id !== id && near.has(c.id));
+  if (out.length >= REGION_HOPS) return out;
+  const continent = all.find((c) => c.id === id)?.continent;
+  return all.filter((c) => c.id !== id && c.continent === continent);
+}
+
 /** The latest year the packs can talk about, for year distractors. */
 const LATEST_YEAR = 2025;
 
@@ -174,26 +305,99 @@ export function findYear(sentence: string): string | undefined {
 /** Words after which a plain word is a verb ("that orbits", "it takes", "to make"). */
 const VERB_CUES = new Set('that which who it he she they we you to will would can could may might must shall should also then not often usually only just always never'.split(' '));
 
+/** The content word next to the gap, for a nudge that points the eye at it. */
+function besideGap(blanked: string): string | undefined {
+  const words = blanked.split(/\s+/).map((w) => w.replace(/[^A-Za-z'-]/g, ''));
+  const at = blanked.split(/\s+/).findIndex((w) => w.includes('_____'));
+  if (at < 0) return undefined;
+  for (const i of [at - 1, at + 1, at - 2, at + 2]) {
+    const w = words[i];
+    if (w && w.length >= 4 && !COMMON.has(fold(w))) return w;
+  }
+  return undefined;
+}
+
+/** The same four digits, within the same century where the article allows it. */
+function yearPool(year: string): string[] {
+  const y = Number(year);
+  const all = [-30, -12, -5, 7, 15, 25, 40]
+    .map((d) => y + d)
+    .filter((v) => v <= LATEST_YEAR && v > 0);
+  const century = (v: number): number => Math.floor((v - 1) / 100);
+  const sameCentury = all.filter((v) => century(v) === century(y));
+  return (sameCentury.length >= 3 ? sameCentury : all).map(String);
+}
+
+/** Wrong answers for a place name, or null when the word is not a place. */
+type PlacePool = (answer: string) => string[] | null;
+
+/** Whether two place names are the same sort of place: a country, or a city. */
+type SameSort = (candidate: string, answer: string) => boolean;
+
+/**
+ * A country is never offered where a city belongs, in any pack: "The largest
+ * city is _____, Mauritania's capital" must not list Egypt and Morocco (D-7).
+ */
+function placeSorter(all: readonly CountryFacts[]): SameSort {
+  const countries = new Set(all.map((c) => fold(c.name)));
+  const cities = new Set(all.flatMap((c) => (c.capital ? [fold(c.capital)] : [])));
+  const sortOf = (term: string): 'country' | 'city' | 'other' => {
+    const f = fold(term);
+    if (countries.has(f) && !cities.has(f)) return 'country';
+    if (cities.has(f) && !countries.has(f)) return 'city';
+    return 'other'; // Luxembourg and Singapore are both at once
+  };
+  return (candidate, answer) => {
+    const wanted = sortOf(answer);
+    return wanted === 'other' || sortOf(candidate) !== (wanted === 'country' ? 'city' : 'country');
+  };
+}
+
+/** Countries against countries of their region, capitals against capitals of theirs. */
+function placePoolFor(all: readonly CountryFacts[]): PlacePool {
+  return (answer) => {
+    const country = all.find((c) => fold(c.name) === fold(answer));
+    if (country) return regionOf(country.id, all).map((c) => c.name);
+    const owner = all.find((c) => c.capital && fold(c.capital) === fold(answer));
+    if (owner) {
+      return regionOf(owner.id, all)
+        .map((c) => c.capital ?? '')
+        .filter(Boolean);
+    }
+    return null;
+  };
+}
+
 /** Gap-fill: blank one key term out of a sentence. */
 function gapCandidates(
   article: Article,
   sentences: readonly Located[],
   termPool: readonly string[],
   posOf: PosOf,
+  names: ReadonlySet<string>,
+  placePool?: PlacePool,
+  sameSort?: SameSort,
 ): Candidate[] {
   const out: Candidate[] = [];
+  const surface = new Map(termPool.map((t) => [fold(t), t]));
   const termSet = new Set(termPool.map(fold));
   for (const s of sentences) {
     if (s.sentence.length < 40 || s.sentence.length > 220) continue;
     const words = s.sentence.match(/[A-Za-z][A-Za-z'-]*|\d{4}/g) ?? [];
     const year = findYear(s.sentence);
-    // Only nouns and adjectives are blanked: a verb or a number word has too few look-alikes in an article to make fair wrong answers.
+    // A sentence that runs into a list ("The different _____ of ancient
+    // Egyptian history are:") is a heading, not a statement a student can
+    // judge. A date in one is still a fair question.
+    if (!year && s.sentence.trimEnd().endsWith(':')) continue;
+    // Only nouns and names are blanked. Blanking an adjective asks which word
+    // sounds best ("For such a _____ empire": prolific, richest, wealthiest),
+    // which is a question about style, not about the article (D-6).
     const at = words.findIndex(
       (w, i) =>
         termSet.has(fold(w)) &&
         !mentions(article.title, w) &&
         w.length > 3 &&
-        ['noun', 'adj'].includes(posOf(w)) &&
+        (names.has(fold(w)) || posOf(w) === 'noun') &&
         // A word right after "that", "it", "to", "will" ... is usually a verb in this sentence, whatever the dictionary lists first.
         !VERB_CUES.has((words[i - 1] ?? '').toLowerCase()),
     );
@@ -202,26 +406,54 @@ function gapCandidates(
     if (!answer) continue;
     const blanked = s.sentence.replace(new RegExp(`\\b${answer}\\b`, 'i'), '_____');
     if (blanked === s.sentence || mentions(blanked, answer)) continue;
+    // "Bamako, Djenné and Timbuktu" must not become "Bamako, _____é and
+    // Timbuktu": the accent falls outside the word pattern, so the gap would
+    // cut the name in half.
+    if (/\p{L}_____|_____\p{L}/u.test(blanked)) continue;
     let pool: string[];
     if (year) {
-      const y = Number(year);
-      pool = [-30, -12, -5, 7, 15, 25, 40]
-        .map((d) => String(y + d))
-        .filter((v) => Number(v) <= LATEST_YEAR);
+      pool = yearPool(year);
     } else {
-      // Wrong answers must fit the gap: the same part of speech, and plural for plural (24-review-4 Req 8).
-      pool = termPool.filter((t) => fold(t) !== fold(answer) && sameKind(t, answer, posOf));
+      // A place is only ever offered against places of its own sort from its own
+      // corner of the world: countries for a country, capitals for a capital (D-7).
+      // Otherwise wrong answers must fit the gap: the same part of speech, and
+      // plural for plural (24-review-4 Req 8).
+      pool =
+        placePool?.(answer) ??
+        termPool.filter(
+          (t) =>
+            fold(t) !== fold(answer) &&
+            sameKind(t, answer, posOf) &&
+            (sameSort?.(t, answer) ?? true),
+        );
     }
     out.push({
       kind: year ? 'year' : 'term',
       prompt: `Fill the gap: “${blanked}”`,
-      answer: year ?? answer,
+      // The article's own spelling of the word, so a capital letter mid-sentence
+      // marks a name and not the right answer (D-5).
+      answer: year ?? surface.get(fold(answer)) ?? answer,
       distractors: pool,
       proof: s,
-      nudge: nudgeFor(answer),
+      beside: besideGap(blanked),
+      fitsSection: fitsItsSection(s),
     });
   }
   return out;
+}
+
+/** True when the gap stands at the start of its sentence. */
+const gapAtStart = (prompt: string): boolean => /^Fill the gap: “_____/.test(prompt);
+
+/**
+ * The four options as a student should read them: capitalised when the
+ * gap opens the sentence, and otherwise in the article's own spelling,
+ * so the odd capital letter never marks the answer (D-5).
+ */
+function caseForGap(options: readonly string[], atStart: boolean): string[] {
+  return options.map((o) =>
+    atStart ? o.charAt(0).toUpperCase() + o.slice(1) : o,
+  );
 }
 
 /**
@@ -238,12 +470,31 @@ export function buildQuiz(
 ): Question[] {
   const next = rng(seedFrom(`quiz:${article.pack}/${article.id}`));
   const sentences = sentencesOf(article);
-  const gaps = gapCandidates(article, sentences, termPool, posOf);
+  // Place names are fair gaps even when a dictionary calls them adjectives.
+  const names = new Set(
+    article.pack === 'countries'
+      ? allFacts.flatMap((c) => [fold(c.name), ...(c.capital ? [fold(c.capital)] : [])])
+      : [],
+  );
+  const gaps = gapCandidates(
+    article,
+    sentences,
+    termPool,
+    posOf,
+    names,
+    article.pack === 'countries' && allFacts.length > 0 ? placePoolFor(allFacts) : undefined,
+    allFacts.length > 0 ? placeSorter(allFacts) : undefined,
+  );
+  const terms = gaps.filter((g) => g.kind === 'term');
+  const years = gaps.filter((g) => g.kind === 'year');
   const candidates = [
     ...(facts ? factCandidates(article, facts, allFacts, sentences) : []),
-    // Named terms make better questions than dates, so they come first.
-    ...shuffle(gaps.filter((g) => g.kind === 'term'), next),
-    ...shuffle(gaps.filter((g) => g.kind === 'year'), next),
+    // Named terms make better questions than dates, so they come first, and a
+    // sentence that sits oddly under its own heading comes last.
+    ...shuffle(terms.filter((g) => g.fitsSection), next),
+    ...shuffle(years.filter((g) => g.fitsSection), next),
+    ...shuffle(terms.filter((g) => !g.fitsSection), next),
+    ...shuffle(years.filter((g) => !g.fitsSection), next),
   ];
   const questions: Question[] = [];
   const usedAnswers = new Set<string>();
@@ -253,9 +504,23 @@ export function buildQuiz(
     if (usedAnswers.has(fold(c.answer)) || usedProofs.has(c.proof.sentence)) continue;
     const distractors = pickDistractors(c.distractors, c.answer, c.proof.sentence, next);
     if (!distractors) continue;
-    const options = shuffle([c.answer, ...distractors], next);
-    const answer = options.indexOf(c.answer);
+    const atStart = c.kind === 'term' && gapAtStart(c.prompt);
+    const options = caseForGap(shuffle([c.answer, ...distractors], next), atStart);
+    const answerText = atStart ? c.answer.charAt(0).toUpperCase() + c.answer.slice(1) : c.answer;
+    const answer = options.indexOf(answerText);
+    if (answer < 0) continue;
     const wrong = shuffle(options.map((_, i) => i).filter((i) => i !== answer), next);
+    const nudge = safeNudge(
+      { kind: c.kind, answer: answerText, title: article.title, beside: c.beside, proper: isName(c.answer) },
+      options,
+    );
+    if (!nudge) continue;
+    // Prefer a different sentence that states the same fact, so the proof is
+    // not the question with the gap filled in (D-8).
+    const proof =
+      (c.kind === 'term' || c.kind === 'year'
+        ? sameFactProof(sentences, c.proof, answerText, options.filter((_, i) => i !== answer))
+        : null) ?? c.proof;
     const q: Question = {
       id: `${article.pack}/${article.id}/${questions.length + 1}`,
       articleId: article.id,
@@ -264,17 +529,18 @@ export function buildQuiz(
       options,
       answer,
       hints: {
-        nudge: c.nudge,
-        whereToLook: whereToLookFor(c.proof.section, article.title),
+        nudge,
+        whereToLook: whereToLookFor(proof.section, article.title, proof === c.proof ? c.fitsSection : fitsItsSection(proof)),
         removed: [wrong[0] as number, wrong[1] as number],
       },
-      proof: c.proof.sentence,
-      proofSection: c.proof.section,
+      proof: proof.sentence,
+      proofSection: proof.section,
     };
     if (validateQuestion(q, article).ok) {
       questions.push(q);
       usedAnswers.add(fold(c.answer));
       usedProofs.add(c.proof.sentence);
+      usedProofs.add(proof.sentence);
     }
   }
   return questions;
@@ -299,17 +565,44 @@ const STOPWORDS = new Set(
  * repeated plain words in its own text, without common words or the
  * title. Wrong choices come from the same article, so they are at least
  * plausible (05-quizzes; used for subject packs and on-demand articles).
+ *
+ * Each word keeps the spelling the article uses away from the start of a
+ * sentence, so "Pyramids" stays a name and "palaces" stays an everyday
+ * word, and the four options of a question can be made to match (D-5).
  */
 export function autoTerms(article: Pick<Article, 'title' | 'sections'>, max = 60): string[] {
-  const text = article.sections.flatMap((s) => s.paragraphs).join(' ');
+  const paragraphs = article.sections.flatMap((s) => s.paragraphs);
   const counts = new Map<string, number>();
-  for (const w of text.match(/[A-Za-z][a-z]{4,}/g) ?? []) {
-    const f = fold(w);
+  const caps = new Map<string, number>();
+  const plain = new Map<string, number>();
+  const bump = (map: Map<string, number>, key: string): void => {
+    map.set(key, (map.get(key) ?? 0) + 1);
+  };
+  /** Whole words only: "Djenné" must not be counted as the word "Djenn". */
+  const wholeWords = (text: string): Array<{ word: string; at: number }> =>
+    [...text.matchAll(/[A-Za-z][a-z]{4,}/g)]
+      .filter((m) => {
+        const before = text.charAt((m.index ?? 0) - 1);
+        const after = text.charAt((m.index ?? 0) + m[0].length);
+        return !/\p{L}/u.test(before) && !/\p{L}/u.test(after);
+      })
+      .map((m) => ({ word: m[0], at: m.index ?? 0 }));
+
+  for (const sentence of paragraphs.flatMap(splitSentences)) {
+    for (const { word, at } of wholeWords(sentence)) {
+      // The first word of a sentence is capitalised whatever it is, so it says
+      // nothing about whether the word is a name.
+      if (at === 0) continue;
+      bump(/^[A-Z]/.test(word) ? caps : plain, fold(word));
+    }
+  }
+  for (const { word } of wholeWords(paragraphs.join(' '))) {
+    const f = fold(word);
     if (STOPWORDS.has(f) || mentions(article.title, f) || f.endsWith('ing') || f.endsWith('ed')) continue;
-    counts.set(f, (counts.get(f) ?? 0) + 1);
+    bump(counts, f);
   }
   return [...counts.entries()]
     .sort((a, b) => b[1] - a[1] || b[0].length - a[0].length || a[0].localeCompare(b[0]))
     .slice(0, max)
-    .map(([w]) => w);
+    .map(([w]) => ((caps.get(w) ?? 0) > (plain.get(w) ?? 0) ? w.charAt(0).toUpperCase() + w.slice(1) : w));
 }
