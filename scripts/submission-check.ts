@@ -12,6 +12,7 @@
 import { execFileSync, spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { ROUTES } from '../src/app/router.ts';
+import { readMediaRecords } from './media/licences.ts';
 import { computeStats } from './stats.ts';
 import { fillNumbers } from './lib/writeup.ts';
 import { REQUIRED_DOCS, findSecrets, parseShots, shotListProblems } from './lib/submission.ts';
@@ -131,7 +132,9 @@ for (const doc of [...writeups, 'docs/blog-post.md', 'docs/social-post.md', 'doc
     const ageDays = (Date.now() - Date.parse(saved.checkedAt)) / 86_400_000;
     if (!(ageDays <= 7)) note(`${path} is ${Math.floor(ageDays)} days old: run npm run licences`);
     if (saved.problems > 0) note(`${path} lists ${saved.problems} image(s) with a licence problem`);
-    const credited = read('CREDITS.md').split('\n').filter((l) => l.startsWith('|') && l.includes('commons.wikimedia.org/wiki/File:')).length;
+    const credited =
+      read('CREDITS.md').split('\n').filter((l) => l.startsWith('|') && l.includes('commons.wikimedia.org/wiki/File:')).length +
+      readMediaRecords().length;
     if (saved.count < credited) note(`${path} covers ${saved.count} of ${credited} credited images: run npm run licences`);
   }
 }

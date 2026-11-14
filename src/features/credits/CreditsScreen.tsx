@@ -4,6 +4,7 @@ import credits from '../../../CREDITS.md?raw';
 import { useTitle } from '../../app/useTitle.ts';
 import { StripHeading } from '../../design/paper.tsx';
 import { parseMarkdown } from '../../lib/text/markdown.ts';
+import { MediaCredits } from './MediaCredits.tsx';
 import './credits.css';
 
 /** Renders `code`, [links](url) and plain text without injecting HTML. */
@@ -80,6 +81,7 @@ export default function CreditsScreen() {
           ) : null}
         </Fragment>
       ))}
+      <MediaCredits />
     </article>
   );
 }

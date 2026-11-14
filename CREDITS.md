@@ -57,6 +57,21 @@ of the articles and share their licence, CC BY-SA 4.0.
 - `packs/quizzes/inventions/*.json`, `packs/quizzes/people/*.json`, `packs/quizzes/arts/*.json`
 - `packs/quizzes/*.json` (the quiz index)
 
+## Media library (pictures)
+
+Thumbnails (480 px WebP copies, resized from the Commons originals) and their records. Every picture was listed by the
+Commons API for the Wikipedia article it belongs to or that article's Commons category, and checked by `npm run licences`
+(licence on the allow-list: public domain, CC0, CC BY, CC BY-SA; no listed restrictions; author and licence read from
+Commons). The author, licence and Commons page of each one are in the records below and are shown in the large view and on
+the Credits screen; they are not repeated here.
+
+- `media/img/*.webp` (one small copy of each picture; the name is the start of the Commons file's sha1)
+- `media/*.json` (one record file per subject, the compact index, the picture of each day and `licences.json`, the dated
+  answer of the Commons API for every image in this file and in the tables above)
+
+The text of a caption is a shortening of the Commons description or of the file name. Changes made by Awari: resized to
+480 px and saved as WebP.
+
 ## Home rotation
 
 - `packs/home.json`: featured articles and margin notes for Home, built by

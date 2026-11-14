@@ -8,7 +8,8 @@
  *
  * Contact for the User-Agent: AWARI_CONTACT (an e-mail address or URL); a default project URL otherwise.
  */
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { checkRecord, exitCode, type CommonsAnswer, type ShownRecord, type Verified } from './check.ts';
 import { titleFromUrl } from './allow.ts';
 
@@ -26,6 +27,17 @@ export function readRecords(credits: string): ShownRecord[] {
     const title = titleFromUrl(cells[4] ?? '');
     if (!title) continue;
     out.push({ path: cells[0] ?? '', title, author: cells[2] ?? '', licence: cells[3] ?? '' });
+  }
+  return out;
+}
+
+/** Every picture of the media library: the records written by `build.ts --records`, one subject file each. */
+export function readMediaRecords(dir = 'public/media'): ShownRecord[] {
+  const out: ShownRecord[] = [];
+  if (!existsSync(dir)) return out;
+  for (const f of readdirSync(dir).filter((x) => x.endsWith('.json') && !['index.json', 'daily.json', 'licences.json'].includes(x))) {
+    const file = JSON.parse(readFileSync(join(dir, f), 'utf8')) as { items?: Array<{ thumb: string; title: string; author: string; licence: string }> };
+    for (const m of file.items ?? []) out.push({ path: `media/${m.thumb}`, title: m.title, author: m.author, licence: m.licence });
   }
   return out;
 }
@@ -82,7 +94,7 @@ async function ask(titles: string[]): Promise<Map<string, CommonsAnswer>> {
 
 async function main(): Promise<void> {
   const only = process.argv.includes('--only') ? process.argv[process.argv.indexOf('--only') + 1] ?? '' : '';
-  const records = readRecords(readFileSync('CREDITS.md', 'utf8')).filter((r) => r.path.startsWith(only));
+  const records = [...readRecords(readFileSync('CREDITS.md', 'utf8')), ...readMediaRecords()].filter((r) => r.path.startsWith(only));
   const unique = [...new Map(records.map((r) => [r.title, r])).values()];
   console.log(`${records.length} credited images, ${unique.length} Commons files to check.`);
   const answers = new Map<string, CommonsAnswer>();
