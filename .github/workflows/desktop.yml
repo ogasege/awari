@@ -1,0 +1,80 @@
+name: Desktop installers
+
+# 25-desktop: builds the Windows, macOS and Linux installers from the same web build and attaches
+# them to a GitHub Release. The installers are never committed. They are not code-signed.
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag to create or update
+        required: true
+        default: v1.0.0
+
+permissions:
+  contents: write
+
+env:
+  TAG: ${{ github.event.inputs.tag || github.ref_name }}
+  CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            target: --mac dmg --arm64 --x64
+          - os: windows-latest
+            target: --win nsis --x64
+          - os: ubuntu-latest
+            target: --linux AppImage --x64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run desktop:prepare
+      - name: Bundle test (every precached file, thumbnails, licences, ignores)
+        run: npx vitest run scripts/lib/desktop.test.ts
+        env:
+          DESKTOP_BUNDLE_REQUIRED: '1'
+      - run: npm ci
+        working-directory: desktop
+      - run: npx electron-builder ${{ matrix.target }} --publish never
+        working-directory: desktop
+      - uses: actions/upload-artifact@v4
+        with:
+          name: installers-${{ matrix.os }}
+          path: |
+            desktop/release/*.dmg
+            desktop/release/*.exe
+            desktop/release/*.AppImage
+          if-no-files-found: error
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: installers
+          merge-multiple: true
+      - name: Create or update the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          ls -la installers
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" installers/* --clobber
+          else
+            gh release create "$TAG" installers/* --title "Awari $TAG (desktop)" --notes-file desktop/RELEASE_NOTES.md
+          fi
