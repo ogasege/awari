@@ -2,8 +2,9 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { rankPictures } from './build.ts';
+import type { Kind } from './select.ts';
 
-const pic = (id: string, article: string, kind = 'photo', quality = 0, lead = false) => ({ id, article, kind, quality, lead });
+const pic = (id: string, article: string, kind: Kind = 'photo', quality = 0, lead = false) => ({ id, article, kind, quality, lead });
 
 describe('default picture order', () => {
   it('puts recognised pictures first, then leads, one per article before any repeats', () => {

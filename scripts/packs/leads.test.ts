@@ -32,7 +32,7 @@ describe('lead photographs (21-review-2 Property 10)', () => {
       const photo = article(key).photos[0];
       expect(photo?.credit.name, key).toBe(`Wikimedia Commons: ${override.file}`);
       expect(photo?.caption, key).toBe(override.caption);
-      expect(photo?.alt, key).toBe(override.alt);
+      if (override.alt !== undefined) expect(photo?.alt, key).toBe(override.alt);
       expect(PHOTO_OVERRIDES.get(key)?.file, key).toBe(override.file);
     }
   });

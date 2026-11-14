@@ -166,7 +166,7 @@ Resized to at most 800 px. Each links to its Commons file page.
 | packs/img/ancient-ancient-egypt.jpg | Ancient Egypt | en:User:Hajor | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Egypt.Giza.Sphinx.01.jpg |
 | packs/img/ancient-ancient-greece.jpg | Ancient Greece | Phanatic | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Parthenon_(30276156187).jpg |
 | packs/img/ancient-aztecs.jpg | Aztecs | Maunus | Public domain | https://commons.wikimedia.org/wiki/File:StaCeciliaAcatitlan.jpg |
-| packs/img/ancient-colosseum.jpg | Colosseum | WarpFlyght | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Colosseum-Entrance_LII.jpg |
+| packs/img/ancient-colosseum.jpg | Colosseum | Diliff | CC BY-SA 2.5 | https://commons.wikimedia.org/wiki/File:Colosseum_in_Rome-April_2007-1-_copie_2B.jpg |
 | packs/img/ancient-colossus-of-rhodes.jpg | Colossus of Rhodes | gravure sur bois de Sidney Barclay numérisée Google | Public domain | https://commons.wikimedia.org/wiki/File:Colosse_de_Rhodes_(Barclay).jpg |
 | packs/img/ancient-great-pyramid-of-giza.jpg | Great Pyramid of Giza | Berthold Werner | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Gizeh_Cheops_BW_1.jpg |
 | packs/img/ancient-great-wall-of-china.jpg | Great Wall of China | Severin.stalder | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:The_Great_Wall_of_China_at_Jinshanling-edit.jpg |
@@ -358,12 +358,12 @@ Resized to at most 800 px. Each links to its Commons file page.
 | packs/img/guatemala.jpg | Guatemala | Christopher Crouzet | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:View_from_Volcano_Pacaya,_Guatemala.jpg |
 | packs/img/guinea-bissau.jpg | Guinea-Bissau | Joehawkins | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Lagoa_com_hipop%C3%B3tamos_03_(cropped).jpg |
 | packs/img/guinea.jpg | Guinea | Flucco | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Plage_de_Roume.jpg |
-| packs/img/guyana.jpg | Guyana | Stephane Lesbats (IFREMER, Pôle Images, Centre Bretagne - ZI de la Pointe du Diable - CS 10070 - 29280 Plouzané, France) | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Ilet_Cupidon_(Guyane)_(Ifremer_00807-91876_-_52994).jpg |
+| packs/img/guyana.jpg | Guyana | Sorenriise at English Wikipedia | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:GuyanaKaieteurFalls2004.jpg |
 | packs/img/haiti.jpg | Haiti | Bdx | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Landscape_in_Palmes,_Petit-Go%C3%A2ve,_Haiti,_2017.jpg |
 | packs/img/honduras.jpg | Honduras | LeRoc | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Pedernales_La_Paz_Honduras.jpg |
 | packs/img/hungary.jpg | Hungary | Cserlajos | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Hungarian_landscape,_near_obanya.jpg |
 | packs/img/iceland.jpg | Iceland | Fran Cano Cabal | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Icelandic_landscapes.jpg |
-| packs/img/india.jpg | India | Dhirad, picture edited by J. A. Knudsen | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Taj_Mahal_in_March_2004.jpg |
+| packs/img/india.jpg | India | Dhirad , picture edited by J. A. Knudsen | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Taj_Mahal_in_March_2004.jpg |
 | packs/img/indonesia.jpg | Indonesia | Gunawan Kartapranata | Public domain | https://commons.wikimedia.org/wiki/File:Borobudur-Nothwest-view.jpg |
 | packs/img/insulator.jpg | Insulator | Thermos | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Insulator_railways.jpg |
 | packs/img/inventions-airplane.jpg | Airplane | Quintin Soloviev | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:ANA_777-300_Taking_off_from_JFK.jpg |
@@ -421,9 +421,9 @@ Resized to at most 800 px. Each links to its Commons file page.
 | packs/img/madagascar.jpg | Madagascar | Bernard Gagnon | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Landscape_Madagascar_05.jpg |
 | packs/img/malawi.jpg | Malawi | Dr. Ondřej Havelka (cestovatel) | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Malawi_Village.jpg |
 | packs/img/malaysia.jpg | Malaysia | Pangalau | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Parliament_House_of_Malaysia_(cropped_4to3_landscape).jpg |
-| packs/img/maldives.jpg | Maldives | O'Dea | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Aquanaut_Explorer,_1987.jpg |
+| packs/img/maldives.jpg | Maldives | Gzzz | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Bathala_(Maldives)_8.JPG |
 | packs/img/mali.jpg | Mali | Dr. Ondřej Havelka (cestovatel) | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Koro,_Mali.jpg |
-| packs/img/malta.jpg | Malta | Peter Flass | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Malta_Corners,_Malta_NY.jpg |
+| packs/img/malta.jpg | Malta | Karelj | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Mellieha_Bay_beach_Malta_1.jpg |
 | packs/img/mauritania.jpg | Mauritania | LBM1948 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Mauritania,_desierto_1997_02.jpg |
 | packs/img/mauritius.jpg | Mauritius | Hansueli Krapf | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Landscape_near_Les_Mariannes,_Mauritius,_2007-09-09.jpg |
 | packs/img/mexico.jpg | Mexico | Daniel Schwen | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Chichen_Itza_3.jpg |
