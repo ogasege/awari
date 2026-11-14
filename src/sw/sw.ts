@@ -67,6 +67,8 @@ async function saveSite(): Promise<void> {
   }
   // A pool, not lock-step batches: a slow (cold-edge) file no longer holds up the others.
   let next = 0;
+  let done = __PRECACHE__.length - missing.length;
+  const total = __PRECACHE__.length;
   await Promise.all(
     Array.from({ length: Math.min(POOL, missing.length) }, async () => {
       while (next < missing.length) {
@@ -76,9 +78,17 @@ async function saveSite(): Promise<void> {
           throw new Error(`Could not save ${url} (${res.status})`);
         }
         await cache.put(url, res);
+        done += 1;
+        if (done % 25 === 0) void progress(done, total);
       }
     }),
   );
+}
+
+/** Tells open pages how far the first save has got (header progress). */
+async function progress(saved: number, total: number): Promise<void> {
+  const clients = await scope.clients.matchAll({ includeUncontrolled: true, type: 'window' });
+  for (const c of clients) c.postMessage({ type: 'progress', saved, total });
 }
 
 scope.addEventListener('install', (event: WaitEvent) => {

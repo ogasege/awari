@@ -3,7 +3,14 @@
  * Everything here is straight and calm (design rule 7).
  */
 import { useEffect, useState, type FormEvent } from 'react';
-import { useOfflineStatus, type OfflineStatus } from '../lib/offline/register.ts';
+import {
+  dismissSavedNotice,
+  savedNoticePending,
+  useOfflineStatus,
+  useSaveProgress,
+  type OfflineStatus,
+  type SaveProgress,
+} from '../lib/offline/register.ts';
 import { Link, navigate, usePath } from './navigation.tsx';
 import { matchRoute, type RouteName } from './router.ts';
 import './header.css';
@@ -35,15 +42,50 @@ function useOnline(): boolean {
   return online;
 }
 
-/** Says in words whether the site is saved for offline use (09-offline Req 3.1). */
-export function badgeText(saved: OfflineStatus, online: boolean): string {
-  if (saved === 'ready') {
-    return online ? 'Works offline' : 'Offline, still working';
+/**
+ * What the header says about offline use (25-desktop task 8, owner feedback): nothing while
+ * online and saved, the progress while the first save runs, and a quiet "Offline" while the
+ * connection is gone. Returns null when there is nothing to say.
+ */
+export function headerStatus(
+  saved: OfflineStatus,
+  online: boolean,
+  progress: SaveProgress | null = null,
+): string | null {
+  if (!online) {
+    return 'Offline';
   }
   if (saved === 'preparing') {
-    return online ? 'Saving for offline…' : 'Offline, still saving';
+    if (progress && progress.total > 0) {
+      return `Saving for offline… ${Math.min(99, Math.floor((progress.saved / progress.total) * 100))}%`;
+    }
+    return 'Saving for offline…';
   }
-  return online ? 'Not saved for offline yet' : 'Offline';
+  return null;
+}
+
+/** The one-time notice when the first save completes; dismissed for good with its button. */
+export function SavedNotice() {
+  const saved = useOfflineStatus();
+  const [pending, setPending] = useState(savedNoticePending);
+  if (saved !== 'ready' || !pending) {
+    return null;
+  }
+  return (
+    <div className="saved-notice" role="status">
+      <span>Saved. Awari now works without a connection.</span>
+      <button
+        type="button"
+        className="saved-notice__close"
+        onClick={() => {
+          dismissSavedNotice();
+          setPending(false);
+        }}
+      >
+        Got it
+      </button>
+    </div>
+  );
 }
 
 export function Header() {
@@ -51,6 +93,8 @@ export function Header() {
   const route = matchRoute(path).name;
   const online = useOnline();
   const offline = useOfflineStatus();
+  const progress = useSaveProgress();
+  const status = headerStatus(offline, online, progress);
   const [query, setQuery] = useState('');
 
   const submit = (event: FormEvent): void => {
@@ -96,14 +140,17 @@ export function Header() {
           onChange={(e) => setQuery(e.target.value)}
         />
       </form>
-      <span className="site-header__badge" role="status">
-        {offline === 'ready' ? (
-          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M5 12.5l4.5 4.5L19 7.5" />
-          </svg>
-        ) : null}
-        {badgeText(offline, online)}
+      <span
+        className={
+          status
+            ? `site-header__badge${online ? '' : ' site-header__badge--offline'}`
+            : 'sr-only'
+        }
+        role="status"
+      >
+        {status ?? ''}
       </span>
+      <SavedNotice />
     </header>
   );
 }

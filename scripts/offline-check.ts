@@ -71,7 +71,7 @@ const open = async (p: Page, path: string): Promise<void> => {
 // 1. One visit online: wait until the site says it is saved.
 console.log(`Visiting ${base} once, online…`);
 await page.goto(base, { waitUntil: 'load' });
-await page.getByRole('status').filter({ hasText: 'Works offline' }).waitFor({ timeout: liveUrl ? 600_000 : 90_000 });
+await page.getByText('Saved. Awari now works without a connection.').waitFor({ timeout: liveUrl ? 600_000 : 90_000 });
 // Any article, on demand (14-any-article): read one from Wikipedia while online.
 let wikiRead = false;
 try {
@@ -100,9 +100,9 @@ await page.waitForFunction(
 await context.setOffline(true);
 
 // 2. Every pack feature, with the network gone.
-await step('Home opens and the badge says offline', async (p) => {
+await step('Home opens and the header says Offline', async (p) => {
   await open(p, '/');
-  await p.getByRole('status').filter({ hasText: 'Offline, still working' }).waitFor({ timeout: 10_000 });
+  await p.getByRole('status').filter({ hasText: /^Offline$/ }).waitFor({ timeout: 10_000 });
   await p.getByRole('heading', { name: 'On this day' }).waitFor({ timeout: 10_000 });
 });
 

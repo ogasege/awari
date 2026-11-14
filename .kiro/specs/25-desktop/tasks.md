@@ -9,3 +9,4 @@ One commit per task, log row in `docs/kiro-log.md`, tests before ticking.
 - [x] 5. GitHub Actions workflow and release notes.
 - [ ] 6. README, devpost, judges, video-script sections; submission-check; report.
 - [ ] 7. Tag `v1.0.0` and let the workflow publish the Release (owner pushes the tag if the push is blocked).
+- [x] 8. Header status (owner feedback): nothing while online and saved, save progress while the first save runs, a one-time dismissible "Saved" notice, a quiet "Offline" while the connection is gone; saved state on the Credits screen.

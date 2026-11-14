@@ -14,7 +14,8 @@ const required = process.env['DESKTOP_BUNDLE_REQUIRED'] === '1';
 
 /** The precache list the service worker was built with. */
 function precacheList(swPath: string): string[] {
-  const match = /var o=(\[.*?\]);/s.exec(readFileSync(swPath, 'utf8'));
+  // The first array literal of path strings that starts with "/" (independent of minified names).
+  const match = /(\["\/"(?:,"[^"]*")*\])/.exec(readFileSync(swPath, 'utf8'));
   if (!match?.[1]) throw new Error(`no precache list in ${swPath}`);
   return JSON.parse(match[1]) as string[];
 }

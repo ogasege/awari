@@ -2,6 +2,7 @@
 import { Fragment, type ReactNode } from 'react';
 import credits from '../../../CREDITS.md?raw';
 import { useTitle } from '../../app/useTitle.ts';
+import { useOfflineStatus, type OfflineStatus } from '../../lib/offline/register.ts';
 import { MarginNote, StripHeading } from '../../design/paper.tsx';
 import { parseMarkdown } from '../../lib/text/markdown.ts';
 import { MediaCredits } from './MediaCredits.tsx';
@@ -57,6 +58,17 @@ function inline(text: string): ReactNode[] {
   return out;
 }
 
+/** Whether this device has the whole site saved (the header stays quiet when it has). */
+export function offlineStateText(status: OfflineStatus): string {
+  if (status === 'ready') return 'On this device: saved. Awari works without a connection.';
+  if (status === 'preparing') return 'On this device: still saving for use without a connection.';
+  return 'On this device: not saved for use without a connection.';
+}
+
+function OfflineState() {
+  return <p className="credits__offline">{offlineStateText(useOfflineStatus())}</p>;
+}
+
 export default function CreditsScreen() {
   useTitle('Credits');
   const blocks = parseMarkdown(credits).filter((b) => !(b.kind === 'heading' && b.level === 1));
@@ -75,6 +87,7 @@ export default function CreditsScreen() {
         Everything in Awari comes from people who chose to share. Here is who made each photo, map,
         word list and article, and the licence that lets us use it.
       </p>
+      <OfflineState />
       {blocks.map((b, i) => (
         <Fragment key={i}>
           {b.kind === 'heading' ? <h2>{inline(b.text)}</h2> : null}

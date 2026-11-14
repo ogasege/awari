@@ -48,7 +48,7 @@ discovery.
 ## How we built it
 
 React 19, TypeScript and Vite, with hand-made components for the scrapbook look and no UI
-framework. The main script is <!--n:mainScriptKB-->269<!--/n--> KB, under the 300 KB budget;
+framework. The main script is <!--n:mainScriptKB-->270<!--/n--> KB, under the 300 KB budget;
 packs load on demand. Content is built by one command, `npm run packs`, from Simple English
 Wikipedia, Wikidata, Natural Earth, Open English WordNet and Wikimedia Commons, and every record
 carries its source and licence. Infrastructure is Terraform (private S3 behind CloudFront, and
@@ -98,8 +98,8 @@ Kiro IDE; they have not fired, because the IDE was not used.
 ### Spec-driven development
 
 <!--n:specs-->25<!--/n--> specs, each with EARS requirements and numbered acceptance criteria, a
-design that derives correctness properties, and tasks; <!--n:specTasksDone-->211<!--/n--> of
-<!--n:specTasks-->217<!--/n--> tasks are done, each committed as `<spec> <task>: <summary>`. The
+design that derives correctness properties, and tasks; <!--n:specTasksDone-->216<!--/n--> of
+<!--n:specTasks-->218<!--/n--> tasks are done, each committed as `<spec> <task>: <summary>`. The
 difference from vibe coding showed most when the scope grew to the whole world: specs 14 to 20
 were written before any code. The design for the timeline made us check what Wikidata's
 "inception" means, found that it is often not a country's independence day, and turned that

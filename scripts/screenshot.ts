@@ -16,6 +16,14 @@ mkdirSync('docs/screenshots', { recursive: true });
 const browser = await chromium.launch();
 for (const width of [1440, 390]) {
   const page = await browser.newPage({ viewport: { width, height: 900 } });
+  // A returning visitor: the one-time "Saved" notice was dismissed long ago.
+  await page.addInitScript(() => {
+    try {
+      localStorage.setItem('awari.savedNoticeDismissed', '1');
+    } catch {
+      // no storage: the notice may show
+    }
+  });
   const errors: string[] = [];
   page.on('console', (m) => {
     if (m.type() === 'error') errors.push(m.text());

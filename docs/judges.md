@@ -5,8 +5,9 @@ Awari is a free encyclopedia for curious students that works offline after one v
 
 ## The main journey (about 90 seconds)
 
-1. **Open the live app** and wait a few seconds. The badge at the top right changes from "Saving
-   for offline…" to **"Works offline"**: the bundled library is saved on your device.
+1. **Open the live app** and wait a few seconds. The header shows "Saving for offline…" with a
+   percentage, then a one-time notice says **"Saved. Awari now works without a connection."**: the
+   bundled library is on your device. After that the header stays quiet while you are online.
 2. **Search any topic.** Type something in the header search, for example *okapi*, and choose
    **Open**. The article opens from Wikipedia with its photo, credits and a quiz. Tap any word
    for its meaning.
@@ -27,7 +28,7 @@ After step 2, turn the network off and reload:
 - **Airplane mode** on your device, **or**
 - **DevTools → Network → Offline** in Chrome or Edge, then reload.
 
-The badge reads **"Offline, still working"**. The bundled articles, dictionary, globe, tours,
+The header shows a quiet **"Offline"**. The bundled articles, dictionary, globe, tours,
 quizzes, castle, timeline and stamps all still work, and so does the article you opened from
 search in step 2. A topic never opened before says, in words, that it needs a connection. The
 optional quiz maker for articles outside the packs appears only when a quiz service is configured.

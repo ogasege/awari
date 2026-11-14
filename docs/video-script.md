@@ -6,7 +6,7 @@ tune), nothing on screen that is not Awari, Kiro or your own terminal. Rows mark
 Kiro at work: together they run 50 seconds (the minimum is 40). Upload as public or unlisted.
 
 **Before recording:** `npm run build && npm run preview`, open the site once and wait for the
-badge to say "Works offline". Seed reference stamps with `/?demo=reference` (it asks first).
+notice "Saved. Awari now works without a connection." Seed reference stamps with `/?demo=reference` (it asks first).
 Screen 1440 × 900, zoom 100%. Record the Kiro rows from the real project folder; open the Kiro
 Crew session and the files named, do not stage anything that did not happen.
 
@@ -20,7 +20,7 @@ Crew session and the files named, do not stage anything that did not happen.
 | 0:55 – 1:15 | Nigeria quiz: nudge, where to look, take away two; answer; "Right!" with the proof slip. | "Every question has three hints: a nudge, where to look, then two wrong answers disappear. When you're right, you see the sentence that proves it." | Pause on the proof slip. |
 | 1:15 – 1:30 | Tours: "Great rivers of the world". Next stop twice: the globe turns to the Amazon, then the Yangtze. | "Guided tours turn the globe from stop to stop: rivers, ancient wonders, volcanoes of the Ring of Fire." | |
 | 1:30 – 1:45 | Castle: the Space wing, one answer, the next door lights. Then the timeline, filter "Oceania". | "Sixteen castle wings, a room for every right answer. And a timeline of the whole world." | |
-| 1:45 – 2:00 | Airplane mode on (menu bar). Reload. Open an article, a quiz, the Okapi page read earlier. Badge: "Offline, still working". | "Now, no internet. After one visit, everything still works, even the page we read from Wikipedia a minute ago." | Show the Wi-Fi icon off. |
+| 1:45 – 2:00 | Airplane mode on (menu bar). Reload. Open an article, a quiz, the Okapi page read earlier. Header: "Offline". | "Now, no internet. After one visit, everything still works, even the page we read from Wikipedia a minute ago." | Show the Wi-Fi icon off. |
 | 2:00 – 2:12 | **[KIRO]** The Kiro Crew session for this build, then `.kiro/specs/`, then `18-world-timeline/requirements.md`. | "I built it in Kiro, spec first. Twenty specs, each with requirements and numbered acceptance criteria, written before the code." | Scroll slowly. |
 | 2:12 – 2:26 | **[KIRO]** `18-world-timeline/design.md` Property 2 beside its test; run `npx vitest run scripts/packs/timeline-world.test.ts`. | "Each requirement becomes a property, and each property a test. This one keeps a date out unless Wikidata agrees. It's why Nigeria's 1963 'inception' isn't shown as its independence day." | Terminal full width. |
 | 2:26 – 2:40 | **[KIRO]** `.kiro/agents/`: run `kiro-cli chat --agent awari-licence-auditor` on the bundle, then show `docs/kiro-evidence/agents.md`. | "Custom Kiro agents did the narrow jobs: one builds with hooks that lint, test and check the hackathon rules; one audits licences; one reviews the design in a real browser." | Show one reply line. |

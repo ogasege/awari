@@ -67,11 +67,8 @@ await page.waitForLoadState('load');
 
 await step('Home opens on first launch with no network', async (p) => {
   await p.getByRole('heading', { name: 'On this day' }).waitFor({ timeout: 20_000 });
-  // The service worker saves the site from the bundled files; the badge must reach a ready state.
-  await p
-    .getByRole('status')
-    .filter({ hasText: /Works offline|Offline, still working/ })
-    .waitFor({ timeout: 60_000 });
+  // The service worker finds every file already on the device and the one-time notice appears.
+  await p.getByText('Saved. Awari now works without a connection.').waitFor({ timeout: 60_000 });
   await shot(p, 'home');
 });
 
