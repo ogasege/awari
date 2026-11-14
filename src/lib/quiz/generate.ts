@@ -6,6 +6,7 @@
  */
 import { rng, seedFrom } from '../../design/wobble.ts';
 import type { Article, CountryFacts, Question } from '../packs/types.ts';
+import { heuristicPos, sameKind, type PosOf } from './pos.ts';
 import { sentencesOf, type Located } from './sentences.ts';
 import { fold, validateQuestion } from './validate.ts';
 
@@ -170,11 +171,15 @@ export function findYear(sentence: string): string | undefined {
   return m && Number(m[1]) <= LATEST_YEAR ? m[1] : undefined;
 }
 
+/** Words after which a plain word is a verb ("that orbits", "it takes", "to make"). */
+const VERB_CUES = new Set('that which who it he she they we you to will would can could may might must shall should also then not often usually only just always never'.split(' '));
+
 /** Gap-fill: blank one key term out of a sentence. */
 function gapCandidates(
   article: Article,
   sentences: readonly Located[],
   termPool: readonly string[],
+  posOf: PosOf,
 ): Candidate[] {
   const out: Candidate[] = [];
   const termSet = new Set(termPool.map(fold));
@@ -182,7 +187,17 @@ function gapCandidates(
     if (s.sentence.length < 40 || s.sentence.length > 220) continue;
     const words = s.sentence.match(/[A-Za-z][A-Za-z'-]*|\d{4}/g) ?? [];
     const year = findYear(s.sentence);
-    const term = words.find((w) => termSet.has(fold(w)) && !mentions(article.title, w) && w.length > 3);
+    // Only nouns and adjectives are blanked: a verb or a number word has too few look-alikes in an article to make fair wrong answers.
+    const at = words.findIndex(
+      (w, i) =>
+        termSet.has(fold(w)) &&
+        !mentions(article.title, w) &&
+        w.length > 3 &&
+        ['noun', 'adj'].includes(posOf(w)) &&
+        // A word right after "that", "it", "to", "will" ... is usually a verb in this sentence, whatever the dictionary lists first.
+        !VERB_CUES.has((words[i - 1] ?? '').toLowerCase()),
+    );
+    const term = at >= 0 ? words[at] : undefined;
     const answer = year ?? term;
     if (!answer) continue;
     const blanked = s.sentence.replace(new RegExp(`\\b${answer}\\b`, 'i'), '_____');
@@ -194,7 +209,8 @@ function gapCandidates(
         .map((d) => String(y + d))
         .filter((v) => Number(v) <= LATEST_YEAR);
     } else {
-      pool = termPool.filter((t) => fold(t) !== fold(answer));
+      // Wrong answers must fit the gap: the same part of speech, and plural for plural (24-review-4 Req 8).
+      pool = termPool.filter((t) => fold(t) !== fold(answer) && sameKind(t, answer, posOf));
     }
     out.push({
       kind: year ? 'year' : 'term',
@@ -218,10 +234,11 @@ export function buildQuiz(
   facts: CountryFacts | undefined,
   allFacts: readonly CountryFacts[],
   termPool: readonly string[],
+  posOf: PosOf = heuristicPos,
 ): Question[] {
   const next = rng(seedFrom(`quiz:${article.pack}/${article.id}`));
   const sentences = sentencesOf(article);
-  const gaps = gapCandidates(article, sentences, termPool);
+  const gaps = gapCandidates(article, sentences, termPool, posOf);
   const candidates = [
     ...(facts ? factCandidates(article, facts, allFacts, sentences) : []),
     // Named terms make better questions than dates, so they come first.

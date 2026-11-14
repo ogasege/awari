@@ -5,6 +5,7 @@
  */
 import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { SUBJECTS } from '../../src/lib/packs/subjects.ts';
+import { wordnetPos } from './dictionary-pos.ts';
 import { autoTerms, buildQuiz, PHYSICS_TERMS, QUIZ_LENGTH } from '../../src/lib/quiz/generate.ts';
 import type {
   Article,
@@ -42,6 +43,7 @@ for (const pack of SUBJECTS.map((x) => x.id)) {
       pack === 'countries' ? factsById.get(article.id) : undefined,
       facts,
       pack === 'countries' ? countryTerms : pack === 'physics' ? PHYSICS_TERMS : autoTerms(article),
+      wordnetPos,
     );
     if (questions.length < QUIZ_LENGTH) {
       short.push(`${pack}/${item.id} (${questions.length})`);
