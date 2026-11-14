@@ -7,6 +7,7 @@ import { usePack } from '../../lib/packs/load.ts';
 import { SUBJECTS } from '../../lib/packs/subjects.ts';
 import type { PackId } from '../../lib/packs/types.ts';
 import { useProgress } from '../../lib/store/useProgress.ts';
+import { PICTURE_QUIZ_SUBJECTS } from '../../lib/quiz/groups.ts';
 import { MakeQuiz } from './MakeQuiz.tsx';
 import './quiz.css';
 
@@ -41,7 +42,7 @@ export default function QuizzesScreen() {
         <h2 id="quizzes-pictures">Picture quizzes</h2>
         <p>Look at a picture and say which page it belongs to.</p>
         <ul className="quizzes__picture-list">
-          {SUBJECTS.map((s) => (
+          {SUBJECTS.filter((s) => PICTURE_QUIZ_SUBJECTS.has(s.id)).map((s) => (
             <li key={s.id}>
               <Link to={`/quiz/pictures/${s.id}`}>{s.label}</Link>
             </li>

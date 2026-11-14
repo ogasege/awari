@@ -55,7 +55,7 @@ describe('pictureQuestion (Property 6)', () => {
   });
 
   it('never offers two pages with the same name, even from different articles', () => {
-    const pool = [make(1, 'wildlife/a', 'Mercury'), make(2, 'space/b', 'mercury'), make(3, 'science/c', 'Gold'), make(4, 'science/d', 'Iron'), make(5, 'science/e', 'Salt')];
+    const pool = [make(1, 'wildlife/a', 'Mercury'), make(2, 'wildlife/b', 'mercury'), make(3, 'wildlife/c', 'Gold'), make(4, 'wildlife/d', 'Iron'), make(5, 'wildlife/e', 'Salt')];
     const q = pictureQuestion(pool[0] as MediaItem, pool, seeded(3));
     expect(q).toBeDefined();
     expect(new Set(q?.options.map((o) => o.toLowerCase())).size).toBe(4);
