@@ -97,9 +97,9 @@ Kiro IDE; they have not fired, because the IDE was not used.
 
 ### Spec-driven development
 
-<!--n:specs-->24<!--/n--> specs, each with EARS requirements and numbered acceptance criteria, a
-design that derives correctness properties, and tasks; <!--n:specTasksDone-->210<!--/n--> of
-<!--n:specTasks-->210<!--/n--> tasks are done, each committed as `<spec> <task>: <summary>`. The
+<!--n:specs-->25<!--/n--> specs, each with EARS requirements and numbered acceptance criteria, a
+design that derives correctness properties, and tasks; <!--n:specTasksDone-->211<!--/n--> of
+<!--n:specTasks-->217<!--/n--> tasks are done, each committed as `<spec> <task>: <summary>`. The
 difference from vibe coding showed most when the scope grew to the whole world: specs 14 to 20
 were written before any code. The design for the timeline made us check what Wikidata's
 "inception" means, found that it is often not a country's independence day, and turned that
