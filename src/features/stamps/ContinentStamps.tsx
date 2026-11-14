@@ -83,6 +83,7 @@ export default function ContinentStamps({ params }: { params: Record<string, str
                 <span aria-hidden="true" className="hand stamp-book__q">
                   ?
                 </span>
+                <span className="hand stamp-book__slot-name">{slot.name}</span>
                 <span>Not found yet</span>
               </span>
             )}

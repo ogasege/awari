@@ -30,7 +30,10 @@
 }
 
 .site-header__nav a {
+  display: inline-block;
+  min-width: 44px;
   padding: 12px 0;
+  text-align: center;
   color: var(--paper);
   text-decoration: none;
 }
@@ -139,15 +142,36 @@
     gap: 8px 20px;
   }
 
+  /* Phone: the logo and the search share a row and the eight links scroll along one line, so the header is about 150 px, not 257 (26-final-review D-10). */
+  .site-header {
+    padding-top: 12px;
+    padding-bottom: 8px;
+  }
+
   .site-header__nav {
     order: 3;
     width: 100%;
-    gap: 4px 20px;
+    flex-wrap: nowrap;
+    gap: 0 22px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(to right, #000 92%, transparent);
+    mask-image: linear-gradient(to right, #000 92%, transparent);
+  }
+
+  .site-header__nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .site-header__nav a {
+    flex: none;
+    min-height: 44px;
+    padding: 10px 0;
   }
 
   .site-header__search {
-    order: 4;
-    flex: 1 1 100%;
+    order: 2;
+    flex: 1 1 150px;
     margin-left: 0;
   }
 

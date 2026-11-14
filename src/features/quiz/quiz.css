@@ -290,6 +290,11 @@
 }
 
 @media (max-width: 899px) {
+  /* The photo print would push the first question below the fold on a phone (26-final-review D-9); the article's own photo is one tap away. */
+  .quiz__print {
+    display: none;
+  }
+
   .question {
     grid-template-columns: 1fr;
     grid-template-areas: 'card' 'feedback' 'hints';
@@ -405,4 +410,14 @@
   color: var(--ink);
   font-weight: 700;
   text-decoration: none;
+}
+
+/* The quiz maker's note is plain flowing text, not a collage note: it must never be wider than the screen (26-final-review F-015). */
+.make-quiz__note {
+  margin: 8px 0;
+  max-width: 100%;
+  font-size: 26px;
+  line-height: 1.1;
+  color: var(--teal-ink);
+  rotate: -2deg;
 }

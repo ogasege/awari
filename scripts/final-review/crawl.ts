@@ -22,6 +22,8 @@ const routesOnly = process.argv.includes('--routes-only');
 const noFollow = process.argv.includes('--no-follow');
 /** Small controls on the phone layout, grouped by component (tag and first class). */
 const smallByComponent = new Map<string, number>();
+let placeholderTotal = 0;
+let screensWithPlaceholders = 0;
 const VIEWPORTS = [
   { name: '1440', width: 1440, height: 900 },
   { name: '390', width: 390, height: 844 },
@@ -67,7 +69,8 @@ function attach(page: Page, problems: string[]): void {
   });
   page.on('requestfailed', (r) => {
     const u = new URL(r.url());
-    if (u.origin === new URL(base).origin) problems.push(`request failed: ${u.pathname}`);
+    // Offline, a library picture that was never saved fails by design; what matters is that a placeholder replaces it (checked as broken images and counted below).
+    if (u.origin === new URL(base).origin && !(offlineMode && u.pathname.startsWith('/media/img/'))) problems.push(`request failed: ${u.pathname}`);
   });
   page.on('response', (r) => {
     const u = new URL(r.url());
@@ -75,7 +78,7 @@ function attach(page: Page, problems: string[]): void {
   });
 }
 
-async function inspect(page: Page, vp: string): Promise<{ problems: string[]; small: number; links: string[]; smallKeys: string[] }> {
+async function inspect(page: Page, vp: string): Promise<{ problems: string[]; small: number; links: string[]; smallKeys: string[]; placeholders: number }> {
   await page.evaluate(() => document.querySelectorAll('img').forEach((i) => (i.loading = 'eager'))).catch(() => undefined);
   await page.waitForFunction(() => ((document.querySelector('main') ?? document.body).textContent ?? '').trim().length >= 40, undefined, { timeout: 8000 }).catch(() => undefined);
   await page.waitForTimeout(500);
@@ -91,7 +94,9 @@ async function inspect(page: Page, vp: string): Promise<{ problems: string[]; sm
     const smallKeys: string[] = [];
     if (isPhone) {
       for (const el of document.querySelectorAll('button, input, select, [role="tab"], summary, a.btn, nav a, header a, .stamp-sheet__link, .tl-note__link')) {
-        const r = (el as HTMLElement).getBoundingClientRect();
+        // A radio button or checkbox is operated through its label, so the label's box is the target.
+        const box = el instanceof HTMLInputElement && (el.type === 'radio' || el.type === 'checkbox') ? (el.closest('label') ?? el) : el;
+        const r = (box as HTMLElement).getBoundingClientRect();
         if (r.width > 0 && r.height > 0 && Math.min(r.width, r.height) < 44) {
           small += 1;
           smallKeys.push(`${el.tagName.toLowerCase()}.${(el.getAttribute('class') ?? '').split(' ')[0] ?? ''}`);
@@ -99,7 +104,7 @@ async function inspect(page: Page, vp: string): Promise<{ problems: string[]; sm
       }
     }
     const links = [...document.querySelectorAll('a[href^="/"]')].map((a) => (a as HTMLAnchorElement).getAttribute('href') ?? '');
-    return { problems, small, links, smallKeys };
+    return { problems, small, links, smallKeys, placeholders: document.querySelectorAll('.pic-missing').length };
   }, vp === '390');
 }
 
@@ -114,6 +119,8 @@ async function visit(ctx: BrowserContext, vp: (typeof VIEWPORTS)[number], route:
     const r = await inspect(page, vp.name);
     problems.push(...r.problems);
     small = r.small;
+    placeholderTotal += r.placeholders;
+    if (r.placeholders > 0) screensWithPlaceholders += 1;
     for (const k of r.smallKeys) smallByComponent.set(k, (smallByComponent.get(k) ?? 0) + 1);
     links = r.links;
   } catch (e) {
@@ -214,6 +221,7 @@ const md = [
   `- Screens visited: ${visits.length} (${new Set(visits.map((v) => v.route)).size} distinct routes, both widths)`,
   `- Controls activated: ${allActs.length} (${activations.length} in the button sweep, ${journeyActs.length} in scripted journeys)`,
   `- Screen failures: ${failedVisits.length}; control failures: ${failedAct.length}`,
+  `- Designed picture placeholders shown (pictures not saved yet): ${placeholderTotal} on ${screensWithPlaceholders} screens`,
   `- Controls under 44 px on the phone layout (not counted as failures, listed for review): ${smallByVp}`,
   '',
   '## Controls activated per screen type',

@@ -7,7 +7,7 @@ import { clearPackCache } from '../../lib/packs/load.ts';
 import { onThisDay } from '../home/today.ts';
 import { OnThisDay } from '../home/OnThisDay.tsx';
 import { servePacksFromDisk } from '../../test/packFetch.ts';
-import TimelineScreen from './TimelineScreen.tsx';
+import TimelineScreen, { shortText } from './TimelineScreen.tsx';
 
 const pack = JSON.parse(readFileSync('public/packs/timeline.json', 'utf8')) as TimelinePack;
 const TOTAL = pack.events.length;
@@ -61,7 +61,7 @@ describe('Timeline screen from the committed pack (07-timeline 3.2, 18-world-tim
     await user.click(screen.getByRole('button', { name: 'Everywhere' }));
     await user.click(countries);
     await everything();
-    expect(screen.queryByText(/Marie Curie was born/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Born 7 November 1867/)).not.toBeInTheDocument();
     // A country event links to its article.
     expect(screen.getByRole('link', { name: 'Read about Mali' })).toHaveAttribute('href', '/article/countries/mali');
 
@@ -71,7 +71,7 @@ describe('Timeline screen from the committed pack (07-timeline 3.2, 18-world-tim
     await user.click(screen.getByRole('button', { name: '1800s' }));
     expect(screen.getByRole('heading', { name: 'The 1800s' })).toBeInTheDocument();
     await everything();
-    expect(screen.getByText('Marie Curie was born on 7 November 1867.')).toBeInTheDocument();
+    expect(screen.getByText('Born 7 November 1867.')).toBeInTheDocument();
     // The previous and next controls walk to the neighbouring centuries.
     await user.click(screen.getByRole('button', { name: '1900s →' }));
     expect(screen.getByRole('heading', { name: 'The 1900s' })).toBeInTheDocument();
@@ -92,7 +92,7 @@ describe('Timeline screen from the committed pack (07-timeline 3.2, 18-world-tim
     // Several events share 1867; the screen opens at the first of them.
     const firstEvent = pack.events.find((e) => e.date.startsWith('1867'));
     expect(firstEvent).toBeDefined();
-    const first = (await screen.findByText(firstEvent?.text ?? '')).closest('li');
+    const first = (await screen.findByText(shortText(firstEvent?.label ?? '', firstEvent?.text ?? ''))).closest('li');
     expect(first).toHaveClass('is-picked');
     expect(screen.getByRole('heading', { name: 'The 1800s' })).toBeInTheDocument();
   });

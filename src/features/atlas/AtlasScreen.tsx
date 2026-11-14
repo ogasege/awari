@@ -84,7 +84,7 @@ function Loaded({ shapes, facts, index, quizzes }: { shapes: Shapes; facts: Fact
           className="atlas__title"
         />
         <p className="atlas__lead">
-          Drag the Earth to turn it, then tap a country to visit. Every country you open turns
+          Drag the Earth to turn it, then pick a country to visit. Every country you open turns
           yellow and becomes a stamp in your book.
         </p>
         <label className="atlas__picker">
@@ -155,7 +155,7 @@ function Loaded({ shapes, facts, index, quizzes }: { shapes: Shapes; facts: Fact
             ) : null}
           </section>
         ) : (
-          <p className="atlas-card atlas-card--empty hand">Tap a country to see its facts here.</p>
+          <p className="atlas-card atlas-card--empty hand">Pick a country to see its facts here.</p>
         )}
       </div>
 

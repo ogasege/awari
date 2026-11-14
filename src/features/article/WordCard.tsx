@@ -56,7 +56,7 @@ export function WordCard({ tap }: { tap: Tap | null }) {
       </h2>
       <div aria-live="polite" className="word-card__answer">
         {asked === null ? (
-          <p className="word-card__hint">Tap any word in the article, or type one below.</p>
+          <p className="word-card__hint">Click or tap any word in the article, or type one below.</p>
         ) : def === undefined ? (
           <p>Looking up “{asked}”…</p>
         ) : def === null ? (

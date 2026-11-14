@@ -38,6 +38,18 @@ function articlePath(link: string): string {
   return `/article/${link}`;
 }
 
+/**
+ * The note's own sentence repeats its heading and its year ("X was born on 4 February 1900." under the heading X and
+ * the badge 1900). When the sentence starts with the label, show only what it adds: "Born 4 February 1900."
+ */
+export function shortText(label: string, text: string): string {
+  if (!text.startsWith(label)) return text;
+  const rest = text.slice(label.length).trim();
+  const m = /^was (\w+) on (.+)$/i.exec(rest);
+  if (!m?.[1]) return text;
+  return `${m[1].charAt(0).toUpperCase()}${m[1].slice(1)} ${m[2]}`;
+}
+
 function EventNote({ event, picked }: { event: TimelineEvent; picked: boolean }) {
   const year = yearOf(event);
   return (
@@ -50,7 +62,7 @@ function EventNote({ event, picked }: { event: TimelineEvent; picked: boolean })
           <span className="sr-only">{year}: </span>
           {event.label}
         </h3>
-        <p>{event.text}</p>
+        <p>{shortText(event.label, event.text)}</p>
         {event.continent ? <p className="tl-note__where">{event.continent}</p> : null}
         {event.link ? (
           <Link to={articlePath(event.link)} className="tl-note__link">

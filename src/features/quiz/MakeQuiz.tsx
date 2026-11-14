@@ -6,7 +6,7 @@
  * `fetchRemoteQuiz`. When anything fails, the bundled quizzes carry on.
  */
 import { useState, type FormEvent } from 'react';
-import { MarginNote } from '../../design/paper.tsx';
+
 import { fetchRemoteQuiz } from '../../lib/quiz/remote.ts';
 import { fetchWikipediaText } from '../../lib/quiz/wikipedia.ts';
 import type { QuizSet } from '../../lib/packs/types.ts';
@@ -100,9 +100,9 @@ export function MakeQuiz({
           Make my quiz
         </button>
       </form>
-      <MarginNote className="deco" decorative tilt={-3} size={28}>
+      <p className="make-quiz__note hand" aria-hidden="true">
         it can take half a minute!
-      </MarginNote>
+      </p>
       <p role="status" aria-live="polite" className="make-quiz__status">
         {state.status === 'working'
           ? 'Reading the article and writing questions…'

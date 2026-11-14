@@ -45,10 +45,10 @@ export function surprise(rows: readonly IndexRow[], count: number, random: () =>
   return out;
 }
 
-function Tile({ row, tilt, onOpen }: { row: IndexRow; tilt: number; onOpen: () => void }) {
+function Tile({ row, tilt, onOpen, onFail }: { row: IndexRow; tilt: number; onOpen: () => void; onFail?: (id: string) => void }) {
   return (
     <button type="button" className="tile lift" style={{ rotate: `${tilt}deg` }} onClick={onOpen}>
-      <SafeImg src={thumbUrl(`img/${row[0]}.webp`)} alt={row[5]} width={row[3]} height={row[4]} loading="lazy" decoding="async" />
+      <SafeImg src={thumbUrl(`img/${row[0]}.webp`)} alt={row[5]} width={row[3]} height={row[4]} loading="lazy" decoding="async" onFail={() => onFail?.(row[0])} />
       <span className="tile__cap hand">{row[5]}</span>
     </button>
   );
@@ -71,7 +71,10 @@ export default function MediaScreen() {
   // With no filter the grid opens on the best pictures (Commons Featured, Quality and Valued, then article leads, one per
   // article before any repeats), in the order the build ranked them; rows without a rank keep a fixed mix.
   const rows = useMemo(() => (index.status === 'ready' ? [...index.data.items].sort((a, b) => (a[6] ?? 1e9) - (b[6] ?? 1e9) || mixOf(a[0]) - mixOf(b[0])) : []), [index]);
-  const matches = useMemo(() => filterRows(rows, subject, kind, query), [rows, subject, kind, query]);
+  // A picture that cannot load (not yet saved, and no connection) is left out; one note says how many, so the grid never becomes a row of blanks.
+  const [failed, setFailed] = useState<ReadonlySet<string>>(new Set());
+  const onFail = (id: string): void => setFailed((p) => (p.has(id) ? p : new Set(p).add(id)));
+  const matches = useMemo(() => filterRows(rows, subject, kind, query).filter((r) => !failed.has(r[0])), [rows, subject, kind, query, failed]);
   // Emblems are not collected, and a diagram only when it is a recognised picture: no chip for a kind the library skips.
   const kinds = useMemo(() => [...new Set(rows.map((r) => r[2]))].filter((k) => k !== 'emblem').sort(), [rows]);
   const current = open ? rows.find((r) => r[0] === open) : undefined;
@@ -174,13 +177,14 @@ export default function MediaScreen() {
         <p className="media__count" role="status">
           Showing {Math.min(shown, matches.length)} of {matches.length} pictures
           {subject === 'all' ? '' : ` about ${SUBJECT_NAME.get(subject) ?? subject}`}.
+          {failed.size > 0 ? ` ${failed.size} more ${failed.size === 1 ? 'needs' : 'need'} a connection first.` : ''}
         </p>
       ) : null}
       <div className="media__table">
         <TornEdge color="var(--coral)" seed="media-top" height={26} />
         <div className="media__grid">
           {matches.slice(0, shown).map((r, i) => (
-            <Tile key={r[0]} row={r} tilt={[-1.5, 1, -0.6, 1.4][i % 4] ?? 0} onOpen={() => setOpen(r[0])} />
+            <Tile key={r[0]} row={r} tilt={[-1.5, 1, -0.6, 1.4][i % 4] ?? 0} onOpen={() => setOpen(r[0])} onFail={onFail} />
           ))}
         </div>
       </div>

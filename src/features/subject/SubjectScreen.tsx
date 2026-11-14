@@ -220,7 +220,7 @@ export function SubjectList() {
         ]}
       />
       <MarginNote tilt={-2} size={30} className="subjects-intro crowding" style={{ color: 'var(--teal-ink)' }}>
-        {SUBJECTS.length} subjects. Tap a picture to open its pages.
+        {SUBJECTS.length} subjects. Pick a picture to open its pages.
       </MarginNote>
       <ul className="subject-prints">
         {SUBJECTS.map((s, i) => (

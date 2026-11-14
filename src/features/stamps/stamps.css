@@ -203,3 +203,17 @@
 .forget {
   margin-top: 32px;
 }
+
+/* An empty stamp space carries the country's printed name, like a real album page (26-final-review D-11). */
+.stamp-book__slot-name {
+  max-width: 90%;
+  font-size: 22px;
+  line-height: 1;
+  text-align: center;
+  color: var(--ink);
+}
+
+.stamp-book__empty-slot .stamp-book__q {
+  font-size: 30px;
+  opacity: 0.45;
+}

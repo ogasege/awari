@@ -231,6 +231,9 @@
 }
 
 .tl-note__link {
+  display: inline-block;
+  min-height: 44px;
+  padding-top: 10px;
   color: var(--teal);
   font-weight: 700;
 }
@@ -260,9 +263,9 @@
 }
 
 .timeline__filters--continents .timeline__chip {
-  min-height: 40px;
+  min-height: 44px;
   font-size: 16px;
-  border-style: dashed;
+  border-style: solid;
 }
 
 .tl-note__where {

@@ -29,7 +29,8 @@ export async function runJourneys(ctx: BrowserContext, base: string, viewport: s
     const u = new URL(r.url());
     if (u.origin === origin && r.status() >= 400 && !u.pathname.startsWith('/api/')) problems.push(`HTTP ${r.status()} ${u.pathname}`);
   });
-  if (offline) page.on('requestfailed', (r) => new URL(r.url()).origin === origin && problems.push(`request failed ${new URL(r.url()).pathname}`));
+  // Offline, an unsaved library picture fails by design and is replaced by a placeholder; any other failed request is a failure.
+  if (offline) page.on('requestfailed', (r) => new URL(r.url()).origin === origin && !new URL(r.url()).pathname.startsWith('/media/img/') && problems.push(`request failed ${new URL(r.url()).pathname}`));
 
   const go = async (path: string): Promise<void> => {
     await page.goto(`${base}${path}`, { waitUntil: 'load' });

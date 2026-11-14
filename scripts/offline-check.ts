@@ -106,13 +106,13 @@ const brokenImages = (p: Page): Promise<number> =>
   p.evaluate(() => [...document.querySelectorAll('img')].filter((i) => i.complete && i.naturalWidth === 0 && !i.src.endsWith('.svg')).length);
 
 await context.setOffline(true);
-await step('Unsaved pictures offline: designed placeholders, a plain note, no broken-image icon', async (p) => {
+await step('Unsaved pictures offline: left out with one note, no empty frames, no broken-image icon', async (p) => {
   await open(p, '/article/countries/nigeria');
   await p.locator('.gallery').waitFor({ timeout: 10_000 });
   await loadAllImages(p);
   if ((await brokenImages(p)) > 0) throw new Error('a broken image is showing');
-  if ((await p.locator('.gallery .pic-missing').count()) === 0) throw new Error('expected placeholders for pictures not saved yet');
-  await p.getByText('need a connection the first time').waitFor({ timeout: 5_000 });
+  if ((await p.locator('.gallery .pic-missing').count()) > 0) throw new Error('empty frames are showing instead of one note');
+  await p.getByText(/more pictures when you are back online/).waitFor({ timeout: 5_000 });
 });
 await context.setOffline(false);
 await step('Save all pictures on Credits, then every picture works offline', async (p) => {

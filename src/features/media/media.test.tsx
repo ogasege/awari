@@ -1,5 +1,5 @@
 /** 23-media-library: the article strip (Property 3), the viewer and the Pictures screen (Req 12, 17, 18). */
-import { render, screen, within } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { readFileSync } from 'node:fs';
 import fc from 'fast-check';
@@ -55,6 +55,18 @@ describe('ArticleGallery', () => {
     expect(imgs.length).toBeGreaterThan(0);
     expect(new Set(imgs.map((i) => i.getAttribute('src'))).size).toBe(imgs.length);
     for (const i of imgs) expect(i.getAttribute('alt')?.length).toBeGreaterThan(1);
+  });
+
+  it('leaves out pictures that cannot load and says how many with one line (26-final-review)', async () => {
+    const key = index.items[0]?.[1] ?? '';
+    const { container } = render(<ArticleGallery articleKey={key} />);
+    await screen.findByRole('heading', { name: 'More pictures' });
+    const before = container.querySelectorAll('.gallery__thumb img').length;
+    expect(before).toBeGreaterThan(1);
+    for (const img of [...container.querySelectorAll('.gallery__thumb img')].slice(0, 2)) fireEvent.error(img);
+    expect(container.querySelectorAll('.gallery__thumb').length).toBe(before - 2);
+    expect(container.querySelectorAll('.pic-missing').length).toBe(0);
+    expect(screen.getByRole('status').textContent).toMatch(/2 more pictures when you are back online/);
   });
 
   it('renders nothing for an article with no pictures', async () => {
