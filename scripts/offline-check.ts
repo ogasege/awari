@@ -39,9 +39,12 @@ const server = createServer((req, res) => {
   res.writeHead(200, { 'content-type': TYPES[extname(file)] ?? 'application/octet-stream' });
   createReadStream(file).pipe(res);
 });
-await new Promise<void>((resolve) => server.listen(0, '127.0.0.1', resolve));
+// OFFLINE_CHECK_URL=https://... runs the same steps against a deployed site instead of dist/.
+const liveUrl = process.env.OFFLINE_CHECK_URL?.replace(/\/$/, '');
+if (!liveUrl) await new Promise<void>((resolve) => server.listen(0, '127.0.0.1', resolve));
 const address = server.address();
-const base = `http://127.0.0.1:${typeof address === 'object' && address ? address.port : 0}`;
+const base =
+  liveUrl ?? `http://127.0.0.1:${typeof address === 'object' && address ? address.port : 0}`;
 
 const browser = await chromium.launch();
 const context = await browser.newContext({ serviceWorkers: 'allow' });
@@ -68,7 +71,7 @@ const open = async (p: Page, path: string): Promise<void> => {
 // 1. One visit online: wait until the site says it is saved.
 console.log(`Visiting ${base} once, online…`);
 await page.goto(base, { waitUntil: 'load' });
-await page.getByRole('status').filter({ hasText: 'Works offline' }).waitFor({ timeout: 90_000 });
+await page.getByRole('status').filter({ hasText: 'Works offline' }).waitFor({ timeout: liveUrl ? 600_000 : 90_000 });
 // Any article, on demand (14-any-article): read one from Wikipedia while online.
 let wikiRead = false;
 try {

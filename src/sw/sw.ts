@@ -41,8 +41,8 @@ interface MessageEv {
 const scope = self as unknown as WorkerScope;
 const CACHE = cacheNameFor(__VERSION__);
 const PRECACHE = new Set(__PRECACHE__);
-/** Files fetched at once during install. */
-const BATCH = 16;
+/** Files fetched at once during install (HTTP/2 to CloudFront handles this well). */
+const POOL = 48;
 
 async function announce(type: 'ready'): Promise<void> {
   const clients = await scope.clients.matchAll({ includeUncontrolled: true, type: 'window' });
@@ -54,23 +54,26 @@ async function announce(type: 'ready'): Promise<void> {
 /** Saves every file; any failure rejects, so the install fails whole. */
 async function saveSite(): Promise<void> {
   const cache = await caches.open(CACHE);
-  const missing = [];
+  const missing: string[] = [];
   for (const url of __PRECACHE__) {
     if (!(await cache.match(url))) {
       missing.push(url);
     }
   }
-  for (let i = 0; i < missing.length; i += BATCH) {
-    await Promise.all(
-      missing.slice(i, i + BATCH).map(async (url) => {
+  // A pool, not lock-step batches: a slow (cold-edge) file no longer holds up the others.
+  let next = 0;
+  await Promise.all(
+    Array.from({ length: Math.min(POOL, missing.length) }, async () => {
+      while (next < missing.length) {
+        const url = missing[next++] as string;
         const res = await fetch(url, { cache: 'reload' });
         if (!res.ok) {
           throw new Error(`Could not save ${url} (${res.status})`);
         }
         await cache.put(url, res);
-      }),
-    );
-  }
+      }
+    }),
+  );
 }
 
 scope.addEventListener('install', (event: WaitEvent) => {
