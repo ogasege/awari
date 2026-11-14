@@ -37,11 +37,17 @@ function testReport(dir: string, out: string, run: boolean): { total: number; pa
 
 /** The media library: pictures, the size of the thumbnails and how many images the licence check covers. */
 function mediaStats(): Stats {
-  if (!existsSync('public/media/index.json')) return { mediaPictures: 0, mediaMB: '0', mediaVerified: 0 };
+  if (!existsSync('public/media/index.json')) return { mediaPictures: 0, mediaMB: '0', mediaVerified: 0, mediaGaps: 0 };
   const dir = 'public/media/img';
   const bytes = existsSync(dir) ? readdirSync(dir).reduce((n, f) => n + statSync(join(dir, f)).size, 0) : 0;
   const lic = existsSync('public/media/licences.json') ? json<{ count: number; problems: number }>('public/media/licences.json') : { count: 0, problems: 0 };
-  return { mediaPictures: json<{ count: number }>('public/media/index.json').count, mediaMB: (bytes / 1048576).toFixed(0), mediaVerified: lic.count };
+  // Articles with fewer than four pictures: the gaps the write-up admits to.
+  const index = json<{ count: number; items: Array<[string, string]> }>('public/media/index.json');
+  const perArticle = new Map<string, number>();
+  for (const row of index.items) perArticle.set(row[1], (perArticle.get(row[1]) ?? 0) + 1);
+  const articles = SUBJECTS.map((x) => x.id).flatMap((s) => json<{ items: Array<{ id: string }> }>(`public/packs/${s}/index.json`).items.map((i) => `${s}/${i.id}`));
+  const mediaGaps = articles.filter((a) => (perArticle.get(a) ?? 0) < 4).length;
+  return { mediaPictures: index.count, mediaMB: (bytes / 1048576).toFixed(0), mediaVerified: lic.count, mediaGaps };
 }
 
 export function computeStats(runTests: boolean): Stats {

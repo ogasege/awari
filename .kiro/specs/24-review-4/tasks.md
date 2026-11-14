@@ -13,4 +13,4 @@ One commit per task, log row in `docs/kiro-log.md`, tests before ticking.
 - [x] 9. Credits page paged with search.
 - [x] 10. Perforated stamp slots on the Atlas and stamp book.
 - [x] 11. Coordinate strings out of snippets and leads.
-- [ ] 12. Screenshots, licences, submission-check, offline-check, numbers, report.
+- [x] 12. Screenshots, licences, submission-check, offline-check, numbers, report.

@@ -68,8 +68,10 @@ the Credits screen; they are not repeated here.
 - `media/*.json` (one record file per subject, the compact index, the picture of each day and `licences.json`, the dated
   answer of the Commons API for every image in this file and in the tables above)
 
-The text of a caption is a shortening of the Commons description or of the file name. Changes made by Awari: resized to
-480 px and saved as WebP.
+The text of a caption is a shortening of the English Commons description or of the Commons structured caption, or a short
+caption written by hand from what the file's own Commons page says (`scripts/media/captions-decisions.txt`). A file name is
+never a caption. Authors are shown as names: an account link becomes the account ("anoldent on Flickr"). Changes made by
+Awari: resized to 480 px and saved as WebP.
 
 ## Home rotation
 

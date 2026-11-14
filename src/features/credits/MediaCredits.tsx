@@ -41,25 +41,25 @@ export function MediaCredits() {
               <table>
                 <thead>
                   <tr>
-                    <th scope="col">Picture</th>
-                    <th scope="col">Author</th>
-                    <th scope="col">Licence</th>
-                    <th scope="col">Commons page</th>
+                    <th scope="col" data-col="Picture">Picture</th>
+                    <th scope="col" data-col="Author">Author</th>
+                    <th scope="col" data-col="Licence">Licence</th>
+                    <th scope="col" data-col="Commons page">Commons page</th>
                   </tr>
                 </thead>
                 <tbody>
                   {shown.map((m) => (
                     <tr key={m.id}>
-                      <td>
+                      <td data-col="Picture">
                         <Link to={`/media?pic=${m.id}`}>{m.caption}</Link> <small>({m.articleTitle})</small>
                       </td>
-                      <td>{m.author || 'unknown'}</td>
-                      <td>
+                      <td data-col="Author">{m.author || 'unknown'}</td>
+                      <td data-col="Licence">
                         <a href={m.licenceUrl || m.page} rel="noreferrer">
                           {m.licence}
                         </a>
                       </td>
-                      <td>
+                      <td data-col="Commons page">
                         <a href={m.page} rel="noreferrer">
                           {m.title.replace(/^File:/, '')}
                         </a>

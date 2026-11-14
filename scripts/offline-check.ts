@@ -219,7 +219,7 @@ await step('A picture question plays in the Castle offline', async (p) => {
   await open(p, '/quiz/pictures/ancient');
   await p.getByRole('radio').first().waitFor({ timeout: 10_000 });
   await p.locator('.question__image').waitFor({ timeout: 10_000 });
-  await p.getByText('What is this a picture of?').waitFor({ timeout: 10_000 });
+  await p.getByText(/is this a picture of\?/).first().waitFor({ timeout: 10_000 });
 });
 
 await browser.close();

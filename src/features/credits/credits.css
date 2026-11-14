@@ -53,9 +53,15 @@
   overflow-wrap: anywhere;
 }
 
-.credits th,
-.credits td:nth-child(3) {
+/* The licence column stays on one line; the Commons page column keeps a readable width, so a row is a few lines high. */
+.credits th[data-col="Licence"],
+.credits td[data-col="Licence"],
+.credits th[data-col="Licence"] {
   white-space: nowrap;
+}
+
+.credits td:last-child {
+  min-width: 24ch;
 }
 
 .credits {

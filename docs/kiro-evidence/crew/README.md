@@ -49,3 +49,10 @@ What did not work, and is not claimed as fixed:
 ## What this does not show
 
 The write-up must not say a conductor, a workflow run or `awari-builder` crew run was used. Say that two Crew members (the licence auditor and the design reviewer) reviewed the final screenshots and photos, that three Crew hooks fired during the build, and that Knowledge holds the three documents.
+
+## Spec 24 (review 4): what ran
+
+No Crew member was started for spec 24. I did the twelve items myself in one session, one commit each, and checked the screens by eye:
+- The captions, the lead pictures and the Pictures screen were read by me from contact sheets and screenshots. This is not an independent review, and it should not be described as one. The 214 hand decisions in `scripts/media/captions-decisions.txt` are mine.
+- The judges' path and the 30 biggest countries were compared on one contact sheet (lead picture against the library's first picture); the leads were right except for the ones listed in the kiro-log row for task 4, which were replaced.
+- A new design review and a new licence audit would need the retaken screenshots in `docs/screenshots/` and a fresh random sample of `public/media/`; `npm run licences` (4,216 of 4,216 images, 0 problems) is the licence evidence for this round.

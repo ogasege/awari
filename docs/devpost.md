@@ -32,14 +32,14 @@ discovery.
 - **A stamp book** with a page per continent, counted out of all <!--n:countries-->197<!--/n-->
   countries.
 - **Quizzes with a hint ladder**: <!--n:quizzes-->479<!--/n--> quizzes,
-  <!--n:questions-->2364<!--/n--> questions, three hints each (a nudge, where to look, two wrong
+  <!--n:questions-->2360<!--/n--> questions, three hints each (a nudge, where to look, two wrong
   answers removed), and the proof sentence after a right answer. Right and wrong are said in
   words.
 - **The Castle**: <!--n:wings-->16<!--/n--> wings, one per continent and one per subject, twelve
   rooms each.
 - **A timeline** of <!--n:events-->1530<!--/n--> dates across every subject and continent, and **On
   this day** on Home, which also rotates its prints, notes and suggestions daily.
-- **A picture library** of <!--n:mediaPictures-->3982<!--/n--> Commons pictures (four or more per article but eighteen, <!--n:mediaMB-->87<!--/n--> MB of small WebP copies): an article strip, a large view with the credit, a Pictures screen, the picture of the day and picture questions. No licence is typed by hand: `npm run licences` asks the Commons API about <!--n:mediaVerified-->4478<!--/n--> images and fails the submission check on any mismatch.
+- **A picture library** of <!--n:mediaPictures-->3720<!--/n--> Commons pictures (four or more per article but <!--n:mediaGaps-->25<!--/n-->, <!--n:mediaMB-->82<!--/n--> MB of small WebP copies): an article strip, a large view with the credit, a Pictures screen, the picture of the day and picture questions. No licence is typed by hand: `npm run licences` asks the Commons API about <!--n:mediaVerified-->4216<!--/n--> images and fails the submission check on any mismatch.
 - **Offline**: a hand-written service worker saves the whole bundle. After one visit every bundled
   feature works in airplane mode, and the header says honestly whether the site has been saved.
 - **An optional quiz service** (AWS Lambda calling Amazon Bedrock) that checks every generated
@@ -97,9 +97,9 @@ Kiro IDE; they have not fired, because the IDE was not used.
 
 ### Spec-driven development
 
-<!--n:specs-->23<!--/n--> specs, each with EARS requirements and numbered acceptance criteria, a
-design that derives correctness properties, and tasks; <!--n:specTasksDone-->198<!--/n--> of
-<!--n:specTasks-->198<!--/n--> tasks are done, each committed as `<spec> <task>: <summary>`. The
+<!--n:specs-->24<!--/n--> specs, each with EARS requirements and numbered acceptance criteria, a
+design that derives correctness properties, and tasks; <!--n:specTasksDone-->209<!--/n--> of
+<!--n:specTasks-->210<!--/n--> tasks are done, each committed as `<spec> <task>: <summary>`. The
 difference from vibe coding showed most when the scope grew to the whole world: specs 14 to 20
 were written before any code. The design for the timeline made us check what Wikidata's
 "inception" means, found that it is often not a country's independence day, and turned that

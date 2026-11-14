@@ -33,7 +33,7 @@ proves it.
 
 ## How Kiro shaped it
 
-I built it in Kiro Crew, spec first: <!--n:specs-->23<!--/n--> specs with EARS requirements, a
+I built it in Kiro Crew, spec first: <!--n:specs-->24<!--/n--> specs with EARS requirements, a
 design that turns them into correctness properties, and tasks, each committed on its own. The
 specs paid off when I widened the scope to the whole world. Writing them first made me ask what
 Wikidata's "inception" date means for a country, and the answer (often not independence: Nigeria's

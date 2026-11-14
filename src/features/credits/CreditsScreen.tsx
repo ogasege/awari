@@ -9,14 +9,41 @@ import { PAGE_SIZE, Paged } from './Paged.tsx';
 import './credits.css';
 
 /** Renders `code`, [links](url) and plain text without injecting HTML. */
+/** A readable label for a bare web address: the file name of a Commons page, else the host. */
+function labelFor(url: string): string {
+  const m = /commons\.wikimedia\.org\/wiki\/File:([^?#]+)/.exec(url);
+  if (m?.[1]) {
+    try {
+      return decodeURIComponent(m[1]).replace(/_/g, ' ');
+    } catch {
+      return m[1].replace(/_/g, ' ');
+    }
+  }
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return url;
+  }
+}
+
 function inline(text: string): ReactNode[] {
   const out: ReactNode[] = [];
-  const re = /`([^`]+)`|\[([^\]]+)\]\((https?:[^)\s]+)\)/g;
+  const re = /`([^`]+)`|\[([^\]]+)\]\((https?:[^)\s]+)\)|(https?:\/\/\S+)/g;
   let last = 0;
   for (const m of text.matchAll(re)) {
     out.push(text.slice(last, m.index));
     if (m[1] !== undefined) {
       out.push(<code key={m.index}>{m[1]}</code>);
+    } else if (m[4] !== undefined) {
+      // A closing bracket or full stop after the address belongs to the sentence, unless the address itself holds the bracket.
+      let url = m[4];
+      while (/[).,;]$/.test(url) && !(url.endsWith(')') && (url.match(/\(/g) ?? []).length >= (url.match(/\)/g) ?? []).length)) url = url.slice(0, -1);
+      out.push(
+        <a key={m.index} href={url} rel="noreferrer">
+          {labelFor(url)}
+        </a>,
+        m[4].slice(url.length),
+      );
     } else {
       out.push(
         <a key={m.index} href={m[3]} rel="noreferrer">
@@ -67,7 +94,7 @@ export default function CreditsScreen() {
                     <thead>
                       <tr>
                         {b.head.map((h) => (
-                          <th key={h} scope="col">
+                          <th key={h} scope="col" data-col={h}>
                             {h}
                           </th>
                         ))}
@@ -77,7 +104,7 @@ export default function CreditsScreen() {
                       {shown.map((r) => (
                         <tr key={r.join('|')}>
                           {r.map((c, j) => (
-                            <td key={j}>{inline(c)}</td>
+                            <td key={j} data-col={b.head[j]}>{inline(c)}</td>
                           ))}
                         </tr>
                       ))}
@@ -93,7 +120,7 @@ export default function CreditsScreen() {
                 <thead>
                   <tr>
                     {b.head.map((h) => (
-                      <th key={h} scope="col">
+                      <th key={h} scope="col" data-col={h}>
                         {h}
                       </th>
                     ))}
@@ -103,7 +130,7 @@ export default function CreditsScreen() {
                   {b.rows.map((r) => (
                     <tr key={r.join('|')}>
                       {r.map((c, j) => (
-                        <td key={j}>{inline(c)}</td>
+                        <td key={j} data-col={b.head[j]}>{inline(c)}</td>
                       ))}
                     </tr>
                   ))}
