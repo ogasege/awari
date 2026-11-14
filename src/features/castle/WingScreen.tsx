@@ -6,6 +6,8 @@ import { useEffect, useReducer, useState } from 'react';
 import { Link } from '../../app/navigation.tsx';
 import { useTitle } from '../../app/useTitle.ts';
 import { Button, StripHeading } from '../../design/paper.tsx';
+import { loadMedia, type MediaFile } from '../../lib/media/media.ts';
+import { pictureQuestions, weave } from '../../lib/quiz/picture.ts';
 import { loadPack, usePack } from '../../lib/packs/load.ts';
 import { normaliseContinent } from '../../lib/packs/subjects.ts';
 import type { PackIndex, Question, QuizSet } from '../../lib/packs/types.ts';
@@ -37,12 +39,23 @@ function useWingPool(wing: Wing): PoolState {
     const entries = quizIndex.data.quizzes.filter((q) => q.pack === wing.pack && (!allowed || allowed.has(q.id)));
     let live = true;
     Promise.all(entries.map((e) => loadPack<QuizSet>(`quizzes/${e.pack}/${e.id}.json`))).then(
-      (sets) =>
-        live &&
+      async (sets) => {
+        // Picture questions from the media library join the pool, one after every third question. If the
+        // pictures cannot be loaded the wing plays on with its written questions alone.
+        let pictures: Question[];
+        try {
+          const media = await loadMedia<MediaFile>(`${wing.pack}.json`);
+          const fed = new Set(sets.map((s) => `${s.pack}/${s.articleId}`));
+          pictures = pictureQuestions(media.items.filter((m) => fed.has(m.article)), 4, wing.id.length * 7919);
+        } catch {
+          pictures = [];
+        }
+        if (!live) return;
         setState({
           wing: wing.id,
-          value: { status: 'ready', pool: buildPool(sets), titles: new Map(sets.map((s) => [s.articleId, s.title])) },
-        }),
+          value: { status: 'ready', pool: weave(buildPool(sets), pictures, 3), titles: new Map(sets.map((s) => [s.articleId, s.title])) },
+        });
+      },
       () => live && setState({ wing: wing.id, value: { status: 'error' } }),
     );
     return () => {

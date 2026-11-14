@@ -9,16 +9,22 @@ import { useTitle } from '../../app/useTitle.ts';
 import { Button, Doodle, MarginNote, Print, StripHeading } from '../../design/paper.tsx';
 import { coverFor } from '../../lib/packs/covers.ts';
 import { packUrl, usePack } from '../../lib/packs/load.ts';
-import { isBundledPack } from '../../lib/packs/subjects.ts';
+import { useMedia, type MediaFile } from '../../lib/media/media.ts';
+import { SUBJECTS, isBundledPack } from '../../lib/packs/subjects.ts';
 import type { Article, QuizSet } from '../../lib/packs/types.ts';
 import { autoTerms, buildQuiz } from '../../lib/quiz/generate.ts';
+import { pictureQuestions } from '../../lib/quiz/picture.ts';
 import { update, withQuizResult } from '../../lib/store/progress.ts';
 import { errorWords, useWikiArticle } from '../article/useWikiArticle.ts';
+import { dayNumber } from '../home/today.ts';
 import { QuestionCard } from './QuestionCard.tsx';
 import { initialState, reduce, type QuizState } from './quizMachine.ts';
 import './quiz.css';
 
 /** Drawn dots: filled for answered questions, ringed for the current one. */
+const SUBJECT_IDS = new Set<string>(SUBJECTS.map((x) => x.id));
+const SUBJECT_LABELS = new Map<string, string>(SUBJECTS.map((x) => [x.id as string, x.label]));
+
 function Dots({ total, index }: { total: number; index: number }) {
   return (
     <svg aria-hidden="true" viewBox={`0 0 ${total * 28} 24`} width={total * 28} height={24} className="quiz-dots">
@@ -202,12 +208,35 @@ function WikiQuiz({ title }: { title: string }) {
   return <Quiz key={`wiki/${title}`} quiz={quiz} />;
 }
 
+/** Five picture questions from the media library for one subject (23-media-library Req 20). */
+function PictureQuiz({ subject }: { subject: string }) {
+  const file = useMedia<MediaFile>(SUBJECT_IDS.has(subject) ? `${subject}.json` : null);
+  const quiz = useMemo<QuizSet | null>(() => {
+    if (file.status !== 'ready') return null;
+    const questions = pictureQuestions(file.data.items, 5, dayNumber(new Date()) + subject.length);
+    return questions.length >= 3
+      ? {
+          articleId: subject,
+          pack: 'pictures' as never,
+          title: `${SUBJECT_LABELS.get(subject) ?? subject} pictures`,
+          questions,
+          source: { name: 'Wikimedia Commons pictures, each credited in its answer', url: 'https://commons.wikimedia.org/', licence: 'CC BY-SA 4.0', licenceUrl: 'https://creativecommons.org/licenses/by-sa/4.0/', retrieved: '2026-11-14' },
+        }
+      : null;
+  }, [file, subject]);
+  if (!SUBJECT_IDS.has(subject)) return <NoQuiz words="There is no picture quiz for that subject." />;
+  if (file.status === 'loading') return <p className="page">Shuffling the pictures…</p>;
+  if (file.status === 'error' || !quiz) return <NoQuiz words="The pictures could not be opened for a quiz. Try again when you are online once." />;
+  return <Quiz key={`pictures/${subject}`} quiz={quiz} externalUrl="/media" />;
+}
+
 export default function QuizScreen({ params }: { params: Record<string, string> }) {
   const pack = params['pack'] ?? '';
   const id = params['id'] ?? '';
   const ok = isBundledPack(pack);
   const quiz = usePack<QuizSet>(ok ? `quizzes/${pack}/${id}.json` : null);
   if (pack === 'wiki') return <WikiQuiz title={id} />;
+  if (pack === 'pictures') return <PictureQuiz subject={id} />;
   if (!ok || quiz.status === 'error') {
     return <NoQuiz words="There is no quiz for that page." />;
   }

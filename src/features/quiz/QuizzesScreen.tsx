@@ -37,6 +37,17 @@ export default function QuizzesScreen() {
         Every quiz has five questions and three hints for each one. Read the article first, or dive
         straight in.
       </p>
+      <section className="quizzes__pictures" aria-labelledby="quizzes-pictures">
+        <h2 id="quizzes-pictures">Picture quizzes</h2>
+        <p>Look at a picture and say which page it belongs to.</p>
+        <ul className="quizzes__picture-list">
+          {SUBJECTS.map((s) => (
+            <li key={s.id}>
+              <Link to={`/quiz/pictures/${s.id}`}>{s.label}</Link>
+            </li>
+          ))}
+        </ul>
+      </section>
       <MakeQuiz />
       <label className="quizzes__filter">
         <span>Find a quiz</span>

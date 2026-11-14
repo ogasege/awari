@@ -19,6 +19,14 @@ function answersByPrompt(): Map<string, string> {
   return map;
 }
 
+/** The right page for the picture on screen: its file name is the picture's id in the library. */
+function pictureAnswer(pack: string): string | undefined {
+  const src = document.querySelector('.question__image')?.getAttribute('src') ?? '';
+  const id = /\/img\/([0-9a-f]+)\.webp/.exec(src)?.[1];
+  const file = JSON.parse(readFileSync(`public/media/${pack}.json`, 'utf8')) as { items: Array<{ id: string; articleTitle: string }> };
+  return file.items.find((m) => m.id === id)?.articleTitle;
+}
+
 describe('The Castle from the committed packs (06-castle)', () => {
   beforeEach(async () => {
     servePacksFromDisk();
@@ -37,7 +45,7 @@ describe('The Castle from the committed packs (06-castle)', () => {
       expect(await screen.findByText(`Room ${room} of 12`, { selector: '.wing__room' })).toBeInTheDocument();
       const legend = document.querySelector('.question__prompt') as HTMLElement;
       const prompt = (legend.lastChild?.textContent ?? '').trim();
-      const answer = answers.get(prompt);
+      const answer = prompt.startsWith('Which page does this picture') ? pictureAnswer('countries') : answers.get(prompt);
       expect(answer, `answer for "${prompt}"`).toBeDefined();
       await user.click(screen.getByRole('radio', { name: answer as string }));
       await user.click(screen.getByRole('button', { name: 'Check my answer' }));

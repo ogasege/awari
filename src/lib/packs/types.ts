@@ -172,6 +172,8 @@ export interface Question {
   proof: string;
   /** Heading of the section the proof sentence is in ("" for the lead). */
   proofSection: string;
+  /** A picture to look at before answering (picture questions from the media library). */
+  image?: { src: string; alt: string };
 }
 
 /** `/packs/quizzes/<pack>/<articleId>.json`: five questions. */

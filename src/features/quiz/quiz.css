@@ -372,3 +372,35 @@
   rotate: -4deg;
   pointer-events: none;
 }
+
+/* A picture question shows its picture above the answers. */
+.question__image {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  max-height: 280px;
+  margin: 8px 0 16px;
+  object-fit: contain;
+  background: var(--mist);
+  box-shadow: var(--shadow-print);
+}
+
+.quizzes__picture-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin: 8px 0 20px;
+  padding: 0;
+  list-style: none;
+}
+
+.quizzes__picture-list a {
+  display: inline-block;
+  padding: 6px 14px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: none;
+}

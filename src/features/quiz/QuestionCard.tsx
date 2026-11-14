@@ -89,6 +89,7 @@ export function QuestionCard({
           </span>
           {q.prompt}
         </legend>
+        {q.image ? <img className="question__image" src={q.image.src} alt={q.image.alt} /> : null}
         <div className="question__options">
           {q.options.map((opt, i) =>
             visible.includes(i) ? (
