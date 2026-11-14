@@ -46,7 +46,7 @@ npm run submission-check  # .kiro, licence, write-up claims, numbers, secrets, t
 
 | What | Where |
 | --- | --- |
-| Specs (EARS requirements, design with correctness properties, tasks) | `.kiro/specs/` (<!--n:specs-->24<!--/n-->) |
+| Specs (EARS requirements, design with correctness properties, tasks) | `.kiro/specs/` (<!--n:specs-->25<!--/n-->) |
 | Steering | `.kiro/steering/` |
 | Custom agents (builder with hooks and MCP, licence auditor, design reviewer) | `.kiro/agents/`, `docs/kiro-evidence/agents.md` |
 | Hooks and their recorded firings | `.kiro/hooks/README.md`, `docs/kiro-evidence/hooks.md`, `docs/kiro-evidence/hook-firings.jsonl` |
