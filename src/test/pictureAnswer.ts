@@ -1,7 +1,12 @@
 /** Test helper: the right page for the picture question on screen (the file name of its picture is its id in the library). */
 import { readFileSync } from 'node:fs';
 
-export const PICTURE_PROMPT = 'Which page does this picture belong to?';
+export const PICTURE_PROMPT = /^(?:What is this a picture of|Which country is this a picture of)\?$/;
+
+/** True when the question on screen is a picture question (it shows a picture above its answers). */
+export function isPictureQuestion(): boolean {
+  return document.querySelector('.question__image') !== null;
+}
 
 export function pictureAnswer(pack: string): string | undefined {
   const src = document.querySelector('.question__image')?.getAttribute('src') ?? '';

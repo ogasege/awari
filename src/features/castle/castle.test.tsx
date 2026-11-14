@@ -4,6 +4,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { beforeEach, describe, expect, it } from 'vitest';
 import type { Question, QuizSet } from '../../lib/packs/types.ts';
 import { getProgress, resetForTests, update } from '../../lib/store/progress.ts';
+import { isPictureQuestion } from '../../test/pictureAnswer.ts';
 import { servePacksFromDisk } from '../../test/packFetch.ts';
 import CastleScreen from './CastleScreen.tsx';
 import WingScreen from './WingScreen.tsx';
@@ -45,7 +46,7 @@ describe('The Castle from the committed packs (06-castle)', () => {
       expect(await screen.findByText(`Room ${room} of 12`, { selector: '.wing__room' })).toBeInTheDocument();
       const legend = document.querySelector('.question__prompt') as HTMLElement;
       const prompt = (legend.lastChild?.textContent ?? '').trim();
-      const answer = prompt.startsWith('Which page does this picture') ? pictureAnswer('countries') : answers.get(prompt);
+      const answer = isPictureQuestion() ? pictureAnswer('countries') : answers.get(prompt);
       expect(answer, `answer for "${prompt}"`).toBeDefined();
       await user.click(screen.getByRole('radio', { name: answer as string }));
       await user.click(screen.getByRole('button', { name: 'Check my answer' }));

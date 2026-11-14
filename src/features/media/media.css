@@ -279,3 +279,71 @@
   color: var(--teal-ink);
   font-weight: 700;
 }
+
+/* The photo table: the Pictures screen lays its prints on Home's coral, between torn edges (media review N1). */
+.media__table {
+  position: relative;
+  margin: 18px calc(var(--gutter) * -1) 0;
+  padding: 0 var(--gutter) 40px;
+  background: var(--coral);
+  color: var(--coral-ink);
+}
+
+.media__table > svg:first-child {
+  display: block;
+  position: relative;
+  top: -25px;
+  margin-bottom: -10px;
+}
+
+.media__table .media__grid {
+  padding-top: 14px;
+}
+
+/* Captions may take three lines before they are cut (N4). */
+.tile__cap,
+.gallery__cap {
+  -webkit-line-clamp: 3;
+  font-size: 18px;
+}
+
+.media__selects {
+  display: none;
+  gap: 10px;
+  margin: 6px 0 0;
+}
+
+.media__selects label {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  font-weight: 700;
+}
+
+.media__selects select {
+  height: 44px;
+  padding: 0 10px;
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  background: var(--paper);
+  font: inherit;
+  font-weight: 400;
+}
+
+@media (max-width: 899px) {
+  .media__chips {
+    display: none;
+  }
+
+  .media__selects {
+    display: flex;
+  }
+}
+
+.gallery__note,
+.viewer__resized {
+  margin: 0 0 6px;
+  color: var(--ink-soft);
+  font-size: 14px;
+}

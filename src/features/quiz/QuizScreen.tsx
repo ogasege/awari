@@ -160,17 +160,29 @@ export function Quiz({ quiz, externalUrl }: { quiz: QuizSet; externalUrl?: strin
         />
       )}
       <p className="quiz__credit">
-        Questions built from{' '}
-        <a href={quiz.source.url} rel="noreferrer">
-          {quiz.source.name}
-        </a>{' '}
-        ({quiz.source.licence}).{' '}
-        {externalUrl ? (
-          <a href={externalUrl} rel="noreferrer">
-            Read the article
-          </a>
+        {quiz.pack === ('pictures' as never) ? (
+          <>
+            Pictures from{' '}
+            <a href={quiz.source.url} rel="noreferrer">
+              Wikimedia Commons
+            </a>
+            ; each picture's author and licence are shown with its answer. <Link to="/media">Look at all the pictures</Link>
+          </>
         ) : (
-          <Link to={articleLink}>Read the article</Link>
+          <>
+            Questions built from{' '}
+            <a href={quiz.source.url} rel="noreferrer">
+              {quiz.source.name}
+            </a>{' '}
+            ({quiz.source.licence}).{' '}
+            {externalUrl ? (
+              <a href={externalUrl} rel="noreferrer">
+                Read the article
+              </a>
+            ) : (
+              <Link to={articleLink}>Read the article</Link>
+            )}
+          </>
         )}
       </p>
     </section>

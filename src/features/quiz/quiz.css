@@ -373,16 +373,18 @@
   pointer-events: none;
 }
 
-/* A picture question shows its picture above the answers. */
+/* A picture question shows its picture as a print above the answers (media review N17). */
 .question__image {
   display: block;
   width: 100%;
   max-width: 420px;
-  max-height: 280px;
-  margin: 8px 0 16px;
+  max-height: 300px;
+  margin: 10px 0 18px 6px;
+  padding: 10px 10px 14px;
   object-fit: contain;
-  background: var(--mist);
+  background: #fffdf6;
   box-shadow: var(--shadow-print);
+  rotate: -1.2deg;
 }
 
 .quizzes__picture-list {

@@ -41,8 +41,36 @@
   overflow-wrap: anywhere;
 }
 
-/* Commons page URLs wrap inside their cell instead of running off the right edge (review N15). */
+/* Words break only at spaces and hyphens, so a column never shrinks to a letter ("Licenc / e"); only the long Commons
+   file names and URLs in the last column may break anywhere (media review N18). */
 .credits td,
 .credits th {
+  overflow-wrap: break-word;
+}
+
+.credits td:last-child,
+.credits td:last-child a {
   overflow-wrap: anywhere;
+}
+
+.credits th,
+.credits td:nth-child(3) {
+  white-space: nowrap;
+}
+
+.credits {
+  position: relative;
+}
+
+.credits__note {
+  position: absolute;
+  top: 24px;
+  right: 0;
+  max-width: 240px;
+}
+
+@media (max-width: 899px) {
+  .credits__note {
+    display: none;
+  }
 }

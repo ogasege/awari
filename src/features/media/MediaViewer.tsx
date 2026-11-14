@@ -79,6 +79,7 @@ export function MediaViewer({
             The bigger picture needs a connection. This is the small copy saved on this device.
           </p>
         ) : null}
+        <p className="viewer__resized">Shown resized; the original is on Wikimedia Commons.</p>
         <p className="viewer__credit">
           {full ? (
             <>

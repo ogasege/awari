@@ -134,7 +134,8 @@ export function rejectReason(c: Candidate, subject?: Subject): string | undefine
   if (GRAPHIC.test(text) || UNSUITABLE.test(text) || EXTRA_UNSUITABLE.test(text)) return 'unsuitable for children';
   if (subject) {
     const kind = kindOf(c);
-    if ((kind === 'flag' || kind === 'emblem') && subject.pack !== 'countries') return 'a flag or emblem outside a country';
+    if (kind === 'emblem') return 'an emblem or coat of arms';
+    if (kind === 'flag' && subject.pack !== 'countries') return 'a flag outside a country';
     if (kind === 'diagram' && recognition(c) === 0) return 'a diagram: too small to read in a print';
     // A picture found only through the Wikipedia article (not its Commons category) must show some sign of the
     // subject in its title, description or categories, so a teddy bear is not Alan Turing and the Matterhorn is not Mount Aso.

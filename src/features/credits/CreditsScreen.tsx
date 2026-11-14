@@ -2,7 +2,7 @@
 import { Fragment, type ReactNode } from 'react';
 import credits from '../../../CREDITS.md?raw';
 import { useTitle } from '../../app/useTitle.ts';
-import { StripHeading } from '../../design/paper.tsx';
+import { MarginNote, StripHeading } from '../../design/paper.tsx';
 import { parseMarkdown } from '../../lib/text/markdown.ts';
 import { MediaCredits } from './MediaCredits.tsx';
 import './credits.css';
@@ -40,6 +40,9 @@ export default function CreditsScreen() {
           { text: 'open knowledge', tone: 'yellow', tilt: 1.5 },
         ]}
       />
+      <MarginNote decorative tilt={-3} size={28} className="credits__note crowding" style={{ color: 'var(--teal-ink)' }}>
+        Every picture here has a name, an author and a licence.
+      </MarginNote>
       <p className="credits__lead">
         Everything in Awari comes from people who chose to share. Here is who made each photo, map,
         word list and article, and the licence that lets us use it.

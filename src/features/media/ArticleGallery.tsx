@@ -28,6 +28,7 @@ export function ArticleGallery({ articleKey, leadCredit }: { articleKey: string;
   return (
     <section className="gallery" aria-label={`More pictures of ${items[0]?.articleTitle ?? 'this article'}`}>
       <h2 className="gallery__title">More pictures</h2>
+      <p className="gallery__note">From Wikimedia Commons, shown as small copies resized to 480 px. Open one for its author and licence.</p>
       <ul className="gallery__strip">
         {items.map((m, i) => (
           <li key={m.id}>

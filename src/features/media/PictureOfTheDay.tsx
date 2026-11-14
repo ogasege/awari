@@ -39,7 +39,7 @@ export function PictureOfTheDay({ today = new Date() }: { today?: Date }) {
         to={`/media?pic=${pic.id}`}
         src={thumbUrl(`img/${pic.id}.webp`)}
         alt={pic.caption}
-        caption={pic.caption.length > 40 ? `${pic.caption.slice(0, 38)}…` : pic.caption}
+        caption={pic.articleTitle}
         captionSize={24}
         width={300}
         aspect={`${pic.tw} / ${pic.th}`}

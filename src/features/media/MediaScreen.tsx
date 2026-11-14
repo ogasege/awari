@@ -5,7 +5,7 @@
  */
 import { useMemo, useState } from 'react';
 import { useTitle } from '../../app/useTitle.ts';
-import { MarginNote, StripHeading } from '../../design/paper.tsx';
+import { MarginNote, StripHeading, TornEdge } from '../../design/paper.tsx';
 import { SUBJECTS } from '../../lib/packs/subjects.ts';
 import { KIND_LABELS, packOf, thumbUrl, useMedia, type IndexRow, type MediaFile, type MediaIndex } from '../../lib/media/media.ts';
 import { MediaViewer } from './MediaViewer.tsx';
@@ -62,7 +62,8 @@ export default function MediaScreen() {
   const shown = more.key === filterKey ? more.n : PAGE;
   const rows = useMemo(() => (index.status === 'ready' ? index.data.items : []), [index]);
   const matches = useMemo(() => filterRows(rows, subject, kind, query), [rows, subject, kind, query]);
-  const kinds = useMemo(() => [...new Set(rows.map((r) => r[2]))].sort(), [rows]);
+  // Emblems are not collected, and a diagram only when it is a recognised picture: no chip for a kind the library skips.
+  const kinds = useMemo(() => [...new Set(rows.map((r) => r[2]))].filter((k) => k !== 'emblem').sort(), [rows]);
   const current = open ? rows.find((r) => r[0] === open) : undefined;
   const file = useMedia<MediaFile>(current ? `${packOf(current[1])}.json` : null);
   const full = current && file.status === 'ready' ? file.data.items.find((m) => m.id === current[0]) : undefined;
@@ -86,9 +87,11 @@ export default function MediaScreen() {
         {index.status === 'ready' ? `${index.data.count} pictures` : 'Pictures'} from Wikimedia Commons, each with its author and licence.
         Pictures you have looked at stay on this device; the rest need a connection.
       </p>
-      <MarginNote decorative tilt={-3} size={30} className="media__note crowding" style={{ color: 'var(--teal-ink)' }}>
-        Tap a picture to see it big.
-      </MarginNote>
+      {index.status === 'ready' ? (
+        <MarginNote decorative tilt={-3} size={30} className="media__note crowding" style={{ color: 'var(--teal-ink)' }}>
+          {index.data.count} pictures, and every licence checked against Commons.
+        </MarginNote>
+      ) : null}
 
       <div className="media__controls">
         <label className="media__search">
@@ -100,19 +103,46 @@ export default function MediaScreen() {
         </button>
       </div>
 
-      <div className="timeline__filters" role="group" aria-label="Pictures about">
-        {[{ id: 'all', label: 'All subjects' }, ...SUBJECTS.map((s) => ({ id: s.id as string, label: s.label }))].map((s) => (
-          <button key={s.id} type="button" className="timeline__chip" aria-pressed={subject === s.id} onClick={() => setSubject(s.id)}>
-            {s.label}
-          </button>
-        ))}
+      {/* Chips on a laptop; two lists on a phone, so the pictures start near the top of the screen. */}
+      <div className="media__chips">
+        <div className="timeline__filters" role="group" aria-label="Pictures about">
+          {[{ id: 'all', label: 'All subjects' }, ...SUBJECTS.map((s) => ({ id: s.id as string, label: s.label }))].map((s) => (
+            <button key={s.id} type="button" className="timeline__chip" aria-pressed={subject === s.id} onClick={() => setSubject(s.id)}>
+              {s.label}
+            </button>
+          ))}
+        </div>
+        <div className="timeline__filters timeline__filters--continents" role="group" aria-label="Kind of picture">
+          {['all', ...kinds].map((k) => (
+            <button key={k} type="button" className="timeline__chip" aria-pressed={kind === k} onClick={() => setKind(k)}>
+              {k === 'all' ? 'Every kind' : (KIND_LABELS[k] ?? k)}
+            </button>
+          ))}
+        </div>
       </div>
-      <div className="timeline__filters timeline__filters--continents" role="group" aria-label="Kind of picture">
-        {['all', ...kinds].map((k) => (
-          <button key={k} type="button" className="timeline__chip" aria-pressed={kind === k} onClick={() => setKind(k)}>
-            {k === 'all' ? 'Every kind' : (KIND_LABELS[k] ?? k)}
-          </button>
-        ))}
+      <div className="media__selects">
+        <label>
+          <span>Subject</span>
+          <select value={subject} onChange={(e) => setSubject(e.target.value)}>
+            <option value="all">All subjects</option>
+            {SUBJECTS.map((s) => (
+              <option key={s.id} value={s.id}>
+                {s.label}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          <span>Kind</span>
+          <select value={kind} onChange={(e) => setKind(e.target.value)}>
+            <option value="all">Every kind</option>
+            {kinds.map((k) => (
+              <option key={k} value={k}>
+                {KIND_LABELS[k] ?? k}
+              </option>
+            ))}
+          </select>
+        </label>
       </div>
 
       {pile.length > 0 ? (
@@ -134,10 +164,13 @@ export default function MediaScreen() {
           {subject === 'all' ? '' : ` about ${SUBJECT_NAME.get(subject) ?? subject}`}.
         </p>
       ) : null}
-      <div className="media__grid">
-        {matches.slice(0, shown).map((r, i) => (
-          <Tile key={r[0]} row={r} tilt={[-1.5, 1, -0.6, 1.4][i % 4] ?? 0} onOpen={() => setOpen(r[0])} />
-        ))}
+      <div className="media__table">
+        <TornEdge color="var(--coral)" seed="media-top" height={26} />
+        <div className="media__grid">
+          {matches.slice(0, shown).map((r, i) => (
+            <Tile key={r[0]} row={r} tilt={[-1.5, 1, -0.6, 1.4][i % 4] ?? 0} onOpen={() => setOpen(r[0])} />
+          ))}
+        </div>
       </div>
       {shown < matches.length ? (
         <button type="button" className="btn btn--outline media__more" onClick={() => setMore({ key: filterKey, n: shown + PAGE })}>

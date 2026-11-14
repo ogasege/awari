@@ -130,6 +130,7 @@ async function records(): Promise<void> {
   const missing: string[] = [];
   const short: string[] = [];
   const seen = new Set<string>();
+  const captionsInPack = new Set<string>();
   for (const { saved, chosen } of articles()) {
     const items: MediaItem[] = [];
     for (const c of chosen) {
@@ -141,10 +142,14 @@ async function records(): Promise<void> {
       const id = file.replace('.webp', '');
       // One picture is listed once, with the first article that chose it (the thumbnail file is shared).
       if (seen.has(id)) continue;
-      seen.add(id);
       const cap = captionFor(c.description, c.title);
       const meta = await sharp(join(IMG_DIR, file)).metadata();
       if (!cap) continue; // selection already drops these; a file with nothing honest to say is not listed
+      // The same caption twice in one subject reads as the same picture twice in the grid.
+      const capKey = `${saved.article.pack}|${cap.text.toLowerCase()}`;
+      if (captionsInPack.has(capKey)) continue;
+      captionsInPack.add(capKey);
+      seen.add(id);
       items.push({
         id,
         article: saved.article.key,

@@ -1,6 +1,7 @@
 /**
- * Picture questions made from the media library (23-media-library Req 20, Property 6): "Which page does this
- * picture belong to?" with four article titles. Pure and seeded, so a test can replay any question.
+ * Picture questions made from the media library (23-media-library Req 20, Property 6): "What is this a picture
+ * of?" (or "Which country ...?") with four article titles, built from photographs only. Pure and seeded, so a
+ * test can replay any question.
  */
 import type { MediaItem } from '../media/media.ts';
 import { thumbUrl } from '../media/media.ts';
@@ -49,7 +50,7 @@ export function pictureQuestion(picture: MediaItem, pool: readonly MediaItem[], 
     id: `picture/${picture.id}`,
     articleId: picture.article.split('/')[1] ?? picture.article,
     pack: pack as PackId,
-    prompt: 'Which page does this picture belong to?',
+    prompt: pack === 'countries' ? 'Which country is this a picture of?' : 'What is this a picture of?',
     options,
     answer,
     hints: {
@@ -59,7 +60,7 @@ export function pictureQuestion(picture: MediaItem, pool: readonly MediaItem[], 
     },
     proof: `The picture is “${picture.caption}” (${picture.author || 'unknown author'}, ${picture.licence}, Wikimedia Commons).`,
     proofSection: '',
-    image: { src: thumbUrl(picture.thumb), alt: 'A picture to name. Choose the page it belongs to.' },
+    image: { src: thumbUrl(picture.thumb), alt: 'A picture to name. Choose what it shows.' },
   };
 }
 
@@ -69,7 +70,10 @@ export function pictureQuestion(picture: MediaItem, pool: readonly MediaItem[], 
  */
 export function pictureQuestions(items: readonly MediaItem[], count: number, seed: number): Question[] {
   const random = seeded(seed);
-  const ranked = shuffle(items, random).sort((a, b) => Number(['photo', 'art'].includes(b.kind)) - Number(['photo', 'art'].includes(a.kind)));
+  // Only photographs: a painting, map or diagram cannot carry the fact the question asks for (a crescent moon in
+  // The Starry Night would make "Moon" a fair answer to a question about something else).
+  const photos = items.filter((m) => m.kind === 'photo');
+  const ranked = shuffle(photos, random).sort((a, b) => Number(['photo', 'art'].includes(b.kind)) - Number(['photo', 'art'].includes(a.kind)));
   const out: Question[] = [];
   const articles = new Set<string>();
   for (const m of ranked) {
