@@ -80,6 +80,20 @@ try {
   console.log('Wikipedia was not reachable: skipping the on-demand article check.');
 }
 console.log('Saved. Going offline (airplane mode).');
+// A picture strip and the Pictures screen, looked at while online: the service worker keeps the pictures it shows.
+await page.goto(`${base}/article/ancient/colosseum`, { waitUntil: 'load' });
+await page.waitForFunction(
+  () => [...document.querySelectorAll('.gallery__thumb img')].some((i) => (i as HTMLImageElement).complete && (i as HTMLImageElement).naturalWidth > 0),
+  undefined,
+  { timeout: 20_000 },
+);
+await page.goto(`${base}/media`, { waitUntil: 'load' });
+await page.getByRole('status').filter({ hasText: /Showing \d+ of \d+ pictures/ }).waitFor({ timeout: 20_000 });
+await page.waitForFunction(
+  () => [...document.querySelectorAll('.tile img')].slice(0, 6).every((i) => (i as HTMLImageElement).complete && (i as HTMLImageElement).naturalWidth > 0),
+  undefined,
+  { timeout: 20_000 },
+);
 await context.setOffline(true);
 
 // 2. Every pack feature, with the network gone.
@@ -182,6 +196,30 @@ if (wikiRead) {
     await p.getByRole('heading', { name: 'Okapi' }).first().waitFor({ timeout: 10_000 });
   });
 }
+
+await step('Pictures seen online show offline, and the large view says honestly what is missing', async (p) => {
+  await open(p, '/article/ancient/colosseum');
+  await p.getByRole('heading', { name: 'More pictures' }).waitFor({ timeout: 10_000 });
+  const shown = await p.evaluate(() => [...document.querySelectorAll('.gallery__thumb img')].filter((i) => (i as HTMLImageElement).naturalWidth > 0).length);
+  if (shown === 0) throw new Error('no saved picture shows offline');
+  await p.locator('.gallery__thumb').first().click();
+  await p.getByRole('dialog').waitFor({ timeout: 10_000 });
+  await p.getByText(/^By /).waitFor({ timeout: 10_000 });
+  await p.getByText('The bigger picture needs a connection.', { exact: false }).waitFor({ timeout: 15_000 });
+});
+
+await step('The Pictures screen opens offline and filters', async (p) => {
+  await open(p, '/media');
+  await p.getByRole('status').filter({ hasText: /Showing \d+ of \d+ pictures/ }).waitFor({ timeout: 10_000 });
+  await p.getByLabel('Search the pictures').fill('colosseum');
+  await p.getByRole('status').filter({ hasText: /of \d+ pictures/ }).waitFor({ timeout: 10_000 });
+});
+
+await step('A picture question plays in the Castle offline', async (p) => {
+  await open(p, '/quiz/pictures/ancient');
+  await p.getByRole('radio').first().waitFor({ timeout: 10_000 });
+  await p.getByText('Which page does this picture belong to?').waitFor({ timeout: 10_000 });
+});
 
 await browser.close();
 server.close();
