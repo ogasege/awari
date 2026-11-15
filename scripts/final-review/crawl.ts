@@ -71,7 +71,8 @@ function attach(page: Page, problems: string[]): void {
   page.on('requestfailed', (r) => {
     const u = new URL(r.url());
     // Offline, a library picture that was never saved fails by design; what matters is that a placeholder replaces it (checked as broken images and counted below).
-    if (u.origin === new URL(base).origin && !(offlineMode && u.pathname.startsWith('/media/img/'))) problems.push(`request failed: ${u.pathname}`);
+    // A request the page itself cancelled by moving on (net::ERR_ABORTED) is not a failure.
+    if (u.origin === new URL(base).origin && r.failure()?.errorText !== 'net::ERR_ABORTED' && !(offlineMode && u.pathname.startsWith('/media/img/'))) problems.push(`request failed: ${u.pathname}`);
   });
   page.on('response', (r) => {
     const u = new URL(r.url());
