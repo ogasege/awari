@@ -31,6 +31,7 @@ import {
   type SubjectFilter,
 } from './filter.ts';
 import './timeline.css';
+import { withoutYear } from '../../lib/text/dates.ts';
 
 
 /** Article link such as "countries/mali" as an in-app path. */
@@ -62,7 +63,7 @@ function EventNote({ event, picked }: { event: TimelineEvent; picked: boolean })
           <span className="sr-only">{year}: </span>
           {event.label}
         </h3>
-        <p>{shortText(event.label, event.text)}</p>
+        <p>{withoutYear(shortText(event.label, event.text), event.date)}</p>
         {event.continent ? <p className="tl-note__where">{event.continent}</p> : null}
         {event.link ? (
           <Link to={articlePath(event.link)} className="tl-note__link">

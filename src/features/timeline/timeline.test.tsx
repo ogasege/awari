@@ -8,6 +8,7 @@ import { onThisDay } from '../home/today.ts';
 import { OnThisDay } from '../home/OnThisDay.tsx';
 import { servePacksFromDisk } from '../../test/packFetch.ts';
 import TimelineScreen, { shortText } from './TimelineScreen.tsx';
+import { withoutDate, withoutYear } from '../../lib/text/dates.ts';
 
 const pack = JSON.parse(readFileSync('public/packs/timeline.json', 'utf8')) as TimelinePack;
 const TOTAL = pack.events.length;
@@ -52,7 +53,7 @@ describe('Timeline screen from the committed pack (07-timeline 3.2, 18-world-tim
     expect(countries).toHaveAttribute('aria-pressed', 'true');
     expect(screen.getByRole('button', { name: 'All' })).toHaveAttribute('aria-pressed', 'false');
     expect(screen.getByText(showing(COUNTRIES, ' about Countries'))).toBeInTheDocument();
-    expect(screen.getByText('Mali became an independent country on 22 September 1960.')).toBeInTheDocument();
+    expect(screen.getByText('Mali became an independent country on 22 September.')).toBeInTheDocument();
     // Subject and continent together (18-world-timeline Req 6).
     await user.click(screen.getByRole('button', { name: 'All' }));
     await user.click(screen.getByRole('button', { name: 'Oceania' }));
@@ -71,7 +72,8 @@ describe('Timeline screen from the committed pack (07-timeline 3.2, 18-world-tim
     await user.click(screen.getByRole('button', { name: '1800s' }));
     expect(screen.getByRole('heading', { name: 'The 1800s' })).toBeInTheDocument();
     await everything();
-    expect(screen.getByText('Born 7 November 1867.')).toBeInTheDocument();
+    // Marie Curie's note: her name is the heading, so the sentence keeps only what it adds.
+    expect(screen.getByRole('heading', { name: /Marie Curie/ }).closest('li')?.textContent).toContain('Born 7 November.');
     // The previous and next controls walk to the neighbouring centuries.
     await user.click(screen.getByRole('button', { name: '1900s →' }));
     expect(screen.getByRole('heading', { name: 'The 1900s' })).toBeInTheDocument();
@@ -81,7 +83,7 @@ describe('Timeline screen from the committed pack (07-timeline 3.2, 18-world-tim
     const { container } = render(<TimelineScreen />);
     await screen.findByText(showing(TOTAL));
     const items = [...container.querySelectorAll('ol.timeline__list li')];
-    const births = items.filter((li) => /was born/.test(li.textContent ?? '')).length;
+    const births = items.filter((li) => /was born|^Born /.test(li.textContent ?? '')).length;
     expect(items.length).toBeGreaterThan(10);
     expect(births * 2).toBeLessThan(items.length);
   });
@@ -92,7 +94,7 @@ describe('Timeline screen from the committed pack (07-timeline 3.2, 18-world-tim
     // Several events share 1867; the screen opens at the first of them.
     const firstEvent = pack.events.find((e) => e.date.startsWith('1867'));
     expect(firstEvent).toBeDefined();
-    const first = (await screen.findByText(shortText(firstEvent?.label ?? '', firstEvent?.text ?? ''))).closest('li');
+    const first = (await screen.findByText(withoutYear(shortText(firstEvent?.label ?? '', firstEvent?.text ?? ''), firstEvent?.date ?? ''))).closest('li');
     expect(first).toHaveClass('is-picked');
     expect(screen.getByRole('heading', { name: 'The 1800s' })).toBeInTheDocument();
   });
@@ -143,7 +145,7 @@ describe('Home: On this day (07-timeline 3.2, Req 3)', () => {
     const shown = onThisDay(pack.events, new Date(2026, 10, 16, 12), 3);
     expect(shown.length).toBe(3);
     for (const e of shown) {
-      expect(await screen.findByText(e.text)).toBeInTheDocument();
+      expect(await screen.findByText(withoutDate(e.text, e.date))).toBeInTheDocument();
     }
     // Every card is a real event of 16 November; none says "Coming up".
     expect(screen.queryByText(/^Coming up/)).not.toBeInTheDocument();
