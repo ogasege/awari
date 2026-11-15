@@ -115,7 +115,9 @@ describe('Timeline screen from the committed pack (07-timeline 3.2, 18-world-tim
     const items = await within(band).findAllByRole('listitem');
     expect(items.length).toBeGreaterThanOrEqual(2);
     for (const li of items) {
-      expect(li.textContent).toMatch(/16 November/);
+      // The heading says the day; each line gives its year and what happened, without repeating the date (round 3, D-24).
+      expect(li.textContent).toMatch(/^\s*\d{3,4}\b/);
+      expect(li.textContent).not.toMatch(/16 November/);
     }
     unmount();
 

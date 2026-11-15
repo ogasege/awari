@@ -31,7 +31,7 @@ import {
   type SubjectFilter,
 } from './filter.ts';
 import './timeline.css';
-import { withoutYear } from '../../lib/text/dates.ts';
+import { withoutDate, withoutYear } from '../../lib/text/dates.ts';
 
 
 /** Article link such as "countries/mali" as an in-app path. */
@@ -198,7 +198,7 @@ export default function TimelineScreen() {
           <ul className="timeline__today-list">
             {todays.map((e) => (
               <li key={e.id}>
-                <strong>{yearOf(e)}</strong> {e.text}
+                <strong>{yearOf(e)}</strong> {withoutDate(e.text, e.date)}
               </li>
             ))}
           </ul>
