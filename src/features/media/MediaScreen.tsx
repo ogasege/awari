@@ -45,10 +45,10 @@ export function surprise(rows: readonly IndexRow[], count: number, random: () =>
   return out;
 }
 
-function Tile({ row, tilt, onOpen, onFail }: { row: IndexRow; tilt: number; onOpen: () => void; onFail?: (id: string) => void }) {
+function Tile({ row, tilt, onOpen, onFail, onLoad }: { row: IndexRow; tilt: number; onOpen: () => void; onFail?: (id: string) => void; onLoad?: () => void }) {
   return (
     <button type="button" className="tile lift" style={{ rotate: `${tilt}deg` }} onClick={onOpen}>
-      <SafeImg src={thumbUrl(`img/${row[0]}.webp`)} alt={row[5]} width={row[3]} height={row[4]} loading="lazy" decoding="async" onFail={() => onFail?.(row[0])} />
+      <SafeImg src={thumbUrl(`img/${row[0]}.webp`)} alt={row[5]} width={row[3]} height={row[4]} loading="lazy" decoding="async" onLoad={onLoad} onFail={() => onFail?.(row[0])} />
       <span className="tile__cap hand">{row[5]}</span>
     </button>
   );
@@ -74,7 +74,10 @@ export default function MediaScreen() {
   // A picture that cannot load (not yet saved, and no connection) is left out; one note says how many, so the grid never becomes a row of blanks.
   const [failed, setFailed] = useState<ReadonlySet<string>>(new Set());
   const onFail = (id: string): void => setFailed((p) => (p.has(id) ? p : new Set(p).add(id)));
-  const matches = useMemo(() => filterRows(rows, subject, kind, query).filter((r) => !failed.has(r[0])), [rows, subject, kind, query, failed]);
+  // With nothing saved on this device and no connection, every tile fails; after 150 misses and no hit, stop trying and say so once.
+  const [loadedAny, setLoadedAny] = useState(false);
+  const gaveUp = failed.size >= 150 && !loadedAny;
+  const matches = useMemo(() => (gaveUp ? [] : filterRows(rows, subject, kind, query).filter((r) => !failed.has(r[0]))), [rows, subject, kind, query, failed, gaveUp]);
   // Emblems are not collected, and a diagram only when it is a recognised picture: no chip for a kind the library skips.
   const kinds = useMemo(() => [...new Set(rows.map((r) => r[2]))].filter((k) => k !== 'emblem').sort(), [rows]);
   const current = open ? rows.find((r) => r[0] === open) : undefined;
@@ -175,16 +178,16 @@ export default function MediaScreen() {
       {index.status === 'error' ? <p role="alert">The pictures could not be opened. Try again when you are online once.</p> : null}
       {index.status === 'ready' ? (
         <p className="media__count" role="status">
-          Showing {Math.min(shown, matches.length)} of {matches.length} pictures
-          {subject === 'all' ? '' : ` about ${SUBJECT_NAME.get(subject) ?? subject}`}.
-          {failed.size > 0 ? ` ${failed.size} more ${failed.size === 1 ? 'needs' : 'need'} a connection first.` : ''}
+          {gaveUp
+            ? 'None of these pictures are on this device yet. They need a connection the first time, or press “Save all pictures” on the Credits screen while you are online.'
+            : `Showing ${Math.min(shown, matches.length)} of ${matches.length} pictures${subject === 'all' ? '' : ` about ${SUBJECT_NAME.get(subject) ?? subject}`}.${failed.size > 0 ? ` ${failed.size} more ${failed.size === 1 ? 'needs' : 'need'} a connection first.` : ''}`}
         </p>
       ) : null}
       <div className="media__table">
         <TornEdge color="var(--coral)" seed="media-top" height={26} />
         <div className="media__grid">
           {matches.slice(0, shown).map((r, i) => (
-            <Tile key={r[0]} row={r} tilt={[-1.5, 1, -0.6, 1.4][i % 4] ?? 0} onOpen={() => setOpen(r[0])} onFail={onFail} />
+            <Tile key={r[0]} row={r} tilt={[-1.5, 1, -0.6, 1.4][i % 4] ?? 0} onOpen={() => setOpen(r[0])} onFail={onFail} onLoad={() => setLoadedAny(true)} />
           ))}
         </div>
       </div>

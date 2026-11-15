@@ -69,6 +69,17 @@ describe('ArticleGallery', () => {
     expect(screen.getByRole('status').textContent).toMatch(/2 more pictures when you are back online/);
   });
 
+  it('says so once, and stops trying, when nothing is on the device and every picture fails (26-final-review)', async () => {
+    const { container } = render(<MediaScreen />);
+    await screen.findByRole('status');
+    for (let round = 0; round < 6; round++) {
+      for (const img of [...container.querySelectorAll('.tile img')]) fireEvent.error(img);
+      await new Promise((r) => setTimeout(r, 20));
+    }
+    expect(await screen.findByText(/None of these pictures are on this device yet/)).toBeTruthy();
+    expect(container.querySelectorAll('.tile').length).toBe(0);
+  });
+
   it('renders nothing for an article with no pictures', async () => {
     const { container } = render(<ArticleGallery articleKey="countries/not-a-country" />);
     await new Promise((r) => setTimeout(r, 50));

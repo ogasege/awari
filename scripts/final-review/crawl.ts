@@ -175,6 +175,8 @@ for (const vp of VIEWPORTS.filter((v) => !process.env.VIEWPORT || v.name === pro
     const warm = await ctx.newPage();
     await warm.goto(base, { waitUntil: 'load' });
     await warm.getByText('Saved. Awari now works without a connection.').waitFor({ timeout: 600_000 });
+    // The one-time notice sits over the bottom of the screen until dismissed; a visitor would dismiss it, so the crawl does too.
+    await warm.getByRole('button', { name: 'Got it' }).click().catch(() => undefined);
     await warm.close();
     await ctx.setOffline(true);
   }
