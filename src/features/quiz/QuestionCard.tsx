@@ -113,7 +113,7 @@ export function QuestionCard({
           )}
         </div>
         {answering ? (
-          <button type="button" className="btn btn--ink" onClick={() => dispatch({ type: 'check' })} disabled={s.selected === null}>
+          <button type="button" className="btn btn--yellow" onClick={() => dispatch({ type: 'check' })} disabled={s.selected === null}>
             Check my answer
           </button>
         ) : null}

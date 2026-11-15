@@ -147,7 +147,7 @@
   grid-area: hints;
   padding: 20px 22px;
   background: var(--paper);
-  border: 2px dashed var(--teal-ink);
+  border: 2px solid var(--teal-ink);
   border-radius: 10px;
 }
 
@@ -280,6 +280,9 @@
 }
 
 .quizzes__list a {
+  display: inline-block;
+  min-height: 44px;
+  padding-top: 11px;
   font-weight: 700;
   color: var(--teal-ink);
 }

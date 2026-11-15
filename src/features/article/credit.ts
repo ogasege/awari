@@ -42,7 +42,8 @@ export function factRows(f: CountryFacts): Array<{ label: string; value: string 
     },
     { label: 'Area', value: formatNumber(f.areaKm2) ? `${formatNumber(f.areaKm2)} km²` : null },
     { label: f.languages.length > 1 ? 'Languages' : 'Language', value: f.languages.join(', ') || null },
-    { label: 'Money', value: f.currency ?? null },
+    // Wikidata writes currency names in lower case ("naira"); a facts card reads like the labels around it (round 3, D-32).
+    { label: 'Money', value: f.currency ? f.currency.charAt(0).toUpperCase() + f.currency.slice(1) : null },
     { label: 'Continent', value: f.continent || null },
   ];
   return rows.filter((r): r is { label: string; value: string } => r.value !== null);
