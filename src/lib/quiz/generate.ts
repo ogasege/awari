@@ -19,6 +19,7 @@ import { safeNudge, type QuestionKind } from './hints.ts';
 import { heuristicPos, sameKind, type PosOf } from './pos.ts';
 import { sentencesOf, splitSentences, type Located } from './sentences.ts';
 import { fold, validateQuestion } from './validate.ts';
+import { unsuitableTopic } from '../text/suitability.ts';
 
 export { nudgeFor } from './hints.ts';
 
@@ -155,48 +156,6 @@ function fitsItsSection(s: Located): boolean {
   return keys.some((k) => text.includes(k));
 }
 
-/**
- * A second sentence from the article that states the same fact as the
- * gap sentence, so the proof adds something the student has not just
- * read (26-final-review D-8). It must name the answer, name none of the
- * wrong options, and share at least two content words with the gap
- * sentence. A sentence from the same section is preferred, so the
- * "where to look" hint keeps sending the student to one place.
- */
-function sameFactProof(
-  sentences: readonly Located[],
-  gap: Located,
-  answer: string,
-  wrong: readonly string[],
-): Located | null {
-  const shared = new Set(keyWords(gap.sentence));
-  const overlap = (s: Located): number =>
-    keyWords(s.sentence).filter((w) => shared.has(w) && !mentions(answer, w)).length;
-  const usable = (s: Located): boolean => {
-    // "farmers relied on the Nile to water their crops" does not prove the word
-    // "water" for a gap that needs a thing: after "to", "that" or "will" the
-    // word is being read as a verb.
-    const before = new RegExp(`([A-Za-z']+)\\s+${answer}\\b`, 'i').exec(s.sentence)?.[1] ?? '';
-    if (VERB_CUES.has(before.toLowerCase())) return false;
-    return !/\bp\d{2,4}\b/.test(s.sentence); // a citation marker the extract left in
-  };
-  const candidates = sentences.filter(
-    (s) =>
-      s.sentence !== gap.sentence &&
-      s.sentence.length >= 40 &&
-      mentions(s.sentence, answer) &&
-      !wrong.some((w) => mentions(s.sentence, w)) &&
-      usable(s),
-  );
-  return (
-    candidates.find((s) => s.section === gap.section && overlap(s) >= 2) ??
-    // A sentence from another part of the article has to look more like the same
-    // fact before it is worth sending the student somewhere else for it.
-    candidates.find((s) => overlap(s) >= 3) ??
-    null
-  );
-}
-
 function factCandidates(
   article: Article,
   facts: CountryFacts,
@@ -227,14 +186,25 @@ function factCandidates(
     others.map((c) => c.capital ?? '').filter(Boolean),
     /capital/i,
   );
-  const neighbour = facts.neighbours.map((n) => nameOf.get(n)).find((n) => n && proofFor(sentences, n, /border/i));
-  add(
-    'neighbour',
-    `Which of these countries shares a border with ${article.title}?`,
-    neighbour,
-    others.filter((c) => !facts.neighbours.includes(c.id)).map((c) => c.name),
-    /border/i,
-  );
+  // A border question needs a sentence in the article that names the neighbour AND talks about a border; a country
+  // with no land neighbours (an island nation) gets none (26-final-review N-1).
+  const borderProof = (n: string): Located | null =>
+    sentences.find((s) => mentions(s.sentence, n) && /\bborder(s|ed|ing)?\b/i.test(s.sentence)) ?? null;
+  const neighbour =
+    facts.neighbours.length > 0 ? facts.neighbours.map((n) => nameOf.get(n)).find((n) => n && borderProof(n)) : undefined;
+  if (neighbour) {
+    const proof = borderProof(neighbour);
+    if (proof) {
+      out.push({
+        kind: 'neighbour',
+        prompt: `Which of these countries shares a border with ${article.title}?`,
+        answer: neighbour,
+        distractors: others.filter((c) => !facts.neighbours.includes(c.id)).map((c) => c.name),
+        proof,
+        fitsSection: true,
+      });
+    }
+  }
   const language = facts.languages.find((l) => proofFor(sentences, l, /language|speak/i));
   add(
     'language',
@@ -410,6 +380,9 @@ function gapCandidates(
     // Timbuktu": the accent falls outside the word pattern, so the gap would
     // cut the name in half.
     if (/\p{L}_____|_____\p{L}/u.test(blanked)) continue;
+    // A name followed straight by another capitalised word is part of a longer name here ("France Prešeren" is a poet,
+    // "Mexico City" is a city), so blanking only the first word asks the wrong question (26-final-review N-6).
+    if (!year && /^\p{Lu}/u.test(answer) && /_____ \p{Lu}/u.test(blanked)) continue;
     let pool: string[];
     if (year) {
       pool = yearPool(year);
@@ -485,7 +458,10 @@ export function buildQuiz(
     article.pack === 'countries' && allFacts.length > 0 ? placePoolFor(allFacts) : undefined,
     allFacts.length > 0 ? placeSorter(allFacts) : undefined,
   );
-  const terms = gaps.filter((g) => g.kind === 'term');
+  // Outside the countries pack a country or capital in a gap ("_____ and England fought", "Lake _____") has no fair
+  // set of wrong answers, and a capital's name can be a lake's (Victoria), so such gaps are not used (26-final-review).
+  const placeNames = new Set(allFacts.flatMap((c) => [fold(c.name), ...(c.capital ? [fold(c.capital)] : [])]));
+  const terms = gaps.filter((g) => g.kind === 'term' && (article.pack === 'countries' || !placeNames.has(fold(g.answer))));
   const years = gaps.filter((g) => g.kind === 'year');
   const candidates = [
     ...(facts ? factCandidates(article, facts, allFacts, sentences) : []),
@@ -515,12 +491,11 @@ export function buildQuiz(
       options,
     );
     if (!nudge) continue;
-    // Prefer a different sentence that states the same fact, so the proof is
-    // not the question with the gap filled in (D-8).
-    const proof =
-      (c.kind === 'term' || c.kind === 'year'
-        ? sameFactProof(sentences, c.proof, answerText, options.filter((_, i) => i !== answer))
-        : null) ?? c.proof;
+    // A cloze question's proof is the very sentence its gap was cut from, so the proof always proves that answer
+    // (26-final-review N-3: a "same fact" sentence from elsewhere sometimes proved something else, or a different century).
+    const proof = c.proof;
+    // Nothing unsuitable for an 8 to 14 year old is put to a child as a question (26-final-review N-2).
+    if (unsuitableTopic(`${c.prompt} ${proof.sentence} ${options.join(' ')}`)) continue;
     const q: Question = {
       id: `${article.pack}/${article.id}/${questions.length + 1}`,
       articleId: article.id,

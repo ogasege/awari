@@ -117,14 +117,12 @@ describe('the four options of every committed question (26-final-review)', () =>
     expect(adjectives).toEqual([]);
   });
 
-  it('Property 8: hundreds of proofs are a second sentence, and every proof still names the answer. _D-8_', () => {
-    let different = 0;
+  it('Property 8: every proof names the answer, and a cloze proof is the sentence its gap was cut from. _D-8, 26-final-review N-3_', () => {
     for (const { where, q } of all) {
       expect(fold(q.proof).includes(fold(answerOf(q))), where).toBe(true);
       if (!isGap(q)) continue;
       const gap = /^Fill the gap: “(.*)”$/.exec(q.prompt)?.[1] ?? '';
-      if (fold(gap.replace('_____', answerOf(q))) !== fold(q.proof)) different += 1;
+      expect(fold(gap.replace('_____', answerOf(q))), where).toBe(fold(q.proof));
     }
-    expect(different).toBeGreaterThanOrEqual(300);
   });
 });

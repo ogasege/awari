@@ -175,6 +175,7 @@ function run(name: string, args: string[]): void {
   }
 }
 run('hard-rule check', ['rules']);
+run('suitability check (ages 8 to 14)', ['suitability']);
 run('credits check', ['credits']);
 if (!process.argv.includes('--docs-only')) {
   run('lint, typecheck, tests, build and bundle budget', ['check']);

@@ -20,6 +20,7 @@
     "credits": "tsx scripts/check-credits.ts",
     "licences": "tsx scripts/media/licences.ts",
     "rules": "tsx scripts/check-rules.ts",
+    "suitability": "tsx scripts/quizzes/suitability-scan.ts",
     "bundle": "tsx scripts/check-bundle.ts",
     "log": "tsx scripts/kiro-log.ts",
     "check": "npm run lint && npm run typecheck && npm test && npm run credits && npm run rules && npm run build && npm run bundle",
