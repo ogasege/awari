@@ -53,3 +53,8 @@ Never write the banned product name (`npm run rules`). Keep `docs/kiro-evidence/
 - Gates passed on the round-2 fixes (submission-check incl. suitability, offline-check). Owner deploying (started ~21:00). NEXT: poll live sw.js == dist/sw.js, then round 3.
 - R3 started: crawls live-r3-1440/390/offline in background; sheets-round2 kept; fresh sheets made.
 - R3 reviewer ef0aa0c0 spawned (no write tool; save its final message as design-review-3.md from /Users/mac/.kiro/crew/subagents/ef0aa0c0/result.txt). Then: axe live-r3, findings/judging/readiness/report.
+- R3 fixes: N-1 (106 border Qs, 5 bad gone), R-1 (24 money Qs, all proofs name the currency). NEXT: article sentences (N-2 abortion quote, R-6 sexual violence), timeline OTD card (D-23/24), then minors.
+- N-2/R-6 article text done (12 sentences; drop-unsuitable-sentences.ts; suitable-text.test.ts). 637 tests. NEXT: timeline 'On this day' card + notes still print date (D-23/D-24), then minors (N-14 alt, N-12 dashed, R-3, D-32, R-7, N-10).
+- Minors done: N-12, R-3, N-10, D-32. N-14 alt left empty by decision (caption names the link; index has no photo description; axe passes). NEXT: rebuild+gates, REDEPLOY NOW, then write findings/judging/readiness/report from design-review-3 + crawls r3.
+- R3 offline crawl crashed on a navigation (not reproducible in a probe; crawler now records instead of crashing; rerun after deploy). Gates running (.gates-sub3/off3/sub4).
+- Gates pass on all round-3 fixes (submission-check, offline-check 20). Live r3 crawls (pre-fix build): 1440 0 failures/500 controls, 390 1 (decorative link hidden on phone, by design). Asking for REDEPLOY NOW.
