@@ -41,3 +41,4 @@ Never write the banned product name (`npm run rules`). Keep `docs/kiro-evidence/
 ## Log (newest last)
 - 01:30 live == dist (92bb8ef5c435). Crawls started (1440, 390, offline). Lighthouse after: a11y 100 all, CLS desktop unchanged. a11y live-after: 0 serious. browser-live-after: 53 checks, 0 failed. slow3G: Home 3.4 s, article 5.6 s, quiz 5.8 s.
 - 01:40 round-2 design reviewer 0b549c35 spawned (fresh sheets incl. movie-theatre and carbon articles).
+- 01:55 round-2 results so far: live 390 crawl 0 failures (525 controls); small targets left: inline prose links (exempt) and Credits input/select (fixed in repo, not yet live: needs next deploy). Offline crawl counted console "net::ERR_FAILED" as failures (expected noise for unsaved pictures and online search): crawler now ignores those offline; rerun as `live-after-offline2` (running). 1440 crawl still running. Reviewer 0b549c35 still running.

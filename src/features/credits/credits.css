@@ -80,3 +80,9 @@
     display: none;
   }
 }
+
+/* Fields on the phone layout are at least 44 px tall (26-final-review F-018). */
+.credits input,
+.credits select {
+  min-height: 44px;
+}

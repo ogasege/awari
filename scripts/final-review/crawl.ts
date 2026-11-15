@@ -65,7 +65,8 @@ const journeyActs: Act[] = [];
 function attach(page: Page, problems: string[]): void {
   page.on('pageerror', (e) => problems.push(`page error: ${e.message.slice(0, 160)}`));
   page.on('console', (m) => {
-    if (m.type() === 'error') problems.push(`console: ${m.text().slice(0, 160)}`);
+    // Offline, the browser logs a console line for every request it could not make (an unsaved picture, the online Wikipedia search); the app handles each one, and what is checked instead is broken images, page errors and failed requests for anything else.
+    if (m.type() === 'error' && !(offlineMode && /net::ERR_(FAILED|INTERNET_DISCONNECTED)/.test(m.text()))) problems.push(`console: ${m.text().slice(0, 160)}`);
   });
   page.on('requestfailed', (r) => {
     const u = new URL(r.url());

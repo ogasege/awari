@@ -23,7 +23,7 @@ export async function runJourneys(ctx: BrowserContext, base: string, viewport: s
   const problems: string[] = [];
   page.on('pageerror', (e) => problems.push(`page error: ${e.message.slice(0, 120)}`));
   page.on('console', (m) => {
-    if (m.type() === 'error') problems.push(`console: ${m.text().slice(0, 120)}`);
+    if (m.type() === 'error' && !(offline && /net::ERR_(FAILED|INTERNET_DISCONNECTED)/.test(m.text()))) problems.push(`console: ${m.text().slice(0, 120)}`);
   });
   page.on('response', (r) => {
     const u = new URL(r.url());
