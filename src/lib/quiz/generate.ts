@@ -156,6 +156,21 @@ function fitsItsSection(s: Located): boolean {
   return keys.some((k) => text.includes(k));
 }
 
+/**
+ * Island states with no land border, which Wikidata still lists as neighbours of the countries across the water
+ * (round 3: Bahrain offered as Saudi Arabia's border). They are never the answer to a border question.
+ */
+const ISLAND_STATES = new Set(
+  [
+    'Bahrain', 'Singapore', 'Sri Lanka', 'Maldives', 'Japan', 'Philippines', 'Taiwan', 'Cuba', 'Jamaica', 'The Bahamas',
+    'Bahamas', 'Barbados', 'Trinidad and Tobago', 'Grenada', 'Saint Lucia', 'Saint Vincent and the Grenadines',
+    'Antigua and Barbuda', 'Dominica', 'Saint Kitts and Nevis', 'Iceland', 'Malta', 'Cyprus', 'Madagascar', 'Mauritius',
+    'Seychelles', 'Comoros', 'Cape Verde', 'São Tomé and Príncipe', 'Australia', 'New Zealand', 'Fiji', 'Samoa', 'Tonga',
+    'Vanuatu', 'Solomon Islands', 'Kiribati', 'Tuvalu', 'Nauru', 'Palau', 'Marshall Islands',
+    'Federated States of Micronesia', 'Micronesia',
+  ].map(fold),
+);
+
 function factCandidates(
   article: Article,
   facts: CountryFacts,
@@ -177,7 +192,9 @@ function factCandidates(
   ): void => {
     if (!answer) return;
     const proof = proofFor(sentences, answer, also);
-    if (proof) out.push({ kind, prompt, answer, distractors: pool, proof, fitsSection: true });
+    // The proof must name the answer as a whole word: "euro" is not proved by a sentence about Austria (round 3 R-1).
+    const whole = new RegExp(`(^|[^\\p{L}])${answer.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[^\\p{L}])`, 'iu');
+    if (proof && whole.test(proof.sentence)) out.push({ kind, prompt, answer, distractors: pool, proof, fitsSection: true });
   };
   add(
     'capital',
@@ -186,10 +203,20 @@ function factCandidates(
     others.map((c) => c.capital ?? '').filter(Boolean),
     /capital/i,
   );
-  // A border question needs a sentence in the article that names the neighbour AND talks about a border; a country
-  // with no land neighbours (an island nation) gets none (26-final-review N-1).
+  // A border question needs a sentence in the article that names the neighbour AND talks about a land border; a
+  // country with no land neighbours (an island nation) gets none (26-final-review N-1). "Water borders", "maritime
+  // borders" and "near" describe the sea, not a border you can walk across, so they do not count (round 3).
   const borderProof = (n: string): Located | null =>
-    sentences.find((s) => mentions(s.sentence, n) && /\bborder(s|ed|ing)?\b/i.test(s.sentence)) ?? null;
+    ISLAND_STATES.has(fold(n))
+      ? null
+      : (sentences.find(
+          (s) =>
+            mentions(s.sentence, n) &&
+            /\bborder(s|ed|ing)?\b/i.test(s.sentence) &&
+            !/\b(water|maritime|sea|ocean|marine)\s+border/i.test(s.sentence) &&
+            !/\b(near|across the|causeway|strait|gulf|island)\b/i.test(s.sentence) &&
+            !new RegExp(`${n}[^.;]{0,20}disputed|disputed[^.;]{0,20}${n}`, 'i').test(s.sentence),
+        ) ?? null);
   const neighbour =
     facts.neighbours.length > 0 ? facts.neighbours.map((n) => nameOf.get(n)).find((n) => n && borderProof(n)) : undefined;
   if (neighbour) {

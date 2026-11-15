@@ -63,6 +63,30 @@ describe('every committed quiz question', () => {
     expect(bad).toEqual([]);
   });
 
+  it('round 3: a border proof is about a land border, never water, maritime, disputed or an island state', () => {
+    const islands = ['Bahrain', 'Singapore', 'Sri Lanka', 'Australia', 'Japan', 'Philippines', 'Madagascar', 'Cuba'];
+    const bad = all
+      .filter((q) => /shares a border with/.test(q.prompt))
+      .filter((q) => {
+        const a = q.options[q.answer] ?? '';
+        const disputed = new RegExp(`${a}[^.;]{0,20}disputed|disputed[^.;]{0,20}${a}`, 'i').test(q.proof);
+        return /\b(water|maritime|sea)\s+border|\bnear\b/i.test(q.proof) || islands.includes(a) || disputed;
+      })
+      .map((q) => `${q.id}: ${q.options[q.answer]}`);
+    expect(bad).toEqual([]);
+  });
+
+  it('round 3: a money, capital or language question is proved by a sentence that names its answer as a word (R-1)', () => {
+    const bad = all
+      .filter((q) => /^(What money|What is the capital|Which language)/.test(q.prompt))
+      .filter((q) => {
+        const a = (q.options[q.answer] ?? '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        return !new RegExp(`(^|[^\\p{L}])${a}($|[^\\p{L}])`, 'iu').test(q.proof);
+      })
+      .map((q) => q.id);
+    expect(bad).toEqual([]);
+  });
+
   it('never offers countries for a gap that is part of a person name (N-6)', () => {
     const bad = all
       .filter((q) => /_____ \p{Lu}/u.test(q.prompt) && countryNames.has(q.options[q.answer] ?? ''))
