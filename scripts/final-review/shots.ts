@@ -13,6 +13,8 @@ const SCREENS: Array<[string, string]> = [
   ['article-country', '/article/countries/nigeria'],
   ['article-wildlife', '/article/wildlife/lion'],
   ['article-science', '/article/science/temperature'],
+  ['article-movie-theatre', '/article/arts/movie-theatre'],
+  ['article-carbon', '/article/science/carbon'],
   ['quiz', '/quiz/countries/nigeria'],
   ['quizzes', '/quizzes'],
   ['castle', '/castle'],

@@ -1,0 +1,373 @@
+{
+ "base": "https://d3txwsv4mn6ye9.cloudfront.net",
+ "when": "2026-11-15T00:30:28.660Z",
+ "rows": [
+  {
+   "viewport": "1440",
+   "screen": "Home",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Search results",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Search, no hits",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Country article",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Subject article",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Quiz",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Quizzes",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Castle",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Atlas",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Atlas with a country",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Pictures",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Timeline",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Tours",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Subjects",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Subject",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Stamps",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Credits",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Not found",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Pictures",
+   "state": "large view open",
+   "serious": []
+  },
+  {
+   "viewport": "1440",
+   "screen": "Quiz",
+   "state": "hint and an answer checked",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Home",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Search results",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Search, no hits",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Country article",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Subject article",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Quiz",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Quizzes",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Castle",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Atlas",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Atlas with a country",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Pictures",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Timeline",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Tours",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Subjects",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Subject",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Stamps",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Credits",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Not found",
+   "state": "loaded",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Pictures",
+   "state": "large view open",
+   "serious": []
+  },
+  {
+   "viewport": "390",
+   "screen": "Quiz",
+   "state": "hint and an answer checked",
+   "serious": []
+  }
+ ],
+ "keyboard": [
+  {
+   "screen": "Home (1440)",
+   "stops": 36,
+   "unnamed": [],
+   "noFocusRing": []
+  },
+  {
+   "screen": "Search results (1440)",
+   "stops": 29,
+   "unnamed": [],
+   "noFocusRing": []
+  },
+  {
+   "screen": "Country article (1440)",
+   "stops": 39,
+   "unnamed": [],
+   "noFocusRing": []
+  },
+  {
+   "screen": "Quiz (1440)",
+   "stops": 14,
+   "unnamed": [],
+   "noFocusRing": []
+  },
+  {
+   "screen": "Castle (1440)",
+   "stops": 27,
+   "unnamed": [],
+   "noFocusRing": []
+  },
+  {
+   "screen": "Atlas (1440)",
+   "stops": 21,
+   "unnamed": [],
+   "noFocusRing": []
+  },
+  {
+   "screen": "Pictures (1440)",
+   "stops": 69,
+   "unnamed": [],
+   "noFocusRing": []
+  },
+  {
+   "screen": "Home (390)",
+   "stops": 33,
+   "unnamed": [],
+   "noFocusRing": []
+  },
+  {
+   "screen": "Search results (390)",
+   "stops": 29,
+   "unnamed": [],
+   "noFocusRing": []
+  },
+  {
+   "screen": "Country article (390)",
+   "stops": 39,
+   "unnamed": [],
+   "noFocusRing": []
+  },
+  {
+   "screen": "Quiz (390)",
+   "stops": 15,
+   "unnamed": [],
+   "noFocusRing": []
+  },
+  {
+   "screen": "Castle (390)",
+   "stops": 28,
+   "unnamed": [],
+   "noFocusRing": []
+  },
+  {
+   "screen": "Atlas (390)",
+   "stops": 22,
+   "unnamed": [],
+   "noFocusRing": []
+  },
+  {
+   "screen": "Pictures (390)",
+   "stops": 69,
+   "unnamed": [],
+   "noFocusRing": []
+  }
+ ],
+ "extras": [
+  "[1440] Search results/loaded: landmark-unique(moderate,1)",
+  "[1440] Search, no hits/loaded: landmark-unique(moderate,1)",
+  "[1440] Country article/loaded: image-redundant-alt(minor,10)",
+  "[1440] Subject article/loaded: image-redundant-alt(minor,6)",
+  "[1440] Pictures/loaded: image-redundant-alt(minor,60)",
+  "[1440] Credits/loaded: landmark-unique(moderate,1)",
+  "[1440] Pictures/large view open: image-redundant-alt(minor,60)",
+  "[1440] 200% text on Home: no horizontal overflow",
+  "[1440] 200% text on Country article: no horizontal overflow",
+  "[1440] 200% text on Quiz: no horizontal overflow",
+  "[1440] 200% text on Pictures: no horizontal overflow",
+  "[1440] 200% text on Credits: no horizontal overflow",
+  "[390] Search results/loaded: landmark-unique(moderate,1)",
+  "[390] Search, no hits/loaded: landmark-unique(moderate,1)",
+  "[390] Country article/loaded: image-redundant-alt(minor,10)",
+  "[390] Subject article/loaded: image-redundant-alt(minor,6)",
+  "[390] Pictures/loaded: image-redundant-alt(minor,60)",
+  "[390] Credits/loaded: landmark-unique(moderate,1)",
+  "[390] Pictures/large view open: image-redundant-alt(minor,60)",
+  "[390] 200% text on Home: no horizontal overflow",
+  "[390] 200% text on Country article: no horizontal overflow",
+  "[390] 200% text on Quiz: no horizontal overflow",
+  "[390] 200% text on Pictures: no horizontal overflow",
+  "[390] 200% text on Credits: no horizontal overflow",
+  "reduced motion on /: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "reduced motion on /atlas: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "reduced motion on /castle: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "reduced motion on /media: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "reduced motion on /article/countries/nigeria: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "dark colour scheme on /: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "dark colour scheme on /atlas: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "dark colour scheme on /castle: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "dark colour scheme on /media: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "dark colour scheme on /article/countries/nigeria: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "light colour scheme on /: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "light colour scheme on /atlas: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "light colour scheme on /castle: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "light colour scheme on /media: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)",
+  "light colour scheme on /article/countries/nigeria: overflow no, running animations 0, body rgb(255, 255, 255) on rgb(16, 24, 40)"
+ ]
+}
