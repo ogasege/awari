@@ -217,3 +217,14 @@
   font-size: 30px;
   opacity: 0.45;
 }
+
+/* The faint outline of a country in its empty stamp space: something to look for, not a form to fill (26-final-review). */
+.stamp-book__outline {
+  width: 62%;
+  max-width: 96px;
+  aspect-ratio: 1;
+  fill: rgb(11 27 77 / 0.08);
+  stroke: rgb(11 27 77 / 0.45);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+}

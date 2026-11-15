@@ -12,6 +12,7 @@ import { CONTINENTS, continentFromSlug, continentSlug } from '../../lib/packs/su
 import type { PackIndex } from '../../lib/packs/types.ts';
 import { useProgress } from '../../lib/store/useProgress.ts';
 import { slotsFor, worldBook } from './stamps.ts';
+import { CountryOutline, outlinePath, useShapes } from './CountryOutline.tsx';
 import './stamps.css';
 
 const EMPTY_EDGE = perforation(8, 4);
@@ -22,6 +23,7 @@ export default function ContinentStamps({ params }: { params: Record<string, str
   useTitle(continent ? `Stamps: ${continent}` : 'Stamp book');
   const progress = useProgress();
   const index = usePack<PackIndex>('countries/index.json');
+  const shapes = useShapes();
   const items = index.status === 'ready' ? index.data.items : [];
 
   if (!continent) {
@@ -80,9 +82,13 @@ export default function ContinentStamps({ params }: { params: Record<string, str
               />
             ) : (
               <span className="stamp-book__empty-slot" style={{ clipPath: EMPTY_EDGE }}>
-                <span aria-hidden="true" className="hand stamp-book__q">
-                  ?
-                </span>
+                {shapes && outlinePath(shapes, slot.id) ? (
+                  <CountryOutline shapes={shapes} id={slot.id} />
+                ) : (
+                  <span aria-hidden="true" className="hand stamp-book__q">
+                    ?
+                  </span>
+                )}
                 <span className="hand stamp-book__slot-name">{slot.name}</span>
                 <span>Not found yet</span>
               </span>

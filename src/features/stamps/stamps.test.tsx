@@ -1,4 +1,4 @@
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { EMPTY_PROGRESS, getProgress, resetForTests, update, withDiscovered } from '../../lib/store/progress.ts';
@@ -51,6 +51,14 @@ describe('World stamp book screens (16-world-stamp-book 3)', () => {
     expect(screen.getByRole('link', { name: /^Africa 2 of 54\./ })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /^Oceania 1 of 14\./ })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /^South America 1 of 12\./ })).toBeInTheDocument();
+  });
+
+  it('draws a faint outline of each country in its empty stamp space, so a new book is not a page of question marks (26-final-review)', async () => {
+    const { container } = render(<ContinentStamps params={{ continent: 'africa' }} />);
+    expect(await screen.findByText(/0 of 54/)).toBeInTheDocument();
+    await waitFor(() => expect(container.querySelectorAll('.stamp-book__outline path').length).toBeGreaterThanOrEqual(45));
+    for (const p of [...container.querySelectorAll('.stamp-book__outline path')].slice(0, 5)) expect(p.getAttribute('d')?.length).toBeGreaterThan(20);
+    expect(container.querySelectorAll('.stamp-book__q').length).toBeLessThanOrEqual(9);
   });
 
   it('shows a continent page with a slot per country, found ones linked, the rest in words. _Req 3_', async () => {
