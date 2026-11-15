@@ -5,8 +5,8 @@ Brief: `docs/crew-capabilities.md`. This file records what really ran in Kiro Cr
 | # | Capability | Status | Evidence |
 | --- | --- | --- | --- |
 | 1 | Crew members `awari-builder`, `awari-design-reviewer`, `awari-licence-auditor` | **Added by the owner on 13 Nov** (each from the `kirocrew-worker` template). **Used**: `awari-licence-auditor` (run `e8072946`) and `awari-design-reviewer` (run `70521deb`) were each started as `spawn_run(crew=...)` for the final review-2 pass. **Not used**: `awari-builder`. The review-2 tasks 5 to 14 were built in the main session with the file tool; no spawn for them. | `licence-audit-review-2.md`, `design-review-review-2.md` (each written by its member) |
-| 2 | Conductor (`kirocrew-conductor`, work ledger) | **Not used.** The review-2 list was worked through one task at a time in one session, with a commit and a `docs/kiro-log.md` row after each. | `git log` (21-review-2 1 to 15) |
-| 3 | Workflow | **Authored, not run.** `.kiro/workflows/awari-post-batch-verification.py` was written by Crew's `workflow_author`. The same steps (retake screenshots, licence audit, design review, `submission-check`, `offline-check`) were run by hand and with the two crew members above. | `.kiro/workflows/awari-post-batch-verification.py` |
+| 2 | Conductor (`kirocrew-conductor`, work ledger) | **Used in spec 26** (run `7e52b9eb`): it split the fix list and started three `awari-builder` runs, then ended its turn without the report it was asked for (details below). Earlier specs: **not used.** The review-2 list was worked through one task at a time in one session, with a commit and a `docs/kiro-log.md` row after each. | `git log` (21-review-2 1 to 15) |
+| 3 | Workflow | **Run once, in spec 26 (`wf_000003`), and cancelled before it finished** (details below). Before that: **authored, not run.** `.kiro/workflows/awari-post-batch-verification.py` was written by Crew's `workflow_author`. The same steps (retake screenshots, licence audit, design review, `submission-check`, `offline-check`) were run by hand and with the two crew members above. | `.kiro/workflows/awari-post-batch-verification.py` |
 | 4 | Steering and Hooks panels | **Used.** The owner added three Crew hooks (hard rules on Stop, lint and tests after a write, credits check after a shell command). They fired in this session: `docs/kiro-evidence/hook-firings.jsonl` holds 48 lines, 21 of them from Crew's own hooks (20 `after-write` and 1 `stop`, event names `PostToolUse` and `Stop`); the other 27 come from the kiro-cli agent hooks in `.kiro/agents/awari-builder.json`. | `hook-firings.jsonl`, `.kiro/hooks/README.md`, `docs/kiro-evidence/hooks.md` |
 | 5 | Knowledge | **Used (read).** The owner added `KICKOFF.md`, `docs/rules-alignment.md` and `.kiro/steering/design.md` (3 sources, 6 items). A search for the design rules returned the scrapbook style guide and the hooks, agents and gate section on 13 Nov. Knowledge was not used to decide any of the review-2 fixes beyond that check. | `knowledge_list_sources`, `local_knowledge_search` on 13 Nov |
 | 6 | Skills and Prompts | **Written; the skill ran as a procedure.** `.kiro/skills/awari-pack-build/SKILL.md` (pack build plus licence check) and `.kiro/prompts/review-request.md`. Task 13 followed the skill's licence check through `scripts/packs/apply-lead-overrides.ts`. | files |
@@ -56,3 +56,22 @@ No Crew member was started for spec 24. I did the twelve items myself in one ses
 - The captions, the lead pictures and the Pictures screen were read by me from contact sheets and screenshots. This is not an independent review, and it should not be described as one. The 214 hand decisions in `scripts/media/captions-decisions.txt` are mine.
 - The judges' path and the 30 biggest countries were compared on one contact sheet (lead picture against the library's first picture); the leads were right except for the ones listed in the kiro-log row for task 4, which were replaced.
 - A new design review and a new licence audit would need the retaken screenshots in `docs/screenshots/` and a fresh random sample of `public/media/`; `npm run licences` (4,216 of 4,216 images, 0 problems) is the licence evidence for this round.
+
+## Spec 26 (final review, 14 Nov): what ran
+
+- **Design reviewer `e44858cc` (independent, round 1): used.** Handed 13 contact sheets (1.6 MB) and four full-size shots, it read
+  the content as text (all 3,720 captions, all 483 leads, 77 quiz files) and wrote `docs/final-review/design-review.md`: 43
+  findings, three blockers (quiz hint names the answer; two unsuitable lead pictures). Unlike run `8b50276e`, it did not fail on size.
+- **Conductor `7e52b9eb`: used.** It read `.kiro/specs/26-final-review/fix-batch-1.md` and started the three builder runs below.
+  It did not write the consolidated report; the parent session wrote `docs/final-review/fix-batch-1-report.md` from the commits
+  and its own checks.
+- **`awari-builder` runs `7186432e` (A, quizzes), `bc314cac` (B, leads), `23821fde` (C, captions and lead pictures): used.** Three
+  commits (`0248d92`, `0522aa4`, `04d7679`). A and B logged a `docs/kiro-log.md` row; C did not.
+- **Workflow `wf_000003` (`awari-post-batch-verification`): run, then cancelled.** Its screenshots step finished (it retook
+  `docs/screenshots` at 1440 and 390 px in 2.5 minutes). Its licence-auditor step returned `pass: false` in 1.5 minutes because
+  "the awari-licence-auditor agent could not be spawned: it is defined only in the repo" (the `.kiro/agents` definition is not a
+  Crew agent). Its design-reviewer step had run for about 35 minutes with no result when I cancelled it. Its two gates were then
+  run by hand: `npm run submission-check` passed, `npm run offline-check` passed (20 steps), and `npm run desktop-check` passed (9).
+  So the workflow is **not** evidence of a passing verification; it is evidence that it was started, what it did and where it broke.
+- **A Kiro power was installed and used** (Terraform, `docs/final-review/kiro-power.md`); it is not a Crew feature.
+- **Round 2 of the design review** (after the fixes were deployed) is recorded in `docs/final-review/design-review-2.md`.
