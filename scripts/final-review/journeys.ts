@@ -33,7 +33,13 @@ export async function runJourneys(ctx: BrowserContext, base: string, viewport: s
   if (offline) page.on('requestfailed', (r) => new URL(r.url()).origin === origin && r.failure()?.errorText !== 'net::ERR_ABORTED' && !new URL(r.url()).pathname.startsWith('/media/img/') && problems.push(`request failed ${new URL(r.url()).pathname}`));
 
   const go = async (path: string): Promise<void> => {
-    await page.goto(`${base}${path}`, { waitUntil: 'load' });
+    try {
+      await page.goto(`${base}${path}`, { waitUntil: 'load' });
+    } catch (e) {
+      // Recorded as a failure of the screen, not a crash of the whole run.
+      acts.push({ viewport, type: 'navigation', screen: path, control: `open ${path}`, ok: false, note: `could not open: ${(e as Error).message.split('\n')[0]?.slice(0, 120)}` });
+      return;
+    }
     await page.waitForFunction(() => ((document.querySelector('main') ?? document.body).textContent ?? '').trim().length > 30, undefined, { timeout: 8000 }).catch(() => undefined);
   };
   const route = (): string => {
