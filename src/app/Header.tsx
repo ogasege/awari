@@ -65,11 +65,19 @@ export function headerStatus(
   return null;
 }
 
-/** The one-time notice when the first save completes; dismissed for good with its button. */
+/**
+ * The one-time notice when the first save completes (26-final-review N-5). It is recorded as shown the moment it
+ * appears, so it never comes back on another page or visit, even if "Got it" is never pressed; it sits in the page
+ * flow under the header, so it never covers content.
+ */
 export function SavedNotice() {
   const saved = useOfflineStatus();
   const [pending, setPending] = useState(savedNoticePending);
-  if (saved !== 'ready' || !pending) {
+  const visible = saved === 'ready' && pending;
+  useEffect(() => {
+    if (visible) dismissSavedNotice();
+  }, [visible]);
+  if (!visible) {
     return null;
   }
   return (
@@ -79,7 +87,6 @@ export function SavedNotice() {
         type="button"
         className="saved-notice__close"
         onClick={() => {
-          dismissSavedNotice();
           setPending(false);
         }}
       >

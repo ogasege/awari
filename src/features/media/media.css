@@ -356,3 +356,8 @@
 .tile .pic-missing {
   height: 130px;
 }
+
+/* Never wider than a small phone (26-final-review, 320 px check). */
+.potd__print {
+  max-width: 100%;
+}

@@ -64,6 +64,16 @@ describe('header offline status (25-desktop task 8)', () => {
     expect(screen.queryByText(NOTICE)).toBeNull();
   });
 
+  it('never shows the saved notice again on another page, even if "Got it" was not pressed (26-final-review N-5)', () => {
+    const first = render(<Header />);
+    act(() => setOfflineStatusForTests('ready'));
+    expect(screen.getByText(NOTICE)).toBeInTheDocument();
+    expect(localStorage.getItem(SAVED_NOTICE_KEY)).toBe('1');
+    first.unmount(); // a route change or a reload, with the notice never dismissed
+    render(<Header />);
+    expect(screen.queryByText(NOTICE)).toBeNull();
+  });
+
   it('shows "Offline" when the connection drops and clears it when it returns', () => {
     act(() => setOfflineStatusForTests('ready'));
     render(<Header />);
