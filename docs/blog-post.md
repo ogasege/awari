@@ -47,7 +47,7 @@ opened screens in a browser through the Playwright MCP server and told me, fairl
 pages "could have been made by a template". It also caught a margin note about an elephant
 being shot. Kids' reference needs that kind of second reader.
 
-<!--n:properties-->118<!--/n--> property-based tests guard the rules that matter, such as "a hint
+<!--n:properties-->126<!--/n--> property-based tests guard the rules that matter, such as "a hint
 never contains the answer", which caught a hint that said "the 1960s" for an answer of 1960.
 
 ### Kiro in use

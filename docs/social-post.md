@@ -13,7 +13,7 @@ Devpost page for any other tag it asks for.
   1990s CD-ROM encyclopedia, brought back as a web app and a desktop app.
 - It works with no connection after one visit: the first save is about 41 MB of articles, quizzes, maps and lead photos; the
   extra pictures (about 86 MB) are optional.
-- 197 countries and 274 articles across 11 subjects, a spinning atlas, guided tours, a timeline, a quiz castle and a stamp
+- <!--n:countries-->197<!--/n--> countries and <!--n:subjectArticles-->274<!--/n--> articles across <!--n:subjects-->11<!--/n--> subjects, a spinning atlas, guided tours, a timeline, a quiz castle and a stamp
   book (numbers come from `docs/generated/stats.json`).
 - Every quiz answer is shown with the sentence from the article that proves it. Every picture has an author and a licence
   that was checked against the Wikimedia Commons API.

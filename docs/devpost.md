@@ -69,7 +69,7 @@ hand-curated. A teacher should treat it as a very good starting point for curios
   rooms each.
 - **A timeline** of <!--n:events-->1530<!--/n--> dates across every subject and continent, and **On
   this day** on Home, which also rotates its prints, notes and suggestions daily.
-- **A picture library** of <!--n:mediaPictures-->3720<!--/n--> Commons pictures (four or more per article but <!--n:mediaGaps-->25<!--/n-->, <!--n:mediaMB-->82<!--/n--> MB of small WebP copies): an article strip, a large view with the credit, a Pictures screen, the picture of the day and picture questions. No licence is typed by hand: `npm run licences` asks the Commons API about <!--n:mediaVerified-->4216<!--/n--> images and fails the submission check on any mismatch.
+- **A picture library** of <!--n:mediaPictures-->3525<!--/n--> Commons pictures (four or more per article but <!--n:mediaGaps-->30<!--/n-->, <!--n:mediaMB-->78<!--/n--> MB of small WebP copies): an article strip, a large view with the credit, a Pictures screen, the picture of the day and picture questions. No licence is typed by hand: `npm run licences` asks the Commons API about <!--n:mediaVerified-->4021<!--/n--> images and fails the submission check on any mismatch.
 - **Offline**: a hand-written service worker saves the whole bundle. After one visit every bundled
   feature works in airplane mode, and the header says honestly whether the site has been saved. The core (articles, quizzes, maps, lead photos) is saved on the first visit; the 3,720 extra library pictures (about 86 MB) are kept as they are viewed, or all at once from Credits, and a picture not yet saved shows a placeholder, not a broken icon.
 - **An optional quiz service** (AWS Lambda calling Amazon Bedrock) that checks every generated
@@ -103,7 +103,7 @@ build was opened and tested by hand; the Windows and Linux builds come from the
 ## How we built it
 
 React 19, TypeScript and Vite, with hand-made components for the scrapbook look and no UI
-framework. The main script is <!--n:mainScriptKB-->270<!--/n--> KB, under the 300 KB budget;
+framework. The main script is <!--n:mainScriptKB-->271<!--/n--> KB, under the 300 KB budget;
 packs load on demand. Content is built by one command, `npm run packs`, from Simple English
 Wikipedia, Wikidata, Natural Earth, Open English WordNet and Wikimedia Commons, and every record
 carries its source and licence. Infrastructure is Terraform (private S3 behind CloudFront, and
@@ -172,43 +172,13 @@ of 23 is in [`docs/kiro-evidence/screenshots/`](kiro-evidence/screenshots/README
 
 `awari-builder` has `postToolUse` hooks (after a source file is written: eslint, typecheck and the
 related tests; after a pack build or a change under `public/`: `npm run credits`) and a `stop`
-hook (`npm run rules`, the hackathon hard rules). Kiro fired them <!--n:hookFirings-->27<!--/n-->
+hook (`npm run rules`, the hackathon hard rules). Kiro fired them <!--n:hookFirings-->254<!--/n-->
 times in real sessions, each logged with its Kiro session id. Crew's own Hooks panel, with three Crew hooks, counted 223 runs
 and 0 errors on 14 November (picture above); those runs are the panel's count, not lines in the log. The hooks earned their place: a
 firing exposed a bug in the hook script itself (a Vitest option that no longer exists), and
 another showed the hook missed a type error in a new test, so it now runs the type checker
 (`docs/kiro-evidence/hooks.md`). The `.kiro/hooks/*.kiro.hook` files hold the same checks for the
 Kiro IDE; they have not fired, because the IDE was not used.
-
-### Kiro powers
-
-The catalogue on this machine lists 26 Kiro powers. I installed HashiCorp's **Terraform** power, because the AWS stack
-(`infra/terraform`) is real work in this repository. Installing it by catalogue name timed out (it clones over SSH), so it
-went in from a clone of the public powers repository by local path (`kiro-cli powers install <path>`), and
-`~/.kiro/powers/installed.json` records it. I used the power's `terraform-best-practices` steering as a checklist against
-the live stack: provider pins, validated inputs, default tags, no IAM wildcards (the only `*` is the explicit Deny of
-insecure transport) and git-ignored state and variables all meet it; remote state does not (local state, one owner). Its
-MCP server was not started, so only the power's steering text was used (`docs/final-review/kiro-power.md`).
-
-### What I tried that did not work
-
-- **A crew member died.** The `awari-builder` run `34363b32` ended on a backend 5xx after fetching its data and before wiring
-  it in; I finished spec 22 by hand.
-- **A review was too big.** The design reviewer run `8b50276e` failed with "Request exceeds the maximum allowed size" when I
-  handed it 40 full-page screenshots. Later runs got contact sheets of about 1.6 MB.
-- **A hook missed things.** It called a Vitest option that no longer exists, and it ran lint and tests but not the type
-  checker, so a type error got through; both are fixed (`docs/kiro-evidence/hooks.md`).
-- **Filtering was not enough for pictures.** Three review rounds measured 62%, 80% and 82% of sampled pictures with a problem.
-  Spec 24 added 214 hand decisions, and the independent review in spec 26 found more (captions cut off, wrong lead pictures).
-- **Safety rules blocked good commands.** Crew refused long shell heredocs as an "ssh to localhost", `curl | shasum` as
-  `curl | sh`, an S3 upload and any push to `main`. I redid each edit with the file tool and short commands, and the owner
-  pushed and deployed by hand.
-- **A model was not available.** Claude Haiku 5.5 was refused for this AWS account, so the quiz service uses Haiku 4.5
-  through an inference profile.
-- **"Works offline" was too broad.** The owner found ten of twelve pictures broken offline on the first article; the notice,
-  the strip and every document were reshaped (`docs/final-review/findings.md`, F-001).
-- **A hint gave away the answer.** The independent reviewer found that the first hint named the answer in 96% of quiz
-  questions; it was rebuilt (D-1).
 
 ### Spec-driven development
 
@@ -243,7 +213,7 @@ listed.
 
 ### Property-based testing
 
-<!--n:properties-->118<!--/n--> fast-check tests are named `Property N:` with the requirements they
+<!--n:properties-->126<!--/n--> fast-check tests are named `Property N:` with the requirements they
 cover. Defects they caught (`docs/kiro-evidence/properties.md`):
 - *05-quizzes, Property 6* ("a hint never gives the answer away") caught year nudges like "the
   1960s" for an answer of 1960 (`be247ac`).
@@ -251,6 +221,36 @@ cover. Defects they caught (`docs/kiro-evidence/properties.md`):
   left out 21 independence days, including Nigeria's (Wikidata gives 1963, the year it became a
   republic) and the United States' (`6084f8d`).
 - *Margin notes are suitable* removed 16 article notes and a Home note (`b1a5071`).
+
+### Kiro powers
+
+The catalogue on this machine lists 26 Kiro powers. I installed HashiCorp's **Terraform** power, because the AWS stack
+(`infra/terraform`) is real work in this repository. Installing it by catalogue name timed out (it clones over SSH), so it
+went in from a clone of the public powers repository by local path (`kiro-cli powers install <path>`), and
+`~/.kiro/powers/installed.json` records it. I used the power's `terraform-best-practices` steering as a checklist against
+the live stack: provider pins, validated inputs, default tags, no IAM wildcards (the only `*` is the explicit Deny of
+insecure transport) and git-ignored state and variables all meet it; remote state does not (local state, one owner). Its
+MCP server was not started, so only the power's steering text was used (`docs/final-review/kiro-power.md`).
+
+### What I tried that did not work
+
+- **A crew member died.** The `awari-builder` run `34363b32` ended on a backend 5xx after fetching its data and before wiring
+  it in; I finished spec 22 by hand.
+- **A review was too big.** The design reviewer run `8b50276e` failed with "Request exceeds the maximum allowed size" when I
+  handed it 40 full-page screenshots. Later runs got contact sheets of about 1.6 MB.
+- **A hook missed things.** It called a Vitest option that no longer exists, and it ran lint and tests but not the type
+  checker, so a type error got through; both are fixed (`docs/kiro-evidence/hooks.md`).
+- **Filtering was not enough for pictures.** Three review rounds measured 62%, 80% and 82% of sampled pictures with a problem.
+  Spec 24 added 214 hand decisions, and the independent review in spec 26 found more (captions cut off, wrong lead pictures).
+- **Safety rules blocked good commands.** Crew refused long shell heredocs as an "ssh to localhost", `curl | shasum` as
+  `curl | sh`, an S3 upload and any push to `main`. I redid each edit with the file tool and short commands, and the owner
+  pushed and deployed by hand.
+- **A model was not available.** Claude Haiku 5.5 was refused for this AWS account, so the quiz service uses Haiku 4.5
+  through an inference profile.
+- **"Works offline" was too broad.** The owner found ten of twelve pictures broken offline on the first article; the notice,
+  the strip and every document were reshaped (`docs/final-review/findings.md`, F-001).
+- **A hint gave away the answer.** The independent reviewer found that the first hint named the answer in 96% of quiz
+  questions; it was rebuilt (D-1).
 
 ## Challenges
 

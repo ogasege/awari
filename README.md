@@ -65,7 +65,7 @@ hand-curated. A teacher should treat it as a very good starting point for curios
 - **Wander the timeline** of <!--n:events-->1530<!--/n--> dates from Wikidata, by subject and by
   continent, and see what happened **on this day** on Home, where the prints, notes and
   suggestions change every day.
-- **Look at the world**: <!--n:mediaPictures-->3720<!--/n--> pictures from Wikimedia Commons, four or more for all but <!--n:mediaGaps-->25<!--/n--> articles (where Commons has too few pictures that pass the filters, mostly abstract science topics),
+- **Look at the world**: <!--n:mediaPictures-->3525<!--/n--> pictures from Wikimedia Commons, four or more for all but <!--n:mediaGaps-->30<!--/n--> articles (where Commons has too few pictures that pass the filters, mostly abstract science topics),
   in a strip under each article, on a **Pictures** screen with filters, search and a surprise pile, as the
   **picture of the day** on Home, and as picture questions in the Castle and picture quizzes. Every picture's author
   and licence is read from the Commons API by `npm run licences`, which the submission check runs.
@@ -182,12 +182,43 @@ Three workspace agents in `.kiro/agents/`, each used for real work (`docs/kiro-e
 `awari-builder` runs `scripts/hooks/kiro-hook.mjs` on `postToolUse` (eslint, typecheck and the
 related tests after a source file is written; `npm run credits` after a pack build or a change
 under `public/`) and on `stop` (`npm run rules`, the hackathon hard rules). Kiro fired these
-<!--n:hookFirings-->27<!--/n--> times in real sessions, each recorded with its session id in
+<!--n:hookFirings-->254<!--/n--> times in real sessions, each recorded with its session id in
 `docs/kiro-evidence/hook-firings.jsonl`. Crew's own Hooks panel, with three Crew hooks, counted 223 runs and 0 errors on
 14 November (picture above); those runs are the panel's count, not lines in that file. A firing caught a defect in the hook itself (an option
 Vitest 4 removed) and showed it missed type errors, so it now runs the type checker
 (`docs/kiro-evidence/hooks.md`). The `.kiro/hooks/*.kiro.hook` files hold the same checks in the
 Kiro IDE format; they have not fired, because the IDE was not used.
+
+### Spec-driven development
+
+<!--n:specs-->26<!--/n--> specs in `.kiro/specs/`, each with EARS requirements, numbered acceptance
+criteria, a design that derives correctness properties, and tasks
+(<!--n:specTasksDone-->218<!--/n--> of <!--n:specTasks-->228<!--/n--> done). Every spec was written
+before its code, and each task became a commit named `<spec> <task>: <summary>`. Compared with
+vibe coding, the specs changed outcomes: when the owner widened the scope to the whole world,
+specs 14 to 20 were written first and caught that Wikidata's "inception" is not independence,
+so the timeline cross-checks every curated date and leaves out the ones that disagree.
+
+### Steering
+
+`.kiro/steering/` holds `product`, `tech`, `structure`, `design` (the art-direction brief, word
+for word) and `hackathon-rules`. The design file was the yardstick for every screen and for
+`awari-design-reviewer`; the hackathon rules are code (`npm run rules`) and run on every stop hook.
+
+### MCP
+
+`awari-builder` used the HashiCorp Terraform MCP server and the AWS Documentation MCP server to
+review the infrastructure against the provider docs and the CloudFront guide for Lambda function
+URL origins (`docs/kiro-evidence/terraform-mcp-review.md`, ten tool calls). `awari-design-reviewer`
+used the Playwright MCP server to open screens at 1440 and 390 pixels and check overflow and
+focus. Configuration: `.kiro/settings/mcp.json` and the agent files; no secrets.
+
+### Property-based testing
+
+<!--n:properties-->126<!--/n--> fast-check tests are named for a spec property and the requirements
+they cover. Defects they caught, with commits, are in `docs/kiro-evidence/properties.md`: a
+quiz hint that gave away its answer (`be247ac`), curated dates that disagreed with Wikidata
+(`6084f8d`), and unsuitable margin notes (`b1a5071`).
 
 ### Kiro powers
 
@@ -218,37 +249,6 @@ MCP server was not started, so only the power's steering text was used (`docs/fi
   the strip and every document were reshaped (`docs/final-review/findings.md`, F-001).
 - **A hint gave away the answer.** The independent reviewer found that the first hint named the answer in 96% of quiz
   questions; it was rebuilt (D-1).
-
-### Spec-driven development
-
-<!--n:specs-->26<!--/n--> specs in `.kiro/specs/`, each with EARS requirements, numbered acceptance
-criteria, a design that derives correctness properties, and tasks
-(<!--n:specTasksDone-->218<!--/n--> of <!--n:specTasks-->228<!--/n--> done). Every spec was written
-before its code, and each task became a commit named `<spec> <task>: <summary>`. Compared with
-vibe coding, the specs changed outcomes: when the owner widened the scope to the whole world,
-specs 14 to 20 were written first and caught that Wikidata's "inception" is not independence,
-so the timeline cross-checks every curated date and leaves out the ones that disagree.
-
-### Steering
-
-`.kiro/steering/` holds `product`, `tech`, `structure`, `design` (the art-direction brief, word
-for word) and `hackathon-rules`. The design file was the yardstick for every screen and for
-`awari-design-reviewer`; the hackathon rules are code (`npm run rules`) and run on every stop hook.
-
-### MCP
-
-`awari-builder` used the HashiCorp Terraform MCP server and the AWS Documentation MCP server to
-review the infrastructure against the provider docs and the CloudFront guide for Lambda function
-URL origins (`docs/kiro-evidence/terraform-mcp-review.md`, ten tool calls). `awari-design-reviewer`
-used the Playwright MCP server to open screens at 1440 and 390 pixels and check overflow and
-focus. Configuration: `.kiro/settings/mcp.json` and the agent files; no secrets.
-
-### Property-based testing
-
-<!--n:properties-->118<!--/n--> fast-check tests are named for a spec property and the requirements
-they cover. Defects they caught, with commits, are in `docs/kiro-evidence/properties.md`: a
-quiz hint that gave away its answer (`be247ac`), curated dates that disagreed with Wikidata
-(`6084f8d`), and unsuitable margin notes (`b1a5071`).
 
 ## Content and licences
 
