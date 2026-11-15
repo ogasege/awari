@@ -62,7 +62,7 @@ hand-curated. A teacher should treat it as a very good starting point for curios
 - **A stamp book** with a page per continent, counted out of all <!--n:countries-->197<!--/n-->
   countries.
 - **Quizzes with a hint ladder**: <!--n:quizzes-->479<!--/n--> quizzes,
-  <!--n:questions-->2357<!--/n--> questions, three hints each (a nudge, where to look, two wrong
+  <!--n:questions-->2358<!--/n--> questions, three hints each (a nudge, where to look, two wrong
   answers removed), and the proof sentence after a right answer. Right and wrong are said in
   words.
 - **The Castle**: <!--n:wings-->16<!--/n--> wings, one per continent and one per subject, twelve
