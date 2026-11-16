@@ -48,6 +48,13 @@ without taking the site down, set `enable_quiz_service = false` and apply (runbo
 
 ## Known issues that remain (also in `report.md`)
 
-Desktop Cumulative Layout Shift above 0.1 on Home (0.19) and articles (0.12) from the web-font swap; 95% of quiz questions are
-the same fill-the-gap shape and most proof sentences repeat the prompt; three uploader first-person picture captions; picture
+Desktop Cumulative Layout Shift above 0.1 on Home (0.19) and articles (0.12) from the web-font swap; 79% of quiz questions are
+the same fill-the-gap shape and every such proof is the question's own sentence (not accepted as shipping state: next spec `27-quiz-variety`); three uploader first-person picture captions; picture
 selection is automatic; the Space page's margin note arrow points at the Sun picture; no sound.
+
+
+## Round 4 (16 Nov)
+
+The owner's five live re-check items, the picture of the day (`picture-of-the-day.md`) and the phone header with the saving pill are
+fixed in the repo. The live site had not received them when this was written, so the live offline pass, axe on the new build and the
+phone-header measurement are **not run**. Local gates are listed in `report.md`.

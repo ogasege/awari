@@ -55,15 +55,19 @@ the hook count stated as the two true numbers.
 
 **The judges ask:** "a complete, coherent product experience… intuitive, polished, and intentional."
 
-**Our answer today.** The scrapbook system is consistent and was praised by the independent reviewer ("the strongest thing
+**Our answer today (16 Nov).** The scrapbook system is consistent and was praised by the independent reviewer ("the strongest thing
 in this submission"). The reviewer's first round found 25 major findings and 3 blockers, mostly content (quiz hints,
 two lead pictures) and the phone header; fix batch 1 and the screen fixes address them (`findings.md`). axe finds 0
 serious or critical issues on 40 screen states (`a11y-local-after2.md`); Lighthouse accessibility is 100 on all eight pages
 (`lighthouse.md`).
 
-**The three weakest screens after the fixes** (from the second review round, `design-review-2.md`; if a screen is not named
-there, it is my own reading and is marked):
-1. See `design-review-2.md`, "The three weakest screens".
+**The three weakest screens** (third review round, `design-review-3.md` section 6, run on the live build of 15 Nov; the fixes
+since are in the repo and not yet re-read live):
+1. **Quiz and Quizzes.** Good mechanics, thin content: 79% one shape, every fill-the-gap proof repeats its own sentence. Money,
+   border and 28 px link faults were fixed after the review. The shape variety is the next spec, `27-quiz-variety`.
+2. **The stamp book overview.** It was a page of grey "?" slots; each empty stamp now draws its country's outline (repo).
+3. **Timeline.** The furniture is right; the sentences are generated and repeated the date (fixed in repo); they still read
+   as database lines, which stays a known weakness.
 
 **Changed in this spec:** see `findings.md` (F-001 to F-018 and D-9 to D-34).
 
