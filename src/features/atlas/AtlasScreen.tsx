@@ -25,13 +25,13 @@ interface QuizIndex {
 /**
  * The world stamp count as the shared stamp sheets (22-review-3 Req 6).
  */
-function WorldStamps({ book }: { book: WorldBook }) {
+function WorldStamps({ book, shapes, items }: { book: WorldBook; shapes: Shapes; items: PackIndex['items'] }) {
   return (
     <div className="atlas-stamps">
       <p className="atlas-stamps__count">
         <strong>{book.count}</strong> of {book.total || 197} countries discovered
       </p>
-      <StampSheets book={book} />
+      <StampSheets book={book} items={items} shapes={shapes as never} />
     </div>
   );
 }
@@ -160,7 +160,7 @@ function Loaded({ shapes, facts, index, quizzes }: { shapes: Shapes; facts: Fact
       </div>
 
       <div className="atlas__sheets">
-        <WorldStamps book={book} />
+        <WorldStamps book={book} shapes={shapes} items={index.items} />
       </div>
 
       <p className="atlas__credit">

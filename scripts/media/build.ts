@@ -114,20 +114,40 @@ function hashOf(text: string): number {
   return h >>> 0;
 }
 
+/** Subjects whose photographs may be the picture of the day: wildlife, earth, space, places and people. */
+export const DAILY_SUBJECTS = ['wildlife', 'earth', 'space', 'countries', 'ancient', 'people'] as const;
+
+/** A caption that describes a diagram, a chart, a specimen or a medical picture, whatever the file's kind says. */
+const NOT_A_PHOTO_CAPTION = /\b(diagram|chart|graph|schematic|map of|cross[- ]section|micrograph|microscop\w*|histolog\w*|x-?ray|scan|illustration|sketch|drawing|versus|niche|cells?|tissue|specimen|skeleton|anatomy|surgery|patient|disease|infection|syndrome|logo|flag of|coat of arms|stamp|banknote|coin|diploma|certificate|lecture|mosaic|painting|painted|engraving|lithograph|poster|manuscript|studio|nadar|whaling|hunt\w*|iwo jima|proclamation|congress|dedication|wrestling|train|railway|locomotive|by [A-Z]\w+ [A-Z]\w+ [A-Z]\w+ \(?\d{4})\b|^(this|these|he|she|it|they|the image|the picture|a view of the)\b/i;
+
+/** Why a picture may not be the picture of the day, or null when it may (26-final-review, round 3). */
+export function dailyRejection(m: Pick<MediaItem, 'article' | 'kind' | 'quality' | 'width' | 'caption'>): string | null {
+  const subject = m.article.split('/')[0] ?? '';
+  if (!(DAILY_SUBJECTS as readonly string[]).includes(subject)) return 'subject is not wildlife, earth, space, places or people';
+  if (m.kind !== 'photo') return 'not a photograph';
+  if (m.quality <= 0) return 'not a Commons Featured, Quality or Valued picture';
+  if (m.width < 1600) return 'under 1600 px wide';
+  if (m.caption.length < 12) return 'caption too short';
+  if (NOT_A_PHOTO_CAPTION.test(m.caption)) return 'caption describes a diagram, specimen or similar';
+  const topic = unsuitableTopic(m.caption);
+  if (topic) return `unsuitable topic: ${topic}`;
+  return null;
+}
+
 /**
- * The picture of each day of the year (366): large photographs with a real caption, taken round the subjects in
+ * The picture of each day of the year (366): a small strong set of photographs (Commons Featured, Quality or Valued;
+ * wildlife, earth, space, places and people; never a diagram, a body picture or a map), taken round the subjects in
  * turn so no subject runs for days, and never one that a bundled photograph already shows (Req 19, Property 3).
+ * The set is shorter than a year, so it comes round again.
  */
 export function dailyPictures(items: readonly MediaItem[]): Array<Pick<MediaItem, 'id' | 'article' | 'articleTitle' | 'caption' | 'tw' | 'th' | 'author' | 'licence' | 'licenceUrl' | 'page'>> {
   const used = bundledTitles();
-  const good = items
-    .filter((m) => m.kind === 'photo' && m.width >= 1600 && m.captionFrom === 'description' && m.caption.length >= 12 && !used.has(m.title.toLowerCase()))
-    .sort((a, b) => hashOf(a.id) - hashOf(b.id));
+  const good = items.filter((m) => dailyRejection(m) === null && !used.has(m.title.toLowerCase())).sort((a, b) => hashOf(a.id) - hashOf(b.id));
   const groups = new Map<string, MediaItem[]>();
   for (const m of good) groups.set(m.article.split('/')[0] ?? '', [...(groups.get(m.article.split('/')[0] ?? '') ?? []), m]);
   const order: MediaItem[] = [];
-  for (let round = 0; order.length < 366 && [...groups.values()].some((g) => g[round]); round++) {
-    for (const g of groups.values()) if (g[round] && order.length < 366) order.push(g[round] as MediaItem);
+  for (let round = 0; [...groups.values()].some((g) => g[round]); round++) {
+    for (const g of groups.values()) if (g[round]) order.push(g[round] as MediaItem);
   }
   const pick = (m: MediaItem) => ({ id: m.id, article: m.article, articleTitle: m.articleTitle, caption: m.caption, tw: m.tw, th: m.th, author: m.author, licence: m.licence, licenceUrl: m.licenceUrl, page: m.page });
   return Array.from({ length: 366 }, (_, i) => pick(order[i % Math.max(1, order.length)] as MediaItem)).filter(Boolean);

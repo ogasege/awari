@@ -10,6 +10,7 @@ import { usePack } from '../../lib/packs/load.ts';
 import type { PackIndex } from '../../lib/packs/types.ts';
 import { useProgress } from '../../lib/store/useProgress.ts';
 import { ForgetProgress } from './ForgetProgress.tsx';
+import { useShapes } from './CountryOutline.tsx';
 import { StampSheets } from './StampSheets.tsx';
 import { worldBook } from './stamps.ts';
 import './stamps.css';
@@ -20,6 +21,7 @@ export default function StampsScreen() {
   useTitle('Stamp book');
   const progress = useProgress();
   const index = usePack<PackIndex>('countries/index.json');
+  const shapes = useShapes();
   const items = index.status === 'ready' ? index.data.items : [];
   const book = worldBook(progress.discovered, items);
   const latest = book.stamps.slice(-6).reverse();
@@ -62,7 +64,7 @@ export default function StampsScreen() {
       ) : null}
 
       <h2>One page for each continent</h2>
-      <StampSheets book={book} />
+      <StampSheets book={book} items={items} shapes={shapes} />
 
       {latest.length > 0 ? (
         <>

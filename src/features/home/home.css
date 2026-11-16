@@ -472,6 +472,11 @@
     clip: auto;
   }
 
+  /* The stacked card already starts with its year ("1738: ..."); the big decorative year would print it twice. */
+  .home-otd__year {
+    display: none;
+  }
+
   .home-stamps__title {
     font-size: 30px !important;
   }

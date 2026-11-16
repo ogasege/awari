@@ -258,3 +258,27 @@ works without a connection." notice appeared, then put offline and walked throug
   designed note ("7 more pictures when you are back online", or similar) so the strip never
   becomes a row of blanks. Same idea on the Pictures screen: saved pictures first, one note for
   the rest, not sixty placeholders.
+
+### Owner's re-check of the live site after the round-2 deploy (15 Nov, 19:35 UTC, Chromium)
+
+Confirmed fixed on the live site: the Mother Teresa quiz, no border questions for Japan, Iceland,
+Madagascar or Sri Lanka, the Slovenia quiz, the saved notice (shown once), the phone navigation
+(4 x 2 grid, no clipped word), the Africa stamp page (country outlines), the timeline notes
+("Born 4 February."), the "you are here" arrow.
+
+Not fixed on the live site, or new:
+
+1. Timeline, "On this day, 15 November" card: lines still read "William Herschel was born on
+   15 November 1738." under a heading that already gives the date and a bold year. The fix reached
+   the notes below it but not this card.
+2. Home, "On this day": the year is printed twice in a row ("1738" then "1738: William Herschel was
+   born.").
+3. Stamp book overview (`/stamps`): each continent sheet is still a grid of tiny "?" stamps. The
+   outlines reached `/stamps/africa` but not the overview, which is the screen a visitor sees first.
+4. Home, "Picture of the day" on 15 November is "Hematopoietic stem cell niche in fetal liver
+   versus bone marrow": a research diagram no child can read. The picture of the day must come
+   from a small, strong set (photographs of wildlife, earth, space, places and people, Commons
+   Featured or Quality where possible, never diagrams, body pictures or maps), and the suitability
+   scan must cover all 366 entries. Show me the list of 366 captions in the report folder.
+5. Phone header is 208 px while the saving pill shows (164 px claimed). Measure it in both states
+   and keep the first screen's headline and first button above the fold.

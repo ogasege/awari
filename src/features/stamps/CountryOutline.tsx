@@ -8,7 +8,7 @@ import type { Feature, FeatureCollection, Geometry } from 'geojson';
 import { useMemo } from 'react';
 import { usePack } from '../../lib/packs/load.ts';
 
-type Shapes = FeatureCollection<Geometry, { id: string; name: string }>;
+export type Shapes = FeatureCollection<Geometry, { id: string; name: string }>;
 
 const SIZE = 100;
 
@@ -32,11 +32,11 @@ export function useShapes(): Shapes | null {
   return file.status === 'ready' ? file.data : null;
 }
 
-export function CountryOutline({ shapes, id }: { shapes: Shapes | null; id: string }) {
+export function CountryOutline({ shapes, id, className = "stamp-book__outline" }: { shapes: Shapes | null; id: string; className?: string }) {
   const d = useMemo(() => (shapes ? outlinePath(shapes, id) : null), [shapes, id]);
   if (!d) return null;
   return (
-    <svg aria-hidden="true" className="stamp-book__outline" viewBox={`0 0 ${SIZE} ${SIZE}`}>
+    <svg aria-hidden="true" className={className} viewBox={`0 0 ${SIZE} ${SIZE}`}>
       <path d={d} />
     </svg>
   );
