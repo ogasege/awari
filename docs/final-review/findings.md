@@ -38,3 +38,30 @@ Severity: blocker, major, minor, polish. Status is `fixed` only when the fix was
   "Picture not available" online), and the strip adds one plain line saying some pictures need a connection the first time.
 - **One true wording** in the header notice, the Credits line, README, devpost, judges guide, runbook and video script.
   The desktop app says plainly that every picture is included.
+
+## Final statuses (round 4, 16 Nov)
+
+Three independent reviews graded the live build: round 1 (`design-review.md`, D-1 to D-43), round 2 (`design-review-2.md`, adds
+N-1 to N-17) and round 3 (`design-review-3.md`, adds R-1 to R-10). Round 3 counted 33 fixed, 13 partly fixed and 13 not fixed
+of D-1 to N-17. "Fixed in repo" means committed with a test and passing the local gates, **not yet seen on the live site**: the
+owner's redeploy of 16 Nov (started 14:40 UTC) had not reached the live site when this was written, so round 4 has not been
+re-read live. Nothing below is marked live-verified unless it says so.
+
+| Id | Status now | Evidence |
+|---|---|---|
+| D-1, D-5, D-6, D-7, D-13 to D-14, D-16 to D-22, D-26 to D-28, D-30, D-31, D-34, D-36 to D-39 | fixed, live-verified in round 3 | `design-review-3.md` section 1 |
+| D-2, D-3, D-9, D-12, N-3, N-4, N-5, N-6, N-8 | fixed, live-verified in round 3 | same |
+| D-11 stamp book empty state | continent pages fixed and live-verified (50 of 55 African countries drawn); the `/stamps` overview now draws outlines too: **fixed in repo** (owner's item 3), test `stampSheets.test.tsx` | commit `bda72bf` |
+| D-23, D-24 timeline and On this day repeat the date | **fixed in repo** (`withoutDate`, round 3, tests); Home phone layout printed the year twice (owner's item 2): **fixed in repo** (`home.css`) | `dates.ts`, `home.css` |
+| D-32 lower-case currency on facts cards | **fixed in repo** | `6393151` |
+| N-1 border questions | **fixed in repo**: 106 left, each with a land-border sentence, no island answers | `a817c3b` |
+| N-2, R-6 unsuitable topics | **fixed in repo**: 7 questions and 12 pictures dropped, 12 article sentences removed, `npm run suitability` is a gate | `d253973`, `f077b1f` |
+| N-7 wrong lead pictures | **fixed in repo** (31 pinned, 47 denylisted); 36 of 40 live-verified in round 3 | `lead-pins.test.ts` |
+| N-10, N-12, R-1, R-3 | **fixed in repo** (44 px quiz links, solid hints border, 24 money questions without a named currency dropped, yellow primary button) | `6393151`, `a817c3b` |
+| R-ref picture of the day (owner's item 4) | **fixed in repo**: chosen from 129 Commons Featured, Quality or Valued photographs of wildlife, earth, space, places and people; all 366 days listed in `picture-of-the-day.md`; test `daily.test.ts` | this round |
+| Owner's item 5 phone header with the saving pill | **fixed in repo, not yet measured**: slim 28 px pill and compact notice; `scripts/final-review/phone-header-states.ts` measures both states after the next deploy. Round 3 reported 208 px with the pill (164 px quiet), so this is unproven until measured | `header.css` |
+| F-019 offline Pictures with nothing saved | fixed in repo (round 2) | `media.test.tsx` |
+| D-4, D-8 quiz shapes and proofs | **open: not accepted as a known issue**. 79% of questions are fill-the-gap. Next spec `27-quiz-variety` (written, not started) | `.kiro/specs/27-quiz-variety/` |
+| D-10 header still 19% of the phone screen; D-15, N-16, R-5 first-person and cut captions (3 to 4 pictures); D-25 margin note placement; D-29; D-33 "as of" dates (51 articles); D-35 US spellings (172 articles); D-40 Credits wording while saving; D-41 empty paper below the hints box; D-42 two-line strips; D-43 Space strip; N-11 Castle photo above the headline on phones; N-13, N-15; N-17 two articles without a margin note; R-2 seven articles without pictures; R-4, R-7, R-8 (5 island slots keep a "?"), R-9, R-10 | **open** (minor or polish; none is a blocker or a major in the round-3 review) | `design-review-3.md` |
+| N-14 empty alt on subject photographs | open by decision: the visible caption names each link, axe passes | round 3 |
+| F-010 CLS 0.19 Home and 0.12 article on desktop | open (font swap), mobile CLS 0.000 to 0.004 | `lighthouse.md` |
