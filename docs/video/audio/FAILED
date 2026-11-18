@@ -1,25 +1,22 @@
-The Nigerian narration was NOT generated (19 Nov 2026, 00:35 WAT).
+The Nigerian man's narration was NOT generated (19 Nov 2026, 00:57 WAT). No money was spent and the plan was not changed.
 
-What was tried
-- The voice library search "Nigerian" (shared voices) found many Nigerian English narrators. Shortlist:
-  1. Pastie - Warm Nigerian Storyteller (y47FZICqt6oFf4Z89DXT), female, middle-aged, use case narrative_story:
-     "clear, articulate, and warm Nigerian female voice ... educational narration ... authentic Nigerian English".
-     First choice: closest to the warm, unhurried narrator the brief asks for.
-  2. Chinedu Dike - Nigerian English Narrator (3W7TIElBzp1JQ8BxQuXK), male, young, narrative_story:
-     "warm, clear Nigerian English male voice ... smooth pacing ... storytelling".
-  3. Ifeoma Odumodu - Nigerian Narrator (reGkImJki7uJOve2F4A0), female, middle-aged, narrative_story:
-     "warm, authoritative Nigerian English female voice with clear diction ... documentaries, e-learning".
-- Text to speech with Pastie's id failed: HTTP 400 voice_not_found ("A voice with ID 'y47FZICqt6oFf4Z89DXT' was
-  not found"). A library voice must first be added to the account's "My Voices", and this connection has no tool
-  that adds a shared library voice (it can only search the library, use voices already in My Voices, clone, or
-  design new voices). My Voices holds only the stock premade voices; a search for "nigerian" there finds nothing.
-- No voice was cloned or designed: the brief asks for a real Nigerian speaker's library voice, not a synthetic one.
+Account: ElevenLabs free tier (check_subscription: tier "free", 10,000 characters a month, 3 voice slots,
+instant and professional cloning not available).
 
-What the owner must do (about two minutes)
-1. Open https://elevenlabs.io/app/voice-library while signed in to the same ElevenLabs account.
-2. Search "Pastie - Warm Nigerian Storyteller", press "Add to my voices" (or "Add voice").
-3. Do the same for "Chinedu Dike - Nigerian English Narrator" and "Ifeoma Odumodu - Nigerian Narrator".
-4. Tell the agent "voices added". It will then generate the sixteen clips with Pastie into docs/video/audio/,
-   clip 01 with the other two as alt-chinedu-01-title1.mp3 and alt-ifeoma-01-title1.mp3, and rewrite voice.txt and DONE.
+What was tried, in the order of docs/video/README.md "Voice change 2"
+1. text_to_speech with voice_id 3W7TIElBzp1JQ8BxQuXK (Chinedu Dike - Nigerian English Narrator):
+   HTTP 400 voice_not_found, "A voice with ID '3W7TIElBzp1JQ8BxQuXK' was not found." The voice is still not in
+   the account's My Voices (the website asks for a paid plan to add it).
+2. text_to_voice (voice design) with the README's description ("A Nigerian man in his mid thirties from Lagos ..."):
+   HTTP 403 feature_not_available, "Creating a voice through the API is only available on a paid plan."
+   So no designed voice exists, and create_voice_from_preview was not reached.
+3. My Voices was searched for "nigerian" and "african": none. The account only has the stock premade voices, none of
+   them Nigerian.
 
-The Sarah set is unchanged in docs/video/audio/sarah/ (sixteen clips and its voice.txt) as a fallback.
+So with this account, neither a Nigerian library voice nor a designed one can be used through the API.
+
+What the owner can do (pick one)
+- Cheapest: the ElevenLabs Starter plan (the account shows a starter promo) unlocks voice design and library voices
+  through the API. Then tell the agent "plan upgraded" and it will run steps 1 to 4 of "Voice change 2".
+- Free: record the sixteen lines yourself (or ask a Nigerian friend) from narration.json; the video needs about 85 s.
+- Fallback already on disk: the Sarah set in docs/video/audio/sarah/ (female, not Nigerian, 84 s, sixteen clips).
