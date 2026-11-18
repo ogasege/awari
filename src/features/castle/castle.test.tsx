@@ -8,6 +8,7 @@ import { isPictureQuestion } from '../../test/pictureAnswer.ts';
 import { servePacksFromDisk } from '../../test/packFetch.ts';
 import CastleScreen from './CastleScreen.tsx';
 import WingScreen from './WingScreen.tsx';
+import { questionKey, questionKeyOnScreen } from '../../test/questionKey.ts';
 
 /** Every country question in the committed bank, by its prompt text. */
 function answersByPrompt(): Map<string, string> {
@@ -15,7 +16,7 @@ function answersByPrompt(): Map<string, string> {
   const map = new Map<string, string>();
   for (const f of readdirSync(dir)) {
     const set = JSON.parse(readFileSync(`${dir}/${f}`, 'utf8')) as QuizSet;
-    set.questions.forEach((q: Question) => map.set(q.prompt, q.options[q.answer] as string));
+    set.questions.forEach((q: Question) => map.set(questionKey(q.prompt, q.options), q.options[q.answer] as string));
   }
   return map;
 }
@@ -46,7 +47,7 @@ describe('The Castle from the committed packs (06-castle)', () => {
       expect(await screen.findByText(`Room ${room} of 12`, { selector: '.wing__room' })).toBeInTheDocument();
       const legend = document.querySelector('.question__prompt') as HTMLElement;
       const prompt = (legend.lastChild?.textContent ?? '').trim();
-      const answer = isPictureQuestion() ? pictureAnswer('countries') : answers.get(prompt);
+      const answer = isPictureQuestion() ? pictureAnswer('countries') : answers.get(questionKeyOnScreen(prompt));
       expect(answer, `answer for "${prompt}"`).toBeDefined();
       await user.click(screen.getByRole('radio', { name: answer as string }));
       await user.click(screen.getByRole('button', { name: 'Check my answer' }));

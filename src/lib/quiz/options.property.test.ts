@@ -59,7 +59,7 @@ const twoNames = (value: string): boolean => {
 describe('the four options of every committed question (26-final-review)', () => {
   it('reads every committed quiz', () => {
     expect(all.length).toBeGreaterThan(2000);
-    expect(all.filter(({ q }) => isGap(q)).length).toBeGreaterThan(1000);
+    expect(all.filter(({ q }) => isGap(q)).length).toBeGreaterThan(500);
   });
 
   it('Property 4: the four options of a gap question agree on their capitalisation. _D-5_', () => {
@@ -119,6 +119,8 @@ describe('the four options of every committed question (26-final-review)', () =>
 
   it('Property 8: every proof names the answer, and a cloze proof is the sentence its gap was cut from. _D-8, 26-final-review N-3_', () => {
     for (const { where, q } of all) {
+      // A true or false question is proved by the true statement; its answer is True or False (27 Req 2.2).
+      if (q.kind === 'truefalse') continue;
       expect(fold(q.proof).includes(fold(answerOf(q))), where).toBe(true);
       if (!isGap(q)) continue;
       const gap = /^Fill the gap: “(.*)”$/.exec(q.prompt)?.[1] ?? '';

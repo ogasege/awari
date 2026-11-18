@@ -9,6 +9,7 @@ import { servePacksFromDisk } from '../../test/packFetch.ts';
 import { isPictureQuestion, pictureAnswer } from '../../test/pictureAnswer.ts';
 import { ROOMS, WINGS } from './castle.ts';
 import WingScreen from './WingScreen.tsx';
+import { questionKey, questionKeyOnScreen } from '../../test/questionKey.ts';
 
 /** Every question in the committed bank that feeds a wing. */
 function questionsFor(wingId: string): Question[] {
@@ -44,14 +45,14 @@ describe('every castle wing can be completed (17-castle-wings)', () => {
 
     it.each(['oceania', 'south-america', 'space', 'people'])('lights all twelve rooms of the %s wing', async (wingId) => {
       const user = userEvent.setup();
-      const answers = new Map(questionsFor(wingId).map((q) => [q.prompt, q.options[q.answer] as string]));
+      const answers = new Map(questionsFor(wingId).map((q) => [questionKey(q.prompt, q.options), q.options[q.answer] as string]));
       render(<WingScreen params={{ wing: wingId }} />);
       expect(await screen.findByText('0 of 12 rooms lit')).toBeInTheDocument();
       for (let room = 1; room <= ROOMS; room += 1) {
         expect(await screen.findByText(`Room ${room} of 12`, { selector: '.wing__room' })).toBeInTheDocument();
         const legend = document.querySelector('.question__prompt') as HTMLElement;
         const prompt = (legend.lastChild?.textContent ?? '').trim();
-        const answer = isPictureQuestion() ? pictureAnswer(WINGS.find((w) => w.id === wingId)?.pack ?? '') : answers.get(prompt);
+        const answer = isPictureQuestion() ? pictureAnswer(WINGS.find((w) => w.id === wingId)?.pack ?? '') : answers.get(questionKeyOnScreen(prompt));
         expect(answer, `answer for "${prompt}"`).toBeDefined();
         await user.click(screen.getByRole('radio', { name: answer as string }));
         await user.click(screen.getByRole('button', { name: 'Check my answer' }));

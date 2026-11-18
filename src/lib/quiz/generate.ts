@@ -14,16 +14,19 @@
  * gap sentence filled in (D-8).
  */
 import { rng, seedFrom } from '../../design/wobble.ts';
-import type { Article, CountryFacts, Question } from '../packs/types.ts';
+import type { Article, CountryFacts, Question, QuizShape, TimelineEvent } from '../packs/types.ts';
 import { safeNudge, type QuestionKind } from './hints.ts';
 import { heuristicPos, sameKind, type PosOf } from './pos.ts';
 import { sentencesOf, splitSentences, type Located } from './sentences.ts';
-import { fold, validateQuestion } from './validate.ts';
+import { articleText, fold, LISTS_ALL_SHAPES, validateQuestion } from './validate.ts';
 import { unsuitableTopic } from '../text/suitability.ts';
 
 export { nudgeFor } from './hints.ts';
 
 export const QUIZ_LENGTH = 5;
+
+/** How many candidate questions of the old shapes are kept before the mix picks five. */
+const CANDIDATE_LIMIT = 7;
 
 /** Key words for gap-fill questions in the Physics pack. */
 export const PHYSICS_TERMS = [
@@ -467,6 +470,7 @@ export function buildQuiz(
   allFacts: readonly CountryFacts[],
   termPool: readonly string[],
   posOf: PosOf = heuristicPos,
+  extras: QuizExtras = {},
 ): Question[] {
   const next = rng(seedFrom(`quiz:${article.pack}/${article.id}`));
   const sentences = sentencesOf(article);
@@ -503,7 +507,7 @@ export function buildQuiz(
   const usedAnswers = new Set<string>();
   const usedProofs = new Set<string>();
   for (const c of candidates) {
-    if (questions.length >= QUIZ_LENGTH) break;
+    if (questions.length >= CANDIDATE_LIMIT) break;
     if (usedAnswers.has(fold(c.answer)) || usedProofs.has(c.proof.sentence)) continue;
     const distractors = pickDistractors(c.distractors, c.answer, c.proof.sentence, next);
     if (!distractors) continue;
@@ -525,6 +529,7 @@ export function buildQuiz(
     if (unsuitableTopic(`${c.prompt} ${proof.sentence} ${options.join(' ')}`)) continue;
     const q: Question = {
       id: `${article.pack}/${article.id}/${questions.length + 1}`,
+      kind: c.kind === 'term' || c.kind === 'year' ? 'cloze' : (c.kind as QuizShape),
       articleId: article.id,
       pack: article.pack,
       prompt: c.prompt,
@@ -545,7 +550,28 @@ export function buildQuiz(
       usedProofs.add(proof.sentence);
     }
   }
-  return questions;
+  // New shapes (27-quiz-variety), then a round-robin mix so no quiz is a run of one shape.
+  const specs: ShapeSpec[] = [];
+  if (facts) specs.push(...countrySpecs(article, facts, allFacts, sentences, next));
+  if (extras.events) {
+    const first = firstSpec(article, extras.events, next);
+    if (first) specs.push(first);
+  }
+  if (!facts && extras.packTerms) {
+    const articleWords = new Set(articleText(article).toLowerCase().match(/[\p{L}]+/gu) ?? []);
+    specs.push(...clozeTrueFalse(article, terms, extras.packTerms, articleWords, posOf, next));
+  }
+  const fresh: Question[] = [];
+  const seenShapeAnswer = new Set<string>();
+  for (const spec of specs) {
+    const q = questionFromSpec(article, spec, next);
+    const key = q ? `${q.kind}|${q.prompt}` : '';
+    if (q && !seenShapeAnswer.has(key)) {
+      seenShapeAnswer.add(key);
+      fresh.push(q);
+    }
+  }
+  return mixShapes([...questions, ...fresh], next);
 }
 
 /** Common words that make poor answers or distractors. */
@@ -607,4 +633,337 @@ export function autoTerms(article: Pick<Article, 'title' | 'sections'>, max = 60
     .sort((a, b) => b[1] - a[1] || b[0].length - a[0].length || a[0].localeCompare(b[0]))
     .slice(0, max)
     .map(([w]) => ((caps.get(w) ?? 0) > (plain.get(w) ?? 0) ? w.charAt(0).toUpperCase() + w.slice(1) : w));
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// 27-quiz-variety: more question shapes from facts the packs already hold. Every shape is pass-or-drop.
+// ---------------------------------------------------------------------------------------------------------------------
+
+/** Extra data a build can hand to `buildQuiz` for the new shapes. */
+export interface QuizExtras {
+  /** Timeline events, for "who was born first". */
+  events?: readonly TimelineEvent[];
+  /** Every noun-ish term used anywhere in the article's pack, for the swapped word of a false statement. */
+  packTerms?: readonly string[];
+}
+
+/** What the generators for one new shape agree on before a question is made. */
+interface ShapeSpec {
+  shape: QuizShape;
+  kind: QuestionKind;
+  prompt: string;
+  /** The right option. For true or false: 'True' or 'False'. */
+  answer: string;
+  distractors: string[];
+  /** Fact line or article sentence that proves the answer. */
+  proof: string;
+  proofSection?: string;
+  whereToLook: string;
+}
+
+
+const CONTINENTS = ['Africa', 'Asia', 'Europe', 'North America', 'South America', 'Oceania'];
+
+/** Countries that Wikidata puts on one continent but that a student could fairly place on two (27 Req 1.2). */
+const TRANSCONTINENTAL = new Set(
+  [
+    'Turkey', 'Russia', 'Egypt', 'Kazakhstan', 'Azerbaijan', 'Georgia', 'Armenia', 'Cyprus', 'Indonesia', 'Panama',
+    'Yemen', 'Spain', 'Mexico', 'Iran', 'Chile', 'Papua New Guinea',
+  ].map(fold),
+);
+
+const withCommas = (n: number): string => Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+/** The first article sentence that names `neighbour` and talks about a border you can walk across (26 N-1). */
+function borderSentence(sentences: readonly Located[], neighbour: string): Located | null {
+  if (ISLAND_STATES.has(fold(neighbour))) return null;
+  return (
+    sentences.find(
+      (s) =>
+        mentions(s.sentence, neighbour) &&
+        /\bborder(s|ed|ing)?\b/i.test(s.sentence) &&
+        !/\b(water|maritime|sea|ocean|marine)\s+border/i.test(s.sentence) &&
+        !/\b(near|across the|causeway|strait|gulf|island)\b/i.test(s.sentence) &&
+        !new RegExp(`${neighbour}[^.;]{0,20}disputed|disputed[^.;]{0,20}${neighbour}`, 'i').test(s.sentence),
+    ) ?? null
+  );
+}
+
+const TF_PROMPT = (statement: string): string => `True or false: “${statement}”`;
+
+function countrySpecs(
+  article: Article,
+  facts: CountryFacts,
+  all: readonly CountryFacts[],
+  sentences: readonly Located[],
+  next: () => number,
+): ShapeSpec[] {
+  const out: ShapeSpec[] = [];
+  const region = regionOf(facts.id, all);
+  const others = region.length >= 6 ? region : all.filter((c) => c.id !== facts.id);
+  const nameOf = new Map(all.map((c) => [c.id, c.name]));
+  const capitalOk =
+    !!facts.capital &&
+    !isTwoNames(facts.capital) &&
+    !all.some((c) => c.id !== facts.id && fold(c.capital ?? '') === fold(facts.capital ?? ''));
+
+  if (facts.capital && capitalOk) {
+    out.push({
+      shape: 'capital-reverse',
+      kind: 'capital-reverse',
+      prompt: `Which country has the capital city ${facts.capital}?`,
+      answer: facts.name,
+      distractors: others.map((c) => c.name),
+      proof: `The capital city of ${facts.name} is ${facts.capital}.`,
+      whereToLook: 'Look on the Atlas: find the city, then see which country it sits in.',
+    });
+  }
+
+  if (CONTINENTS.includes(facts.continent) && !TRANSCONTINENTAL.has(fold(facts.name))) {
+    out.push({
+      shape: 'continent',
+      kind: 'continent',
+      prompt: `Which continent is ${article.title} in?`,
+      answer: facts.continent,
+      distractors: CONTINENTS.filter((c) => c !== facts.continent),
+      proof: `${facts.name} is in ${facts.continent}.`,
+      whereToLook: `Find ${article.title} on the Atlas and see which land mass it sits on.`,
+    });
+  }
+
+  const money = facts.currency;
+  if (money && !/\d/.test(money) && !isTwoNames(money)) {
+    const sharing = new Set(all.filter((c) => fold(c.currency ?? '') === fold(money)).map((c) => c.id));
+    out.push({
+      shape: 'currency',
+      kind: 'currency',
+      prompt: `What money is used in ${article.title}?`,
+      answer: money,
+      distractors: [...new Set(others.filter((c) => !sharing.has(c.id)).map((c) => c.currency ?? '').filter(Boolean))],
+      proof: `The money used in ${facts.name} is the ${money}.`,
+      whereToLook: 'Look in the part of the article about the economy, or at the facts for the country.',
+    });
+  }
+
+  const area = facts.areaKm2;
+  if (area && area > 0) {
+    const smaller = others.filter((c) => c.areaKm2 && c.areaKm2 > 0 && c.areaKm2 * 1.25 <= area);
+    if (smaller.length >= 3) {
+      const three = shuffle(smaller, next).slice(0, 3);
+      const rows = [facts, ...three].sort((a, b) => (b.areaKm2 ?? 0) - (a.areaKm2 ?? 0));
+      out.push({
+        shape: 'largest',
+        kind: 'largest',
+        prompt: 'Which of these countries covers the most ground?',
+        answer: facts.name,
+        distractors: three.map((c) => c.name),
+        proof: `By area: ${rows.map((c) => `${c.name} about ${withCommas(c.areaKm2 ?? 0)} square kilometres`).join('; ')}.`,
+        whereToLook: 'Compare the four on the Atlas. Area means how much ground a country covers.',
+      });
+    }
+  }
+
+  // True or false about the capital: half of the statements swap in another country's capital.
+  if (facts.capital && capitalOk) {
+    const truth = next() < 0.5;
+    const wrong = shuffle(others.map((c) => c.capital ?? '').filter((c) => c && !isTwoNames(c) && fold(c) !== fold(facts.capital ?? '')), next)[0];
+    if (truth || wrong) {
+      out.push({
+        shape: 'truefalse',
+        kind: 'truefalse',
+        prompt: TF_PROMPT(`The capital city of ${facts.name} is ${truth ? facts.capital : wrong}.`),
+        answer: truth ? 'True' : 'False',
+        distractors: [],
+        proof: `The capital city of ${facts.name} is ${facts.capital}.`,
+        whereToLook: `Look in the opening paragraphs of the ${article.title} article, or on the Atlas.`,
+      });
+    }
+  }
+
+  // True or false about a land border: the true one is proved by an article sentence; the false one names a country
+  // two or three borders away and the proof lists the real neighbours.
+  const realNeighbours = facts.neighbours.map((n) => nameOf.get(n)).filter((n): n is string => !!n);
+  if (realNeighbours.length > 0 && !realNeighbours.some((n) => ISLAND_STATES.has(fold(n))) && !ISLAND_STATES.has(fold(facts.name))) {
+    const near = nearbyIds(facts.id, all, 1);
+    const far = nearbyIds(facts.id, all, 3);
+    const farOnly = all.filter((c) => far.has(c.id) && !near.has(c.id) && !ISLAND_STATES.has(fold(c.name)));
+    const truth = next() < 0.5;
+    const trueN = realNeighbours.find((n) => borderSentence(sentences, n));
+    if (truth && trueN) {
+      const s = borderSentence(sentences, trueN) as Located;
+      out.push({
+        shape: 'truefalse',
+        kind: 'truefalse',
+        prompt: TF_PROMPT(`${facts.name} shares a land border with ${trueN}.`),
+        answer: 'True',
+        distractors: [],
+        proof: s.sentence,
+        proofSection: s.section,
+        whereToLook: whereToLookFor(s.section, article.title),
+      });
+    } else if (!truth && farOnly.length > 0 && realNeighbours.length <= 8) {
+      const m = shuffle(farOnly, next)[0] as CountryFacts;
+      out.push({
+        shape: 'truefalse',
+        kind: 'truefalse',
+        prompt: TF_PROMPT(`${facts.name} shares a land border with ${m.name}.`),
+        answer: 'False',
+        distractors: [],
+        proof: `${facts.name} borders ${realNeighbours.join(', ')}.`,
+        whereToLook: 'Look at the Atlas and see which countries touch it.',
+      });
+    }
+  }
+  return out;
+}
+
+/** "Who was born first?" for an article about a person on the timeline (27 Req 1.7). */
+function firstSpec(article: Article, events: readonly TimelineEvent[], next: () => number): ShapeSpec | null {
+  const born = (e: TimelineEvent): boolean => / was born on /.test(e.text) && /^\d{4}-/.test(e.date);
+  const mine = events.find((e) => born(e) && e.label === article.title);
+  if (!mine) return null;
+  const year = (e: TimelineEvent): number => Number(e.date.slice(0, 4));
+  const pool = events.filter((e) => born(e) && e.label !== mine.label && !mine.label.includes(e.label) && !e.label.includes(mine.label));
+  const rank = (e: TimelineEvent): number => (e.subject === mine.subject ? 0 : 1);
+  const pick = (list: TimelineEvent[]): TimelineEvent[] => {
+    const seen = new Set<number>();
+    const distinct = shuffle(list, next).filter((e) => (seen.has(year(e)) ? false : (seen.add(year(e)), true)));
+    return distinct.sort((a, b) => rank(a) - rank(b)).slice(0, 3);
+  };
+  const later = pick(pool.filter((e) => year(e) >= year(mine) + 10));
+  const earlier = pick(pool.filter((e) => year(e) <= year(mine) - 10));
+  const first = later.length === 3;
+  const three = first ? later : earlier;
+  if (three.length < 3) return null;
+  const rows = [mine, ...three].sort((a, b) => year(a) - year(b));
+  return {
+    shape: 'first',
+    kind: 'first',
+    prompt: first ? 'Which of these people was born first?' : 'Which of these people was born most recently?',
+    answer: mine.label,
+    distractors: three.map((e) => e.label),
+    proof: `Born: ${rows.map((e) => `${e.label} in ${year(e)}`).join('; ')}.`,
+    whereToLook: 'Look in the Timeline: every entry shows its date.',
+  };
+}
+
+/** A true or false statement from an article sentence: the sentence itself, or the sentence with one word swapped. */
+function clozeTrueFalse(
+  article: Article,
+  gaps: readonly Candidate[],
+  packTerms: readonly string[],
+  articleWords: ReadonlySet<string>,
+  posOf: PosOf,
+  next: () => number,
+): ShapeSpec[] {
+  const out: ShapeSpec[] = [];
+  for (const g of gaps) {
+    if (g.kind !== 'term' || !g.fitsSection || g.proof.sentence.length > 150) continue;
+    if (/_____/.test(g.proof.sentence)) continue;
+    // A statement that opens with a pronoun cannot stand alone without its article.
+    if (/^(He|She|It|They|This|These|Those|His|Her|Its|Their|There|Such|However|But|And|Also)\b/.test(g.proof.sentence)) continue;
+    let truth = next() < 0.55;
+    let statement = g.proof.sentence;
+    if (!truth) {
+      // A swapped word must come from the pack's vocabulary, never occur in this article, and fit the same slot, so the
+      // false statement is false with near certainty (27 Req 1.8). Proper names are never swapped; when no word fits,
+      // the sentence is offered as it stands, which is true.
+      const swap = isName(g.answer)
+        ? undefined
+        : shuffle(
+            packTerms.filter((t) => !articleWords.has(fold(t)) && sameKind(t, g.answer, posOf) && usableOption(t, g.answer) && t.length > 3),
+            next,
+          )[0];
+      const replaced = swap ? statement.replace(new RegExp(`\\b${g.answer}\\b`, 'i'), swap) : statement;
+      if (swap && replaced !== statement) statement = replaced;
+      else truth = true;
+    }
+    out.push({
+      shape: 'truefalse',
+      kind: 'truefalse',
+      prompt: TF_PROMPT(statement),
+      answer: truth ? 'True' : 'False',
+      distractors: [],
+      proof: g.proof.sentence,
+      proofSection: g.proof.section,
+      whereToLook: whereToLookFor(g.proof.section, article.title, g.fitsSection),
+    });
+  }
+  return out;
+}
+
+/** Turns a shape spec into a validated question, or null when it cannot be made cleanly. */
+function questionFromSpec(article: Article, spec: ShapeSpec, next: () => number): Question | null {
+  if (unsuitableTopic(`${spec.prompt} ${spec.proof} ${spec.answer} ${spec.distractors.join(' ')}`)) return null;
+  let options: string[];
+  let answer: number;
+  let removed: [number, number] | [];
+  if (spec.shape === 'truefalse') {
+    options = ['True', 'False'];
+    answer = spec.answer === 'True' ? 0 : 1;
+    removed = [];
+  } else {
+    const d = pickDistractors(spec.distractors, spec.answer, LISTS_ALL_SHAPES.has(spec.shape) ? '' : spec.proof, next);
+    if (!d) return null;
+    options = shuffle([spec.answer, ...d], next);
+    answer = options.indexOf(spec.answer);
+    const wrong = shuffle(options.map((_, i) => i).filter((i) => i !== answer), next);
+    removed = [wrong[0] as number, wrong[1] as number];
+  }
+  const nudge = safeNudge(
+    { kind: spec.kind, answer: options[answer] as string, title: article.title, proper: isName(spec.answer) },
+    options,
+  );
+  if (!nudge) return null;
+  const q: Question = {
+    id: '',
+    kind: spec.shape,
+    articleId: article.id,
+    pack: article.pack,
+    prompt: spec.prompt,
+    options,
+    answer,
+    hints: { nudge, whereToLook: spec.whereToLook, removed },
+    proof: spec.proof,
+    proofSection: spec.proofSection ?? '',
+  };
+  return validateQuestion(q, article).ok ? q : null;
+}
+
+/** Per-shape caps in one quiz of five (27 Req 5.3): no shape more than two of five, which is 40%. */
+const SHAPE_ORDER: QuizShape[] = [
+  'capital', 'capital-reverse', 'continent', 'largest', 'neighbour', 'currency', 'language', 'first', 'truefalse', 'cloze',
+];
+const shapeCap = (_shape: QuizShape): number => 2;
+
+/** Mixes candidate questions round-robin across shapes so no quiz is a run of one shape; cloze only fills the rest. */
+export function mixShapes(pool: readonly Question[], next: () => number): Question[] {
+  const queues = new Map<QuizShape, Question[]>();
+  for (const q of pool) {
+    const k = q.kind ?? 'cloze';
+    queues.set(k, [...(queues.get(k) ?? []), q]);
+  }
+  const picked: Question[] = [];
+  const count = (k: QuizShape): number => picked.filter((q) => (q.kind ?? 'cloze') === k).length;
+  const take = (k: QuizShape, ignoreCap: boolean): boolean => {
+    const queue = queues.get(k);
+    // The same question can arrive from an article sentence and from a fact line; keep one.
+    while (queue && queue.length > 0 && picked.some((p) => p.prompt === queue[0]?.prompt)) queue.shift();
+    if (!queue || queue.length === 0 || picked.length >= QUIZ_LENGTH) return false;
+    if (!ignoreCap && count(k) >= shapeCap(k)) return false;
+    picked.push(queue.shift() as Question);
+    return true;
+  };
+  let progress = true;
+  while (progress && picked.length < QUIZ_LENGTH) {
+    progress = false;
+    for (const k of SHAPE_ORDER.filter((s) => s !== 'cloze')) progress = take(k, false) || progress;
+  }
+  while (take('cloze', false)) {
+    /* up to two gap-fill questions */
+  }
+  for (const k of ['cloze' as QuizShape, ...SHAPE_ORDER]) while (take(k, true)) {
+    /* only when the quiz would otherwise be short */
+  }
+  return shuffle(picked, next).map((q, i) => ({ ...q, id: `${q.pack}/${q.articleId}/${i + 1}` }));
 }

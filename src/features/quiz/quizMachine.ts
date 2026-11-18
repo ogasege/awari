@@ -28,6 +28,11 @@ export type Action =
 export const MAX_HINTS = 3;
 export const MAX_TRIES = 2;
 
+/** A true or false question has two options, so it has no "take away two answers" rung and only one try. */
+export const isTwoWay = (q: Question): boolean => q.options.length === 2;
+export const maxHints = (q: Question): number => (isTwoWay(q) ? MAX_HINTS - 1 : MAX_HINTS);
+export const maxTries = (q: Question): number => (isTwoWay(q) ? 1 : MAX_TRIES);
+
 export function initialState(): QuizState {
   return { index: 0, selected: null, hintsUsed: 0, tries: 0, status: 'asking', score: 0, totalHints: 0 };
 }
@@ -50,7 +55,7 @@ export function reduce(questions: readonly Question[], s: QuizState, a: Action):
       if (!answering(s) || !visibleOptions(q, s.hintsUsed).includes(a.option)) return s;
       return { ...s, selected: a.option };
     case 'hint': {
-      if (!answering(s) || s.hintsUsed >= MAX_HINTS) return s;
+      if (!answering(s) || s.hintsUsed >= maxHints(q)) return s;
       const hintsUsed = s.hintsUsed + 1;
       const stillVisible = s.selected !== null && visibleOptions(q, hintsUsed).includes(s.selected);
       return { ...s, hintsUsed, totalHints: s.totalHints + 1, selected: stillVisible ? s.selected : null };
@@ -61,7 +66,7 @@ export function reduce(questions: readonly Question[], s: QuizState, a: Action):
         return { ...s, status: 'right', score: s.score + 1 };
       }
       const tries = s.tries + 1;
-      return { ...s, tries, status: tries >= MAX_TRIES ? 'revealed' : 'wrong', selected: tries >= MAX_TRIES ? s.selected : null };
+      return { ...s, tries, status: tries >= maxTries(q) ? 'revealed' : 'wrong', selected: tries >= maxTries(q) ? s.selected : null };
     }
     case 'next': {
       if (s.status !== 'right' && s.status !== 'revealed') return s;

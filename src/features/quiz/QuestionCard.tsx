@@ -7,7 +7,7 @@ import { useId, type Dispatch, type ReactNode } from 'react';
 import { Link } from '../../app/navigation.tsx';
 import { sectionId } from '../article/ArticleBody.tsx';
 import type { Question } from '../../lib/packs/types.ts';
-import { MAX_HINTS, visibleOptions, type Action, type QuizState } from './quizMachine.ts';
+import { isTwoWay, maxHints, visibleOptions, type Action, type QuizState } from './quizMachine.ts';
 import { SafeImg } from '../../design/SafeImg.tsx';
 import './quiz.css';
 
@@ -78,7 +78,7 @@ export function QuestionCard({
   const groupId = useId();
   const visible = visibleOptions(q, s.hintsUsed);
   const answering = s.status === 'asking' || s.status === 'wrong';
-  const hintsLeft = MAX_HINTS - s.hintsUsed;
+  const hintsLeft = maxHints(q) - s.hintsUsed;
 
   return (
     <div className="question">
@@ -91,7 +91,7 @@ export function QuestionCard({
           {q.prompt}
         </legend>
         {q.image ? <SafeImg className="question__image" src={q.image.src} alt={q.image.alt} /> : null}
-        <div className="question__options">
+        <div className={`question__options${isTwoWay(q) ? ' question__options--two' : ''}`}>
           {q.options.map((opt, i) =>
             visible.includes(i) ? (
               <label key={opt} className={`question__option${s.selected === i ? ' is-selected' : ''}`}>
@@ -122,7 +122,7 @@ export function QuestionCard({
       <div className="question__feedback" aria-live="polite">
         {s.status === 'wrong' ? (
           <p className="verdict verdict--wrong">
-            <Cross /> <strong>Not quite.</strong> Try again, or take a hint.
+            <Cross /> <strong>Not quite.</strong> {isTwoWay(q) ? '' : 'Try again, or take a hint.'}
           </p>
         ) : null}
         {s.status === 'right' || s.status === 'revealed' ? (
@@ -159,13 +159,13 @@ export function QuestionCard({
       <section className="hints" aria-label="Hints">
         <p className="hints__left">
           <span className="hints__bulbs">
-            {[0, 1, 2].map((i) => (
+            {Array.from({ length: maxHints(q) }, (_, i) => i).map((i) => (
               <Bulb key={i} lit={i >= s.hintsUsed} />
             ))}
           </span>
           {hintsLeft === 1 ? '1 hint left' : `${hintsLeft} hints left`}
         </p>
-        {answering && s.hintsUsed < MAX_HINTS ? (
+        {answering && s.hintsUsed < maxHints(q) ? (
           <button type="button" className="btn btn--outline hints__button" onClick={() => dispatch({ type: 'hint' })}>
             {HINT_LABELS[s.hintsUsed]}
           </button>

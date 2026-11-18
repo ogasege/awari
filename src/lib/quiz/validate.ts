@@ -79,11 +79,39 @@ function isIndex(value: unknown, length: number): value is number {
 }
 
 /**
+ * Shapes whose proof is a fact line built from the pack data ("The capital of Chad is N'Djamena.") and not a sentence of
+ * the article. The fact test in `scripts/quizzes/facts.test.ts` re-derives each answer from the packs (27 Req 5.4).
+ */
+export const FACT_LINE_SHAPES: ReadonlySet<string> = new Set(['capital-reverse', 'continent', 'largest', 'first', 'currency']);
+
+/** Shapes whose proof lists every option's figure, so a proof naming wrong options is the point (27 Req 2.3). */
+export const LISTS_ALL_SHAPES: ReadonlySet<string> = new Set(['first', 'largest']);
+
+/** A true or false question: two options, one try, a proof that is the true fact (27 Req 1.8, 2.2). */
+function validateTrueFalse(q: Question, article: Article): Verdict {
+  const reasons: string[] = [];
+  if (q.options.length !== 2 || q.options[0] !== 'True' || q.options[1] !== 'False') {
+    reasons.push('true or false needs exactly the options True and False');
+  }
+  if (q.answer !== 0 && q.answer !== 1) reasons.push('answer must be 0 or 1');
+  if (q.hints.removed.length !== 0) reasons.push('true or false has no removed options');
+  if (normalise(q.prompt) === '' || normalise(q.proof) === '') reasons.push('prompt and proof must not be empty');
+  if (normalise(q.hints.nudge) === '' || normalise(q.hints.whereToLook) === '') reasons.push('hints must not be empty');
+  const proof = normalise(q.proof);
+  if (q.proofSection !== '' && !articleText(article).includes(proof)) {
+    reasons.push('proof is not an exact sentence from the article');
+  }
+  return reasons.length === 0 ? { ok: true } : { ok: false, reasons };
+}
+
+/**
  * Checks a question against the article it claims to come from and
  * returns every rule it breaks. Never throws for a structurally typed
  * question, whatever its values.
  */
 export function validateQuestion(q: Question, article: Article): Verdict {
+  if (q.kind === 'truefalse') return validateTrueFalse(q, article);
+  const factLine = q.kind !== undefined && FACT_LINE_SHAPES.has(q.kind);
   const reasons: string[] = [];
   const options = q.options;
 
@@ -107,9 +135,9 @@ export function validateQuestion(q: Question, article: Article): Verdict {
   const proof = normalise(q.proof);
   if (proof === '') {
     reasons.push('proof is empty');
-  } else if (!articleText(article).includes(proof)) {
+  } else if (!factLine && !articleText(article).includes(proof)) {
     reasons.push('proof is not an exact sentence from the article');
-  } else {
+  } else if (!factLine) {
     const section = sectionOfSentence(article, proof);
     if (section === null) {
       reasons.push('proof does not sit inside a single section');
@@ -136,7 +164,7 @@ export function validateQuestion(q: Question, article: Article): Verdict {
     }
   }
   options.forEach((option, i) => {
-    if (i !== q.answer && mentions(q.proof, option)) {
+    if (i !== q.answer && !(q.kind && LISTS_ALL_SHAPES.has(q.kind)) && mentions(q.proof, option)) {
       reasons.push(`proof contains wrong option ${i} ("${option}")`);
     }
   });
@@ -192,7 +220,7 @@ export function isQuestionShape(value: unknown): value is Question {
     typeof hints.nudge === 'string' &&
     typeof hints.whereToLook === 'string' &&
     Array.isArray(hints.removed) &&
-    hints.removed.length === 2 &&
+    (hints.removed.length === 2 || (value.kind === 'truefalse' && hints.removed.length === 0)) &&
     hints.removed.every((r) => typeof r === 'number')
   );
 }

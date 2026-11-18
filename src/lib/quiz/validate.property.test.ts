@@ -114,7 +114,7 @@ describe('validateQuestion properties', () => {
           answer: moved(q.answer),
           hints: {
             ...q.hints,
-            removed: [moved(q.hints.removed[0]), moved(q.hints.removed[1])],
+            removed: [moved(q.hints.removed[0] ?? 0), moved(q.hints.removed[1] ?? 0)],
           },
         };
         expect(ok({ article, question: shuffled })).toBe(true);

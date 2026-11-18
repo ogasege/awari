@@ -12,7 +12,18 @@ import { looksPlural } from './pos.ts';
 import { fold } from './validate.ts';
 
 /** The kinds of question the pack pipeline builds. */
-export type QuestionKind = 'capital' | 'neighbour' | 'language' | 'currency' | 'year' | 'term';
+export type QuestionKind =
+  | 'capital'
+  | 'neighbour'
+  | 'language'
+  | 'currency'
+  | 'year'
+  | 'term'
+  | 'capital-reverse'
+  | 'continent'
+  | 'largest'
+  | 'first'
+  | 'truefalse';
 
 const ORDINALS = [
   'tenth', 'eleventh', 'twelfth', 'thirteenth', 'fourteenth', 'fifteenth', 'sixteenth',
@@ -137,6 +148,21 @@ export function nudgeCandidates(ctx: NudgeContext): string[] {
       out.push(
         'Money names often come from a country’s own words. The other three are spent in other countries.',
       );
+      break;
+    case 'capital-reverse':
+      out.push('Every country has one capital city. Find the city in the question on a map, then see which country it sits in.');
+      break;
+    case 'continent':
+      out.push(`A continent is one of the great land masses of the world. Find ${title} on the Atlas and see which land mass it sits on.`);
+      break;
+    case 'largest':
+      out.push('Area is how much ground a country covers, not how many people live there. A small crowded country can still be small.');
+      break;
+    case 'first':
+      out.push('Think about which one is the oldest. The dates in the Timeline run from the earliest to the latest.');
+      break;
+    case 'truefalse':
+      out.push('Read the statement slowly. Does it match what the article says, or has one word been swapped for another?');
       break;
     case 'year':
       if (/^\d{4}$/.test(answer)) out.push(`It is a year in the ${centuryName(Number(answer))} century.`);

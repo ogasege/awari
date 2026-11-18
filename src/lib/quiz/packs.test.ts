@@ -41,7 +41,8 @@ describe('bundled quizzes', () => {
       const quiz = read<QuizSet>(`quizzes/${pack}/${file}`);
       expect(quiz.questions.length).toBeGreaterThanOrEqual(3);
       expect(quiz.questions.length).toBeLessThanOrEqual(5);
-      const answers = quiz.questions.map((q) => fold(q.options[q.answer] ?? ''));
+      // The same country can answer two different shapes (its capital and its area); never twice in one shape.
+      const answers = quiz.questions.map((q) => `${q.kind ?? 'cloze'}|${q.prompt.startsWith('True') ? q.prompt : ''}|${fold(q.options[q.answer] ?? '')}`);
       expect(new Set(answers).size).toBe(answers.length);
       expect(new Set(quiz.questions.map((q) => q.prompt)).size).toBe(quiz.questions.length);
       expect(quiz.source.licence).toBe('CC BY-SA 4.0');

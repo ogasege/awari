@@ -155,11 +155,27 @@ export interface HintLadder {
   /** Step 2: which section of the article to read. */
   whereToLook: string;
   /** Step 3: indexes of the two wrong options to remove. */
-  removed: [number, number];
+  removed: [number, number] | [];
 }
+
+/** The shape of a question (27-quiz-variety). A missing `kind` means fill-the-gap, so older files load unchanged. */
+export type QuizShape =
+  | 'cloze'
+  | 'capital'
+  | 'capital-reverse'
+  | 'continent'
+  | 'currency'
+  | 'language'
+  | 'neighbour'
+  | 'largest'
+  | 'first'
+  | 'truefalse'
+  | 'picture';
 
 export interface Question {
   id: string;
+  /** What kind of question this is; missing means fill-the-gap. */
+  kind?: QuizShape;
   articleId: string;
   pack: PackId;
   prompt: string;
