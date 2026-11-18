@@ -424,3 +424,395 @@
   color: var(--teal-ink);
   rotate: -2deg;
 }
+
+/* ------------------------------------------------------------------------------------------------------------------
+ * 28-every-screen-like-home task 1: the quiz is a game table. A navy board, the question on a pinned index card,
+ * the answers as paper tickets, progress as stamps, the hints on a sticky note, the verdict as an inked stamp.
+ * Decoration sits behind straight, calm controls (Rule 7).
+ * ---------------------------------------------------------------------------------------------------------------- */
+.quiz--board {
+  position: relative;
+  max-width: none;
+  min-height: calc(100vh - 94px);
+  padding-bottom: 56px;
+  background-color: var(--navy);
+  background-image:
+    radial-gradient(rgb(255 255 255 / 0.07) 1.4px, transparent 1.6px),
+    radial-gradient(circle at 85% 10%, rgb(255 134 98 / 0.18), transparent 40%),
+    radial-gradient(circle at 5% 95%, rgb(0 122 140 / 0.35), transparent 45%);
+  background-size: 22px 22px, auto, auto;
+  color: var(--paper);
+}
+
+.quiz--board > * {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.quiz--board .quiz__progress {
+  color: var(--paper);
+}
+
+.quiz--board .quiz__credit,
+.quiz--board .quiz__credit a {
+  color: rgb(255 255 255 / 0.85);
+}
+
+.quiz__stamp-note {
+  margin: -8px 0 0;
+  font-size: 24px;
+  color: var(--coral);
+  rotate: -2deg;
+  text-align: right;
+}
+
+.quiz--board .quiz__print {
+  rotate: 4deg;
+  z-index: 1;
+}
+
+/* The index card. */
+.question__card {
+  background: transparent;
+  box-shadow: none;
+  padding: 34px 34px 32px;
+  color: var(--ink);
+  isolation: isolate;
+}
+
+.question__paper {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  rotate: -1.2deg;
+  background:
+    linear-gradient(90deg, transparent 54px, rgb(255 134 98 / 0.55) 54px 56px, transparent 56px),
+    repeating-linear-gradient(180deg, transparent 0 33px, rgb(0 122 140 / 0.16) 33px 35px),
+    var(--cream);
+  box-shadow: 0 18px 34px rgb(0 0 0 / 0.35), 0 2px 0 rgb(0 0 0 / 0.08);
+  border-radius: 3px;
+}
+
+.question__card .pin {
+  position: absolute;
+  z-index: 2;
+}
+
+.question__shape {
+  position: absolute;
+  top: -40px;
+  right: 18px;
+  padding: 4px 14px;
+  background: var(--yellow);
+  color: var(--ink);
+  font-size: 24px;
+  rotate: 3deg;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 0.25);
+}
+
+.question__prompt {
+  font-size: 34px;
+}
+
+/* The answers are paper tickets with notched ends, in four colours from the palette. */
+.question__options {
+  gap: 16px;
+}
+
+.question__option {
+  min-height: 76px;
+  padding: 14px 28px;
+  border: 0;
+  border-radius: 6px;
+  background: #fff3c4;
+  font-size: 22px;
+  box-shadow: 0 5px 0 rgb(16 24 40 / 0.85);
+  -webkit-mask: radial-gradient(circle 11px at 0 50%, transparent 10.5px, #000 11px) left / 51% 100% no-repeat,
+    radial-gradient(circle 11px at 100% 50%, transparent 10.5px, #000 11px) right / 51% 100% no-repeat;
+  mask: radial-gradient(circle 11px at 0 50%, transparent 10.5px, #000 11px) left / 51% 100% no-repeat,
+    radial-gradient(circle 11px at 100% 50%, transparent 10.5px, #000 11px) right / 51% 100% no-repeat;
+  transition: translate 120ms ease;
+}
+
+.question__options > :nth-child(4n + 2) {
+  background: #ffd9cc;
+}
+
+.question__options > :nth-child(4n + 3) {
+  background: #d4eef1;
+}
+
+.question__options > :nth-child(4n + 4) {
+  background: #ffffff;
+}
+
+.question__option:hover {
+  translate: 0 -2px;
+}
+
+.question__option.is-selected {
+  background: var(--yellow);
+  border: 0;
+  outline: 4px solid var(--ink);
+  outline-offset: -4px;
+}
+
+.question__option:focus-within {
+  outline: 4px solid var(--focus);
+  outline-offset: -4px;
+}
+
+.question__option.is-removed {
+  background: transparent;
+  box-shadow: none;
+  outline: 2px dashed rgb(16 24 40 / 0.35);
+  outline-offset: -2px;
+}
+
+/* True or false: two big tickets side by side. */
+.question__options--two .question__option {
+  min-height: 110px;
+  justify-content: center;
+  font-family: var(--font-head);
+  font-size: 34px;
+}
+
+/* Who came first: the four names stand on a drawn ruler. */
+.question--first .question__options {
+  position: relative;
+  padding-bottom: 44px;
+}
+
+.question--first .question__options::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 6px;
+  height: 26px;
+  background:
+    repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 24px) bottom / 100% 12px no-repeat,
+    linear-gradient(var(--ink), var(--ink)) bottom / 100% 3px no-repeat,
+    #ffe49a;
+  border-radius: 3px;
+  rotate: -0.6deg;
+}
+
+/* The hints are a sticky note. */
+.hints {
+  position: relative;
+  border: 0;
+  background: var(--yellow);
+  color: var(--ink);
+  border-radius: 2px;
+  box-shadow: 0 14px 24px rgb(0 0 0 / 0.35);
+  rotate: 1.5deg;
+}
+
+.hints__button {
+  rotate: -1.5deg;
+}
+
+.hints .bulb {
+  width: 40px;
+  height: 52px;
+}
+
+.hints__list {
+  color: var(--ink);
+}
+
+/* The verdict: an inked stamp, and the proof on a torn slip. */
+.question__feedback {
+  grid-area: feedback;
+  position: relative;
+}
+
+.quiz--board .question__feedback {
+  color: var(--paper);
+}
+
+.verdict__stamp {
+  display: block;
+  color: #ffb199;
+  rotate: -8deg;
+  margin: 0 0 6px 8px;
+}
+
+.verdict__stamp.is-right {
+  color: #8be0c4;
+}
+
+.proof-slip {
+  color: var(--ink);
+  background: var(--cream);
+  clip-path: polygon(0 0, 100% 0, 100% 92%, 96% 100%, 91% 93%, 85% 100%, 79% 94%, 72% 100%, 66% 93%, 58% 100%, 51% 94%, 44% 100%, 37% 93%, 30% 100%, 23% 94%, 16% 100%, 9% 93%, 3% 100%, 0 94%);
+  padding-bottom: 30px;
+  rotate: 0.8deg;
+}
+
+.proof-slip a {
+  color: var(--teal-ink);
+}
+
+/* The result is a certificate. */
+.quiz-done {
+  position: relative;
+  max-width: 900px;
+  margin-top: 8px;
+  padding: 40px 48px;
+  color: var(--ink);
+  background: var(--cream);
+  border: 10px double var(--coral);
+  box-shadow: 0 22px 40px rgb(0 0 0 / 0.4);
+}
+
+.quiz-done__kicker {
+  margin: 0;
+  font-size: 30px;
+  color: var(--teal-ink);
+}
+
+.quiz-done__seal {
+  position: absolute;
+  top: -26px;
+  right: 28px;
+  display: grid;
+  place-items: center;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: var(--yellow);
+  border: 4px dashed var(--ink);
+  font-size: 40px;
+  rotate: 10deg;
+}
+
+.quiz-done__stamps {
+  display: block;
+  margin: 8px 0 16px;
+  max-width: 100%;
+}
+
+.quiz-done__next {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 24px 36px;
+  margin-top: 18px;
+}
+
+.quiz-done__next-note {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 28px;
+  color: var(--coral-ink);
+}
+
+@media (max-width: 899px) {
+  .quiz--board {
+    min-height: 0;
+    padding-top: 14px;
+  }
+
+  .quiz--board .quiz__head {
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 26px;
+  }
+
+  .quiz--board .quiz__title {
+    font-size: 30px;
+  }
+
+  .quiz--board .quiz__progress span,
+  .quiz--board .quiz__note,
+  .quiz__stamp-note {
+    display: none;
+  }
+
+  .quiz--board .quiz-dots {
+    width: 150px;
+    height: auto;
+  }
+
+  .question__card {
+    padding: 26px 20px 22px;
+  }
+
+  .question__shape {
+    top: -30px;
+    font-size: 20px;
+  }
+
+  .question__prompt {
+    font-size: 23px;
+  }
+
+  .question__options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .question__option {
+    min-height: 64px;
+    padding: 10px 16px;
+    font-size: 17px;
+  }
+
+  .question__option {
+    position: relative;
+  }
+
+  .question__option input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+
+  .question__options--two .question__option {
+    min-height: 84px;
+    font-size: 26px;
+  }
+
+  .quiz-done {
+    padding: 32px 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .question__option {
+    transition: none;
+  }
+}
+
+/* Board readability and placement fixes after the first look (28 task 1). */
+.quiz--board .verdict--wrong {
+  color: #ffb199;
+}
+
+.quiz--board .verdict--right {
+  color: #8be0c4;
+}
+
+.question__shape {
+  left: 70px;
+  right: auto;
+  rotate: -3deg;
+}
+
+@media (min-width: 900px) {
+  .quiz--board .quiz__head {
+    margin-right: 300px;
+  }
+
+  .quiz__stamp-note {
+    position: absolute;
+    top: 92px;
+    right: 330px;
+    margin: 0;
+  }
+}

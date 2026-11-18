@@ -1,3 +1,6 @@
+const SUBJECT_IDS = new Set<string>(SUBJECTS.map((x) => x.id));
+const SUBJECT_LABELS = new Map<string, string>(SUBJECTS.map((x) => [x.id as string, x.label]));
+
 /**
  * The quiz for one article (05-quizzes): five questions, a three-step
  * hint ladder, a proof slip after each answer, drawn progress dots and the
@@ -11,7 +14,7 @@ import { coverFor } from '../../lib/packs/covers.ts';
 import { packUrl, usePack } from '../../lib/packs/load.ts';
 import { useMedia, type MediaFile } from '../../lib/media/media.ts';
 import { SUBJECTS, isBundledPack } from '../../lib/packs/subjects.ts';
-import type { Article, QuizSet } from '../../lib/packs/types.ts';
+import type { Article, PackIndex, PackIndexItem, QuizSet } from '../../lib/packs/types.ts';
 import { autoTerms, buildQuiz } from '../../lib/quiz/generate.ts';
 import { pictureQuestions } from '../../lib/quiz/picture.ts';
 import { update, withQuizResult } from '../../lib/store/progress.ts';
@@ -21,25 +24,56 @@ import { QuestionCard } from './QuestionCard.tsx';
 import { initialState, reduce, type QuizState } from './quizMachine.ts';
 import './quiz.css';
 
-/** Drawn dots: filled for answered questions, ringed for the current one. */
-const SUBJECT_IDS = new Set<string>(SUBJECTS.map((x) => x.id));
-const SUBJECT_LABELS = new Map<string, string>(SUBJECTS.map((x) => [x.id as string, x.label]));
-
+/** Five drawn postage stamps along the top of the board: inked for each answered question, ringed for the current one. */
 function Dots({ total, index }: { total: number; index: number }) {
   return (
-    <svg aria-hidden="true" viewBox={`0 0 ${total * 28} 24`} width={total * 28} height={24} className="quiz-dots">
-      {Array.from({ length: total }, (_, i) => (
-        <circle
-          key={i}
-          cx={14 + i * 28}
-          cy={12}
-          r={i === index ? 9 : 7}
-          fill={i < index ? '#007A8C' : 'none'}
-          stroke="#007A8C"
-          strokeWidth={i === index ? 3 : 2}
+    <svg aria-hidden="true" viewBox={`0 0 ${total * 52} 52`} width={total * 52} height={52} className="quiz-dots">
+      {Array.from({ length: total }, (_, i) => {
+        const x = 4 + i * 52;
+        const done = i < index;
+        return (
+          <g key={i} transform={`rotate(${(i % 2 ? 4 : -5) + (i === index ? 0 : 0)} ${x + 22} 26)`}>
+            <rect x={x} y={4} width={44} height={44} rx={3} fill={done ? '#FF8662' : '#FFFDF5'} stroke={i === index ? '#FFD23F' : '#FFFDF5'} strokeWidth={i === index ? 4 : 2} strokeDasharray="3 3" />
+            {done ? (
+              <path d={`M${x + 11} ${27}l8 8 15-17`} fill="none" stroke="#2E0D00" strokeWidth={4} strokeLinecap="round" strokeLinejoin="round" />
+            ) : (
+              <text x={x + 22} y={33} textAnchor="middle" fontSize={20} fontWeight={800} fill="#0B1B4D">
+                {i + 1}
+              </text>
+            )}
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+/** Two more quizzes from the same subject, as prints on the certificate (28 Req 2.1). */
+function NextQuizzes({ pack, id }: { pack: string; id: string }) {
+  const index = usePack<PackIndex>(isBundledPack(pack) ? `${pack}/index.json` : null);
+  if (index.status !== 'ready') return null;
+  const items = index.data.items;
+  const at = Math.max(0, items.findIndex((i) => i.id === id));
+  const next = [1, 2].map((k) => items[(at + k) % items.length]).filter((i): i is PackIndexItem => !!i && i.id !== id);
+  if (next.length === 0) return null;
+  return (
+    <div className="quiz-done__next">
+      <p className="hand quiz-done__next-note">Try one of these next</p>
+      {next.map((item, k) => (
+        <Print
+          key={item.id}
+          className="quiz-done__print"
+          src={item.thumb ? packUrl(item.thumb) : (coverFor(pack)?.file ?? '')}
+          alt=""
+          caption={`${item.title} quiz`}
+          captionSize={22}
+          width={190}
+          tilt={k ? 3 : -3}
+          to={`/quiz/${pack}/${item.id}`}
+          tape={[{ left: '34%', width: 70, tilt: k ? 5 : -5, tone: 'yellow' }]}
         />
       ))}
-    </svg>
+    </div>
   );
 }
 
@@ -65,6 +99,10 @@ function Finished({ quiz, state, externalUrl }: { quiz: QuizSet; state: QuizStat
         : 'A good start. Read the article again and try once more.';
   return (
     <section className="quiz-done" aria-labelledby="quiz-done-title">
+      <span aria-hidden="true" className="quiz-done__seal hand">
+        {state.score}/{total}
+      </span>
+      <p className="quiz-done__kicker hand">Certificate of reading</p>
       <h2 id="quiz-done-title" tabIndex={-1}>
         You got {state.score} out of {total}
       </h2>
@@ -72,6 +110,14 @@ function Finished({ quiz, state, externalUrl }: { quiz: QuizSet; state: QuizStat
       <p>
         You used {state.totalHints === 1 ? '1 hint' : `${state.totalHints} hints`}.
       </p>
+      <svg aria-hidden="true" className="quiz-done__stamps" viewBox={`0 0 ${total * 56} 56`} width={total * 56} height={56}>
+        {Array.from({ length: total }, (_, i) => (
+          <g key={i} transform={`rotate(${i % 2 ? 6 : -6} ${28 + i * 56} 28)`}>
+            <circle cx={28 + i * 56} cy={28} r={22} fill={i < state.score ? '#FF8662' : 'none'} stroke={i < state.score ? '#2E0D00' : '#98A2B3'} strokeWidth={3} strokeDasharray={i < state.score ? undefined : '4 4'} />
+            {i < state.score ? <path d={`M${16 + i * 56} 29l8 8 15-17`} fill="none" stroke="#2E0D00" strokeWidth={4} strokeLinecap="round" /> : null}
+          </g>
+        ))}
+      </svg>
       <div className="quiz-done__actions">
         {externalUrl ? (
           <a className="btn btn--yellow" href={externalUrl} rel="noreferrer">
@@ -88,6 +134,7 @@ function Finished({ quiz, state, externalUrl }: { quiz: QuizSet; state: QuizStat
         </Button>
       </div>
       <Doodle kind="star" seed={`done-${quiz.articleId}`} size={70} color="var(--yellow)" />
+      {externalUrl ? null : <NextQuizzes pack={quiz.pack} id={quiz.articleId} />}
     </section>
   );
 }
@@ -113,7 +160,7 @@ export function Quiz({ quiz, externalUrl }: { quiz: QuizSet; externalUrl?: strin
       : undefined;
 
   return (
-    <section className="page squared quiz" aria-labelledby="quiz-title">
+    <section className="page quiz quiz--board" aria-labelledby="quiz-title">
       {print ? (
         <Print
           className="page-print quiz__print"
@@ -140,9 +187,12 @@ export function Quiz({ quiz, externalUrl }: { quiz: QuizSet; externalUrl?: strin
           <span>{state.status === 'done' ? 'All done' : `Question ${state.index + 1} of ${total}`}</span>
         </div>
       </div>
-      <MarginNote tilt={-2} size={28} className="quiz__note crowding" style={{ color: 'var(--teal-ink)' }}>
+      <MarginNote tilt={-2} size={28} className="quiz__note crowding" style={{ color: 'var(--yellow)' }}>
         How many can you get without a hint?
       </MarginNote>
+      <p aria-hidden="true" className="quiz__stamp-note hand">
+        each right answer inks a stamp ↓
+      </p>
       {state.status === 'done' || !q ? (
         <Finished quiz={quiz} state={state} externalUrl={externalUrl} />
       ) : (

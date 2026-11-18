@@ -9,6 +9,7 @@ import { sectionId } from '../article/ArticleBody.tsx';
 import type { Question } from '../../lib/packs/types.ts';
 import { isTwoWay, maxHints, visibleOptions, type Action, type QuizState } from './quizMachine.ts';
 import { SafeImg } from '../../design/SafeImg.tsx';
+import { Pin } from '../../design/paper.tsx';
 import './quiz.css';
 
 /** A hand-drawn light bulb: lit when the hint is still available. */
@@ -39,6 +40,34 @@ function Cross() {
   return (
     <svg aria-hidden="true" viewBox="0 0 40 40" width="30" height="30">
       <path d="M8 8.6c7.6 6.9 15.8 15.4 23.6 23.2M31.4 7.4C23.9 15.2 15.6 24 8.8 32.2" fill="none" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+/** A handwritten word on the card that names the kind of question (27-quiz-variety, 28 Req 2.1). */
+const SHAPE_WORDS: Record<string, string> = {
+  cloze: 'fill the gap',
+  capital: 'capital cities',
+  'capital-reverse': 'whose capital?',
+  continent: 'which continent?',
+  currency: 'money',
+  language: 'languages',
+  neighbour: 'neighbours',
+  largest: 'biggest',
+  first: 'who came first?',
+  truefalse: 'true or false?',
+  picture: 'picture round',
+};
+
+/** A drawn rubber stamp for the verdict: inked teal for right, a soft coral ring for "not yet". */
+function VerdictStamp({ right }: { right: boolean }) {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 150 76" width="150" height="76" className={`verdict__stamp${right ? ' is-right' : ''}`}>
+      <rect x="5" y="5" width="140" height="66" rx="12" fill="none" stroke="currentColor" strokeWidth="5" strokeDasharray={right ? undefined : '2 0'} />
+      <rect x="13" y="13" width="124" height="50" rx="8" fill="none" stroke="currentColor" strokeWidth="2" />
+      <text x="75" y="49" textAnchor="middle" fontSize="30" fontWeight="800" fill="currentColor" fontFamily="var(--font-head)">
+        {right ? 'RIGHT!' : 'NOT YET'}
+      </text>
     </svg>
   );
 }
@@ -81,9 +110,14 @@ export function QuestionCard({
   const hintsLeft = maxHints(q) - s.hintsUsed;
 
   return (
-    <div className="question">
+    <div className={`question question--${q.kind ?? 'cloze'}`}>
       <fieldset className="question__card" disabled={!answering}>
-        <span aria-hidden="true" className="tape tape--yellow question__tape" />
+        {/* The index card behind the question: tilted and ruled, while the question and answers on it stay straight (Rule 7). */}
+        <span aria-hidden="true" className="question__paper" />
+        <Pin left="48%" />
+        <span aria-hidden="true" className="question__shape hand">
+          {SHAPE_WORDS[q.kind ?? 'cloze']}
+        </span>
         <legend id={`${groupId}-legend`} className="question__prompt">
           <span className="question__count">
             Question {number} of {total}
@@ -127,6 +161,7 @@ export function QuestionCard({
         ) : null}
         {s.status === 'right' || s.status === 'revealed' ? (
           <>
+            <VerdictStamp right={s.status === 'right'} />
             {s.status === 'right' ? (
               <p className="verdict verdict--right">
                 <Tick /> <strong>Right!</strong> The answer is {q.options[q.answer]}.

@@ -45,7 +45,7 @@ describe('paper furniture on /subjects, /stamps and /quiz', () => {
     const { container } = render(<QuizScreen params={{ pack: 'countries', id: 'nigeria' }} />);
     await screen.findAllByText(/Question 1 of 5/);
     expectFurniture(container);
-    // The question card is a taped sheet (22-review-3 Req 20).
-    expect(container.querySelector('.question__card .question__tape')).not.toBeNull();
+    // The question card is a pinned index card (22-review-3 Req 20; 28-every-screen-like-home task 1).
+    expect(container.querySelector('.question__card .question__paper')).not.toBeNull();
   });
 });
