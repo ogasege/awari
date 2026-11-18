@@ -1,0 +1,6 @@
+Voice: Sarah - Mature, Reassuring, Confident (ElevenLabs premade stock voice, id EXAVITQu4vr4xnSDxMaL; not cloned)
+Model: eleven_multilingual_v2
+Settings: speed 0.95 (16-end: 0.90), stability 0.55, similarity 0.75, style 0, speaker boost on
+Format: mp3_44100_64, speech only (no music, no effects)
+Pronunciation: "Awari" was sent as "Ah-wah-ree" in clips 02, 11 and 16 (narration.json unchanged). Not yet checked by ear.
+Generated 19 Nov 2026, 00:23 to 00:24 WAT.
