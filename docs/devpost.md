@@ -103,7 +103,7 @@ build was opened and tested by hand; the Windows and Linux builds come from the
 ## How we built it
 
 React 19, TypeScript and Vite, with hand-made components for the scrapbook look and no UI
-framework. The main script is <!--n:mainScriptKB-->271<!--/n--> KB, under the 300 KB budget;
+framework. The main script is <!--n:mainScriptKB-->272<!--/n--> KB, under the 300 KB budget;
 packs load on demand. Content is built by one command, `npm run packs`, from Simple English
 Wikipedia, Wikidata, Natural Earth, Open English WordNet and Wikimedia Commons, and every record
 carries its source and licence. Infrastructure is Terraform (private S3 behind CloudFront, and
