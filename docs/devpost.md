@@ -61,8 +61,8 @@ hand-curated. A teacher should treat it as a very good starting point for curios
   wonders of the ancient world, volcanoes of the Ring of Fire.
 - **A stamp book** with a page per continent, counted out of all <!--n:countries-->197<!--/n-->
   countries.
-- **Quizzes with a hint ladder**: <!--n:quizzes-->479<!--/n--> quizzes,
-  <!--n:questions-->2358<!--/n--> questions, three hints each (a nudge, where to look, two wrong
+- **Quizzes with a hint ladder**: <!--n:quizzes-->483<!--/n--> quizzes,
+  <!--n:questions-->2415<!--/n--> questions, three hints each (a nudge, where to look, two wrong
   answers removed), and the proof sentence after a right answer. Right and wrong are said in
   words.
 - **The Castle**: <!--n:wings-->16<!--/n--> wings, one per continent and one per subject, twelve
@@ -182,9 +182,9 @@ Kiro IDE; they have not fired, because the IDE was not used.
 
 ### Spec-driven development
 
-<!--n:specs-->26<!--/n--> specs, each with EARS requirements and numbered acceptance criteria, a
+<!--n:specs-->28<!--/n--> specs, each with EARS requirements and numbered acceptance criteria, a
 design that derives correctness properties, and tasks; <!--n:specTasksDone-->218<!--/n--> of
-<!--n:specTasks-->228<!--/n--> tasks are done, each committed as `<spec> <task>: <summary>`. The
+<!--n:specTasks-->246<!--/n--> tasks are done, each committed as `<spec> <task>: <summary>`. The
 difference from vibe coding showed most when the scope grew to the whole world: specs 14 to 20
 were written before any code. The design for the timeline made us check what Wikidata's
 "inception" means, found that it is often not a country's independence day, and turned that
