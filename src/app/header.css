@@ -181,6 +181,26 @@
     font-size: 13px;
   }
 
+  /* While the first save runs, the pill sits on the bottom edge of the header like a luggage tag, so it never adds a
+     row and the page keeps its place (26-final-review round 5: the pill had pushed the search to a row of its own,
+     202 px at 360). */
+  .site-header__badge {
+    position: absolute;
+    right: var(--gutter);
+    bottom: -14px;
+    z-index: 2;
+    box-shadow: 0 3px 8px rgb(0 0 0 / 0.25);
+  }
+
+  .site-header {
+    column-gap: 12px;
+  }
+
+  .site-header__search {
+    flex-basis: 120px;
+    min-width: 0;
+  }
+
   /* The one-time notice is a compact line on a phone: smaller type, tighter padding (26-final-review round 4). */
   .saved-notice {
     gap: 8px;

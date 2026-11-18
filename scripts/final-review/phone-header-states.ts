@@ -36,6 +36,9 @@ for (const w of [360, 390]) {
       console.log(`skip ${w} px ${name}: not shown within the wait`);
       continue;
     }
+    // Measure only once the page itself has rendered its headline: the first live run measured an empty page (round 5).
+    await p.locator('main h1').first().waitFor({ timeout: 30_000 }).catch(() => undefined);
+    if (name === 'saving') await p.screenshot({ path: `docs/final-review/phone-header-saving-${w}.png` });
     const r = await measure(p);
     const ok = r.h1Bottom > 0 && r.h1Bottom < FOLD && r.buttonBottom < FOLD;
     if (!ok) failed += 1;
