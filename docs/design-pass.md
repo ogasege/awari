@@ -114,3 +114,57 @@ tables on purpose. Not found gets a drawn map with an X and real links.
    came first).
 7. Say REDEPLOY NOW after each screen group is green, so the owner can look at the live site as it
    improves.
+
+## Owner feedback on finished screens (newest last; act on each, then tick it here)
+
+### Quiz play screen, commit 064ac95 (looked at 18 Nov 22:35 UTC, the `after/` shots)
+
+Big step up: the navy board, the pinned index card, the stamps, the sticky-note hints and the
+certificate all read as hand-made. Keep them. Still to fix:
+
+- [x] The answers still look like form rows (a thin pastel bar with a radio button). Make them
+      real tickets: about twice as tall, a perforated edge, the option in large type, and a
+      picture on each whenever the question has one (flags for country options such as this
+      "neighbours" question, a photograph for picture questions). The whole ticket is the
+      target; the radio dot can go (keep the real input for the keyboard and screen readers).
+- [x] After a wrong answer the layout jumps: the stamp row slides under the lead print (the "5"
+      is cut off), and the handwritten "each right answer inks a stamp" lands on top of the
+      "neighbours" label. Nothing may move or overlap text between states. Test both states at
+      1440, 1024, 768 and 390.
+- [x] "Not quite. Try again, or take a hint." is red text on navy: measure its contrast and fix
+      it (a cream slip with the words works, like the proof slip).
+- [x] "Check my answer" looks switched off even before anything is wrong. Give it the yellow
+      primary style as soon as an option is picked, and a quiet style before.
+- [x] At 1440 the lower right third of the board is empty. Use it: the lead print larger with a
+      true handwritten fact about the subject, or the hint ladder drawn bigger.
+- [x] The certificate's "Try one of these next" after the Nigeria quiz offers Tim Berners-Lee and
+      Barack Obama. Offer related quizzes: neighbouring countries, the same continent, the same
+      subject. Add a test that the two suggestions share the continent or the pack.
+- [x] Phone: the 4 x 2 navigation plus search takes the top 165 px before the game starts. On the
+      quiz play screen only, collapse the navigation to the logo and a "Leave quiz" link so the
+      card and all four tickets fit on one screen without scrolling at 390 x 844 and 360 x 740.
+
+Owner's look at the live Quiz screen after the deploy (18 Nov 23:02 UTC, Chromium 1440 and 390):
+the board, card, stamps and hints are live and work; no page errors. At 1440 the layout did not
+jump after a wrong answer and "Not quite" was light text, so check those two boxes against the
+other widths (1024, 768) and tick them if they hold. After a wrong answer no ticket shows which
+one was tried: mark the tried ticket (a pencil cross and the word "tried") so a child does not
+pick it again. The other boxes above stand (tickets as real tickets with flags or photos, Check
+my answer style, the empty lower right, related next quizzes, the phone navigation on this screen).
+
+Done (19 Nov, main session), with notes:
+- Tickets: 108 px tall at 1440 (was 76), a perforated stub with a star (a tick when picked), the option in 28 px heavy
+  type, no radio dot (the real input stays for the keyboard and screen readers). Borders, whose-capital, biggest and
+  who-was-born-first tickets carry a photograph. **There are no flag files in the picture library**, so countries show
+  their lead photograph, not a flag; picture questions keep their picture on the card, not on the tickets, because a
+  photo per option would give the answer away.
+- No movement: `data/build/layout-stable.ts` measures every text box before and after "Not quite" at 1440, 1024, 768,
+  390 and 360: nothing moves and nothing overlaps. After the answer is revealed, the proof slip appears and only the
+  decorative print below it moves down on narrow screens.
+- "Not quite" sits on a cream slip, ink on cream. "Check my answer" is a dashed quiet button until a ticket is picked,
+  then the yellow primary button.
+- The lower right holds the subject's print (300 px) with the article's first sentence handwritten under it.
+- The certificate offers related quizzes (`related.ts`, test `related.test.ts`): a country's neighbours first, then the
+  same continent; other subjects the same pack.
+- Phone: on the play screen the header is the logo and "Leave quiz" (the navigation and search fold away); the card and
+  all four tickets fit at 390 x 844 and 360 x 740.

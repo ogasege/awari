@@ -3,7 +3,10 @@
  * screen and the Castle. Right and wrong are always said in words with a
  * drawn tick or cross, never colour alone (05 Req 3.1).
  */
-import { useId, type Dispatch, type ReactNode } from 'react';
+import { useId, useMemo, type Dispatch, type ReactNode } from 'react';
+import { packUrl, usePack } from '../../lib/packs/load.ts';
+import { fold } from '../../lib/quiz/validate.ts';
+import type { PackIndex } from '../../lib/packs/types.ts';
 import { Link } from '../../app/navigation.tsx';
 import { sectionId } from '../article/ArticleBody.tsx';
 import type { Question } from '../../lib/packs/types.ts';
@@ -42,6 +45,25 @@ function Cross() {
       <path d="M8 8.6c7.6 6.9 15.8 15.4 23.6 23.2M31.4 7.4C23.9 15.2 15.6 24 8.8 32.2" fill="none" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" />
     </svg>
   );
+}
+
+/**
+ * A photograph for each ticket when every option is a country or a person the packs have a lead photo for (28, owner
+ * feedback 18 Nov). Only for shapes where a photo cannot give the answer away: borders, whose capital, biggest country
+ * and who was born first. The library has no flag files, so countries show their lead photograph.
+ */
+const PICTURE_KINDS = new Set(['neighbour', 'capital-reverse', 'largest', 'first']);
+
+function useOptionPictures(q: Question): string[] | null {
+  const wanted = PICTURE_KINDS.has(q.kind ?? '');
+  const pack = q.kind === 'first' ? 'people' : 'countries';
+  const index = usePack<PackIndex>(wanted ? `${pack}/index.json` : null);
+  return useMemo(() => {
+    if (!wanted || index.status !== 'ready') return null;
+    const byTitle = new Map(index.data.items.filter((i) => i.thumb).map((i) => [fold(i.title), packUrl(i.thumb as string)]));
+    const urls = q.options.map((o) => byTitle.get(fold(o)));
+    return urls.every((u): u is string => !!u) ? urls : null;
+  }, [wanted, index, q.options]);
 }
 
 /** A handwritten word on the card that names the kind of question (27-quiz-variety, 28 Req 2.1). */
@@ -84,6 +106,7 @@ export function QuestionCard({
   articleLink,
   externalUrl,
   nextLabel = 'Next question',
+  aside,
 }: {
   question: Question;
   state: QuizState;
@@ -95,6 +118,8 @@ export function QuestionCard({
   /** For quizzes outside the packs: the page to link to instead. */
   externalUrl?: string;
   nextLabel?: string;
+  /** Something for the board's side under the hints: the subject's print and a fact (the quiz screen only). */
+  aside?: ReactNode;
 }) {
   const ref = (children: ReactNode) =>
     externalUrl ? (
@@ -105,6 +130,7 @@ export function QuestionCard({
       <Link to={`${articleLink}#${sectionId(q.proofSection)}`}>{children}</Link>
     );
   const groupId = useId();
+  const pictures = useOptionPictures(q);
   const visible = visibleOptions(q, s.hintsUsed);
   const answering = s.status === 'asking' || s.status === 'wrong';
   const hintsLeft = maxHints(q) - s.hintsUsed;
@@ -125,7 +151,7 @@ export function QuestionCard({
           {q.prompt}
         </legend>
         {q.image ? <SafeImg className="question__image" src={q.image.src} alt={q.image.alt} /> : null}
-        <div className={`question__options${isTwoWay(q) ? ' question__options--two' : ''}`}>
+        <div className={`question__options${isTwoWay(q) ? ' question__options--two' : ''}${pictures ? ' question__options--pictures' : ''}`}>
           {q.options.map((opt, i) =>
             visible.includes(i) ? (
               <label key={opt} className={`question__option${s.selected === i ? ' is-selected' : ''}`}>
@@ -136,7 +162,12 @@ export function QuestionCard({
                   checked={s.selected === i}
                   onChange={() => dispatch({ type: 'select', option: i })}
                 />
-                <span>{opt}</span>
+                {pictures ? (
+                  <span aria-hidden="true" className="question__stub">
+                    <SafeImg src={pictures[i] ?? ''} alt="" loading="lazy" decoding="async" />
+                  </span>
+                ) : null}
+                <span className="question__words">{opt}</span>
                 {s.status === 'revealed' && i === q.answer ? <strong className="question__tag"> (the answer)</strong> : null}
               </label>
             ) : (
@@ -147,10 +178,18 @@ export function QuestionCard({
           )}
         </div>
         {answering ? (
-          <button type="button" className="btn btn--yellow" onClick={() => dispatch({ type: 'check' })} disabled={s.selected === null}>
+          <button
+            type="button"
+            className={`btn question__check ${s.selected === null ? 'btn--outline is-waiting' : 'btn--yellow'}`}
+            onClick={() => dispatch({ type: 'check' })}
+            disabled={s.selected === null}
+          >
             Check my answer
           </button>
-        ) : null}
+        ) : (
+          // Keeps the button's space once the question is answered, so nothing under the card moves (owner feedback).
+          <span aria-hidden="true" className="question__check-space" />
+        )}
       </fieldset>
 
       <div className="question__feedback" aria-live="polite">
@@ -215,6 +254,7 @@ export function QuestionCard({
           {s.hintsUsed >= 3 ? <li className="hand">Two wrong answers are crossed out.</li> : null}
         </ol>
       </section>
+      {aside ? <div className="question__aside">{aside}</div> : null}
     </div>
   );
 }

@@ -14,7 +14,10 @@ import { coverFor } from '../../lib/packs/covers.ts';
 import { packUrl, usePack } from '../../lib/packs/load.ts';
 import { useMedia, type MediaFile } from '../../lib/media/media.ts';
 import { SUBJECTS, isBundledPack } from '../../lib/packs/subjects.ts';
-import type { Article, PackIndex, PackIndexItem, QuizSet } from '../../lib/packs/types.ts';
+import type { Article, FactsPack, PackIndex, QuizSet } from '../../lib/packs/types.ts';
+import { relatedQuizzes } from './related.ts';
+import { splitSentences } from '../../lib/quiz/sentences.ts';
+import { unsuitableTopic } from '../../lib/text/suitability.ts';
 import { autoTerms, buildQuiz } from '../../lib/quiz/generate.ts';
 import { pictureQuestions } from '../../lib/quiz/picture.ts';
 import { update, withQuizResult } from '../../lib/store/progress.ts';
@@ -48,17 +51,24 @@ function Dots({ total, index }: { total: number; index: number }) {
   );
 }
 
+/** The article's first sentence when it is short enough to write by hand beside the print (28, owner feedback). */
+function shortFact(article: Article): string | undefined {
+  const first = article.sections[0]?.paragraphs[0];
+  const sentence = first ? splitSentences(first)[0] : undefined;
+  if (!sentence || sentence.length > 130 || unsuitableTopic(sentence)) return undefined;
+  return sentence;
+}
+
 /** Two more quizzes from the same subject, as prints on the certificate (28 Req 2.1). */
 function NextQuizzes({ pack, id }: { pack: string; id: string }) {
   const index = usePack<PackIndex>(isBundledPack(pack) ? `${pack}/index.json` : null);
+  const facts = usePack<FactsPack>(pack === 'countries' ? 'countries/facts.json' : null);
   if (index.status !== 'ready') return null;
-  const items = index.data.items;
-  const at = Math.max(0, items.findIndex((i) => i.id === id));
-  const next = [1, 2].map((k) => items[(at + k) % items.length]).filter((i): i is PackIndexItem => !!i && i.id !== id);
+  const next = relatedQuizzes(index.data.items, id, facts.status === 'ready' ? facts.data.countries : []);
   if (next.length === 0) return null;
   return (
     <div className="quiz-done__next">
-      <p className="hand quiz-done__next-note">Try one of these next</p>
+      <p className="hand quiz-done__next-note">{pack === 'countries' ? 'Try a country nearby' : 'Try one of these next'}</p>
       {next.map((item, k) => (
         <Print
           key={item.id}
@@ -152,6 +162,8 @@ export function Quiz({ quiz, externalUrl }: { quiz: QuizSet; externalUrl?: strin
   // The quiz's own article photograph; the subject's cover when the article has none (or is not bundled).
   const lead = usePack<Article>(isBundledPack(quiz.pack) ? `${quiz.pack}/${quiz.articleId}.json` : null);
   const photo = lead.status === 'ready' ? lead.data.photos[0] : undefined;
+  // A true fact about the subject for the board's side, in the article's own words: its first short sentence.
+  const fact = lead.status === 'ready' ? shortFact(lead.data) : undefined;
   const cover = coverFor(quiz.pack);
   const print = photo
     ? { src: packUrl(photo.file), alt: photo.alt }
@@ -161,18 +173,6 @@ export function Quiz({ quiz, externalUrl }: { quiz: QuizSet; externalUrl?: strin
 
   return (
     <section className="page quiz quiz--board" aria-labelledby="quiz-title">
-      {print ? (
-        <Print
-          className="page-print quiz__print"
-          src={print.src}
-          alt={print.alt}
-          caption={quiz.title}
-          captionSize={24}
-          width={220}
-          tilt={3}
-          tape={[{ left: '36%', width: 96, tilt: -4, tone: 'yellow' }]}
-        />
-      ) : null}
       <div className="quiz__head">
         <StripHeading
           id="quiz-title"
@@ -183,6 +183,9 @@ export function Quiz({ quiz, externalUrl }: { quiz: QuizSet; externalUrl?: strin
           className="quiz__title"
         />
         <div className="quiz__progress">
+          <p aria-hidden="true" className="quiz__stamp-note hand">
+            each right answer inks a stamp
+          </p>
           <Dots total={total} index={state.index} />
           <span>{state.status === 'done' ? 'All done' : `Question ${state.index + 1} of ${total}`}</span>
         </div>
@@ -190,9 +193,6 @@ export function Quiz({ quiz, externalUrl }: { quiz: QuizSet; externalUrl?: strin
       <MarginNote tilt={-2} size={28} className="quiz__note crowding" style={{ color: 'var(--yellow)' }}>
         How many can you get without a hint?
       </MarginNote>
-      <p aria-hidden="true" className="quiz__stamp-note hand">
-        each right answer inks a stamp ↓
-      </p>
       {state.status === 'done' || !q ? (
         <Finished quiz={quiz} state={state} externalUrl={externalUrl} />
       ) : (
@@ -206,6 +206,23 @@ export function Quiz({ quiz, externalUrl }: { quiz: QuizSet; externalUrl?: strin
           articleTitle={quiz.title}
           articleLink={articleLink}
           externalUrl={externalUrl}
+          aside={
+            print ? (
+              <div className="quiz__aside">
+                <Print
+                  className="quiz__print"
+                  src={print.src}
+                  alt={print.alt}
+                  caption={quiz.title}
+                  captionSize={26}
+                  width={300}
+                  tilt={3}
+                  tape={[{ left: '36%', width: 110, tilt: -4, tone: 'yellow' }]}
+                />
+                {fact ? <p className="quiz__fact hand">{fact}</p> : null}
+              </div>
+            ) : null
+          }
           nextLabel={state.index + 1 === total ? 'See my score' : 'Next question'}
         />
       )}

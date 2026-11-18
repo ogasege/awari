@@ -114,10 +114,17 @@ export function Header() {
   };
 
   return (
-    <header className="site-header">
+    <header className={`site-header${route === 'quiz' ? ' site-header--play' : ''}`}>
       <Link to="/" className="site-header__logo" aria-label="Awari home">
         <img src="/logo/awari-logo.svg" alt="" width={134} height={62} />
       </Link>
+      {route === 'quiz' ? (
+        // On a phone the quiz play screen keeps only the logo and this link, so the card and its four tickets fit on
+        // one screen (28-every-screen-like-home, owner feedback 18 Nov). The full navigation stays on wider screens.
+        <Link to="/quizzes" className="site-header__leave">
+          Leave quiz
+        </Link>
+      ) : null}
       <nav aria-label="Main" className="site-header__nav">
         {NAV.map((item) => {
           const current = item.routes.includes(route);

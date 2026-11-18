@@ -213,3 +213,38 @@
     padding: 0 12px;
   }
 }
+
+/* The quiz play screen (28-every-screen-like-home, owner feedback 18 Nov): "Leave quiz" shows only on a phone, where
+   the navigation and search fold away so the game starts at the top of the screen. */
+.site-header__leave {
+  display: none;
+}
+
+@media (max-width: 899px) {
+  .site-header--play {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .site-header--play .site-header__nav,
+  .site-header--play .site-header__search {
+    display: none;
+  }
+
+  .site-header--play .site-header__logo img {
+    height: 40px;
+  }
+
+  .site-header--play .site-header__leave {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-left: auto;
+    padding: 0 16px;
+    border: 2px solid var(--paper);
+    border-radius: 22px;
+    color: var(--paper);
+    font-weight: 700;
+    text-decoration: none;
+  }
+}

@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { EMPTY_PROGRESS, resetForTests, update } from '../../lib/store/progress.ts';
 import { servePacksFromDisk } from '../../test/packFetch.ts';
@@ -44,7 +44,12 @@ describe('paper furniture on /subjects, /stamps and /quiz', () => {
   it('/quiz/countries/nigeria', async () => {
     const { container } = render(<QuizScreen params={{ pack: 'countries', id: 'nigeria' }} />);
     await screen.findAllByText(/Question 1 of 5/);
-    expectFurniture(container);
+    // The subject's print now sits on the board's side under the hints, with a handwritten fact (28, owner feedback).
+    await waitFor(() => expect(container.querySelector('.quiz__aside .print img')?.getAttribute('src')).toBeTruthy());
+    expect(container.querySelector('.quiz__aside .print img')?.getAttribute('alt')).toBeTruthy();
+    expect(container.querySelector('.quiz__aside .print .tape')).not.toBeNull();
+    expect(container.querySelector('.strip-heading .strip')).not.toBeNull();
+    expect(container.querySelector('.margin-note')?.textContent?.trim().length).toBeGreaterThan(10);
     // The question card is a pinned index card (22-review-3 Req 20; 28-every-screen-like-home task 1).
     expect(container.querySelector('.question__card .question__paper')).not.toBeNull();
   });
