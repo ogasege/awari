@@ -154,6 +154,9 @@ await step('Nigeria quiz plays a question with a hint', async (p) => {
 
 await step('Quizzes list opens', async (p) => {
   await open(p, '/quizzes');
+  // The quiz shelf (28-every-screen-like-home): piles and stamp sheets, with find-a-quiz at the top.
+  await p.getByRole('button', { name: /Surprise me/ }).waitFor({ timeout: 10_000 });
+  await p.getByRole('searchbox').last().fill('Nigeria');
   await p.getByRole('link', { name: 'Nigeria' }).first().waitFor({ timeout: 10_000 });
 });
 

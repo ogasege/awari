@@ -1,0 +1,521 @@
+/* The quiz shelf (28-every-screen-like-home task 2). */
+.shelf {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+}
+
+.shelf > * {
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+.shelf__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px 40px;
+  margin-bottom: 26px;
+}
+
+.shelf__find {
+  flex: 0 1 420px;
+  margin: 0;
+}
+
+/* The coral table. */
+.shelf-table {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(300px, 420px) minmax(0, 1fr);
+  grid-template-areas: 'today piles' 'note piles';
+  gap: 20px 56px;
+  padding-top: 64px;
+  padding-bottom: 72px;
+  background:
+    radial-gradient(rgb(46 13 0 / 0.08) 1.3px, transparent 1.5px) 0 0 / 20px 20px,
+    var(--coral);
+  color: var(--coral-ink);
+}
+
+.shelf-today {
+  grid-area: today;
+  position: relative;
+}
+
+.shelf-today__print {
+  display: block;
+  max-width: 100%;
+}
+
+.shelf-today__note {
+  position: absolute;
+  top: 40%;
+  right: -46px;
+  margin: 0;
+  font-size: 30px;
+  rotate: -8deg;
+  color: var(--navy);
+  pointer-events: none;
+}
+
+.shelf-today__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.shelf-table__note {
+  grid-area: note;
+  max-width: 400px;
+  color: var(--navy);
+}
+
+.shelf-piles {
+  grid-area: piles;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 30px 34px;
+}
+
+.shelf-pile {
+  flex: 0 0 auto;
+}
+
+.shelf-pile:has([aria-expanded='true']) {
+  flex-basis: 100%;
+}
+
+.shelf-pile__button {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  min-width: 200px;
+  padding: 18px 10px 10px;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.shelf-pile__button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 4px;
+}
+
+.shelf-pile__stack {
+  position: relative;
+  display: block;
+  width: 200px;
+  height: 150px;
+}
+
+.shelf-pile--1 .shelf-pile__stack {
+  width: 230px;
+  height: 172px;
+}
+
+.shelf-pile--2 .shelf-pile__stack {
+  width: 176px;
+  height: 132px;
+}
+
+.shelf-pile__card {
+  position: absolute;
+  inset: 0;
+  padding: 7px 7px 22px;
+  background: var(--paper);
+  box-shadow: 0 8px 16px rgb(46 13 0 / 0.3);
+  transition: translate 160ms ease, rotate 160ms ease;
+}
+
+.shelf-pile__card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: var(--cream);
+}
+
+.shelf-pile__button:hover .shelf-pile__card:last-child {
+  translate: 30px -16px !important;
+}
+
+.shelf-pile__label {
+  margin-top: 4px;
+  padding: 2px 12px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-head);
+  font-size: 22px;
+  font-weight: 800;
+  rotate: -1.5deg;
+}
+
+.shelf-pile__count {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.shelf-pile__spread {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin: 14px 0 0;
+  padding: 18px;
+  list-style: none;
+  background: rgb(255 255 255 / 0.25);
+  border-radius: 8px;
+}
+
+.shelf-mini {
+  display: grid;
+  width: 150px;
+  padding: 6px 6px 8px;
+  background: var(--paper);
+  color: var(--ink);
+  text-decoration: none;
+  box-shadow: 0 6px 12px rgb(46 13 0 / 0.25);
+}
+
+.shelf-mini img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: var(--cream);
+}
+
+.shelf-mini span {
+  margin-top: 4px;
+  font-size: 20px;
+  line-height: 1.1;
+  text-align: center;
+}
+
+.shelf-mini:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* The countries as continent stamp sheets on cream album paper. */
+.shelf-countries {
+  padding-top: 56px;
+  padding-bottom: 56px;
+  background: var(--navy);
+  color: var(--paper);
+}
+
+.shelf-countries h2,
+.shelf-rounds h2,
+.shelf-all h2,
+.shelf-found h2 {
+  font-size: 40px;
+}
+
+.shelf-countries h2 .hand {
+  margin-left: 12px;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--yellow);
+}
+
+.shelf-sheets {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 560px), 1fr));
+  gap: 30px;
+  margin-top: 26px;
+}
+
+.shelf-sheet {
+  padding: 20px 22px 24px;
+  background: var(--cream);
+  color: var(--ink);
+  box-shadow: 0 16px 28px rgb(0 0 0 / 0.35);
+}
+
+.shelf-sheet:nth-child(odd) {
+  rotate: -0.6deg;
+}
+
+.shelf-sheet:nth-child(even) {
+  rotate: 0.5deg;
+}
+
+.shelf-sheet__title {
+  margin: 0 0 12px;
+  font-size: 28px;
+}
+
+.shelf-sheet__title .hand {
+  margin-left: 8px;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--teal-ink);
+}
+
+.shelf-sheet__stamps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.shelf-sheet__stamps .stamp {
+  width: 104px;
+}
+
+/* Picture rounds as tickets. */
+.shelf-rounds {
+  padding-top: 48px;
+  padding-bottom: 20px;
+}
+
+.shelf-rounds__tickets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.shelf-rounds__tickets a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 56px;
+  padding: 0 26px;
+  background: var(--yellow);
+  color: var(--ink);
+  font-weight: 800;
+  font-size: 19px;
+  text-decoration: none;
+  box-shadow: 0 4px 0 var(--ink);
+  -webkit-mask: radial-gradient(circle 8px at 0 50%, transparent 7.5px, #000 8px) left / 51% 100% no-repeat,
+    radial-gradient(circle 8px at 100% 50%, transparent 7.5px, #000 8px) right / 51% 100% no-repeat;
+  mask: radial-gradient(circle 8px at 0 50%, transparent 7.5px, #000 8px) left / 51% 100% no-repeat,
+    radial-gradient(circle 8px at 100% 50%, transparent 7.5px, #000 8px) right / 51% 100% no-repeat;
+}
+
+.shelf-rounds__tickets a:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.shelf .make-quiz {
+  margin-left: var(--gutter);
+  margin-right: var(--gutter);
+}
+
+.shelf-all,
+.shelf-found {
+  padding-top: 36px;
+  padding-bottom: 56px;
+}
+
+.shelf-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.shelf-chips a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 2px solid var(--ink);
+  border-radius: 22px;
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+@media (max-width: 899px) {
+  .shelf-table {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'today' 'piles' 'note';
+    padding-top: 36px;
+    padding-bottom: 40px;
+  }
+
+  .shelf-today__print {
+    width: min(300px, 80vw);
+  }
+
+  .shelf-today__note {
+    right: 0;
+    top: 20%;
+    font-size: 24px;
+  }
+
+  .shelf-piles {
+    gap: 14px;
+    justify-content: space-between;
+  }
+
+  .shelf-pile__button {
+    min-width: 0;
+    padding: 12px 0 4px;
+  }
+
+  .shelf-pile__stack,
+  .shelf-pile--1 .shelf-pile__stack,
+  .shelf-pile--2 .shelf-pile__stack {
+    width: 130px;
+    height: 98px;
+  }
+
+  .shelf-pile__label {
+    font-size: 17px;
+  }
+
+  .shelf-pile__count {
+    font-size: 13px;
+  }
+
+  .shelf-countries h2,
+  .shelf-rounds h2,
+  .shelf-all h2,
+  .shelf-found h2 {
+    font-size: 30px;
+  }
+
+  .shelf-sheet__stamps .stamp {
+    width: 84px;
+  }
+
+  .shelf-mini {
+    width: 130px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shelf-pile__card {
+    transition: none;
+  }
+}
+
+/* One coral table from the heading down, so the first screen has no empty white band. */
+.shelf__top {
+  margin-bottom: 0;
+  padding-bottom: 8px;
+  background:
+    radial-gradient(rgb(46 13 0 / 0.08) 1.3px, transparent 1.5px) 0 0 / 20px 20px,
+    var(--coral);
+  color: var(--coral-ink);
+}
+
+.shelf {
+  padding-top: 0;
+}
+
+.shelf__top {
+  padding-top: 36px;
+}
+
+.shelf__top .strip-heading {
+  font-size: clamp(40px, 4.4vw, 60px);
+}
+
+.shelf__find input {
+  background: var(--paper);
+}
+
+.shelf-table {
+  padding-top: 28px;
+}
+
+@media (max-width: 899px) {
+  .shelf__top {
+    padding-top: 20px;
+  }
+
+  .shelf-today__print {
+    width: min(240px, 66vw);
+  }
+
+  .shelf-today__note {
+    position: static;
+    margin-top: -6px;
+    font-size: 22px;
+    rotate: -3deg;
+  }
+
+  .shelf-today__note::first-letter {
+    font-size: 0;
+  }
+}
+
+@media (max-width: 899px) {
+  .shelf-today {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .shelf-today__note {
+    order: -1;
+    margin: 0 0 14px 6px;
+  }
+
+  .shelf-today__print.print {
+    width: min(250px, 68vw) !important;
+  }
+}
+
+/* Stamp sheets: small stamps in a grid that always fits the sheet. */
+.shelf-sheet {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.shelf .shelf-sheet__stamps {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 12px 10px;
+}
+
+.shelf .shelf-sheet__stamps li {
+  min-width: 0;
+}
+
+.shelf .shelf-sheet__stamps .stamp {
+  width: 100%;
+  max-width: 120px;
+  font-size: 13px;
+  --u: 0.55px;
+}
+
+.shelf .shelf-sheet__stamps .stamp__name {
+  font-size: 13px;
+  line-height: 1.15;
+}
+
+.shelf .shelf-sheet__stamps .stamp__caption {
+  font-size: 15px;
+}
+
+@media (max-width: 899px) {
+  .shelf .shelf-sheet__stamps {
+    grid-template-columns: repeat(auto-fill, minmax(78px, 1fr));
+  }
+
+  .shelf-sheet:nth-child(odd),
+  .shelf-sheet:nth-child(even) {
+    rotate: 0deg;
+  }
+}
+
+.shelf-sheet__more {
+  margin-top: 16px;
+}
