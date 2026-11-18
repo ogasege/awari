@@ -16,7 +16,10 @@ the next spec (`27-quiz-variety`, written, not started).
 | Check | Result | Where |
 |---|---|---|
 | Live crawl with journeys, both widths (359 routes each, 500 to 525 controls activated) | 0 failures at 1440 px; 1 at 390 px (a decorative Home link hidden on phones by design) | `crawl-live-r3-*.md` |
-| Offline crawl, 60 articles, live | round 2: found F-019 (fixed); round 3 run crashed on one navigation, not reproducible; **round 4 rerun pending the deploy** | `crawl-live-after-offline3.md` |
+| Offline crawl, 60 articles, live | round 2: found F-019 (fixed); round 3 crashed once; **round 4 (18 Nov, live build 96cc349): 196 screens, 864 controls, 0 screen failures, 5 control failures** (Pictures large view Next/Previous timed out offline at both widths, under investigation; the Home stamp-book link at 390 px is hidden on phones by design) | `crawl-live-r4-offline.md` |
+| axe on the live round-4 build (18 Nov) | 0 serious or critical on 40 states; keyboard walks with no unnamed stop and no missing focus indicator | `a11y-live-r4.md` |
+| Phone header in each state (local build, 18 Nov) | 360 px: quiet 164 px, saving 164 px (was 202; the pill now sits on the header's edge), one-time saved notice 226 px; headline and first control above the fold in every state | `phone-header-saving-360.png` |
+| Gates on 064ac95 (spec 27 shapes + spec 28 quiz screen) | `submission-check` and `offline-check` pass; 654 tests pass; `desktop-check` could not start Electron in the agent sandbox ("sandbox initialization failed"), so it must be run from the owner's terminal | this session |
 | axe, 40 screen states, both widths | 0 serious or critical (live, round 2; local after every fix since) | `a11y-live-after.md` |
 | Lighthouse (4 pages, mobile and desktop, live) | accessibility 100 on all, best practices 100, performance 91 to 100, SEO 92; desktop CLS 0.19 Home and 0.12 article (open) | `lighthouse.md` |
 | Browser behaviour on live (deep links with refresh, back and forward, reload mid-quiz, 200% zoom, reduced motion) | 53 checks, 0 failed | `browser-live-after.md` |
@@ -39,9 +42,9 @@ the next spec (`27-quiz-variety`, written, not started).
 | Captions cut with "..." | 431 | 0 | 0 |
 | Article leads with leftover markup, foreign script or IPA | 30+ | 0 | 0 |
 | Phone header, quiet | 257 px | 164 px | 164 px |
-| Phone header with the saving pill | not measured | 208 px (owner) | slim pill, **to be measured** |
+| Phone header with the saving pill | not measured | 208 px (owner) | 164 px at 360 (pill on the header edge) |
 | axe serious or critical | 7 | 0 | 0 |
-| Fill-the-gap share of questions | 77% | 79% | 79% (spec 27) |
+| Fill-the-gap share of questions | 77% | 79% | 35.2% of 2,415 (spec 27: capital, capital-reverse, continent, money, borders, biggest, who was born first, true or false) |
 | Pictures in the library | 3,720 | 3,466 | 3,466 |
 | Picture of the day | any picture, including diagrams | 15 Nov: a research diagram | 129-photograph set, all 366 listed |
 
