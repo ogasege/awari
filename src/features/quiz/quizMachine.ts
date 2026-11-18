@@ -17,6 +17,8 @@ export interface QuizState {
   status: Status;
   score: number;
   totalHints: number;
+  /** Options already tried and found wrong on the current question, so the card can mark them (owner feedback). */
+  tried?: number[];
 }
 
 export type Action =
@@ -34,7 +36,7 @@ export const maxHints = (q: Question): number => (isTwoWay(q) ? MAX_HINTS - 1 : 
 export const maxTries = (q: Question): number => (isTwoWay(q) ? 1 : MAX_TRIES);
 
 export function initialState(): QuizState {
-  return { index: 0, selected: null, hintsUsed: 0, tries: 0, status: 'asking', score: 0, totalHints: 0 };
+  return { index: 0, selected: null, hintsUsed: 0, tries: 0, status: 'asking', score: 0, totalHints: 0, tried: [] };
 }
 
 /** Options still on the card after the hints so far. */
@@ -52,7 +54,7 @@ export function reduce(questions: readonly Question[], s: QuizState, a: Action):
   }
   switch (a.type) {
     case 'select':
-      if (!answering(s) || !visibleOptions(q, s.hintsUsed).includes(a.option)) return s;
+      if (!answering(s) || !visibleOptions(q, s.hintsUsed).includes(a.option) || (s.tried ?? []).includes(a.option)) return s;
       return { ...s, selected: a.option };
     case 'hint': {
       if (!answering(s) || s.hintsUsed >= maxHints(q)) return s;
@@ -66,7 +68,7 @@ export function reduce(questions: readonly Question[], s: QuizState, a: Action):
         return { ...s, status: 'right', score: s.score + 1 };
       }
       const tries = s.tries + 1;
-      return { ...s, tries, status: tries >= maxTries(q) ? 'revealed' : 'wrong', selected: tries >= maxTries(q) ? s.selected : null };
+      return { ...s, tries, tried: [...(s.tried ?? []), s.selected], status: tries >= maxTries(q) ? 'revealed' : 'wrong', selected: tries >= maxTries(q) ? s.selected : null };
     }
     case 'next': {
       if (s.status !== 'right' && s.status !== 'revealed') return s;
@@ -77,6 +79,7 @@ export function reduce(questions: readonly Question[], s: QuizState, a: Action):
         selected: null,
         hintsUsed: 0,
         tries: 0,
+        tried: [],
         status: index >= questions.length ? 'done' : 'asking',
       };
     }

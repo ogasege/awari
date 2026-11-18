@@ -154,14 +154,20 @@ export function QuestionCard({
         <div className={`question__options${isTwoWay(q) ? ' question__options--two' : ''}${pictures ? ' question__options--pictures' : ''}`}>
           {q.options.map((opt, i) =>
             visible.includes(i) ? (
-              <label key={opt} className={`question__option${s.selected === i ? ' is-selected' : ''}`}>
+              <label key={opt} className={`question__option${s.selected === i ? ' is-selected' : ''}${(s.tried ?? []).includes(i) ? ' is-tried' : ''}`}>
                 <input
                   type="radio"
                   name={groupId}
                   value={i}
                   checked={s.selected === i}
+                  disabled={(s.tried ?? []).includes(i)}
                   onChange={() => dispatch({ type: 'select', option: i })}
                 />
+                {(s.tried ?? []).includes(i) ? (
+                  <span className="question__tried hand">
+                    <span aria-hidden="true">✗ </span>tried
+                  </span>
+                ) : null}
                 {pictures ? (
                   <span aria-hidden="true" className="question__stub">
                     <SafeImg src={pictures[i] ?? ''} alt="" loading="lazy" decoding="async" />

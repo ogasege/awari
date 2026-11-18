@@ -168,3 +168,6 @@ Done (19 Nov, main session), with notes:
   same continent; other subjects the same pack.
 - Phone: on the play screen the header is the logo and "Leave quiz" (the navigation and search fold away); the card and
   all four tickets fit at 390 x 844 and 360 x 740.
+- [x] (owner, 23:02 UTC) The tried ticket is marked: a pencil cross over it, a handwritten "✗ tried" tag, and it cannot be
+      picked again (`tried` in `quizMachine.ts`, test `tried.test.ts`). 1024 and 768 re-measured with
+      `layout-stable.ts`: no movement, no overlap, "Not quite" on a cream slip at every width.

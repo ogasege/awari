@@ -1234,3 +1234,27 @@
   font-weight: 700;
   border-radius: 3px;
 }
+
+/* A ticket already tried and found wrong: a pencil cross and the word "tried", and it cannot be picked again. */
+.question__option.is-tried {
+  cursor: not-allowed;
+  background-image:
+    linear-gradient(to top right, transparent calc(50% - 1.5px), rgb(46 13 0 / 0.55) calc(50% - 1.5px) calc(50% + 1.5px), transparent calc(50% + 1.5px)),
+    linear-gradient(to bottom right, transparent calc(50% - 1.5px), rgb(46 13 0 / 0.55) calc(50% - 1.5px) calc(50% + 1.5px), transparent calc(50% + 1.5px));
+  filter: saturate(0.4);
+}
+
+.question__option.is-tried::after {
+  content: '';
+}
+
+.question__tried {
+  position: absolute;
+  top: 6px;
+  right: 14px;
+  padding: 0 8px;
+  background: var(--cream);
+  color: var(--coral-ink);
+  font-size: 22px;
+  rotate: 6deg;
+}
