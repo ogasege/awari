@@ -3,7 +3,7 @@
  * handler reports the tapped word. Sentences that prove a margin note are
  * marked with a chalk underline and an id the note links to.
  */
-import { memo, type MouseEvent } from 'react';
+import { memo, type MouseEvent , type ReactNode } from 'react';
 import type { ArticleSection } from '../../lib/packs/types.ts';
 import { splitWords } from '../../lib/text/tokens.ts';
 
@@ -65,10 +65,13 @@ export const ArticleBody = memo(function ArticleBody({
   sections,
   proofs,
   onWord,
+  between = [],
 }: {
   sections: readonly ArticleSection[];
   proofs: readonly string[];
   onWord: (word: string) => void;
+  /** Pictures taped in after a section: item i goes after section i + 1 (28-every-screen-like-home task 3). */
+  between?: readonly ReactNode[];
 }) {
   const click = (event: MouseEvent<HTMLDivElement>): void => {
     const target = event.target as HTMLElement;
@@ -95,9 +98,10 @@ export const ArticleBody = memo(function ArticleBody({
           </ol>
         </nav>
       ) : null}
-      {sections.map((s) => (
+      {sections.map((s, si) => (
         <section key={s.heading || 'lead'} id={sectionId(s.heading)} aria-labelledby={s.heading ? `${sectionId(s.heading)}-h` : undefined}>
-          {s.heading ? <h2 id={`${sectionId(s.heading)}-h`}>{s.heading}</h2> : null}
+          {si > 0 ? between[si - 1] ?? null : null}
+          {s.heading ? <h2 id={`${sectionId(s.heading)}-h`} className={`article__strip article__strip--${si % 3}`}>{s.heading}</h2> : null}
           {s.paragraphs.map((p, i) => (
             <Paragraph key={i} text={p} proofs={proofs} />
           ))}

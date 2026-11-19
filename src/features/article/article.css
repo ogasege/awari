@@ -299,3 +299,341 @@
   min-height: 44px;
   line-height: 44px;
 }
+
+/* ------------------------------------------------------------------------------------------------------------------
+ * 28-every-screen-like-home task 3: the article as a scrapbook spread. Headings on paper strips, pictures taped in
+ * between sections on alternating sides, "Did you know" sticky notes, the facts as an index card with the country's
+ * outline, the word lookup as a torn dictionary slip, and "Keep exploring" as prints and a ticket. Body text stays a
+ * calm, straight, dark-on-white column.
+ * ---------------------------------------------------------------------------------------------------------------- */
+.article__paper {
+  background:
+    radial-gradient(rgb(0 96 110 / 0.07) 1.2px, transparent 1.4px) 0 0 / 22px 22px,
+    var(--paper);
+}
+
+.article__body .article__strip {
+  display: inline-block;
+  margin: 34px 0 14px -10px;
+  padding: 6px 18px 4px;
+  background: var(--yellow);
+  color: var(--ink);
+  rotate: -1.2deg;
+  box-shadow: 0 4px 8px rgb(16 24 40 / 0.18);
+  clip-path: polygon(0 4%, 3% 0, 97% 3%, 100% 0, 99% 96%, 96% 100%, 4% 97%, 0 100%);
+}
+
+.article__body .article__strip--1 {
+  background: #d4eef1;
+  rotate: 1deg;
+}
+
+.article__body .article__strip--2 {
+  background: #ffd9cc;
+  rotate: -0.6deg;
+}
+
+/* Taped pictures, floated into the column on alternating sides. */
+.taped {
+  position: relative;
+  margin: 18px 0 20px;
+  padding: 10px 10px 12px;
+  background: var(--paper);
+  box-shadow: 0 10px 22px rgb(16 24 40 / 0.22);
+  max-width: 46%;
+}
+
+.taped--left {
+  float: left;
+  margin-right: 28px;
+  margin-left: -36px;
+}
+
+.taped--right {
+  float: right;
+  margin-left: 28px;
+  margin-right: -36px;
+}
+
+.taped img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--cream);
+}
+
+.taped figcaption {
+  margin-top: 6px;
+  font-size: 21px;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+.taped__credit {
+  margin: 4px 0 0;
+  font-size: 12px;
+  line-height: 1.3;
+  color: var(--ink-soft);
+}
+
+.article__body section {
+  display: flow-root;
+}
+
+/* The facts as an index card with the country's outline as its locator. */
+.facts-card {
+  position: relative;
+  padding-top: 26px;
+  background:
+    linear-gradient(90deg, transparent 38px, rgb(255 134 98 / 0.5) 38px 40px, transparent 40px),
+    repeating-linear-gradient(180deg, transparent 0 29px, rgb(0 122 140 / 0.14) 29px 31px),
+    var(--cream);
+  border: 0;
+  box-shadow: 0 12px 24px rgb(16 24 40 / 0.2);
+  rotate: 1deg;
+}
+
+.facts-card__outline {
+  position: absolute;
+  top: -26px;
+  right: 14px;
+  width: 92px;
+  height: 92px;
+  padding: 6px;
+  background: var(--paper);
+  box-shadow: 0 6px 12px rgb(16 24 40 / 0.2);
+  rotate: -6deg;
+  fill: var(--coral);
+  stroke: var(--coral-ink);
+  stroke-width: 1.5;
+}
+
+/* "Did you know?" sticky notes. */
+.dyk {
+  display: grid;
+  gap: 26px;
+  margin: 30px 0;
+}
+
+.dyk__note {
+  position: relative;
+  margin: 0;
+  padding: 22px 22px 18px;
+  background: #fff3a6;
+  color: var(--ink);
+  box-shadow: 0 10px 18px rgb(16 24 40 / 0.2);
+  rotate: -2deg;
+}
+
+.dyk__note--1 {
+  background: #ffd9cc;
+  rotate: 2.5deg;
+  margin-left: 22px;
+}
+
+.dyk__note--2 {
+  background: #d4eef1;
+  rotate: -1deg;
+}
+
+.dyk__pin {
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--coral);
+  box-shadow: 0 3px 4px rgb(0 0 0 / 0.3);
+}
+
+.dyk__kicker {
+  margin: 0 0 6px;
+  font-size: 26px;
+  color: var(--teal-ink);
+}
+
+.dyk blockquote {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+/* The word lookup is a torn dictionary slip. */
+.word-card {
+  background: var(--cream);
+  border: 0;
+  box-shadow: 0 10px 20px rgb(16 24 40 / 0.18);
+  clip-path: polygon(0 0, 100% 0, 100% 96%, 95% 100%, 90% 96%, 84% 100%, 77% 97%, 70% 100%, 62% 96%, 55% 100%, 47% 97%, 40% 100%, 32% 96%, 25% 100%, 17% 96%, 10% 100%, 4% 97%, 0 100%);
+  padding-bottom: 34px;
+}
+
+/* Keep exploring. */
+.explore-on {
+  padding: 56px var(--gutter) 64px;
+  background:
+    radial-gradient(rgb(46 13 0 / 0.08) 1.3px, transparent 1.5px) 0 0 / 20px 20px,
+    var(--coral);
+  color: var(--coral-ink);
+}
+
+.explore-on__title {
+  font-size: 44px;
+  margin: 0 0 26px;
+}
+
+.explore-on__table {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 40px 60px;
+}
+
+.explore-on__ticket {
+  display: grid;
+  gap: 4px;
+  min-width: 280px;
+  padding: 26px 40px;
+  background: var(--yellow);
+  color: var(--ink);
+  text-decoration: none;
+  box-shadow: 0 6px 0 var(--ink);
+  rotate: -2deg;
+  -webkit-mask: radial-gradient(circle 14px at 0 50%, transparent 13.5px, #000 14px) left / 51% 100% no-repeat,
+    radial-gradient(circle 14px at 100% 50%, transparent 13.5px, #000 14px) right / 51% 100% no-repeat;
+  mask: radial-gradient(circle 14px at 0 50%, transparent 13.5px, #000 14px) left / 51% 100% no-repeat,
+    radial-gradient(circle 14px at 100% 50%, transparent 13.5px, #000 14px) right / 51% 100% no-repeat;
+}
+
+.explore-on__ticket:focus-visible {
+  outline: 4px solid var(--focus);
+  outline-offset: 4px;
+}
+
+.explore-on__admit {
+  font-size: 24px;
+  color: var(--coral-ink);
+}
+
+.explore-on__quiz {
+  font-family: var(--font-head);
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.explore-on__small {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.explore-on__prints {
+  display: flex;
+  align-items: flex-start;
+}
+
+.explore-on__print + .explore-on__print {
+  margin-left: -34px;
+}
+
+.explore-on__print--1 {
+  margin-top: 40px;
+  z-index: 2;
+}
+
+@media (max-width: 899px) {
+  .taped,
+  .taped--left,
+  .taped--right {
+    float: none;
+    max-width: 82%;
+    margin: 22px auto 24px;
+  }
+
+  .taped--right {
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  .explore-on__title {
+    font-size: 34px;
+  }
+
+  .explore-on__prints {
+    flex-wrap: wrap;
+  }
+
+  .explore-on__print + .explore-on__print {
+    margin-left: -20px;
+  }
+
+  .explore-on__print {
+    width: 150px !important;
+  }
+}
+
+/* The board: the lead print larger and over the torn edge, a smaller second print tucked under it, and a note. */
+.article__board {
+  position: relative;
+}
+
+.article__lead {
+  z-index: 2;
+}
+
+.article__second {
+  position: absolute;
+  z-index: 1;
+  right: calc(var(--gutter) + 360px);
+  bottom: 18px;
+  width: 190px;
+  margin: 0;
+  padding: 8px 8px 22px;
+  background: var(--paper);
+  box-shadow: 0 10px 20px rgb(0 0 0 / 0.3);
+  rotate: -7deg;
+}
+
+.article__second img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: var(--cream);
+}
+
+.article__tap-note {
+  position: absolute;
+  z-index: 3;
+  left: calc(var(--gutter) + 8px);
+  bottom: 44px;
+  margin: 0;
+  font-size: 26px;
+  color: var(--yellow);
+  rotate: -2deg;
+}
+
+@media (max-width: 1199px) {
+  .article__second {
+    display: none;
+  }
+}
+
+@media (max-width: 899px) {
+  .article__tap-note {
+    position: static;
+    margin: 8px 0 18px;
+    font-size: 22px;
+  }
+}
+
+.article__tap-note {
+  position: static;
+  margin: 22px 0 0 4px;
+}
+
+.article__second {
+  right: calc(var(--gutter) + 430px);
+  bottom: 70px;
+  width: 210px;
+  rotate: -9deg;
+}

@@ -20,9 +20,9 @@ export function galleryFor(items: readonly MediaItem[], articleKey: string, lead
   return items.filter((m) => m.article === articleKey && fileName(m.title).toLowerCase() !== lead);
 }
 
-export function ArticleGallery({ articleKey, leadCredit }: { articleKey: string; leadCredit?: string }) {
+export function ArticleGallery({ articleKey, leadCredit, skip = 0 }: { articleKey: string; leadCredit?: string; skip?: number }) {
   const file = useMedia<MediaFile>(articleKey.includes('/') && packOf(articleKey) !== 'wiki' ? `${packOf(articleKey)}.json` : null);
-  const all = useMemo(() => (file.status === 'ready' ? galleryFor(file.data.items, articleKey, leadCredit) : []), [file, articleKey, leadCredit]);
+  const all = useMemo(() => (file.status === 'ready' ? galleryFor(file.data.items, articleKey, leadCredit).slice(skip) : []), [file, articleKey, leadCredit, skip]);
   // A picture that cannot load (not saved yet, and no connection) is left out, and one line says how many, so the strip
   // is never a row of empty frames (26-final-review F-001).
   const [failed, setFailed] = useState<ReadonlySet<string>>(new Set());

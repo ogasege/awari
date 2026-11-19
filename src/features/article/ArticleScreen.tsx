@@ -3,7 +3,7 @@
  * lead print on the board, straight reading column on white paper,
  * margin notes, facts card, word side card and full credits.
  */
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, navigate } from '../../app/navigation.tsx';
 import { useTitle } from '../../app/useTitle.ts';
 import { Button, MarginNote, Print, StripHeading, TornEdge } from '../../design/paper.tsx';
@@ -13,11 +13,14 @@ import { urlTitle } from '../../lib/wiki/convert.ts';
 import type { Article, FactsPack, PackIndex } from '../../lib/packs/types.ts';
 import { update, withDiscovered } from '../../lib/store/progress.ts';
 import { ArticleGallery } from '../media/ArticleGallery.tsx';
+import { thumbUrl } from '../../lib/media/media.ts';
 import { ArticleBody } from './ArticleBody.tsx';
 import { articleCredits, factRows } from './credit.ts';
 import { WordCard } from './WordCard.tsx';
 import { errorWords, useWikiArticle } from './useWikiArticle.ts';
 import { TourBar } from '../tours/TourBar.tsx';
+import { CountryOutline, useShapes } from '../stamps/CountryOutline.tsx';
+import { DidYouKnow, KeepExploring, TAPED, TapedPicture, didYouKnow, useArticlePictures } from './scrapbook.tsx';
 import './article.css';
 
 
@@ -54,11 +57,13 @@ function Missing({ id }: { id: string }) {
 
 function FactsCard({ id }: { id: string }) {
   const facts = usePack<FactsPack>('countries/facts.json');
+  const shapes = useShapes();
   if (facts.status !== 'ready') return null;
   const f = facts.data.countries.find((c) => c.id === id);
   if (!f) return null;
   return (
     <section className="facts-card" aria-labelledby="facts-title">
+      <CountryOutline shapes={shapes} id={id} className="facts-card__outline" />
       <h2 id="facts-title">Quick facts</h2>
       <dl>
         {factRows(f).map((r) => (
@@ -104,6 +109,15 @@ function ArticleView({ article, photoSrc }: { article: Article; photoSrc?: strin
   const facts = article.notes.filter((n) => n.kind === 'fact' && n.proof);
   const proofs = facts.map((n) => n.proof as string);
   const isCountry = article.pack === 'countries';
+  const pictures = useArticlePictures(article);
+  const taped = useMemo(() => pictures.slice(0, Math.min(TAPED, Math.max(0, article.sections.length - 1))), [pictures, article.sections.length]);
+  // One more library picture overlaps the lead print on the board, so the first screen has prints of two sizes.
+  const second = pictures[taped.length];
+  const notes = useMemo(
+    () => didYouKnow(article.sections, article.notes.filter((n) => n.kind === 'fact' && n.proof).map((n) => n.proof as string)),
+    [article.sections, article.notes],
+  );
+  const quizTo = `/quiz/${article.pack}/${article.pack === 'wiki' ? wikiSlug(article) : article.id}`;
 
   useEffect(() => {
     if (isCountry) void update((p) => withDiscovered(p, article.id));
@@ -136,6 +150,9 @@ function ArticleView({ article, photoSrc }: { article: Article; photoSrc?: strin
               </Button>
             ) : null}
           </div>
+          <p aria-hidden="true" className="article__tap-note hand">
+            tap any word below to look it up ↓
+          </p>
         </div>
         {lead ? (
           <Print
@@ -148,13 +165,23 @@ function ArticleView({ article, photoSrc }: { article: Article; photoSrc?: strin
             tape={[{ left: '38%', width: 120, tilt: -5 }]}
           />
         ) : null}
+        {second ? (
+          <figure className="article__second" aria-hidden="true">
+            <img src={thumbUrl(second.thumb)} alt="" loading="lazy" decoding="async" />
+          </figure>
+        ) : null}
         <TornEdge color="var(--paper)" seed={`article-${article.id}`} height={30} />
       </header>
 
-      {article.pack !== 'wiki' ? <ArticleGallery articleKey={`${article.pack}/${article.id}`} leadCredit={lead?.credit.name} /> : null}
-
       <div className="article__paper">
-        <ArticleBody sections={article.sections} proofs={proofs} onWord={onWord} />
+        <ArticleBody
+          sections={article.sections}
+          proofs={proofs}
+          onWord={onWord}
+          between={taped.map((m, i) => (
+            <TapedPicture key={m.id} item={m} index={i} />
+          ))}
+        />
         <div className="article__side">
           {facts.length > 0 ? (
             <div className="article__notes">
@@ -166,9 +193,13 @@ function ArticleView({ article, photoSrc }: { article: Article; photoSrc?: strin
             </div>
           ) : null}
           {isCountry ? <FactsCard id={article.id} /> : null}
+          <DidYouKnow notes={notes} />
           <WordCard tap={tap} />
         </div>
       </div>
+
+      {article.pack !== 'wiki' ? <ArticleGallery articleKey={`${article.pack}/${article.id}`} leadCredit={lead?.credit.name} skip={taped.length} /> : null}
+      {article.pack !== 'wiki' ? <KeepExploring article={article} quizTo={quizTo} /> : null}
 
       <footer className="page-footer">
         {articleCredits(article).map((c) => (
