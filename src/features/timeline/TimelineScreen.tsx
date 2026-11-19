@@ -6,8 +6,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from '../../app/navigation.tsx';
 import { useTitle } from '../../app/useTitle.ts';
-import { Doodle, MarginNote, StripHeading, Tape } from '../../design/paper.tsx';
-import { seedFrom, wobblyLine } from '../../design/wobble.ts';
+import { Doodle, MarginNote, Pin, StripHeading, Tape } from '../../design/paper.tsx';
+import { cutPolygon, seedFrom, wobblyLine } from '../../design/wobble.ts';
 import { usePack } from '../../lib/packs/load.ts';
 import type { TimelineEvent, TimelinePack } from '../../lib/packs/types.ts';
 import { onThisDay } from '../home/today.ts';
@@ -51,10 +51,18 @@ export function shortText(label: string, text: string): string {
   return `${m[1].charAt(0).toUpperCase()}${m[1].slice(1)} ${m[2]}`;
 }
 
-function EventNote({ event, picked }: { event: TimelineEvent; picked: boolean }) {
+function EventNote({ event, picked, index }: { event: TimelineEvent; picked: boolean; index: number }) {
   const year = yearOf(event);
+  // Three sizes and alternating tilt so the wall of notes is not a uniform grid (28 Req 1.2).
+  const size = index % 5 === 0 ? 'big' : index % 3 === 0 ? 'small' : 'mid';
+  const tilt = (seedFrom(event.id) % 5) - 2;
   return (
-    <li id={`event-${event.id}`} className={`tl-note tl-note--${kindOf(event)}${picked ? ' is-picked' : ''}`}>
+    <li
+      id={`event-${event.id}`}
+      className={`tl-note tl-note--${kindOf(event)} tl-note--${size}${picked ? ' is-picked' : ''}`}
+      style={{ rotate: `${tilt}deg` }}
+    >
+      <Pin left="50%" />
       <span aria-hidden="true" className="tl-note__year hand">
         {year}
       </span>
@@ -171,39 +179,50 @@ export default function TimelineScreen() {
 
   return (
     <section className="page squared timeline" aria-labelledby="timeline-title">
-      <StripHeading
-        id="timeline-title"
-        lines={[
-          { text: 'Timeline', tone: 'paper', tilt: -2 },
-          { text: 'walk through the years', tone: 'yellow', tilt: 1.5, style: { marginLeft: '0.8em' } },
-        ]}
-      />
-      <p className="timeline__lead">
-        Every note here is a date taken from Wikidata. Pick a subject, or look at what happened on
-        today’s date.
-      </p>
-      <MarginNote decorative tilt={-3} size={30} className="deco-note crowding" style={{ color: 'var(--teal-ink)' }}>
-        Which of these happened on your birthday?
-      </MarginNote>
+      <div className="timeline__intro">
+        <div className="timeline__intro-copy">
+          <StripHeading
+            id="timeline-title"
+            lines={[
+              { text: 'Timeline', tone: 'paper', tilt: -2 },
+              { text: 'walk through the years', tone: 'yellow', tilt: 1.5, style: { marginLeft: '0.8em' } },
+            ]}
+          />
+          <p className="timeline__lead">
+            Every note here is a date taken from Wikidata. Pick a subject, or look at what happened on
+            today’s date.
+          </p>
+          <MarginNote decorative tilt={-3} size={28} className="deco-note crowding" style={{ color: 'var(--teal-ink)' }}>
+            Which of these happened on your birthday?
+          </MarginNote>
+        </div>
 
-      <section className="timeline__today" aria-labelledby="timeline-today">
-        <Tape left="6%" width={110} tilt={-5} tone="yellow" />
-        <h2 id="timeline-today">On this day, {dayText}</h2>
-        {pack.status === 'loading' ? <p>Turning the pages…</p> : null}
-        {pack.status === 'error' ? <p>The timeline could not be opened. Try again when you are online.</p> : null}
-        {pack.status === 'ready' && todays.length === 0 ? (
-          <p>No events are filed for {dayText} yet. Wander through the years below.</p>
-        ) : null}
-        {todays.length > 0 ? (
-          <ul className="timeline__today-list">
-            {todays.map((e) => (
-              <li key={e.id}>
-                <strong>{yearOf(e)}</strong> {withoutDate(e.text, e.date)}
-              </li>
-            ))}
-          </ul>
-        ) : null}
-      </section>
+        <section className="tl-calendar" aria-labelledby="timeline-today">
+          <Tape left="32%" width={110} tilt={-5} tone="yellow" />
+          <div className="tl-calendar__page" style={{ clipPath: cutPolygon(seedFrom('timeline-calendar'), 0.6) }}>
+            <p className="tl-calendar__weekday">{today.toLocaleDateString('en-GB', { weekday: 'long' })}</p>
+            <p className="tl-calendar__day">{today.getDate()}</p>
+            <p className="tl-calendar__month">{today.toLocaleDateString('en-GB', { month: 'long' })}</p>
+          </div>
+          <h2 id="timeline-today" className="tl-calendar__title">
+            On this day, {dayText}
+          </h2>
+          {pack.status === 'loading' ? <p>Turning the pages…</p> : null}
+          {pack.status === 'error' ? <p>The timeline could not be opened. Try again when you are online.</p> : null}
+          {pack.status === 'ready' && todays.length === 0 ? (
+            <p>No events are filed for {dayText} yet. Wander through the years below.</p>
+          ) : null}
+          {todays.length > 0 ? (
+            <ul className="tl-calendar__list">
+              {todays.map((e) => (
+                <li key={e.id}>
+                  <strong>{yearOf(e)}</strong> {withoutDate(e.text, e.date)}
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </section>
+      </div>
 
       <div className="timeline__filters" role="group" aria-label="Show events about">
         {FILTERS.map((f) => (
@@ -288,8 +307,8 @@ export default function TimelineScreen() {
             ))}
           </ul>
           <ol className="timeline__list">
-            {visible.map((e) => (
-              <EventNote key={e.id} event={e} picked={picked?.id === e.id} />
+            {visible.map((e, i) => (
+              <EventNote key={e.id} event={e} picked={picked?.id === e.id} index={i} />
             ))}
           </ol>
           {visible.length < inThis.length ? (

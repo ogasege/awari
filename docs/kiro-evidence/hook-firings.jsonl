@@ -982,3 +982,48 @@
 {"at":"2026-11-19T01:39:12.718Z","hook":"after-shell","event":"PostToolUse","tool":"Check live vs local dist sw.js hash before any dist-touching command","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
 {"at":"2026-11-19T01:39:44.590Z","hook":"after-shell","event":"PostToolUse","tool":"Run submission-check gate","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
 {"at":"2026-11-19T01:40:20.173Z","hook":"after-shell","event":"PostToolUse","tool":"Run offline-check gate","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:40:37.913Z","hook":"after-shell","event":"PostToolUse","tool":"Commit Castle redesign","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:40:53.418Z","hook":"after-write","event":"PostToolUse","tool":"Append to File","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:42:45.542Z","hook":"after-shell","event":"PostToolUse","tool":"Check palette variables","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:42:55.362Z","hook":"after-shell","event":"PostToolUse","tool":"Check table colours used by other redesigned screens","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:43:06.237Z","hook":"after-shell","event":"PostToolUse","tool":"Check page-level band colour per redesigned screen","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:43:14.022Z","hook":"after-shell","event":"PostToolUse","tool":"Check quizzes page top band","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:43:35.827Z","hook":"after-write","event":"PostToolUse","tool":"Replace in File","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:44:02.822Z","hook":"after-write","event":"PostToolUse","tool":"Replace in File","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:44:20.838Z","hook":"after-write","event":"PostToolUse","tool":"Replace in File","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:44:30.281Z","hook":"after-write","event":"PostToolUse","tool":"Replace in File","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:44:41.476Z","hook":"after-write","event":"PostToolUse","tool":"Replace in File","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:44:50.134Z","hook":"after-shell","event":"PostToolUse","tool":"Check pin CSS positioning rules","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:44:59.111Z","hook":"after-write","event":"PostToolUse","tool":"Replace in File","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:45:55.566Z","hook":"after-write","event":"PostToolUse","tool":"Replace in File","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:46:04.917Z","hook":"after-shell","event":"PostToolUse","tool":"Check .page and .squared base styles","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:46:34.318Z","hook":"after-shell","event":"PostToolUse","tool":"Shoot timeline screen after redesign","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:47:44.718Z","hook":"after-shell","event":"PostToolUse","tool":"Check margin-note CSS","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:47:56.317Z","hook":"after-shell","event":"PostToolUse","tool":"Check deco-note mobile rule","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:48:08.768Z","hook":"after-shell","event":"PostToolUse","tool":"Probe timeline DOM layout at mobile width","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:48:22.032Z","hook":"after-write","event":"PostToolUse","tool":"Write File","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:48:42.152Z","hook":"after-shell","event":"PostToolUse","tool":"Probe timeline mobile layout","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:48:54.693Z","hook":"after-write","event":"PostToolUse","tool":"Replace in File","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:49:05.211Z","hook":"after-shell","event":"PostToolUse","tool":"Probe timeline mobile layout retry","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:49:17.935Z","hook":"after-write","event":"PostToolUse","tool":"Write File","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:49:28.198Z","hook":"after-shell","event":"PostToolUse","tool":"Probe timeline mobile layout retry 2","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:49:42.013Z","hook":"after-write","event":"PostToolUse","tool":"Write File","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:49:51.558Z","hook":"after-shell","event":"PostToolUse","tool":"Probe timeline mobile layout retry 3","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:50:02.467Z","hook":"after-shell","event":"PostToolUse","tool":"placeholder","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:50:14.179Z","hook":"after-shell","event":"PostToolUse","tool":"Check intro CSS rules","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:50:32.672Z","hook":"after-write","event":"PostToolUse","tool":"Replace in File","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:50:43.098Z","hook":"after-shell","event":"PostToolUse","tool":"Reprobe after fix","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:51:02.592Z","hook":"after-shell","event":"PostToolUse","tool":"Reshoot timeline after mobile fix, clean up probe","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:51:22.354Z","hook":"after-shell","event":"PostToolUse","tool":"Lint timeline feature","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:51:23.848Z","hook":"after-shell","event":"PostToolUse","tool":"Typecheck after timeline changes","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:51:35.545Z","hook":"after-shell","event":"PostToolUse","tool":"Run timeline tests","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:52:13.095Z","hook":"after-write","event":"PostToolUse","tool":"Replace in File","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:52:21.010Z","hook":"after-write","event":"PostToolUse","tool":"Replace in File","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:52:35.044Z","hook":"after-shell","event":"PostToolUse","tool":"Rerun timeline tests","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:52:48.343Z","hook":"after-shell","event":"PostToolUse","tool":"Final typecheck and lint for timeline","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:52:54.998Z","hook":"after-shell","event":"PostToolUse","tool":"Final reshoot of timeline","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:53:22.150Z","hook":"after-shell","event":"PostToolUse","tool":"Full lint after timeline changes","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:53:23.646Z","hook":"after-shell","event":"PostToolUse","tool":"Full test suite after timeline changes","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:53:34.544Z","hook":"after-shell","event":"PostToolUse","tool":"Verify live sw.js still matches dist before rebuilding","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:54:09.180Z","hook":"after-shell","event":"PostToolUse","tool":"Run submission-check gate for timeline","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}
+{"at":"2026-11-19T01:54:55.310Z","hook":"after-shell","event":"PostToolUse","tool":"Run offline-check gate for timeline","files":[],"check":"none","ok":true,"source":"manual","session":null,"output":""}

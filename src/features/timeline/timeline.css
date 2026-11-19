@@ -1,7 +1,25 @@
-/* Timeline and On this day (07-timeline). Text stays straight and dark on
-   white; only the year numbers, tape and tiny card tilts are playful. */
+/* Timeline and On this day (07-timeline, redesigned 28 Req 2.6: its own
+   mist-paper ledger band; event notes are pinned paper of three sizes,
+   not a uniform grid; text stays straight and dark on white. */
 .timeline {
   position: relative;
+  background: var(--mist);
+  margin: calc(-1 * var(--gutter)) calc(-1 * var(--gutter)) 0;
+  padding: var(--gutter);
+  padding-bottom: 56px;
+}
+
+.timeline__intro {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 32px 48px;
+  margin-bottom: 8px;
+}
+
+.timeline__intro-copy {
+  flex: 1 1 420px;
+  min-width: 0;
 }
 
 .timeline__lead {
@@ -10,39 +28,62 @@
 }
 
 .deco-note {
-  position: absolute;
-  top: 64px;
-  right: var(--gutter);
-  max-width: 280px;
+  margin: 10px 0 0;
+  max-width: 320px;
 }
 
-.timeline__today {
+/* The calendar page, reusing Home's torn tear-off look (OnThisDay.tsx). */
+.tl-calendar {
   position: relative;
-  max-width: 760px;
-  margin: 24px 0 28px;
-  padding: 22px 28px 18px;
+  flex: 0 0 340px;
+  padding: 18px 24px 20px;
+  background: var(--paper);
+  box-shadow: var(--shadow-hard);
+  rotate: 1.4deg;
+}
+
+.tl-calendar__page {
+  padding: 10px 14px 14px;
   background: var(--cream);
-  box-shadow: var(--shadow-print);
-  rotate: -0.6deg;
+  text-align: center;
 }
 
-.timeline__today h2 {
-  margin: 0 0 8px;
-  font-size: 28px;
-}
-
-.timeline__today p,
-.timeline__today-list {
+.tl-calendar__weekday {
   margin: 0;
-  font-size: 19px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--teal-ink);
 }
 
-.timeline__today-list {
-  padding-left: 22px;
+.tl-calendar__day {
+  margin: 0;
+  font-family: var(--font-head);
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1;
 }
 
-.timeline__today-list li {
-  margin: 6px 0;
+.tl-calendar__month {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.tl-calendar__title {
+  margin: 14px 0 6px;
+  font-size: 21px;
+}
+
+.tl-calendar__list {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 16px;
+}
+
+.tl-calendar__list li {
+  margin: 4px 0;
 }
 
 .timeline__filters {
@@ -50,7 +91,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin: 8px 0 4px;
+  margin: 20px 0 4px;
 }
 
 .timeline__chip {
@@ -141,10 +182,12 @@
   box-shadow: var(--shadow-hard);
 }
 
+/* The wall of notes: a flowing wrap of three sizes, not a uniform grid (28 Req 1.1, 1.2). */
 .timeline__list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-  gap: 20px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 28px 22px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -156,11 +199,29 @@
   flex-direction: column;
   gap: 4px;
   align-items: flex-start;
-  padding: 14px 18px 16px;
+  flex: 0 0 300px;
+  padding: 16px 18px 18px;
   background: var(--paper);
   color: var(--ink);
   border: 2px solid var(--ink);
   box-shadow: var(--shadow-hard);
+  transition: translate 140ms ease, rotate 140ms ease;
+}
+
+.tl-note--small {
+  flex-basis: 230px;
+  padding: 12px 16px 14px;
+}
+
+.tl-note--big {
+  flex-basis: 380px;
+  padding: 20px 24px 22px;
+}
+
+.tl-note:hover,
+.tl-note:focus-within {
+  translate: 0 -4px;
+  rotate: 0deg !important;
 }
 
 /* The colour says what kind of event it is; the legend names each one (22-review-3 Req 14). */
@@ -189,7 +250,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px 12px;
-  margin: 0 0 18px;
+  margin: 0 0 22px;
   padding: 0;
   list-style: none;
 }
@@ -200,6 +261,7 @@
   color: var(--ink);
   font-size: 15px;
   font-weight: 700;
+  background: var(--paper);
 }
 
 .tl-note.is-picked {
@@ -213,6 +275,14 @@
   font-size: 40px;
   line-height: 1;
   rotate: -4deg;
+}
+
+.tl-note--small .tl-note__year {
+  font-size: 32px;
+}
+
+.tl-note--big .tl-note__year {
+  font-size: 48px;
 }
 
 .tl-note__body {
@@ -245,16 +315,50 @@
 }
 
 @media (max-width: 899px) {
+  .timeline {
+    margin: 0;
+    padding: 20px var(--gutter) 48px;
+  }
+
+  .timeline__intro {
+    flex-direction: column;
+  }
+
+  .timeline__intro-copy {
+    flex: none;
+  }
+
+  .tl-calendar {
+    flex-basis: auto;
+    width: 100%;
+    rotate: 0deg;
+  }
+
   .deco-note {
     display: none;
   }
 
   .timeline__list {
-    grid-template-columns: 1fr;
+    flex-direction: column;
   }
 
-  .timeline__today {
-    rotate: 0deg;
+  .tl-note,
+  .tl-note--small,
+  .tl-note--big {
+    flex-basis: auto;
+    width: 100%;
+    rotate: 0deg !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tl-note {
+    transition: none;
+  }
+
+  .tl-note:hover,
+  .tl-note:focus-within {
+    translate: none;
   }
 }
 
@@ -304,3 +408,4 @@
 .timeline__more {
   margin-top: 24px;
 }
+
