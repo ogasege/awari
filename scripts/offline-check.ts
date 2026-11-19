@@ -193,7 +193,7 @@ await step('Subjects list and a subject wall open', async (p) => {
   await p.getByRole('link', { name: /Wildlife/ }).first().waitFor({ timeout: 10_000 });
   await open(p, '/subject/wildlife');
   await p.getByText(/\d+ articles in this subject\./).waitFor({ timeout: 10_000 });
-  await p.locator('.subject__print').first().waitFor({ timeout: 10_000 });
+  await p.locator('.cluster__item').first().waitFor({ timeout: 10_000 });
 });
 
 await step('A subject pack article, its quiz and its castle wing work', async (p) => {
