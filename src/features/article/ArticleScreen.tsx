@@ -6,6 +6,7 @@
 import { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, navigate } from '../../app/navigation.tsx';
 import { useTitle } from '../../app/useTitle.ts';
+import { Loading } from '../../app/Loading.tsx';
 import { Button, MarginNote, Print, StripHeading, TornEdge } from '../../design/paper.tsx';
 import { packUrl, usePack } from '../../lib/packs/load.ts';
 import { isBundledPack, subjectById } from '../../lib/packs/subjects.ts';
@@ -236,7 +237,7 @@ function ArticleView({ article, photoSrc }: { article: Article; photoSrc?: strin
 /** An article loaded on demand from Wikipedia (14-any-article). */
 function WikiArticle({ title }: { title: string }) {
   const state = useWikiArticle(title);
-  if (state.status === 'loading') return <p className="page">Opening the page…</p>;
+  if (state.status === 'loading') return <Loading route="article" />;
   if (state.status === 'error') {
     return (
       <section className="page squared" aria-labelledby="wiki-missing">
@@ -262,6 +263,6 @@ export default function ArticleScreen({ params }: { params: Record<string, strin
   if (pack === 'wiki') return <WikiArticle title={id} />;
   if (bundled && id === 'random') return <RandomArticle pack={pack} />;
   if (!valid || article.status === 'error') return <Missing id={id} />;
-  if (article.status === 'loading') return <p className="page">Opening the page…</p>;
+  if (article.status === 'loading') return <Loading route="article" />;
   return <ArticleView key={article.data.id} article={article.data} />;
 }

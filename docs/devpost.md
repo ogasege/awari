@@ -69,7 +69,7 @@ hand-curated. A teacher should treat it as a very good starting point for curios
   rooms each.
 - **A timeline** of <!--n:events-->1530<!--/n--> dates across every subject and continent, and **On
   this day** on Home, which also rotates its prints, notes and suggestions daily.
-- **A picture library** of <!--n:mediaPictures-->3466<!--/n--> Commons pictures (four or more per article but <!--n:mediaGaps-->36<!--/n-->, <!--n:mediaMB-->76<!--/n--> MB of small WebP copies): an article strip, a large view with the credit, a Pictures screen, the picture of the day and picture questions. No licence is typed by hand: `npm run licences` asks the Commons API about <!--n:mediaVerified-->4021<!--/n--> images and fails the submission check on any mismatch.
+- **A picture library** of <!--n:mediaPictures-->3455<!--/n--> Commons pictures (four or more per article but <!--n:mediaGaps-->36<!--/n-->, <!--n:mediaMB-->76<!--/n--> MB of small WebP copies): an article strip, a large view with the credit, a Pictures screen, the picture of the day and picture questions. No licence is typed by hand: `npm run licences` asks the Commons API about <!--n:mediaVerified-->4021<!--/n--> images and fails the submission check on any mismatch.
 - **Offline**: a hand-written service worker saves the whole bundle. After one visit every bundled
   feature works in airplane mode, and the header says honestly whether the site has been saved. The core (articles, quizzes, maps, lead photos) is saved on the first visit; the 3,720 extra library pictures (about 86 MB) are kept as they are viewed, or all at once from Credits, and a picture not yet saved shows a placeholder, not a broken icon.
 - **An optional quiz service** (AWS Lambda calling Amazon Bedrock) that checks every generated

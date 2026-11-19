@@ -267,3 +267,270 @@
   width: 100%;
   max-width: 760px;
 }
+
+/* ------------------------------------------------------------------------------------------------------------------
+ * 28 task 5: the gate is a floor plan. Sixteen rooms round a courtyard, each in its own colour and door shape.
+ * ---------------------------------------------------------------------------------------------------------------- */
+.castle-gate {
+  padding-top: 28px;
+  background-image:
+    radial-gradient(rgb(255 255 255 / 0.06) 1.4px, transparent 1.6px),
+    radial-gradient(circle at 50% 40%, rgb(0 122 140 / 0.3), transparent 60%);
+  background-size: 22px 22px, auto;
+}
+
+.plan {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-rows: repeat(4, minmax(168px, auto));
+  gap: 14px;
+  max-width: 1360px;
+  margin: 0 auto;
+}
+
+.plan__yard {
+  grid-column: 2 / 6;
+  grid-row: 2 / 4;
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas: 'photo title' 'photo lead';
+  align-content: center;
+  align-items: start;
+  gap: 4px 30px;
+  padding: 26px 34px;
+  background: #1a2a63;
+  border: 3px dashed rgb(255 255 255 / 0.35);
+  border-radius: 6px;
+}
+
+.plan__yard .castle__photo {
+  grid-area: photo;
+  width: 230px;
+  align-self: center;
+}
+
+.plan__yard .castle__title {
+  grid-area: title;
+  font-size: 54px;
+}
+
+.plan__yard .castle__lead {
+  grid-area: lead;
+  margin-top: 10px;
+  font-size: 17px;
+}
+
+.plan__yard .castle__note {
+  position: absolute;
+  right: 26px;
+  bottom: 14px;
+  margin: 0;
+}
+
+.plan__room {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto auto auto auto;
+  align-content: start;
+  justify-items: start;
+  gap: 4px;
+  min-height: 168px;
+  padding: 10px 12px 12px;
+  color: var(--paper);
+  text-decoration: none;
+  border: 3px solid rgb(255 255 255 / 0.8);
+  box-shadow: 0 6px 0 rgb(0 0 0 / 0.35);
+  clip-path: polygon(0 1%, 4% 0, 97% 2%, 100% 0, 99% 97%, 96% 100%, 3% 98%, 0 100%);
+  transition: translate 140ms ease;
+}
+
+.castle-board a.plan__room {
+  color: var(--paper);
+}
+
+.plan__room:hover,
+.plan__room:focus-visible {
+  translate: 0 -5px;
+}
+
+.plan__room:focus-visible {
+  outline: 4px solid var(--yellow);
+  outline-offset: 3px;
+}
+
+.plan__room--pointed {
+  border-radius: 40px 40px 6px 6px;
+}
+
+.plan__room--round {
+  border-radius: 28px;
+}
+
+.plan__room--square {
+  border-radius: 2px;
+}
+
+.plan__room--arch {
+  border-radius: 24px 24px 4px 4px;
+}
+
+.plan__print {
+  width: 100%;
+  height: 74px;
+  object-fit: cover;
+  border: 3px solid var(--paper);
+  background: var(--cream);
+  rotate: -1.5deg;
+}
+
+.plan__name {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 19px;
+  line-height: 1.1;
+}
+
+.plan__doors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  max-width: 100%;
+}
+
+.plan__doors i {
+  width: 11px;
+  height: 15px;
+  border: 1.5px solid rgb(255 255 255 / 0.8);
+  border-radius: 6px 6px 1px 1px;
+}
+
+.plan__doors i.is-lit {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  box-shadow: 0 0 6px var(--yellow);
+}
+
+.plan__count {
+  font-size: 22px;
+  color: var(--yellow);
+}
+
+.plan__legend {
+  margin: 18px 0 0;
+  text-align: center;
+  font-size: 24px;
+  color: var(--yellow);
+}
+
+/* A wing's own board: its colour, its landmark print at the side, its own door shape. */
+.castle-board--wing {
+  background-color: var(--wing, var(--navy));
+}
+
+.wing__landmark {
+  float: right;
+  margin: 0 0 12px 24px;
+}
+
+@media (max-width: 899px) {
+  .plan {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+    gap: 12px;
+  }
+
+  .plan__yard {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    grid-template-columns: 1fr;
+    grid-template-areas: 'title' 'lead' 'photo';
+    padding: 18px;
+  }
+
+  .plan__yard .castle__photo {
+    width: 180px;
+    justify-self: start;
+  }
+
+  .plan__yard .castle__title {
+    font-size: 40px;
+  }
+
+  .plan__yard .castle__note {
+    position: static;
+  }
+
+  .plan__room {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    min-height: 150px;
+  }
+
+  .plan__legend {
+    font-size: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plan__room {
+    transition: none;
+  }
+
+  .plan__room:hover,
+  .plan__room:focus-visible {
+    translate: none;
+  }
+}
+
+.plan__yard .castle__note {
+  white-space: nowrap;
+}
+
+.wing__head {
+  position: relative;
+  align-items: flex-start;
+}
+
+.castle-board--wing {
+  background-image: radial-gradient(rgb(255 255 255 / 0.07) 1.4px, transparent 1.6px);
+  background-size: 22px 22px;
+}
+
+/* On a wide screen the wall of doors stands on the left and the question beside it, so the page is full. */
+@media (min-width: 1100px) {
+  .wing__play {
+    display: grid;
+    grid-template-columns: minmax(380px, 5fr) minmax(0, 6fr);
+    gap: 40px;
+    align-items: start;
+  }
+
+  .wing__play .wing__wall {
+    margin-bottom: 0;
+  }
+
+  .wing__play .wing__done {
+    align-self: center;
+  }
+}
+
+/* In a wing the question card has the whole right side; its hints sit under it, never squeezing the tickets. */
+.wing__question .question {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: 'card' 'feedback' 'hints' 'aside';
+  grid-template-rows: none;
+}
+
+/* The question's shape tag (28, "fill the gap" etc.) floats above the card; give "Room N of 12" room to clear it. */
+.wing__question .question__card {
+  margin-top: 28px;
+}
+
+.wing__question .hints {
+  min-height: 0;
+}
+
+.wing__question .question__feedback {
+  min-height: 0;
+}

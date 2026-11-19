@@ -9,6 +9,7 @@ const SUBJECT_LABELS = new Map<string, string>(SUBJECTS.map((x) => [x.id as stri
 import { useEffect, useMemo, useReducer } from 'react';
 import { Link } from '../../app/navigation.tsx';
 import { useTitle } from '../../app/useTitle.ts';
+import { Loading } from '../../app/Loading.tsx';
 import { Button, Doodle, MarginNote, Print, StripHeading } from '../../design/paper.tsx';
 import { coverFor } from '../../lib/packs/covers.ts';
 import { packUrl, usePack } from '../../lib/packs/load.ts';
@@ -279,7 +280,7 @@ function WikiQuiz({ title }: { title: string }) {
       ? { articleId: title, pack: 'wiki', title: a.title, questions, source: a.source }
       : null;
   }, [state, title]);
-  if (state.status === 'loading') return <p className="page">Shuffling the questions…</p>;
+  if (state.status === 'loading') return <Loading route="quiz" />;
   if (state.status === 'error') return <NoQuiz words={errorWords(state.reason, title)} />;
   if (!quiz) {
     return <NoQuiz words="This article is too short to make a fair quiz from. Try reading it, or pick another article." />;
@@ -304,7 +305,7 @@ function PictureQuiz({ subject }: { subject: string }) {
       : null;
   }, [file, subject]);
   if (!SUBJECT_IDS.has(subject)) return <NoQuiz words="There is no picture quiz for that subject." />;
-  if (file.status === 'loading') return <p className="page">Shuffling the pictures…</p>;
+  if (file.status === 'loading') return <Loading route="quiz" words="Shuffling the pictures…" />;
   if (file.status === 'error' || !quiz) return <NoQuiz words="The pictures could not be opened for a quiz. Try again when you are online once." />;
   return <Quiz key={`pictures/${subject}`} quiz={quiz} externalUrl="/media" />;
 }
@@ -319,6 +320,6 @@ export default function QuizScreen({ params }: { params: Record<string, string> 
   if (!ok || quiz.status === 'error') {
     return <NoQuiz words="There is no quiz for that page." />;
   }
-  if (quiz.status === 'loading') return <p className="page">Shuffling the questions…</p>;
+  if (quiz.status === 'loading') return <Loading route="quiz" />;
   return <Quiz key={`${pack}/${id}`} quiz={quiz.data} />;
 }

@@ -65,7 +65,7 @@ hand-curated. A teacher should treat it as a very good starting point for curios
 - **Wander the timeline** of <!--n:events-->1530<!--/n--> dates from Wikidata, by subject and by
   continent, and see what happened **on this day** on Home, where the prints, notes and
   suggestions change every day.
-- **Look at the world**: <!--n:mediaPictures-->3466<!--/n--> pictures from Wikimedia Commons, four or more for all but <!--n:mediaGaps-->36<!--/n--> articles (where Commons has too few pictures that pass the filters, mostly abstract science topics),
+- **Look at the world**: <!--n:mediaPictures-->3455<!--/n--> pictures from Wikimedia Commons, four or more for all but <!--n:mediaGaps-->36<!--/n--> articles (where Commons has too few pictures that pass the filters, mostly abstract science topics),
   in a strip under each article, on a **Pictures** screen with filters, search and a surprise pile, as the
   **picture of the day** on Home, and as picture questions in the Castle and picture quizzes. Every picture's author
   and licence is read from the Commons API by `npm run licences`, which the submission check runs.

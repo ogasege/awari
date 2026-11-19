@@ -245,3 +245,18 @@ do not pass yet. Open boxes, most important first:
       Home, Atlas, Article, Quiz, Castle, Timeline, Pictures. Castle, Timeline, Pictures and the
       lower half of Atlas are still the old look. After Subjects and Subject, do Castle, Timeline
       and Pictures before Stamp book, Tours and Search.
+
+### Article fixes c218328, Subjects and Subject 17f748e (looked at 19 Nov 01:20 UTC, the `after/` shots)
+
+Article now passes; Subjects passes (it reads like Home); Subject passes. Small things only, do
+them when you next touch these files, not before Castle, Timeline and Pictures:
+
+- [ ] Article, Nigeria: the History section (the slave trade) now has the current president's
+      official portrait beside it. A living politician's portrait should not be a section print at
+      all; keep such portraits in the strip, and never beside text about slavery, war or disaster.
+- [ ] Subject: the cluster labels read "B to D8", "K to P8": the small count looks like part of the
+      name. Write "B to D" and put "8 articles" in small plain type after it, or drop the count.
+- [ ] Subject: "0 of 30 quizzes done" is a row of thirty plain pale squares. Use the stamp idea from
+      the quiz screen (empty stamp outlines that ink in), or one handwritten line.
+- [ ] Subject: clusters with seven or eight prints leave a row of two with a hole beside it. Let
+      the last row centre or let prints grow so each cluster fills its rows.

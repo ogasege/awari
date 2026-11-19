@@ -3,6 +3,7 @@
  * glow yellow and carry a chalked name of what was learned there; the
  * next door gets a "next!" arrow. Screen readers get a plain list.
  */
+import { DOOR_PATHS, type DoorShape } from './castle-look.ts';
 import { seedFrom, wobblyArrow, wobblyLine } from '../../design/wobble.ts';
 import { doorPath } from '../home/DoorRow.tsx';
 import { ROOMS } from './castle.ts';
@@ -18,7 +19,7 @@ function doorAt(i: number): { x: number; y: number } {
   return { x: 40 + c * 120, y: 50 + row * 120 };
 }
 
-export function Doors({ lit, names = [], compact = false }: { lit: number; names?: readonly string[]; compact?: boolean }) {
+export function Doors({ lit, names = [], compact = false, shape = 'arch' }: { lit: number; names?: readonly string[]; compact?: boolean; shape?: DoorShape }) {
   const doors = Array.from({ length: ROOMS }, (_, i) => doorAt(i));
   const next = doors[lit];
   return (
@@ -33,7 +34,7 @@ export function Doors({ lit, names = [], compact = false }: { lit: number; names
           // doorPath draws a 20 x 22 door; scale it up for the wall.
           return (
             <g key={i} transform={`translate(${d.x} ${d.y}) scale(2.6)`}>
-              <path d={doorPath(0, 6, seedFrom(`wall-door${i}`))} className={isLit ? 'doors__door is-lit' : 'doors__door'} />
+              <path d={shape === 'arch' ? doorPath(0, 6, seedFrom(`wall-door${i}`)) : DOOR_PATHS[shape]} className={isLit ? 'doors__door is-lit' : 'doors__door'} />
               {isLit ? null : <circle cx="15.5" cy="18" r="1.1" className="doors__knob" />}
             </g>
           );

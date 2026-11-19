@@ -1,21 +1,58 @@
-/** The castle gate: choose a wing, with each wing's doors drawn lit. */
+/**
+ * The castle gate as a hand-drawn floor plan (28-every-screen-like-home task 5): sixteen rooms round a courtyard, one
+ * per wing, each in its own colour with its landmark print and its lit rooms drawn as small doors. A child taps a
+ * room to open that wing. Rooms are real links, straight and at least 44 px tall (Rule 7).
+ */
 import { useTitle } from '../../app/useTitle.ts';
-import { Button, MarginNote, Print, StripHeading } from '../../design/paper.tsx';
+import { MarginNote, StripHeading } from '../../design/paper.tsx';
 import { useProgress } from '../../lib/store/useProgress.ts';
-import { ROOMS, WINGS, wingPrint } from './castle.ts';
-import { Doors } from './Doors.tsx';
+import { ROOMS, WINGS, wingPrint, type Wing } from './castle.ts';
+import { wingLook } from './castle-look.ts';
+import { Link } from '../../app/navigation.tsx';
 import './castle.css';
 
-const printOf = wingPrint;
+/** Places on a 6 x 4 plan, clockwise from the top left: top row, right side, bottom row, left side. */
+const SPOTS: ReadonlyArray<readonly [col: number, row: number]> = [
+  [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1],
+  [6, 2], [6, 3],
+  [6, 4], [5, 4], [4, 4], [3, 4], [2, 4], [1, 4],
+  [1, 3], [1, 2],
+];
+
+function Room({ wing, index, lit }: { wing: Wing; index: number; lit: number }) {
+  const look = wingLook(wing.id);
+  const print = wingPrint(wing);
+  const [col, row] = SPOTS[index] ?? [1, 1];
+  const done = lit >= ROOMS;
+  return (
+    <Link
+      to={`/castle/${wing.id}`}
+      className={`plan__room plan__room--${look.shape}`}
+      style={{ gridColumn: col, gridRow: row, background: look.colour }}
+      aria-label={`${wing.name}: ${done ? 'all 12 rooms lit' : `${lit} of ${ROOMS} rooms lit`}`}
+    >
+      {print ? <img className="plan__print" src={print.src} alt="" loading="lazy" decoding="async" /> : null}
+      <span className="plan__name">{wing.name.replace(/^The /, '').replace(/ wing$/, '').replace(/^./, (c) => c.toUpperCase())}</span>
+      <span aria-hidden="true" className="plan__doors">
+        {Array.from({ length: ROOMS }, (_, i) => (
+          <i key={i} className={i < lit ? 'is-lit' : ''} />
+        ))}
+      </span>
+      <span aria-hidden="true" className="plan__count hand">
+        {done ? 'all lit!' : lit === 0 ? 'open the door' : `${lit} of ${ROOMS}`}
+      </span>
+    </Link>
+  );
+}
 
 export default function CastleScreen() {
   useTitle('The Castle');
   const progress = useProgress();
   return (
-    <section className="castle-board grain" aria-labelledby="castle-title">
-      <div className="castle__intro">
-        <img className="castle__photo" src="/photos/castle.jpg" alt="A stone castle tower in Gondar, Ethiopia" />
-        <div>
+    <section className="castle-board grain castle-gate" aria-labelledby="castle-title">
+      <div className="plan">
+        <div className="plan__yard">
+          <img className="castle__photo" src="/photos/castle.jpg" alt="A stone castle tower in Gondar, Ethiopia" />
           <StripHeading
             id="castle-title"
             lines={[
@@ -25,53 +62,20 @@ export default function CastleScreen() {
             className="castle__title"
           />
           <p className="castle__lead">
-            Every door asks a question. Answer it and the next room lights up. Light all twelve to
-            finish a wing. Stuck? Every question has three hints.
+            Every door asks a question. Answer it and the next room lights up. Light all twelve to finish a wing. Stuck? Every
+            question has three hints.
           </p>
+          <MarginNote className="castle__note" decorative color="var(--yellow)" tilt={-3} size={28}>
+            tap a room to walk in
+          </MarginNote>
         </div>
+        {WINGS.map((w, i) => (
+          <Room key={w.id} wing={w} index={i} lit={progress.castle[w.id] ?? 0} />
+        ))}
       </div>
-      {(
-        [
-          ['world', 'Around the world', 'One wing for each continent.'],
-          ['subject', 'Subjects', 'One wing for each subject in Awari.'],
-        ] as const
-      ).map(([group, title, blurb]) => (
-        <section key={group} className="castle__group" aria-labelledby={`group-${group}`}>
-          <h2 id={`group-${group}`} className="castle__group-title">
-            {title}
-          </h2>
-          <p className="castle__group-blurb">{blurb}</p>
-          <div className="castle__wings">
-            {WINGS.filter((w) => w.group === group).map((w, i) => {
-              const lit = progress.castle[w.id] ?? 0;
-              return (
-                <section key={w.id} className="castle__wing" aria-labelledby={`wing-${w.id}`} style={{ rotate: i % 2 ? '1deg' : '-1deg' }}>
-                  {printOf(w) ? (
-                    <Print
-                      className="castle__wing-print"
-                      src={printOf(w)?.src ?? ''}
-                      alt={printOf(w)?.alt ?? ''}
-                      width={200}
-                      tilt={i % 2 ? 2 : -2}
-                      tape={[{ left: '36%', width: 80, tilt: i % 2 ? 5 : -5, tone: 'yellow' }]}
-                    />
-                  ) : null}
-                  <h3 id={`wing-${w.id}`}>{w.name}</h3>
-                  <p>{w.blurb}</p>
-                  <Doors lit={lit} compact />
-                  <p className="castle__wing-count">
-                    {lit === ROOMS ? 'All 12 rooms lit' : `${lit} of ${ROOMS} rooms lit`}
-                  </p>
-                  <Button to={`/castle/${w.id}`}>{lit === 0 ? 'Open the first door' : lit === ROOMS ? 'Visit again' : 'Keep going'}</Button>
-                </section>
-              );
-            })}
-          </div>
-        </section>
-      ))}
-      <MarginNote className="castle__note crowding" decorative color="var(--yellow)" tilt={-4} size={30}>
-        who do you think lived in a castle like this?
-      </MarginNote>
+      <p className="plan__legend hand" aria-hidden="true">
+        the top row is the six continents, the other ten rooms are subjects
+      </p>
     </section>
   );
 }

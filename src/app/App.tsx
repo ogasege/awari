@@ -5,6 +5,7 @@
 import { Suspense, lazy, useEffect, useRef, type ComponentType } from 'react';
 import { ChalkFilter } from '../design/paper.tsx';
 import { Header } from './Header.tsx';
+import { Loading } from './Loading.tsx';
 import { usePath } from './navigation.tsx';
 import { matchRoute, type RouteName } from './router.ts';
 import Home from '../features/home/Home.tsx';
@@ -81,7 +82,7 @@ export function App() {
           </div>
         )}
         <main id="main">
-          <Suspense fallback={<p className="app__loading">Opening the page…</p>}>
+          <Suspense fallback={<Loading route={name} />}>
             <Screen params={params} />
           </Suspense>
         </main>

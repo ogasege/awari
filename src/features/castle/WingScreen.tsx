@@ -2,10 +2,10 @@
  * Playing one wing of the Castle (06-castle Req 2): the wall of twelve
  * doors and the question behind the next dark one.
  */
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useReducer, useState, type CSSProperties } from 'react';
 import { Link } from '../../app/navigation.tsx';
 import { useTitle } from '../../app/useTitle.ts';
-import { Button, StripHeading } from '../../design/paper.tsx';
+import { Button, Print, StripHeading } from '../../design/paper.tsx';
 import { loadMedia, type MediaFile } from '../../lib/media/media.ts';
 import { pictureQuestions, weave } from '../../lib/quiz/picture.ts';
 import { loadPack, usePack } from '../../lib/packs/load.ts';
@@ -14,7 +14,8 @@ import type { PackIndex, Question, QuizSet } from '../../lib/packs/types.ts';
 import { loadProgress, update, withRoomsLit } from '../../lib/store/progress.ts';
 import { QuestionCard } from '../quiz/QuestionCard.tsx';
 import type { Action } from '../quiz/quizMachine.ts';
-import { buildPool, castleReduce, ROOMS, startCastle, WINGS, type CastleState, type Wing } from './castle.ts';
+import { buildPool, castleReduce, ROOMS, startCastle, WINGS, wingPrint, type CastleState, type Wing } from './castle.ts';
+import { wingLook } from './castle-look.ts';
 import { Doors } from './Doors.tsx';
 import './castle.css';
 
@@ -103,9 +104,9 @@ function Play({ wing, pool, titles, savedLit }: { wing: Wing; pool: Question[]; 
   const roomNumber = Math.min(ROOMS, state.lit + 1);
 
   return (
-    <>
+    <div className="wing__play">
       <div className="wing__wall">
-        <Doors lit={state.lit} names={names} />
+        <Doors lit={state.lit} names={names} shape={wingLook(wing.id).shape} />
         <p className="wing__count" aria-live="polite">
           {state.lit >= ROOMS ? 'Every room is lit!' : `${state.lit} of ${ROOMS} rooms lit`}
         </p>
@@ -134,7 +135,7 @@ function Play({ wing, pool, titles, savedLit }: { wing: Wing; pool: Question[]; 
           />
         </div>
       ) : null}
-    </>
+    </div>
   );
 }
 
@@ -154,6 +155,7 @@ export default function WingScreen({ params }: { params: Record<string, string> 
   }, [wing]);
   const savedLit = saved && wing && saved.wing === wing.id ? saved.lit : null;
 
+  const print = wing ? wingPrint(wing) : undefined;
   if (!wing) {
     return (
       <section className="page squared">
@@ -164,12 +166,15 @@ export default function WingScreen({ params }: { params: Record<string, string> 
     );
   }
   return (
-    <section className="castle-board grain" aria-labelledby="wing-title">
+    <section className="castle-board castle-board--wing grain" style={{ '--wing': wingLook(wing.id).colour } as CSSProperties} aria-labelledby="wing-title">
       <div className="wing__head">
         <StripHeading id="wing-title" lines={[{ text: wing.name, tone: 'paper', tilt: -2 }]} className="castle__title" />
         <Link to="/castle" className="wing__back">
           Back to the castle
         </Link>
+        {print ? (
+          <Print className="wing__landmark" src={print.src} alt={print.alt} width={200} tilt={4} tape={[{ left: '36%', width: 80, tilt: -5, tone: 'yellow' }]} />
+        ) : null}
       </div>
       {pool.status === 'ready' && savedLit !== null ? (
         <Play key={`${wing.id}-${savedLit}`} wing={wing} pool={pool.pool} titles={pool.titles} savedLit={savedLit} />

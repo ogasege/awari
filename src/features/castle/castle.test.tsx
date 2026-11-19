@@ -1,4 +1,4 @@
-import { render, screen, waitFor, within } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { readFileSync, readdirSync } from 'node:fs';
 import { beforeEach, describe, expect, it } from 'vitest';
@@ -61,10 +61,12 @@ describe('The Castle from the committed packs (06-castle)', () => {
     await waitFor(() => expect(getProgress().castle['africa']).toBe(12));
   });
 
-  it('shows each wing at the gate with its lit rooms in words', async () => {
+  it('shows each wing as a room on the floor plan, a link with its lit rooms in words', async () => {
     render(<CastleScreen />);
-    const africa = (await screen.findByRole('heading', { name: 'The Africa wing' })).closest('section') as HTMLElement;
-    expect(within(africa).getByText('0 of 12 rooms lit')).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'The Electricity wing' })).toBeInTheDocument();
+    const africa = await screen.findByRole('link', { name: 'The Africa wing: 0 of 12 rooms lit' });
+    expect(africa).toHaveAttribute('href', '/castle/africa');
+    expect(screen.getByRole('link', { name: 'The Electricity wing: 0 of 12 rooms lit' })).toHaveAttribute('href', '/castle/electricity');
+    // Sixteen rooms, each with its own colour (28-every-screen-like-home task 5).
+    expect(screen.getAllByRole('link', { name: /wing: / })).toHaveLength(16);
   });
 });
