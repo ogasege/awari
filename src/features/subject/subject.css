@@ -218,3 +218,355 @@
 .subjects-intro {
   margin-bottom: 40px;
 }
+
+/* ------------------------------------------------------------------------------------------------------------------
+ * 28-every-screen-like-home task 4: Subjects is Home's "Step into a subject" at full size, and each Subject is a
+ * board with a hero collage, labelled clusters of prints in varied sizes, and quiz progress as drawn stamps.
+ * ---------------------------------------------------------------------------------------------------------------- */
+.subjects-page {
+  background:
+    radial-gradient(rgb(46 13 0 / 0.08) 1.3px, transparent 1.5px) 0 0 / 20px 20px,
+    var(--coral);
+  color: var(--coral-ink);
+  min-height: calc(100vh - 94px);
+  padding: 36px var(--gutter) 72px;
+}
+
+.subjects-page__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px 40px;
+  margin-bottom: 30px;
+}
+
+.subjects-page .subjects-intro {
+  margin: 0 0 10px;
+}
+
+.subjects-table__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 18px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.subjects-table__item {
+  position: relative;
+  display: grid;
+  justify-items: start;
+  gap: 4px;
+  max-width: 340px;
+}
+
+.subjects-table__item--1 {
+  margin-top: 46px;
+}
+
+.subjects-table__item--2 {
+  margin-top: 14px;
+  margin-left: -16px;
+}
+
+.subjects-table__item--3 {
+  margin-top: 60px;
+}
+
+.subjects-table__ask {
+  margin: 8px 0 0 6px;
+  font-size: 27px;
+  line-height: 1.1;
+  color: var(--navy);
+  rotate: -2deg;
+  max-width: 280px;
+}
+
+.subjects-table__count {
+  margin: 0 0 0 8px;
+  font-weight: 800;
+  font-size: 15px;
+}
+
+/* A subject board. */
+.subject--space .subject__board {
+  background: var(--navy);
+}
+
+.subject--wildlife .subject__board,
+.subject--ancient .subject__board {
+  background: #1e5a3a;
+}
+
+.subject--earth .subject__board,
+.subject--inventions .subject__board {
+  background: #7a3b1d;
+}
+
+.subject--body .subject__board,
+.subject--arts .subject__board {
+  background: #8a2f4d;
+}
+
+.hero-collage {
+  position: relative;
+  z-index: 2;
+  min-height: 300px;
+  margin-bottom: -110px;
+}
+
+.hero-collage__a {
+  position: relative;
+  z-index: 2;
+  margin-left: auto;
+}
+
+.hero-collage__b {
+  position: absolute !important;
+  z-index: 3;
+  left: -20px;
+  bottom: 8px;
+}
+
+.hero-collage__c {
+  position: absolute !important;
+  z-index: 1;
+  left: 60px;
+  top: -14px;
+}
+
+.hero-collage__note {
+  position: absolute;
+  z-index: 4;
+  right: 100%;
+  top: 0;
+  width: 230px;
+  margin-right: 20px;
+}
+
+/* Clusters of prints with a handwritten label each. */
+.subject__paper {
+  background:
+    radial-gradient(rgb(0 96 110 / 0.07) 1.2px, transparent 1.4px) 0 0 / 22px 22px,
+    var(--paper);
+}
+
+.clusters {
+  display: grid;
+  gap: 54px;
+  margin-top: 24px;
+}
+
+.cluster {
+  position: relative;
+}
+
+.subject .cluster__label {
+  display: inline-block;
+  margin: 0 0 22px;
+  padding: 2px 16px 0;
+  font-family: var(--font-hand);
+  font-size: 38px;
+  font-weight: 400;
+  background: var(--yellow);
+  color: var(--ink);
+  rotate: -1.5deg;
+  clip-path: polygon(0 5%, 4% 0, 96% 3%, 100% 0, 99% 96%, 95% 100%, 5% 97%, 0 100%);
+}
+
+.cluster--1 .cluster__label {
+  background: #d4eef1;
+  rotate: 1deg;
+}
+
+.cluster--2 .cluster__label {
+  background: #ffd9cc;
+  rotate: -0.6deg;
+}
+
+.cluster__count {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.cluster__prints {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 8px 4px;
+  margin: 0;
+  padding: 0 0 0 10px;
+  list-style: none;
+}
+
+.cluster__item {
+  position: relative;
+  margin-right: -10px;
+}
+
+.cluster__item--1 {
+  margin-top: 26px;
+}
+
+.cluster__item--2 {
+  margin-top: 8px;
+}
+
+.cluster__item--3 {
+  margin-top: 40px;
+}
+
+.cluster__item--5 {
+  margin-top: 18px;
+}
+
+.cluster__done {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  z-index: 3;
+  padding: 0 8px;
+  background: var(--yellow);
+  color: var(--ink);
+  font-size: 20px;
+  rotate: 6deg;
+}
+
+/* The countries as continent stamp sheets. */
+.country-sheets {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 540px), 1fr));
+  gap: 28px;
+  margin-top: 24px;
+}
+
+.country-sheet {
+  min-width: 0;
+  padding: 18px 22px 22px;
+  background: var(--cream);
+  box-shadow: 0 14px 26px rgb(16 24 40 / 0.2);
+}
+
+.country-sheet:nth-child(odd) {
+  rotate: -0.5deg;
+}
+
+.country-sheet:nth-child(even) {
+  rotate: 0.5deg;
+}
+
+.subject .country-sheet__title {
+  margin: 0 0 12px;
+  font-size: 28px;
+}
+
+.country-sheet__title .hand {
+  margin-left: 8px;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--teal-ink);
+}
+
+.country-sheet__stamps {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+  gap: 12px 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.country-sheet__stamps li {
+  min-width: 0;
+}
+
+.country-sheet__stamps .stamp {
+  width: 100%;
+  max-width: 118px;
+  --u: 0.55px;
+}
+
+.country-sheet__more {
+  margin-top: 16px;
+}
+
+@media (max-width: 899px) {
+  .subjects-page {
+    padding-top: 22px;
+  }
+
+  .subjects-table__list {
+    justify-content: space-between;
+    gap: 6px 10px;
+  }
+
+  .subjects-table__item {
+    max-width: 48%;
+  }
+
+  .subjects-table__item--1,
+  .subjects-table__item--3 {
+    margin-top: 24px;
+  }
+
+  .subjects-table__item .print {
+    width: 100% !important;
+  }
+
+  .subjects-table__ask {
+    font-size: 21px;
+  }
+
+  .hero-collage {
+    min-height: 0;
+    margin-bottom: 0;
+  }
+
+  .hero-collage__a {
+    margin: 0 auto;
+    width: min(300px, 80vw) !important;
+  }
+
+  .hero-collage__b,
+  .hero-collage__c,
+  .hero-collage__note {
+    display: none;
+  }
+
+  .subject .cluster__label {
+    font-size: 30px;
+  }
+
+  .cluster__prints {
+    justify-content: space-between;
+    padding-left: 0;
+  }
+
+  .cluster__item {
+    margin-right: 0;
+    width: 47%;
+  }
+
+  .cluster__item .print {
+    width: 100% !important;
+  }
+}
+
+.hero-collage__note a,
+.hero-collage__note a:visited {
+  color: var(--yellow);
+  text-decoration: none;
+}
+
+.hero-collage__note a:hover,
+.hero-collage__note a:focus-visible {
+  text-decoration: underline wavy var(--yellow);
+}
+
+.subject__stamps span {
+  min-width: 22px;
+  min-height: 22px;
+}

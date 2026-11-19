@@ -31,8 +31,8 @@ describe('paper furniture on /subjects, /stamps and /quiz', () => {
     expect(container.querySelector('.strip-heading .strip')).not.toBeNull();
     expect(container.querySelector('.margin-note')?.textContent?.trim().length).toBeGreaterThan(10);
     // Every subject is its own cover print with tape (22-review-3 Req 4).
-    expect(container.querySelectorAll('.subject-print .print img').length).toBeGreaterThanOrEqual(10);
-    expect(container.querySelectorAll('.subject-print .print .tape').length).toBeGreaterThanOrEqual(10);
+    expect(container.querySelectorAll('.subjects-table__item .print img').length).toBeGreaterThanOrEqual(10);
+    expect(container.querySelectorAll('.subjects-table__item .print .tape').length).toBeGreaterThanOrEqual(10);
   });
 
   it('/stamps', async () => {

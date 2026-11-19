@@ -1,4 +1,5 @@
 import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { readFileSync } from 'node:fs';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { BUNDLED_PACKS, SUBJECTS, SUBJECT_PACKS } from '../../lib/packs/subjects.ts';
@@ -46,11 +47,12 @@ describe('subject packs and pages (15-subject-packs)', () => {
 
   it('Property 4: the page lists exactly the articles of the pack. _Req 2.1, 2.2_', async () => {
     render(<SubjectPage id="wildlife" />);
-    const wall = (await screen.findByRole('status')).nextElementSibling as HTMLElement;
-    const links = within(wall).getAllByRole('link');
+    // The articles sit in labelled clusters (28-every-screen-like-home task 4): every article once, none left out.
+    const board = (await screen.findByRole('status')).nextElementSibling as HTMLElement;
+    const links = within(board).getAllByRole('link');
     const items = index('wildlife').items;
     expect(links).toHaveLength(items.length);
-    expect(links.map((a) => a.getAttribute('href'))).toEqual(items.map((i) => `/article/wildlife/${i.id}`));
+    expect(links.map((a) => a.getAttribute('href')).sort()).toEqual(items.map((i) => `/article/wildlife/${i.id}`).sort());
     expect(screen.getByRole('link', { name: 'Visit the castle wing' })).toHaveAttribute('href', '/castle/wildlife');
     expect(screen.getByRole('link', { name: 'See it on the timeline' })).toHaveAttribute('href', '/timeline?subject=wildlife');
     expect(screen.getByRole('link', { name: 'Take a quiz' })).toHaveAttribute('href', '/quizzes#quizzes-wildlife');
@@ -59,7 +61,9 @@ describe('subject packs and pages (15-subject-packs)', () => {
   it('shows Countries by continent, and says so in words for an unknown subject. _Req 2.3_', async () => {
     const { unmount } = render(<SubjectPage id="countries" />);
     expect(await screen.findByRole('heading', { name: /^Oceania/ })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Nigeria' })).toHaveAttribute('href', '/article/countries/nigeria');
+    // Each continent's stamp sheet shows its first stamps, and "Show all" opens the rest.
+    await userEvent.click(screen.getByRole('button', { name: /Show all \d+ in Africa/ }));
+    expect(screen.getByRole('link', { name: /Nigeria/ })).toHaveAttribute('href', '/article/countries/nigeria');
     unmount();
     render(<SubjectPage id="nothing" />);
     expect(screen.getByRole('alert')).toHaveTextContent('There is no subject called “nothing”');
