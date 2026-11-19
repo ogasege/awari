@@ -199,10 +199,11 @@
 }
 
 /* A photographic print pinned to the top right of a page (21-review-2 Req 16).
-   On a phone it sits under the heading instead. */
+   On a phone it sits under the heading instead. Clears the translucent header, which overlaps the top
+   of the page by design; the print must never tuck under it (28, found while shooting the Stamp book). */
 .print.page-print {
   position: absolute;
-  top: 28px;
+  top: 66px;
   right: var(--gutter);
   z-index: 1;
 }

@@ -112,3 +112,18 @@ Never write the banned product name (`npm run rules`). Keep `docs/kiro-evidence/
   later video-recording note explicitly names Pictures as still looking old and says to do it before Stamp book/Tours/Search;
   treating that later, more specific note as the current instruction and redesigning Pictures (not Credits, which no note
   mentions). Read docs/design-pass.md once more first in case anything was appended.
+- R5 04:45 WAT 19 Nov: Pictures DONE (67fac83). Scope note: requirements.md Req 2.6 said "Pictures and Credits keep their
+  current design", but the owner's video-recording note (docs/design-pass.md, "Seen while recording the demo video") names
+  Pictures by name as still looking old and says to do it before Stamp book/Tours/Search; treated that later, more specific
+  note as current and redesigned Pictures only (not Credits, which no note names). The screen already had a coral photo
+  table with tilted prints (from an earlier round); the one real gap against Req 1.1/1.2 was a uniform 6-up grid of
+  same-size tiles. Fixed with a CSS grid masonry (`grid-auto-rows` + `grid-row: span N`), three tile sizes (`tile--small`,
+  `tile--mid`, `tile--big`) picked by `tableSize(i)` (one big in six, one small in six), applied to both the main table and
+  the surprise pile; image heights scale with size (100/130/190px). No change to filtering, search, pagination, the "show
+  more" button or the offline fallback for pictures not yet saved. Gates: tsc clean, eslint 0, 663 tests pass,
+  submission-check PASS, offline-check PASS (20 steps, incl. "Pictures seen online show offline" and "The Pictures screen
+  opens offline and filters"). Shots in design-pass/after. desktop-check not run (sandbox). REDEPLOY NOW.
+  NEXT: Castle, Timeline, Pictures are all done — the owner's video-order list is clear. Read docs/design-pass.md once more
+  (nothing new waiting beyond the deferred Subjects polish items) then move to the "second wave" named in
+  .kiro/specs/28-every-screen-like-home/tasks.md task 5: Stamp book, Tours, Search, Atlas, Not found (own table colour,
+  varied sizes, no uniform grid, same gates, shots, commit per screen or pair, REDEPLOY NOW after every two).

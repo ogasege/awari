@@ -1,4 +1,17 @@
-/* The stamp book screen (08-stamp-book). */
+/* The stamp book screen (08-stamp-book, redesigned 28 Req 2.6: its own parchment album band). */
+.stamp-book {
+  position: relative;
+  background: var(--cream);
+  color: var(--ink);
+  margin: calc(-1 * var(--gutter)) calc(-1 * var(--gutter)) 0;
+  padding: var(--gutter);
+  padding-bottom: 56px;
+}
+
+.stamp-book a:not(.stamp):not(.stamp-book__continent) {
+  color: var(--teal-ink);
+}
+
 .stamp-book__count {
   max-width: 620px;
   font-size: 22px;
@@ -7,11 +20,13 @@
 .stamp-book__note {
   max-width: 420px;
   margin: 4px 0 8px;
+  color: var(--teal-ink) !important;
 }
 
 .stamp-book h2 {
   margin: 36px 0 16px;
   font-size: 34px;
+  color: var(--ink);
 }
 
 .stamp-book__empty {
@@ -19,14 +34,16 @@
 }
 
 .stamp-book__empty a {
-  color: var(--teal);
+  color: var(--teal-ink);
   font-weight: 700;
 }
 
+/* Latest stamps: three sizes so the row is not a uniform grid (28 Req 1.1, 1.2). */
 .stamp-book__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
-  gap: 26px 22px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 24px 20px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -34,7 +51,18 @@
 
 .stamp-book__grid .stamp {
   width: 100%;
-  max-width: 190px;
+}
+
+.stamp-book__grid li {
+  flex: 0 0 170px;
+}
+
+.stamp-book__grid li:first-child {
+  flex-basis: 230px;
+}
+
+.stamp-book__grid li:nth-child(4) {
+  flex-basis: 140px;
 }
 
 .stamp-book__empty-slot {
@@ -95,11 +123,6 @@
   font-size: 26px;
   font-weight: 800;
   color: var(--teal);
-}
-
-/* Plain links on the stamp pages use the teal ink, not the browser's blue (review N8). */
-.stamp-book a:not(.stamp):not(.stamp-book__continent) {
-  color: var(--teal-ink);
 }
 
 /* Stamp sheets, shared by the stamp book and the Atlas (22-review-3 Req 5, 6). */
