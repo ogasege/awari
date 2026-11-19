@@ -16,9 +16,6 @@ import { unsuitableTopic } from '../../lib/text/suitability.ts';
 import { galleryFor } from '../media/ArticleGallery.tsx';
 import { relatedQuizzes } from '../quiz/related.ts';
 
-/** How many library pictures are taped in between sections; the rest stay in the "More pictures" strip. */
-export const TAPED = 4;
-
 /** The article's library pictures (minus the lead photo), for taping in and for the strip. */
 export function useArticlePictures(article: Article): MediaItem[] {
   const key = `${article.pack}/${article.id}`;
@@ -31,10 +28,9 @@ const SIZES = [300, 240, 270, 220];
 const TILTS = [-3, 2.5, -2, 3];
 
 /** One picture taped onto the page between sections; left out if it cannot load (offline and not saved). */
-export function TapedPicture({ item, index }: { item: MediaItem; index: number }) {
+export function TapedPicture({ item, index, side }: { item: MediaItem; index: number; side: 'left' | 'right' }) {
   const [gone, setGone] = useState(false);
   if (gone) return null;
-  const side = index % 2 ? 'right' : 'left';
   return (
     <figure className={`taped taped--${side}`} style={{ width: SIZES[index % SIZES.length], rotate: `${TILTS[index % TILTS.length]}deg` }}>
       <Tape left={side === 'left' ? '30%' : '40%'} width={90} tilt={index % 2 ? 6 : -6} tone={index % 3 ? 'clear' : 'yellow'} />
@@ -70,19 +66,66 @@ export function didYouKnow(sections: readonly ArticleSection[], proofs: readonly
   return Array.from({ length: count }, (_, i) => pool[Math.round(i * step)] as string);
 }
 
-export function DidYouKnow({ notes }: { notes: readonly string[] }) {
-  if (notes.length === 0) return null;
+/** One sticky note: in the right-hand column on a wide screen, between sections on a phone (28, owner feedback). */
+export function StickyNote({ text, index, where }: { text: string; index: number; where: 'inline' | 'side' }) {
   return (
-    <section className="dyk" aria-label="Did you know?">
-      {notes.map((n, i) => (
-        <figure key={n} className={`dyk__note dyk__note--${i % 3}`}>
-          <span aria-hidden="true" className="dyk__pin" />
-          <p className="dyk__kicker hand">Did you know?</p>
-          <blockquote>{n}</blockquote>
-        </figure>
-      ))}
-    </section>
+    <figure className={`dyk__note dyk__note--${index % 3} dyk__note--${where}`}>
+      <span aria-hidden="true" className="dyk__pin" />
+      <p className="dyk__kicker hand">Did you know?</p>
+      <blockquote>{text}</blockquote>
+    </figure>
   );
+}
+
+const STOP = new Set(
+  'the and with from that this near view photo picture image taken during between about into over under their there which while where after before other some more most also very just than then them they these those were was are for but not all can has have had its his her one two three four five six seven eight nine ten many much first second new old big small large long short high low area part city town village people'.split(' '),
+);
+
+/** The words of a caption that could tie it to a section: four letters or more, not filler, not the article's own title. */
+function captionWords(caption: string, title: string): string[] {
+  const own = new Set(title.toLowerCase().match(/\p{L}{4,}/gu) ?? []);
+  return [...new Set(caption.toLowerCase().match(/\p{L}{4,}/gu) ?? [])].filter((w) => !STOP.has(w) && !own.has(w));
+}
+
+/**
+ * Which picture goes beside which section: a picture sits in a section only when one of its caption words (not the
+ * article's own name) appears in that section's heading or text, so a dam never lands in the history of the slave
+ * trade. A picture with no such section stays in the strip at the end (28-every-screen-like-home, owner feedback).
+ * One picture per section; the best match first.
+ */
+export function placePictures(article: Pick<Article, 'title' | 'sections'>, pictures: readonly MediaItem[]): Map<number, MediaItem> {
+  // Whole words only: "resident" is not in "president".
+  const text = article.sections.map((s) => new Set(`${s.heading} ${s.paragraphs.join(' ')}`.toLowerCase().match(/\p{L}{4,}/gu) ?? []));
+  const options: Array<{ si: number; pi: number; score: number }> = [];
+  pictures.forEach((m, pi) => {
+    const words = captionWords(m.caption, article.title);
+    for (let si = 1; si < article.sections.length; si += 1) {
+      const heading = new Set((article.sections[si]?.heading ?? '').toLowerCase().match(/\p{L}{4,}/gu) ?? []);
+      const score = words.reduce((n, w) => n + (text[si]?.has(w) ? 1 : 0) + (heading.has(w) ? 2 : 0), 0);
+      if (score > 0) options.push({ si, pi, score });
+    }
+  });
+  options.sort((x, y) => y.score - x.score || x.si - y.si || x.pi - y.pi);
+  const placed = new Map<number, MediaItem>();
+  const used = new Set<number>();
+  for (const o of options) {
+    if (placed.has(o.si) || used.has(o.pi)) continue;
+    placed.set(o.si, pictures[o.pi] as MediaItem);
+    used.add(o.pi);
+  }
+  return placed;
+}
+
+/** Spreads the sticky notes through the article: note k goes beside section 1 + floor((k + 0.5) / n * (sections - 1)). */
+export function spreadNotes(notes: readonly string[], sectionCount: number): Map<number, string> {
+  const out = new Map<number, string>();
+  if (sectionCount < 2) return out;
+  notes.forEach((n, k) => {
+    let si = 1 + Math.floor(((k + 0.5) / notes.length) * (sectionCount - 1));
+    while (out.has(si) && si < sectionCount - 1) si += 1;
+    if (!out.has(si)) out.set(si, n);
+  });
+  return out;
 }
 
 /** "Keep exploring": three related articles as overlapping prints, and the quiz as a ticket. */

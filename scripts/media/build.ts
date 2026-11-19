@@ -18,7 +18,7 @@ import { pinLead } from './leads.ts';
 import { readRecords } from './licences.ts';
 import { MIN_PER_ARTICLE, commonsTitle, keepFor, kindOf, qualityOf, selectForArticle, subjectOf, type Kind } from './select.ts';
 import { IMG_DIR, ensureThumb, folderBytes, thumbName } from './thumbs.ts';
-import { unsuitableTopic } from '../../src/lib/text/suitability.ts';
+import { unsuitableCaption, unsuitableTopic } from '../../src/lib/text/suitability.ts';
 
 const CANDIDATES = join('data', 'media', 'candidates');
 const OUT = join('public', 'media');
@@ -204,7 +204,7 @@ async function records(): Promise<void> {
       const meta = await sharp(join(IMG_DIR, file)).metadata();
       if (!cap) continue; // selection already drops these; a file with nothing honest to say is not listed
       // A caption about alcohol, drugs, violence, sex or suicide is not shown to a child (26-final-review N-2).
-      if (unsuitableTopic(`${cap.text} ${c.description ?? ''}`)) continue;
+      if (unsuitableCaption(`${cap.text} ${c.description ?? ''}`)) continue;
       // The same caption twice in one subject reads as the same picture twice in the grid.
       const capKey = `${saved.article.pack}|${cap.text.toLowerCase()}`;
       if (captionsInPack.has(capKey)) continue;

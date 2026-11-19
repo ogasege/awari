@@ -189,3 +189,59 @@ the stamp sheets with photographs. Small things:
   ten piles sit across the whole table in rows of four, three and three with offsets; the note and both buttons sit
   beside the quiz of the day. Each pile is one button that lifts on hover and reads "Open the Wildlife pile, 30 quizzes"
   to a screen reader; the visible line is "30 quizzes".
+
+### Article scrapbook, commits 0a9b6ac and 9fe6f02 (looked at 19 Nov 00:25 UTC, the `after/` shots)
+
+The top of the spread passes: title strips, the two taped prints, the index-card facts with the
+country outline, the sticky notes, the word slip, the ticket at the bottom. The lower two thirds
+do not pass yet. Open boxes, most important first:
+
+- [x] **The right half of the page is empty from the second section down.** On Nigeria at 1440 the
+      side column ends about 1,400 px down and the remaining 4,000 px is one 600 px text column
+      beside blank paper. Spread the side pieces down the whole article: one sticky note or margin
+      note beside each section, the word slip lower, and prints on alternating sides.
+- [x] **Three or four sections in a row have no picture** (Natural resources, Cuisine, Sport on
+      Nigeria) while six unused pictures sit in the "More pictures" strip at the bottom. Put one
+      taped print in every section that has a suitable picture and keep the strip for the rest.
+- [x] **Pictures do not match the section they sit in.** History (the slave trade) has a dam
+      ("The water flows from four openings"); "Communal conflicts" has a mountain view. Place a
+      picture in a section only when its caption shares a word with that section's heading or text;
+      otherwise put it in a neutral section (Geography, or the strip).
+- [x] **"In this article" is a plain pale panel with default blue underlined links.** It is the one
+      piece on the page a template could have made. Make it a paper slip (torn or taped, slightly
+      tilted) with the section names in ink colour as short tabs or a handwritten numbered list;
+      no default link blue anywhere on the page.
+- [x] **Unsuitable pictures in the Nigeria strip:** "Homicides by Nigerian state per year and per 1
+      million inhabitants" (a chart about killings) and "Dominant religion by state" (a chart, not
+      a photograph). Add both to the denylist and make the suitability scan reject captions with
+      homicide, murder, killings, deaths per; charts and maps of statistics do not belong in the
+      strip at all.
+- [x] **Prints with nothing in them.** In the shots five of six "More pictures" prints and all three
+      "Keep exploring" prints are empty rectangles. If that is only the screenshot being taken
+      before lazy pictures load, make the shot script scroll and wait; if a visitor can see it, fix
+      it (the prints must never show an empty frame for more than a moment).
+- [x] "São Tomé and Princ" is cut off on its print. Let a long name wrap onto two lines.
+- [x] The footer joins "Source · Licence" with a middle dot. Use a space or a comma.
+- [x] Phone (390): check that every taped print between sections is full width with its credit
+      readable, and that the sticky notes come between sections, not all in one pile at the end.
+- Done (19 Nov, main session): the right column is now a flex column the height of the article: facts card, sticky notes
+  spread down it, and the word slip, which stays in view as you scroll (sticky). Pictures are placed by `placePictures`:
+  one per section, only where a whole word of the caption appears in the section (heading counts double), never the
+  article's own name; the dam is no longer in History. The ones with no section stay in the strip. "In this article" is a
+  taped paper slip with ink links; no default blue on the article page. `unsuitableCaption` drops killings and charts or
+  maps of statistics (11 pictures, among them the two named) and is in `npm run suitability`. Footer reads "Source,
+  Licence". Prints in Keep exploring overlap with the first on top, so no caption is covered (the cut "Princ" was the next
+  print lying over it). The shot script now scrolls the page before shooting, so no frame is empty because of lazy loading.
+  Phone: pictures between sections at 82% width with credit, sticky notes between sections, none in a pile at the end.
+
+### Seen while recording the demo video on the live site (19 Nov 00:35 UTC, build c2b8a8b31365)
+
+- [ ] **A white page flashes between screens.** Going from the Castle to a wing shows a blank white
+      page that says "Opening the page…" for about half a second, then "Lighting the torches…" on a
+      half-painted page. On a video and on a slow phone that reads as broken. The route fallback
+      must keep the header and paint the table colour of the screen being opened (or of the screen
+      being left) with one handwritten line on it; never a white page.
+- [ ] The demo video shows these screens, in this order, so they are the ones a judge sees first:
+      Home, Atlas, Article, Quiz, Castle, Timeline, Pictures. Castle, Timeline, Pictures and the
+      lower half of Atlas are still the old look. After Subjects and Subject, do Castle, Timeline
+      and Pictures before Stamp book, Tours and Search.

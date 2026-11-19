@@ -1,0 +1,18 @@
+[
+ {"id":"01-title1","text":"In the nineties, a whole encyclopedia fit on one disc, and it worked with no internet. Today, many children share one phone and a patchy connection."},
+ {"id":"02-title2","text":"Awari brings the disc back: a free encyclopedia that keeps working when the internet does not."},
+ {"id":"03-home","text":"You explore it by place, by date, or by playing. Four hundred and eighty-three articles, every country, and more than three thousand pictures, all openly licensed."},
+ {"id":"04-atlas","text":"Spin the globe, and pick a country."},
+ {"id":"05-article","text":"Each article has pictures, quick facts, and a quiz. Tap any word to look it up."},
+ {"id":"06-quiz","text":"Every question has three hints. A wrong answer is a chance to look again. A right answer inks a stamp, and shows the sentence that proves it."},
+ {"id":"07-castle","text":"In the Castle, each answer lights the next door."},
+ {"id":"08-timeline","text":"The timeline walks through fifteen hundred dated events."},
+ {"id":"09-pictures","text":"And the picture library shows who made each picture, and its licence."},
+ {"id":"10-offline","text":"Now the connection drops. Articles, quizzes, the atlas and the castle all keep working, just like the disc did."},
+ {"id":"11-kiro-specs","text":"I built Awari with Kiro Crew. Every session began from steering files and specs."},
+ {"id":"12-kiro-steering","text":"Steering loaded the design rules before any code was written."},
+ {"id":"13-kiro-hooks","text":"Agent hooks ran lint, tests and licence checks after every change."},
+ {"id":"14-kiro-crew","text":"Custom crew members, a design reviewer and a licence auditor, checked the work independently."},
+ {"id":"15-kiro-tests","text":"Twenty-eight specs and more than six hundred tests guard the rules that matter."},
+ {"id":"16-end","text":"Awari. Discovery, for everyone."}
+]

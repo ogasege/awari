@@ -3,7 +3,7 @@
  * lead print on the board, straight reading column on white paper,
  * margin notes, facts card, word side card and full credits.
  */
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, navigate } from '../../app/navigation.tsx';
 import { useTitle } from '../../app/useTitle.ts';
 import { Button, MarginNote, Print, StripHeading, TornEdge } from '../../design/paper.tsx';
@@ -21,7 +21,7 @@ import { WordCard } from './WordCard.tsx';
 import { errorWords, useWikiArticle } from './useWikiArticle.ts';
 import { TourBar } from '../tours/TourBar.tsx';
 import { CountryOutline, useShapes } from '../stamps/CountryOutline.tsx';
-import { DidYouKnow, KeepExploring, TAPED, TapedPicture, didYouKnow, useArticlePictures } from './scrapbook.tsx';
+import { KeepExploring, StickyNote, TapedPicture, didYouKnow, placePictures, spreadNotes, useArticlePictures } from './scrapbook.tsx';
 import './article.css';
 
 
@@ -111,13 +111,15 @@ function ArticleView({ article, photoSrc }: { article: Article; photoSrc?: strin
   const proofs = facts.map((n) => n.proof as string);
   const isCountry = article.pack === 'countries';
   const pictures = useArticlePictures(article);
-  const taped = useMemo(() => pictures.slice(0, Math.min(TAPED, Math.max(0, article.sections.length - 1))), [pictures, article.sections.length]);
+  const placed = useMemo(() => placePictures(article, pictures), [article, pictures]);
+  const placedIds = useMemo(() => new Set([...placed.values()].map((m) => m.id)), [placed]);
   // One more library picture overlaps the lead print on the board, so the first screen has prints of two sizes.
-  const second = pictures[taped.length];
+  const second = pictures.find((m) => !placedIds.has(m.id));
   const notes = useMemo(
     () => didYouKnow(article.sections, article.notes.filter((n) => n.kind === 'fact' && n.proof).map((n) => n.proof as string)),
     [article.sections, article.notes],
   );
+  const noteAt = useMemo(() => spreadNotes(notes, article.sections.length), [notes, article.sections.length]);
   const quizTo = `/quiz/${article.pack}/${article.pack === 'wiki' ? wikiSlug(article) : article.id}`;
 
   useEffect(() => {
@@ -179,9 +181,18 @@ function ArticleView({ article, photoSrc }: { article: Article; photoSrc?: strin
           sections={article.sections}
           proofs={proofs}
           onWord={onWord}
-          between={taped.map((m, i) => (
-            <TapedPicture key={m.id} item={m} index={i} />
-          ))}
+          between={article.sections.slice(1).map((_, k) => {
+            const si = k + 1;
+            const pic = placed.get(si);
+            const note = noteAt.get(si);
+            const picSide = [...placed.keys()].filter((x) => x < si).length % 2 ? 'right' : 'left';
+            return (
+              <Fragment key={si}>
+                {pic ? <TapedPicture item={pic} index={si} side={picSide} /> : null}
+                {note ? <StickyNote text={note} index={si} where="inline" /> : null}
+              </Fragment>
+            );
+          })}
         />
         <div className="article__side">
           {facts.length > 0 ? (
@@ -194,12 +205,14 @@ function ArticleView({ article, photoSrc }: { article: Article; photoSrc?: strin
             </div>
           ) : null}
           {isCountry ? <FactsCard id={article.id} /> : null}
-          <DidYouKnow notes={notes} />
+          {notes.map((n, i) => (
+            <StickyNote key={n} text={n} index={i} where="side" />
+          ))}
           <WordCard tap={tap} />
         </div>
       </div>
 
-      {article.pack !== 'wiki' ? <ArticleGallery articleKey={`${article.pack}/${article.id}`} leadCredit={lead?.credit.name} skip={taped.length} /> : null}
+      {article.pack !== 'wiki' ? <ArticleGallery articleKey={`${article.pack}/${article.id}`} leadCredit={lead?.credit.name} skip={0} exclude={placedIds} /> : null}
       {article.pack !== 'wiki' ? <KeepExploring article={article} quizTo={quizTo} /> : null}
 
       <footer className="page-footer">
@@ -208,8 +221,8 @@ function ArticleView({ article, photoSrc }: { article: Article; photoSrc?: strin
             {c.text}{' '}
             <a href={c.source.url} rel="noreferrer">
               Source
-            </a>{' '}
-            ·{' '}
+            </a>
+            {', '}
             <a href={c.source.licenceUrl} rel="noreferrer">
               Licence
             </a>

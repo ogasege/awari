@@ -32,3 +32,19 @@ export function unsuitableTopic(text: string): string | null {
  * not. The general rule above would also catch "the naked eye", same-sex marriage and book titles.
  */
 export const ARTICLE_UNSUITABLE = /\b(abortion|rape|raped|raping|prostitut\w*|sexual (favou?rs|violence|abuse|slavery)|sex scandal|kill her child)\b/i;
+
+/**
+ * A picture caption that must not reach a child's picture strip (28-every-screen-like-home, owner feedback 19 Nov):
+ * anything `unsuitableTopic` finds, killings and violent-death statistics ("Homicides by Nigerian state per year"),
+ * and charts or maps of statistics, which are not photographs ("Dominant religion by state").
+ */
+export const CAPTION_KILLINGS = /\b(homicides?|murders?|murdered|killings|deaths? per)\b/i;
+export const CAPTION_STATISTICS = /\b(chart|graph|statistics?|per (year|capita|million|thousand|1,?000)|by (state|region|province|county|district|country)|percentage of|population density|dominant religion)\b/i;
+
+export function unsuitableCaption(text: string): string | null {
+  const topic = unsuitableTopic(text);
+  if (topic) return topic;
+  if (CAPTION_KILLINGS.test(text)) return 'killings';
+  if (CAPTION_STATISTICS.test(text)) return 'a chart or map of statistics';
+  return null;
+}
