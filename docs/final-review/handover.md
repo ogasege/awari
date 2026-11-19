@@ -98,3 +98,17 @@ Never write the banned product name (`npm run rules`). Keep `docs/kiro-evidence/
   NEXT: read docs/design-pass.md owner feedback (none new for Castle), then Timeline, then Pictures (owner's video-recording
   note says do these before Stamp book/Tours/Search); Pictures/Media requirements.md originally said "keep current design"
   for Pictures and Credits — re-check that note against the newer instruction before assuming scope has changed.
+- R5 04:20 WAT 19 Nov: Timeline DONE (416f4f9): its own full-bleed mist band; the title strips overlap the yellow banner;
+  "On this day" is a torn tear-off calendar card (tape, reusing the cutPolygon look from Home's OnThisDay.tsx) beside the
+  intro text instead of a plain panel; the century ruler is unchanged (it was already hand-drawn); the event wall is a
+  flex-wrap of three note sizes with a red pin and alternating tilt, not a uniform grid. Fixed a bug the after-shot caught:
+  at phone width `.timeline__intro-copy` kept `flex: 1 1 420px` after the intro switched to a column, so 420px of empty
+  space sat under the lead paragraph; added `.timeline__intro-copy { flex: none }` in the phone media query. Fixed a test
+  that broke when `.timeline__today` (a `<section>`) became `.tl-calendar` (first written as a `<div>`, which let
+  `.closest('section')` escape to the page and pick up the century-chip list items): made `.tl-calendar` a `<section>`.
+  Gates: tsc clean, eslint 0, 663 tests pass, submission-check PASS, offline-check PASS (20 steps, incl. "Timeline lists
+  events" and "The timeline filters by continent"). Shots in design-pass/after. desktop-check not run (sandbox). REDEPLOY NOW.
+  NEXT: Pictures/Media — the spec's requirements.md says "Pictures and Credits keep their current design", but the owner's
+  later video-recording note explicitly names Pictures as still looking old and says to do it before Stamp book/Tours/Search;
+  treating that later, more specific note as the current instruction and redesigning Pictures (not Credits, which no note
+  mentions). Read docs/design-pass.md once more first in case anything was appended.

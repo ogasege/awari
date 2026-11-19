@@ -45,13 +45,19 @@ export function surprise(rows: readonly IndexRow[], count: number, random: () =>
   return out;
 }
 
-function Tile({ row, tilt, onOpen, onFail, onLoad }: { row: IndexRow; tilt: number; onOpen: () => void; onFail?: (id: string) => void; onLoad?: () => void }) {
+function Tile({ row, tilt, size, onOpen, onFail, onLoad }: { row: IndexRow; tilt: number; size?: 'small' | 'mid' | 'big'; onOpen: () => void; onFail?: (id: string) => void; onLoad?: () => void }) {
   return (
-    <button type="button" className="tile lift" style={{ rotate: `${tilt}deg` }} onClick={onOpen}>
+    <button type="button" className={`tile lift${size ? ` tile--${size}` : ''}`} style={{ rotate: `${tilt}deg` }} onClick={onOpen}>
       <SafeImg src={thumbUrl(`img/${row[0]}.webp`)} alt={row[5]} width={row[3]} height={row[4]} loading="lazy" decoding="async" onLoad={onLoad} onFail={() => onFail?.(row[0])} />
       <span className="tile__cap hand">{row[5]}</span>
     </button>
   );
+}
+
+/** A size for the photo table so it is not a uniform grid (28 Req 1.1, 1.2): one big print in every six, one small. */
+function tableSize(i: number): 'small' | 'mid' | 'big' {
+  const m = i % 6;
+  return m === 0 ? 'big' : m === 3 ? 'small' : 'mid';
 }
 
 export default function MediaScreen() {
@@ -168,7 +174,7 @@ export default function MediaScreen() {
           <h2>A surprise pile</h2>
           <div className="media__grid">
             {pile.map((r, i) => (
-              <Tile key={r[0]} row={r} tilt={[-3, 2, -1.5, 3][i % 4] ?? 0} onOpen={() => setOpen(r[0])} />
+              <Tile key={r[0]} row={r} tilt={[-3, 2, -1.5, 3][i % 4] ?? 0} size={tableSize(i)} onOpen={() => setOpen(r[0])} />
             ))}
           </div>
         </section>
@@ -187,7 +193,7 @@ export default function MediaScreen() {
         <TornEdge color="var(--coral)" seed="media-top" height={26} />
         <div className="media__grid">
           {matches.slice(0, shown).map((r, i) => (
-            <Tile key={r[0]} row={r} tilt={[-1.5, 1, -0.6, 1.4][i % 4] ?? 0} onOpen={() => setOpen(r[0])} onFail={onFail} onLoad={() => setLoadedAny(true)} />
+            <Tile key={r[0]} row={r} tilt={[-1.5, 1, -0.6, 1.4][i % 4] ?? 0} size={tableSize(i)} onOpen={() => setOpen(r[0])} onFail={onFail} onLoad={() => setLoadedAny(true)} />
           ))}
         </div>
       </div>
