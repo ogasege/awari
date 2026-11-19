@@ -519,3 +519,154 @@
 .shelf-sheet__more {
   margin-top: 16px;
 }
+
+/* Owner feedback 18 Nov 23:40: no hyphen inside handwriting; the ten piles spread across the whole table in rows of
+   four, three and three with offsets; the note beside the buttons; the whole pile lifts as one control. */
+.shelf-table__note,
+.shelf-table__note * {
+  hyphens: none;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+@media (min-width: 900px) {
+  .shelf-table {
+    grid-template-columns: minmax(300px, 400px) minmax(0, 1fr);
+    grid-template-areas:
+      'today note'
+      'piles piles';
+    align-items: center;
+    gap: 10px 56px;
+  }
+
+  .shelf-table__note {
+    align-self: end;
+    max-width: 560px;
+    margin-bottom: 104px;
+    font-size: 34px;
+  }
+
+  .shelf-today__note {
+    right: auto;
+    left: calc(100% + 24px);
+    top: 30%;
+  }
+
+  .shelf-today__actions {
+    position: absolute;
+    left: calc(100% + 56px);
+    bottom: 18px;
+    margin: 0;
+    flex-wrap: nowrap;
+  }
+
+  .shelf-today {
+    margin-bottom: 20px;
+  }
+
+  .shelf-piles {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 34px 20px;
+    margin-top: 18px;
+  }
+
+  .shelf-pile {
+    grid-column: span 3;
+    justify-self: center;
+  }
+
+  /* Rows two and three hold three piles each, shifted by half a column for an offset, hand-laid look. */
+  .shelf-pile:nth-child(n + 5) {
+    grid-column: span 4;
+  }
+
+  .shelf-pile:nth-child(5) {
+    translate: 30px 0;
+  }
+
+  .shelf-pile:nth-child(7),
+  .shelf-pile:nth-child(10) {
+    translate: -30px 0;
+  }
+
+  .shelf-pile:nth-child(9) {
+    translate: 40px 6px;
+  }
+
+  .shelf-pile:has([aria-expanded='true']) {
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    translate: none;
+  }
+}
+
+.shelf-pile__button {
+  border-radius: 10px;
+  transition: translate 140ms ease, background-color 140ms ease;
+}
+
+.shelf-pile__button:hover,
+.shelf-pile__button:focus-visible {
+  translate: 0 -6px;
+  background: rgb(255 255 255 / 0.18);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shelf-pile__button {
+    transition: none;
+  }
+
+  .shelf-pile__button:hover,
+  .shelf-pile__button:focus-visible {
+    translate: none;
+  }
+}
+
+/* The note and the two buttons sit together beside the quiz of the day. */
+.shelf-beside {
+  grid-area: note;
+  display: grid;
+  gap: 22px;
+  align-content: center;
+}
+
+.shelf-beside .shelf-today__actions {
+  position: static;
+  margin: 0;
+  flex-wrap: wrap;
+}
+
+.shelf-beside .shelf-table__note {
+  margin: 0;
+  max-width: 620px;
+}
+
+@media (max-width: 899px) {
+  .shelf-table {
+    grid-template-areas: 'today' 'note' 'piles';
+  }
+
+  .shelf-beside .shelf-table__note {
+    font-size: 24px;
+  }
+}
+
+.shelf-today__note {
+  white-space: nowrap;
+}
+
+.margin-note {
+  font-variant-ligatures: none;
+  font-feature-settings: 'liga' 0, 'calt' 0, 'dlig' 0;
+}
+
+@media (min-width: 900px) {
+  .shelf-today__note {
+    top: auto;
+    left: auto;
+    right: -10px;
+    bottom: -38px;
+    rotate: -4deg;
+  }
+}

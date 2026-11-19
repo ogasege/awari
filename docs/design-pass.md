@@ -171,3 +171,21 @@ Done (19 Nov, main session), with notes:
 - [x] (owner, 23:02 UTC) The tried ticket is marked: a pencil cross over it, a handwritten "✗ tried" tag, and it cannot be
       picked again (`tried` in `quizMachine.ts`, test `tried.test.ts`). 1024 and 768 re-measured with
       `layout-stable.ts`: no movement, no overlap, "Not quite" on a cream slip at every width.
+
+### Quizzes shelf, commit 411711e (looked at 18 Nov 23:40 UTC, the `after/` shots)
+
+This passes the test: it reads like Home. Keep the coral table, the piles, the quiz of the day and
+the stamp sheets with photographs. Small things:
+
+- [x] The handwritten note breaks a word: "483 quiz-zes". Never hyphenate inside handwriting; let
+      the line wrap between words.
+- [x] The piles sit in a ragged block with holes on the right of rows two and four and an empty
+      strip down the left under "Surprise me". Spread the ten piles across the full table width
+      (four, three, three with offsets) and move the handwritten note up beside the buttons.
+- [x] "30 quizzes · open the pile": drop the middle dot; write "30 quizzes" and let the whole pile
+      be the control (it should lift on hover, and say "Open the Wildlife pile" to a screen reader).
+- Done (19 Nov, main session): the hand font draws "z" with a crossbar, which read as a hyphen in "quizzes"; the note now
+  says "483 to play, 2,415 questions on ...", and every `.hand` text has ligatures and hyphenation switched off. The
+  ten piles sit across the whole table in rows of four, three and three with offsets; the note and both buttons sit
+  beside the quiz of the day. Each pile is one button that lifts on hover and reads "Open the Wildlife pile, 30 quizzes"
+  to a screen reader; the visible line is "30 quizzes".

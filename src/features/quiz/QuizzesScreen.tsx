@@ -45,7 +45,7 @@ function thumbOf(pack: string, item: PackIndexItem | undefined): string {
   return item?.thumb ? packUrl(item.thumb) : (coverFor(pack)?.file ?? '');
 }
 
-function QuizOfTheDay({ quiz, all }: { quiz: QuizEntry; all: readonly QuizEntry[] }) {
+function QuizOfTheDay({ quiz }: { quiz: QuizEntry }) {
   const thumbs = useThumbs(quiz.pack);
   return (
     <div className="shelf-today">
@@ -66,22 +66,28 @@ function QuizOfTheDay({ quiz, all }: { quiz: QuizEntry; all: readonly QuizEntry[
       <p aria-hidden="true" className="shelf-today__note hand">
         ← quiz of the day
       </p>
-      <div className="shelf-today__actions">
-        <Link className="btn btn--yellow" to={`/quiz/${quiz.pack}/${quiz.id}`}>
-          Play the quiz of the day
-        </Link>
-        <button
-          type="button"
-          className="btn btn--ink"
-          onClick={() => {
-            const pick = all[Math.floor(Math.random() * all.length)];
-            if (pick) navigate(`/quiz/${pick.pack}/${pick.id}`);
-          }}
-        >
-          Surprise me
-        </button>
-      </div>
     </div>
+  );
+}
+
+/** "Play the quiz of the day" and "Surprise me", beside the print with the handwritten note. */
+function TodayActions({ quiz, all }: { quiz: QuizEntry; all: readonly QuizEntry[] }) {
+  return (
+        <div className="shelf-today__actions">
+          <Link className="btn btn--yellow" to={`/quiz/${quiz.pack}/${quiz.id}`}>
+            Play the quiz of the day
+          </Link>
+          <button
+            type="button"
+            className="btn btn--ink"
+            onClick={() => {
+              const pick = all[Math.floor(Math.random() * all.length)];
+              if (pick) navigate(`/quiz/${pick.pack}/${pick.id}`);
+            }}
+          >
+            Surprise me
+          </button>
+        </div>
   );
 }
 
@@ -95,7 +101,14 @@ function Pile({ pack, quizzes, index }: { pack: string; quizzes: readonly QuizEn
   const panel = `pile-${pack}`;
   return (
     <section className={`shelf-pile shelf-pile--${index % 3}`} aria-labelledby={`${panel}-title`}>
-      <button type="button" className="shelf-pile__button" aria-expanded={open} aria-controls={panel} onClick={() => setOpen((o) => !o)}>
+      <button
+        type="button"
+        className="shelf-pile__button"
+        aria-expanded={open}
+        aria-controls={panel}
+        aria-label={`${open ? 'Close' : 'Open'} the ${LABEL[pack]} pile, ${quizzes.length} quizzes`}
+        onClick={() => setOpen((o) => !o)}
+      >
         <span aria-hidden="true" className="shelf-pile__stack">
           {top.map((q, i) => (
             <span key={q.id} className="shelf-pile__card" style={{ rotate: `${tilt(index + i * 2)}deg`, translate: `${i * 26 - 26}px ${i * -8}px` }}>
@@ -107,7 +120,7 @@ function Pile({ pack, quizzes, index }: { pack: string; quizzes: readonly QuizEn
           {LABEL[pack]}
         </span>
         <span className="shelf-pile__count">
-          {quizzes.length} quizzes{done ? `, ${done} played` : ''} · {open ? 'close the pile' : 'open the pile'}
+          {quizzes.length} quizzes{done ? `, ${done} played` : ''}
         </span>
       </button>
       {open ? (
@@ -218,13 +231,16 @@ export default function QuizzesScreen() {
       ) : null}
 
       <div className="shelf-table">
-        {today ? <QuizOfTheDay quiz={today} all={quizzes} /> : null}
-        {total ? (
-          <MarginNote tilt={2} size={30} className="shelf-table__note">
-            {quizzes.length} quizzes, {total.toLocaleString('en-GB')} questions: capitals, borders, money, biggest country, who was born
-            first, true or false, fill the gap
-          </MarginNote>
-        ) : null}
+        {today ? <QuizOfTheDay quiz={today} /> : null}
+        <div className="shelf-beside">
+          {total ? (
+            <MarginNote tilt={2} size={30} className="shelf-table__note">
+              {quizzes.length} to play, {total.toLocaleString('en-GB')} questions on capitals, borders, money, biggest country, who was
+              born first, true or false, fill the gap
+            </MarginNote>
+          ) : null}
+          {today ? <TodayActions quiz={today} all={quizzes} /> : null}
+        </div>
         <div className="shelf-piles">
           {SUBJECTS.filter((s) => s.id !== 'countries').map((s, i) => (
             <Pile key={s.id} pack={s.id} index={i} quizzes={quizzes.filter((q) => q.pack === s.id)} />

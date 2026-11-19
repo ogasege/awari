@@ -46,6 +46,11 @@ h2:focus {
 .hand {
   font-family: var(--font-hand);
   font-weight: 400;
+  /* The hand font joins "zz" and some other pairs with a stroke that reads as a hyphen ("quiz-zes"); handwriting
+     never hyphenates (28, owner feedback 18 Nov). */
+  font-variant-ligatures: none;
+  font-feature-settings: 'liga' 0, 'calt' 0, 'dlig' 0;
+  hyphens: none;
 }
 
 .sr-only {
