@@ -14,6 +14,7 @@ import type { Article, FactsPack, PackIndex } from '../../lib/packs/types.ts';
 import { update, withDiscovered } from '../../lib/store/progress.ts';
 import { ArticleGallery } from '../media/ArticleGallery.tsx';
 import { thumbUrl } from '../../lib/media/media.ts';
+import { SafeImg } from '../../design/SafeImg.tsx';
 import { ArticleBody } from './ArticleBody.tsx';
 import { articleCredits, factRows } from './credit.ts';
 import { WordCard } from './WordCard.tsx';
@@ -167,7 +168,7 @@ function ArticleView({ article, photoSrc }: { article: Article; photoSrc?: strin
         ) : null}
         {second ? (
           <figure className="article__second" aria-hidden="true">
-            <img src={thumbUrl(second.thumb)} alt="" loading="lazy" decoding="async" />
+            <SafeImg src={thumbUrl(second.thumb)} alt="" loading="lazy" decoding="async" />
           </figure>
         ) : null}
         <TornEdge color="var(--paper)" seed={`article-${article.id}`} height={30} />

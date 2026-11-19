@@ -85,6 +85,8 @@ try {
 console.log('Saved. Going offline (airplane mode).');
 // A picture strip and the Pictures screen, looked at while online: the service worker keeps the pictures it shows.
 await page.goto(`${base}/article/ancient/colosseum`, { waitUntil: 'load' });
+// The strip now sits under the article (28-every-screen-like-home task 3), so bring it into view for its lazy pictures.
+await page.locator('.gallery').scrollIntoViewIfNeeded({ timeout: 20_000 });
 await page.waitForFunction(
   () => [...document.querySelectorAll('.gallery__thumb img')].some((i) => (i as HTMLImageElement).complete && (i as HTMLImageElement).naturalWidth > 0),
   undefined,
