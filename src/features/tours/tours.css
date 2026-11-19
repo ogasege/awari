@@ -1,4 +1,17 @@
-/* Guided tours (20-tours). */
+/* Guided tours (20-tours, redesigned 28 Req 2.6: its own yellow postcard band on the index). */
+.tours {
+  position: relative;
+  background: var(--yellow);
+  color: var(--yellow-ink);
+  margin: calc(-1 * var(--gutter)) calc(-1 * var(--gutter)) 0;
+  padding: var(--gutter);
+  padding-bottom: 56px;
+}
+
+.tours a:not(.btn) {
+  color: var(--navy);
+}
+
 .tour__board.atlas-board,
 .tour__board {
   position: relative;
@@ -158,10 +171,10 @@
 }
 
 .tours__list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  align-items: stretch;
-  gap: 22px 26px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 28px 26px;
   margin: 24px 0 0;
   padding: 0;
   list-style: none;
@@ -169,12 +182,36 @@
 
 .tours__card {
   display: flex;
+  flex: 1 1 320px;
   flex-direction: column;
   gap: 8px;
   padding: 20px 22px;
   background: var(--paper);
+  color: var(--ink);
   border: 2px solid var(--ink);
   box-shadow: var(--shadow-hard);
+  transition: rotate 140ms ease;
+}
+
+/* Three sizes and a little tilt so three cards do not read as a uniform grid (28 Req 1.1, 1.2). */
+.tours__card:nth-child(1) {
+  flex-basis: 420px;
+  rotate: -1.2deg;
+}
+
+.tours__card:nth-child(2) {
+  flex-basis: 300px;
+  rotate: 1deg;
+}
+
+.tours__card:nth-child(3) {
+  flex-basis: 340px;
+  rotate: -0.6deg;
+}
+
+.tours__card:hover,
+.tours__card:focus-within {
+  rotate: 0deg;
 }
 
 .tours__card h2 {
@@ -238,6 +275,21 @@
 
   .tour__paper .tour__route {
     margin-top: 40px;
+  }
+
+  .tours__card,
+  .tours__card:nth-child(1),
+  .tours__card:nth-child(2),
+  .tours__card:nth-child(3) {
+    flex-basis: auto;
+    width: 100%;
+    rotate: 0deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tours__card {
+    transition: none;
   }
 }
 

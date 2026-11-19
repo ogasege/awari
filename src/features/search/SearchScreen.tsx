@@ -5,7 +5,8 @@
 import { useEffect, useMemo, useState, type FormEvent } from 'react';
 import { Link, navigate, usePath } from '../../app/navigation.tsx';
 import { useTitle } from '../../app/useTitle.ts';
-import { StripHeading } from '../../design/paper.tsx';
+import { StripHeading, MarginNote } from '../../design/paper.tsx';
+import { wobblyLine, seedFrom } from '../../design/wobble.ts';
 import { lookupWord, partOfSpeech, type Definition } from '../../lib/dictionary/lookup.ts';
 import { loadPack, usePack } from '../../lib/packs/load.ts';
 import { BUNDLED_PACKS } from '../../lib/packs/subjects.ts';
@@ -20,6 +21,9 @@ interface QuizIndex {
 }
 
 const MAX_SHOWN = 40;
+
+/** A handful of starting points for a child with nothing to type yet (28, filling the quiet first screen). */
+const TRY_THESE = ['Lion', 'Volcano', 'Pyramid', 'Electricity', 'Mount Everest', 'Great Wall of China'];
 
 /** Every bundled pack index, loaded on demand when search opens (15-subject-packs Req 3.1). */
 function usePackIndexes(): { ready: PackIndex[]; loading: boolean } {
@@ -38,6 +42,18 @@ function usePackIndexes(): { ready: PackIndex[]; loading: boolean } {
     };
   }, []);
   return state;
+}
+
+/** A large hand-drawn magnifying glass, purely decorative, filling the quiet right side of the search table. */
+function MagnifyingGlass() {
+  return (
+    <svg aria-hidden="true" className="search__glass" viewBox="0 0 220 220" width="220" height="220">
+      <path d={wobblyLine({ x: 150, y: 150 }, { x: 206, y: 206 }, seedFrom('glass-handle'), 10)} strokeLinecap="round" />
+      <circle cx="92" cy="92" r="72" fill="none" stroke="currentColor" strokeWidth="9" />
+      <circle cx="92" cy="92" r="72" fill="currentColor" opacity="0.06" />
+      <path d={wobblyLine({ x: 58, y: 58 }, { x: 78, y: 48 }, seedFrom('glass-glint'), 3)} strokeLinecap="round" strokeWidth="5" />
+    </svg>
+  );
 }
 
 export default function SearchScreen() {
@@ -154,13 +170,19 @@ export default function SearchScreen() {
 
   return (
     <section className="page squared search" aria-labelledby="search-title">
-      <StripHeading
-        id="search-title"
-        lines={[
-          { text: 'Search', tone: 'paper', tilt: -2 },
-          { text: 'find anything', tone: 'yellow', tilt: 1.5, style: { marginLeft: '0.8em' } },
-        ]}
-      />
+      <div className="search__intro">
+        <StripHeading
+          id="search-title"
+          lines={[
+            { text: 'Search', tone: 'paper', tilt: -2 },
+            { text: 'find anything', tone: 'yellow', tilt: 1.5, style: { marginLeft: '0.8em' } },
+          ]}
+        />
+        <MagnifyingGlass />
+      </div>
+      <MarginNote decorative tilt={-2} size={26} className="search__note crowding" style={{ color: 'var(--teal-ink)' }}>
+        Articles, dates and word meanings, all searched at once.
+      </MarginNote>
       <form role="search" className="search__form" onSubmit={submit}>
         <label htmlFor="search-field">Search articles, events and words</label>
         <div>
@@ -202,6 +224,21 @@ export default function SearchScreen() {
               ))}
             </ul>
           ) : null}
+        </section>
+      ) : null}
+
+      {words.length === 0 ? (
+        <section className="search__try" aria-labelledby="search-try">
+          <h2 id="search-try">Try one of these</h2>
+          <ul className="search__chips">
+            {TRY_THESE.map((t) => (
+              <li key={t}>
+                <Link to={`/search?q=${encodeURIComponent(t)}`} className="search__chip">
+                  {t}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </section>
       ) : null}
 

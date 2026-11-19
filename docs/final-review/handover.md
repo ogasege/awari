@@ -127,3 +127,20 @@ Never write the banned product name (`npm run rules`). Keep `docs/kiro-evidence/
   (nothing new waiting beyond the deferred Subjects polish items) then move to the "second wave" named in
   .kiro/specs/28-every-screen-like-home/tasks.md task 5: Stamp book, Tours, Search, Atlas, Not found (own table colour,
   varied sizes, no uniform grid, same gates, shots, commit per screen or pair, REDEPLOY NOW after every two).
+- R5 05:15 WAT 19 Nov: Stamp book DONE (6d19f8e). Its own parchment (cream) band (first tried full teal, then found
+  Atlas already owns full-strength teal — reshot Atlas to check, switched to cream before committing); "Latest stamps"
+  is a flex-wrap row of three sizes (first stamp bigger, the fourth smaller), not a uniform grid. Found and fixed a
+  real pre-existing bug while shooting (present in the "before" shot too, not caused by this task): `.print.page-print`
+  (the Earth print top-right of the Stamp book) sat at `top: 28px` from its positioned ancestor, which is flush with
+  `main`'s top under the app's header, so the print's tape poked up into the header and partly covered the search box.
+  Raised it to `top: 66px` in src/design/paper.css (the only screen using `.page-print`) so the tape clears the header
+  by eye at 1440px; confirmed no other screen uses that class. Left the single-continent pages (/stamps/<continent>)
+  as a uniform slot grid: a real stamp album page is a grid by nature, Req 1.1 is read as being about the main
+  entry screen, and reflowing 54 fixed-size postage-stamp slots into varied sizes would blur the "find your country"
+  task; noted as a deliberate scope choice, not an oversight. Gates: tsc clean, eslint 0, 663 tests pass,
+  submission-check PASS, offline-check PASS (20 steps, incl. "The stamp book has a page for each continent"). Shots in
+  design-pass/{before,after}. desktop-check not run (sandbox). REDEPLOY NOW.
+  NEXT: Tours, Search, Atlas, Not found remain from spec 28 task 5. Read docs/design-pass.md once more first (nothing
+  new as of this entry). Atlas already has a reasonable look (teal band, globe, tilt) from an earlier round — give it
+  a Req-1 pass rather than a full rebuild. Not found has no existing design pass at all; check it renders inside
+  `.page` with at least the shared look before deciding how much custom work it needs.

@@ -1,4 +1,35 @@
-/* Search (13-search). */
+/* Search (13-search, redesigned 28 Req 2.6: its own card-catalogue band; results stay a plain, scannable list). */
+.search {
+  position: relative;
+  background: #eef1fb;
+  margin: calc(-1 * var(--gutter)) calc(-1 * var(--gutter)) 0;
+  padding: var(--gutter);
+  padding-bottom: 56px;
+  min-height: calc(100vh - 94px);
+}
+
+.search__intro {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 20px 40px;
+}
+
+.search__glass {
+  position: absolute;
+  top: -10px;
+  right: 6%;
+  color: var(--teal-ink);
+  opacity: 0.9;
+  rotate: -6deg;
+}
+
+.search__note {
+  max-width: 420px;
+  margin: 4px 0 0;
+}
+
 .search__form {
   max-width: 640px;
   margin: 20px 0 8px;
@@ -131,4 +162,45 @@
 
 .search__az-list {
   columns: 2 220px;
+}
+
+.search__try h2 {
+  margin-top: 36px;
+}
+
+.search__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.search__chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 22px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.search__chip:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.search__chip:hover {
+  background: var(--yellow);
+}
+
+@media (max-width: 899px) {
+  .search__glass {
+    display: none;
+  }
 }
